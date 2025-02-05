@@ -6,6 +6,12 @@ of possible move activity throughout a chess game and generates **gradient-based
 intensity for each
 square at each position in the loaded game.
 
+## **An Introduction by Phillyclause89 (Not ChatGPT)
+
+The idea for this project got into my head over 2 years ago. And I even got as far as version that ran ok upto depth 1.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tV9pxEQnRHU?si=1RZtHPQotlBQChbE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ## **Features**
 
 ✅ **PGN File Support** – Load chess games from PGN files to analyze move activity.  
