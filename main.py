@@ -324,13 +324,17 @@ class ChessHeatMap(tk.Tk):
         if map_index in self.heatmaps:
             heatmap_colors: NDArray[str] = self.heatmaps[map_index]  # Use precomputed color list
         else:
-            future: Future = self.heatmap_futures[map_index]
-            if future.done():
-                heatmap: GradientHeatmap = future.result()
-                heatmap_colors = heatmap.colors  # Extract colors immediately
-                self.heatmaps[map_index] = heatmap_colors  # Store only colors
-            else:
-                heatmap_colors = GradientHeatmap().colors  # Fallback colors
+            # TODO: There might not be a need to catch this if we do better in open_pgn
+            try:
+                future: Future = self.heatmap_futures[map_index]
+                if future.done():
+                    heatmap: GradientHeatmap = future.result()
+                    heatmap_colors = heatmap.colors  # Extract colors immediately
+                    self.heatmaps[map_index] = heatmap_colors  # Store only colors
+                else:
+                    heatmap_colors = GradientHeatmap().colors
+            except IndexError:
+                heatmap_colors = GradientHeatmap().colors
 
         for square in chess.SQUARES:
             row: int
