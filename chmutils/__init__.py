@@ -39,24 +39,25 @@ def calculate_heatmap(board: Board, depth: int = 1,
         The computed `GradientHeatmap` containing accumulated move intensities for each square
         on the board, considering the specified recursion depth and discounting.
 
+
     Notes
     -----
     - The `heatmap` and `discount` parameters are reserved for internal recursive processing.
-      Users should not provide values for these parameters unless they need to override default behavior.
+        Users should not provide values for these parameters unless they need to override default behavior.
     - The time complexity of this function is **O(b^d)**, where **b ≈ 35** is the branching factor of chess,
-      and **d** is the recursion depth. Please see performance warnings below regarding high depths.
+        and **d** is the recursion depth. Please see performance warnings below regarding high depths.
     - **Warning:** This function does not implement safeguards to limit excessive recursion depth.
-      Very high `depth` values can lead to significant performance degradation and may hit Python's
-      recursion depth limitations. It is recommended to avoid setting depth too high, especially
-      with complex board positions, as the time complexity grows exponentially.
+        Very high `depth` values can lead to significant performance degradation and may hit Python's
+        recursion depth limitations. It is recommended to avoid setting depth too high, especially
+        with complex board positions, as the time complexity grows exponentially.
     - The `depth` parameter controls how many layers of future moves are explored:
-      - **depth 0** calculates results from the current player's current moves only.
-      - **depth 1** calculates both the current player's current moves
-                    and the opponent's possible future moves in their upcoming turn.
-      - **depth 2** continues this pattern into the current player's future moves
-                    but stops short of the opponent's future moves in their turn thereafter.
+        - **depth 0** calculates results from the current player's current moves only.
+        - **depth 1** calculates both the current player's current moves
+            and the opponent's possible future moves in their upcoming turn.
+        - **depth 2** continues this pattern into the current player's future moves
+            but stops short of the opponent's future moves in their turn thereafter.
     - In theory, **only odd depths** will give an equalized representation of both players,
-      while **even depths** will be biased toward the current player.
+        while **even depths** will be biased toward the current player.
 
     Examples
     --------
@@ -99,6 +100,5 @@ if __name__ == "__main__":
 
     b = chess.Board()
 
-    for d in range(6):
+    for d in range(1):
         hmap = timeit("calculate_heatmap(board=b, depth=d)", number=1, globals=globals())
-        print(f"depth={d}", hmap)

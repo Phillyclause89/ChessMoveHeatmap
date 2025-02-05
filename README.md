@@ -1,2 +1,120 @@
-# ChessMoveHeatmap
- Visualize possible future moves for any chess position.
+# **ChessMoveHeatmap**
+
+A **visual heatmap generator for chess PGN games**, built with Python, `tkinter`, and `chess`. This application does a
+discounted count
+of possible move activity throughout a chess game and generates **gradient-based heatmaps** that highlight move
+intensity for each
+square at each position in the loaded game.
+
+## **Features**
+
+✅ **PGN File Support** – Load chess games from PGN files to analyze move activity.  
+✅ **Move-by-Move Navigation** – Step through the game and observe heatmap changes dynamically.  
+✅ **Parallelized Heatmap Calculation** – Uses `ProcessPoolExecutor` to compute heatmaps efficiently.  
+✅ **Configurable Board Colors & Fonts** – Customize square colors and piece fonts in the UI.  
+✅ **Real-time Heatmap Updates** – Background processing ensures smooth heatmap rendering.
+
+---
+
+## **Installation**
+
+### **Prerequisites**
+
+Ensure you have Python **3.7+** installed. Then, install the required dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+## **Running the Application**
+
+### **Run the main application:**
+
+```bash
+python main.py
+```
+
+This will open the Chess Heatmap UI, prompting you to **load a PGN file** for analysis.
+
+## **Usage**
+
+### **Loading a PGN File**
+
+1. Click **File > Open PGN** and select a `.pgn` chess game file.
+2. The heatmap will be computed in the background (and hopefully load in when ready).
+
+### **Navigating Moves**
+
+- Press the **Right Arrow (`→`)** to advance to the next move.
+-
+    - ***PhillyNote:** use the ui button at the top of the app window, I may have deleted the binding on accident*
+- Press the **Left Arrow (`←`)** to go back to the previous move.
+-
+    - ***PhillyNote:** use the ui button, I may have deleted the binding on accident*
+
+### **Customization**
+
+- **Change Default Board Colors:** `Options > Change Board Colors`
+- **Change Default Font:** `Options > Font`
+
+## **Project Structure**
+
+```graphql
+ChessMoveHeatmap/
+│── chmutils/
+│ ├── __init__.py
+│  ├── calculate_heatmap # Recursive heatmap calculation function
+│
+│── heatmaps/
+│ ├── __init__.py
+│  ├── GradientHeatmap # Heatmap class with color mapping
+│  ├── GradientHeatmapT # Base heatmap class (type-safe operations)
+│
+│── pgns/ # Sample PGN files for testing
+│
+│── main.py # Main Chess Heatmap application
+│ ├── Builder # Custom PGN parser with error raising
+│ ├── ChessHeatMap # Main Tkinter GUI class
+│
+│── standalone_color_legend.py # Prototype for heatmap color legend
+│
+│── requirements.txt # Dependencies
+│── LICENSE # Project License
+│── .gitignore # Git ignore rules
+│── .gitattributes # Git attribute settings
+```
+
+### **Key Components**
+
+- `main.py` – The main GUI application, handles PGN loading, move navigation, and heatmap visualization.
+- `chmutils.calculate_heatmap` – Recursively calculates the heatmap for a given board state.
+- `heatmaps.GradientHeatmap` – Manages heatmap intensity-to-color mapping.
+- `heatmaps.GradientHeatmapT` – Base class for type-safe heatmap operations.
+- `standalone_color_legend.py` – Standalone Tkinter window for prototyping the color legend (not integrated yet).
+
+## **Performance Considerations**
+
+- **Recursive Depth & Complexity:** The heatmap calculation has an estimated **O(35^d)** complexity, where `d` is the
+  recursion
+  `depth`.
+- **High** `depth` **values** can cause **significant calculation times and/or performance degradation** and may hit
+  Python's recursion depth limits.
+- The application uses `parallel processing` to optimize calculations across full games, but the underlying function it
+  uses does not impose hard limits on recursion depth.
+- Right now, the application is hard coded to run at `depth=3` which runs with acceptable load times on my intel i7.
+
+## **License**
+
+This project is licensed under the **MIT License**. See the `LICENSE` file for details.
+
+## **Future Plans**
+
+- 🎨 **Integrate Color Legend** – Adapt `standalone_color_legend.py` into the main UI.
+- 🚀 **Improve Performance** – Optimize recursion and caching strategies.
+- 🏗️ **Database Storage** – Store precomputed heatmaps for faster access.
+- 📈 **Enhanced Visualizations** – Provide more customization for heatmap intensity scaling.
+
+### Contributors
+
+- Phillyclause89 - Project Creator & Lead Developer
+- ChatGPT (OpenAI) - Developer, Documentation Assistance, Type Hinting Refinements, Complexity Analysis
