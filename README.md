@@ -8,9 +8,13 @@ square at each position in the loaded game.
 
 ## **An Introduction by Phillyclause89 (Not ChatGPT)
 
-The idea for this project got into my head over 2 years ago. And I even got as far as version that ran ok upto depth 1.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/tV9pxEQnRHU?si=1RZtHPQotlBQChbE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+The idea for this project got into my head over 2 years ago. And I even got as far
+as [a version that ran ok upto depth 1](https://youtu.be/tV9pxEQnRHU?si=SSc_HT5Mu8XeKaOa).
+But sadly, I never put that project on GitHub and only have that video to remember it by.
+Anyway, someone on [r/learnpython](https://www.reddit.com/r/learnpython/) made a post asking for project ideas and I
+mentioned this one as a fun one that I remember doing once upon a time. I felt bad that I had lost the code to show for
+it though, thus I have decided to restart the project from scratch. Though I admit to using chatgpt doc generation and
+rubberduck debugging this go around as there is no way I'm typing the rest of this ReadMe out on my own...
 
 ## **Features**
 
