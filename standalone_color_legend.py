@@ -21,7 +21,7 @@ def inverse_intensity_to_color(red: float, blue: float) -> str:
 
 def draw_color_grid(canvas: tk.Canvas, grid_size: int = 50):
     """Draws a 2D grid of colors representing different move intensities."""
-    width = 800  # Canvas size
+    width = 1000  # Canvas size
     cell_size = width // grid_size
 
     for row in range(grid_size):
@@ -56,7 +56,7 @@ if __name__ == "__main__":
     root = tk.Tk()
     root.title("Chess Heatmap 2D Color Grid")
 
-    canvas = tk.Canvas(root, width=800, height=800, bg="white")
+    canvas = tk.Canvas(root, width=1000, height=1000, bg="white")
     canvas.pack()
 
     draw_color_grid(canvas, grid_size=50)  # Adjust grid_size for smoother gradient
