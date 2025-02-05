@@ -1,0 +1,21 @@
+[Event "Hourly Rapid Arena"]
+[Site "https://lichess.org/6jE193ad"]
+[Date "2019.01.18"]
+[White "Sfide_Mentali"]
+[Black "Phillyclause89"]
+[Result "0-1"]
+[UTCDate "2019.01.18"]
+[UTCTime "03:04:16"]
+[WhiteElo "1972"]
+[BlackElo "1452"]
+[WhiteRatingDiff "-25"]
+[BlackRatingDiff "+23"]
+[Variant "Standard"]
+[TimeControl "600+0"]
+[ECO "C00"]
+[Opening "Queen's Pawn Game: Franco-Sicilian Defense"]
+[Termination "Normal"]
+
+1. e4 e6 2. d4 c5 3. Nf3 h6 4. Bc4 Nf6 5. e5 Nd5 6. O-O a6 7. Re1 Nc6 8. a3 b5 9. Bxd5 exd5 10. Nc3 Nxd4 11. Nxd4 cxd4 12. Qxd4 Bb7 13. Nxd5 Bxd5 14. Qxd5 Be7 15. e6 dxe6 16. Qc6+ Kf8 17. Qf3 Rc8 18. Rxe6 Rxc2 19. Be3 Rxb2 20. Rc1 Rb3 21. Qf4 Rxa3 22. Rxe7 Qxe7 23. Bc5 Qxc5 24. Rxc5 Ra1+ 25. Rc1 g5 26. Qb8+ Kg7 27. Rxa1 Rxb8 28. Rxa6 b4 29. Ra2 b3 30. Rb2 f5 31. f3 f4 32. Kf2 Kf6 33. Ke2 Ke5 34. Kd3 Rb4 35. Kc3 Rb6 36. Kc4 Kd6 37. Rxb3 Rxb3 38. Kxb3 Kd5 39. Kc3 Ke5 40. Kd3 h5 41. h3 h4 42. Kc4 Kf6 43. Kd5 Kf5 44. Kd6 Kf6 45. Kd7 Kf5 46. Ke7 Kg6 47. Ke6 Kh5 48. Kf5 Kh6 49. Kg4 Kg6 50. g3 fxg3 51. f4 g2 52. fxg5 g1=Q+ 53. Kxh4 Qxg5# 0-1
+
+

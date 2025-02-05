@@ -1,0 +1,23 @@
+[Event "Bird's Opening Rapid Arena"]
+[Site "https://lichess.org/h3XHvNgP"]
+[Date "2022.06.24"]
+[White "Phillyclause89"]
+[Black "rssylgn_49"]
+[Result "1-0"]
+[UTCDate "2022.06.24"]
+[UTCTime "07:32:49"]
+[WhiteElo "1669"]
+[BlackElo "2005"]
+[WhiteRatingDiff "+16"]
+[BlackRatingDiff "-9"]
+[Variant "From Position"]
+[TimeControl "600+0"]
+[ECO "?"]
+[Opening "?"]
+[Termination "Normal"]
+[FEN "rnbqkbnr/pppppppp/8/8/5P2/8/PPPPP1PP/RNBQKBNR b KQkq - 0 1"]
+[SetUp "1"]
+
+1... g6 2. d4 Bg7 3. Nf3 c5 4. d5 d6 5. Nc3 a6 6. e4 b5 7. Bd3 Nf6 8. O-O O-O 9. e5 Ng4 10. Ne4 c4 11. Be2 Bf5 12. Ng3 Qb6+ 13. Nd4 dxe5 14. fxe5 Nxe5 15. Nxf5 gxf5 16. Rxf5 Ng6 17. Be3 Nd7 18. c3 e5 19. dxe6 fxe6 20. Rxf8+ Rxf8 21. Nf5 Qc7 22. Nd4 e5 23. Ne6 Qc8 24. Nxf8 Ndxf8 25. Qd5+ Kh8 26. Qf7 Nf4 27. Bxf4 exf4 28. Qxf4 Qe6 29. Bf3 h6 30. Rd1 Be5 31. Qxf8+ 1-0
+
+

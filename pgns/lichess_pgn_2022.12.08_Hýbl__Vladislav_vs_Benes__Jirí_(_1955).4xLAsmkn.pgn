@@ -1,0 +1,20 @@
+[Event "CZE/PinkasM/03 (CZE)"]
+[Site "ICCF"]
+[Date "2021.10.05"]
+[Round "?"]
+[White "Hýbl, Vladislav"]
+[Black "Benes, Jirí (*1955)"]
+[Result "1/2-1/2"]
+[GameId "4xLAsmkn"]
+[WhiteElo "2402"]
+[BlackElo "2353"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "C88"]
+[Opening "Ruy Lopez: Closed"]
+[Termination "Normal"]
+[Annotator "lichess.org"]
+
+1. e4 { [%eval 0.18] } 1... e5 { [%eval 0.21] } 2. Nf3 { [%eval 0.13] } 2... Nc6 { [%eval 0.17] } 3. Bb5 { [%eval 0.08] } 3... a6 { [%eval 0.21] } 4. Ba4 { [%eval 0.27] } 4... Nf6 { [%eval 0.18] } 5. O-O { [%eval 0.13] } 5... Be7 { [%eval 0.21] } 6. Re1 { [%eval 0.24] } 6... b5 { [%eval 0.14] } 7. Bb3 { [%eval 0.11] } 7... O-O { [%eval 0.19] } { C88 Ruy Lopez: Closed } 8. c3 { [%eval 0.27] } 8... Na5 { [%eval 0.37] } 9. Bc2 { [%eval 0.39] } 9... d5 { [%eval 0.31] } 10. exd5 { [%eval 0.26] } 10... e4 { [%eval 0.25] } 11. Bxe4 { [%eval 0.23] } 11... Nxe4 { [%eval 0.24] } 12. Rxe4 { [%eval 0.29] } 12... Re8 { [%eval 0.33] } 13. d4 { [%eval 0.22] } 13... Bb7 { [%eval 0.27] } 14. Nbd2 { [%eval 0.23] } 14... Qxd5 { [%eval 0.25] } 15. b3 { [%eval 0.22] } 15... c5 { [%eval 0.25] } 16. Ba3 { [%eval 0.3] } 16... b4 { [%eval 0.28] } 17. Bb2 { [%eval 0.28] } 17... cxd4 { [%eval 0.27] } 18. Rxd4 { [%eval 0.28] } 18... Qf5 { [%eval 0.26] } 19. Qb1 { [%eval 0.33] } 19... Qxb1+ { [%eval 0.27] } 20. Rxb1 { [%eval 0.27] } 20... Nc6 { [%eval 0.28] } 21. Rd7 { [%eval 0.27] } 21... Bc8 { [%eval 0.29] } 22. Rc7 { [%eval 0.23] } 22... Nd8 { [%eval 0.34] } 23. cxb4 { [%eval 0.29] } 23... Bxb4 { [%eval 0.27] } 24. Bc3 { [%eval 0.24] } 24... Bf8 { [%eval 0.34] } 25. Ba5 { [%eval 0.3] } 25... Ne6 { [%eval 0.27] } 26. Rc4 { [%eval 0.25] } 26... Bd7 { [%eval 0.26] } 27. Re1 { [%eval 0.27] } 27... Rab8 { [%eval 0.28] } 28. h4 { [%eval 0.27] } 28... Rb5 { [%eval 0.17] } 29. Bc3 { [%eval 0.17] } 29... Rb7 { [%eval 0.24] } 30. Rce4 { [%eval 0.19] } 30... Rc8 { [%eval 0.23] } 31. Nc4 { [%eval 0.24] } 31... Bc6 { [%eval 0.28] } 32. R4e3 { [%eval 0.14] } 32... Bb5 { [%eval 0.17] } 33. Nfd2 { [%eval 0.2] } 33... h6 { [%eval 0.19] } 34. g3 { [%eval 0.21] } 34... Rd8 { [%eval 0.21] } 35. Rc1 { [%eval 0.19] } 35... Rbb8 { [%eval 0.21] } 36. Kg2 { [%eval 0.2] } 36... Nc5 { [%eval 0.16] } 37. Ba5 { [%eval 0.18] } 37... Rd5 { [%eval 0.14] } 38. Nf3 { [%eval 0.16] } 38... f6 { [%eval 0.17] } 39. Bc7 { [%eval 0.2] } 39... Rb7 { [%eval 0.15] } 40. Bb6 { [%eval 0.18] } 40... h5 { [%eval 0.18] } 41. Rcc3 { [%eval 0.17] } 41... Rb8 { [%eval 0.16] } 42. Bc7 { [%eval 0.16] } 42... Re8 { [%eval 0.26] } 43. Rxe8 { [%eval 0.23] } 43... Bxe8 { [%eval 0.18] } 44. Ne3 { [%eval 0.19] } 44... Rd3 { [%eval 0.04] } 45. Rc4 { [%eval 0.09] } 45... Bf7 { [%eval 0.16] } { The game is a draw. } 1/2-1/2
+
+
