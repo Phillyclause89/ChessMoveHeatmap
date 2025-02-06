@@ -17,13 +17,13 @@ The function `calculate_heatmap(board, depth)` recursively evaluates **all legal
 - For **each legal move** $m$:
   - The target square **$s = m.to\\_square$** is **incremented** by a **discounted factor**:
   
-    $H[s, c] \gets H[s, c] + \frac{1}{discount}$
+    $$H[s, c] \gets H[s, c] + \frac{1}{discount}$$
 
     where **$c = 0$** for White moves and **$c = 1$** for Black moves.
 
 - If **depth > 0**, the function **recursively evaluates** the resulting position **after playing $m$**, with an **updated discount factor**:
   
-  $discount \gets discount \times num\\_moves$
+  $$discount \gets discount \times num\\_moves$$
   
   where **num_moves** is the number of legal moves in the current position.
 
@@ -46,13 +46,13 @@ Each square’s **normalized intensities** **$(r, b)$** (for **red/blue channels
 
 - The **green component** is computed as:
 
-  $g = 175 + 80 \times |r - b|$
+  $$g = 175 + 80 \times |r - b|$$
 
 - The **red and blue components** are scaled:
 
-  $r' = 175 + 80 \times r$
+  $$r' = 175 + 80 \times r$$
 
-  $b' = 175 + 80 \times b$
+  $$b' = 175 + 80 \times b$$
 
 - The final **hex color** for each square is formatted as:
 
