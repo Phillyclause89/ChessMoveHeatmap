@@ -15,7 +15,7 @@ The function `calculate_heatmap(board, depth)` recursively evaluates **all legal
 
 - The algorithm starts with an **empty heatmap** $H = \mathbf{0}_{64 \times 2}$.
 - For **each legal move** $m$:
-  - The target square **$s = m.tosquare$** is **incremented** by a **discounted factor**:
+  - The target square **$s = m.to_square$** is **incremented** by a **discounted factor**:
     $H[s, c] \gets H[s, c] + \frac{1}{discount}$
     where **$c = 0$** for White moves and **$c = 1$** for Black moves.
 
