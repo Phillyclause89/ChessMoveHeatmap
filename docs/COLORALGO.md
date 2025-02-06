@@ -5,9 +5,9 @@ to `GradientHeatmap.colors`** using Markdown-friendly **mathematical notation (`
 
 ## **Algorithm Overview: From `calculate_heatmap()` to `GradientHeatmap.colors`**
 
-The core algorithm of **ChessMoveHeatmap** follows a structured pipeline, transforming a chess position into a **
-gradient-based heatmap representation**. The process involves **recursive move exploration, heatmap accumulation,
-normalization, and color mapping**.
+The core algorithm of **ChessMoveHeatmap** follows a structured pipeline, transforming a chess position into a
+**gradient-based heatmap representation**. The process involves
+**recursive move exploration, heatmap accumulation, normalization, and color mapping**.
 
 ### **1️⃣ Recursive Heatmap Calculation (`calculate_heatmap`)**
 
@@ -21,16 +21,12 @@ and **propagates move intensities** across future positions.
 - The algorithm starts with an **empty heatmap** $H = \mathbf{0}_{64 \times 2}$.
 - For **each legal move** $m$:
     - The target square **$s = m.to\_square$** is **incremented** by a **discounted factor**:
-      $$
-      H[s, c] \gets H[s, c] + \frac{1}{\text{discount}}
-      $$
+      $$H[s, c] \gets H[s, c] + \frac{1}{\text{discount}}$$
       where **$c = 0$** for White moves and **$c = 1$** for Black moves.
 
-- If **depth > 0**, the function **recursively evaluates** the resulting position **after playing $m$**, with an **
-  updated discount factor**:
-  $$
-  \text{discount} \gets \text{discount} \times \text{num_moves}
-  $$
+- If **depth > 0**, the function **recursively evaluates** the resulting position **after playing $m$**, with an
+  **updated discount factor**:
+  $$\text{discount} \gets \text{discount} \times \text{num_moves}$$
   where **num_moves** is the number of legal moves in the current position.
 
 - This recursion continues **until depth reaches 0**, at which point the accumulated **$H$ matrix** is returned.
@@ -44,9 +40,7 @@ extends `GradientHeatmapT`. This class provides operations for **normalization a
 
 To ensure that **heatmap values are scaled** within **$[0,1]$**, the function computes:
 
-$$
-H' = \frac{H}{\max(H)}
-$$
+$$H' = \frac{H}{\max(H)}$$
 
 where $\max(H)$ is the **largest recorded intensity value**. If **$\max(H) = 0$**, the original $H$ is used.
 
@@ -57,18 +51,12 @@ gradient function:
 
 - The **green component** is computed as:
 
-  $$
-  g = 175 + 80 \times |r - b|
-  $$
+  $$g = 175 + 80 \times |r - b|$$
 
 - The **red and blue components** are scaled:
 
-  $$
-  r' = 175 + 80 \times r
-  $$
-  $$
-  b' = 175 + 80 \times b
-  $$
+  $$r' = 175 + 80 \times r$$
+  $$b' = 175 + 80 \times b$$
 
 - The final **hex color** for each square is formatted as:
 
