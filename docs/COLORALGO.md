@@ -47,6 +47,7 @@ Each square’s **normalized intensities** **$(r, b)$** (for **red/blue channels
 - The **red and blue components** are scaled:
 
   $r' = 175 + 80 \times r$
+
   $b' = 175 + 80 \times b$
 
 - The final **hex color** for each square is formatted as:
