@@ -6,6 +6,12 @@ of possible move activity throughout a chess game and generates **gradient-based
 intensity for each
 square at each position in the loaded game.
 
+<p align="center">
+  <a href="https://youtu.be/BMZ6-X9SCvs?si=DDEDqgzYPQtFgGXO" target="_blank">
+    <img src="docs/images/ChessMoveHeatmap-depth3.gif" alt="ChessMoveHeatmap Screenshot" width="800">
+  </a>
+</p>
+
 ## **An Introduction by Phillyclause89 (Not ChatGPT)
 
 The idea for this project got into my head over 2 years ago. And I even got as far
