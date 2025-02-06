@@ -38,7 +38,7 @@ class ChessHeatMap(tk.Tk):
     ----------
     depth : int
         The depth of recursion for calculating the heatmap.
-    heatmap_futures : List[Optional[Future]]
+    heatmap_futures : Dict[Optional[int], Optional[Future]]
         A list of `Future` objects tracking the status of background heatmap calculations.
     heatmaps : Dict[Optional[int], Optional[NDArray[str]]]
         A dictionary mapping move indices to corresponding heatmap color arrays.
@@ -80,7 +80,7 @@ class ChessHeatMap(tk.Tk):
     update_board : Updates the chessboard display based on the current board state and heatmap.
     """
     depth: int
-    heatmap_futures: List[Optional[Future]]
+    heatmap_futures: Dict[Optional[int], Optional[Future]]  # Refactored to dict so -1 can be a key
     heatmaps: Dict[Optional[int], Optional[NDArray[str]]]
     executor: ProcessPoolExecutor
     highlight_squares: Set[Optional[int]]
@@ -125,7 +125,7 @@ class ChessHeatMap(tk.Tk):
         self.depth = 3
         self.executor = ProcessPoolExecutor(
             max_workers=max(1, int(os.cpu_count() * 0.9)))  # Manage background processes
-        self.heatmap_futures = []  # Track running futures
+        self.heatmap_futures = {}  # Track running futures
         self.heatmaps = {}  # Store completed heatmaps
         self.open_pgn()
         self.updating = False
@@ -227,7 +227,7 @@ class ChessHeatMap(tk.Tk):
                     moves: Optional[List[Optional[Move]]] = list(game.mainline_moves())
                     # Cancel any running heatmap calculations
                     future: Future
-                    for future in self.heatmap_futures:
+                    for future in self.heatmap_futures.values():
                         future.cancel()
                     self.heatmap_futures.clear()
                     self.heatmaps.clear()
@@ -246,7 +246,7 @@ class ChessHeatMap(tk.Tk):
                             for j in range(i):
                                 new_board.push(self.moves[j])
                         future = self.executor.submit(calculate_heatmap, new_board, depth=self.depth)
-                        self.heatmap_futures.append(future)
+                        self.heatmap_futures[i - 1] = future
                     self.after(100, self.check_heatmap_futures)
             except Exception as e:
                 print(f"Error loading PGN file: {e.__repr__()}")
@@ -264,14 +264,22 @@ class ChessHeatMap(tk.Tk):
         """
         updated = False
 
-        for i, future in enumerate(self.heatmap_futures):
+        for i, future in self.heatmap_futures.items():  # Start at -1 to align with self.current_move_index
             if i not in self.heatmaps and future.done():
                 heatmap = future.result()
                 self.heatmaps[i] = heatmap.colors  # Store only colors
-                updated = True  # A new heatmap became available
+                if self.current_move_index == i:
+                    updated = True
 
-        if updated and not self.updating:  # Check if update_board is not already in progress
-            self.update_board()  # Only update board if something changed
+        if updated and not self.updating:
+            self.updating = True
+            self.update_board()
+            self.updating = False
+            if len(self.heatmaps) != len(self.heatmap_futures):
+                self.after(100, self.check_heatmap_futures)
+            else:
+                # TODO: Stop background procs?
+                pass
         else:
             self.after(100, self.check_heatmap_futures)
 
@@ -319,7 +327,7 @@ class ChessHeatMap(tk.Tk):
         square_size: int = self.square_size
         colors: List[str] = self.colors
         font_size: int = int(square_size * 0.4)
-        map_index: int = self.current_move_index + 1
+        map_index: int = self.current_move_index
 
         if map_index in self.heatmaps:
             heatmap_colors: NDArray[str] = self.heatmaps[map_index]  # Use precomputed color list
@@ -333,7 +341,7 @@ class ChessHeatMap(tk.Tk):
                     self.heatmaps[map_index] = heatmap_colors  # Store only colors
                 else:
                     heatmap_colors = GradientHeatmap().colors
-            except IndexError:
+            except KeyError:
                 heatmap_colors = GradientHeatmap().colors
 
         for square in chess.SQUARES:
