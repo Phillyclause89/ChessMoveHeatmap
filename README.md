@@ -12,6 +12,14 @@ square at each position in the loaded game.
   </a>
 </p>
 
+As you can see in the GIF above, the app assigns a Light Blue color range to the white player and a Yellow range to the
+black player. Squares that have no possible moves from either player within the search depth (this case depth=3)
+will get the default colors applied to them (which in the example above are set to `"#ffffff"` for light squares
+and `"#c0c0c0"` for dark.) If both players have possible moves detected to a square then both players' assigned colors
+will merge into a purple square color.
+
+
+
 ## **An Introduction by Phillyclause89 (Not ChatGPT)
 
 The idea for this project got into my head over 2 years ago. And I even got as far
@@ -19,8 +27,8 @@ as [a version that ran ok upto depth 1](https://youtu.be/tV9pxEQnRHU?si=SSc_HT5M
 But sadly, I never put that project on GitHub and only have that video to remember it by.
 Anyway, someone on [r/learnpython](https://www.reddit.com/r/learnpython/) made a post asking for project ideas and I
 mentioned this one as a fun one that I remember doing once upon a time. I felt bad that I had lost the code to show for
-it though, thus I have decided to restart the project from scratch. Though I admit to using chatgpt doc generation and
-rubberduck debugging this go around as there is no way I'm typing the rest of this ReadMe out on my own...
+it though, thus I have decided to restart the project from scratch. Though I admit to using chatgpt for doc generation
+and rubberduck debugging this go around as there is no way I'm typing the rest of this ReadMe out on my own...
 
 ## **Features**
 
