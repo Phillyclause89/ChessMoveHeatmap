@@ -20,7 +20,7 @@ The function `calculate_heatmap(board, depth)` recursively evaluates **all legal
     where **$c = 0$** for White moves and **$c = 1$** for Black moves.
 
 - If **depth > 0**, the function **recursively evaluates** the resulting position **after playing $m$**, with an **updated discount factor**:
-  $discount \gets discount \times num\_moves$
+  $discount \gets discount \times num\\_moves$
   where **num_moves** is the number of legal moves in the current position.
 
 - This recursion continues **until depth reaches 0**, at which point the accumulated **$H$ matrix** is returned.
