@@ -42,7 +42,7 @@ class ChessHeatMap(tk.Tk):
         A list of `Future` objects tracking the status of background heatmap calculations.
     heatmaps : Dict[Optional[int], Optional[NDArray[str]]]
         A dictionary mapping move indices to corresponding heatmap color arrays.
-    executor : ProcessPoolExecutor
+    executor : Optional[ProcessPoolExecutor]
         A process pool executor used to run heatmap calculations in parallel.
     highlight_squares : Set[Optional[int]]
         A set of square indices to highlight (e.g., the squares involved in the current move).
@@ -216,6 +216,8 @@ class ChessHeatMap(tk.Tk):
         and starts the background process for heatmap calculation. It also clears previous heatmaps
         and resets the game state.
         """
+        if self.executor is None:
+            self.executor = ProcessPoolExecutor(max_workers=max(1, int(os.cpu_count() * 0.9)))
         file_path: str = filedialog.askopenfilename(filetypes=[("PGN Files", "*.pgn")])
         if file_path:
             try:
@@ -236,8 +238,6 @@ class ChessHeatMap(tk.Tk):
                     self.current_move_index = -1
                     self.title(f"Chess Heat Map: {dict(game.headers)}")
                     # Start background heatmap calculations
-                    if self.executor is None:
-                        self.executor = ProcessPoolExecutor(max_workers=max(1, int(os.cpu_count() * 0.9)))
                     move: Optional[Move]
                     i: int
                     for i, move in enumerate([None] + moves):  # Include initial board state
@@ -254,6 +254,11 @@ class ChessHeatMap(tk.Tk):
                 if isinstance(e, AttributeError):
                     e = "The file does not contain a valid PGN game."
                 messagebox.showerror("Error", f"Failed to load PGN file: {e}")
+        if not self.heatmap_futures and not self.heatmaps:
+            new_board: Board = self.board.copy()
+            future = self.executor.submit(calculate_heatmap, new_board, depth=self.depth)
+            self.heatmap_futures[self.current_move_index] = future
+            self.after(100, self.check_heatmap_futures)
         self.update_board()
 
     def check_heatmap_futures(self) -> None:
@@ -331,16 +336,12 @@ class ChessHeatMap(tk.Tk):
         if map_index in self.heatmaps:
             heatmap_colors: NDArray[str] = self.heatmaps[map_index]  # Use precomputed color list
         else:
-            # TODO: There might not be a need to catch this if we do better in open_pgn
-            try:
-                future: Future = self.heatmap_futures[map_index]
-                if future.done():
-                    heatmap: GradientHeatmap = future.result()
-                    heatmap_colors = heatmap.colors  # Extract colors immediately
-                    self.heatmaps[map_index] = heatmap_colors  # Store only colors
-                else:
-                    heatmap_colors = GradientHeatmap().colors
-            except KeyError:
+            future: Future = self.heatmap_futures[map_index]
+            if future.done():
+                heatmap: GradientHeatmap = future.result()
+                heatmap_colors = heatmap.colors  # Extract colors immediately
+                self.heatmaps[map_index] = heatmap_colors  # Store only colors
+            else:
                 heatmap_colors = GradientHeatmap().colors
 
         for square in chess.SQUARES:
