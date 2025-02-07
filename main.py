@@ -332,17 +332,19 @@ class ChessHeatMap(tk.Tk):
         colors: List[str] = self.colors
         font_size: int = int(square_size * 0.4)
         map_index: int = self.current_move_index
+        future: Future = self.heatmap_futures[map_index]
 
         if map_index in self.heatmaps:
+            heatmap: GradientHeatmap = future.result()
             heatmap_colors: NDArray[str] = self.heatmaps[map_index]  # Use precomputed color list
         else:
-            future: Future = self.heatmap_futures[map_index]
             if future.done():
-                heatmap: GradientHeatmap = future.result()
+                heatmap = future.result()
                 heatmap_colors = heatmap.colors  # Extract colors immediately
                 self.heatmaps[map_index] = heatmap_colors  # Store only colors
             else:
-                heatmap_colors = GradientHeatmap().colors
+                heatmap = GradientHeatmap()
+                heatmap_colors = heatmap.colors
 
         for square in chess.SQUARES:
             row: int
@@ -358,7 +360,6 @@ class ChessHeatMap(tk.Tk):
             width: int = 1
             if heatmap_color != "#afafaf":
                 color = heatmap_color
-            print(chess.square_name(square), color)
             outline_color: str = "black"
 
             if square in self.highlight_squares:
@@ -374,11 +375,32 @@ class ChessHeatMap(tk.Tk):
             )
             piece: Optional[Piece] = self.board.piece_at(square)
             if piece:
+                piece_bg: str = "⬤"
+                self.canvas.create_text(
+                    x0 + square_size / 2, y0 + square_size / 2,
+                    text=piece_bg, font=(self.font, font_size + 25), fill="white" if piece.color else "black"
+                )
                 piece_symbol: str = piece.unicode_symbol()
                 self.canvas.create_text(
                     x0 + square_size / 2, y0 + square_size / 2,
                     text=piece_symbol, font=(self.font, font_size), fill="blue" if piece.color else "yellow"
                 )
+            self.canvas.create_rectangle(
+                x1 - (square_size / 9) * 2, y0 + offset + 2, x1 - offset - 2, y0 + (square_size / 10) * 1.8,
+                fill="black"
+            )
+            self.canvas.create_text(
+                x1 - square_size / 9, y0 + square_size / 10,
+                text=f"{heatmap[square][1]:.1f}", font=(self.font, font_size // 5), fill="yellow"
+            )
+            self.canvas.create_rectangle(
+                x0 + offset + 2, y1 - (square_size / 10) * 1.8, x0 + (square_size / 9) * 2, y1 - offset - 2,
+                fill="white",
+            )
+            self.canvas.create_text(
+                x0 + square_size / 9, y1 - square_size / 10,
+                text=f"{heatmap[square][0]:.1f}", font=(self.font, font_size // 5), fill="blue"
+            )
 
 
 if __name__ == "__main__":
