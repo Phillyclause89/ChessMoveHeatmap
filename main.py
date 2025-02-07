@@ -82,7 +82,7 @@ class ChessHeatMap(tk.Tk):
     depth: int
     heatmap_futures: Dict[Optional[int], Optional[Future]]  # Refactored to dict so -1 can be a key
     heatmaps: Dict[Optional[int], Optional[NDArray[str]]]
-    executor: ProcessPoolExecutor
+    executor: Optional[ProcessPoolExecutor]
     highlight_squares: Set[Optional[int]]
     current_move_index: int
     moves: Optional[List[Optional[Move]]]
@@ -123,8 +123,7 @@ class ChessHeatMap(tk.Tk):
         self.highlight_squares = set()  # Store the squares to highlight
         # Parallel processing setup
         self.depth = 3
-        self.executor = ProcessPoolExecutor(
-            max_workers=max(1, int(os.cpu_count() * 0.9)))  # Manage background processes
+        self.executor = ProcessPoolExecutor(max_workers=max(1, int(os.cpu_count() * 0.9)))
         self.heatmap_futures = {}  # Track running futures
         self.heatmaps = {}  # Store completed heatmaps
         self.open_pgn()
@@ -237,6 +236,8 @@ class ChessHeatMap(tk.Tk):
                     self.current_move_index = -1
                     self.title(f"Chess Heat Map: {dict(game.headers)}")
                     # Start background heatmap calculations
+                    if self.executor is None:
+                        self.executor = ProcessPoolExecutor(max_workers=max(1, int(os.cpu_count() * 0.9)))
                     move: Optional[Move]
                     i: int
                     for i, move in enumerate([None] + moves):  # Include initial board state
@@ -275,13 +276,11 @@ class ChessHeatMap(tk.Tk):
             self.updating = True
             self.update_board()
             self.updating = False
-            if len(self.heatmaps) != len(self.heatmap_futures):
-                self.after(100, self.check_heatmap_futures)
-            else:
-                # TODO: Stop background procs?
-                pass
-        else:
+        if len(self.heatmaps) != len(self.heatmap_futures):
             self.after(100, self.check_heatmap_futures)
+        else:
+            self.executor.shutdown()
+            self.executor = None
 
     def next_move(self) -> None:
         """Display the next move in the game.
