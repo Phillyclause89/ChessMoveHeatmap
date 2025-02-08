@@ -8,7 +8,9 @@ from chess import Board, Piece, Move
 from chess.pgn import GameBuilder, Game
 from typing import Dict, List, Optional, Set, TextIO, Tuple
 from concurrent.futures import ProcessPoolExecutor, Future
+from multiprocessing.context import SpawnProcess
 import os
+import signal
 from chmutils import calculate_heatmap, GradientHeatmap
 
 DARK_SQUARE_COLOR_PROMPT: str = "Pick Dark Square Color"
@@ -123,11 +125,22 @@ class ChessHeatMap(tk.Tk):
         self.highlight_squares = set()  # Store the squares to highlight
         # Parallel processing setup
         self.depth = 3
+        self.protocol("WM_DELETE_WINDOW", self.on_closing)
         self.executor = ProcessPoolExecutor(max_workers=max(1, int(os.cpu_count() * 0.9)))
         self.heatmap_futures = {}  # Track running futures
         self.heatmaps = {}  # Store completed heatmaps
         self.open_pgn()
         self.updating = False
+
+    def on_closing(self) -> None:
+        """Clean up resources before closing the application."""
+        self.updating = True
+        if self.executor is not None:
+            process: SpawnProcess
+            for process in self.executor._processes.values():
+                os.kill(process.pid, signal.SIGTERM)
+            self.executor.shutdown()
+        self.destroy()
 
     def on_resize(self, event: Event) -> None:
         """Handle window resize events.
