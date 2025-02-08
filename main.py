@@ -218,11 +218,16 @@ class ChessHeatMap(tk.Tk):
 
     def ask_depth(self) -> Optional[int]:
         """
+        Prompt the user to set a new recursion depth for heatmap calculations.
+
+        This method displays a dialog box warning the user about the exponential
+        complexity of increasing depth values. It recommends using odd values for
+        unbiased heatmaps, as even depths favor the current player.
 
         Returns
         -------
-        Union[None, int]
-
+        Union[int, None]
+            The user-provided depth value if valid, otherwise None.
         """
         depth_warning: str = "Every increment to this value increases calculation times exponentially!\n\n"
         depth_warning += "Note: Odd values are recommended for least biased heatmaps\nas each depth starting from 0 "
@@ -234,7 +239,12 @@ class ChessHeatMap(tk.Tk):
                                        maxvalue=100)  # Adjust maxvalue as needed.
 
     def clear_heatmaps(self) -> None:
-        """Cancel any running heatmap calculations and clear completed ones."""
+        """
+        Cancel any running heatmap calculations and clear completed ones.
+
+        This method ensures that all heatmap-related processes are halted, preventing
+        conflicts when a new PGN file is loaded or when the user adjusts the depth setting.
+        """
         future: Future
         for future in self.heatmap_futures.values():
             future.cancel()
@@ -326,17 +336,22 @@ class ChessHeatMap(tk.Tk):
         self.update_board()
 
     def ensure_executor(self) -> None:
-        """Ensure executor is not None!"""
+        """Ensure that the process pool executor is initialized.
+
+        This method is called before submitting new heatmap calculations to ensure
+        that parallel processing resources are available.
+        """
         if self.executor is None:
             self.executor = ProcessPoolExecutor(max_workers=max(1, int(os.cpu_count() * 0.9)))
 
     @property
     def format_game_headers(self) -> str:
-        """Formats game details substring from game headers.
+        """Generate a formatted string containing game details from PGN headers.
 
         Returns
         -------
         str
+            A formatted string displaying White/Black player names, result, date, and site.
         """
         if self.game is None:
             return ""
@@ -463,19 +478,31 @@ class ChessHeatMap(tk.Tk):
 
     def create_count_labels(self, font_size: int, heatmap: GradientHeatmap, offset: int, square: int,
                             square_size: int, x0: int, x1: int, y0: int, y1: int) -> None:
-        """
+        """Display move count intensity labels on the board.
+
+        This method creates small text labels on each square representing
+        the number of times that square was moved to in the analyzed game.
 
         Parameters
         ----------
-        font_size
-        heatmap
-        offset
-        square
-        square_size
-        x0
-        x1
-        y0
-        y1
+        font_size : int
+            The font size for the count labels.
+        heatmap : GradientHeatmap
+            The heatmap object containing move count data.
+        offset : int
+            Offset for label positioning within the square.
+        square : int
+            The square index (0-63) corresponding to the chessboard layout.
+        square_size : int
+            The size of each square in pixels.
+        x0 : int
+            The top-left x-coordinate of the square.
+        x1 : int
+            The bottom-right x-coordinate of the square.
+        y0 : int
+            The top-left y-coordinate of the square.
+        y1 : int
+            The bottom-right y-coordinate of the square.
         """
         self.canvas.create_rectangle(
             x1 - (square_size / 9) * 2, y0 + offset + 2, x1 - offset - 2, y0 + (square_size / 10) * 1.8,
@@ -495,15 +522,23 @@ class ChessHeatMap(tk.Tk):
         )
 
     def create_piece(self, font_size: int, piece: Optional[Piece], square_size: int, x0: int, y0: int) -> None:
-        """
+        """Render a chess piece on the board.
+
+        This method displays a chess piece symbol at the correct square location.
+        It also includes a circular background for better visibility.
 
         Parameters
         ----------
-        font_size
-        piece
-        square_size
-        x0
-        y0
+        font_size : int
+            The font size for the piece symbol.
+        piece : Optional[Piece]
+            The chess piece object to render, or None if the square is empty.
+        square_size : int
+            The size of each square in pixels.
+        x0 : int
+            The top-left x-coordinate of the square.
+        y0 : int
+            The top-left y-coordinate of the square.
         """
         if piece:
             piece_bg: str = "⬤"
