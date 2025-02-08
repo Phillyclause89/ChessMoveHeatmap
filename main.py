@@ -1,7 +1,7 @@
 """Chess Heat Map App"""
 import chess
 import tkinter as tk
-from tkinter import Canvas, Menu, filedialog, colorchooser, messagebox, font as tk_font, Event
+from tkinter import Canvas, Menu, filedialog, colorchooser, messagebox, font as tk_font, Event, simpledialog
 
 from numpy.typing import NDArray
 from chess import Board, Piece, Move
@@ -180,10 +180,53 @@ class ChessHeatMap(tk.Tk):
                                  command=lambda: self.choose_square_color(title=LIGHT_SQUARE_COLOR_PROMPT, index=0))
         options_menu.add_command(label=DARK_SQUARE_COLOR_PROMPT,
                                  command=lambda: self.choose_square_color(title=DARK_SQUARE_COLOR_PROMPT, index=1))
+        options_menu.add_command(label="Set Depth", command=self.set_depth)
         menu_bar.add_cascade(label="Options", menu=options_menu)
         menu_bar.add_command(label="Prev Move", command=self.prev_move)
         menu_bar.add_command(label="Next Move", command=self.next_move)
         self.config(menu=menu_bar)
+
+    def set_depth(self) -> None:
+        """Prompt the user to set a new recursion depth for heatmap calculations.
+
+        The user is asked to input an integer value. If a valid value is provided,
+        the depth is updated and the window title is refreshed to reflect the change.
+        """
+        depth_warning: str = "Every increment to this value increases calculation times exponentially!\n\n"
+        depth_warning += "Note: Odd values are recommended for least biased heatmaps\nas each depth starting from 0 "
+        depth_warning += "only counts one half turn of possible moves."
+        new_depth = simpledialog.askinteger("Set Depth",
+                                            f"\nWARNING: {depth_warning}\n\nEnter new recursion depth:",
+                                            initialvalue=self.depth,
+                                            minvalue=0,
+                                            maxvalue=100)  # Adjust maxvalue as needed.
+        if new_depth is not None and new_depth != self.depth:
+            self.depth = new_depth
+            # Update the window title to reflect the new depth.
+            self.title(f"Chess Move Heatmap | Depth = {self.depth} | {self.format_game_headers}")
+            if self.executor is None:
+                self.executor = ProcessPoolExecutor(max_workers=max(1, int(os.cpu_count() * 0.9)))
+            future: Future
+            for future in self.heatmap_futures.values():
+                future.cancel()
+            self.heatmap_futures.clear()
+            self.heatmaps.clear()
+            if self.game is not None:
+                board: Board = self.game.board()
+                moves: List = [None] + self.moves
+            else:
+                board = Board()
+                moves = [None]
+            for i, move in enumerate(moves):  # Include initial board state
+                new_board: Board = board.copy()
+                if move:
+                    j: int
+                    for j in range(i):
+                        new_board.push(self.moves[j])
+                future = self.executor.submit(calculate_heatmap, new_board, depth=self.depth)
+                self.heatmap_futures[i - 1] = future
+            self.after(100, self.check_heatmap_futures)
+            self.update_board()
 
     def change_font(self, new_font: str) -> None:
         """Handle font option updates.
@@ -250,7 +293,7 @@ class ChessHeatMap(tk.Tk):
                     self.moves = moves
                     self.board = board
                     self.current_move_index = -1
-                    self.title(f"Chess Move Heatmap | Depth = {self.depth} | {self.format_game_headers}")
+                    self.title(f"Chess Move Heatmap | Depth = {self.depth}{self.format_game_headers}")
                     # Start background heatmap calculations
                     move: Optional[Move]
                     i: int
@@ -282,8 +325,10 @@ class ChessHeatMap(tk.Tk):
         -------
         str
         """
+        if self.game is None:
+            return ""
         headers: Headers = self.game.headers
-        f_head: str = f"White (Blue): {headers.get('White', '?')} | Black (Yellow): {headers.get('Black', '?')}"
+        f_head: str = f" | White (Blue): {headers.get('White', '?')} | Black (Yellow): {headers.get('Black', '?')}"
         f_head += f" | Result: {headers.get('Result', '?')} | Date: {headers.get('Date', '?')}"
         return f"{f_head} | Site: {headers.get('Site', '?')}"
 
@@ -309,7 +354,7 @@ class ChessHeatMap(tk.Tk):
             self.updating = False
         if len(self.heatmaps) != len(self.heatmap_futures):
             self.after(100, self.check_heatmap_futures)
-        else:
+        elif self.executor is not None:
             self.executor.shutdown()
             self.executor = None
 
