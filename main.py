@@ -192,25 +192,13 @@ class ChessHeatMap(tk.Tk):
         The user is asked to input an integer value. If a valid value is provided,
         the depth is updated and the window title is refreshed to reflect the change.
         """
-        depth_warning: str = "Every increment to this value increases calculation times exponentially!\n\n"
-        depth_warning += "Note: Odd values are recommended for least biased heatmaps\nas each depth starting from 0 "
-        depth_warning += "only counts one half turn of possible moves."
-        new_depth = simpledialog.askinteger("Set Depth",
-                                            f"\nWARNING: {depth_warning}\n\nEnter new recursion depth:",
-                                            initialvalue=self.depth,
-                                            minvalue=0,
-                                            maxvalue=100)  # Adjust maxvalue as needed.
+        new_depth: Optional[int] = self.ask_depth()
         if new_depth is not None and new_depth != self.depth:
             self.depth = new_depth
             # Update the window title to reflect the new depth.
             self.title(f"Chess Move Heatmap | Depth = {self.depth} | {self.format_game_headers}")
-            if self.executor is None:
-                self.executor = ProcessPoolExecutor(max_workers=max(1, int(os.cpu_count() * 0.9)))
-            future: Future
-            for future in self.heatmap_futures.values():
-                future.cancel()
-            self.heatmap_futures.clear()
-            self.heatmaps.clear()
+            self.ensure_executor()
+            self.clear_heatmaps()
             if self.game is not None:
                 board: Board = self.game.board()
                 moves: List = [None] + self.moves
@@ -227,6 +215,31 @@ class ChessHeatMap(tk.Tk):
                 self.heatmap_futures[i - 1] = future
             self.after(100, self.check_heatmap_futures)
             self.update_board()
+
+    def ask_depth(self) -> Optional[int]:
+        """
+
+        Returns
+        -------
+        Union[None, int]
+
+        """
+        depth_warning: str = "Every increment to this value increases calculation times exponentially!\n\n"
+        depth_warning += "Note: Odd values are recommended for least biased heatmaps\nas each depth starting from 0 "
+        depth_warning += "only counts one half turn of possible moves."
+        return simpledialog.askinteger("Set Depth",
+                                       f"\nWARNING: {depth_warning}\n\nEnter new recursion depth:",
+                                       initialvalue=self.depth,
+                                       minvalue=0,
+                                       maxvalue=100)  # Adjust maxvalue as needed.
+
+    def clear_heatmaps(self) -> None:
+        """Cancel any running heatmap calculations and clear completed ones."""
+        future: Future
+        for future in self.heatmap_futures.values():
+            future.cancel()
+        self.heatmap_futures.clear()
+        self.heatmaps.clear()
 
     def change_font(self, new_font: str) -> None:
         """Handle font option updates.
@@ -273,44 +286,38 @@ class ChessHeatMap(tk.Tk):
         and starts the background process for heatmap calculation. It also clears previous heatmaps
         and resets the game state.
         """
-        if self.executor is None:
-            self.executor = ProcessPoolExecutor(max_workers=max(1, int(os.cpu_count() * 0.9)))
+        self.ensure_executor()
         file_path: str = filedialog.askopenfilename(filetypes=[("PGN Files", "*.pgn")])
-        if file_path:
-            try:
-                file: TextIO
-                with open(file_path, "r") as file:
-                    game: Optional[Game] = chess.pgn.read_game(file, Visitor=Builder)
-                    board: Board = game.board()
-                    moves: Optional[List[Optional[Move]]] = list(game.mainline_moves())
-                    # Cancel any running heatmap calculations
-                    future: Future
-                    for future in self.heatmap_futures.values():
-                        future.cancel()
-                    self.heatmap_futures.clear()
-                    self.heatmaps.clear()
-                    self.game = game
-                    self.moves = moves
-                    self.board = board
-                    self.current_move_index = -1
-                    self.title(f"Chess Move Heatmap | Depth = {self.depth}{self.format_game_headers}")
-                    # Start background heatmap calculations
-                    move: Optional[Move]
-                    i: int
-                    for i, move in enumerate([None] + moves):  # Include initial board state
-                        new_board: Board = self.board.copy()
-                        if move:
-                            j: int
-                            for j in range(i):
-                                new_board.push(self.moves[j])
-                        future = self.executor.submit(calculate_heatmap, new_board, depth=self.depth)
-                        self.heatmap_futures[i - 1] = future
-                    self.after(100, self.check_heatmap_futures)
-            except Exception as e:
-                print(f"Error loading PGN file: {e.__repr__()}")
-                if isinstance(e, AttributeError):
-                    e = "The file does not contain a valid PGN game."
-                messagebox.showerror("Error", f"Failed to load PGN file: {e}")
+        try:
+            file: TextIO
+            with open(file_path, "r") as file:
+                game: Optional[Game] = chess.pgn.read_game(file, Visitor=Builder)
+                board: Board = game.board()
+                moves: Optional[List[Optional[Move]]] = list(game.mainline_moves())
+                self.clear_heatmaps()
+                self.game = game
+                self.moves = moves
+                self.board = board
+                self.current_move_index = -1
+                self.title(f"Chess Move Heatmap | Depth = {self.depth}{self.format_game_headers}")
+                # Start background heatmap calculations
+                move: Optional[Move]
+                i: int
+                for i, move in enumerate([None] + moves):  # Include initial board state
+                    new_board: Board = self.board.copy()
+                    if move:
+                        j: int
+                        for j in range(i):
+                            new_board.push(self.moves[j])
+                    future = self.executor.submit(calculate_heatmap, new_board, depth=self.depth)
+                    self.heatmap_futures[i - 1] = future
+                self.after(100, self.check_heatmap_futures)
+        except Exception as e:
+            if isinstance(e, AttributeError):
+                e = "The file does not contain a valid PGN game."
+            elif not file_path:
+                e = "No PGN file was selected."
+            messagebox.showerror("Error", f"Failed to load PGN file: {e}")
         if not self.heatmap_futures and not self.heatmaps:
             new_board: Board = self.board.copy()
             future = self.executor.submit(calculate_heatmap, new_board, depth=self.depth)
@@ -318,9 +325,15 @@ class ChessHeatMap(tk.Tk):
             self.after(100, self.check_heatmap_futures)
         self.update_board()
 
+    def ensure_executor(self) -> None:
+        """Ensure executor is not None!"""
+        if self.executor is None:
+            self.executor = ProcessPoolExecutor(max_workers=max(1, int(os.cpu_count() * 0.9)))
+
     @property
     def format_game_headers(self) -> str:
-        """
+        """Formats game details substring from game headers.
+
         Returns
         -------
         str
@@ -445,32 +458,63 @@ class ChessHeatMap(tk.Tk):
                 fill=color, outline=outline_color, width=width
             )
             piece: Optional[Piece] = self.board.piece_at(square)
-            if piece:
-                piece_bg: str = "⬤"
-                self.canvas.create_text(
-                    x0 + square_size / 2, y0 + square_size / 2,
-                    text=piece_bg, font=(self.font, font_size + 25), fill="white" if piece.color else "black"
-                )
-                piece_symbol: str = piece.unicode_symbol()
-                self.canvas.create_text(
-                    x0 + square_size / 2, y0 + square_size / 2,
-                    text=piece_symbol, font=(self.font, font_size), fill="blue" if piece.color else "yellow"
-                )
-            self.canvas.create_rectangle(
-                x1 - (square_size / 9) * 2, y0 + offset + 2, x1 - offset - 2, y0 + (square_size / 10) * 1.8,
-                fill="black"
-            )
+            self.create_piece(font_size, piece, square_size, x0, y0)
+            self.create_count_labels(font_size, heatmap, offset, square, square_size, x0, x1, y0, y1)
+
+    def create_count_labels(self, font_size: int, heatmap: GradientHeatmap, offset: int, square: int,
+                            square_size: int, x0: int, x1: int, y0: int, y1: int) -> None:
+        """
+
+        Parameters
+        ----------
+        font_size
+        heatmap
+        offset
+        square
+        square_size
+        x0
+        x1
+        y0
+        y1
+        """
+        self.canvas.create_rectangle(
+            x1 - (square_size / 9) * 2, y0 + offset + 2, x1 - offset - 2, y0 + (square_size / 10) * 1.8,
+            fill="black"
+        )
+        self.canvas.create_text(
+            x1 - square_size / 9, y0 + square_size / 10,
+            text=f"{heatmap[square][1]:.1f}", font=(self.font, font_size // 5), fill="yellow"
+        )
+        self.canvas.create_rectangle(
+            x0 + offset + 2, y1 - (square_size / 10) * 1.8, x0 + (square_size / 9) * 2, y1 - offset - 2,
+            fill="white",
+        )
+        self.canvas.create_text(
+            x0 + square_size / 9, y1 - square_size / 10,
+            text=f"{heatmap[square][0]:.1f}", font=(self.font, font_size // 5), fill="blue"
+        )
+
+    def create_piece(self, font_size: int, piece: Optional[Piece], square_size: int, x0: int, y0: int) -> None:
+        """
+
+        Parameters
+        ----------
+        font_size
+        piece
+        square_size
+        x0
+        y0
+        """
+        if piece:
+            piece_bg: str = "⬤"
             self.canvas.create_text(
-                x1 - square_size / 9, y0 + square_size / 10,
-                text=f"{heatmap[square][1]:.1f}", font=(self.font, font_size // 5), fill="yellow"
+                x0 + square_size / 2, y0 + square_size / 2,
+                text=piece_bg, font=(self.font, font_size + 25), fill="white" if piece.color else "black"
             )
-            self.canvas.create_rectangle(
-                x0 + offset + 2, y1 - (square_size / 10) * 1.8, x0 + (square_size / 9) * 2, y1 - offset - 2,
-                fill="white",
-            )
+            piece_symbol: str = piece.unicode_symbol()
             self.canvas.create_text(
-                x0 + square_size / 9, y1 - square_size / 10,
-                text=f"{heatmap[square][0]:.1f}", font=(self.font, font_size // 5), fill="blue"
+                x0 + square_size / 2, y0 + square_size / 2,
+                text=piece_symbol, font=(self.font, font_size), fill="blue" if piece.color else "yellow"
             )
 
 
