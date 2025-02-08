@@ -5,7 +5,7 @@ from tkinter import Canvas, Menu, filedialog, colorchooser, messagebox, font as 
 
 from numpy.typing import NDArray
 from chess import Board, Piece, Move
-from chess.pgn import GameBuilder, Game
+from chess.pgn import GameBuilder, Game, Headers
 from typing import Dict, List, Optional, Set, TextIO, Tuple
 from concurrent.futures import ProcessPoolExecutor, Future
 from multiprocessing.context import SpawnProcess
@@ -105,7 +105,8 @@ class ChessHeatMap(tk.Tk):
         """
         self.updating = True
         super().__init__()
-        self.title("Chess Heat Map")
+        self.depth = 3
+        self.title(f"Chess Move Heatmap | Depth = {self.depth}")
         self.board = chess.Board()
         screen_height: int = self.winfo_screenheight()
         screen_width: int = int(screen_height * 0.75)
@@ -124,7 +125,7 @@ class ChessHeatMap(tk.Tk):
         self.current_move_index = -1
         self.highlight_squares = set()  # Store the squares to highlight
         # Parallel processing setup
-        self.depth = 3
+
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
         self.executor = ProcessPoolExecutor(max_workers=max(1, int(os.cpu_count() * 0.9)))
         self.heatmap_futures = {}  # Track running futures
@@ -249,7 +250,7 @@ class ChessHeatMap(tk.Tk):
                     self.moves = moves
                     self.board = board
                     self.current_move_index = -1
-                    self.title(f"Chess Heat Map: {dict(game.headers)}")
+                    self.title(f"Chess Move Heatmap | Depth = {self.depth} | {self.format_game_headers}")
                     # Start background heatmap calculations
                     move: Optional[Move]
                     i: int
@@ -273,6 +274,18 @@ class ChessHeatMap(tk.Tk):
             self.heatmap_futures[self.current_move_index] = future
             self.after(100, self.check_heatmap_futures)
         self.update_board()
+
+    @property
+    def format_game_headers(self) -> str:
+        """
+        Returns
+        -------
+        str
+        """
+        headers: Headers = self.game.headers
+        f_head: str = f"White (Blue): {headers.get('White', '?')} | Black (Yellow): {headers.get('Black', '?')}"
+        f_head += f" | Result: {headers.get('Result', '?')} | Date: {headers.get('Date', '?')}"
+        return f"{f_head} | Site: {headers.get('Site', '?')}"
 
     def check_heatmap_futures(self) -> None:
         """Periodically check for completed heatmap calculations.
