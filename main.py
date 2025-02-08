@@ -505,11 +505,11 @@ class ChessHeatMap(tk.Tk):
             The bottom-right y-coordinate of the square.
         """
         self.canvas.create_rectangle(
-            x1 - (square_size / 9) * 2, y0 + offset + 2, x1 - offset - 2, y0 + (square_size / 10) * 1.8,
+            x0 + offset + 2, y0 + offset + 2, x0 + (square_size / 9) * 2, y0 + (square_size / 10) * 1.8,
             fill="black"
         )
         self.canvas.create_text(
-            x1 - square_size / 9, y0 + square_size / 10,
+            x0 + square_size / 9, y0 + square_size / 10,
             text=f"{heatmap[square][1]:.1f}", font=(self.font, font_size // 5), fill="yellow"
         )
         self.canvas.create_rectangle(
