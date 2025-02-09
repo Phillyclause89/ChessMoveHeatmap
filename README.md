@@ -7,7 +7,7 @@ intensity for each
 square at each position in the loaded game.
 
 <p align="center">
-  <a href="https://youtu.be/BMZ6-X9SCvs?si=DDEDqgzYPQtFgGXO" target="_blank">
+  <a href="https://youtu.be/hRwwK6vnPzs?si=hTRCUvtmDCgvCDna" target="_blank">
     <img src="docs/images/ChessMoveHeatmap-depth3.gif" alt="ChessMoveHeatmap Screenshot" width="800">
   </a>
 </p>
