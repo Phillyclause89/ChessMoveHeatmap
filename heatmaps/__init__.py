@@ -1,7 +1,12 @@
-from typing import Optional, Tuple, Union
+from typing import Dict, Optional, Tuple, Union
 
+from chess import PIECE_TYPES, Piece, COLORS
 from numpy.typing import NDArray, ArrayLike
 import numpy as np
+
+from copy import deepcopy
+
+PIECES: Tuple[Piece] = tuple(Piece(p, c) for c in COLORS for p in PIECE_TYPES)
 
 
 class GradientHeatmapT:
@@ -163,9 +168,9 @@ class GradientHeatmap(GradientHeatmapT):
         if data is None:
             return
         elif isinstance(data, np.ndarray) and data.dtype == np.float64:
-            self.data = np.copy(data)
+            self.data = deepcopy(data)
         elif isinstance(data, GradientHeatmapT):
-            self.data = np.copy(data.data)
+            self.data = deepcopy(data.data)
         else:
             raise TypeError("Data must be either a NumPy array of float64 or a GradientHeatmapT instance.")
 
@@ -276,6 +281,67 @@ class GradientHeatmap(GradientHeatmapT):
         return html
 
 
+class ChessMoveHeatmapT(GradientHeatmap):
+    _piece_counts: NDArray[Dict[Piece, np.float64]]
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self._piece_counts = np.array(
+            [{k: np.float64(0) for k in PIECES} for _ in range(64)],
+            dtype=dict
+        )
+
+    @property
+    def piece_counts(self) -> NDArray[Dict[Piece, np.float64]]:
+        """
+
+        Returns
+        -------
+        NDArray[Dict[Piece, np.float64]]
+
+        """
+        return self._piece_counts
+
+    @piece_counts.setter
+    def piece_counts(self, value: NDArray[Dict[Piece, np.float64]]) -> None:
+        """
+
+        Parameters
+        ----------
+        value NDArray[Dict[Piece, np.float64]]
+
+        """
+        try:
+            if value.shape == (64,) and value.dtype == object:
+                self._piece_counts = value
+                return
+            raise ValueError(f"Other {type(value)} must have shape 1, got {value.shape}.")
+        except AttributeError:
+            try:
+                self.piece_counts = np.asarray(value, dtype=dict)
+                return
+            except Exception as e:
+                raise TypeError(f"Other must be a shape (64,) ArrayLike, got {type(value)}") from e
+
+
+class ChessMoveHeatmap(ChessMoveHeatmapT):
+    def __init__(
+            self,
+            piece_counts: Optional[NDArray[Dict[Piece, np.float64]]] = None,
+            **kwargs: Dict[str, object]
+    ) -> None:
+        super().__init__(**kwargs)
+        data: Optional[object] = kwargs.get("data")
+        if piece_counts is None and data is None:
+            return
+        elif isinstance(piece_counts, np.ndarray) and piece_counts.dtype == object:
+            self.piece_counts = deepcopy(piece_counts)
+        elif isinstance(data, ChessMoveHeatmapT):
+            self.piece_counts = deepcopy(data.piece_counts)
+        else:
+            raise TypeError("piece_counts must be a NumPy array of object.")
+
+
 if __name__ == "__main__":
     from chmutils import calculate_heatmap
     from chess import Board
@@ -289,3 +355,25 @@ if __name__ == "__main__":
     print(x.data)
     # original hmap data should not be mutated
     print(hmap.data)
+
+    # New empty ChessMoveHeatmap
+    cmhmap0 = ChessMoveHeatmap()
+    print(cmhmap0.piece_counts[0][PIECES[0]])
+    cmhmap0.piece_counts[0][PIECES[0]] += 1
+    print(cmhmap0.piece_counts[0][PIECES[0]])
+
+    # New ChessMoveHeatmap with all data copied from first one
+    cmhmap1 = ChessMoveHeatmap(data=cmhmap0)
+    cmhmap1.piece_counts[0][PIECES[0]] += 1
+    print(cmhmap0.piece_counts[0][PIECES[0]], cmhmap1.piece_counts[0][PIECES[0]])
+
+    #
+    cmhmap2 = ChessMoveHeatmap(cmhmap0.piece_counts, data=cmhmap0)
+    cmhmap2.piece_counts[0][PIECES[0]] += 2
+    print(cmhmap0.piece_counts[0][PIECES[0]], cmhmap1.piece_counts[0][PIECES[0]], cmhmap2.piece_counts[0][PIECES[0]])
+
+    #
+    cmhmap3 = ChessMoveHeatmap(cmhmap0.piece_counts)
+    cmhmap3.piece_counts[0][PIECES[0]] += 3
+    print(cmhmap0.piece_counts[0][PIECES[0]], cmhmap1.piece_counts[0][PIECES[0]], cmhmap2.piece_counts[0][PIECES[0]],
+          cmhmap3.piece_counts[0][PIECES[0]])
