@@ -11,7 +11,8 @@ from concurrent.futures import ProcessPoolExecutor, Future
 from multiprocessing.context import SpawnProcess
 import os
 import signal
-from chmutils import calculate_heatmap, GradientHeatmap
+from chmutils import calculate_heatmap
+from heatmaps import GradientHeatmap
 
 DARK_SQUARE_COLOR_PROMPT: str = "Pick Dark Square Color"
 LIGHT_SQUARE_COLOR_PROMPT: str = "Pick Light Square Color"

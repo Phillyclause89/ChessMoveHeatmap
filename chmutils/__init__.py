@@ -1,12 +1,12 @@
 from typing import Optional, Tuple
 import chess
-from chess import Move, Board
-from heatmaps import GradientHeatmap
+from chess import Move, Board, Piece
+import heatmaps
 
 
 def calculate_heatmap(board: Board, depth: int = 1,
-                      heatmap: Optional[GradientHeatmap] = None,
-                      discount: int = 1) -> GradientHeatmap:
+                      heatmap: Optional[heatmaps.GradientHeatmap] = None,
+                      discount: int = 1) -> heatmaps.GradientHeatmap:
     """
     Recursively computes a gradient heatmap for a given chess board position.
 
@@ -73,7 +73,7 @@ def calculate_heatmap(board: Board, depth: int = 1,
     >>> print(depth2_hmap.colors)
     """
     if heatmap is None:
-        heatmap = GradientHeatmap()
+        heatmap = heatmaps.GradientHeatmap()
 
     moves: Tuple[Move] = tuple(board.legal_moves)
     num_moves: int = len(moves)
@@ -95,10 +95,51 @@ def calculate_heatmap(board: Board, depth: int = 1,
     return heatmap
 
 
+def calculate_chess_move_heatmap(
+        board: Board, depth: int = 1,
+        heatmap: Optional[heatmaps.ChessMoveHeatmap] = None,
+        discount: int = 1) -> heatmaps.ChessMoveHeatmap:
+    if heatmap is None:
+        heatmap = heatmaps.ChessMoveHeatmap()
+
+    moves: Tuple[Move] = tuple(board.legal_moves)
+    num_moves: int = len(moves)
+
+    if num_moves == 0:
+        return heatmap
+
+    color_index: int = int(not board.turn)
+    move: Move
+
+    for move in moves:
+        target_square: int = move.to_square
+        heatmap[target_square][color_index] += (1.0 / discount)
+        from_square: int = move.from_square
+        piece: Piece = board.piece_at(from_square)
+        heatmap.piece_counts[target_square][piece] += (1.0 / discount)
+
+        if depth > 0:
+            new_board: Board = board.copy()
+            new_board.push(move)
+            heatmap = calculate_chess_move_heatmap(new_board, depth - 1, heatmap, discount * num_moves)
+    return heatmap
+
+
 if __name__ == "__main__":
     from timeit import timeit
 
     b = chess.Board()
 
-    for d in range(1):
-        hmap = timeit("calculate_heatmap(board=b, depth=d)", number=1, globals=globals())
+    for d in range(4):
+        hmap_t = timeit("calculate_heatmap(board=b, depth=d)", number=1, globals=globals())
+        print(d, hmap_t)
+
+    hmap = calculate_heatmap(board=b, depth=1)
+    print(hmap)
+
+    for d in range(4):
+        cmhmap_t = timeit("calculate_chess_move_heatmap(board=b, depth=d)", number=1, globals=globals())
+        print(d, cmhmap_t)
+
+    cmhmap = calculate_chess_move_heatmap(board=b, depth=1)
+    print(cmhmap)

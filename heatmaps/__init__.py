@@ -169,7 +169,9 @@ class GradientHeatmap(GradientHeatmapT):
             return
         elif isinstance(data, np.ndarray) and data.dtype == np.float64:
             self.data = deepcopy(data)
-        elif isinstance(data, GradientHeatmapT):
+        elif isinstance(data, (
+                GradientHeatmapT, GradientHeatmap, ChessMoveHeatmapT, ChessMoveHeatmap,
+        )) or str(type(self)).replace('__main__', 'heatmaps') == str(type(data)):
             self.data = deepcopy(data.data)
         else:
             raise TypeError("Data must be either a NumPy array of float64 or a GradientHeatmapT instance.")
@@ -328,7 +330,7 @@ class ChessMoveHeatmap(ChessMoveHeatmapT):
     def __init__(
             self,
             piece_counts: Optional[NDArray[Dict[Piece, np.float64]]] = None,
-            **kwargs: Dict[str, object]
+            **kwargs
     ) -> None:
         super().__init__(**kwargs)
         data: Optional[object] = kwargs.get("data")
@@ -336,49 +338,51 @@ class ChessMoveHeatmap(ChessMoveHeatmapT):
             return
         elif isinstance(piece_counts, np.ndarray) and piece_counts.dtype == object:
             self.piece_counts = deepcopy(piece_counts)
-        elif isinstance(data, ChessMoveHeatmapT):
+        elif isinstance(
+                data, (ChessMoveHeatmapT, ChessMoveHeatmap)
+        ) or str(type(self)).replace('__main__', 'heatmaps') == str(type(data)):
             self.piece_counts = deepcopy(data.piece_counts)
         else:
             raise TypeError("piece_counts must be a NumPy array of object.")
 
 
 if __name__ == "__main__":
-    from chmutils import calculate_heatmap
-    from chess import Board
+    from chmutils import calculate_heatmap, calculate_chess_move_heatmap
+    from chess import Board, Piece
 
-    hmap = calculate_heatmap(Board(), 1)
-    print(hmap[32])
-    hmap1 = GradientHeatmap(hmap.data)
-    hmap1[32][0] += 1
-    print(hmap[32], hmap1[32])
+    hmap0 = calculate_heatmap(Board(), 1)
+    print(hmap0[16])
+    hmap1 = GradientHeatmap(hmap0.data)
+    hmap1[16][0] += 1
+    print(hmap0[16], hmap1[16])
 
     hmap2 = GradientHeatmap(hmap1)
-    hmap2[32][0] += 1
-    print(hmap[32], hmap1[32], hmap2[32])
+    hmap2[16][0] += 1
+    print(hmap0[16], hmap1[16], hmap2[16])
     # __add__ should work with both GradientHeatmap objects and (64,2) shaped arrays
-    hmap3 = hmap + hmap1 + hmap2.data
+    hmap3 = hmap0 + hmap1 + hmap2.data
     # x should be GradientHeatmap with .data containing the results of the calculation
-    print(hmap[32], hmap1[32], hmap2[32], hmap3[32])
+    print(hmap0[16], hmap1[16], hmap2[16], hmap3[16])
     # original hmap data should not be mutated
 
     # New empty ChessMoveHeatmap
-    cmhmap0 = ChessMoveHeatmap()
-    print(cmhmap0.piece_counts[0][PIECES[0]])
-    cmhmap0.piece_counts[0][PIECES[0]] += 1
-    print(cmhmap0.piece_counts[0][PIECES[0]])
+    cmhmap0 = calculate_chess_move_heatmap(Board(), 1)
+    print(cmhmap0.piece_counts[16][PIECES[0]])
 
     # New ChessMoveHeatmap with all data copied from first one
     cmhmap1 = ChessMoveHeatmap(data=cmhmap0)
-    cmhmap1.piece_counts[0][PIECES[0]] += 1
-    print(cmhmap0.piece_counts[0][PIECES[0]], cmhmap1.piece_counts[0][PIECES[0]])
+    cmhmap1.piece_counts[16][PIECES[0]] += 1
+    print(cmhmap0.piece_counts[16][PIECES[0]], cmhmap1.piece_counts[16][PIECES[0]])
 
     #
-    cmhmap2 = ChessMoveHeatmap(cmhmap0.piece_counts, data=cmhmap0)
-    cmhmap2.piece_counts[0][PIECES[0]] += 2
-    print(cmhmap0.piece_counts[0][PIECES[0]], cmhmap1.piece_counts[0][PIECES[0]], cmhmap2.piece_counts[0][PIECES[0]])
+    cmhmap2 = ChessMoveHeatmap(cmhmap1.piece_counts, data=cmhmap1)
+    cmhmap2.piece_counts[16][PIECES[0]] += 1
+    print(cmhmap0.piece_counts[16][PIECES[0]], cmhmap1.piece_counts[16][PIECES[0]], cmhmap2.piece_counts[16][PIECES[0]])
 
     #
-    cmhmap3 = ChessMoveHeatmap(cmhmap0.piece_counts)
-    cmhmap3.piece_counts[0][PIECES[0]] += 3
-    print(cmhmap0.piece_counts[0][PIECES[0]], cmhmap1.piece_counts[0][PIECES[0]], cmhmap2.piece_counts[0][PIECES[0]],
-          cmhmap3.piece_counts[0][PIECES[0]])
+    cmhmap3 = ChessMoveHeatmap(cmhmap2.piece_counts)
+    cmhmap3.piece_counts[16][PIECES[0]] += 1
+    print(cmhmap0.piece_counts[16][PIECES[0]], cmhmap1.piece_counts[16][PIECES[0]], cmhmap2.piece_counts[16][PIECES[0]],
+          cmhmap3.piece_counts[16][PIECES[0]])
+
+
