@@ -2,7 +2,8 @@
 import chess
 import tkinter as tk
 from tkinter import Canvas, Menu, filedialog, colorchooser, messagebox, font as tk_font, Event, simpledialog
-
+from tooltips import CanvasTooltip
+from numpy import float64
 from numpy.typing import NDArray
 from chess import Board, Piece, Move
 from chess.pgn import GameBuilder, Game, Headers
@@ -11,8 +12,8 @@ from concurrent.futures import ProcessPoolExecutor, Future
 from multiprocessing.context import SpawnProcess
 import os
 import signal
-from chmutils import calculate_heatmap
-from heatmaps import GradientHeatmap
+from chmutils import calculate_chess_move_heatmap
+from heatmaps import ChessMoveHeatmap
 
 DARK_SQUARE_COLOR_PROMPT: str = "Pick Dark Square Color"
 LIGHT_SQUARE_COLOR_PROMPT: str = "Pick Light Square Color"
@@ -30,7 +31,7 @@ class Builder(GameBuilder):
         raise error
 
 
-class ChessHeatMap(tk.Tk):
+class ChessHeatMapApp(tk.Tk):
     """Main application window for the Chess Heat Map app.
 
     This class is responsible for rendering the chessboard, handling user inputs,
@@ -82,6 +83,8 @@ class ChessHeatMap(tk.Tk):
     prev_move : Updates the board to show the previous move in the loaded game.
     update_board : Updates the chessboard display based on the current board state and heatmap.
     """
+    tooltips: List[Optional[CanvasTooltip]]
+    pieces_maps: Dict[Optional[int], Optional[NDArray[Dict[Piece, float64]]]]
     depth: int
     heatmap_futures: Dict[Optional[int], Optional[Future]]  # Refactored to dict so -1 can be a key
     heatmaps: Dict[Optional[int], Optional[NDArray[str]]]
@@ -98,7 +101,7 @@ class ChessHeatMap(tk.Tk):
     updating: bool
 
     def __init__(self) -> None:
-        """Initialize the ChessHeatMap application.
+        """Initialize the ChessHeatMapApp application.
 
         This method sets up the window size, board dimensions, and various attributes like colors,
         font, and heatmap futures. It also prompts the user to load a PGN file and begins the process
@@ -116,7 +119,7 @@ class ChessHeatMap(tk.Tk):
         self.colors = list(DEFAULT_COLORS)
         self.font = DEFAULT_FONT
         self.create_menu()
-        self.canvas = tk.Canvas(self)
+        self.canvas = tk.Canvas(self, )
         self.canvas.pack(fill="both", expand=True)
         self.game = None
         self.moves = None
@@ -128,6 +131,8 @@ class ChessHeatMap(tk.Tk):
         self.executor = ProcessPoolExecutor(max_workers=max(1, int(os.cpu_count() * 0.9)))
         self.heatmap_futures = {}  # Track running futures
         self.heatmaps = {}  # Store completed heatmaps
+        self.pieces_maps = {}
+        self.tooltips = []
         self.open_pgn()
 
         self.bind("<Configure>", self.on_resize)
@@ -214,7 +219,7 @@ class ChessHeatMap(tk.Tk):
                     j: int
                     for j in range(i):
                         new_board.push(self.moves[j])
-                future = self.executor.submit(calculate_heatmap, new_board, depth=self.depth)
+                future = self.executor.submit(calculate_chess_move_heatmap, new_board, depth=self.depth)
                 self.heatmap_futures[i - 1] = future
             self.after(100, self.check_heatmap_futures)
             self.update_board()
@@ -253,6 +258,7 @@ class ChessHeatMap(tk.Tk):
             future.cancel()
         self.heatmap_futures.clear()
         self.heatmaps.clear()
+        self.pieces_maps.clear()
 
     def change_font(self, new_font: str) -> None:
         """Handle font option updates.
@@ -322,7 +328,7 @@ class ChessHeatMap(tk.Tk):
                         j: int
                         for j in range(i):
                             new_board.push(self.moves[j])
-                    future = self.executor.submit(calculate_heatmap, new_board, depth=self.depth)
+                    future = self.executor.submit(calculate_chess_move_heatmap, new_board, depth=self.depth)
                     self.heatmap_futures[i - 1] = future
                 self.after(100, self.check_heatmap_futures)
         except Exception as e:
@@ -333,7 +339,7 @@ class ChessHeatMap(tk.Tk):
             messagebox.showerror("Error", f"Failed to load PGN file: {e}")
         if not self.heatmap_futures and not self.heatmaps:
             new_board: Board = self.board.copy()
-            future = self.executor.submit(calculate_heatmap, new_board, depth=self.depth)
+            future = self.executor.submit(calculate_chess_move_heatmap, new_board, depth=self.depth)
             self.heatmap_futures[self.current_move_index] = future
             self.after(100, self.check_heatmap_futures)
         self.update_board()
@@ -374,8 +380,9 @@ class ChessHeatMap(tk.Tk):
 
         for i, future in self.heatmap_futures.items():  # Start at -1 to align with self.current_move_index
             if i not in self.heatmaps and future.done():
-                heatmap = future.result()
+                heatmap: ChessMoveHeatmap = future.result()
                 self.heatmaps[i] = heatmap.colors  # Store only colors
+                self.pieces_maps[i] = heatmap.piece_counts
                 if self.current_move_index == i:
                     updated = True
 
@@ -430,6 +437,11 @@ class ChessHeatMap(tk.Tk):
         precomputed heatmap colors if available, or calculates them if necessary.
         """
         self.canvas.delete("all")
+        if len(self.tooltips) >> 0:
+            for t_tip in self.tooltips:
+                t_tip.hide()
+                del t_tip
+            self.tooltips.clear()
         square_size: int = self.square_size
         colors: List[str] = self.colors
         font_size: int = int(square_size * 0.4)
@@ -437,18 +449,38 @@ class ChessHeatMap(tk.Tk):
         future: Future = self.heatmap_futures[map_index]
 
         if map_index in self.heatmaps:
-            heatmap: GradientHeatmap = future.result()
+            heatmap: ChessMoveHeatmap = future.result()
             heatmap_colors: NDArray[str] = self.heatmaps[map_index]  # Use precomputed color list
+            pieces_map: NDArray[Dict[Piece, float64]] = self.pieces_maps[map_index]
         else:
             if future.done():
                 heatmap = future.result()
                 heatmap_colors = heatmap.colors  # Extract colors immediately
+                pieces_map = heatmap.piece_counts
                 self.heatmaps[map_index] = heatmap_colors  # Store only colors
+                self.pieces_maps[map_index] = pieces_map
             else:
-                heatmap = GradientHeatmap()
+                heatmap = ChessMoveHeatmap()
                 heatmap_colors = heatmap.colors
+                pieces_map = heatmap.piece_counts
 
         for square in chess.SQUARES:
+            square_pieces: Dict[Piece, float64] = pieces_map[square]
+            black_hint_text: str = ' '.join([
+                f"{k.unicode_symbol()}:{square_pieces[k]:.2f}" for k in square_pieces if
+                square_pieces[k] > 0 and not k.color
+            ])
+            if not black_hint_text.replace(" ", ""):
+                black_hint_text = "None"
+            white_hint_text: str = ' '.join([
+                f"{k.unicode_symbol()}:{square_pieces[k]:.2f}" for k in square_pieces if
+                square_pieces[k] > 0 and k.color
+            ])
+            if not white_hint_text.replace(" ", ""):
+                white_hint_text = "None"
+            wb_text = f"White: {white_hint_text}\nBlack: {black_hint_text}"
+            turn_depth = f"{((self.depth + 1) / 2):.1f}"
+            tip: str = f"Possible moves to {chess.square_name(square)} within {turn_depth} turns:\n{wb_text}"
             row: int
             col: int
             row, col = divmod(square, 8)
@@ -460,8 +492,11 @@ class ChessHeatMap(tk.Tk):
             color: str = colors[(flipped_row + col) % 2]
             heatmap_color: str = heatmap_colors[square]
             width: int = 1
-            if heatmap_color != "#afafaf":
+            if black_hint_text != "None" or white_hint_text != "None":
                 color = heatmap_color
+                make_tip = True
+            else:
+                make_tip = False
             outline_color: str = "black"
 
             if square in self.highlight_squares:
@@ -471,16 +506,25 @@ class ChessHeatMap(tk.Tk):
                     outline_color = "blue"
                 width = 3
             offset: int = width // 2
-            self.canvas.create_rectangle(
+            sq_id = self.canvas.create_rectangle(
                 x0 + offset, y0 + offset, x1 - offset, y1 - offset,
                 fill=color, outline=outline_color, width=width
             )
+            if make_tip:
+                self.tooltips.append(CanvasTooltip(self, self.canvas, sq_id, text=tip, bg=color))
             piece: Optional[Piece] = self.board.piece_at(square)
-            self.create_piece(font_size, piece, square_size, x0, y0)
-            self.create_count_labels(font_size, heatmap, offset, square, square_size, x0, x1, y0, y1)
+            self.create_piece(font_size, piece, square_size, x0, y0, tip, make_tip, color)
+            self.create_count_labels(
+                font_size, heatmap, offset, square, square_size, x0, y0, y1,
+                black_hint_text, white_hint_text, color
+            )
 
-    def create_count_labels(self, font_size: int, heatmap: GradientHeatmap, offset: int, square: int,
-                            square_size: int, x0: int, x1: int, y0: int, y1: int) -> None:
+    def create_count_labels(
+            self, font_size: int, heatmap: ChessMoveHeatmap,
+            offset: int, square: int,
+            square_size: int, x0: int, y0: int, y1: int,
+            black_hint_text: str, white_hint_text: str, color: str
+    ) -> None:
         """Display move count intensity labels on the board.
 
         This method creates small text labels on each square representing
@@ -500,31 +544,43 @@ class ChessHeatMap(tk.Tk):
             The size of each square in pixels.
         x0 : int
             The top-left x-coordinate of the square.
-        x1 : int
-            The bottom-right x-coordinate of the square.
         y0 : int
             The top-left y-coordinate of the square.
         y1 : int
             The bottom-right y-coordinate of the square.
         """
-        self.canvas.create_rectangle(
+        black_total: float64 = heatmap[square][1]
+        bbg_id = self.canvas.create_rectangle(
             x0 + offset + 2, y0 + offset + 2, x0 + (square_size / 9) * 2, y0 + (square_size / 10) * 1.8,
             fill="black"
         )
-        self.canvas.create_text(
+        btx_id = self.canvas.create_text(
             x0 + square_size / 9, y0 + square_size / 10,
-            text=f"{heatmap[square][1]:.1f}", font=(self.font, font_size // 5), fill="yellow"
+            text=f"{black_total:.1f}", font=(self.font, font_size // 5), fill="yellow"
         )
-        self.canvas.create_rectangle(
+
+        white_total: float64 = heatmap[square][0]
+        wbg_id = self.canvas.create_rectangle(
             x0 + offset + 2, y1 - (square_size / 10) * 1.8, x0 + (square_size / 9) * 2, y1 - offset - 2,
             fill="white",
         )
-        self.canvas.create_text(
+        wtx_id = self.canvas.create_text(
             x0 + square_size / 9, y1 - square_size / 10,
-            text=f"{heatmap[square][0]:.1f}", font=(self.font, font_size // 5), fill="blue"
+            text=f"{white_total:.1f}", font=(self.font, font_size // 5), fill="blue"
         )
 
-    def create_piece(self, font_size: int, piece: Optional[Piece], square_size: int, x0: int, y0: int) -> None:
+        if white_total > 0:
+            CanvasTooltip(self, self.canvas, wbg_id, text=white_hint_text, bg=color)
+            CanvasTooltip(self, self.canvas, wtx_id, text=white_hint_text, bg=color)
+        if black_total > 0:
+            CanvasTooltip(self, self.canvas, bbg_id, text=black_hint_text, bg=color)
+            CanvasTooltip(self, self.canvas, btx_id, text=black_hint_text, bg=color)
+
+    def create_piece(
+            self, font_size: int, piece: Optional[Piece],
+            square_size: int, x0: int, y0: int,
+            tip: str, make_tip: bool, color: str
+    ) -> None:
         """Render a chess piece on the board.
 
         This method displays a chess piece symbol at the correct square location.
@@ -545,17 +601,20 @@ class ChessHeatMap(tk.Tk):
         """
         if piece:
             piece_bg: str = "⬤"
-            self.canvas.create_text(
+            bg_id = self.canvas.create_text(
                 x0 + square_size / 2, y0 + square_size / 2,
                 text=piece_bg, font=(self.font, font_size + 25), fill="white" if piece.color else "black"
             )
             piece_symbol: str = piece.unicode_symbol()
-            self.canvas.create_text(
+            pc_id = self.canvas.create_text(
                 x0 + square_size / 2, y0 + square_size / 2,
                 text=piece_symbol, font=(self.font, font_size), fill="blue" if piece.color else "yellow"
             )
+            if make_tip:
+                self.tooltips.append(CanvasTooltip(self, self.canvas, bg_id, text=tip, bg=color))
+                self.tooltips.append(CanvasTooltip(self, self.canvas, pc_id, text=tip, bg=color))
 
 
 if __name__ == "__main__":
-    app = ChessHeatMap()
+    app = ChessHeatMapApp()
     app.mainloop()

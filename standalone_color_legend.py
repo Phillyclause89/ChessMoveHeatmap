@@ -46,8 +46,8 @@ def draw_color_grid(canvas: tk.Canvas, grid_size: int = 50):
             canvas.create_rectangle(x0, y0, x1, y1, fill=color, outline="black")
 
     # Labels
-    canvas.create_text(20, 0, text="Intensity of Possible White Moves →", anchor="nw", font=("Arial", 10), fill="white")
-    canvas.create_text(0, 20, text="Intensity of Possible Black Moves →", anchor="sw", font=("Arial", 10),
+    canvas.create_text(20, 0, text="Intensity of Possible White Moves →", anchor="nw", font=("Arial", 15), fill="white")
+    canvas.create_text(0, 20, text="Intensity of Possible Black Moves →", anchor="sw", font=("Arial", 15),
                        angle=-90, fill="black")
 
 
