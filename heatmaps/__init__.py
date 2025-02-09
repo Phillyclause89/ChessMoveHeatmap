@@ -347,14 +347,19 @@ if __name__ == "__main__":
     from chess import Board
 
     hmap = calculate_heatmap(Board(), 1)
-    hmap1 = calculate_heatmap(Board(), 1)
-    hmap2 = calculate_heatmap(Board(), 1)
+    print(hmap[32])
+    hmap1 = GradientHeatmap(hmap.data)
+    hmap1[32][0] += 1
+    print(hmap[32], hmap1[32])
+
+    hmap2 = GradientHeatmap(hmap1)
+    hmap2[32][0] += 1
+    print(hmap[32], hmap1[32], hmap2[32])
     # __add__ should work with both GradientHeatmap objects and (64,2) shaped arrays
-    x = hmap + hmap1 + hmap2.data
+    hmap3 = hmap + hmap1 + hmap2.data
     # x should be GradientHeatmap with .data containing the results of the calculation
-    print(x.data)
+    print(hmap[32], hmap1[32], hmap2[32], hmap3[32])
     # original hmap data should not be mutated
-    print(hmap.data)
 
     # New empty ChessMoveHeatmap
     cmhmap0 = ChessMoveHeatmap()
