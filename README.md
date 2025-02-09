@@ -69,12 +69,8 @@ This will open the Chess Heatmap UI, prompting you to **load a PGN file** for an
 
 ### **Navigating Moves**
 
-- Press the **Right Arrow (`→`)** to advance to the next move.
--
-    - ***PhillyNote:** use the ui button at the top of the app window, I may have deleted the binding on accident*
+- Press the **Right Arrow (`→`)** to advance to the next move
 - Press the **Left Arrow (`←`)** to go back to the previous move.
--
-    - ***PhillyNote:** use the ui button, I may have deleted the binding on accident*
 
 ### **Customization**
 

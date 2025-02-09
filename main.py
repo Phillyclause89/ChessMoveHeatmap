@@ -117,9 +117,6 @@ class ChessHeatMap(tk.Tk):
         self.create_menu()
         self.canvas = tk.Canvas(self)
         self.canvas.pack(fill="both", expand=True)
-        self.bind("<Configure>", self.on_resize)
-        self.bind("<Left>", lambda event: self.prev_move())
-        self.bind("<Right>", lambda event: self.next_move())
         self.game = None
         self.moves = None
         self.current_move_index = -1
@@ -131,6 +128,11 @@ class ChessHeatMap(tk.Tk):
         self.heatmap_futures = {}  # Track running futures
         self.heatmaps = {}  # Store completed heatmaps
         self.open_pgn()
+
+        self.bind("<Configure>", self.on_resize)
+        self.bind("<Left>", lambda event: self.prev_move())
+        self.bind("<Right>", lambda event: self.next_move())
+        self.focus_force()
         self.updating = False
 
     def on_closing(self) -> None:
