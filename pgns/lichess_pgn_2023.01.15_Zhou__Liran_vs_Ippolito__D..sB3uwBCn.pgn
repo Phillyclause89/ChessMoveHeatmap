@@ -1,0 +1,20 @@
+[Event "Charlotte Summer GMA 2022"]
+[Site "Charlotte USA"]
+[Date "2022.07.24"]
+[Round "1.5"]
+[White "Zhou, Liran"]
+[Black "Ippolito, D."]
+[Result "1-0"]
+[GameId "sB3uwBCn"]
+[WhiteElo "2393"]
+[BlackElo "2361"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "C67"]
+[Opening "Ruy Lopez: Berlin Defense, Rio Gambit Accepted"]
+[Termination "Unknown"]
+[Annotator "lichess.org"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 Nf6 4. O-O Nxe4 { C67 Ruy Lopez: Berlin Defense, Rio Gambit Accepted } 5. Re1 Nd6 6. Nxe5 Be7 7. Bf1 Nxe5 8. Rxe5 O-O 9. d4 Bf6 10. Re1 Re8 11. Bf4 Rxe1 12. Qxe1 Ne8 13. Bd3 d5 14. Be5 g6 15. c4 Be6 16. cxd5 Bxd5 17. Nc3 c6 18. Rc1 Bxe5 19. Qxe5 Be6 20. b3 Qd6 21. Ne4 Qxe5 22. dxe5 Rd8 23. Bf1 Kg7 24. f4 Rd4 25. Nc5 Bc8 26. Rc4 Rd1 27. Ra4 Bf5 28. Kf2 b6 29. Be2 Rd8 30. Nb7 Rd2 31. Ke1 Rd7 32. Rxa7 Be4 33. Kf2 Kf8 34. Bg4 Rc7 35. a4 c5 36. Bf3 Bxf3 37. Kxf3 Rd7 38. g4 Rd3+ 39. Ke2 Rd7 40. Kf3 Rd3+ 41. Kf2 Rd7 42. h3 h6 43. Ke2 g5 44. f5 Re7 45. Kd3 Rxe5 46. Ra6 Rd5+ 47. Kc2 Ke7 48. Rxb6 Kd7 49. Rxh6 Kc7 50. Na5 Nd6 51. Rh5 Re5 52. Rxg5 Re3 53. h4 Rh3 54. h5 Rh2+ 55. Kd3 Rh3+ 56. Ke2 Ne4 57. Rg7 Kd6 58. Rxf7 Ke5 59. Re7+ Kf4 60. Nc4 Rh2+ 61. Kd3 Nf2+ 62. Kd2 Nxg4+ 63. Re2 Rxh5 64. a5 Rxf5 65. a6 Rd5+ 66. Kc3 Rd7 67. Ra2 Ra7 68. Nd6 Ne3 69. Nb5 Ra8 70. a7 Ke5 71. Nc7 Nd5+ 72. Nxd5 Kxd5 73. Ra6 c4 74. b4 { White wins. } 1-0
+
+
