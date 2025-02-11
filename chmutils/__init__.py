@@ -99,6 +99,62 @@ def calculate_chess_move_heatmap(
         board: Board, depth: int = 1,
         heatmap: Optional[heatmaps.ChessMoveHeatmap] = None,
         discount: int = 1) -> heatmaps.ChessMoveHeatmap:
+    """
+    Recursively computes a chess move heatmap that tracks both move intensities and piece counts.
+
+    This function extends the standard gradient heatmap calculation by additionally updating,
+    for each move, a per-square dictionary of chess piece counts. For each legal move, the target
+    square’s intensity is incremented (as in calculate_heatmap), and the count corresponding to
+    the moving piece is also incremented.
+
+    Parameters
+    ----------
+    board : chess.Board
+        The chess board position for which to calculate the move heatmap.
+    depth : int, optional
+        The recursion depth to explore legal moves. Higher depth yields more comprehensive data,
+        but at the cost of exponentially increased computation time.
+    heatmap : Optional[heatmaps.ChessMoveHeatmap], optional
+        An existing ChessMoveHeatmap instance to which both move intensities and piece counts
+        will be added. For initial calls, this should be left as None.
+    discount : int, optional
+        A multiplier used to discount contributions of moves as the recursion deepens.
+        It is updated recursively to moderate the exponential growth in contributions.
+        Default is 1.
+
+    Returns
+    -------
+    heatmaps.ChessMoveHeatmap
+        The computed ChessMoveHeatmap containing:
+            - A gradient heatmap of move intensities per square.
+            - A corresponding array of piece count dictionaries per square.
+
+    Notes
+    -----
+    - The function updates both the standard heatmap data (for move intensity) and, in addition,
+      the `piece_counts` attribute. For a move from square s₁ to s₂ with moving piece P, the update is:
+
+      - Move intensity:
+        $$ H[s_2, c] \mathrel{+}= \frac{1}{\text{discount}} $$
+      - Piece count:
+        $$ \text{piece\_counts}[s_2][P] \mathrel{+}= \frac{1}{\text{discount}} $$
+
+    - As with `calculate_heatmap`, the parameters `heatmap` and `discount` are intended for internal use.
+    - The recursion depth controls the number of future move layers considered. Only odd depths tend to provide
+      balanced data between both players.
+    - The time complexity is approximately O(b^d), where b ≈ 35 (the average branching factor in chess) and d is the depth.
+
+    Examples
+    --------
+    >>> import chess
+    >>> from heatmaps import ChessMoveHeatmap
+    >>> from chmutils import calculate_chess_move_heatmap
+    >>> brd = chess.Board()
+    >>> depth1_cmhm = calculate_chess_move_heatmap(brd, depth=1)
+    >>> print(depth1_cmhm.colors)
+    >>> depth2_cmhm = calculate_chess_move_heatmap(brd, depth=2)
+    >>> print(depth2_cmhm.colors)
+    """
     if heatmap is None:
         heatmap = heatmaps.ChessMoveHeatmap()
 

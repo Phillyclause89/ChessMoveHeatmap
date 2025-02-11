@@ -284,9 +284,26 @@ class GradientHeatmap(GradientHeatmapT):
 
 
 class ChessMoveHeatmapT(GradientHeatmap):
+    """A gradient heatmap that additionally tracks chess piece counts per square.
+
+    This class extends `GradientHeatmap` by maintaining, for each square, a dictionary
+    mapping each chess piece to a floating point value. This value can represent an intensity
+    or count of moves involving that piece on the square.
+
+    Attributes
+    ----------
+    piece_counts : numpy.ndarray of dict
+        A NumPy array of shape (64,) where each element is a dictionary mapping
+        chess `Piece` objects to a `float` count.
+    """
     _piece_counts: NDArray[Dict[Piece, np.float64]]
 
     def __init__(self, **kwargs):
+        """Initialize the ChessMoveHeatmapT.
+
+        All inherited data is initialized via `GradientHeatmap.__init__()`, and a new
+        `piece_counts` array is created with zero values for all pieces on each square.
+        """
         super().__init__(**kwargs)
         self._piece_counts = np.array(
             [{k: np.float64(0) for k in PIECES} for _ in range(64)],
@@ -296,28 +313,39 @@ class ChessMoveHeatmapT(GradientHeatmap):
     @property
     def piece_counts(self) -> NDArray[Dict[Piece, np.float64]]:
         """
+        Get the piece count array.
 
         Returns
         -------
         NDArray[Dict[Piece, np.float64]]
-
+            A NumPy array of length 64 where each element is a dictionary mapping chess pieces
+            to their associated count or intensity.
         """
         return self._piece_counts
 
     @piece_counts.setter
     def piece_counts(self, value: NDArray[Dict[Piece, np.float64]]) -> None:
         """
+        Set the piece count array.
 
         Parameters
         ----------
-        value NDArray[Dict[Piece, np.float64]]
+        value : NDArray[Dict[Piece, np.float64]]
+            A NumPy array of shape (64,) where each element is a dictionary mapping chess pieces
+            to a float. The array should have dtype `object`.
 
+        Raises
+        ------
+        ValueError
+            If the provided value does not have shape (64,).
+        TypeError
+            If the value cannot be converted to a NumPy array of dictionaries.
         """
         try:
             if value.shape == (64,) and value.dtype == object:
                 self._piece_counts = value
                 return
-            raise ValueError(f"Other {type(value)} must have shape 1, got {value.shape}.")
+            raise ValueError(f"Other {type(value)} must have shape (64,), got {value.shape}.")
         except AttributeError:
             try:
                 self.piece_counts = np.asarray(value, dtype=dict)
@@ -327,11 +355,34 @@ class ChessMoveHeatmapT(GradientHeatmap):
 
 
 class ChessMoveHeatmap(ChessMoveHeatmapT):
+    """A concrete extension of `ChessMoveHeatmapT` for tracking move-related piece counts.
+
+    This class refines `ChessMoveHeatmapT` by optionally initializing the piece counts from an external
+    source. If neither `piece_counts` nor an existing heatmap data object is provided, the default
+    initialization from `ChessMoveHeatmapT` is used.
+    """
+
     def __init__(
             self,
             piece_counts: Optional[NDArray[Dict[Piece, np.float64]]] = None,
             **kwargs
     ) -> None:
+        """Initialize the ChessMoveHeatmap instance.
+
+        Parameters
+        ----------
+        piece_counts : Optional[NDArray[Dict[Piece, np.float64]]], optional
+            A NumPy array of shape (64,) where each element is a dictionary mapping chess pieces
+            to a float representing move intensity. If not provided, the default initialization
+            from the base class is used.
+        **kwargs
+            Additional keyword arguments passed to the base class.
+
+        Raises
+        ------
+        TypeError
+            If `piece_counts` is provided but is not a NumPy array with the expected dtype.
+        """
         super().__init__(**kwargs)
         data: Optional[object] = kwargs.get("data")
         if piece_counts is None and data is None:
@@ -365,7 +416,7 @@ if __name__ == "__main__":
     print(hmap0[16], hmap1[16], hmap2[16], hmap3[16])
     # original hmap data should not be mutated
 
-    # New empty ChessMoveHeatmap
+    # New ChessMoveHeatmap
     cmhmap0 = calculate_chess_move_heatmap(Board(), 1)
     print(cmhmap0.piece_counts[16][PIECES[0]])
 
@@ -384,5 +435,3 @@ if __name__ == "__main__":
     cmhmap3.piece_counts[16][PIECES[0]] += 1
     print(cmhmap0.piece_counts[16][PIECES[0]], cmhmap1.piece_counts[16][PIECES[0]], cmhmap2.piece_counts[16][PIECES[0]],
           cmhmap3.piece_counts[16][PIECES[0]])
-
-
