@@ -1,0 +1,23 @@
+[Event "Rated blitz game"]
+[Site "https://lichess.org/aZ8cn9v5"]
+[Date "2025.02.10"]
+[White "Fugzi"]
+[Black "Phillyclause89"]
+[Result "0-1"]
+[GameId "aZ8cn9v5"]
+[UTCDate "2025.02.10"]
+[UTCTime "17:45:21"]
+[WhiteElo "1605"]
+[BlackElo "1575"]
+[WhiteRatingDiff "-6"]
+[BlackRatingDiff "+6"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[ECO "C27"]
+[Opening "Vienna Game: Frankenstein-Dracula Variation"]
+[Termination "Normal"]
+[Annotator "lichess.org"]
+
+1. e4 { [%eval 0.18] [%clk 0:05:00] } 1... e5 { [%eval 0.21] [%clk 0:05:00] } 2. Bc4 { [%eval 0.03] [%clk 0:04:58] } 2... Nf6 { [%eval 0.11] [%clk 0:04:58] } 3. Nc3 { [%eval 0.0] [%clk 0:04:56] } 3... Nxe4 { [%eval 0.1] [%clk 0:04:57] } { C27 Vienna Game: Frankenstein-Dracula Variation } 4. Nxe4?! { (0.10 → -0.52) Inaccuracy. Qh5 was best. } { [%eval -0.52] [%clk 0:04:55] } (4. Qh5 Nd6 5. Bb3 Be7 6. Qxe5 O-O 7. Nf3 Nc6 8. Qf4 Na5) 4... d5 { [%eval -0.65] [%clk 0:04:56] } 5. Bxd5 { [%eval -1.19] [%clk 0:04:38] } 5... Qxd5 { [%eval -1.07] [%clk 0:04:56] } 6. Qf3 { [%eval -1.11] [%clk 0:04:33] } 6... Be6 { [%eval -0.67] [%clk 0:04:54] } 7. Nf6+?? { (-0.67 → -5.43) Blunder. Nc3 was best. } { [%eval -5.43] [%clk 0:04:31] } (7. Nc3 Qxf3 8. Nxf3 Nc6 9. d3 Nb4 10. Kd1 f6 11. Be3 Nd5) 7... gxf6 { [%eval -5.43] [%clk 0:04:52] } 8. Qxf6 { [%eval -7.0] [%clk 0:04:29] } 8... Rg8 { [%eval -6.85] [%clk 0:04:49] } 9. Nf3 { [%eval -8.39] [%clk 0:04:25] } 9... Nd7 { [%eval -8.36] [%clk 0:04:46] } 10. Qh4 { [%eval -8.5] [%clk 0:04:19] } 10... Be7 { [%eval -7.5] [%clk 0:04:42] } 11. Qxh7 { [%eval -7.56] [%clk 0:04:12] } 11... O-O-O { [%eval -6.67] [%clk 0:04:40] } 12. d3 { [%eval -7.58] [%clk 0:04:01] } 12... Nf6 { [%eval -7.6] [%clk 0:04:35] } 13. Qh4 { [%eval -8.5] [%clk 0:03:55] } 13... Rxg2 { [%eval -8.45] [%clk 0:04:26] } 14. Ng5 { [%eval -9.15] [%clk 0:03:14] } 14... Rg4 { [%eval -9.8] [%clk 0:04:15] } 15. Qh6? { (-9.80 → Mate in 9) Checkmate is now unavoidable. Nxe6 was best. } { [%eval #-9] [%clk 0:02:56] } (15. Nxe6 Qxh1+ 16. Ke2 Rxh4 17. Nxd8 Kxd8 18. Bg5 Qxa1 19. Bxh4 Qxb2 20. Kd1 Qb1+) 15... Qxh1+ { [%eval #-8] [%clk 0:04:11] } 16. Kd2 { [%eval -13.61] [%clk 0:02:52] } 16... Ne4+ { [%eval -12.58] [%clk 0:03:46] } 17. Nxe4?! { (-12.58 → Mate in 7) Checkmate is now unavoidable. Ke2 was best. } { [%eval #-7] [%clk 0:02:46] } (17. Ke2 Nxg5 18. Qf6 Qe4+ 19. Be3 Bxf6 20. Rf1 Qa4 21. Rd1 Qxc2+ 22. Rd2 Qa4) 17... Qxe4? { (Mate in 7 → -9.65) Lost forced checkmate sequence. Rxe4 was best. } { [%eval -9.65] [%clk 0:03:44] } (17... Rxe4 18. Qxe6+ fxe6 19. Kc3 Re2 20. a4 Qc6+ 21. Kb3 Qxc2+ 22. Ka2 Rxd3 23. Bd2) 18. Kc3? { (-9.65 → Mate in 1) Checkmate is now unavoidable. Qe3 was best. } { [%eval #-1] [%clk 0:02:33] } (18. Qe3 Qc6 19. h3 Rgg8 20. Qxa7 Bb4+ 21. c3 Bc5 22. Qa8+ Kd7 23. Qxd8+ Rxd8) 18... Qb4# { [%clk 0:03:40] } { Black wins by checkmate. } 0-1
+
+
