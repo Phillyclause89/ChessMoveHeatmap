@@ -532,6 +532,9 @@ class ChessHeatMapApp(tk.Tk):
 
         Parameters
         ----------
+        color
+        white_hint_text
+        black_hint_text
         font_size : int
             The font size for the count labels.
         heatmap : GradientHeatmap
@@ -588,6 +591,9 @@ class ChessHeatMapApp(tk.Tk):
 
         Parameters
         ----------
+        color
+        make_tip
+        tip
         font_size : int
             The font size for the piece symbol.
         piece : Optional[Piece]
