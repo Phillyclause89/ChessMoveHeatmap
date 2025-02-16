@@ -23,7 +23,7 @@ class GradientHeatmapT:
     _data: NDArray[np.float64]
     _shape: Tuple[int, int] = (64, 2)
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize a heatmap with zeros."""
         self._data = np.zeros(self._shape, dtype=np.float64)
 
@@ -40,31 +40,41 @@ class GradientHeatmapT:
         numpy.ndarray
             A NumPy array of shape (2,) representing the heatmap data for the square.
         """
-        return self.data[square]
+        try:
+            return self.data[square]
+        except IndexError as i:
+            raise IndexError(f"square must be in range({self.shape[0]}) got {square}") from i
 
-    def __setitem__(self, square: int, value: NDArray[np.float64]) -> None:
+    def __setitem__(self, square: int, value: Union[NDArray[np.float64], ArrayLike]) -> None:
         """Set the heatmap data for a given square.
 
         Parameters
         ----------
         square : int
             The index of the chessboard square (0 to 63).
-        value : numpy.ndarray
-            A NumPy array of shape (2,) representing the new heatmap data for the square.
+        value : Union[NDArray[numpy.float64], ArrayLike]
+            A NumPy array or ArrayLike of shape (2,) representing the new heatmap data for the square.
 
         Raises
         ------
-        TypeError
-            If the provided value is not a NumPy array of dtype numpy.float64.
         ValueError
             If the provided value does not have shape (2,).
+        IndexError
+            If the provided square is not in range(64)
         """
         expected_shape = (self.shape[1],)
-        if not isinstance(value, np.ndarray) or value.dtype != np.float64:
-            raise TypeError(f"Value must be a shape {expected_shape} NDArray[numpy.float64], got {type(value)}")
-        if value.shape != expected_shape:
+        try:
+            if value.shape == expected_shape and value.dtype == np.float64:
+                self.data[square] = value
+                return
             raise ValueError(f"Value must have shape {expected_shape}, got {value.shape}.")
-        self.data[square] = value
+        except AttributeError:
+            try:
+                return self.__setitem__(square, np.asarray(value, dtype=np.float64))
+            except ValueError as ve:
+                raise ve
+        except IndexError as i:
+            raise IndexError(f"square must be in range({self.shape[0]}) got {square}") from i
 
     def __add__(self, other: Union["GradientHeatmapT", NDArray[np.float64], ArrayLike]) -> "GradientHeatmap":
         """Perform element-wise addition with another heatmap or compatible array.
@@ -174,7 +184,9 @@ class GradientHeatmap(GradientHeatmapT):
         )) or str(type(self)).replace('__main__', 'heatmaps') == str(type(data)):
             self.data = deepcopy(data.data)
         else:
-            raise TypeError("Data must be either a NumPy array of float64 or a GradientHeatmapT instance.")
+            raise TypeError(
+                f"Data must be either a NumPy array of float64 or a GradientHeatmapT instance, got: {type(data)}"
+            )
 
     @property
     def _normalize_(self) -> NDArray[np.float64]:
@@ -298,7 +310,7 @@ class ChessMoveHeatmapT(GradientHeatmap):
     """
     _piece_counts: NDArray[Dict[Piece, np.float64]]
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         """Initialize the ChessMoveHeatmapT.
 
         All inherited data is initialized via `GradientHeatmap.__init__()`, and a new
@@ -393,8 +405,8 @@ class ChessMoveHeatmap(ChessMoveHeatmapT):
                 data, (ChessMoveHeatmapT, ChessMoveHeatmap)
         ) or str(type(self)).replace('__main__', 'heatmaps') == str(type(data)):
             self.piece_counts = deepcopy(data.piece_counts)
-        else:
-            raise TypeError("piece_counts must be a NumPy array of object.")
+        elif piece_counts is not None:
+            raise TypeError(f"piece_counts must be a NumPy array of object, got {type(piece_counts)}")
 
 
 if __name__ == "__main__":
