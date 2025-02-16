@@ -393,7 +393,7 @@ class HeatmapCache:
             return cached
 
         # Not cached; compute the heatmap.
-        cmhm = calculate_chess_move_heatmap(board, depth=self.depth)
+        cmhm = calculate_chess_move_heatmap(self.board, depth=self.depth)
         self.store_heatmap(cmhm)
         return cmhm
 
