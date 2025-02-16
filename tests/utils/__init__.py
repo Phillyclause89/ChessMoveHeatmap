@@ -33,12 +33,26 @@ CAINAN: Type[ChessMoveHeatmap] = KENAN
 
 
 def _validate_data_types(test_case: unittest.TestCase, test_objects: Iterable[GradientHeatmapT]) -> None:
-    """Helper function that ensures all test_objects are still valid GradientHeatmapT form
+    """Ensures that all test_objects are valid instances of GradientHeatmapT.
+
+    This function verifies that each object in `test_objects`:
+    - Is an instance of `GradientHeatmapT` (aliased as `ADAM`).
+    - Has a `data` attribute of type `numpy.ndarray`.
+    - Has the expected shape `(64, 2)`.
+    - Maintains consistency between its declared shape (`obj.shape`) and actual data shape (`obj.data.shape`).
+    - Stores data as `numpy.float64`.
 
     Parameters
     ----------
     test_case : unittest.TestCase
+        The test case instance that will handle assertions.
     test_objects : Iterable[GradientHeatmapT]
+        An iterable of objects expected to be instances of `GradientHeatmapT`.
+
+    Raises
+    ------
+    AssertionError
+        If any object fails to meet the expected type, shape, or data format requirements.
     """
     for obj in test_objects:
         test_case.assertIsInstance(obj, ADAM)
@@ -52,13 +66,25 @@ def validate_data_types(
         test_objects: Iterable[GradientHeatmapT],
         test_case: Optional[unittest.TestCase] = None,
 ) -> None:
-    """Helper function that ensures all test_objects are still valid GradientHeatmapT form
+    """Validates that all test_objects are instances of GradientHeatmapT.
+
+    This function serves as a wrapper around `_validate_data_types`. If `test_case` is not provided,
+    it attempts to create a new `unittest.TestCase` instance for validation. If an `AttributeError`
+    occurs during the initial validation attempt, it retries with a newly instantiated `unittest.TestCase`.
 
     Parameters
     ----------
     test_objects : Iterable[GradientHeatmapT]
-    test_case : Optional[unittest.TestCase]
+        An iterable of objects expected to be instances of `GradientHeatmapT`.
+    test_case : Optional[unittest.TestCase], default=None
+        A test case instance used to perform assertions. If `None`, a temporary instance is created.
 
+    Raises
+    ------
+    AssertionError
+        If any object fails validation in `_validate_data_types`.
+    AttributeError
+        If an object lacks an expected attribute, potentially indicating corruption.
     """
     try:
         _validate_data_types(test_case, test_objects)
