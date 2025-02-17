@@ -63,16 +63,16 @@ def calculate_heatmap(board: Board, depth: int = 1,
 
     Examples
     --------
-    >>> import chess
-    >>> from heatmaps import GradientHeatmap
-    >>> from chmutils import calculate_heatmap
-    >>> brd = chess.Board()
-    >>> # Calculate a heatmap with a recursion depth of 1.
-    >>> depth1_hmap = calculate_heatmap(brd, depth=1)
-    >>> print(depth1_hmap.colors)
-    >>> # Calculate a heatmap with a recursion depth of 2.
-    >>> depth2_hmap = calculate_heatmap(brd, depth=2)
-    >>> print(depth2_hmap.colors)
+    # >>> import chess
+    # >>> from heatmaps import GradientHeatmap
+    # >>> from chmutils import calculate_heatmap
+    # >>> brd = chess.Board()
+    # >>> # Calculate a heatmap with a recursion depth of 1.
+    # >>> depth1_hmap = calculate_heatmap(brd, depth=1)
+    # >>> print(depth1_hmap.colors)
+    # >>> # Calculate a heatmap with a recursion depth of 2.
+    # >>> depth2_hmap = calculate_heatmap(brd, depth=2)
+    # >>> print(depth2_hmap.colors)
     """
     if heatmap is None:
         heatmap = heatmaps.GradientHeatmap()
@@ -148,14 +148,14 @@ def calculate_chess_move_heatmap(
 
     Examples
     --------
-    >>> import chess
-    >>> from heatmaps import ChessMoveHeatmap
-    >>> from chmutils import calculate_chess_move_heatmap
-    >>> brd = chess.Board()
-    >>> depth1_cmhm = calculate_chess_move_heatmap(brd, depth=1)
-    >>> print(depth1_cmhm.colors)
-    >>> depth2_cmhm = calculate_chess_move_heatmap(brd, depth=2)
-    >>> print(depth2_cmhm.colors)
+    # >>> import chess
+    # >>> from heatmaps import ChessMoveHeatmap
+    # >>> from chmutils import calculate_chess_move_heatmap
+    # >>> brd = chess.Board()
+    # >>> depth1_cmhm = calculate_chess_move_heatmap(brd, depth=1)
+    # >>> print(depth1_cmhm.colors)
+    # >>> depth2_cmhm = calculate_chess_move_heatmap(brd, depth=2)
+    # >>> print(depth2_cmhm.colors)
     """
     if heatmap is None:
         heatmap = heatmaps.ChessMoveHeatmap()
@@ -253,10 +253,10 @@ def get_cached_chess_move_heatmap(board: Board, depth: int = 1) -> heatmaps.Ches
 
 
 # Assume PIECE_KEYS is defined (e.g., from chess.UNICODE_PIECE_SYMBOLS.values())
-PIECE_KEYS = tuple(chess.UNICODE_PIECE_SYMBOLS.values())
+PIECE_KEYS = heatmaps.PIECES
 
 
-def flatten_heatmap(cmhm: heatmaps.ChessMoveHeatmap) -> Dict[str, Any]:
+def flatten_heatmap(heatmap: heatmaps.ChessMoveHeatmap) -> Dict[str, Any]:
     """
     Flatten a ChessMoveHeatmap into a dictionary of primitive values.
     Keys will be strings like "sq0_white", "sq0_black", and
@@ -264,11 +264,11 @@ def flatten_heatmap(cmhm: heatmaps.ChessMoveHeatmap) -> Dict[str, Any]:
     """
     flat = {}
     for square in range(64):
-        flat[f"sq{square}_white"] = float(cmhm.data[square][0])
-        flat[f"sq{square}_black"] = float(cmhm.data[square][1])
+        flat[f"sq{square}_white"] = heatmap.data[square][0]
+        flat[f"sq{square}_black"] = heatmap.data[square][1]
         # For each piece key, store its count from piece_counts.
         for key in PIECE_KEYS:
-            flat[f"sq{square}_piece_{key}"] = float(cmhm.piece_counts[square].get(key, 0))
+            flat[f"sq{square}_piece_{key.unicode_symbol()}"] = heatmap.piece_counts[square][key]
     return flat
 
 
@@ -278,18 +278,13 @@ def inflate_heatmap(data: Dict[str, Any]) -> heatmaps.ChessMoveHeatmap:
     Assumes the dictionary has keys in the format defined in flatten_heatmap.
     """
     # Create a new heatmap object.
-    cmhm = heatmaps.ChessMoveHeatmap()
+    heatmap = heatmaps.ChessMoveHeatmap()
     for square in range(64):
-        # Update intensity values.
-        cmhm.data[square][0] = data.get(f"sq{square}_white", 0.0)
-        cmhm.data[square][1] = data.get(f"sq{square}_black", 0.0)
-        # Reconstruct the piece_counts dictionary.
-        counts = {}
+        heatmap.data[square][0] = data[f"sq{square}_white"]
+        heatmap.data[square][1] = data[f"sq{square}_black"]
         for key in PIECE_KEYS:
-            counts[key] = data.get(f"sq{square}_piece_{key}", 0.0)
-        # Assuming piece_counts is writable (or using a protected attribute)
-        cmhm._piece_counts[square] = counts
-    return cmhm
+            heatmap.piece_counts[square][key] = data[f"sq{square}_piece_{key.unicode_symbol()}"]
+    return heatmap
 
 
 class HeatmapCache:
@@ -327,8 +322,7 @@ class HeatmapCache:
             col_defs.append(f"sq{square}_white REAL")
             col_defs.append(f"sq{square}_black REAL")
             for key in PIECE_KEYS:
-                safe_key = key.replace(" ", "_")
-                col_defs.append(f"sq{square}_piece_{safe_key} REAL")
+                col_defs.append(f"sq{square}_piece_{key.unicode_symbol()} REAL")
 
         # Join all column definitions.
         cols = ", ".join(col_defs)
@@ -339,7 +333,7 @@ class HeatmapCache:
 
     @property
     def _cache_key(self) -> str:
-        """Build a unique cache key from the board FEN and depth."""
+        """Build a unique cache key from the board FEN."""
         return f"{self.board.fen()}"
 
     def get_cached_heatmap(self) -> Optional[heatmaps.ChessMoveHeatmap]:
@@ -347,7 +341,7 @@ class HeatmapCache:
         key = self._cache_key
         conn = sqlite3.connect(self.db_path)
         cur = conn.cursor()
-        cur.execute("SELECT * FROM heatmap_cache WHERE cache_key = ?", (key,))
+        cur.execute(f"SELECT * FROM heatmap_cache WHERE cache_key = ?", (key,))
         row = cur.fetchone()
         conn.close()
         if row:
@@ -383,67 +377,33 @@ class HeatmapCache:
         conn.commit()
         conn.close()
 
-    def get_or_compute_heatmap(self) -> heatmaps.ChessMoveHeatmap:
-        """
-        Retrieve the ChessMoveHeatmap from the cache if available; otherwise, compute it,
-        store it in the cache, and return the new heatmap.
-        """
-        cached = self.get_cached_heatmap()
-        if cached is not None:
-            return cached
 
-        # Not cached; compute the heatmap.
-        cmhm = calculate_chess_move_heatmap(self.board, depth=self.depth)
-        self.store_heatmap(cmhm)
-        return cmhm
+def get_or_compute_heatmap(board: chess.Board, depth: int) -> heatmaps.ChessMoveHeatmap:
+    """
+    Retrieve the ChessMoveHeatmap from the cache if available; otherwise, compute it,
+    store it in the cache, and return the new heatmap.
+    """
+    cache: HeatmapCache = HeatmapCache(board, depth)
+    cached: Optional[heatmaps.ChessMoveHeatmap] = cache.get_cached_heatmap()
+    if cached is not None:
+        return cached
+
+    # Not cached; compute the heatmap.
+    cmhm: heatmaps.ChessMoveHeatmap = calculate_chess_move_heatmap(board, depth=depth)
+    cache.store_heatmap(cmhm)
+    return cmhm
 
 
 # Example usage:
 if __name__ == "__main__":
     import chess
 
-    board = chess.Board()
-    cmhm1 = HeatmapCache(board, depth=1).get_or_compute_heatmap()
-    print(cmhm1.data[16])
-    cmhm2 = HeatmapCache(board, depth=3).get_or_compute_heatmap()
-    print(cmhm2.data[16])
-
-    # while True:
-    #     moves = list(board.legal_moves)
-    #     [print(i, m) for i, m in enumerate(moves)]
-    #     move = input("Pick move by index")
-    #     try:
-    #         i = int(move)
-    #         board.push(moves[i])
-    #         cmhm = cache.get_or_compute_heatmap(board, depth=1)
-    #         print(cmhm.colors)
-    #     except IndexError as e:
-    #         print(e)
-# # Example usage:
-# if __name__ == "__main__":
-#     import chess
-#
-#     board = chess.Board()
-#     cmhm0 = get_cached_chess_move_heatmap(board, depth=1)
-#     print(cmhm0.colors)
-#     cmhm1 = get_cached_chess_move_heatmap(board, depth=1)
-#     print(cmhm1.colors)
-
-# if __name__ == "__main__":
-#     from timeit import timeit
-#
-#     b = chess.Board()
-#
-#     for d in range(4):
-#         hmap_t = timeit("calculate_heatmap(board=b, depth=d)", number=1, globals=globals())
-#         print(d, hmap_t)
-#
-#     hmap = calculate_heatmap(board=b, depth=1)
-#     print(hmap)
-#
-#     for d in range(4):
-#         cmhmap_t = timeit("calculate_chess_move_heatmap(board=b, depth=d)", number=1, globals=globals())
-#         print(d, cmhmap_t)
-#
-#     cmhmap = calculate_chess_move_heatmap(board=b, depth=1)
-#     print(cmhmap)
+    b = chess.Board()
+    cmhm11 = get_or_compute_heatmap(b, 1)
+    print(cmhm11.data[16])
+    cmhm12 = get_or_compute_heatmap(b, 1)
+    print(cmhm12.data[16])
+    cmhm21 = get_or_compute_heatmap(b, 3)
+    print(cmhm21.data[16])
+    cmhm22 = get_or_compute_heatmap(b, 3)
+    print(cmhm22.data[16])

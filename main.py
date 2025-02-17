@@ -12,7 +12,7 @@ from concurrent.futures import ProcessPoolExecutor, Future
 from multiprocessing.context import SpawnProcess
 import os
 import signal
-from chmutils import calculate_chess_move_heatmap
+from chmutils import get_or_compute_heatmap
 from heatmaps import ChessMoveHeatmap
 
 DARK_SQUARE_COLOR_PROMPT: str = "Pick Dark Square Color"
@@ -219,7 +219,7 @@ class ChessHeatMapApp(tk.Tk):
                     j: int
                     for j in range(i):
                         new_board.push(self.moves[j])
-                future = self.executor.submit(calculate_chess_move_heatmap, new_board, depth=self.depth)
+                future = self.executor.submit(get_or_compute_heatmap, new_board, depth=self.depth)
                 self.heatmap_futures[i - 1] = future
             self.after(100, self.check_heatmap_futures)
             self.update_board()
@@ -328,7 +328,7 @@ class ChessHeatMapApp(tk.Tk):
                         j: int
                         for j in range(i):
                             new_board.push(self.moves[j])
-                    future = self.executor.submit(calculate_chess_move_heatmap, new_board, depth=self.depth)
+                    future = self.executor.submit(get_or_compute_heatmap, new_board, depth=self.depth)
                     self.heatmap_futures[i - 1] = future
                 self.after(100, self.check_heatmap_futures)
         except Exception as e:
@@ -339,7 +339,7 @@ class ChessHeatMapApp(tk.Tk):
             messagebox.showerror("Error", f"Failed to load PGN file: {e}")
         if not self.heatmap_futures and not self.heatmaps:
             new_board: Board = self.board.copy()
-            future = self.executor.submit(calculate_chess_move_heatmap, new_board, depth=self.depth)
+            future = self.executor.submit(get_or_compute_heatmap, new_board, depth=self.depth)
             self.heatmap_futures[self.current_move_index] = future
             self.after(100, self.check_heatmap_futures)
         self.update_board()
