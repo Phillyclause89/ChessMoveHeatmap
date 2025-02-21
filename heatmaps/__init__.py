@@ -273,8 +273,8 @@ class GradientHeatmap(GradientHeatmapT):
 
         Examples
         --------
-        >>> heatmap = GradientHeatmap()  # Assuming this is an initialized heatmap object
-        >>> heatmap._repr_html_()  # This will generate an HTML table representation of the heatmap.
+        # >>> heatmap = GradientHeatmap()  # Assuming this is an initialized heatmap object
+        # >>> heatmap._repr_html_()  # This will generate an HTML table representation of the heatmap.
         """
         colors: NDArray[np.str_] = self.colors  # Get final color values
         sep: str = "</td><td>"

@@ -134,17 +134,12 @@ def calculate_chess_move_heatmap(
     Notes
     -----
     - The function updates both the standard heatmap data (for move intensity) and, in addition,
-      the `piece_counts` attribute. For a move from square s₁ to s₂ with moving piece P, the update is:
-
-      - Move intensity:
-        $$ H[s_2, c] \mathrel{+}= \frac{1}{\text{discount}} $$
-      - Piece count:
-        $$ \text{piece\_counts}[s_2][P] \mathrel{+}= \frac{1}{\text{discount}} $$
-
+      the `piece_counts` attribute.
     - As with `calculate_heatmap`, the parameters `heatmap` and `discount` are intended for internal use.
     - The recursion depth controls the number of future move layers considered. Only odd depths tend to provide
       balanced data between both players.
-    - The time complexity is approximately O(b^d), where b ≈ 35 (the average branching factor in chess) and d is the depth.
+    - The time complexity is approximately O(b^d),
+      where b ≈ 35 (the average branching factor in chess) and d is the depth.
 
     Examples
     --------
