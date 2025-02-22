@@ -1,9 +1,14 @@
-import pickle
 import sqlite3
-from typing import Any, Dict, Optional, Tuple
+from sqlite3 import Connection, Cursor
+from typing import Dict, List, Optional, Tuple, Union, Any
 import chess
 from chess import Move, Board, Piece
+from numpy import float_
+
 import heatmaps
+import numpy as np
+
+from heatmaps import ChessMoveHeatmap
 
 
 def calculate_heatmap(board: Board, depth: int = 1,
@@ -182,71 +187,129 @@ def calculate_chess_move_heatmap(
 PIECE_KEYS = heatmaps.PIECES
 
 
-def flatten_heatmap(heatmap: heatmaps.ChessMoveHeatmap) -> Dict[str, Any]:
+def flatten_heatmap(heatmap: heatmaps.ChessMoveHeatmap) -> Dict[str, np.float64]:
+    """Flatten a ChessMoveHeatmap into a dictionary of primitive values.
+
+    This function converts a ChessMoveHeatmap into a flat dictionary where each key
+    represents a specific attribute for a given square. The keys are constructed in the
+    following format:
+
+      - "sq{square}_white": Move intensity for White on that square.
+      - "sq{square}_black": Move intensity for Black on that square.
+      - "sq{square}_piece_{symbol}": The count (or intensity) for a specific piece (identified by its Unicode symbol)
+        on that square.
+
+    Parameters
+    ----------
+    heatmap : heatmaps.ChessMoveHeatmap
+        The ChessMoveHeatmap object to be flattened.
+
+    Returns
+    -------
+    Dict[str, numpy.float64]
+        A dictionary with keys for each square's move intensities and piece counts.
     """
-    Flatten a ChessMoveHeatmap into a dictionary of primitive values.
-    Keys will be strings like "sq0_white", "sq0_black", and
-    "sq0_piece_<symbol>" for each square (0-63).
-    """
-    flat = {}
+    flat: Dict[str, np.float64] = {}
+    square: int
     for square in range(64):
         flat[f"sq{square}_white"] = heatmap.data[square][0]
         flat[f"sq{square}_black"] = heatmap.data[square][1]
         # For each piece key, store its count from piece_counts.
+        key: Piece
         for key in PIECE_KEYS:
             flat[f"sq{square}_piece_{key.unicode_symbol()}"] = heatmap.piece_counts[square][key]
     return flat
 
 
-def inflate_heatmap(data: Dict[str, Any]) -> heatmaps.ChessMoveHeatmap:
-    """
-    Inflate a flat dictionary of primitive values back into a ChessMoveHeatmap.
-    Assumes the dictionary has keys in the format defined in flatten_heatmap.
+def inflate_heatmap(data: Dict[str, float]) -> heatmaps.ChessMoveHeatmap:
+    """Inflate a flat dictionary of primitive values back into a ChessMoveHeatmap.
+
+    This function reconstructs a ChessMoveHeatmap from a dictionary that was
+    produced by `flatten_heatmap()`. It assumes that the dictionary contains keys in
+    the format "sq{square}_white", "sq{square}_black", and "sq{square}_piece_{symbol}" for
+    each square (0-63).
+
+    Parameters
+    ----------
+    data : Dict[str, float]
+        A flat dictionary of primitive values representing a ChessMoveHeatmap.
+
+    Returns
+    -------
+    heatmaps.ChessMoveHeatmap
+        The reconstituted ChessMoveHeatmap object.
     """
     # Create a new heatmap object.
-    heatmap = heatmaps.ChessMoveHeatmap()
+    heatmap: heatmaps.ChessMoveHeatmap = heatmaps.ChessMoveHeatmap()
+    square: int
     for square in range(64):
         heatmap.data[square][0] = data[f"sq{square}_white"]
         heatmap.data[square][1] = data[f"sq{square}_black"]
+        key: Piece
         for key in PIECE_KEYS:
             heatmap.piece_counts[square][key] = data[f"sq{square}_piece_{key.unicode_symbol()}"]
     return heatmap
 
 
 class HeatmapCache:
-    """
-    A caching mechanism for ChessMoveHeatmap objects using SQLite.
+    """A caching mechanism for ChessMoveHeatmap objects using SQLite.
 
-    This class stores flattened heatmap data in a SQLite database, indexed by a key
-    constructed from the board's FEN string and the recursion depth (e.g., "fen_depth").
-    If the key exists in the database, the cached heatmap is returned; otherwise, the heatmap
-    is computed, stored in the database, and then returned.
+    This class stores flattened heatmap data in a SQLite database, indexed by a unique
+    key derived from the board's FEN string. If a cached heatmap exists for a given board
+    configuration and recursion depth, it is returned. Otherwise, the heatmap is computed,
+    stored in the database, and then returned.
+
+    Attributes
+    ----------
+    depth : int
+        The recursion depth associated with the heatmap calculations.
+    board : chess.Board
+        The chess board whose heatmap is being cached.
+    db_path : str
+        The file path to the SQLite database used for caching.
     """
     depth: int
     board: chess.Board
     db_path: str
 
-    def __init__(self, board: chess.Board, depth: int):
+    def __init__(self, board: chess.Board, depth: int) -> None:
+        """Initialize the HeatmapCache.
+
+        Parameters
+        ----------
+        board : chess.Board
+            The chess board for which the heatmap cache is maintained.
+        depth : int
+            The recursion depth associated with the heatmap calculations.
+        """
         self.depth = depth
         self.db_path = f"heatmap_cache_depth_{self.depth}.db"
         self.board = board
         self._initialize_db()
 
     def _initialize_db(self) -> None:
-        """Create the cache table if it does not exist and ensure indexing for faster lookups."""
+        """Create the cache table in the SQLite database if it does not exist.
+
+        This method sets up the database schema with columns for each square's 
+        move intensities and piece counts, and creates an index on the cache key 
+        for faster lookups.
+        """
+        conn: Connection
         with sqlite3.connect(self.db_path) as conn:
-            cur = conn.cursor()
+            cur: Cursor = conn.cursor()
             cur.execute("PRAGMA journal_mode=WAL;")
             # Construct column definitions for each square.
-            col_defs = []
+            col_defs: List[str] = []
+            square: int
             for square in range(64):
                 col_defs.append(f"sq{square}_white REAL")
                 col_defs.append(f"sq{square}_black REAL")
+                key: Piece
                 for key in PIECE_KEYS:
                     col_defs.append(f"sq{square}_piece_{key.unicode_symbol()} REAL")
 
-            cols = ", ".join(col_defs)
-            create_stmt = f"CREATE TABLE IF NOT EXISTS heatmap_cache (cache_key TEXT PRIMARY KEY, {cols})"
+            cols: str = ", ".join(col_defs)
+            create_stmt: str = f"CREATE TABLE IF NOT EXISTS heatmap_cache (cache_key TEXT PRIMARY KEY, {cols})"
             cur.execute(create_stmt)
 
             # Add an index for faster lookups (though PRIMARY KEY already has one)
@@ -254,50 +317,83 @@ class HeatmapCache:
 
     @property
     def _cache_key(self) -> str:
-        """Build a unique cache key from the board FEN."""
+        """Build a unique cache key based on the board's FEN string.
+
+        Returns
+        -------
+        str
+            A string key uniquely representing the current board configuration.
+        """
         return f"{self.board.fen()}"
 
     def get_cached_heatmap(self) -> Optional[heatmaps.ChessMoveHeatmap]:
-        """Retrieve a cached ChessMoveHeatmap for the given board and depth, if available."""
-        key = self._cache_key
+        """Retrieve a cached ChessMoveHeatmap for the given board and depth, if available.
+
+        Returns
+        -------
+        Union[heatmaps.ChessMoveHeatmap, None]
+            The cached ChessMoveHeatmap if found; otherwise, None.
+        """
+        key: str = self._cache_key
+        conn: Connection
         with sqlite3.connect(self.db_path) as conn:
-            cur = conn.cursor()
+            cur: Cursor = conn.cursor()
             cur.execute(f"SELECT * FROM heatmap_cache WHERE cache_key = ?", (key,))
             row: Optional[Tuple[float, ...]] = cur.fetchone()
             if row is None:
                 return row
-            col_names = [description[0] for description in cur.description]
-        data = dict(zip(col_names, row))
+            col_names: List[str] = [description[0] for description in cur.description]
+        data: Dict[str, float] = dict(zip(col_names, row))
         # Remove the cache_key from the dict
         data.pop("cache_key", None)
         return inflate_heatmap(data)
 
     def store_heatmap(self, cmhm: heatmaps.ChessMoveHeatmap) -> None:
-        """
-        Store a ChessMoveHeatmap in the cache.
+        """Store a ChessMoveHeatmap in the cache.
 
-        The heatmap is flattened into a dictionary of primitive values and inserted into the database.
+        The given heatmap is flattened into a dictionary of primitive values and inserted
+        into the SQLite database. If an entry with the same cache key already exists, it is replaced.
+
+        Parameters
+        ----------
+        cmhm : heatmaps.ChessMoveHeatmap
+            The ChessMoveHeatmap object to be stored.
         """
-        key = self._cache_key
-        flat = flatten_heatmap(cmhm)
+        key: str = self._cache_key
+        flat: Dict[str, float_] = flatten_heatmap(cmhm)
 
         # Prepare the column names and placeholders.
         # We'll assume the schema matches the flattened dict keys exactly.
-        columns = ["cache_key"] + list(flat.keys())
-        placeholders = ", ".join(["?"] * len(columns))
-        values = [key] + [flat[col] for col in flat]
+        columns: List[str] = ["cache_key"] + list(flat.keys())
+        placeholders: str = ", ".join(["?"] * len(columns))
+        values: List[str, float_] = [key] + [flat[col] for col in flat]
 
+        conn: Connection
         with sqlite3.connect(self.db_path) as conn:
-            cur = conn.cursor()
+            cur: Cursor = conn.cursor()
             # Use INSERT OR REPLACE to update existing cache if needed.
-            sql = f"INSERT OR REPLACE INTO heatmap_cache ({', '.join(columns)}) VALUES ({placeholders})"
+            sql: str = f"INSERT OR REPLACE INTO heatmap_cache ({', '.join(columns)}) VALUES ({placeholders})"
             cur.execute(sql, values)
 
 
 def get_or_compute_heatmap(board: chess.Board, depth: int) -> heatmaps.ChessMoveHeatmap:
-    """
-    Retrieve the ChessMoveHeatmap from the cache if available; otherwise, compute it,
-    store it in the cache, and return the new heatmap.
+    """Retrieve a ChessMoveHeatmap from the cache, or compute and cache it if not available.
+
+    This function first attempts to retrieve a cached heatmap based on the board's FEN and the
+    specified recursion depth. If the cached heatmap is not found, it computes the heatmap,
+    stores it in the cache, and returns the newly computed object.
+
+    Parameters
+    ----------
+    board : chess.Board
+        The chess board position for which the heatmap is computed.
+    depth : int
+        The recursion depth used for calculating the heatmap.
+
+    Returns
+    -------
+    heatmaps.ChessMoveHeatmap
+        The ChessMoveHeatmap corresponding to the board and depth.
     """
     cache: HeatmapCache = HeatmapCache(board, depth)
     cached: Optional[heatmaps.ChessMoveHeatmap] = cache.get_cached_heatmap()
