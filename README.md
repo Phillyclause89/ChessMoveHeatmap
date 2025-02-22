@@ -76,6 +76,7 @@ This will open the Chess Heatmap UI, prompting you to **load a PGN file** for an
 
 - **Change Default Board Colors:** `Options > Change Board Colors`
 - **Change Default Font:** `Options > Font`
+- **Change Depth:** `Options > Change Depth`
 
 ## **Project Structure**
 
@@ -140,7 +141,6 @@ ChessMoveHeatmap/
   Python's recursion depth limits.
 - The application uses `parallel processing` to optimize calculations across full games, but the underlying function it
   uses does not impose hard limits on recursion depth.
-- Right now, the application is hard coded to run at `depth=3` which runs with acceptable load times on my intel i7.
 
 ## **License**
 
