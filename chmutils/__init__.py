@@ -281,7 +281,7 @@ class HeatmapCache:
             The recursion depth associated with the heatmap calculations.
         """
         self.depth = depth
-        self.db_path = f"SQLite3Caches\\heatmap_cache_depth_{self.depth}.db"
+        self.db_path = os.path.join("SQLite3Caches", f"heatmap_cache_depth_{self.depth}.db")
         self.board = board
         self._initialize_db()
 
