@@ -266,7 +266,7 @@ class HeatmapCache:
     board : chess.Board
         The chess board whose heatmap is being cached.
     db_path : str
-        The file path to the SQLite database used for caching.
+        The relative file path to the SQLite database used for caching.
     """
     depth: int
     board: chess.Board
