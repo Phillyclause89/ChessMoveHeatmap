@@ -81,27 +81,46 @@ This will open the Chess Heatmap UI, prompting you to **load a PGN file** for an
 
 ```graphql
 ChessMoveHeatmap/
-│── chmutils/
-│ ├── __init__.py
-│  ├── calculate_heatmap # Recursive heatmap calculation function
-│
-│── heatmaps/
-│ ├── __init__.py
-│  ├── GradientHeatmap # Heatmap class with color mapping
-│  ├── GradientHeatmapT # Base heatmap class (type-safe operations)
-│
-│── pgns/ # Sample PGN files for testing
-│
-│── main.py # Main Chess Heatmap application
-│ ├── Builder # Custom PGN parser with error raising
-│ ├── ChessHeatMap # Main Tkinter GUI class
-│
-│── standalone_color_legend.py # Prototype for heatmap color legend
-│
-│── requirements.txt # Dependencies
-│── LICENSE # Project License
-│── .gitignore # Git ignore rules
-│── .gitattributes # Git attribute settings
+|   .gitattributes
+|   .gitignore
+|   LICENSE
+|   main.py
+|   main_basic.py
+|   main_basic_piece_counts.py
+|   README.md
+|   requirements.txt
+|   standalone_color_legend.py
+|   
++---.github
+|   \---workflows
+|           python-app.yml
+|               
++---chmutils
+|   |   __init__.py
+|           
++---docs
+|   |   COLORALGO.md
+|   |           
+|   +---images
+|   |       ChessMoveHeatmap-depth3-Basic.gif
+|   |       ChessMoveHeatmap-depth3.gif
+|
++---heatmaps
+|   |   __init__.py
+|           
++---pgns
+|   |   [Assortment of valid and invalid .pgn files for testing...]
+|       
++---SQLite3Caches
+|   |   [Assortment of sqlite3 db files will be saved here when running main.py]
+|       
++---tests
+|   |   test_chmutils.py
+|   |   test_heatmaps.py
+|   |   __init__.py
+|           
++---tooltips
+|   |   __init__.py
 ```
 
 ### **Key Components**

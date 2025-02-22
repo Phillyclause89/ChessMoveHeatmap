@@ -182,7 +182,7 @@ def calculate_chess_move_heatmap(
 
 
 # Assume PIECE_KEYS is defined (e.g., from chess.UNICODE_PIECE_SYMBOLS.values())
-PIECE_KEYS = heatmaps.PIECES
+PIECE_KEYS: Tuple[Piece] = heatmaps.PIECES
 
 
 def flatten_heatmap(heatmap: heatmaps.ChessMoveHeatmap) -> Dict[str, np.float64]:
