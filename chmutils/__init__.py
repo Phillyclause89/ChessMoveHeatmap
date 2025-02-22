@@ -4,7 +4,7 @@ from typing import Dict, List, Optional, Tuple, Union, Any
 import chess
 from chess import Move, Board, Piece
 from numpy import float_
-
+import os
 import heatmaps
 import numpy as np
 
@@ -283,7 +283,7 @@ class HeatmapCache:
             The recursion depth associated with the heatmap calculations.
         """
         self.depth = depth
-        self.db_path = f"heatmap_cache_depth_{self.depth}.db"
+        self.db_path = f"SQLite3Caches\\heatmap_cache_depth_{self.depth}.db"
         self.board = board
         self._initialize_db()
 
@@ -294,6 +294,8 @@ class HeatmapCache:
         move intensities and piece counts, and creates an index on the cache key 
         for faster lookups.
         """
+        if not os.path.isdir("SQLite3Caches"):
+            os.mkdir("SQLite3Caches")
         conn: Connection
         with sqlite3.connect(self.db_path) as conn:
             cur: Cursor = conn.cursor()
@@ -408,8 +410,6 @@ def get_or_compute_heatmap(board: chess.Board, depth: int) -> heatmaps.ChessMove
 
 # Example usage:
 if __name__ == "__main__":
-    import chess
-
     b = chess.Board()
     cmhm11 = get_or_compute_heatmap(b, 1)
     print(cmhm11.data[16])
