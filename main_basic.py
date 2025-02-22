@@ -477,10 +477,10 @@ class ChessHeatMap(tk.Tk):
             )
             piece: Optional[Piece] = self.board.piece_at(square)
             self.create_piece(font_size, piece, square_size, x0, y0)
-            self.create_count_labels(font_size, heatmap, offset, square, square_size, x0, x1, y0, y1)
+            self.create_count_labels(font_size, heatmap, offset, square, square_size, x0, y0, y1)
 
     def create_count_labels(self, font_size: int, heatmap: GradientHeatmap, offset: int, square: int,
-                            square_size: int, x0: int, x1: int, y0: int, y1: int) -> None:
+                            square_size: int, x0: int, y0: int, y1: int) -> None:
         """Display move count intensity labels on the board.
 
         This method creates small text labels on each square representing
@@ -500,8 +500,6 @@ class ChessHeatMap(tk.Tk):
             The size of each square in pixels.
         x0 : int
             The top-left x-coordinate of the square.
-        x1 : int
-            The bottom-right x-coordinate of the square.
         y0 : int
             The top-left y-coordinate of the square.
         y1 : int
