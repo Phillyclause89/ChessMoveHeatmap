@@ -9,7 +9,8 @@ from chess import Board, Piece, Move
 from chess.pgn import GameBuilder, Game, Headers
 from typing import Dict, List, Optional, Set, TextIO, Tuple
 from concurrent.futures import ProcessPoolExecutor, Future
-from multiprocessing.context import SpawnProcess
+# noinspection PyProtectedMember
+from multiprocessing.context import Process
 import os
 import signal
 from chmutils import get_or_compute_heatmap
@@ -21,7 +22,7 @@ DEFAULT_COLORS: Tuple[str, str] = ("#ffffff", "#c0c0c0")
 DEFAULT_FONT: str = "Arial"
 
 
-class Builder(GameBuilder):
+class GBuilder(GameBuilder):
     """Overrides GameBuilder.handle_error to raise exception."""
 
     def handle_error(self, error: Exception) -> None:
@@ -29,6 +30,21 @@ class Builder(GameBuilder):
 
         """
         raise error
+
+
+class PPExecutor(ProcessPoolExecutor):
+    """Implements processes property for ProcessPoolExecutor"""
+
+    @property
+    def processes(self) -> Tuple[Optional[Process], ...]:
+        """Exposes _processes from ProcessPoolExecutor
+
+        Returns
+        -------
+        Tuple[Optional[Process], ...]
+
+        """
+        return tuple(self._processes.values())
 
 
 class ChessHeatMapApp(tk.Tk):
@@ -88,7 +104,7 @@ class ChessHeatMapApp(tk.Tk):
     depth: int
     heatmap_futures: Dict[Optional[int], Optional[Future]]  # Refactored to dict so -1 can be a key
     heatmaps: Dict[Optional[int], Optional[NDArray[str]]]
-    executor: Optional[ProcessPoolExecutor]
+    executor: Optional[PPExecutor]
     highlight_squares: Set[Optional[int]]
     current_move_index: int
     moves: Optional[List[Optional[Move]]]
@@ -126,18 +142,18 @@ class ChessHeatMapApp(tk.Tk):
         self.current_move_index = -1
         self.highlight_squares = set()  # Store the squares to highlight
         # Parallel processing setup
-
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
-        self.executor = ProcessPoolExecutor(max_workers=max(1, int(os.cpu_count() * 0.9)))
+        self.executor = PPExecutor(max_workers=max(1, int(os.cpu_count() * 0.9)))
         self.heatmap_futures = {}  # Track running futures
         self.heatmaps = {}  # Store completed heatmaps
         self.pieces_maps = {}
         self.tooltips = []
         self.open_pgn()
-
         self.bind("<Configure>", self.on_resize)
         self.bind("<Left>", lambda event: self.prev_move())
+        self.bind("<a>", lambda event: self.prev_move())
         self.bind("<Right>", lambda event: self.next_move())
+        self.bind("<d>", lambda event: self.next_move())
         self.focus_force()
         self.updating = False
 
@@ -145,8 +161,8 @@ class ChessHeatMapApp(tk.Tk):
         """Clean up resources before closing the application."""
         self.updating = True
         if self.executor is not None:
-            process: SpawnProcess
-            for process in self.executor._processes.values():
+            process: Process
+            for process in self.executor.processes:
                 os.kill(process.pid, signal.SIGTERM)
             self.executor.shutdown()
         self.destroy()
@@ -310,7 +326,7 @@ class ChessHeatMapApp(tk.Tk):
         try:
             file: TextIO
             with open(file_path, "r") as file:
-                game: Optional[Game] = chess.pgn.read_game(file, Visitor=Builder)
+                game: Optional[Game] = chess.pgn.read_game(file, Visitor=GBuilder)
                 board: Board = game.board()
                 moves: Optional[List[Optional[Move]]] = list(game.mainline_moves())
                 self.clear_heatmaps()
@@ -351,7 +367,7 @@ class ChessHeatMapApp(tk.Tk):
         that parallel processing resources are available.
         """
         if self.executor is None:
-            self.executor = ProcessPoolExecutor(max_workers=max(1, int(os.cpu_count() * 0.9)))
+            self.executor = PPExecutor(max_workers=max(1, int(os.cpu_count() * 0.9)))
 
     @property
     def format_game_headers(self) -> str:
@@ -436,17 +452,178 @@ class ChessHeatMapApp(tk.Tk):
         including updating the colors of the squares and displaying the chess pieces. It uses the
         precomputed heatmap colors if available, or calculates them if necessary.
         """
+        self.clear_board()
+        colors: List[str]
+        font_size: int
+        heatmap: ChessMoveHeatmap
+        heatmap_colors: NDArray[str]
+        pieces_map: NDArray[Dict[Piece, float64]]
+        square_size: int
+        colors, font_size, heatmap, heatmap_colors, pieces_map, square_size = self.get_board_drawing_properties()
+        self.draw_board(heatmap, heatmap_colors, pieces_map, colors, square_size, font_size)
+
+    def clear_board(self) -> None:
+        """Clears the canvas of any drawn board objects"""
         self.canvas.delete("all")
-        if len(self.tooltips) >> 0:
-            for t_tip in self.tooltips:
-                t_tip.onLeave()
-            self.tooltips.clear()
+        self.clear_tooltips()
+
+    def draw_board(
+            self, heatmap: ChessMoveHeatmap, heatmap_colors: NDArray[str],
+            pieces_map: NDArray[Dict[Piece, float64]],
+            colors: List[str], square_size: int, font_size: int
+    ) -> None:
+        """Draws the board to the canvas.
+
+        Parameters
+        ----------
+        heatmap : ChessMoveHeatmap
+        heatmap_colors : NDArray[str]
+        pieces_map : NDArray[Dict[Piece, float64]]
+        colors : List[str]
+        square_size : int
+        font_size : int
+        """
+        square: int
+        for square in chess.SQUARES:
+            black_hint_text: str
+            color: str
+            make_tip: bool
+            offset: int
+            outline_color: str
+            tip: str
+            white_hint_text: str
+            width: int
+            x0: int
+            x1: int
+            y0: int
+            y1: int
+            (
+                black_hint_text, color, make_tip, offset, outline_color, tip, white_hint_text, width, x0, x1, y0, y1
+            ) = self.get_all_draw_properties_for(square, square_size, colors, heatmap_colors, pieces_map)
+            self.draw_square_to_canvas(heatmap, square, x0, x1, y0, y1, square_size, width, color, outline_color,
+                                       offset, font_size, make_tip, tip, white_hint_text, black_hint_text)
+
+    def get_board_drawing_properties(self) -> Tuple[
+        List[str], int, ChessMoveHeatmap, NDArray[str], NDArray[Dict[Piece, float64]], int
+    ]:
+        """Gets properties needed for drawing the board to the canvas.
+
+        Returns
+        -------
+        Tuple[List[str], int, ChessMoveHeatmap, NDArray[str], NDArray[Dict[Piece, float64]], int]
+
+        """
         square_size: int = self.square_size
         colors: List[str] = self.colors
         font_size: int = int(square_size * 0.4)
         map_index: int = self.current_move_index
         future: Future = self.heatmap_futures[map_index]
+        heatmap: ChessMoveHeatmap
+        heatmap_colors: NDArray[str]
+        pieces_map: NDArray[Dict[Piece, float64]]
+        heatmap, heatmap_colors, pieces_map = self.get_active_maps(future, map_index)
+        return colors, font_size, heatmap, heatmap_colors, pieces_map, square_size
 
+    def get_all_draw_properties_for(
+            self, square: int, square_size: int, colors: List[str],
+            heatmap_colors: NDArray[str], pieces_map: NDArray[Dict[Piece, float64]]
+    ) -> Tuple[str, str, bool, int, str, str, str, int, int, int, int, int]:
+        """Gets properties needed for drawing a board square to the canvas.
+
+        Parameters
+        ----------
+        square : int
+        square_size : int
+        colors : List[str]
+        heatmap_colors : numpy.NDArray[str]
+        pieces_map : NDArray[Dict[Piece, float64]]
+
+        Returns
+        -------
+        Tuple[str, str, bool, int, str, str, str, int, int, int, int, int]
+
+        """
+        square_pieces: Dict[Piece, float64] = pieces_map[square]
+        black_hint_text: str
+        white_hint_text: str
+        tip: str
+        black_hint_text, tip, white_hint_text = self.get_tooltip_texts(square, square_pieces)
+        row: int
+        col: int
+        row, col = divmod(square, 8)
+        flipped_row: int = 7 - row
+        y1: int
+        y0: int
+        x1: int
+        x0: int
+        x0, x1, y0, y1 = self.get_xys(col, flipped_row, square_size)
+        color: str
+        make_tip: bool
+        offset: int
+        outline_color: str
+        width: int
+        color, make_tip, offset, outline_color, width = self.get_square_properties(
+            black_hint_text, col, colors,
+            flipped_row, heatmap_colors,
+            square, white_hint_text
+        )
+        return black_hint_text, color, make_tip, offset, outline_color, tip, white_hint_text, width, x0, x1, y0, y1
+
+    def draw_square_to_canvas(
+            self, heatmap: ChessMoveHeatmap, square: int, x0: int, x1: int, y0: int, y1: int,
+            square_size: int, width: int, color: str, outline_color: str,
+            offset: int, font_size: int, make_tip: bool, tip: str, white_hint_text: str,
+            black_hint_text: str
+    ) -> None:
+        """Draws a complete Square to the canvas.
+
+        Parameters
+        ----------
+        heatmap : ChessMoveHeatmap
+        square : int
+        x0 : int
+        x1 : int
+        y0 : int
+        y1 : int
+        square_size : int
+        width : int
+        color : str
+        outline_color : str
+        offset : int
+        font_size : int
+        make_tip : bool
+        tip : str
+        white_hint_text : str
+        black_hint_text : str
+        """
+        sq_id: int = self.canvas.create_rectangle(
+            x0 + offset, y0 + offset, x1 - offset, y1 - offset,
+            fill=color, outline=outline_color, width=width
+        )
+        if make_tip:
+            self.tooltips.append(CanvasTooltip(self, self.canvas, sq_id, text=tip, bg=color))
+        piece: Optional[Piece] = self.board.piece_at(square)
+        self.create_piece(font_size, piece, square_size, x0, y0, tip, make_tip, color)
+        self.create_count_labels(
+            font_size, heatmap, offset, square, square_size, x0, y0, y1,
+            black_hint_text, white_hint_text, color
+        )
+
+    def get_active_maps(
+            self, future: Future, map_index: int
+    ) -> Tuple[ChessMoveHeatmap, NDArray[str], NDArray[Dict[Piece, float64]]]:
+        """Gets maps for rendering active positon.
+
+        Parameters
+        ----------
+        future : Future
+        map_index : int
+
+        Returns
+        -------
+        Tuple[ChessMoveHeatmap, numpy.NDArray[str], numpy.NDArray[Dict[Piece, numpy.float64]]]
+
+        """
         if map_index in self.heatmaps:
             heatmap: ChessMoveHeatmap = future.result()
             heatmap_colors: NDArray[str] = self.heatmaps[map_index]  # Use precomputed color list
@@ -462,61 +639,123 @@ class ChessHeatMapApp(tk.Tk):
                 heatmap = ChessMoveHeatmap()
                 heatmap_colors = heatmap.colors
                 pieces_map = heatmap.piece_counts
+        return heatmap, heatmap_colors, pieces_map
 
-        for square in chess.SQUARES:
-            square_pieces: Dict[Piece, float64] = pieces_map[square]
-            black_hint_text: str = ' '.join([
-                f"{k.unicode_symbol()}:{square_pieces[k]:.2f}" for k in square_pieces if
-                square_pieces[k] > 0 and not k.color
-            ])
-            if not black_hint_text.replace(" ", ""):
-                black_hint_text = "None"
-            white_hint_text: str = ' '.join([
-                f"{k.unicode_symbol()}:{square_pieces[k]:.2f}" for k in square_pieces if
-                square_pieces[k] > 0 and k.color
-            ])
-            if not white_hint_text.replace(" ", ""):
-                white_hint_text = "None"
-            wb_text = f"White: {white_hint_text}\nBlack: {black_hint_text}"
-            turn_depth = f"{((self.depth + 1) / 2):.1f}"
-            tip: str = f"Possible moves to {chess.square_name(square)} within {turn_depth} turns:\n{wb_text}"
-            row: int
-            col: int
-            row, col = divmod(square, 8)
-            flipped_row: int = 7 - row
-            x0: int = col * square_size
-            y0: int = flipped_row * square_size
-            x1: int = x0 + square_size
-            y1: int = y0 + square_size
-            color: str = colors[(flipped_row + col) % 2]
-            heatmap_color: str = heatmap_colors[square]
-            width: int = 1
-            if black_hint_text != "None" or white_hint_text != "None":
-                color = heatmap_color
-                make_tip = True
+    def clear_tooltips(self) -> None:
+        """Clears any existing tooltips."""
+        if len(self.tooltips) >> 0:
+            for t_tip in self.tooltips:
+                t_tip.onLeave()
+            self.tooltips.clear()
+
+    def get_tooltip_texts(self, square: int, square_pieces: Dict[Piece, float64]) -> Tuple[str, str, str]:
+        """Get texts for tooltips
+
+        Parameters
+        ----------
+        square : int
+        square_pieces : Dict[Piece, float64]
+
+        Returns
+        -------
+        Tuple[str, str, str]
+
+        """
+        black_hint_text: str
+        white_hint_text: str
+        black_hint_text, white_hint_text = self.get_black_white_hints(square_pieces)
+        wb_text: str = f"White: {white_hint_text}\nBlack: {black_hint_text}"
+        turn_depth: str = f"{((self.depth + 1) / 2):.1f}"
+        tip: str = f"Possible moves to {chess.square_name(square)} within {turn_depth} turns:\n{wb_text}"
+        return black_hint_text, tip, white_hint_text
+
+    def get_square_properties(
+            self,
+            black_hint_text: str, col: int, colors: List[str],
+            flipped_row: int, heatmap_colors: NDArray[str],
+            square: int, white_hint_text: str) -> Tuple[str, bool, int, str, int]:
+        """Gets border and fill properties of a square.
+
+        Parameters
+        ----------
+        black_hint_text : str
+        col : int
+        colors : List[str]
+        flipped_row : int
+        heatmap_colors : numpy.NDArray[str]
+        square : int
+        white_hint_text : str
+
+        Returns
+        -------
+        Tuple[str, bool, int, str, int]
+
+        """
+        color: str = colors[(flipped_row + col) % 2]
+        heatmap_color: str = heatmap_colors[square]
+        width: int = 1
+        if black_hint_text != "None" or white_hint_text != "None":
+            color = heatmap_color
+            make_tip = True
+        else:
+            make_tip = False
+        outline_color: str = "black"
+        if square in self.highlight_squares:
+            if self.board.turn:
+                outline_color = "yellow"
             else:
-                make_tip = False
-            outline_color: str = "black"
+                outline_color = "blue"
+            width = 3
+        offset: int = width // 2
+        return color, make_tip, offset, outline_color, width
 
-            if square in self.highlight_squares:
-                if self.board.turn:
-                    outline_color = "yellow"
-                else:
-                    outline_color = "blue"
-                width = 3
-            offset: int = width // 2
-            sq_id = self.canvas.create_rectangle(
-                x0 + offset, y0 + offset, x1 - offset, y1 - offset,
-                fill=color, outline=outline_color, width=width
-            )
-            if make_tip:
-                self.tooltips.append(CanvasTooltip(self, self.canvas, sq_id, text=tip, bg=color))
-            piece: Optional[Piece] = self.board.piece_at(square)
-            self.create_piece(font_size, piece, square_size, x0, y0, tip, make_tip, color)
-            self.create_count_labels(
-                font_size, heatmap, offset, square, square_size, x0, y0, y1,
-                black_hint_text, white_hint_text, color
-            )
+    @staticmethod
+    def get_black_white_hints(square_pieces: Dict[Piece, float64]) -> Tuple[str, str]:
+        """Gets hint text for black and white piece counts
+
+        Parameters
+        ----------
+        square_pieces : Dict[Piece, float64]
+
+        Returns
+        -------
+        Tuple[str, str]
+
+        """
+        black_hint_text: str = ' '.join([
+            f"{k.unicode_symbol()}:{square_pieces[k]:.2f}" for k in square_pieces if
+            square_pieces[k] > 0 and not k.color
+        ])
+        if not black_hint_text.replace(" ", ""):
+            black_hint_text = "None"
+        white_hint_text: str = ' '.join([
+            f"{k.unicode_symbol()}:{square_pieces[k]:.2f}" for k in square_pieces if
+            square_pieces[k] > 0 and k.color
+        ])
+        if not white_hint_text.replace(" ", ""):
+            white_hint_text = "None"
+        return black_hint_text, white_hint_text
+
+    @staticmethod
+    def get_xys(col: int, flipped_row: int, square_size: int) -> Tuple[int, int, int, int]:
+        """Get x0, x1, y0, y1 of a square.
+
+        Parameters
+        ----------
+        col : int
+        flipped_row : int
+        square_size : int
+
+        Returns
+        -------
+        Tuple[int, int, int, int]
+
+        """
+        x0: int = col * square_size
+        y0: int = flipped_row * square_size
+        x1: int = x0 + square_size
+        y1: int = y0 + square_size
+        return x0, x1, y0, y1
 
     def create_count_labels(
             self, font_size: int, heatmap: ChessMoveHeatmap,
