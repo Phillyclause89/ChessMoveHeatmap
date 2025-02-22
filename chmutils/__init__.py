@@ -9,9 +9,11 @@ import heatmaps
 import numpy as np
 
 
-def calculate_heatmap(board: Board, depth: int = 1,
-                      heatmap: Optional[heatmaps.GradientHeatmap] = None,
-                      discount: int = 1) -> heatmaps.GradientHeatmap:
+def calculate_heatmap(
+        board: Board, depth: int = 1,
+        heatmap: Optional[heatmaps.GradientHeatmap] = None,
+        discount: int = 1
+) -> heatmaps.GradientHeatmap:
     """
     Recursively computes a gradient heatmap for a given chess board position.
 
@@ -137,12 +139,12 @@ def calculate_chess_move_heatmap(
     Notes
     -----
     - The function updates both the standard heatmap data (for move intensity) and, in addition,
-      the `piece_counts` attribute.
+        the `piece_counts` attribute.
     - As with `calculate_heatmap`, the parameters `heatmap` and `discount` are intended for internal use.
     - The recursion depth controls the number of future move layers considered. Only odd depths tend to provide
-      balanced data between both players.
+        balanced data between both players.
     - The time complexity is approximately O(b^d),
-      where b ≈ 35 (the average branching factor in chess) and d is the depth.
+        where b ≈ 35 (the average branching factor in chess) and d is the depth.
 
     Examples
     --------
@@ -192,9 +194,9 @@ def flatten_heatmap(heatmap: heatmaps.ChessMoveHeatmap) -> Dict[str, np.float64]
     represents a specific attribute for a given square. The keys are constructed in the
     following format:
 
-      - "sq{square}_white": Move intensity for White on that square.
-      - "sq{square}_black": Move intensity for Black on that square.
-      - "sq{square}_piece_{symbol}": The count (or intensity) for a specific piece (identified by its Unicode symbol)
+    - "sq{square}_white": Move intensity for White on that square.
+    - "sq{square}_black": Move intensity for Black on that square.
+    - "sq{square}_piece_{symbol}": The count (or intensity) for a specific piece (identified by its Unicode symbol)
         on that square.
 
     Parameters

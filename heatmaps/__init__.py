@@ -267,9 +267,9 @@ class GradientHeatmap(GradientHeatmapT):
         Notes
         -----
         - The `text_color` (black or white) is determined based on the brightness of the background
-          color for each square to ensure contrast and legibility.
+            color for each square to ensure contrast and legibility.
         - The `colors` array is expected to contain hexadecimal color strings generated based on the
-          heatmap's intensity data for White and Black.
+            heatmap's intensity data for White and Black.
 
         Examples
         --------
@@ -445,5 +445,9 @@ if __name__ == "__main__":
     #
     cmhmap3 = ChessMoveHeatmap(cmhmap2.piece_counts)
     cmhmap3.piece_counts[16][PIECES[0]] += 1
-    print(cmhmap0.piece_counts[16][PIECES[0]], cmhmap1.piece_counts[16][PIECES[0]], cmhmap2.piece_counts[16][PIECES[0]],
-          cmhmap3.piece_counts[16][PIECES[0]])
+    print(
+        cmhmap0.piece_counts[16][PIECES[0]],
+        cmhmap1.piece_counts[16][PIECES[0]],
+        cmhmap2.piece_counts[16][PIECES[0]],
+        cmhmap3.piece_counts[16][PIECES[0]]
+    )

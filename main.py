@@ -200,10 +200,12 @@ class ChessHeatMapApp(tk.Tk):
         options_menu: Menu = tk.Menu(menu_bar, tearoff=0)
         options_menu.add_cascade(label="Font", menu=fonts_menu)
         options_menu.add_command(label="Change Board Colors", command=self.change_board_colors)
-        options_menu.add_command(label=LIGHT_SQUARE_COLOR_PROMPT,
-                                 command=lambda: self.choose_square_color(title=LIGHT_SQUARE_COLOR_PROMPT, index=0))
-        options_menu.add_command(label=DARK_SQUARE_COLOR_PROMPT,
-                                 command=lambda: self.choose_square_color(title=DARK_SQUARE_COLOR_PROMPT, index=1))
+        options_menu.add_command(
+            label=LIGHT_SQUARE_COLOR_PROMPT,
+            command=lambda: self.choose_square_color(title=LIGHT_SQUARE_COLOR_PROMPT, index=0))
+        options_menu.add_command(
+            label=DARK_SQUARE_COLOR_PROMPT,
+            command=lambda: self.choose_square_color(title=DARK_SQUARE_COLOR_PROMPT, index=1))
         options_menu.add_command(label="Set Depth", command=self.set_depth)
         menu_bar.add_cascade(label="Options", menu=options_menu)
         menu_bar.add_command(label="Prev Move", command=self.prev_move)
@@ -263,11 +265,13 @@ class ChessHeatMapApp(tk.Tk):
         depth_warning: str = "Every increment to this value increases calculation times exponentially!\n\n"
         depth_warning += "Note: Odd values are recommended for least biased heatmaps\nas each depth starting from 0 "
         depth_warning += "only counts one half turn of possible moves."
-        return simpledialog.askinteger("Set Depth",
-                                       f"\nWARNING: {depth_warning}\n\nEnter new recursion depth:",
-                                       initialvalue=self.depth,
-                                       minvalue=0,
-                                       maxvalue=100)  # Adjust maxvalue as needed.
+        return simpledialog.askinteger(
+            "Set Depth",
+            f"\nWARNING: {depth_warning}\n\nEnter new recursion depth:",
+            initialvalue=self.depth,
+            minvalue=0,
+            maxvalue=100
+        )  # Adjust maxvalue as needed.
 
     def clear_heatmaps(self) -> None:
         """
@@ -531,8 +535,10 @@ class ChessHeatMapApp(tk.Tk):
             (
                 black_hint_text, color, make_tip, offset, outline_color, tip, white_hint_text, width, x0, x1, y0, y1
             ) = self.get_all_draw_properties_for(square, square_size, colors, heatmap_colors, pieces_map)
-            self.draw_square_to_canvas(heatmap, square, x0, x1, y0, y1, square_size, width, color, outline_color,
-                                       offset, font_size, make_tip, tip, white_hint_text, black_hint_text)
+            self.draw_square_to_canvas(
+                heatmap, square, x0, x1, y0, y1, square_size, width, color, outline_color,
+                offset, font_size, make_tip, tip, white_hint_text, black_hint_text
+            )
 
     def get_board_drawing_properties(self) -> Tuple[
         List[str], int, ChessMoveHeatmap, NDArray[str], NDArray[Dict[Piece, float64]], int
