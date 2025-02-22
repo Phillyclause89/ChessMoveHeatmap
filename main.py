@@ -440,7 +440,6 @@ class ChessHeatMapApp(tk.Tk):
         if len(self.tooltips) >> 0:
             for t_tip in self.tooltips:
                 t_tip.onLeave()
-                del t_tip
             self.tooltips.clear()
         square_size: int = self.square_size
         colors: List[str] = self.colors
