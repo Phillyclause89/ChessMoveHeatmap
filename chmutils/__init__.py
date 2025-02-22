@@ -1,14 +1,12 @@
 import sqlite3
 from sqlite3 import Connection, Cursor
-from typing import Dict, List, Optional, Tuple, Union, Any
+from typing import Dict, List, Optional, Tuple, Union
 import chess
 from chess import Move, Board, Piece
 from numpy import float_
 import os
 import heatmaps
 import numpy as np
-
-from heatmaps import ChessMoveHeatmap
 
 
 def calculate_heatmap(board: Board, depth: int = 1,
