@@ -251,6 +251,9 @@ def inflate_heatmap(data: Dict[str, float]) -> heatmaps.ChessMoveHeatmap:
     return heatmap
 
 
+CACHE_DIR: str = "SQLite3Caches"
+
+
 class HeatmapCache:
     """A caching mechanism for ChessMoveHeatmap objects using SQLite.
 
@@ -271,6 +274,7 @@ class HeatmapCache:
     depth: int
     board: chess.Board
     db_path: str
+    cache_dir: str = CACHE_DIR
 
     def __init__(self, board: chess.Board, depth: int) -> None:
         """Initialize the HeatmapCache.
@@ -283,7 +287,7 @@ class HeatmapCache:
             The recursion depth associated with the heatmap calculations.
         """
         self.depth = depth
-        self.db_path = os.path.join("SQLite3Caches", f"heatmap_cache_depth_{self.depth}.db")
+        self.db_path = os.path.join(self.cache_dir, f"heatmap_cache_depth_{self.depth}.db")
         self.board = board
         self._initialize_db()
 
@@ -294,8 +298,8 @@ class HeatmapCache:
         move intensities and piece counts, and creates an index on the cache key 
         for faster lookups.
         """
-        if not os.path.isdir("SQLite3Caches"):
-            os.mkdir("SQLite3Caches")
+        if not os.path.isdir(self.cache_dir):
+            os.mkdir(self.cache_dir)
         conn: Connection
         with sqlite3.connect(self.db_path) as conn:
             cur: Cursor = conn.cursor()

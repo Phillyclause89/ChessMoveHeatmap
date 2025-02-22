@@ -14,38 +14,43 @@ import numpy as np
 from chmutils import HeatmapCache
 from heatmaps import ChessMoveHeatmap, GradientHeatmap
 
-CACHE_DIR = "SQLite3Caches"
+CACHE_DIR = "SQLite3TestCaches"
+chmutils.HeatmapCache.cache_dir = CACHE_DIR
 
 
 class TestCalculateHeatmap(unittest.TestCase):
     board: Board
     expected_values: Dict[int, Tuple[List[float], Dict[Piece, float]]] = {
-        16: ([2.0, 0.0],  # expected heatmap values for a square
-             {chess.Piece.from_symbol('P'): 1.0,
-              chess.Piece.from_symbol('N'): 1.0,
-              chess.Piece.from_symbol('B'): 0.0,
-              chess.Piece.from_symbol('R'): 0.0,
-              chess.Piece.from_symbol('k'): 0.0,
-              chess.Piece.from_symbol('b'): 0.0,
-              chess.Piece.from_symbol('n'): 0.0,
-              chess.Piece.from_symbol('p'): 0.0,
-              chess.Piece.from_symbol('q'): 0.0,
-              chess.Piece.from_symbol('r'): 0.0,
-              chess.Piece.from_symbol('K'): 0.0,
-              chess.Piece.from_symbol('Q'): 0.0}),  # expected piece counts for that square
-        17: ([1.0, 0.0],
-             {chess.Piece.from_symbol('P'): 1.0,
-              chess.Piece.from_symbol('N'): 0.0,
-              chess.Piece.from_symbol('B'): 0.0,
-              chess.Piece.from_symbol('R'): 0.0,
-              chess.Piece.from_symbol('k'): 0.0,
-              chess.Piece.from_symbol('b'): 0.0,
-              chess.Piece.from_symbol('n'): 0.0,
-              chess.Piece.from_symbol('p'): 0.0,
-              chess.Piece.from_symbol('q'): 0.0,
-              chess.Piece.from_symbol('r'): 0.0,
-              chess.Piece.from_symbol('K'): 0.0,
-              chess.Piece.from_symbol('Q'): 0.0}),
+        16: (
+            [2.0, 0.0],  # expected heatmap values for a square
+            {
+                chess.Piece.from_symbol('P'): 1.0,
+                chess.Piece.from_symbol('N'): 1.0,
+                chess.Piece.from_symbol('B'): 0.0,
+                chess.Piece.from_symbol('R'): 0.0,
+                chess.Piece.from_symbol('k'): 0.0,
+                chess.Piece.from_symbol('b'): 0.0,
+                chess.Piece.from_symbol('n'): 0.0,
+                chess.Piece.from_symbol('p'): 0.0,
+                chess.Piece.from_symbol('q'): 0.0,
+                chess.Piece.from_symbol('r'): 0.0,
+                chess.Piece.from_symbol('K'): 0.0,
+                chess.Piece.from_symbol('Q'): 0.0}),  # expected piece counts for that square
+        17: (
+            [1.0, 0.0],
+            {
+                chess.Piece.from_symbol('P'): 1.0,
+                chess.Piece.from_symbol('N'): 0.0,
+                chess.Piece.from_symbol('B'): 0.0,
+                chess.Piece.from_symbol('R'): 0.0,
+                chess.Piece.from_symbol('k'): 0.0,
+                chess.Piece.from_symbol('b'): 0.0,
+                chess.Piece.from_symbol('n'): 0.0,
+                chess.Piece.from_symbol('p'): 0.0,
+                chess.Piece.from_symbol('q'): 0.0,
+                chess.Piece.from_symbol('r'): 0.0,
+                chess.Piece.from_symbol('K'): 0.0,
+                chess.Piece.from_symbol('Q'): 0.0}),
     }
 
     def setUp(self):
