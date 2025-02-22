@@ -220,7 +220,7 @@ class ChessHeatMapApp(tk.Tk):
         if new_depth is not None and new_depth != self.depth:
             self.depth = new_depth
             # Update the window title to reflect the new depth.
-            self.title(f"Chess Move Heatmap | Depth = {self.depth} | {self.format_game_headers}")
+            self.set_title()
             self.ensure_executor()
             self.clear_heatmaps()
             if self.game is not None:
@@ -239,6 +239,13 @@ class ChessHeatMapApp(tk.Tk):
                 self.heatmap_futures[i - 1] = future
             self.after(100, self.check_heatmap_futures)
             self.update_board()
+
+    def set_title(self) -> None:
+        """Sets the App window title"""
+        target: int = len(self.heatmap_futures.items())
+        completed: int = len(self.heatmaps.items())
+        status: str = f" | Calculating Heatmaps: {completed}/{target} loaded" if not completed == target else ""
+        self.title(f"Chess Move Heatmap | Depth = {self.depth}{status}{self.format_game_headers}")
 
     def ask_depth(self) -> Optional[int]:
         """
@@ -328,37 +335,61 @@ class ChessHeatMapApp(tk.Tk):
             with open(file_path, "r") as file:
                 game: Optional[Game] = chess.pgn.read_game(file, Visitor=GBuilder)
                 board: Board = game.board()
-                moves: Optional[List[Optional[Move]]] = list(game.mainline_moves())
+                moves: List[Optional[Move]] = list(game.mainline_moves())
                 self.clear_heatmaps()
                 self.game = game
                 self.moves = moves
                 self.board = board
                 self.current_move_index = -1
-                self.title(f"Chess Move Heatmap | Depth = {self.depth}{self.format_game_headers}")
-                # Start background heatmap calculations
-                move: Optional[Move]
-                i: int
-                for i, move in enumerate([None] + moves):  # Include initial board state
-                    new_board: Board = self.board.copy()
-                    if move:
-                        j: int
-                        for j in range(i):
-                            new_board.push(self.moves[j])
-                    future = self.executor.submit(get_or_compute_heatmap, new_board, depth=self.depth)
-                    self.heatmap_futures[i - 1] = future
-                self.after(100, self.check_heatmap_futures)
+                self.set_title()
+                self.submit_heatmap_futures(moves)
         except Exception as e:
-            if isinstance(e, AttributeError):
-                e = "The file does not contain a valid PGN game."
-            elif not file_path:
-                e = "No PGN file was selected."
-            messagebox.showerror("Error", f"Failed to load PGN file: {e}")
+            self.handle_bad_pgn_selection(e, file_path)
+        self.ensure_board_has_heatmap()
+        self.update_board()
+
+    def submit_heatmap_futures(self, moves: List[Optional[Move]]) -> None:
+        """Submits heatmap futures for all positions in the game.
+
+        Parameters
+        ----------
+        moves : List[Optional[Move]]
+        """
+        # Start background heatmap calculations
+        move: Optional[Move]
+        i: int
+        for i, move in enumerate([None] + moves):  # Include initial board state
+            new_board: Board = self.board.copy()
+            if move:
+                j: int
+                for j in range(i):
+                    new_board.push(self.moves[j])
+            future: Future = self.executor.submit(get_or_compute_heatmap, new_board, depth=self.depth)
+            self.heatmap_futures[i - 1] = future
+        self.after(100, self.check_heatmap_futures)
+
+    def ensure_board_has_heatmap(self) -> None:
+        """Ensures a default heatmap is calculated/retrieved if none exists in app."""
         if not self.heatmap_futures and not self.heatmaps:
             new_board: Board = self.board.copy()
             future = self.executor.submit(get_or_compute_heatmap, new_board, depth=self.depth)
             self.heatmap_futures[self.current_move_index] = future
             self.after(100, self.check_heatmap_futures)
-        self.update_board()
+
+    @staticmethod
+    def handle_bad_pgn_selection(e: Exception, file_path: str) -> None:
+        """Presents the user with an error when an Exception is encountered in open_pgn.
+
+        Parameters
+        ----------
+        e : Exception
+        file_path : str
+        """
+        if isinstance(e, AttributeError):
+            e = "The file does not contain a valid PGN game."
+        elif not file_path:
+            e = "No PGN file was selected."
+        messagebox.showerror("Error", f"Failed to load PGN file: {e}")
 
     def ensure_executor(self) -> None:
         """Ensure that the process pool executor is initialized.
@@ -401,7 +432,7 @@ class ChessHeatMapApp(tk.Tk):
                 self.pieces_maps[i] = heatmap.piece_counts
                 if self.current_move_index == i:
                     updated = True
-
+        self.set_title()
         if updated and not self.updating:
             self.updating = True
             self.update_board()
