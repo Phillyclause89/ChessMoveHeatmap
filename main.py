@@ -3,15 +3,13 @@ from typing import Dict, List, Optional, Set, TextIO, Tuple
 from concurrent.futures import ProcessPoolExecutor, Future
 # noinspection PyProtectedMember
 from multiprocessing.context import Process
-import os
-import signal
-import tkinter as tk
-from tkinter import Canvas, Menu, filedialog, colorchooser, messagebox, font as tk_font, Event, simpledialog
+from os import kill, cpu_count
+from signal import SIGTERM
+from tkinter import Tk, Canvas, Menu, filedialog, colorchooser, messagebox, font as tk_font, Event, simpledialog
 
 from numpy import float64
 from numpy.typing import NDArray
-import chess
-from chess import Board, Piece, Move
+from chess import square_name, pgn, SQUARES, Board, Piece, Move
 from chess.pgn import GameBuilder, Game, Headers
 
 from tooltips import CanvasTooltip
@@ -28,9 +26,7 @@ class GBuilder(GameBuilder):
     """Overrides GameBuilder.handle_error to raise exception."""
 
     def handle_error(self, error: Exception) -> None:
-        """Override of GameBuilder.handle_error method to raise errors.
-
-        """
+        """Override of GameBuilder.handle_error method to raise errors."""
         raise error
 
 
@@ -50,7 +46,7 @@ class PPExecutor(ProcessPoolExecutor):
 
 
 # pylint: disable=too-many-instance-attributes,too-many-public-methods
-class ChessHeatMapApp(tk.Tk):
+class ChessHeatMapApp(Tk):
     """Main application window for the Chess Heat Map app.
 
     This class is responsible for rendering the chessboard, handling user inputs,
@@ -130,7 +126,7 @@ class ChessHeatMapApp(tk.Tk):
         super().__init__()
         self.depth = 3
         self.title(f"Chess Move Heatmap | Depth = {self.depth}")
-        self.board = chess.Board()
+        self.board = Board()
         screen_height: int = self.winfo_screenheight()
         screen_width: int = int(screen_height * 0.75)
         self.geometry(f"{screen_width}x{screen_height}")
@@ -138,7 +134,7 @@ class ChessHeatMapApp(tk.Tk):
         self.colors = list(DEFAULT_COLORS)
         self.font = DEFAULT_FONT
         self.create_menu()
-        self.canvas = tk.Canvas(self, )
+        self.canvas = Canvas(self, )
         self.canvas.pack(fill="both", expand=True)
         self.game = None
         self.moves = None
@@ -146,7 +142,7 @@ class ChessHeatMapApp(tk.Tk):
         self.highlight_squares = set()  # Store the squares to highlight
         # Parallel processing setup
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
-        self.executor = PPExecutor(max_workers=max(1, int(os.cpu_count() * 0.9)))
+        self.executor = PPExecutor(max_workers=max(1, int(cpu_count() * 0.9)))
         self.heatmap_futures = {}  # Track running futures
         self.heatmaps = {}  # Store completed heatmaps
         self.pieces_maps = {}
@@ -166,7 +162,7 @@ class ChessHeatMapApp(tk.Tk):
         if self.executor is not None:
             process: Process
             for process in self.executor.processes:
-                os.kill(process.pid, signal.SIGTERM)
+                kill(process.pid, SIGTERM)
             self.executor.shutdown()
         self.destroy()
 
@@ -192,15 +188,15 @@ class ChessHeatMapApp(tk.Tk):
         This method creates a menu bar with options to load a PGN file, change the board colors,
         and modify the font. It also allows navigation through the moves in the game (next/previous move).
         """
-        menu_bar: Menu = tk.Menu(self)
-        file_menu: Menu = tk.Menu(menu_bar, tearoff=0)
+        menu_bar: Menu = Menu(self)
+        file_menu: Menu = Menu(menu_bar, tearoff=0)
         file_menu.add_command(label="Open PGN", command=self.open_pgn)
         menu_bar.add_cascade(label="File", menu=file_menu)
-        fonts_menu: Menu = tk.Menu(menu_bar, tearoff=0)
+        fonts_menu: Menu = Menu(menu_bar, tearoff=0)
         font: str
         for font in tk_font.families():
             fonts_menu.add_command(label=font.title(), command=lambda f=font: self.change_font(new_font=f))
-        options_menu: Menu = tk.Menu(menu_bar, tearoff=0)
+        options_menu: Menu = Menu(menu_bar, tearoff=0)
         options_menu.add_cascade(label="Font", menu=fonts_menu)
         options_menu.add_command(label="Change Board Colors", command=self.change_board_colors)
         options_menu.add_command(
@@ -340,7 +336,7 @@ class ChessHeatMapApp(tk.Tk):
         try:
             file: TextIO
             with open(file_path, mode="r", encoding="utf-8") as file:
-                game: Optional[Game] = chess.pgn.read_game(file, Visitor=GBuilder)
+                game: Optional[Game] = pgn.read_game(file, Visitor=GBuilder)
                 board: Board = game.board()
                 moves: List[Optional[Move]] = list(game.mainline_moves())
                 self.clear_heatmaps()
@@ -406,7 +402,7 @@ class ChessHeatMapApp(tk.Tk):
         that parallel processing resources are available.
         """
         if self.executor is None:
-            self.executor = PPExecutor(max_workers=max(1, int(os.cpu_count() * 0.9)))
+            self.executor = PPExecutor(max_workers=max(1, int(cpu_count() * 0.9)))
 
     @property
     def format_game_headers(self) -> str:
@@ -524,7 +520,7 @@ class ChessHeatMapApp(tk.Tk):
         font_size : int
         """
         square: int
-        for square in chess.SQUARES:
+        for square in SQUARES:
             black_hint_text: str
             color: str
             make_tip: bool
@@ -708,7 +704,7 @@ class ChessHeatMapApp(tk.Tk):
         black_hint_text, white_hint_text = self.get_black_white_hints(square_pieces)
         wb_text: str = f"White: {white_hint_text}\nBlack: {black_hint_text}"
         turn_depth: str = f"{((self.depth + 1) / 2):.1f}"
-        tip: str = f"Possible moves to {chess.square_name(square)} within {turn_depth} turns:\n{wb_text}"
+        tip: str = f"Possible moves to {square_name(square)} within {turn_depth} turns:\n{wb_text}"
         return black_hint_text, tip, white_hint_text
 
     def get_square_properties(
