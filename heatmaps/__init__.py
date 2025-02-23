@@ -1,10 +1,9 @@
+"""Heatmaps"""
 from typing import Dict, Optional, Tuple, Union
-
+from copy import deepcopy
 from chess import PIECE_TYPES, Piece, COLORS
 from numpy.typing import NDArray, ArrayLike
 import numpy as np
-
-from copy import deepcopy
 
 PIECES: Tuple[Piece] = tuple(Piece(p, c) for c in COLORS for p in PIECE_TYPES)
 
@@ -66,13 +65,13 @@ class GradientHeatmapT:
         try:
             if value.shape == expected_shape and value.dtype == np.float64:
                 self.data[square] = value
-                return
+                return None
             raise ValueError(f"Value must have shape {expected_shape}, got {value.shape}.")
         except AttributeError:
             try:
                 return self.__setitem__(square, np.asarray(value, dtype=np.float64))
-            except ValueError as ve:
-                raise ve
+            except ValueError as value_error:
+                raise value_error
         except IndexError as i:
             raise IndexError(f"square must be in range({self.shape[0]}) got {square}") from i
 
@@ -105,10 +104,10 @@ class GradientHeatmapT:
         except AttributeError:
             try:
                 return self.__add__(GradientHeatmap(np.asarray(other, dtype=np.float64)))
-            except Exception as e:
-                t: str = "Other must be a GradientHeatmapT "
-                t += f"or a shape {self.shape} NDArray[np.float64] like, got {type(other)}"
-                raise TypeError(t) from e
+            except Exception as exception:
+                text: str = "Other must be a GradientHeatmapT "
+                text += f"or a shape {self.shape} NDArray[np.float64] like, got {type(other)}"
+                raise TypeError(text) from exception
 
     @property
     def shape(self) -> Tuple[int, int]:
@@ -156,8 +155,8 @@ class GradientHeatmapT:
             try:
                 self.data = np.asarray(value, dtype=np.float64)
                 return
-            except Exception as e:
-                raise TypeError(f"Other must be a shape {self.shape} ArrayLike, got {type(value)}") from e
+            except Exception as exception:
+                raise TypeError(f"Other must be a shape {self.shape} ArrayLike, got {type(value)}") from exception
 
 
 class GradientHeatmap(GradientHeatmapT):
@@ -177,7 +176,7 @@ class GradientHeatmap(GradientHeatmapT):
         super().__init__()
         if data is None:
             return
-        elif isinstance(data, np.ndarray) and data.dtype == np.float64:
+        if isinstance(data, np.ndarray) and data.dtype == np.float64:
             self.data = deepcopy(data)
         elif isinstance(data, (
                 GradientHeatmapT, GradientHeatmap, ChessMoveHeatmapT, ChessMoveHeatmap,
@@ -279,7 +278,7 @@ class GradientHeatmap(GradientHeatmapT):
         colors: NDArray[np.str_] = self.colors  # Get final color values
         sep: str = "</td><td>"
 
-        html: str = f"<h4>{self.__repr__()}</h4>"
+        html: str = f"<h4>{repr(self)}</h4>"
         html += "<table border='1' style='border-collapse: collapse; text-align: center;'>"
         html += "<tr><th>Square</th><th>White Intensity</th><th>Black Intensity</th><th>Heat Map Color</th></tr>"
 
@@ -362,8 +361,8 @@ class ChessMoveHeatmapT(GradientHeatmap):
             try:
                 self.piece_counts = np.asarray(value, dtype=dict)
                 return
-            except Exception as e:
-                raise TypeError(f"Other must be a shape (64,) ArrayLike, got {type(value)}") from e
+            except Exception as exception:
+                raise TypeError(f"Other must be a shape (64,) ArrayLike, got {type(value)}") from exception
 
 
 class ChessMoveHeatmap(ChessMoveHeatmapT):
@@ -399,7 +398,7 @@ class ChessMoveHeatmap(ChessMoveHeatmapT):
         data: Optional[object] = kwargs.get("data")
         if piece_counts is None and data is None:
             return
-        elif isinstance(piece_counts, np.ndarray) and piece_counts.dtype == object:
+        if isinstance(piece_counts, np.ndarray) and piece_counts.dtype == object:
             self.piece_counts = deepcopy(piece_counts)
         elif isinstance(
                 data, (ChessMoveHeatmapT, ChessMoveHeatmap)
@@ -408,46 +407,3 @@ class ChessMoveHeatmap(ChessMoveHeatmapT):
         elif piece_counts is not None:
             raise TypeError(f"piece_counts must be a NumPy array of object, got {type(piece_counts)}")
 
-
-if __name__ == "__main__":
-    from chmutils import calculate_heatmap, calculate_chess_move_heatmap
-    from chess import Board, Piece
-
-    hmap0 = calculate_heatmap(Board(), 1)
-    print(hmap0[16])
-    hmap1 = GradientHeatmap(hmap0.data)
-    hmap1[16][0] += 1
-    print(hmap0[16], hmap1[16])
-
-    hmap2 = GradientHeatmap(hmap1)
-    hmap2[16][0] += 1
-    print(hmap0[16], hmap1[16], hmap2[16])
-    # __add__ should work with both GradientHeatmap objects and (64,2) shaped arrays
-    hmap3 = hmap0 + hmap1 + hmap2.data
-    # x should be GradientHeatmap with .data containing the results of the calculation
-    print(hmap0[16], hmap1[16], hmap2[16], hmap3[16])
-    # original hmap data should not be mutated
-
-    # New ChessMoveHeatmap
-    cmhmap0 = calculate_chess_move_heatmap(Board(), 1)
-    print(cmhmap0.piece_counts[16][PIECES[0]])
-
-    # New ChessMoveHeatmap with all data copied from first one
-    cmhmap1 = ChessMoveHeatmap(data=cmhmap0)
-    cmhmap1.piece_counts[16][PIECES[0]] += 1
-    print(cmhmap0.piece_counts[16][PIECES[0]], cmhmap1.piece_counts[16][PIECES[0]])
-
-    #
-    cmhmap2 = ChessMoveHeatmap(cmhmap1.piece_counts, data=cmhmap1)
-    cmhmap2.piece_counts[16][PIECES[0]] += 1
-    print(cmhmap0.piece_counts[16][PIECES[0]], cmhmap1.piece_counts[16][PIECES[0]], cmhmap2.piece_counts[16][PIECES[0]])
-
-    #
-    cmhmap3 = ChessMoveHeatmap(cmhmap2.piece_counts)
-    cmhmap3.piece_counts[16][PIECES[0]] += 1
-    print(
-        cmhmap0.piece_counts[16][PIECES[0]],
-        cmhmap1.piece_counts[16][PIECES[0]],
-        cmhmap2.piece_counts[16][PIECES[0]],
-        cmhmap3.piece_counts[16][PIECES[0]]
-    )
