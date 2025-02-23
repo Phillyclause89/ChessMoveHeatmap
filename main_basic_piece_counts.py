@@ -511,7 +511,7 @@ class ChessHeatMapApp(tk.Tk):
                 fill=color, outline=outline_color, width=width
             )
             if make_tip:
-                self.tooltips.append(CanvasTooltip(self, self.canvas, sq_id, text=tip, bg=color))
+                self.tooltips.append(CanvasTooltip(self, self.canvas, sq_id, text=tip, bg_color=color))
             piece: Optional[Piece] = self.board.piece_at(square)
             self.create_piece(font_size, piece, square_size, x0, y0, tip, make_tip, color)
             self.create_count_labels(
@@ -573,11 +573,11 @@ class ChessHeatMapApp(tk.Tk):
         )
 
         if white_total > 0:
-            CanvasTooltip(self, self.canvas, wbg_id, text=white_hint_text, bg=color)
-            CanvasTooltip(self, self.canvas, wtx_id, text=white_hint_text, bg=color)
+            CanvasTooltip(self, self.canvas, wbg_id, text=white_hint_text, bg_color=color)
+            CanvasTooltip(self, self.canvas, wtx_id, text=white_hint_text, bg_color=color)
         if black_total > 0:
-            CanvasTooltip(self, self.canvas, bbg_id, text=black_hint_text, bg=color)
-            CanvasTooltip(self, self.canvas, btx_id, text=black_hint_text, bg=color)
+            CanvasTooltip(self, self.canvas, bbg_id, text=black_hint_text, bg_color=color)
+            CanvasTooltip(self, self.canvas, btx_id, text=black_hint_text, bg_color=color)
 
     def create_piece(
             self, font_size: int, piece: Optional[Piece],
@@ -617,8 +617,8 @@ class ChessHeatMapApp(tk.Tk):
                 text=piece_symbol, font=(self.font, font_size), fill="blue" if piece.color else "yellow"
             )
             if make_tip:
-                self.tooltips.append(CanvasTooltip(self, self.canvas, bg_id, text=tip, bg=color))
-                self.tooltips.append(CanvasTooltip(self, self.canvas, pc_id, text=tip, bg=color))
+                self.tooltips.append(CanvasTooltip(self, self.canvas, bg_id, text=tip, bg_color=color))
+                self.tooltips.append(CanvasTooltip(self, self.canvas, pc_id, text=tip, bg_color=color))
 
 
 if __name__ == "__main__":
