@@ -1,12 +1,13 @@
+"""CHMUtils"""
+import os
 import sqlite3
 from sqlite3 import Connection, Cursor
 from typing import Dict, List, Optional, Tuple, Union
 import chess
 from chess import Move, Board, Piece
 from numpy import float_
-import os
-import heatmaps
 import numpy as np
+import heatmaps
 
 
 def calculate_heatmap(
@@ -344,7 +345,7 @@ class HeatmapCache:
         conn: Connection
         with sqlite3.connect(self.db_path) as conn:
             cur: Cursor = conn.cursor()
-            cur.execute(f"SELECT * FROM heatmap_cache WHERE cache_key = ?", (key,))
+            cur.execute("SELECT * FROM heatmap_cache WHERE cache_key = ?", (key,))
             row: Optional[Tuple[float, ...]] = cur.fetchone()
             if row is None:
                 return row
@@ -372,7 +373,7 @@ class HeatmapCache:
         # We'll assume the schema matches the flattened dict keys exactly.
         columns: List[str] = ["cache_key"] + list(flat.keys())
         placeholders: str = ", ".join(["?"] * len(columns))
-        values: List[str, float_] = [key] + [flat[col] for col in flat]
+        values: List[str, float_] = [key] + list(flat.values())
 
         conn: Connection
         with sqlite3.connect(self.db_path) as conn:

@@ -406,4 +406,3 @@ class ChessMoveHeatmap(ChessMoveHeatmapT):
             self.piece_counts = deepcopy(data.piece_counts)
         elif piece_counts is not None:
             raise TypeError(f"piece_counts must be a NumPy array of object, got {type(piece_counts)}")
-
