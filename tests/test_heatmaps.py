@@ -1,11 +1,11 @@
 """Tests Heatmaps"""
-from typing import Any, Dict, List, Optional, Union
+from typing import Dict, List, Optional
 from unittest import TestCase, main
 from re import fullmatch
 
 from chess import Piece
 from numpy.typing import NDArray
-from numpy import dtype, float_, random as np_random, array, testing as np_testing, float64, unicode_, zeros, ndarray
+from numpy import random as np_random, array, testing as np_testing, float64, zeros, ndarray
 
 from heatmaps import GradientHeatmapT, GradientHeatmap, ChessMoveHeatmapT, ChessMoveHeatmap
 from tests.utils import INVALID_OBJ_STR, PIECES, SHAPE, validate_data_types
@@ -227,6 +227,36 @@ class TestChessMoveHeatmapT(TestCase):
                     self.heatmap.piece_counts[square][piece] + result2.piece_counts[square][piece]
                 )
         validate_data_types((self.heatmap, other_heatmap, result1, result2, result3), self, True)
+
+    def test_invalid_addition_type(self) -> None:
+        """Ensure TypeError is raised when adding an incompatible type."""
+        with self.assertRaises(TypeError):
+            _ = self.heatmap + INVALID_OBJ_STR
+        result1: ChessMoveHeatmap = self.heatmap + self.heatmap
+        np_testing.assert_array_equal(result1.data, self.heatmap.data)
+        with self.assertRaises(TypeError):
+            _ = result1 + array([[INVALID_OBJ_STR, INVALID_OBJ_STR]] * 64, dtype=object)
+        result2: ChessMoveHeatmap = result1 + (zeros(SHAPE, dtype=float64), self.heatmap.piece_counts)
+        np_testing.assert_array_equal(result2.data, self.heatmap.data)
+        with self.assertRaises(TypeError):
+            _ = result2 + array([[INVALID_OBJ_STR, INVALID_OBJ_STR]], dtype=object)
+        with self.assertRaises(TypeError):
+            _ = self.heatmap + (self.heatmap.data, INVALID_OBJ_STR)
+        with self.assertRaises(TypeError):
+            _ = self.heatmap + [INVALID_OBJ_STR, self.heatmap.piece_counts]
+        validate_data_types((self.heatmap, result1, result2), self, True)
+
+    def test_invalid_addition_shape(self) -> None:
+        """Ensure ValueError is raised when setting incorrect shape."""
+        with self.assertRaises(ValueError):
+            _ = self.heatmap + array([1.5, 2.5, 3.0], dtype=float64)
+        with self.assertRaises(ValueError):
+            _ = self.heatmap + array([3.0], dtype=float64)
+        with self.assertRaises(ValueError):
+            _ = self.heatmap + []
+        with self.assertRaises(ValueError):
+            _ = self.heatmap + (self.heatmap.data, array([{0: 0}], dtype=dict))
+        validate_data_types((self.heatmap,), self, True)
 
 
 class TestChessMoveHeatmap(TestCase):

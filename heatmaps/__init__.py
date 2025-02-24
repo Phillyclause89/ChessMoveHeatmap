@@ -327,6 +327,7 @@ class ChessMoveHeatmapT(GradientHeatmap):
             other: Union[
                 "ChessMoveHeatmapT",
                 Tuple[NDArray[float64], NDArray[Dict[Piece, float64]]],
+                ArrayLike,
                 Dict[str, Union[NDArray[float64], NDArray[Dict[Piece, float64]]]]
             ]
     ) -> "ChessMoveHeatmap":
@@ -340,10 +341,10 @@ class ChessMoveHeatmapT(GradientHeatmap):
         except AttributeError as attribute_error:
             try:
                 return self + ChessMoveHeatmap(
-                    data=other["data"],
-                    piece_counts=other["piece_counts"]
+                    data=other.get("data", KeyError),
+                    piece_counts=other.get("piece_counts", KeyError)
                 )
-            except TypeError as type_error:
+            except AttributeError as attribute_error2:
                 try:
                     return self + ChessMoveHeatmap(
                         data=other[0],
@@ -352,11 +353,14 @@ class ChessMoveHeatmapT(GradientHeatmap):
                 except IndexError as index_error:
                     raise ValueError(f"Other {type(other)} must be of len 2 got: {len(other)}") from index_error
                 except Exception as error1:
-                    raise error1 from type_error
+                    raise error1 from attribute_error2
+
             except KeyError as key_error:
                 if 'data' not in other or 0 not in other:
-                    raise ValueError(f"Other {type(other)} does not have 'data':{other}") from key_error
-                raise ValueError(f"Other {type(other)} does not have 'piece_counts':{other}") from key_error
+                    text = f"Other {type(other)} does not have a 'data' key: keys:{other.keys()}"
+                    raise KeyError(text) from key_error
+                text = f"Other {type(other)} does not have a 'piece_counts' key: keys:{other.keys()}"
+                raise KeyError(text) from key_error
             except Exception as error0:
                 raise error0 from attribute_error
 
@@ -469,4 +473,4 @@ class ChessMoveHeatmap(ChessMoveHeatmapT):
         ) or str(type(self)).replace('__main__', 'heatmaps') == str(type(data)):
             self.piece_counts = deepcopy(data.piece_counts)
         elif piece_counts is not None:
-            raise TypeError(f"piece_counts must be a NumPy array of object, got {type(piece_counts)}")
+            raise TypeError(f"piece_counts must be a NumPy array of dict, got {type(piece_counts)}")
