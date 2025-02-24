@@ -2,6 +2,8 @@ import unittest
 from typing import Any, Callable, Dict, Iterable, List, Optional, Union, Type, Tuple
 import numpy as np
 from chess import COLORS, PIECE_TYPES, Piece
+from numpy import dtype, float_, ndarray
+from numpy.typing import NDArray
 
 from heatmaps import GradientHeatmap, GradientHeatmapT, ChessMoveHeatmapT, ChessMoveHeatmap
 
@@ -32,7 +34,11 @@ CAYNAM: Type[ChessMoveHeatmap] = KENAN
 CAINAN: Type[ChessMoveHeatmap] = KENAN
 
 
-def _validate_data_types(test_case: unittest.TestCase, test_objects: Iterable[GradientHeatmapT]) -> None:
+def _validate_data_types(
+        test_case: unittest.TestCase,
+        test_objects: Iterable[GradientHeatmapT],
+        assert_enos: bool = False
+) -> None:
     """Ensures that all test_objects are valid instances of GradientHeatmapT.
 
     This function verifies that each object in `test_objects`:
@@ -60,11 +66,33 @@ def _validate_data_types(test_case: unittest.TestCase, test_objects: Iterable[Gr
         test_case.assertEqual(obj.shape, SHAPE)
         test_case.assertEqual(obj.data.shape, obj.shape)
         test_case.assertEqual(obj.data.dtype, np.float64)
+        square_count: NDArray[np.float64]
+        for square_count in obj:
+            test_case.assertIsInstance(square_count, np.ndarray)
+            test_case.assertEqual(square_count.shape, (SHAPE[1],))
+            count: np.float64
+            for count in square_count:
+                test_case.assertIsInstance(count, np.float64)
+        if assert_enos:
+            test_case.assertIsInstance(obj, ENOS)
+            test_case.assertIsInstance(obj.piece_counts, np.ndarray)
+            test_case.assertEqual(obj.piece_counts.shape, (SHAPE[0],))
+            test_case.assertEqual(obj.piece_counts.dtype, dict)
+            p_count: dict
+            for p_count in obj.piece_counts:
+                test_case.assertIsInstance(p_count, dict)
+                test_case.assertEqual(len(p_count), len(PIECES))
+                piece: Piece
+                value: np.float64
+                for piece, value in p_count.items():
+                    test_case.assertIsInstance(piece, Piece)
+                    test_case.assertIsInstance(value, np.float64)
 
 
 def validate_data_types(
         test_objects: Iterable[GradientHeatmapT],
         test_case: Optional[unittest.TestCase] = None,
+        assert_enos: bool = False
 ) -> None:
     """Validates that all test_objects are instances of GradientHeatmapT.
 
@@ -74,7 +102,8 @@ def validate_data_types(
 
     Parameters
     ----------
-    test_objects : Iterable[GradientHeatmapT]
+    assert_enos : bool
+    test_objects : Iterable
         An iterable of objects expected to be instances of `GradientHeatmapT`.
     test_case : Optional[unittest.TestCase], default=None
         A test case instance used to perform assertions. If `None`, a temporary instance is created.
@@ -87,14 +116,14 @@ def validate_data_types(
         If an object lacks an expected attribute, potentially indicating corruption.
     """
     try:
-        _validate_data_types(test_case, test_objects)
-    except AttributeError as a:
+        _validate_data_types(test_case, test_objects, assert_enos)
+    except AttributeError as attribute_error:
         try:
-            validate_data_types(test_objects, unittest.TestCase())
-        except Exception as e:
-            raise e from a
-    except AssertionError as a:
-        raise AssertionError(a) from a
+            validate_data_types(test_objects, unittest.TestCase(), assert_enos)
+        except Exception as error:
+            raise error from attribute_error
+    except AssertionError as attribute_error:
+        raise AssertionError(attribute_error) from attribute_error
 
 
 def construct_all(
@@ -108,7 +137,7 @@ def construct_all(
     classes : Union[Iterable[Callable], Dict[Callable, dict]]
         - If an **iterable of callables** is provided, each class is instantiated without arguments.
         - If a **dictionary** is provided, keys must be callables (class constructors),
-          and values must be dictionaries containing keyword arguments (`kwargs`) for instantiation.
+            and values must be dictionaries containing keyword arguments (`kwargs`) for instantiation.
 
     errors : str, optional
         Defines how to handle instantiation errors (default is `"raise"`).

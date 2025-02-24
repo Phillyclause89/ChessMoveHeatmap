@@ -3,9 +3,9 @@ from typing import Dict, Optional, Tuple, Union
 from copy import deepcopy
 from chess import PIECE_TYPES, Piece, COLORS
 from numpy.typing import NDArray, ArrayLike
-import numpy as np
+from numpy import asarray, abs as np_abs, array, str_, float64, zeros, ndarray
 
-PIECES: Tuple[Piece] = tuple(Piece(p, c) for c in COLORS for p in PIECE_TYPES)
+PIECES: Tuple[Piece, ...] = tuple(Piece(p, c) for c in COLORS for p in PIECE_TYPES)
 
 
 class GradientHeatmapT:
@@ -19,14 +19,14 @@ class GradientHeatmapT:
     data : numpy.ndarray
         A NumPy array holding the heatmap data, initialized to zeros.
     """
-    _data: NDArray[np.float64]
+    _data: NDArray[float64]
     _shape: Tuple[int, int] = (64, 2)
 
     def __init__(self) -> None:
         """Initialize a heatmap with zeros."""
-        self._data = np.zeros(self._shape, dtype=np.float64)
+        self._data = zeros(self._shape, dtype=float64)
 
-    def __getitem__(self, square: int) -> NDArray[np.float64]:
+    def __getitem__(self, square: int) -> NDArray[float64]:
         """Retrieve the heatmap data for a given square.
 
         Parameters
@@ -41,10 +41,10 @@ class GradientHeatmapT:
         """
         try:
             return self.data[square]
-        except IndexError as i:
-            raise IndexError(f"square must be in range({self.shape[0]}) got {square}") from i
+        except IndexError as index_error:
+            raise IndexError(f"square must be in range({self.shape[0]}) got {square}") from index_error
 
-    def __setitem__(self, square: int, value: Union[NDArray[np.float64], ArrayLike]) -> None:
+    def __setitem__(self, square: int, value: Union[NDArray[float64], ArrayLike]) -> None:
         """Set the heatmap data for a given square.
 
         Parameters
@@ -63,19 +63,19 @@ class GradientHeatmapT:
         """
         expected_shape = (self.shape[1],)
         try:
-            if value.shape == expected_shape and value.dtype == np.float64:
+            if value.shape == expected_shape and value.dtype == float64:
                 self.data[square] = value
                 return None
             raise ValueError(f"Value must have shape {expected_shape}, got {value.shape}.")
         except AttributeError:
             try:
-                return self.__setitem__(square, np.asarray(value, dtype=np.float64))
+                return self.__setitem__(square, asarray(value, dtype=float64))
             except ValueError as value_error:
                 raise value_error
         except IndexError as i:
             raise IndexError(f"square must be in range({self.shape[0]}) got {square}") from i
 
-    def __add__(self, other: Union["GradientHeatmapT", NDArray[np.float64], ArrayLike]) -> "GradientHeatmap":
+    def __add__(self, other: Union["GradientHeatmapT", NDArray[float64], ArrayLike]) -> "GradientHeatmap":
         """Perform element-wise addition with another heatmap or compatible array.
 
         Parameters
@@ -103,7 +103,7 @@ class GradientHeatmapT:
             raise ValueError(f"Other {type(other)} must have shape {self.shape}, got {other.shape}.")
         except AttributeError:
             try:
-                return self.__add__(GradientHeatmap(np.asarray(other, dtype=np.float64)))
+                return self.__add__(GradientHeatmap(asarray(other, dtype=float64)))
             except Exception as exception:
                 text: str = "Other must be a GradientHeatmapT "
                 text += f"or a shape {self.shape} NDArray[np.float64] like, got {type(other)}"
@@ -120,12 +120,12 @@ class GradientHeatmapT:
         raise AttributeError("Shape is immutable and cannot be changed.")
 
     @property
-    def data(self) -> NDArray[np.float64]:
+    def data(self) -> NDArray[float64]:
         """Return the heatmap data."""
         return self._data
 
     @data.setter
-    def data(self, value: Union[NDArray[np.float64], ArrayLike]) -> None:
+    def data(self, value: Union[NDArray[float64], ArrayLike]) -> None:
         """Set the heatmap data, ensuring correct type and shape.
 
         The setter first checks if `value` has the correct shape and dtype.
@@ -147,13 +147,13 @@ class GradientHeatmapT:
             If the value cannot be converted to a NumPy array of shape (64, 2).
         """
         try:
-            if value.shape == self.shape and value.dtype == np.float64:
+            if value.shape == self.shape and value.dtype == float64:
                 self._data = value
                 return
             raise ValueError(f"Other {type(value)} must have shape {self.shape}, got {value.shape}.")
         except AttributeError:
             try:
-                self.data = np.asarray(value, dtype=np.float64)
+                self.data = asarray(value, dtype=float64)
                 return
             except Exception as exception:
                 raise TypeError(f"Other must be a shape {self.shape} ArrayLike, got {type(value)}") from exception
@@ -162,7 +162,7 @@ class GradientHeatmapT:
 class GradientHeatmap(GradientHeatmapT):
     """A subclass of `GradientHeatmapT` that supports additional operations like normalization and color conversion."""
 
-    def __init__(self, data: Union[Optional[NDArray[np.float64]], GradientHeatmapT, ArrayLike] = None) -> None:
+    def __init__(self, data: Union[Optional[NDArray[float64]], GradientHeatmapT, ArrayLike] = None) -> None:
         """Initialize a gradient heatmap.
 
         Parameters
@@ -176,7 +176,7 @@ class GradientHeatmap(GradientHeatmapT):
         super().__init__()
         if data is None:
             return
-        if isinstance(data, np.ndarray) and data.dtype == np.float64:
+        if isinstance(data, ndarray) and data.dtype == float64:
             self.data = deepcopy(data)
         elif isinstance(data, (
                 GradientHeatmapT, GradientHeatmap, ChessMoveHeatmapT, ChessMoveHeatmap,
@@ -188,7 +188,7 @@ class GradientHeatmap(GradientHeatmapT):
             )
 
     @property
-    def _normalize_(self) -> NDArray[np.float64]:
+    def _normalize_(self) -> NDArray[float64]:
         """Return the normalized heatmap data.
 
         Normalization scales intensity values between 0 and 1.
@@ -198,11 +198,11 @@ class GradientHeatmap(GradientHeatmapT):
         numpy.ndarray
             The normalized heatmap data.
         """
-        max_value: np.float64 = self.data.max(initial=None)
+        max_value: float64 = self.data.max(initial=None)
         return self.data / max_value if max_value > 0 else self.data
 
     @staticmethod
-    def _intensity_to_color_(red64: np.float64, blue64: np.float64) -> str:
+    def _intensity_to_color_(red64: float64, blue64: float64) -> str:
         """Convert intensity values into a hexadecimal color string.
 
         The function computes the green channel based on the absolute difference
@@ -221,14 +221,14 @@ class GradientHeatmap(GradientHeatmapT):
         str
             A hexadecimal color string in the format '#rrggbb'.
         """
-        delta: np.float64 = np.abs(red64 - blue64)
+        delta: float64 = np_abs(red64 - blue64)
         green: int = 175 + int(80 * delta) if (red64 or blue64) else 175
         red: int = 175 + int(80 * red64) if red64 else 175
         blue: int = 175 + int(80 * blue64) if blue64 else 175
         return f"#{red:02x}{green:02x}{blue:02x}"
 
     @property
-    def colors(self) -> NDArray[np.str_]:
+    def colors(self) -> NDArray[str_]:
         """Generate an array of color strings for each square.
 
         Each square's color is determined by converting its normalized red and blue
@@ -240,7 +240,7 @@ class GradientHeatmap(GradientHeatmapT):
         numpy.ndarray
             NumPy array of hexadecimal color codes.
         """
-        return np.array([self._intensity_to_color_(s[1], s[0]) for s in self._normalize_], dtype=np.str_)
+        return array([self._intensity_to_color_(s[1], s[0]) for s in self._normalize_], dtype=str_)
 
     def _repr_html_(self) -> str:
         """Render the heatmap's data as an HTML table with colorized rows representing move intensities.
@@ -275,7 +275,7 @@ class GradientHeatmap(GradientHeatmapT):
         # >>> heatmap = GradientHeatmap()  # Assuming this is an initialized heatmap object
         # >>> heatmap._repr_html_()  # This will generate an HTML table representation of the heatmap.
         """
-        colors: NDArray[np.str_] = self.colors  # Get final color values
+        colors: NDArray[str_] = self.colors  # Get final color values
         sep: str = "</td><td>"
 
         html: str = f"<h4>{repr(self)}</h4>"
@@ -307,7 +307,7 @@ class ChessMoveHeatmapT(GradientHeatmap):
         A NumPy array of shape (64,) where each element is a dictionary mapping
         chess `Piece` objects to a `float` count.
     """
-    _piece_counts: NDArray[Dict[Piece, np.float64]]
+    _piece_counts: NDArray[Dict[Piece, float64]]
 
     def __init__(self, **kwargs) -> None:
         """Initialize the ChessMoveHeatmapT.
@@ -316,13 +316,77 @@ class ChessMoveHeatmapT(GradientHeatmap):
         `piece_counts` array is created with zero values for all pieces on each square.
         """
         super().__init__(**kwargs)
-        self._piece_counts = np.array(
-            [{k: np.float64(0) for k in PIECES} for _ in range(64)],
+        piece_key: Piece
+        self._piece_counts = array(
+            [{piece_key: float64(0) for piece_key in PIECES} for _ in range(64)],
+            dtype=dict
+        )
+
+    def __add__(
+            self,
+            other: Union[
+                "ChessMoveHeatmapT",
+                Tuple[NDArray[float64], NDArray[Dict[Piece, float64]]],
+                Dict[str, Union[NDArray[float64], NDArray[Dict[Piece, float64]]]]
+            ]
+    ) -> "ChessMoveHeatmap":
+        """Perform element-wise addition with another heatmap or compatible array."""
+        try:
+
+            return ChessMoveHeatmap(
+                data=self.data + other.data,
+                piece_counts=self.add_piece_counts(other.piece_counts)
+            )
+        except AttributeError as attribute_error:
+            try:
+                return self + ChessMoveHeatmap(
+                    data=other["data"],
+                    piece_counts=other["piece_counts"]
+                )
+            except TypeError as type_error:
+                try:
+                    return self + ChessMoveHeatmap(
+                        data=other[0],
+                        piece_counts=other[1]
+                    )
+                except IndexError as index_error:
+                    raise ValueError(f"Other {type(other)} must be of len 2 got: {len(other)}") from index_error
+                except Exception as error1:
+                    raise error1 from type_error
+            except KeyError as key_error:
+                if 'data' not in other or 0 not in other:
+                    raise ValueError(f"Other {type(other)} does not have 'data':{other}") from key_error
+                raise ValueError(f"Other {type(other)} does not have 'piece_counts':{other}") from key_error
+            except Exception as error0:
+                raise error0 from attribute_error
+
+    def add_piece_counts(self, other_piece_counts: NDArray[Dict[Piece, float64]]) -> NDArray[Dict[Piece, float64]]:
+        """
+
+        Parameters
+        ----------
+        other_piece_counts : NDArray[Dict[Piece, float64]]
+
+        Returns
+        -------
+        NDArray[Dict[Piece, float64]]
+
+        """
+        self_pcount: Dict[Piece, float64]
+        other_pcount: Dict[Piece, float64]
+        sp_v: float64
+        sp_k: Piece
+        return array(
+            [
+                {
+                    sp_k: sp_v + other_pcount.get(sp_k, float64(0.0)) for sp_k, sp_v in self_pcount.items()
+                } for self_pcount, other_pcount in zip(self.piece_counts, other_piece_counts)
+            ],
             dtype=dict
         )
 
     @property
-    def piece_counts(self) -> NDArray[Dict[Piece, np.float64]]:
+    def piece_counts(self) -> NDArray[Dict[Piece, float64]]:
         """
         Get the piece count array.
 
@@ -335,7 +399,7 @@ class ChessMoveHeatmapT(GradientHeatmap):
         return self._piece_counts
 
     @piece_counts.setter
-    def piece_counts(self, value: NDArray[Dict[Piece, np.float64]]) -> None:
+    def piece_counts(self, value: NDArray[Dict[Piece, float64]]) -> None:
         """
         Set the piece count array.
 
@@ -359,7 +423,7 @@ class ChessMoveHeatmapT(GradientHeatmap):
             raise ValueError(f"Other {type(value)} must have shape (64,), got {value.shape}.")
         except AttributeError:
             try:
-                self.piece_counts = np.asarray(value, dtype=dict)
+                self.piece_counts = asarray(value, dtype=dict)
                 return
             except Exception as exception:
                 raise TypeError(f"Other must be a shape (64,) ArrayLike, got {type(value)}") from exception
@@ -375,7 +439,7 @@ class ChessMoveHeatmap(ChessMoveHeatmapT):
 
     def __init__(
             self,
-            piece_counts: Optional[NDArray[Dict[Piece, np.float64]]] = None,
+            piece_counts: Optional[NDArray[Dict[Piece, float64]]] = None,
             **kwargs
     ) -> None:
         """Initialize the ChessMoveHeatmap instance.
@@ -398,7 +462,7 @@ class ChessMoveHeatmap(ChessMoveHeatmapT):
         data: Optional[object] = kwargs.get("data")
         if piece_counts is None and data is None:
             return
-        if isinstance(piece_counts, np.ndarray) and piece_counts.dtype == object:
+        if isinstance(piece_counts, ndarray) and piece_counts.dtype == object:
             self.piece_counts = deepcopy(piece_counts)
         elif isinstance(
                 data, (ChessMoveHeatmapT, ChessMoveHeatmap)
