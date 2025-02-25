@@ -184,6 +184,132 @@ def calculate_chess_move_heatmap(
     return heatmap
 
 
+def calculate_chess_move_heatmap_with_better_discount(
+        board: Board, depth: int = 1,
+        depth_map: Optional[Tuple[List[Union[int, heatmaps.ChessMoveHeatmap]]]] = None) -> heatmaps.ChessMoveHeatmap:
+    """
+    Recursively computes a chess move heatmap for a given board state while applying a discount
+    to moves based on the branching factor at each level of recursion. This discounting approach
+    reduces the weight of moves that occur in positions with many legal alternatives, thereby
+    "better discounting" moves from deeper, more complex branches.
+
+    The function explores all legal moves from the current board state up to the specified depth.
+    For each move, it updates a depth-specific accumulator (the ``depth_map``) that stores:
+        - A count of the total number of legal moves (branches) encountered at that depth.
+        - A ``ChessMoveHeatmap`` that aggregates move data, including:
+            - Incrementing the value at the target square (indexed by the opponent’s color).
+            - Tracking piece counts for moves arriving at each square.
+
+    After the recursive exploration is complete (i.e., at the exit depth), the function aggregates the
+    heatmaps from each depth level. Although the code uses a reversed iteration over ``depth_map``,
+    due to the way recursion updates the accumulator (using ``depth_map[depth]``), the reversed order
+    actually corresponds to processing from the shallowest (initial board state) to the deepest level.
+    At each level, the accumulated values are divided by a discount factor determined by the number of
+    branches at that level, ensuring that moves from positions with more alternatives contribute proportionally
+    less to the final heatmap.
+
+    Parameters
+    ----------
+    board : chess.Board
+        The current chess board state from which legal moves are generated.
+    depth : int, optional
+        The depth (or ply) to which moves are recursively explored. A depth of 1 considers only the
+        immediate legal moves, while higher depths recursively analyze subsequent moves. Default is 1.
+    depth_map : Optional[Tuple[List[Union[int, heatmaps.ChessMoveHeatmap]]]], optional
+        An internal accumulator used during recursion. Each element in the tuple corresponds to a
+        depth level and is a list containing:
+            - An integer count of legal move branches encountered at that depth.
+            - A ``ChessMoveHeatmap`` instance that aggregates move and piece count data for that depth.
+        If not provided, it is initialized automatically. External callers should typically omit this parameter.
+
+    Returns
+    -------
+    heatmaps.ChessMoveHeatmap
+        A composite chess move heatmap where each square’s value reflects the discounted cumulative
+        influence of moves leading to that square. The heatmap also maintains aggregated piece movement
+        counts.
+
+    Notes
+    -----
+    - ``depth_map`` is not supplied, it is initialized as a tuple of pairs for each depth level (from 0 to ``depth``),
+        with each pair consisting of a branch count (initialized to 0) and a new ``ChessMoveHeatmap``.
+    - During recursion, for each legal move:
+        * The total branch count for the current depth is incremented by the number of legal moves.
+        * The target square’s value in the current depth’s heatmap is increased by 1.0 for the opponent’s color.
+        * The piece count for the target square is incremented based on the piece moving from the source square.
+    - Once the deepest level is reached (i.e., in the original call where ``depth == len(depth_map) - 1``),
+        the function aggregates the heatmaps from all depth levels. Although the iteration uses ``depth_map[::-1]``,
+        this reversed order corresponds to: processing from the shallowest level (the original board state)
+        to the deepest level, due to how updates are applied using ``depth_map[depth]`` during recursion.
+    - At each aggregated level, the heatmap values (both move counts and piece counts) are divided by a discount factor,
+        which is updated based on the number of branches at that level. This mechanism weights moves from positions with
+        fewer alternatives more heavily.
+
+    Examples
+    --------
+    >>> import chess
+    >>> from chmutils import calculate_chess_move_heatmap_with_better_discount
+    >>> brd = chess.Board()
+    >>> # Calculate the heatmap for the current board state by exploring two moves ahead.
+    >>> cmheatmap = calculate_chess_move_heatmap_with_better_discount(brd, depth=1)
+    >>> print([f"{sqr}:{cnt[0]},{cnt[1]}" for sqr, cnt in enumerate(cmheatmap) if cnt[0] > 1 or cnt[1] > 1])
+    ['16:2.0,0.0', '18:2.0,0.0', '21:2.0,0.0', '23:2.0,0.0', '40:0.0,2.0', '42:0.0,2.0', '45:0.0,2.0', '47:0.0,2.0']
+    """
+    if depth_map is None:
+        # If depth=1, the map will look like:
+        # ([0, <heatmaps.ChessMoveHeatmap object at 0x99A7630>], [0, <heatmaps.ChessMoveHeatmap object at 0x74465C0>])
+        # Isolate counts at each depth. The int at index 0 needs to keep track of the number of branches at each depth
+        depth_map = tuple([0, heatmaps.ChessMoveHeatmap()] for _ in range(depth + 1))
+
+    moves: Tuple[Move] = tuple(board.legal_moves)
+    num_moves: int = len(moves)
+    # Each sub-depth's total branches will be counted here
+    depth_map[depth][0] += num_moves
+
+    color_index: int = int(not board.turn)
+    move: Move
+
+    for move in moves:
+        target_square: int = move.to_square
+        depth_map[depth][1][target_square][color_index] += np.float64(1.0)
+        from_square: int = move.from_square
+        piece: Piece = board.piece_at(from_square)
+        depth_map[depth][1].piece_counts[target_square][piece] += np.float64(1.0)
+
+        if depth > 0:
+            new_board: Board = board.copy()
+            new_board.push(move)
+            depth_map = calculate_chess_move_heatmap_with_better_discount(
+                new_board,
+                depth - 1,
+                depth_map
+            )
+    # exit depth will always equal len(depth_map) - 1
+    if depth == len(depth_map) - 1:
+        # return object
+        heatmap: heatmaps.ChessMoveHeatmap = heatmaps.ChessMoveHeatmap()
+        # discount is the total number parrallel branches at each depth
+        discount: int = 1
+        branches: int
+        heatmap_at_depth: heatmaps.ChessMoveHeatmap
+        # Need to loop through depth_map in backwards order to update discount correctly
+        for branches, heatmap_at_depth in depth_map[::-1]:
+            square: int
+            for square in chess.SQUARES:
+                heatmap_at_depth[square] /= discount
+                p_counts: Dict[Piece, np.float64] = heatmap_at_depth.piece_counts[square]
+                for piece in p_counts:
+                    p_counts[piece] /= discount
+            # TODO: Make a div method for ChessMoveHeatmap to replace the above with the below `/ prev_branches`
+            heatmap += heatmap_at_depth  # / prev_branches
+            # Update discount to apply to the next heatmap being added in the next loop
+            discount = branches
+        # Final return
+        return heatmap
+    # Recursive return
+    return depth_map
+
+
 # Assume PIECE_KEYS is defined (e.g., from chess.UNICODE_PIECE_SYMBOLS.values())
 PIECE_KEYS: Tuple[Piece] = heatmaps.PIECES
 
@@ -413,14 +539,31 @@ def get_or_compute_heatmap(board: chess.Board, depth: int) -> heatmaps.ChessMove
     return cmhm
 
 
-# Example usage:
-if __name__ == "__main__":
-    b = chess.Board()
-    cmhm11 = get_or_compute_heatmap(b, 1)
-    print(cmhm11.data[16])
-    cmhm12 = get_or_compute_heatmap(b, 1)
-    print(cmhm12.data[16])
-    cmhm21 = get_or_compute_heatmap(b, 3)
-    print(cmhm21.data[16])
-    cmhm22 = get_or_compute_heatmap(b, 3)
-    print(cmhm22.data[16])
+def get_or_compute_heatmap_with_better_discounts(board: chess.Board, depth: int) -> heatmaps.ChessMoveHeatmap:
+    """Retrieve a ChessMoveHeatmap from the cache, or compute and cache it if not available.
+
+    This function first attempts to retrieve a cached heatmap based on the board's FEN and the
+    specified recursion depth. If the cached heatmap is not found, it computes the heatmap,
+    stores it in the cache, and returns the newly computed object.
+
+    Parameters
+    ----------
+    board : chess.Board
+        The chess board position for which the heatmap is computed.
+    depth : int
+        The recursion depth used for calculating the heatmap.
+
+    Returns
+    -------
+    heatmaps.ChessMoveHeatmap
+        The ChessMoveHeatmap corresponding to the board and depth.
+    """
+    cache: HeatmapCache = HeatmapCache(board, depth)
+    cached: Optional[heatmaps.ChessMoveHeatmap] = cache.get_cached_heatmap()
+    if cached is not None:
+        return cached
+
+    # Not cached; compute the heatmap.
+    cmhm: heatmaps.ChessMoveHeatmap = calculate_chess_move_heatmap_with_better_discount(board, depth=depth)
+    cache.store_heatmap(cmhm)
+    return cmhm
