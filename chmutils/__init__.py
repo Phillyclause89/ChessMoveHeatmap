@@ -255,12 +255,12 @@ def calculate_chess_move_heatmap_with_better_discount(
     >>> import chess
     >>> from chmutils import calculate_chess_move_heatmap_with_better_discount
     >>> brd = chess.Board()
-    >>> depth1_cmhm = calculate_chess_move_heatmap(brd, depth=1)
+    >>> depth1_cmhm = calculate_chess_move_heatmap_with_better_discount(brd, depth=1)
     >>> print(", ".join([f"{p.unicode_symbol()}: {cnt}" for p, cnt in depth1_cmhm.piece_counts[16].items() if cnt]))
     ♙: 1.0, ♘: 1.0
-    >>> depth2_cmhm = calculate_chess_move_heatmap(brd, depth=3)
+    >>> depth2_cmhm = calculate_chess_move_heatmap_with_better_discount(brd, depth=3)
     >>> print(", ".join([f"{p.unicode_symbol()}: {cnt}" for p, cnt in depth2_cmhm.piece_counts[16].items() if cnt]))
-    ♙: 1.849999999999993, ♘: 1.849999999999984, ♗: 0.10000000000000005, ♖: 0.05000000000000001, ♝: 0.09067002690459958
+    ♙: 1.85, ♘: 1.85, ♗: 0.1, ♖: 0.05, ♝: 0.09110312289373175
     """
     if depth_map is None:
         # If depth=1, the map will look like:
