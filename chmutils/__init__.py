@@ -69,16 +69,18 @@ def calculate_heatmap(
 
     Examples
     --------
-    # >>> import chess
-    # >>> from heatmaps import GradientHeatmap
-    # >>> from chmutils import calculate_heatmap
-    # >>> brd = chess.Board()
-    # >>> # Calculate a heatmap with a recursion depth of 1.
-    # >>> depth1_hmap = calculate_heatmap(brd, depth=1)
-    # >>> print(depth1_hmap.colors)
-    # >>> # Calculate a heatmap with a recursion depth of 2.
-    # >>> depth2_hmap = calculate_heatmap(brd, depth=2)
-    # >>> print(depth2_hmap.colors)
+    >>> import chess
+    >>> from heatmaps import GradientHeatmap
+    >>> from chmutils import calculate_heatmap
+    >>> brd = chess.Board()
+    >>> # Calculate a heatmap with a recursion depth of 1.
+    >>> depth1_hmap = calculate_heatmap(brd, depth=1)
+    >>> print(depth1_hmap.colors[16])
+    #affefe
+    >>> # Calculate a heatmap with a recursion depth of 2.
+    >>> depth2_hmap = calculate_heatmap(brd, depth=2)
+    >>> print(depth2_hmap.colors[16])
+    #afffff
     """
     if heatmap is None:
         heatmap = heatmaps.GradientHeatmap()
@@ -149,14 +151,17 @@ def calculate_chess_move_heatmap(
 
     Examples
     --------
-    # >>> import chess
-    # >>> from heatmaps import ChessMoveHeatmap
-    # >>> from chmutils import calculate_chess_move_heatmap
-    # >>> brd = chess.Board()
-    # >>> depth1_cmhm = calculate_chess_move_heatmap(brd, depth=1)
-    # >>> print(depth1_cmhm.colors)
-    # >>> depth2_cmhm = calculate_chess_move_heatmap(brd, depth=2)
-    # >>> print(depth2_cmhm.colors)
+    >>> import chess
+    >>> from heatmaps import ChessMoveHeatmap
+    >>> from chmutils import calculate_chess_move_heatmap
+    >>> brd = chess.Board()
+    >>> depth1_cmhm = calculate_chess_move_heatmap(brd, depth=1)
+    >>> print(", ".join([f"{p.unicode_symbol()}: {cnt}" for p, cnt in depth1_cmhm.piece_counts[16].items() if cnt]))
+    ♙: 1.0, ♘: 1.0
+    >>> depth2_cmhm = calculate_chess_move_heatmap(brd, depth=3)
+    >>> print(", ".join([f"{p.unicode_symbol()}: {cnt}" for p, cnt in depth2_cmhm.piece_counts[16].items() if cnt]))
+    ♙: 1.849999999999993, ♘: 1.849999999999984, ♗: 0.10000000000000005, ♖: 0.05000000000000001, ♝: 0.09067002690459958
+
     """
     if heatmap is None:
         heatmap = heatmaps.ChessMoveHeatmap()
@@ -203,7 +208,7 @@ def calculate_chess_move_heatmap_with_better_discount(
     After the recursive exploration is complete (i.e., at the exit depth), the function aggregates the
     heatmaps from each depth level. Although the code uses a reversed iteration over ``depth_map``,
     due to the way recursion updates the accumulator (using ``depth_map[depth]``), the reversed order
-    actually corresponds to processing from the shallowest (initial board state) to the deepest level.
+    actually corresponds to: processing from the shallowest (initial board state) to the deepest level.
     At each level, the accumulated values are divided by a discount factor determined by the number of
     branches at that level, ensuring that moves from positions with more alternatives contribute proportionally
     less to the final heatmap.
@@ -250,10 +255,12 @@ def calculate_chess_move_heatmap_with_better_discount(
     >>> import chess
     >>> from chmutils import calculate_chess_move_heatmap_with_better_discount
     >>> brd = chess.Board()
-    >>> # Calculate the heatmap for the current board state by exploring two moves ahead.
-    >>> cmheatmap = calculate_chess_move_heatmap_with_better_discount(brd, depth=1)
-    >>> print([f"{sqr}:{cnt[0]},{cnt[1]}" for sqr, cnt in enumerate(cmheatmap) if cnt[0] > 1 or cnt[1] > 1])
-    ['16:2.0,0.0', '18:2.0,0.0', '21:2.0,0.0', '23:2.0,0.0', '40:0.0,2.0', '42:0.0,2.0', '45:0.0,2.0', '47:0.0,2.0']
+    >>> depth1_cmhm = calculate_chess_move_heatmap(brd, depth=1)
+    >>> print(", ".join([f"{p.unicode_symbol()}: {cnt}" for p, cnt in depth1_cmhm.piece_counts[16].items() if cnt]))
+    ♙: 1.0, ♘: 1.0
+    >>> depth2_cmhm = calculate_chess_move_heatmap(brd, depth=3)
+    >>> print(", ".join([f"{p.unicode_symbol()}: {cnt}" for p, cnt in depth2_cmhm.piece_counts[16].items() if cnt]))
+    ♙: 1.849999999999993, ♘: 1.849999999999984, ♗: 0.10000000000000005, ♖: 0.05000000000000001, ♝: 0.09067002690459958
     """
     if depth_map is None:
         # If depth=1, the map will look like:
