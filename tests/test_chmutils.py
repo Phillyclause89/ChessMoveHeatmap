@@ -184,7 +184,7 @@ class TestHeatmapCacheAndFunctions(unittest.TestCase):
 
         self.assertEqual(cached.piece_counts[0][self.pawn], cmhm.piece_counts[0][self.pawn])
 
-    def test_get_or_compute_heatmap(self):
+    def test_get_or_compute_heatmap(self) -> None:
         """Test that get_or_compute_heatmap computes the heatmap on the first call and then retrieves it from cache."""
 
         # First call should compute and store the heatmap.

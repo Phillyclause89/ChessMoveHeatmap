@@ -1,5 +1,6 @@
 """Heatmaps"""
-from typing import Dict, Optional, Tuple, Union
+from numbers import Real
+from typing import Any, Dict, Optional, Tuple, Union
 from copy import deepcopy
 from chess import PIECE_TYPES, Piece, COLORS
 from numpy.typing import NDArray, ArrayLike
@@ -321,6 +322,40 @@ class ChessMoveHeatmapT(GradientHeatmap):
             [{piece_key: float64(0) for piece_key in PIECES} for _ in range(64)],
             dtype=dict
         )
+
+    def __truediv__(self, divisor: Real) -> "ChessMoveHeatmap":
+        """
+        Returns a new ChessMoveHeatmap where each value is divided by the given divisor.
+
+        Parameters
+        ----------
+        divisor : numbers.Real
+            A numeric value (e.g. int, float, or a NumPy numeric type) by which to divide
+            the heatmap's data and piece counts.
+
+        Returns
+        -------
+        ChessMoveHeatmap
+            A new heatmap instance with all move intensity and piece count values scaled by 1/divisor.
+        """
+        piece_count: Dict[Piece, float64]
+        piece: Piece
+        count: float64
+        try:
+            return ChessMoveHeatmap(
+                data=self.data / divisor,
+                piece_counts=array(
+                    [
+                        {
+                            piece: count / divisor for piece, count in piece_count.items()
+                        } for piece_count in self.piece_counts
+                    ],
+                    dtype=dict
+                )
+            )
+        # TODO: Make error handling more inline with rest of class.
+        except Exception as error:
+            raise ArithmeticError(error) from error
 
     def __add__(
             self,
