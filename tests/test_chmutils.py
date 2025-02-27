@@ -57,6 +57,7 @@ class TestCalculateHeatmap(unittest.TestCase):
     }
 
     def setUp(self):
+        """Set up test board"""
         self.board = chess.Board()
 
     def test_calculate_heatmap_depth_0(self):
@@ -94,6 +95,7 @@ class TestCalculateChessMoveHeatmap(unittest.TestCase):
     expected_values: Dict[int, Tuple[List[float], Dict[Piece, float]]] = TestCalculateHeatmap.expected_values
 
     def setUp(self):
+        """Set up test board"""
         self.board = chess.Board()
 
     def test_calculate_chess_move_heatmap_depth_0(self):
@@ -138,12 +140,14 @@ class TestHeatmapCacheAndFunctions(unittest.TestCase):
     board: Board
 
     def setUp(self):
+        """Set up test board, piece and clear any leftover test cache"""
         self.board = chess.Board()
         self.pawn = chess.Piece.from_symbol('P')
         clear_test_cache()
         self.assertFalse(os.path.exists(CACHE_DIR))
 
     def tearDown(self) -> None:
+        """clear any leftover test cache"""
         clear_test_cache()
         self.assertFalse(os.path.exists(CACHE_DIR))
 
@@ -218,6 +222,7 @@ class TestCalculateChessMoveHeatmapWithBetterDiscount(unittest.TestCase):
     expected_values: Dict[int, Tuple[List[float], Dict[Piece, float]]] = TestCalculateHeatmap.expected_values
 
     def setUp(self):
+        """Set up test board"""
         self.board = chess.Board()
 
     def test_calculate_chess_move_heatmap_depth_0(self):

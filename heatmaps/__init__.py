@@ -4,9 +4,11 @@ from typing import Any, Dict, Optional, Tuple, Union
 from copy import deepcopy
 from chess import PIECE_TYPES, Piece, COLORS
 from numpy.typing import NDArray, ArrayLike
-from numpy import asarray, abs as np_abs, array, str_, float64, zeros, ndarray
+from numpy import asarray, abs as np_abs, array, str_, float64, zeros, ndarray, seterr
 
 PIECES: Tuple[Piece, ...] = tuple(Piece(p, c) for c in COLORS for p in PIECE_TYPES)
+
+seterr(invalid="raise")
 
 
 class GradientHeatmapT:
@@ -355,7 +357,7 @@ class ChessMoveHeatmapT(GradientHeatmap):
             )
         # TODO: Make error handling more inline with rest of class.
         except Exception as error:
-            raise ArithmeticError(error) from error
+            raise ArithmeticError(f"{type(divisor)}{divisor}") from error
 
     def __add__(
             self,

@@ -13,7 +13,7 @@ from chess import square_name, pgn, SQUARES, Board, Piece, Move
 from chess.pgn import GameBuilder, Game, Headers
 
 from tooltips import CanvasTooltip
-from chmutils import get_or_compute_heatmap_with_better_discounts
+from chmutils import get_or_compute_heatmap
 from heatmaps import ChessMoveHeatmap
 
 DARK_SQUARE_COLOR_PROMPT: str = "Pick Dark Square Color"
@@ -236,7 +236,7 @@ class ChessHeatMapApp(Tk):
                     j: int
                     for j in range(i):
                         new_board.push(self.moves[j])
-                future = self.executor.submit(get_or_compute_heatmap_with_better_discounts, new_board, depth=self.depth)
+                future = self.executor.submit(get_or_compute_heatmap, new_board, depth=self.depth)
                 self.heatmap_futures[i - 1] = future
             self.after(100, self.check_heatmap_futures)
             self.update_board()
@@ -368,9 +368,7 @@ class ChessHeatMapApp(Tk):
                 j: int
                 for j in range(i):
                     new_board.push(self.moves[j])
-            future: Future = self.executor.submit(
-                get_or_compute_heatmap_with_better_discounts, new_board, depth=self.depth
-            )
+            future: Future = self.executor.submit(get_or_compute_heatmap, new_board, depth=self.depth)
             self.heatmap_futures[i - 1] = future
         self.after(100, self.check_heatmap_futures)
 
@@ -378,9 +376,7 @@ class ChessHeatMapApp(Tk):
         """Ensures a default heatmap is calculated/retrieved if none exists in app."""
         if not self.heatmap_futures and not self.heatmaps:
             new_board: Board = self.board.copy()
-            future = self.executor.submit(
-                get_or_compute_heatmap_with_better_discounts, new_board, depth=self.depth
-            )
+            future = self.executor.submit(get_or_compute_heatmap, new_board, depth=self.depth)
             self.heatmap_futures[self.current_move_index] = future
             self.after(100, self.check_heatmap_futures)
 

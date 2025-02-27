@@ -2,6 +2,7 @@
 import os
 import sqlite3
 from sqlite3 import Connection, Cursor
+from os import path
 from typing import Any, Dict, List, Optional, Tuple, Union
 import chess
 from chess import Move, Board, Piece
@@ -254,7 +255,7 @@ def calculate_chess_move_heatmap_with_better_discount(board: Board, depth: int =
     for branches, heatmap_at_depth in depth_map[::-1]:
         heatmap += heatmap_at_depth / discount
         # Update the discount factor based on the branch count at this level.
-        discount = branches
+        discount = branches if branches > 0 else discount
     return heatmap
 
 
@@ -417,7 +418,7 @@ class HeatmapCache:
     depth: int
     board: chess.Board
     db_path: str
-    cache_dir: str = CACHE_DIR
+    cache_dir: str = path.join(CACHE_DIR, "Faster")
 
     def __init__(self, board: chess.Board, depth: int) -> None:
         """Initialize the HeatmapCache.
@@ -555,8 +556,13 @@ def get_or_compute_heatmap(board: chess.Board, depth: int) -> heatmaps.ChessMove
     return cmhm
 
 
+class BetterHeatmapCache(HeatmapCache):
+    """Overides cache_dir"""
+    cache_dir: str = path.join(CACHE_DIR, "Better")
+
+
 def get_or_compute_heatmap_with_better_discounts(board: chess.Board, depth: int) -> heatmaps.ChessMoveHeatmap:
-    """Retrieve a ChessMoveHeatmap from the cache, or compute and cache it if not available.
+    """Retrieve a ChessMoveHeatmap from the Better cache, or compute and cache Better if not available.
 
     This function first attempts to retrieve a cached heatmap based on the board's FEN and the
     specified recursion depth. If the cached heatmap is not found, it computes the heatmap,
@@ -574,7 +580,7 @@ def get_or_compute_heatmap_with_better_discounts(board: chess.Board, depth: int)
     heatmaps.ChessMoveHeatmap
         The ChessMoveHeatmap corresponding to the board and depth.
     """
-    cache: HeatmapCache = HeatmapCache(board, depth)
+    cache: BetterHeatmapCache = BetterHeatmapCache(board, depth)
     cached: Optional[heatmaps.ChessMoveHeatmap] = cache.get_cached_heatmap()
     if cached is not None:
         return cached
