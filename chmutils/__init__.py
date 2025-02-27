@@ -5,7 +5,7 @@ from sqlite3 import Connection, Cursor
 from typing import Any, Dict, List, Optional, Tuple, Union
 import chess
 from chess import Move, Board, Piece
-from numpy import float_
+from numpy import float64, float_
 import numpy as np
 import heatmaps
 from heatmaps import ChessMoveHeatmap
@@ -386,11 +386,11 @@ def inflate_heatmap(data: Dict[str, float]) -> heatmaps.ChessMoveHeatmap:
     heatmap: heatmaps.ChessMoveHeatmap = heatmaps.ChessMoveHeatmap()
     square: int
     for square in range(64):
-        heatmap.data[square][0] = data[f"sq{square}_white"]
-        heatmap.data[square][1] = data[f"sq{square}_black"]
+        heatmap.data[square][0] = float64(data[f"sq{square}_white"])
+        heatmap.data[square][1] = float64(data[f"sq{square}_black"])
         key: Piece
         for key in PIECE_KEYS:
-            heatmap.piece_counts[square][key] = data[f"sq{square}_piece_{key.unicode_symbol()}"]
+            heatmap.piece_counts[square][key] = float64(data[f"sq{square}_piece_{key.unicode_symbol()}"])
     return heatmap
 
 
@@ -509,7 +509,7 @@ class HeatmapCache:
             The ChessMoveHeatmap object to be stored.
         """
         key: str = self._cache_key
-        flat: Dict[str, float_] = flatten_heatmap(cmhm)
+        flat: Dict[str, float64] = flatten_heatmap(cmhm)
 
         # Prepare the column names and placeholders.
         # We'll assume the schema matches the flattened dict keys exactly.

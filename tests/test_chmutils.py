@@ -1,24 +1,27 @@
+"""Tests chmutils"""
+import unittest
 import os
 import shutil
 from typing import Dict, List, Optional, Tuple
 
 import chess
 from chess import Board, Piece
-from numpy import float_
+from numpy import float64, float_
+import numpy as np
 
 import heatmaps
 import chmutils
-import unittest
-import numpy as np
 
 from chmutils import HeatmapCache
 from heatmaps import ChessMoveHeatmap, GradientHeatmap
+from tests.utils import validate_data_types
 
 CACHE_DIR = "SQLite3TestCaches"
 chmutils.HeatmapCache.cache_dir = CACHE_DIR
 
 
 class TestCalculateHeatmap(unittest.TestCase):
+    """Tests Calculate Heatmap Function"""
     board: Board
     expected_values: Dict[int, Tuple[List[float], Dict[Piece, float]]] = {
         16: (
@@ -66,27 +69,27 @@ class TestCalculateHeatmap(unittest.TestCase):
         expected: Tuple[List[float], Dict[Piece, float]]
         for square, expected in self.expected_values.items():
             np.testing.assert_array_equal(heatmap[square], expected[0])
+        validate_data_types([heatmap], self)
 
     def test_calculate_heatmap_depth_1(self):
         """Test calculate_heatmap at depth 1 for performance and type."""
         heatmap: GradientHeatmap = chmutils.calculate_heatmap(self.board)
         # Ensure that the result is a GradientHeatmap object
-        self.assertIsInstance(heatmap, heatmaps.GradientHeatmap)
+        validate_data_types([heatmap], self)
 
     def test_calculate_heatmap_depth_2(self):
         """Test calculate_heatmap at depth 2 for performance and type."""
         heatmap: GradientHeatmap = chmutils.calculate_heatmap(self.board, depth=2)
-
-        self.assertIsInstance(heatmap, heatmaps.GradientHeatmap)
+        validate_data_types([heatmap], self)
 
     def test_calculate_heatmap_depth_3(self):
         """Test calculate_heatmap at depth 3 for performance and type."""
         heatmap: GradientHeatmap = chmutils.calculate_heatmap(self.board, depth=3)
-
-        self.assertIsInstance(heatmap, heatmaps.GradientHeatmap)
+        validate_data_types([heatmap], self)
 
 
 class TestCalculateChessMoveHeatmap(unittest.TestCase):
+    """Tests Calculate Chess Move Heatmap Function"""
     board: Board
     expected_values: Dict[int, Tuple[List[float], Dict[Piece, float]]] = TestCalculateHeatmap.expected_values
 
@@ -103,22 +106,24 @@ class TestCalculateChessMoveHeatmap(unittest.TestCase):
         for square, (expected_heatmap, expected_pieces) in self.expected_values.items():
             np.testing.assert_array_equal(heatmap[square], expected_heatmap)
             self.assertEqual(heatmap.piece_counts[square], expected_pieces)
+            # pylint: disable=no-member
             self.assertEqual(heatmap[square][0], sum(expected_pieces.values()))
+        validate_data_types([heatmap], self, True)
 
     def test_calculate_chess_move_heatmap_depth_1(self):
         """Test calculate_chess_move_heatmap at depth 1 for performance and type."""
         heatmap: ChessMoveHeatmap = chmutils.calculate_chess_move_heatmap(self.board)
-        self.assertIsInstance(heatmap, heatmaps.ChessMoveHeatmap)
+        validate_data_types([heatmap], self, True)
 
     def test_calculate_chess_move_heatmap_depth_2(self):
         """Test calculate_chess_move_heatmap at depth 2 for performance and type."""
         heatmap: ChessMoveHeatmap = chmutils.calculate_chess_move_heatmap(self.board, depth=2)
-        self.assertIsInstance(heatmap, heatmaps.ChessMoveHeatmap)
+        validate_data_types([heatmap], self, True)
 
     def test_calculate_chess_move_heatmap_depth_3(self):
         """Test calculate_chess_move_heatmap at depth 3 for performance and type."""
         heatmap: ChessMoveHeatmap = chmutils.calculate_chess_move_heatmap(self.board, depth=3)
-        self.assertIsInstance(heatmap, heatmaps.ChessMoveHeatmap)
+        validate_data_types([heatmap], self, True)
 
 
 def clear_test_cache(cache_dir: str = CACHE_DIR) -> None:
@@ -128,6 +133,7 @@ def clear_test_cache(cache_dir: str = CACHE_DIR) -> None:
 
 
 class TestHeatmapCacheAndFunctions(unittest.TestCase):
+    """Test Heatmap Cache And related Functions"""
     pawn: Piece
     board: Board
 
@@ -145,7 +151,7 @@ class TestHeatmapCacheAndFunctions(unittest.TestCase):
         """Verify that a ChessMoveHeatmap can be flattened and then re-inflated correctly."""
         # Create a ChessMoveHeatmap and modify some values at square 0.
         cmhm: ChessMoveHeatmap = heatmaps.ChessMoveHeatmap()
-        cmhm.data[0][0], cmhm.data[0][1], cmhm.piece_counts[0][self.pawn] = 1.0, 2.0, 3.0
+        cmhm.data[0][0], cmhm.data[0][1], cmhm.piece_counts[0][self.pawn] = float64(1.0), float64(2.0), float64(3.0)
 
         # Flatten the heatmap.
         flat: Dict[str, float_] = chmutils.flatten_heatmap(cmhm)
@@ -155,8 +161,9 @@ class TestHeatmapCacheAndFunctions(unittest.TestCase):
 
         # Inflate the flat dict back into a ChessMoveHeatmap.
         inflated: ChessMoveHeatmap = chmutils.inflate_heatmap(flat)
-        np.testing.assert_array_equal(inflated.data[0], np.array([1.0, 2.0]))
+        np.testing.assert_array_equal(inflated.data[0], np.array([1.0, 2.0], dtype=float64))
         self.assertEqual(inflated.piece_counts[0][self.pawn], 3.0)
+        validate_data_types([cmhm, inflated], self, True)
 
     def test_heatmap_cache_store_and_retrieve(self):
         """Test that HeatmapCache stores a heatmap and later retrieves an equivalent object."""
@@ -164,6 +171,7 @@ class TestHeatmapCacheAndFunctions(unittest.TestCase):
         self.assertTrue(os.path.exists(CACHE_DIR))
         clear_test_cache()
         self.assertFalse(os.path.exists(CACHE_DIR))
+        # pylint: disable=protected-access
         cache._initialize_db()
         self.assertTrue(os.path.exists(CACHE_DIR))
 
@@ -183,6 +191,7 @@ class TestHeatmapCacheAndFunctions(unittest.TestCase):
         np.testing.assert_array_equal(cached.data, cmhm.data)
 
         self.assertEqual(cached.piece_counts[0][self.pawn], cmhm.piece_counts[0][self.pawn])
+        validate_data_types([cmhm, cached], self, True)
 
     def test_get_or_compute_heatmap(self) -> None:
         """Test that get_or_compute_heatmap computes the heatmap on the first call and then retrieves it from cache."""
@@ -200,6 +209,45 @@ class TestHeatmapCacheAndFunctions(unittest.TestCase):
 
         # Also verify that at least one piece count (e.g., for a pawn on square 0) is identical.
         self.assertEqual(cmhm1.piece_counts[0][self.pawn], cmhm2.piece_counts[0][self.pawn])
+        validate_data_types([cmhm1, cmhm2], self, True)
+
+
+class TestCalculateChessMoveHeatmapWithBetterDiscount(unittest.TestCase):
+    """Test Calculate ChessMoveHeatmap With Better Discount functions"""
+    board: Board
+    expected_values: Dict[int, Tuple[List[float], Dict[Piece, float]]] = TestCalculateHeatmap.expected_values
+
+    def setUp(self):
+        self.board = chess.Board()
+
+    def test_calculate_chess_move_heatmap_depth_0(self):
+        """Test calculate_chess_move_heatmap at depth 0 for accuracy of values."""
+        heatmap: ChessMoveHeatmap = chmutils.calculate_chess_move_heatmap_with_better_discount(self.board, depth=0)
+
+        square: int
+        expected_heatmap: List[float]
+        expected_pieces: Dict[Piece, float]
+        for square, (expected_heatmap, expected_pieces) in self.expected_values.items():
+            np.testing.assert_array_equal(heatmap[square], expected_heatmap)
+            self.assertEqual(heatmap.piece_counts[square], expected_pieces)
+            # pylint: disable=no-member
+            self.assertEqual(heatmap[square][0], sum(expected_pieces.values()))
+        validate_data_types([heatmap], self, True)
+
+    def test_calculate_chess_move_heatmap_depth_1(self):
+        """Test calculate_chess_move_heatmap at depth 1 for performance and type."""
+        heatmap: ChessMoveHeatmap = chmutils.calculate_chess_move_heatmap_with_better_discount(self.board)
+        validate_data_types([heatmap], self, True)
+
+    def test_calculate_chess_move_heatmap_depth_2(self):
+        """Test calculate_chess_move_heatmap at depth 2 for performance and type."""
+        heatmap: ChessMoveHeatmap = chmutils.calculate_chess_move_heatmap_with_better_discount(self.board, depth=2)
+        validate_data_types([heatmap], self, True)
+
+    def test_calculate_chess_move_heatmap_depth_3(self):
+        """Test calculate_chess_move_heatmap at depth 3 for performance and type."""
+        heatmap: ChessMoveHeatmap = chmutils.calculate_chess_move_heatmap_with_better_discount(self.board, depth=3)
+        validate_data_types([heatmap], self, True)
 
 
 if __name__ == '__main__':
