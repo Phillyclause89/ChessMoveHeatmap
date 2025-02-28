@@ -293,7 +293,6 @@ class ChessHeatMapApp(Tk):
         After updating, the board is re-rendered with the new font.
         """
         self.font = new_font
-        print(f"Font updated to: {self.font}")
         self.update_board()
 
     def change_board_colors(self) -> None:
@@ -685,7 +684,7 @@ class ChessHeatMapApp(Tk):
 
     def clear_tooltips(self) -> None:
         """Clears any existing tooltips."""
-        if len(self.tooltips) >> 0:
+        if len(self.tooltips) > 0:
             for t_tip in self.tooltips:
                 t_tip.onLeave()
             self.tooltips.clear()
