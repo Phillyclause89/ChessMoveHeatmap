@@ -230,20 +230,39 @@ class ChessHeatMapApp(Tk):
             self.clear_heatmaps()
             if self.game is not None:
                 board: Board = self.game.board()
-                moves: List = [None] + self.moves
+                moves: List[Optional[Move]] = [None] + self.moves
             else:
                 board = Board()
                 moves = [None]
+            i: int
+            move: Optional[Move]
             for i, move in enumerate(moves):  # Include initial board state
-                new_board: Board = board.copy()
-                if move:
-                    j: int
-                    for j in range(i):
-                        new_board.push(self.moves[j])
+                new_board = self.new_board_pushed_upto(board, i, move)
                 future = self.executor.submit(get_or_compute_heatmap_with_better_discounts, new_board, depth=self.depth)
                 self.heatmap_futures[i - 1] = future
             self.after(100, self.check_heatmap_futures)
             self.update_board()
+
+    def new_board_pushed_upto(self, board: Board, i: int, move: Move) -> Board:
+        """Gets copy of board pushed upto move
+
+        Parameters
+        ----------
+        board : chess.Board
+        i : int
+        move : chess.Move
+
+        Returns
+        -------
+        chess.Board
+
+        """
+        new_board: Board = board.copy()
+        if move:
+            j: int
+            for j in range(i):
+                new_board.push(self.moves[j])
+        return new_board
 
     def set_title(self) -> None:
         """Sets the App window title"""
@@ -366,11 +385,7 @@ class ChessHeatMapApp(Tk):
         move: Optional[Move]
         i: int
         for i, move in enumerate([None] + moves):  # Include initial board state
-            new_board: Board = self.board.copy()
-            if move:
-                j: int
-                for j in range(i):
-                    new_board.push(self.moves[j])
+            new_board = self.new_board_pushed_upto(self.board, i, move)
             future: Future = self.executor.submit(
                 get_or_compute_heatmap_with_better_discounts, new_board, depth=self.depth
             )
