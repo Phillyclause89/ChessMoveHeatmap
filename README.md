@@ -1,3 +1,7 @@
+[![Pytests](
+https://github.com/Phillyclause89/ChessMoveHeatmap/actions/workflows/python-app.yml/badge.svg?branch=main
+)](https://github.com/Phillyclause89/ChessMoveHeatmap/actions/workflows/python-app.yml)
+
 # **ChessMoveHeatmap**
 
 A **visual heatmap generator for chess PGN games**, built with Python, `tkinter`, and `chess`. This application does a
