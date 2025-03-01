@@ -1,22 +1,17 @@
 """CHMUtils"""
-import os
-import sqlite3
-from sqlite3 import Connection, Cursor
-from os import path
-from typing import Any, Dict, List, Optional, Tuple, Union
-import chess
+from os import path, mkdir
+from sqlite3 import connect, Connection, Cursor
+from typing import Dict, List, Optional, Tuple, Union
 from chess import Move, Board, Piece
 from numpy import float64, float_
-import numpy as np
-import heatmaps
-from heatmaps import ChessMoveHeatmap
+from heatmaps import GradientHeatmap, PIECES, ChessMoveHeatmap
 
 
 def calculate_heatmap(
         board: Board, depth: int = 1,
-        heatmap: Optional[heatmaps.GradientHeatmap] = None,
+        heatmap: Optional[GradientHeatmap] = None,
         discount: int = 1
-) -> heatmaps.GradientHeatmap:
+) -> GradientHeatmap:
     """
     Recursively computes a gradient heatmap for a given chess board position.
 
@@ -85,7 +80,7 @@ def calculate_heatmap(
     #afffff
     """
     if heatmap is None:
-        heatmap = heatmaps.GradientHeatmap()
+        heatmap = GradientHeatmap()
 
     moves: Tuple[Move] = tuple(board.legal_moves)
     num_moves: int = len(moves)
@@ -109,8 +104,8 @@ def calculate_heatmap(
 
 def calculate_chess_move_heatmap(
         board: Board, depth: int = 1,
-        heatmap: Optional[heatmaps.ChessMoveHeatmap] = None,
-        discount: int = 1) -> heatmaps.ChessMoveHeatmap:
+        heatmap: Optional[ChessMoveHeatmap] = None,
+        discount: int = 1) -> ChessMoveHeatmap:
     """
     Recursively computes a chess move heatmap that tracks both move intensities and piece counts.
 
@@ -165,7 +160,7 @@ def calculate_chess_move_heatmap(
 
     """
     if heatmap is None:
-        heatmap = heatmaps.ChessMoveHeatmap()
+        heatmap = ChessMoveHeatmap()
 
     moves: Tuple[Move] = tuple(board.legal_moves)
     num_moves: int = len(moves)
@@ -190,7 +185,7 @@ def calculate_chess_move_heatmap(
     return heatmap
 
 
-def calculate_chess_move_heatmap_with_better_discount(board: Board, depth: int = 1) -> heatmaps.ChessMoveHeatmap:
+def calculate_chess_move_heatmap_with_better_discount(board: Board, depth: int = 1) -> ChessMoveHeatmap:
     """
     Recursively computes a chess move heatmap for a given board state while applying a discount
     to moves based on the branching factor at each level of recursion. This discounting approach
@@ -238,17 +233,17 @@ def calculate_chess_move_heatmap_with_better_discount(board: Board, depth: int =
     ♙: 1.85, ♘: 1.85, ♗: 0.1, ♖: 0.05, ♝: 0.09110312289373175
     """
     # Initialize depth_map as a tuple of [branch_count, ChessMoveHeatmap] pairs for each depth level.
-    depth_map: Tuple[List[Union[int, heatmaps.ChessMoveHeatmap]], ...] = tuple(
-        [0, heatmaps.ChessMoveHeatmap()] for _ in range(depth + 1)
+    depth_map: Tuple[List[Union[int, ChessMoveHeatmap]], ...] = tuple(
+        [0, ChessMoveHeatmap()] for _ in range(depth + 1)
     )
     # Recursively populate the depth_map with move counts and heatmap data
     depth_map = fill_depth_map_with_counts(board, depth, depth_map)
-    heatmap: heatmaps.ChessMoveHeatmap = heatmaps.ChessMoveHeatmap()
+    heatmap: ChessMoveHeatmap = ChessMoveHeatmap()
     # Aggregate the heatmaps from each depth level with appropriate discounting.
     # discount is the total number branches at each depth, inittalliy this is always 1.
     discount: int = 1
     branches: int
-    heatmap_at_depth: heatmaps.ChessMoveHeatmap
+    heatmap_at_depth: ChessMoveHeatmap
     # Although iterating over depth_map[::-1] might suggest processing from deepest to shallowest,
     # the recursion updates (via depth_map[depth]) mean that the reversed order processes from the shallowest
     # (initial board state) to the deepest level.
@@ -260,10 +255,10 @@ def calculate_chess_move_heatmap_with_better_discount(board: Board, depth: int =
 
 
 def fill_depth_map_with_counts(
-        board: chess.Board,
+        board: Board,
         depth: int,
-        depth_map: Tuple[List[Union[int, heatmaps.ChessMoveHeatmap]], ...]
-) -> Tuple[List[Union[int, heatmaps.ChessMoveHeatmap]], ...]:
+        depth_map: Tuple[List[Union[int, ChessMoveHeatmap]], ...]
+) -> Tuple[List[Union[int, ChessMoveHeatmap]], ...]:
     """
     Recursively populates the depth_map accumulator with move counts and heatmap data for each depth level.
 
@@ -310,11 +305,11 @@ def fill_depth_map_with_counts(
     for move in moves:
         target_square: int = move.to_square
         # Update at the target square, the move's player's move count.
-        depth_map[depth][1][target_square][color_index] += np.float64(1.0)
+        depth_map[depth][1][target_square][color_index] += float64(1.0)
         from_square: int = move.from_square
         piece: Piece = board.piece_at(from_square)
         # Update at the target square, the piece count for move's piece.
-        depth_map[depth][1].piece_counts[target_square][piece] += np.float64(1.0)
+        depth_map[depth][1].piece_counts[target_square][piece] += float64(1.0)
 
         if depth > 0:
             new_board: Board = board.copy()
@@ -328,10 +323,10 @@ def fill_depth_map_with_counts(
 
 
 # Assume PIECE_KEYS is defined (e.g., from chess.UNICODE_PIECE_SYMBOLS.values())
-PIECE_KEYS: Tuple[Piece] = heatmaps.PIECES
+PIECE_KEYS: Tuple[Piece] = PIECES
 
 
-def flatten_heatmap(heatmap: heatmaps.ChessMoveHeatmap) -> Dict[str, np.float64]:
+def flatten_heatmap(heatmap: ChessMoveHeatmap) -> Dict[str, float64]:
     """Flatten a ChessMoveHeatmap into a dictionary of primitive values.
 
     This function converts a ChessMoveHeatmap into a flat dictionary where each key
@@ -353,7 +348,7 @@ def flatten_heatmap(heatmap: heatmaps.ChessMoveHeatmap) -> Dict[str, np.float64]
     Dict[str, numpy.float64]
         A dictionary with keys for each square's move intensities and piece counts.
     """
-    flat: Dict[str, np.float64] = {}
+    flat: Dict[str, float64] = {}
     square: int
     for square in range(64):
         flat[f"sq{square}_white"] = heatmap.data[square][0]
@@ -365,7 +360,7 @@ def flatten_heatmap(heatmap: heatmaps.ChessMoveHeatmap) -> Dict[str, np.float64]
     return flat
 
 
-def inflate_heatmap(data: Dict[str, float]) -> heatmaps.ChessMoveHeatmap:
+def inflate_heatmap(data: Dict[str, float]) -> ChessMoveHeatmap:
     """Inflate a flat dictionary of primitive values back into a ChessMoveHeatmap.
 
     This function reconstructs a ChessMoveHeatmap from a dictionary that was
@@ -384,7 +379,7 @@ def inflate_heatmap(data: Dict[str, float]) -> heatmaps.ChessMoveHeatmap:
         The reconstituted ChessMoveHeatmap object.
     """
     # Create a new heatmap object.
-    heatmap: heatmaps.ChessMoveHeatmap = heatmaps.ChessMoveHeatmap()
+    heatmap: ChessMoveHeatmap = ChessMoveHeatmap()
     square: int
     for square in range(64):
         heatmap.data[square][0] = float64(data[f"sq{square}_white"])
@@ -416,11 +411,11 @@ class HeatmapCache:
         The relative file path to the SQLite database used for caching.
     """
     depth: int
-    board: chess.Board
+    board: Board
     db_path: str
     cache_dir: str = path.join(CACHE_DIR, "Faster")
 
-    def __init__(self, board: chess.Board, depth: int) -> None:
+    def __init__(self, board: Board, depth: int) -> None:
         """Initialize the HeatmapCache.
 
         Parameters
@@ -431,7 +426,7 @@ class HeatmapCache:
             The recursion depth associated with the heatmap calculations.
         """
         self.depth = depth
-        self.db_path = os.path.join(self.cache_dir, f"heatmap_cache_depth_{self.depth}.db")
+        self.db_path = path.join(self.cache_dir, f"heatmap_cache_depth_{self.depth}.db")
         self.board = board
         self._initialize_db()
 
@@ -442,10 +437,10 @@ class HeatmapCache:
         move intensities and piece counts, and creates an index on the cache key 
         for faster lookups.
         """
-        if not os.path.isdir(self.cache_dir):
-            os.mkdir(self.cache_dir)
+        if not path.isdir(self.cache_dir):
+            mkdir(self.cache_dir)
         conn: Connection
-        with sqlite3.connect(self.db_path) as conn:
+        with connect(self.db_path) as conn:
             cur: Cursor = conn.cursor()
             cur.execute("PRAGMA journal_mode=WAL;")
             # Construct column definitions for each square.
@@ -476,7 +471,7 @@ class HeatmapCache:
         """
         return f"{self.board.fen()}"
 
-    def get_cached_heatmap(self) -> Optional[heatmaps.ChessMoveHeatmap]:
+    def get_cached_heatmap(self) -> Optional[ChessMoveHeatmap]:
         """Retrieve a cached ChessMoveHeatmap for the given board and depth, if available.
 
         Returns
@@ -486,7 +481,7 @@ class HeatmapCache:
         """
         key: str = self._cache_key
         conn: Connection
-        with sqlite3.connect(self.db_path) as conn:
+        with connect(self.db_path) as conn:
             cur: Cursor = conn.cursor()
             cur.execute("SELECT * FROM heatmap_cache WHERE cache_key = ?", (key,))
             row: Optional[Tuple[float, ...]] = cur.fetchone()
@@ -498,7 +493,7 @@ class HeatmapCache:
         data.pop("cache_key", None)
         return inflate_heatmap(data)
 
-    def store_heatmap(self, cmhm: heatmaps.ChessMoveHeatmap) -> None:
+    def store_heatmap(self, cmhm: ChessMoveHeatmap) -> None:
         """Store a ChessMoveHeatmap in the cache.
 
         The given heatmap is flattened into a dictionary of primitive values and inserted
@@ -519,14 +514,14 @@ class HeatmapCache:
         values: List[str, float_] = [key] + list(flat.values())
 
         conn: Connection
-        with sqlite3.connect(self.db_path) as conn:
+        with connect(self.db_path) as conn:
             cur: Cursor = conn.cursor()
             # Use INSERT OR REPLACE to update existing cache if needed.
             sql: str = f"INSERT OR REPLACE INTO heatmap_cache ({', '.join(columns)}) VALUES ({placeholders})"
             cur.execute(sql, values)
 
 
-def get_or_compute_heatmap(board: chess.Board, depth: int) -> heatmaps.ChessMoveHeatmap:
+def get_or_compute_heatmap(board: Board, depth: int) -> ChessMoveHeatmap:
     """Retrieve a ChessMoveHeatmap from the cache, or compute and cache it if not available.
 
     This function first attempts to retrieve a cached heatmap based on the board's FEN and the
@@ -546,12 +541,12 @@ def get_or_compute_heatmap(board: chess.Board, depth: int) -> heatmaps.ChessMove
         The ChessMoveHeatmap corresponding to the board and depth.
     """
     cache: HeatmapCache = HeatmapCache(board, depth)
-    cached: Optional[heatmaps.ChessMoveHeatmap] = cache.get_cached_heatmap()
+    cached: Optional[ChessMoveHeatmap] = cache.get_cached_heatmap()
     if cached is not None:
         return cached
 
     # Not cached; compute the heatmap.
-    cmhm: heatmaps.ChessMoveHeatmap = calculate_chess_move_heatmap(board, depth=depth)
+    cmhm: ChessMoveHeatmap = calculate_chess_move_heatmap(board, depth=depth)
     cache.store_heatmap(cmhm)
     return cmhm
 
@@ -561,7 +556,7 @@ class BetterHeatmapCache(HeatmapCache):
     cache_dir: str = path.join(CACHE_DIR, "Better")
 
 
-def get_or_compute_heatmap_with_better_discounts(board: chess.Board, depth: int) -> heatmaps.ChessMoveHeatmap:
+def get_or_compute_heatmap_with_better_discounts(board: Board, depth: int) -> ChessMoveHeatmap:
     """Retrieve a ChessMoveHeatmap from the Better cache, or compute and cache Better if not available.
 
     This function first attempts to retrieve a cached heatmap based on the board's FEN and the
@@ -581,11 +576,11 @@ def get_or_compute_heatmap_with_better_discounts(board: chess.Board, depth: int)
         The ChessMoveHeatmap corresponding to the board and depth.
     """
     cache: BetterHeatmapCache = BetterHeatmapCache(board, depth)
-    cached: Optional[heatmaps.ChessMoveHeatmap] = cache.get_cached_heatmap()
+    cached: Optional[ChessMoveHeatmap] = cache.get_cached_heatmap()
     if cached is not None:
         return cached
 
     # Not cached; compute the heatmap.
-    cmhm: heatmaps.ChessMoveHeatmap = calculate_chess_move_heatmap_with_better_discount(board, depth=depth)
+    cmhm: ChessMoveHeatmap = calculate_chess_move_heatmap_with_better_discount(board, depth=depth)
     cache.store_heatmap(cmhm)
     return cmhm
