@@ -353,11 +353,15 @@ class ChessHeatMapApp(Tk):
         index : int
             The index (0 for light squares, 1 for dark squares) of the square color to be changed.
         """
-        color: Optional[str] = colorchooser.askcolor(title=title)[1]
-        print(color)
-        if isinstance(color, str):
-            self.colors[index] = color
-            self.update_board()
+        if not self.updating:
+            self.updating = True
+            color: Optional[str] = colorchooser.askcolor(title=title)[1]
+            if isinstance(color, str):
+                self.colors[index] = color
+                self.update_board()
+            self.updating = False
+        else:
+            self.after(100, lambda: self.choose_square_color(title, index))
 
     def open_pgn(self) -> None:
         """Prompts the user to open and parse a PGN file.
@@ -488,14 +492,17 @@ class ChessHeatMapApp(Tk):
         This method updates the board to reflect the next move in the loaded game. It also highlights
         the squares involved in the move and updates the chessboard display accordingly.
         """
-        if self.game and (self.current_move_index < len(self.moves) - 1) and not self.updating:
+        if not self.updating:
             self.updating = True
-            self.current_move_index += 1
-            move: Move = self.moves[self.current_move_index]
-            self.highlight_squares = {move.from_square, move.to_square}
-            self.board.push(move)
-            self.update_board()
+            if self.game and (self.current_move_index < len(self.moves) - 1):
+                self.current_move_index += 1
+                move: Move = self.moves[self.current_move_index]
+                self.highlight_squares = {move.from_square, move.to_square}
+                self.board.push(move)
+                self.update_board()
             self.updating = False
+        else:
+            self.after(100, self.next_move)
 
     def prev_move(self) -> None:
         """Display the previous move in the game.
@@ -503,17 +510,20 @@ class ChessHeatMapApp(Tk):
         This method updates the board to reflect the previous move in the loaded game. It also highlights
         the squares involved in the move and updates the chessboard display accordingly.
         """
-        if self.game and (self.current_move_index >= 0) and not self.updating:
+        if not self.updating:
             self.updating = True
-            self.current_move_index -= 1
-            if self.current_move_index >= 0:
-                move: Move = self.moves[self.current_move_index]
-                self.highlight_squares = {move.from_square, move.to_square}
-            else:
-                self.highlight_squares = set()
-            self.board.pop()
-            self.update_board()
+            if self.game and (self.current_move_index >= 0):
+                self.current_move_index -= 1
+                if self.current_move_index >= 0:
+                    move: Move = self.moves[self.current_move_index]
+                    self.highlight_squares = {move.from_square, move.to_square}
+                else:
+                    self.highlight_squares = set()
+                self.board.pop()
+                self.update_board()
             self.updating = False
+        else:
+            self.after(100, self.prev_move)
 
     def update_board(self) -> None:
         """Update the chessboard display based on the current position.
