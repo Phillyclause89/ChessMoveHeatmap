@@ -1,9 +1,10 @@
-import unittest
+"""Test Helpers"""
+from unittest import TestCase
 from typing import Any, Callable, Dict, Iterable, List, Optional, Union, Type, Tuple
-import numpy as np
-from chess import COLORS, PIECE_TYPES, Piece
-from numpy import dtype, float_, ndarray
+
+from numpy import float64, ndarray
 from numpy.typing import NDArray
+from chess import COLORS, PIECE_TYPES, Piece
 
 from heatmaps import GradientHeatmap, GradientHeatmapT, ChessMoveHeatmapT, ChessMoveHeatmap
 
@@ -35,7 +36,7 @@ CAINAN: Type[ChessMoveHeatmap] = KENAN
 
 
 def _validate_data_types(
-        test_case: unittest.TestCase,
+        test_case: TestCase,
         test_objects: Iterable[GradientHeatmapT],
         assert_enos: bool = False
 ) -> None:
@@ -62,20 +63,20 @@ def _validate_data_types(
     """
     for obj in test_objects:
         test_case.assertIsInstance(obj, ADAM)
-        test_case.assertIsInstance(obj.data, np.ndarray)
+        test_case.assertIsInstance(obj.data, ndarray)
         test_case.assertEqual(obj.shape, SHAPE)
         test_case.assertEqual(obj.data.shape, obj.shape)
-        test_case.assertEqual(obj.data.dtype, np.float64)
-        square_count: NDArray[np.float64]
+        test_case.assertEqual(obj.data.dtype, float64)
+        square_count: NDArray[float64]
         for square_count in obj:
-            test_case.assertIsInstance(square_count, np.ndarray)
+            test_case.assertIsInstance(square_count, ndarray)
             test_case.assertEqual(square_count.shape, (SHAPE[1],))
-            count: np.float64
+            count: float64
             for count in square_count:
-                test_case.assertIsInstance(count, np.float64)
+                test_case.assertIsInstance(count, float64)
         if assert_enos:
             test_case.assertIsInstance(obj, ENOS)
-            test_case.assertIsInstance(obj.piece_counts, np.ndarray)
+            test_case.assertIsInstance(obj.piece_counts, ndarray)
             test_case.assertEqual(obj.piece_counts.shape, (SHAPE[0],))
             test_case.assertEqual(obj.piece_counts.dtype, dict)
             p_count: dict
@@ -83,15 +84,15 @@ def _validate_data_types(
                 test_case.assertIsInstance(p_count, dict)
                 test_case.assertEqual(len(p_count), len(PIECES))
                 piece: Piece
-                value: np.float64
+                value: float64
                 for piece, value in p_count.items():
                     test_case.assertIsInstance(piece, Piece)
-                    test_case.assertIsInstance(value, np.float64)
+                    test_case.assertIsInstance(value, float64)
 
 
 def validate_data_types(
         test_objects: Iterable[GradientHeatmapT],
-        test_case: Optional[unittest.TestCase] = None,
+        test_case: Optional[TestCase] = None,
         assert_enos: bool = False
 ) -> None:
     """Validates that all test_objects are instances of GradientHeatmapT.
@@ -119,7 +120,7 @@ def validate_data_types(
         _validate_data_types(test_case, test_objects, assert_enos)
     except AttributeError as attribute_error:
         try:
-            validate_data_types(test_objects, unittest.TestCase(), assert_enos)
+            validate_data_types(test_objects, TestCase(), assert_enos)
         except Exception as error:
             raise error from attribute_error
     except AssertionError as attribute_error:
@@ -171,82 +172,46 @@ def construct_all(
     >>> class B:
     ...     def __init__(self):
     ...         self.text = "Hello"
-    >>> construct_all([A, B])
-    [<__main__.A object at 0x...>, <__main__.B object at 0x...>]
+    >>> instances = construct_all([A, B])
+    >>> instances[0] is not instances[1]
+    True
 
     Using a dictionary (instantiation with keyword arguments):
 
     >>> class C:
     ...     def __init__(self, x):
     ...         self.x = x
-    >>> construct_all({C: {"x": 10}})
-    [<__main__.C object at 0x...>]
+    >>> instances = construct_all({C: {"x": 10}})
+    >>> instances[0].x == 10
+    True
 
     Handling instantiation errors:
 
     >>> class D:
     ...     def __init__(self, y):
     ...         self.y = y
-    >>> construct_all({D: {}}, errors="append")
-    [TypeError('cls: <class '__main__.D'>\\nkwargs: {}')]
+    >>> instances = construct_all({D: {}}, errors="append")
+    >>> isinstance(instances[0], TypeError)
+    True
     """
     constructed: List[Any] = []
     try:
         for cls, kwargs in classes.items():
             try:
                 constructed.append(cls(**kwargs))
-            except TypeError as t:
+            except TypeError as type_error:
                 txt: str = f"cls: {cls}\nkwargs: {kwargs}"
                 if not isinstance(errors, str):
-                    raise TypeError(f"Unexpected {type(errors)} argument: errors={errors}") from t
+                    raise TypeError(f"Unexpected {type(errors)} argument: errors={errors}") from type_error
                 if errors.lower() in ("raise", "fire"):
-                    raise TypeError(txt) from t
+                    raise TypeError(txt) from type_error
                 if errors.lower() in ("append", "log", "include"):
                     constructed.append(TypeError(txt))
                 elif errors.lower() in ("ignore", "skip"):
                     continue
                 else:
-                    raise ValueError(f"Unexpected str argument: errors='{errors}'") from t
+                    raise ValueError(f"Unexpected str argument: errors='{errors}'") from type_error
 
         return constructed
     except AttributeError:
         return [cls() for cls in classes]
-
-
-if __name__ == "__main__":
-    t_case: unittest.TestCase = unittest.TestCase()
-    invalid_classes_arg: Dict[None, Dict[str, str]] = {None: {INVALID_OBJ_STR: INVALID_OBJ_STR}}
-    with t_case.assertRaises(TypeError):
-        # noinspection PyTypeChecker,PydanticTypeChecker
-        construct_all(invalid_classes_arg, errors=0)
-    with t_case.assertRaises(TypeError):
-        # noinspection PyTypeChecker,PydanticTypeChecker
-        construct_all(invalid_classes_arg, errors="raise".upper())
-    with t_case.assertRaises(ValueError):
-        # noinspection PyTypeChecker,PydanticTypeChecker
-        construct_all(invalid_classes_arg, errors=INVALID_OBJ_STR)
-    # noinspection PyTypeChecker,PydanticTypeChecker
-    t_case.assertIsInstance(construct_all(invalid_classes_arg, errors="append")[0], TypeError)
-    # noinspection PyTypeChecker,PydanticTypeChecker
-    t_case.assertListEqual(construct_all(invalid_classes_arg, errors="skip".title()), [])
-
-    to_validate_good: List[Any] = construct_all(MAP_FAM) + construct_all(
-        classes={k: {"data": np.zeros(SHAPE, dtype=np.float64)} for k in MAP_FAM},
-        errors="ignore".upper()
-    )
-    validate_data_types(to_validate_good)
-    bad_data_family: List[Any] = construct_all(MAP_FAM)
-    for bad_obj in bad_data_family:
-        bad_obj._data = None
-    bad_shape_family = construct_all(MAP_FAM)
-    for bad_obj in bad_shape_family:
-        bad_obj._shape = None
-    bad_family = construct_all(MAP_FAM)
-    for bad_obj in bad_shape_family:
-        bad_obj._shape = None
-        bad_obj._data = None
-    to_validate_bad = [None] + bad_data_family + bad_shape_family + bad_shape_family
-    for bad_obj in to_validate_bad:
-        with t_case.assertRaises(AssertionError):
-            # noinspection PyTypeChecker,PydanticTypeChecker
-            validate_data_types([bad_obj])

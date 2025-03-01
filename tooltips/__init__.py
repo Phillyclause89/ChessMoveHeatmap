@@ -1,11 +1,10 @@
 """Tooltips"""
-import tkinter as tk
-from tkinter import Canvas, Frame, ttk
+from tkinter import Frame, NSEW, LEFT, Tk, Canvas, Event, Toplevel, ttk, SOLID
 from tkinter.ttk import Label
 from typing import Optional, Tuple
 
 
-class ChessHeatMapApp(tk.Tk):
+class ChessHeatMapApp(Tk):
     """ChessHeatMapApp"""
     updating: bool
 
@@ -31,7 +30,7 @@ class CanvasTooltip:
     font_size: int
 
     def __init__(
-            self, root: ChessHeatMapApp, canvas: tk.Canvas, tag_or_id: int,
+            self, root: ChessHeatMapApp, canvas: Canvas, tag_or_id: int,
             *,
             bg_color: str = '#FFFFEA',
             pad: Tuple[int, int, int, int] = (5, 3, 5, 3),
@@ -55,7 +54,7 @@ class CanvasTooltip:
         self.tw_ = None
 
     # pylint: disable=invalid-name
-    def onEnter(self, _: Optional[tk.Event] = None) -> None:
+    def onEnter(self, _: Optional[Event] = None) -> None:
         """
 
         Parameters
@@ -66,7 +65,7 @@ class CanvasTooltip:
             self.schedule()
 
     # pylint: disable=invalid-name
-    def onLeave(self, _: Optional[tk.Event] = None) -> None:
+    def onLeave(self, _: Optional[Event] = None) -> None:
         """
 
         Parameters
@@ -87,7 +86,7 @@ class CanvasTooltip:
         if id_ is not None:
             self.canvas.after_cancel(id_)
 
-    def show(self, _: Optional[tk.Event] = None) -> None:
+    def show(self, _: Optional[Event] = None) -> None:
         """
 
         Parameters
@@ -98,8 +97,8 @@ class CanvasTooltip:
 
         # pylint: disable=too-many-locals
         def tip_pos_calculator(
-                canvas: tk.Canvas,
-                label: tk.ttk.Label,
+                canvas: Canvas,
+                label: ttk.Label,
                 *,
                 tip_delta: Tuple[int, int] = (10, 5),
                 pad: Tuple[int, int, int, int] = (5, 3, 5, 3)
@@ -159,11 +158,11 @@ class CanvasTooltip:
             pad: Tuple[int, int, int, int] = self.pad
             canvas: Canvas = self.canvas
             # creates a toplevel window
-            self.tw_ = tk.Toplevel(canvas.master)
+            self.tw_ = Toplevel(canvas.master)
             # Leaves only the label and removes the app window
             self.tw_.wm_overrideredirect(True)
 
-            win: Frame = tk.Frame(
+            win: Frame = Frame(
                 self.tw_,
                 background=bg,
                 borderwidth=0
@@ -171,9 +170,9 @@ class CanvasTooltip:
             label: Label = ttk.Label(
                 win,
                 text=self.text,
-                justify=tk.LEFT,
+                justify=LEFT,
                 background=bg,
-                relief=tk.SOLID,
+                relief=SOLID,
                 borderwidth=0,
                 wraplength=self.wraplength,
                 font=(self.root.font, self.font_size)
@@ -182,7 +181,7 @@ class CanvasTooltip:
             label.grid(
                 padx=(pad[0], pad[2]),
                 pady=(pad[1], pad[3]),
-                sticky=tk.NSEW
+                sticky=NSEW
             )
             win.grid()
             x: int
