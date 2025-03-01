@@ -221,27 +221,35 @@ class ChessHeatMapApp(Tk):
         The user is asked to input an integer value. If a valid value is provided,
         the depth is updated and the window title is refreshed to reflect the change.
         """
-        new_depth: Optional[int] = self.ask_depth()
-        if new_depth is not None and new_depth != self.depth:
-            self.depth = new_depth
-            # Update the window title to reflect the new depth.
-            self.set_title()
-            self.ensure_executor()
-            self.clear_heatmaps()
-            if self.game is not None:
-                board: Board = self.game.board()
-                moves: List[Optional[Move]] = [None] + self.moves
-            else:
-                board = Board()
-                moves = [None]
-            i: int
-            move: Optional[Move]
-            for i, move in enumerate(moves):  # Include initial board state
-                new_board = self.new_board_pushed_upto(board, i, move)
-                future = self.executor.submit(get_or_compute_heatmap_with_better_discounts, new_board, depth=self.depth)
-                self.heatmap_futures[i - 1] = future
-            self.after(100, self.check_heatmap_futures)
-            self.update_board()
+        if not self.updating:
+            self.updating = True
+            new_depth: Optional[int] = self.ask_depth()
+            if new_depth is not None and new_depth != self.depth:
+                self.depth = new_depth
+                # Update the window title to reflect the new depth.
+                self.set_title()
+                self.ensure_executor()
+                self.clear_heatmaps()
+                if self.game is not None:
+                    board: Board = self.game.board()
+                    moves: List[Optional[Move]] = [None] + self.moves
+                else:
+                    board = Board()
+                    moves = [None]
+                i: int
+                move: Optional[Move]
+                for i, move in enumerate(moves):  # Include initial board state
+                    new_board = self.new_board_pushed_upto(board, i, move)
+                    future = self.executor.submit(
+                        get_or_compute_heatmap_with_better_discounts,
+                        new_board,
+                        depth=self.depth)
+                    self.heatmap_futures[i - 1] = future
+                self.after(100, self.check_heatmap_futures)
+                self.update_board()
+            self.updating = False
+        else:
+            self.after(100, self.set_depth)
 
     def new_board_pushed_upto(self, board: Board, i: int, move: Move) -> Board:
         """Gets copy of board pushed upto move
@@ -315,8 +323,13 @@ class ChessHeatMapApp(Tk):
         This method updates the font used for displaying chess pieces on the board.
         After updating, the board is re-rendered with the new font.
         """
-        self.font = new_font
-        self.update_board()
+        if not self.updating:
+            self.updating = True
+            self.font = new_font
+            self.update_board()
+            self.updating = False
+        else:
+            self.after(100, lambda: self.change_font(new_font))
 
     def change_board_colors(self) -> None:
         """Invoke both light and dark square color option prompts.
@@ -871,11 +884,11 @@ class ChessHeatMapApp(Tk):
         )
 
         if white_total > 0:
-            CanvasTooltip(self, self.canvas, wbg_id, text=white_hint_text, bg_color=color)
-            CanvasTooltip(self, self.canvas, wtx_id, text=white_hint_text, bg_color=color)
+            self.tooltips.append(CanvasTooltip(self, self.canvas, wbg_id, text=white_hint_text, bg_color=color))
+            self.tooltips.append(CanvasTooltip(self, self.canvas, wtx_id, text=white_hint_text, bg_color=color))
         if black_total > 0:
-            CanvasTooltip(self, self.canvas, bbg_id, text=black_hint_text, bg_color=color)
-            CanvasTooltip(self, self.canvas, btx_id, text=black_hint_text, bg_color=color)
+            self.tooltips.append(CanvasTooltip(self, self.canvas, bbg_id, text=black_hint_text, bg_color=color))
+            self.tooltips.append(CanvasTooltip(self, self.canvas, btx_id, text=black_hint_text, bg_color=color))
 
     def create_piece(
             self, font_size: int, piece: Optional[Piece],
