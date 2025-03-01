@@ -1,3 +1,5 @@
+***PhillyNote:** This is a description of the orignal algorithm. I have yet to make ChatGPT write a README for the new algorithm with better discounting.*
+
 You're very welcome! Below is a **raw `.md` blurb** that describes the full **data flow from `calculate_heatmap()` to `GradientHeatmap.colors`** using Markdown-friendly **mathematical notation (`$LaTeX$`)** where applicable.  
 
 ---

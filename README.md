@@ -20,9 +20,7 @@ As you can see in the GIF above, the app assigns a Light Blue color range to the
 black player. Squares that have no possible moves from either player within the search depth (this case depth=3)
 will get the default colors applied to them (which in the example above are set to `"#ffffff"` for light squares
 and `"#c0c0c0"` for dark.) If both players have possible moves detected to a square then both players' assigned colors
-will merge into a purple square color. For a detailed breakdown of the algorith see the
-[docs/COLORALGO.md](docs/COLORALGO.md) file that took chatgpt 30 seconds to write and me an hour to fix the `.md` syntax
-of so that it would look nice in GitHub...
+will merge into a purple square color.
 
 ## **An Introduction by Phillyclause89 (Not ChatGPT)
 
