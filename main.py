@@ -148,13 +148,17 @@ class ChessHeatMapApp(Tk):
         self.pieces_maps = {}
         self.tooltips = []
         self.open_pgn()
+        self.set_bindings()
+        self.focus_force()
+        self.updating = False
+
+    def set_bindings(self) -> None:
+        """Sets app bindings"""
         self.bind("<Configure>", self.on_resize)
         self.bind("<Left>", lambda event: self.prev_move())
         self.bind("<a>", lambda event: self.prev_move())
         self.bind("<Right>", lambda event: self.next_move())
         self.bind("<d>", lambda event: self.next_move())
-        self.focus_force()
-        self.updating = False
 
     def on_closing(self) -> None:
         """Clean up resources before closing the application."""
