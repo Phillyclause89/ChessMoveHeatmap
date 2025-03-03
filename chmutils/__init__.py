@@ -1,5 +1,5 @@
 """CHMUtils"""
-from os import path, mkdir
+from os import makedirs, path
 from sqlite3 import connect, Connection, Cursor
 from typing import Dict, List, Optional, Tuple, Union
 from chess import Move, Board, Piece
@@ -413,7 +413,7 @@ class HeatmapCache:
     depth: int
     board: Board
     db_path: str
-    cache_dir: str = path.join(CACHE_DIR, "Faster")
+    cache_dir: str = path.join(".", CACHE_DIR, "Faster")
 
     def __init__(self, board: Board, depth: int) -> None:
         """Initialize the HeatmapCache.
@@ -438,7 +438,7 @@ class HeatmapCache:
         for faster lookups.
         """
         if not path.isdir(self.cache_dir):
-            mkdir(self.cache_dir)
+            makedirs(self.cache_dir)
         conn: Connection
         with connect(self.db_path) as conn:
             cur: Cursor = conn.cursor()
@@ -553,7 +553,7 @@ def get_or_compute_heatmap(board: Board, depth: int) -> ChessMoveHeatmap:
 
 class BetterHeatmapCache(HeatmapCache):
     """Overides cache_dir"""
-    cache_dir: str = path.join(CACHE_DIR, "Better")
+    cache_dir: str = path.join(".", CACHE_DIR, "Better")
 
 
 def get_or_compute_heatmap_with_better_discounts(board: Board, depth: int) -> ChessMoveHeatmap:
