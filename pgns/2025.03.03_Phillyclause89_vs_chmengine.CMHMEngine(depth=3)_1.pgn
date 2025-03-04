@@ -1,0 +1,14 @@
+[Event "Phillyclause89 vs chmengine.CMHMEngine(depth=3)"]
+[Site "Phil's Place"]
+[Date "2025.03.03"]
+[Round "1"]
+[White "Phillyclause89"]
+[Black "chmengine.CMHMEngine(depth=3)"]
+[Result "1-0"]
+[Timezone "Pacific Standard Time"]
+[UTCDate "2025.03.04"]
+[UTCTime "04:42:23"]
+[Termination "CHECKMATE"]
+
+1. e4 e5 2. Nf3 Qh4 3. Nxh4 Bb4 4. c3 d5 5. cxb4 Bg4 6. Qxg4 Nd7 7. Qxg7 Ne7 8. Qxh8+ Ng8 9. Qxg8+ Nf8 10. Nf5 Kd7 11. Qxf7+ Kd8 12. Qe7+ Kc8 13. Qe8# 1-0
+

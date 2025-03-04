@@ -127,7 +127,7 @@ class CMHMEngine:
         board_copy.push(move)
         return board_copy
 
-    def pick_move(self) -> Tuple[chess.Move, numpy.float64]:
+    def pick_move(self, by: str = "delta") -> Tuple[chess.Move, numpy.float64]:
         """
         Returns
         -------
@@ -139,21 +139,49 @@ class CMHMEngine:
         >>> engine = CMHMEngine()
         >>> engine.pick_move()
         (Move.from_uci('e2e4'), 10.0)
+        >>> engine.pick_move(by="max")
+        (Move.from_uci('e2e4'), 30.0)
+        >>> engine.pick_move(by="min")[1]
+        20.0
         """
         color_index: int = int(not self.board.turn)
         other_index: int = int(self.board.turn)
         move_maps_items: List[Tuple[chess.Move, heatmaps.GradientHeatmap]] = self.get_or_calc_move_maps_list()
-        target_moves: List[Tuple[Optional[chess.Move], Optional[numpy.float64]]] = [(None, None)]
+        target_moves_by_max_current: List[Tuple[Optional[chess.Move], Optional[numpy.float64]]] = [(None, None)]
+        target_moves_by_min_other: List[Tuple[Optional[chess.Move], Optional[numpy.float64]]] = [(None, None)]
+        target_moves_by_delta: List[Tuple[Optional[chess.Move], Optional[numpy.float64]]] = [(None, None)]
+
         for move, heatmap in move_maps_items:
             transposed_map: numpy.ndarray = heatmap.data.transpose()
+
             current_player_sum: numpy.float64 = sum(transposed_map[color_index])
+            current_best_max: numpy.float64 = target_moves_by_max_current[0][1]
+            if current_best_max is None or current_player_sum > current_best_max:
+                target_moves_by_max_current = [(move, current_player_sum)]
+            elif current_best_max == current_player_sum:
+                target_moves_by_max_current.append((move, current_player_sum))
+
             other_player_sum: numpy.float64 = sum(transposed_map[other_index])
+            current_best_min: numpy.float64 = target_moves_by_min_other[0][1]
+            if current_best_min is None or current_best_min > other_player_sum:
+                target_moves_by_min_other = [(move, other_player_sum)]
+            elif current_best_min == other_player_sum:
+                target_moves_by_min_other.append((move, other_player_sum))
+
             delta: numpy.float64 = numpy.float64(current_player_sum - other_player_sum)
-            current_best_detla: numpy.float64 = target_moves[0][1]
+            current_best_detla: numpy.float64 = target_moves_by_delta[0][1]
             if current_best_detla is None or delta > current_best_detla:
-                target_moves = [(move, delta)]
+                target_moves_by_delta = [(move, delta)]
             elif delta == current_best_detla:
-                target_moves.append((move, delta))
+                target_moves_by_delta.append((move, delta))
+        target_moves = []
+        if "delta" in by.lower():
+            target_moves += target_moves_by_delta
+        if "min" in by.lower():
+            target_moves += target_moves_by_min_other
+        if "max" in by.lower():
+            target_moves += target_moves_by_max_current
+
         return random.choice(target_moves)
 
     def get_or_calc_move_maps_list(self) -> List[Tuple[chess.Move, heatmaps.GradientHeatmap]]:
