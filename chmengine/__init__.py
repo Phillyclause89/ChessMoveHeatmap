@@ -127,7 +127,7 @@ class CMHMEngine:
         board_copy.push(move)
         return board_copy
 
-    def pick_move(self, by: str = "delta") -> Tuple[chess.Move, numpy.float64]:
+    def pick_move(self, pick_by: str = "delta") -> Tuple[chess.Move, numpy.float64]:
         """
         Returns
         -------
@@ -139,9 +139,9 @@ class CMHMEngine:
         >>> engine = CMHMEngine()
         >>> engine.pick_move()
         (Move.from_uci('e2e4'), 10.0)
-        >>> engine.pick_move(by="max")
+        >>> engine.pick_move(pick_by="max")
         (Move.from_uci('e2e4'), 30.0)
-        >>> engine.pick_move(by="min")[1]
+        >>> engine.pick_move(pick_by="min")[1]
         20.0
         """
         color_index: int = int(not self.board.turn)
@@ -175,11 +175,11 @@ class CMHMEngine:
             elif delta == current_best_detla:
                 target_moves_by_delta.append((move, delta))
         target_moves = []
-        if "delta" in by.lower():
+        if "delta" in pick_by.lower():
             target_moves += target_moves_by_delta
-        if "min" in by.lower():
+        if "min" in pick_by.lower():
             target_moves += target_moves_by_min_other
-        if "max" in by.lower():
+        if "max" in pick_by.lower():
             target_moves += target_moves_by_max_current
 
         return random.choice(target_moves)
@@ -300,15 +300,14 @@ class PlayCMHMEngine:
             self.player_index, self.cpu_index = self.cpu_index, self.player_index
             self.player_color, self.cpu_color = self.cpu_color, self.player_color
 
-    def play(self) -> None:
+    def play(self, pick_by: str = "delta") -> None:
         """Play a game agianst the engine"""
         self.game_round += 1
         local_time = datetime.datetime.now(datetime.datetime.now().astimezone().tzinfo)
-        print(f"Round: {self.game_round} | Time: {str(local_time)}")
-        print(self.engine.board)
+        print(f"Round: {self.game_round} | Time: {str(local_time)}\n{self.engine.board}")
         other_moves: List[chess.Move] = list(self.engine.board.legal_moves)
-        print(f"All legal moves: {', '.join([m.uci() for m in other_moves])}")
-        my_move_choice: Tuple[chess.Move, numpy.float64] = self.engine.pick_move()
+        print(f"All legal moves: {', '.join([m.uci() for m in other_moves])}\nCalculating move scores...")
+        my_move_choice: Tuple[chess.Move, numpy.float64] = self.engine.pick_move(pick_by=pick_by)
         print(f"My recommended move has a score of {my_move_choice[1]:.2f}: {my_move_choice[0]}")
         while other_moves:
             if self.engine.board.turn:
@@ -333,12 +332,11 @@ class PlayCMHMEngine:
             try:
                 other_moves = list(self.engine.board.legal_moves)
                 print(f"All legal moves: {', '.join([m.uci() for m in other_moves])}")
-                my_move_choice = self.engine.pick_move()
+                my_move_choice = self.engine.pick_move(pick_by=pick_by)
                 print(f"My recommended move has a score of {my_move_choice[1]:.2f}: {my_move_choice[0]}")
             except ValueError:
-                print("Game Over:")
-                print(self.engine.board)
                 outcome = self.engine.board.outcome()
+                print(f"Game Over: {outcome}\n{self.engine.board}")
                 game = pgn.Game.from_board(self.engine.board)
                 game_heads = game.headers
                 game_heads["Event"] = f"{self.player_name} vs {self.cpu_name}" if (
