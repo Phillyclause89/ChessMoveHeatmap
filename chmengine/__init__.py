@@ -150,10 +150,39 @@ class CMHMEngine:
         target_moves_by_max_current: List[Tuple[Optional[chess.Move], Optional[numpy.float64]]] = [(None, None)]
         target_moves_by_min_other: List[Tuple[Optional[chess.Move], Optional[numpy.float64]]] = [(None, None)]
         target_moves_by_delta: List[Tuple[Optional[chess.Move], Optional[numpy.float64]]] = [(None, None)]
+        target_moves_by_max_other_king: List[Tuple[Optional[chess.Move], Optional[numpy.float64]]] = [(None, None)]
+        target_moves_by_min_current_king: List[Tuple[Optional[chess.Move], Optional[numpy.float64]]] = [(None, None)]
+        other_king_square = self.board.king(not self.board.turn)
+        current_king_square = self.board.king(self.board.turn)
+        other_king_box = []
+        current_king_box = []
+        for long in (-1, 0, 1):
+            for lat in (-8, 0, +8):
+                other_king_square = other_king_square + long + lat
+                current_king_square = current_king_square + long + lat
+                if 0 <= other_king_square <= 63:
+                    other_king_box.append(other_king_square)
+                if 0 <= current_king_square <= 63:
+                    current_king_box.append(other_king_square)
 
         for move, heatmap in move_maps_items:
-            transposed_map: numpy.ndarray = heatmap.data.transpose()
+            other_king_map = heatmap[other_king_box].transpose()[color_index]
+            other_king_sum = sum(other_king_map)
+            current_best_king_max = target_moves_by_max_other_king[0][1]
+            if current_best_king_max is None or other_king_sum > current_best_king_max:
+                target_moves_by_max_other_king = [(move, other_king_sum)]
+            elif other_king_sum == current_best_king_max:
+                target_moves_by_max_other_king.append((move, other_king_sum))
 
+            current_king_map = heatmap[current_king_box].transpose()[other_index]
+            current_king_min = sum(current_king_map)
+            current_best_king_min = target_moves_by_min_current_king[0][1]
+            if current_best_king_min is None or current_best_king_min > current_king_min:
+                target_moves_by_min_current_king = [(move, current_king_min)]
+            elif current_king_min == current_best_king_min:
+                target_moves_by_min_current_king.append((move, current_king_min))
+
+            transposed_map: numpy.ndarray = heatmap.data.transpose()
             current_player_sum: numpy.float64 = sum(transposed_map[color_index])
             current_best_max: numpy.float64 = target_moves_by_max_current[0][1]
             if current_best_max is None or current_player_sum > current_best_max:
@@ -181,6 +210,10 @@ class CMHMEngine:
             target_moves += target_moves_by_min_other
         if "max" in pick_by.lower():
             target_moves += target_moves_by_max_current
+        if "king-atk" in pick_by.lower():
+            target_moves += target_moves_by_max_other_king
+        if "king-def" in pick_by.lower():
+            target_moves += target_moves_by_min_current_king
 
         return random.choice(target_moves)
 

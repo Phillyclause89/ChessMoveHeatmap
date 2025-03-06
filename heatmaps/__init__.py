@@ -1,6 +1,6 @@
 """Heatmaps"""
 from numbers import Real
-from typing import Dict, Optional, Tuple, Union
+from typing import Dict, Optional, Tuple, Union, Iterable
 from copy import deepcopy
 from chess import PIECE_TYPES, Piece, COLORS
 from numpy.typing import NDArray, ArrayLike
@@ -29,7 +29,7 @@ class GradientHeatmapT:
         """Initialize a heatmap with zeros."""
         self._data = zeros(self._shape, dtype=float64)
 
-    def __getitem__(self, square: int) -> NDArray[float64]:
+    def __getitem__(self, square: Union[int, Iterable]) -> NDArray[float64]:
         """Retrieve the heatmap data for a given square.
 
         Parameters
