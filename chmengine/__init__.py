@@ -143,6 +143,10 @@ class CMHMEngine:
         (Move.from_uci('e2e4'), 30.0)
         >>> engine.pick_move(pick_by="min")[1]
         20.0
+        >>> engine.pick_move(pick_by="king-atk")[1]
+        0.0
+        >>> engine.pick_move(pick_by="king-def")[1]
+        0.0
         """
         color_index: int = int(not self.board.turn)
         other_index: int = int(self.board.turn)
@@ -152,6 +156,139 @@ class CMHMEngine:
         target_moves_by_delta: List[Tuple[Optional[chess.Move], Optional[numpy.float64]]] = [(None, None)]
         target_moves_by_max_other_king: List[Tuple[Optional[chess.Move], Optional[numpy.float64]]] = [(None, None)]
         target_moves_by_min_current_king: List[Tuple[Optional[chess.Move], Optional[numpy.float64]]] = [(None, None)]
+        target_moves_by_king_delta: List[Tuple[Optional[chess.Move], Optional[numpy.float64]]] = [(None, None)]
+        current_king_box, other_king_box = self.get_king_boxes()
+
+        for move, heatmap in move_maps_items:
+            if self.heatmap_data_is_zeros(heatmap):
+                return move, numpy.nan
+            other_king_sum, target_moves_by_max_other_king = self.update_target_moves_by_max_other_king(
+                target_moves_by_max_other_king, heatmap,
+                move, color_index, other_king_box
+            )
+            current_king_min, target_moves_by_min_current_king = self.update_target_moves_by_min_current_king(
+                target_moves_by_min_current_king, heatmap, move, other_index, current_king_box
+            )
+            target_moves_by_king_delta = self.update_target_moves_by_king_delta(
+                target_moves_by_king_delta, move,
+                current_king_min, other_king_sum
+            )
+            transposed_map: numpy.ndarray = heatmap.data.transpose()
+            current_player_sum, target_moves_by_max_current = self.update_target_moves_by_max_current(
+                target_moves_by_max_current, transposed_map, move, color_index
+            )
+            other_player_sum, target_moves_by_min_other = self.update_target_moves_by_min_other(
+                target_moves_by_min_other, transposed_map, move, other_index
+            )
+            target_moves_by_delta = self.update_target_moves_by_delta(
+                target_moves_by_delta, current_player_sum,
+                other_player_sum, move
+            )
+        target_moves = []
+        if "delta" in pick_by.lower():
+            target_moves += target_moves_by_delta
+        if "min" in pick_by.lower():
+            target_moves += target_moves_by_min_other
+        if "max" in pick_by.lower():
+            target_moves += target_moves_by_max_current
+        if "king-atk" in pick_by.lower():
+            target_moves += target_moves_by_max_other_king
+        if "king-def" in pick_by.lower():
+            target_moves += target_moves_by_min_current_king
+        if "king-delta" in pick_by.lower():
+            target_moves += target_moves_by_king_delta
+
+        return random.choice(target_moves)
+
+    def update_target_moves_by_delta(self, target_moves_by_delta, current_player_sum, other_player_sum, move):
+        delta: numpy.float64 = numpy.float64(current_player_sum - other_player_sum)
+        current_best_detla: numpy.float64 = target_moves_by_delta[0][1]
+        if current_best_detla is None or delta > current_best_detla:
+            target_moves_by_delta = [(move, delta)]
+        elif delta == current_best_detla:
+            target_moves_by_delta.append((move, delta))
+        return target_moves_by_delta
+
+    def update_target_moves_by_min_other(self, target_moves_by_min_other, transposed_map, move, other_index):
+        other_player_sum: numpy.float64 = sum(transposed_map[other_index])
+        current_best_min: numpy.float64 = target_moves_by_min_other[0][1]
+        if current_best_min is None or current_best_min > other_player_sum:
+            target_moves_by_min_other = [(move, other_player_sum)]
+        elif current_best_min == other_player_sum:
+            target_moves_by_min_other.append((move, other_player_sum))
+        return other_player_sum, target_moves_by_min_other
+
+    def update_target_moves_by_max_current(self, target_moves_by_max_current, transposed_map, move, color_index):
+        current_player_sum: numpy.float64 = sum(transposed_map[color_index])
+        current_best_max: numpy.float64 = target_moves_by_max_current[0][1]
+        if current_best_max is None or current_player_sum > current_best_max:
+            target_moves_by_max_current = [(move, current_player_sum)]
+        elif current_best_max == current_player_sum:
+            target_moves_by_max_current.append((move, current_player_sum))
+        return current_player_sum, target_moves_by_max_current
+
+    def update_target_moves_by_king_delta(self, target_moves_by_king_delta, move, current_king_min, other_king_sum):
+        current_king_delta = other_king_sum - current_king_min
+        current_best_king_delta = target_moves_by_king_delta[0][1]
+        if current_best_king_delta is None or current_king_delta > current_best_king_delta:
+            target_moves_by_king_delta = [(move, current_king_delta)]
+        elif current_king_delta == current_best_king_delta:
+            target_moves_by_king_delta.append((move, current_king_delta))
+        return target_moves_by_king_delta
+
+    def update_target_moves_by_min_current_king(self, target_moves_by_min_current_king, heatmap, move, other_index,
+                                                current_king_box):
+        current_king_map = heatmap[current_king_box].transpose()[other_index]
+        current_king_min = sum(current_king_map)
+        current_best_king_min = target_moves_by_min_current_king[0][1]
+        if current_best_king_min is None or current_best_king_min > current_king_min:
+            target_moves_by_min_current_king = [(move, current_king_min)]
+        elif current_king_min == current_best_king_min:
+            target_moves_by_min_current_king.append((move, current_king_min))
+        return current_king_min, target_moves_by_min_current_king
+
+    def update_target_moves_by_max_other_king(self, target_moves_by_max_other_king, heatmap, move, color_index,
+                                              other_king_box):
+        other_king_map = heatmap[other_king_box].transpose()[color_index]
+        other_king_sum = sum(other_king_map)
+        current_best_king_max = target_moves_by_max_other_king[0][1]
+        if current_best_king_max is None or other_king_sum > current_best_king_max:
+            target_moves_by_max_other_king = [(move, other_king_sum)]
+        elif other_king_sum == current_best_king_max:
+            target_moves_by_max_other_king.append((move, other_king_sum))
+        return other_king_sum, target_moves_by_max_other_king
+
+    @staticmethod
+    def heatmap_data_is_zeros(heatmap: heatmaps.GradientHeatmap) -> bool:
+        """
+
+        Parameters
+        ----------
+        heatmap : heatmaps.GradientHeatmap
+
+        Returns
+        -------
+        bool
+
+        Examples
+        --------
+        >>> from chmengine import CMHMEngine
+        >>> from heatmaps import GradientHeatmap
+        >>> hmap = GradientHeatmap()
+        >>> CMHMEngine.heatmap_data_is_zeros(hmap)
+        True
+        >>> hmap[32][1] = 1.0
+        >>> CMHMEngine.heatmap_data_is_zeros(hmap)
+        False
+        """
+        return (heatmap.data == numpy.float64(0.0)).all()
+
+    def get_king_boxes(self) -> Tuple[List[int], List[int]]:
+        """
+        Returns
+        -------
+        Tuple[List[int], List[int]]
+        """
         other_king_square = self.board.king(not self.board.turn)
         current_king_square = self.board.king(self.board.turn)
         other_king_box = []
@@ -164,58 +301,7 @@ class CMHMEngine:
                     other_king_box.append(other_king_square)
                 if 0 <= current_king_square <= 63:
                     current_king_box.append(other_king_square)
-
-        for move, heatmap in move_maps_items:
-            other_king_map = heatmap[other_king_box].transpose()[color_index]
-            other_king_sum = sum(other_king_map)
-            current_best_king_max = target_moves_by_max_other_king[0][1]
-            if current_best_king_max is None or other_king_sum > current_best_king_max:
-                target_moves_by_max_other_king = [(move, other_king_sum)]
-            elif other_king_sum == current_best_king_max:
-                target_moves_by_max_other_king.append((move, other_king_sum))
-
-            current_king_map = heatmap[current_king_box].transpose()[other_index]
-            current_king_min = sum(current_king_map)
-            current_best_king_min = target_moves_by_min_current_king[0][1]
-            if current_best_king_min is None or current_best_king_min > current_king_min:
-                target_moves_by_min_current_king = [(move, current_king_min)]
-            elif current_king_min == current_best_king_min:
-                target_moves_by_min_current_king.append((move, current_king_min))
-
-            transposed_map: numpy.ndarray = heatmap.data.transpose()
-            current_player_sum: numpy.float64 = sum(transposed_map[color_index])
-            current_best_max: numpy.float64 = target_moves_by_max_current[0][1]
-            if current_best_max is None or current_player_sum > current_best_max:
-                target_moves_by_max_current = [(move, current_player_sum)]
-            elif current_best_max == current_player_sum:
-                target_moves_by_max_current.append((move, current_player_sum))
-
-            other_player_sum: numpy.float64 = sum(transposed_map[other_index])
-            current_best_min: numpy.float64 = target_moves_by_min_other[0][1]
-            if current_best_min is None or current_best_min > other_player_sum:
-                target_moves_by_min_other = [(move, other_player_sum)]
-            elif current_best_min == other_player_sum:
-                target_moves_by_min_other.append((move, other_player_sum))
-
-            delta: numpy.float64 = numpy.float64(current_player_sum - other_player_sum)
-            current_best_detla: numpy.float64 = target_moves_by_delta[0][1]
-            if current_best_detla is None or delta > current_best_detla:
-                target_moves_by_delta = [(move, delta)]
-            elif delta == current_best_detla:
-                target_moves_by_delta.append((move, delta))
-        target_moves = []
-        if "delta" in pick_by.lower():
-            target_moves += target_moves_by_delta
-        if "min" in pick_by.lower():
-            target_moves += target_moves_by_min_other
-        if "max" in pick_by.lower():
-            target_moves += target_moves_by_max_current
-        if "king-atk" in pick_by.lower():
-            target_moves += target_moves_by_max_other_king
-        if "king-def" in pick_by.lower():
-            target_moves += target_moves_by_min_current_king
-
-        return random.choice(target_moves)
+        return current_king_box, other_king_box
 
     def get_or_calc_move_maps_list(self) -> List[Tuple[chess.Move, heatmaps.GradientHeatmap]]:
         """
@@ -366,7 +452,7 @@ class PlayCMHMEngine:
                 other_moves = list(self.engine.board.legal_moves)
                 print(f"All legal moves: {', '.join([m.uci() for m in other_moves])}")
                 my_move_choice = self.engine.pick_move(pick_by=pick_by)
-                print(f"My recommended move has a score of {my_move_choice[1]:.2f}: {my_move_choice[0]}")
+                print(f"My recommended move has a {pick_by} score of {my_move_choice[1]:.2f}: {my_move_choice[0]}")
             except ValueError:
                 outcome = self.engine.board.outcome()
                 print(f"Game Over: {outcome}\n{self.engine.board}")
@@ -384,6 +470,8 @@ class PlayCMHMEngine:
                 game_heads["White"] = self.player_name if self.cpu_index else self.cpu_name
                 game_heads["Black"] = self.cpu_name if self.cpu_index else self.player_name
                 game_heads["Termination"] = outcome.termination.name
+                game_heads["CMHMEngineMode"] = f"pick_by='{pick_by}'"
+                game_heads["CMHMEngineDepth"] = str(self.engine.depth)
                 fname = path.join(
                     ".",
                     "pgns",
