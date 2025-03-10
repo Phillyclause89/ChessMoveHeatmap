@@ -660,15 +660,12 @@ class CMHMEngine2(CMHMEngine):
             ) - sum(
                 new_heatmap_transposed[other_index]
             )
-            print(f"{move.uci()} inital score: {initial_move_score:.2f}")
             initial_king_box_score = sum(
                 new_heatmap_transposed[current_index][new_other_king_box]
             ) - sum(
                 new_heatmap_transposed[other_index][new_current_king_box]
             )
-            print(f"{move.uci()} inital king box score: {initial_king_box_score:.2f}")
             initial_move_score += initial_king_box_score
-            print(f"{move.uci()} updated inital score: {initial_move_score:.2f}")
             next_moves: List[Move] = self.current_moves_list(new_board)
             response_moves: List[Tuple[Optional[Move], Optional[numpy.float64]]]
             response_moves, = self.null_target_moves(1)
@@ -703,7 +700,7 @@ class CMHMEngine2(CMHMEngine):
                 if next_move_score < initial_move_score:
                     if early_exit:
                         break
-            print(f"{move.uci()}->", self.formatted_moves(response_moves))
+            print(f"{move.uci()}: {initial_move_score:.2f}->", self.formatted_moves(response_moves))
             best_reaponse_score = response_moves[0][1]
             move_score = best_reaponse_score if best_reaponse_score is not None else initial_move_score
             if moves[0] == (None, None):
