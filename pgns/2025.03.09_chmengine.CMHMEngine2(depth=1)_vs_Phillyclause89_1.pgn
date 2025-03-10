@@ -1,0 +1,16 @@
+[Event "chmengine.CMHMEngine2(depth=1) vs Phillyclause89"]
+[Site "Kindom of Phil"]
+[Date "2025.03.09"]
+[Round "1"]
+[White "chmengine.CMHMEngine2(depth=1)"]
+[Black "Phillyclause89"]
+[Result "0-1"]
+[Timezone "Pacific Daylight Time"]
+[UTCDate "2025.03.09"]
+[UTCTime "22:40:34"]
+[Termination "CHECKMATE"]
+[CMHMEngineMode "pick_by='CMHMEngine2'"]
+[CMHMEngineDepth "1"]
+
+1. e3 e5 2. Qg4 Nf6 3. Qf5 d6 4. Bb5+ c6 5. Bxc6+ Nxc6 6. Qd3 e4 7. Qb5 a6 8. Qc4 Be6 9. Qxc6+ bxc6 10. Nc3 d5 11. Nf3 exf3 12. b4 Bxb4 13. Bb2 d4 14. gxf3 dxc3 15. O-O cxb2 16. Rab1 Qxd2 17. Kh1 Qxc2 18. Rxb2 Qxb2 19. Rd1 Qxf2 20. h4 Nh5 21. Rg1 Qxh4+ 22. Kg2 Qh3+ 23. Kf2 O-O-O 24. Rg2 Rd2+ 25. Ke1 Qxg2 26. a4 Qf2# 0-1
+

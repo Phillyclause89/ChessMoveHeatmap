@@ -1,6 +1,7 @@
 """A silly chess engine that picks moves using heatmaps"""
 import datetime
 import random
+from bisect import bisect_left
 from os import path
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
@@ -515,14 +516,19 @@ class CMHMEngine:
         """
         return (heatmap.data == numpy.float64(0.0)).all()
 
-    def get_king_boxes(self) -> Tuple[List[int], List[int]]:
-        """
+    def get_king_boxes(self, board: Optional[chess.Board] = None) -> Tuple[List[int], List[int]]:
+        """current_king_box, other_king_box
+
+        Parameters
+        ----------
+        board : Optional[chess.Board]
+
         Returns
         -------
         Tuple[List[int], List[int]]
         """
-        other_king_square = self.board.king(not self.board.turn)
-        current_king_square = self.board.king(self.board.turn)
+        other_king_square = self.board.king(not self.board.turn) if board is None else board.king(not board.turn)
+        current_king_square = self.board.king(self.board.turn) if board is None else board.king(board.turn)
         other_king_box = []
         current_king_box = []
         for long in (-1, 0, 1):
@@ -631,69 +637,84 @@ class CMHMEngine2(CMHMEngine):
         (Move.from_uci('e2e4'), 10.0)
         """
         current_index: int = self.current_player_heatmap_index
-        # other_index: int = self.other_player_heatmap_index
+        other_index: int = self.other_player_heatmap_index
         current_moves: List[Move] = self.current_moves_list()
         if len(current_moves) == 0:
-            raise ValueError("Current Board has no legal moves.")
-        best_moves: List[Tuple[Optional[Move], Optional[numpy.float64]]]
-        other_moves: List[Tuple[Optional[Move], Optional[numpy.float64]]]
-        best_moves, other_moves = self.null_target_moves(2)
+            raise ValueError(f"Current Board has no legal moves: {self.board.fen()}")
+        moves, = self.null_target_moves(1)
         for move in current_moves:
             new_board: Board = self.board_copy_pushed(move)
+            new_current_king_box, new_other_king_box = self.get_king_boxes(new_board)
             new_heatmap: GradientHeatmap = chmutils.get_or_compute_heatmap_with_better_discounts(
                 new_board, depth=self.depth
             )
-            move_score = sum(new_heatmap.data.transpose()[current_index])
-            print(self.formatted_moves([(move, move_score)]))
+            new_heatmap_transposed = new_heatmap.data.transpose()
+            if self.heatmap_data_is_zeros(new_heatmap) and new_board.is_checkmate():
+                if early_exit:
+                    return move, numpy.nan
+                new_heatmap_transposed[current_index] = numpy.float64(
+                    len([p for p, p in new_board.piece_map().items() if p.color == self.board.turn])
+                )
+            initial_move_score = sum(
+                new_heatmap_transposed[current_index]
+            ) - sum(
+                new_heatmap_transposed[other_index]
+            )
+            print(f"{move.uci()} inital score: {initial_move_score:.2f}")
+            initial_king_box_score = sum(
+                new_heatmap_transposed[current_index][new_other_king_box]
+            ) - sum(
+                new_heatmap_transposed[other_index][new_current_king_box]
+            )
+            print(f"{move.uci()} inital king box score: {initial_king_box_score:.2f}")
+            initial_move_score += initial_king_box_score
+            print(f"{move.uci()} updated inital score: {initial_move_score:.2f}")
             next_moves: List[Move] = self.current_moves_list(new_board)
-            best_reaponse: List[Tuple[Optional[Move], Optional[numpy.float64]]]
-            best_reaponse, = self.null_target_moves(1)
-            good_move = True
+            response_moves: List[Tuple[Optional[Move], Optional[numpy.float64]]]
+            response_moves, = self.null_target_moves(1)
             for next_move in next_moves:
                 next_board: Board = new_board.copy()
                 next_board.push(next_move)
+                next_current_king_box, next_other_king_box = self.get_king_boxes(next_board)
                 next_heatmap: GradientHeatmap = chmutils.get_or_compute_heatmap_with_better_discounts(
                     next_board, depth=self.depth
                 )
-                next_move_score = sum(next_heatmap.data.transpose()[current_index])
-                if best_reaponse[0] == (None, None):
-                    best_reaponse = [(next_move, next_move_score)]
-                elif best_reaponse[0][1] >= next_move_score:
-                    best_reaponse.insert(0, (next_move, next_move_score))
+                next_heatmap_transposed = next_heatmap.data.transpose()
+                if self.heatmap_data_is_zeros(next_heatmap) and next_board.is_checkmate():
+                    next_heatmap_transposed[other_index] = numpy.float64(
+                        len([p for p, p in next_board.piece_map().items() if p.color != self.board.turn])
+                    )
+                next_move_score = sum(
+                    next_heatmap_transposed[current_index]
+                ) - sum(
+                    next_heatmap_transposed[other_index]
+                )
+                next_king_box_score = sum(
+                    next_heatmap_transposed[current_index][next_other_king_box]
+                ) - sum(
+                    next_heatmap_transposed[other_index][next_current_king_box]
+                )
+                next_move_score += next_king_box_score
+                if response_moves[0][0] is None:
+                    response_moves = [(next_move, next_move_score)]
                 else:
-                    best_reaponse.append((next_move, next_move_score))
-                if next_move_score < move_score:
-                    good_move = False
+                    pos = bisect_left([x[1] for x in response_moves], next_move_score)
+                    response_moves.insert(pos, (next_move, next_move_score))
+                if next_move_score < initial_move_score:
                     if early_exit:
                         break
-            print("->", self.formatted_moves(best_reaponse))
-            if good_move:
-                best_reaponse_score = best_reaponse[0][1]
-                move_score = best_reaponse_score - move_score if best_reaponse_score is not None else move_score
-                if best_moves[0] == (None, None):
-                    best_moves = [(move, move_score)]
-                elif best_moves[0][1] <= move_score:
-                    best_moves.insert(0, (move, move_score))
-                else:
-                    best_moves.append((move, move_score))
-                print(f"{move.uci()}: {move_score} is good. Opponent has no better move(s).")
+            print(f"{move.uci()}->", self.formatted_moves(response_moves))
+            best_reaponse_score = response_moves[0][1]
+            move_score = best_reaponse_score if best_reaponse_score is not None else initial_move_score
+            if moves[0] == (None, None):
+                moves = [(move, move_score)]
             else:
-                best_reaponse_score = best_reaponse[0][1]
-                move_score = best_reaponse_score - move_score if best_reaponse_score is not None else move_score
-                if other_moves[0] == (None, None):
-                    other_moves = [(move, move_score)]
-                elif other_moves[0][1] <= move_score:
-                    other_moves.insert(0, (move, move_score))
-                else:
-                    other_moves.append((move, move_score))
-                print(f"{move.uci()}: {move_score} is BAD. Opponent has better move(s).")
-        print(self.formatted_moves(best_moves))
-        print(self.formatted_moves(other_moves))
-        picks = [
-            (m, s) for m, s in best_moves if s == best_moves[0][1]
-        ] if best_moves[0][0] is not None else [
-            (m, s) for m, s in other_moves if s == other_moves[0][1]
-        ]
+                pos = bisect_left([-x[1] for x in moves], -move_score)
+                moves.insert(pos, (move, move_score))
+            print(f"{move.uci()} final score: {move_score:.2f}")
+        print("All moves ranked:", self.formatted_moves(moves))
+        picks = [(m, s) for m, s in moves if s == moves[0][1]]
+        print("Engine moves:", self.formatted_moves(picks))
 
         return random.choice(picks)
 
