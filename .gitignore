@@ -154,3 +154,4 @@ chmutils/heatmap_cache.db
 *.db
 *.db-shm
 SQLite3Caches/QTables/qtable_depth_1.db-journal
+SQLite3Caches/Better/heatmap_cache_depth_1.db-wal
