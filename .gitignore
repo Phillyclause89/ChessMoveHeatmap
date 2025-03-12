@@ -153,3 +153,4 @@ cython_debug/
 chmutils/heatmap_cache.db
 *.db
 *.db-shm
+SQLite3Caches/QTables/qtable_depth_1.db-journal
