@@ -1,12 +1,14 @@
 """A silly chess engine that picks moves using heatmaps"""
 import datetime
 import random
+import sqlite3
 from bisect import bisect_left
-from os import path
+from os import makedirs, path
+from sqlite3 import Connection, Cursor
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
 import chess
-from chess import Board, Move, pgn
+from chess import Board, Move, Outcome, Piece, pgn
 import numpy
 from numpy import float_
 from numpy.typing import NDArray
@@ -69,7 +71,7 @@ class CMHMEngine:
 
     @depth.setter
     def depth(self, new_depth: int):
-        """Sets curret depth setting if >= 0"""
+        """Sets current depth setting if >= 0"""
         if new_depth < 0:
             raise ValueError(f"depth must be greater than or equal to 0, got {new_depth}")
         self._depth = new_depth
@@ -338,10 +340,10 @@ class CMHMEngine:
 
         """
         delta: numpy.float64 = numpy.float64(current_player_sum - other_player_sum)
-        current_best_detla: numpy.float64 = target_moves_by_delta[0][1]
-        if current_best_detla is None or delta > current_best_detla:
+        current_best_delta: numpy.float64 = target_moves_by_delta[0][1]
+        if current_best_delta is None or delta > current_best_delta:
             target_moves_by_delta = [(move, delta)]
-        elif delta == current_best_detla:
+        elif delta == current_best_delta:
             target_moves_by_delta.append((move, delta))
         return target_moves_by_delta
 
@@ -527,19 +529,42 @@ class CMHMEngine:
         -------
         Tuple[List[int], List[int]]
         """
-        other_king_square = self.board.king(not self.board.turn) if board is None else board.king(not board.turn)
-        current_king_square = self.board.king(self.board.turn) if board is None else board.king(board.turn)
-        other_king_box = []
-        current_king_box = []
+        other_king_square: int = self.board.king(not self.board.turn) if board is None else board.king(not board.turn)
+        current_king_square: int = self.board.king(self.board.turn) if board is None else board.king(board.turn)
+        other_king_box: List[int] = [other_king_square]
+        current_king_box: List[int] = [current_king_square]
+        long: int
         for long in (-1, 0, 1):
+            lat: int
             for lat in (-8, 0, +8):
-                oks_box_id = other_king_square + long + lat
-                cks_box_id = current_king_square + long + lat
-                if 0 <= oks_box_id <= 63 and chess.square_distance(other_king_square, oks_box_id) == 1:
+                oks_box_id: int = other_king_square + long + lat
+                cks_box_id: int = current_king_square + long + lat
+                if self.is_valid_king_box_square(board, oks_box_id, other_king_square):
                     other_king_box.append(oks_box_id)
-                if 0 <= cks_box_id <= 63 and chess.square_distance(current_king_square, cks_box_id) == 1:
+                if self.is_valid_king_box_square(board, cks_box_id, current_king_square):
                     current_king_box.append(cks_box_id)
         return current_king_box, other_king_box
+
+    @staticmethod
+    def is_valid_king_box_square(board: chess.Board, square_id: int, king_square: int) -> bool:
+        """
+
+        Parameters
+        ----------
+        board : chess.Board
+        square_id : int
+        king_square : int
+
+        Returns
+        -------
+        bool
+        """
+        if square_id < 0 or 63 < square_id or chess.square_distance(king_square, square_id) != 1:
+            return False
+        piece_at_square: Optional[Piece] = board.piece_at(square_id)
+        if isinstance(piece_at_square, chess.Piece) and piece_at_square.color != board.piece_at(king_square).color:
+            return False
+        return True
 
     def get_or_calc_move_maps_list(self) -> List[Tuple[chess.Move, heatmaps.GradientHeatmap]]:
         """
@@ -616,14 +641,81 @@ class CMHMEngine:
 
 class CMHMEngine2(CMHMEngine):
     """Overrides CMHMEngine.pick_move"""
+    qdb_path: str
+    cache_dir: str = path.join(".", chmutils.CACHE_DIR, "QTables")
 
-    def pick_move(self, pick_by: str = "", early_exit: bool = False) -> Tuple[chess.Move, numpy.float64]:
-        """
+    def __init__(self, board: Optional[chess.Board] = None, depth: int = 1) -> None:
+        super().__init__(board, depth)
+        self.qdb_path = path.join(self.cache_dir, f"qtable_depth_{self.depth}.db")
+        self._init_qdb()  # List to store moves made during the game as (state_fen, move_uci) pairs.
+
+    def _init_qdb(self) -> None:
+        """Initializes the Q-table database and creates the table if it does not exist."""
+        if not path.isdir(self.cache_dir):
+            makedirs(self.cache_dir)
+        with sqlite3.connect(self.qdb_path) as q_conn:
+            q_cursor = q_conn.cursor()
+            q_cursor.execute(
+                """
+                CREATE TABLE IF NOT EXISTS q_table (
+                    state_fen TEXT,
+                    q_value REAL,
+                    PRIMARY KEY (state_fen)
+                )
+                """
+            )
+
+    def get_q_value(self, state_fen: str) -> Optional[float]:
+        """Returns the Q-value for a given state and move, or None if not found."""
+        with sqlite3.connect(self.qdb_path) as q_conn:
+            q_cursor = q_conn.cursor()
+            q_cursor.execute(
+                "SELECT q_value FROM q_table WHERE state_fen = ?",
+                (state_fen,)
+            )
+            row: Optional[Tuple[float, ...]] = q_cursor.fetchone()
+            return row[0] if row is not None else None
+
+    def set_q_value(self, state_fen: str, value: float) -> None:
+        """Sets or updates the Q-value for a given state and move."""
+        with sqlite3.connect(self.qdb_path) as q_conn:
+            q_cursor = q_conn.cursor()
+            q_cursor.execute(
+                "INSERT OR REPLACE INTO q_table (state_fen, q_value) VALUES (?, ?)",
+                (state_fen, value)
+            )
+
+    def update_q_values(self) -> None:
+        outcome: Optional[Outcome] = self.board.outcome()
+        if outcome.winner is None:
+            return
+        while len(self.board.move_stack) > 0:
+            state = self.board.fen()
+            current_q = self.get_q_value(state)
+            if current_q is None:
+                self.board.pop()
+                continue
+            # The q score of a board fen is relative to the player who just moved
+            if self.board.turn != outcome.winner:
+                new_q = current_q + abs(current_q * 0.2)
+            else:
+                new_q = current_q - abs(current_q * 0.2)
+            self.set_q_value(state, new_q)
+            self.board.pop()
+
+    def pick_move(
+            self,
+            pick_by: str = "",
+            early_exit: bool = False,
+            king_box_multiplier: int = 1
+    ) -> Tuple[chess.Move, numpy.float64]:
+        """Overides parents pick_move method
 
         Parameters
         ----------
-        early_exit : bool
         pick_by : str
+        early_exit : bool
+        king_box_multiplier : int
 
         Returns
         -------
@@ -636,93 +728,160 @@ class CMHMEngine2(CMHMEngine):
         >>> engine.pick_move()
         (Move.from_uci('e2e4'), 10.0)
         """
-        current_index: int = self.current_player_heatmap_index
-        other_index: int = self.other_player_heatmap_index
         current_moves: List[Move] = self.current_moves_list()
+        # PlayCMHMEngine.play() needs a ValueError to detect game termination.
         if len(current_moves) == 0:
             raise ValueError(f"Current Board has no legal moves: {self.board.fen()}")
+        # Index of heatmap colors is opposite the chess lib's color mapping
+        current_index: int = self.current_player_heatmap_index
+        other_index: int = self.other_player_heatmap_index
+        # moves will be current moves ordered by engine's score best to worst
+        moves: List[Tuple[Optional[Move], Optional[float_]]]
         moves, = self.null_target_moves(1)
+        move: Move
         for move in current_moves:
+            move_uci: str = move.uci()
             new_board: Board = self.board_copy_pushed(move)
-            new_current_king_box, new_other_king_box = self.get_king_boxes(new_board)
-            new_heatmap: GradientHeatmap = chmutils.get_or_compute_heatmap_with_better_discounts(
-                new_board, depth=self.depth
-            )
-            new_heatmap_transposed = new_heatmap.data.transpose()
-            if self.heatmap_data_is_zeros(new_heatmap) and new_board.is_checkmate():
-                if early_exit:
-                    return move, numpy.nan
-                new_heatmap_transposed[current_index] = numpy.float64(
-                    len([p for p, p in new_board.piece_map().items() if p.color == self.board.turn])
+            state_fen = new_board.fen()
+            q_val = self.get_q_value(state_fen)
+            if q_val is None:
+                print(f"Calculating score for move: {move_uci}")
+                new_current_king_box: List[int]
+                new_other_king_box: List[int]
+                new_current_king_box, new_other_king_box = self.get_king_boxes(new_board)
+                new_heatmap: heatmaps.ChessMoveHeatmap = chmutils.get_or_compute_heatmap_with_better_discounts(
+                    new_board, depth=self.depth
                 )
-            initial_move_score = sum(
-                new_heatmap_transposed[current_index]
-            ) - sum(
-                new_heatmap_transposed[other_index]
-            )
-            initial_king_box_score = sum(
-                new_heatmap_transposed[current_index][new_other_king_box]
-            ) - sum(
-                new_heatmap_transposed[other_index][new_current_king_box]
-            )
-            initial_move_score += initial_king_box_score
-            next_moves: List[Move] = self.current_moves_list(new_board)
-            response_moves: List[Tuple[Optional[Move], Optional[numpy.float64]]]
-            response_moves, = self.null_target_moves(1)
-            for next_move in next_moves:
-                next_board: Board = new_board.copy()
-                next_board.push(next_move)
-                next_current_king_box, next_other_king_box = self.get_king_boxes(next_board)
-                next_heatmap: GradientHeatmap = chmutils.get_or_compute_heatmap_with_better_discounts(
-                    next_board, depth=self.depth
-                )
-                next_heatmap_transposed = next_heatmap.data.transpose()
-                if self.heatmap_data_is_zeros(next_heatmap) and next_board.is_checkmate():
-                    next_heatmap_transposed[other_index] = numpy.float64(
-                        len([p for p, p in next_board.piece_map().items() if p.color != self.board.turn])
+                new_heatmap_transposed: NDArray[numpy.float64] = new_heatmap.data.transpose()
+                # I wanted to rely on the heatmap as much as possible, but any game termination state win or draw
+                # results in a zeros heatmap. Thus, we cheat with new_board.is_checkmate here. (draw scores stay zero.)
+                if self.heatmap_data_is_zeros(new_heatmap) and new_board.is_checkmate():
+                    # Checkmate moves get scored as all the surviving pieces (opponent's pieces are POWs now)
+                    # being able to move to every square (the war is over, pieces can go hangout on the same square
+                    # with their surviving buddies). Anyway, this should just about guarantee checkmates get
+                    # a score higher than what a heatmap can produce from a position.
+                    new_heatmap_transposed[current_index] = numpy.float64(
+                        len(new_board.piece_map()) * (self.depth + 1)
                     )
-                next_move_score = sum(
-                    next_heatmap_transposed[current_index]
-                ) - sum(
-                    next_heatmap_transposed[other_index]
-                )
-                next_king_box_score = sum(
-                    next_heatmap_transposed[current_index][next_other_king_box]
-                ) - sum(
-                    next_heatmap_transposed[other_index][next_current_king_box]
-                )
-                next_move_score += next_king_box_score
-                if response_moves[0][0] is None:
-                    response_moves = [(next_move, next_move_score)]
-                else:
-                    pos = bisect_left([x[1] for x in response_moves], next_move_score)
-                    response_moves.insert(pos, (next_move, next_move_score))
-                if next_move_score < initial_move_score:
                     if early_exit:
-                        break
-            print(f"{move.uci()}: {initial_move_score:.2f}->", self.formatted_moves(response_moves))
-            best_reaponse_score = response_moves[0][1]
-            move_score = best_reaponse_score if best_reaponse_score is not None else initial_move_score
-            if moves[0] == (None, None):
+                        return move, sum(new_heatmap_transposed[current_index])
+                initial_move_score = self.calculate_score(
+                    current_index, other_index, new_heatmap_transposed,
+                    king_box_multiplier, new_current_king_box, new_other_king_box
+                )
+                # However, that is not our Final score,
+                # the score after finding the best response to our move should be the final score.
+                next_moves: List[Move] = self.current_moves_list(new_board)
+                response_moves: List[Tuple[Optional[Move], Optional[numpy.float64]]]
+                response_moves, = self.null_target_moves(1)
+                next_move: Move
+                for next_move in next_moves:
+                    # next_move score calculations stay in the perspective of current player
+                    next_board: Board = new_board.copy()
+                    next_board.push(next_move)
+                    next_current_king_box: List[int]
+                    next_other_king_box: List[int]
+                    next_current_king_box, next_other_king_box = self.get_king_boxes(next_board)
+                    next_heatmap: heatmaps.ChessMoveHeatmap = chmutils.get_or_compute_heatmap_with_better_discounts(
+                        next_board, depth=self.depth
+                    )
+                    next_heatmap_transposed: NDArray[numpy.float64] = next_heatmap.data.transpose()
+                    if self.heatmap_data_is_zeros(next_heatmap) and next_board.is_checkmate():
+                        # No early exit here as this is a bad is_checkmate result :(
+                        next_heatmap_transposed[other_index] = numpy.float64(
+                            len(next_board.piece_map()) * (self.depth + 1)
+                        )
+                    next_move_score: numpy.float64 = self.calculate_score(
+                        current_index, other_index, next_heatmap_transposed,
+                        king_box_multiplier, next_current_king_box, next_other_king_box
+                    )
+                    if response_moves[0][0] is None:
+                        response_moves = [(next_move, next_move_score)]
+                    else:
+                        # response moves are inserted to form worst scores to best order (perspective of current player)
+                        pos: int = bisect_left([x[1] for x in response_moves], next_move_score)
+                        response_moves.insert(pos, (next_move, next_move_score))
+                print(f"{move_uci} initial score: {initial_move_score:.2f} ->", self.formatted_moves(response_moves))
+                # Once all responses to a move reviewed, final move score is the worst outcome to current player.
+                best_response_score: Optional[numpy.float64] = response_moves[0][1]
+            else:
+                print("Fetching Score From Q table...")
+                initial_move_score, best_response_score = numpy.float64(q_val), numpy.float64(q_val)
+            move_score: numpy.float64 = best_response_score if best_response_score is not None else initial_move_score
+            if q_val is None:
+                self.set_q_value(state_fen, move_score)
+            if moves[0][0] is None:
                 moves = [(move, move_score)]
             else:
+                # current moves are inserted into our moves list in order of best scores to worst
                 pos = bisect_left([-x[1] for x in moves], -move_score)
                 moves.insert(pos, (move, move_score))
-            print(f"{move.uci()} final score: {move_score:.2f}")
+            print(f"{move_uci} final score: {move_score:.2f}")
+        # Final pick is a random choice of all moves equal to the highest scoring move
         print("All moves ranked:", self.formatted_moves(moves))
         picks = [(m, s) for m, s in moves if s == moves[0][1]]
         print("Engine moves:", self.formatted_moves(picks))
+        chosen_move, chosen_q = random.choice(picks)
+        return chosen_move, chosen_q
 
-        return random.choice(picks)
+    @staticmethod
+    def calculate_score(
+            current_index: int,
+            other_index: int,
+            new_heatmap_transposed: NDArray[numpy.float64],
+            king_box_multiplier: int,
+            new_current_king_box: List[int],
+            new_other_king_box: List[int]
+    ) -> numpy.float64:
+        """
+
+        Parameters
+        ----------
+        current_index : int
+        other_index : int
+        new_heatmap_transposed : NDArray[numpy.float64]
+        king_box_multiplier : int
+        new_current_king_box : List[int]
+        new_other_king_box : List[int]
+
+        Returns
+        -------
+        numpy.float64
+
+        """
+        # Calculating score at this level is only needed in corner-case scenarios
+        # where every possible move results in game termination.
+        # score is initially, the delta of the sums of each player's heatmap.data values.
+        initial_move_score: numpy.float64 = sum(
+            new_heatmap_transposed[current_index]
+        ) - sum(
+            new_heatmap_transposed[other_index]
+        )
+        # king box score adds weights to the scores of squares around the kings.
+        initial_king_box_score: numpy.float64 = sum(new_heatmap_transposed[current_index][new_other_king_box]) - (
+                sum(new_heatmap_transposed[other_index][new_current_king_box]) * king_box_multiplier
+        )
+        # Final score is the agg of both above.
+        return numpy.float64(initial_move_score + initial_king_box_score)
 
     @staticmethod
     def formatted_moves(moves: List[Tuple[Optional[Move], Optional[numpy.float64]]]) -> List[Optional[Tuple[str, str]]]:
+        """
+
+        Parameters
+        ----------
+        moves : List[Tuple[Optional[Move], Optional[numpy.float64]]]
+
+        Returns
+        -------
+        List[Optional[Tuple[str, str]]]
+        """
         return [(m.uci(), f"{s:.2f}") for m, s in moves if m is not None]
 
 
 # pylint: disable=too-few-public-methods
 class PlayCMHMEngine:
-    """Play a game aginst the engine."""
+    """Play a game against the engine."""
     player_name: str = "Unknown"
     cpu_name: str = "chmengine.CMHMEngine"
     site: str = player_name
@@ -793,7 +952,7 @@ class PlayCMHMEngine:
             self.player_color, self.cpu_color = self.cpu_color, self.player_color
 
     def play(self, pick_by: str = "delta") -> None:
-        """Play a game agianst the engine"""
+        """Play a game against the engine"""
         self.game_round += 1
         local_time = datetime.datetime.now(datetime.datetime.now().astimezone().tzinfo)
         print(f"Round: {self.game_round} | Time: {str(local_time)}\n{self.engine.board}")
@@ -809,6 +968,7 @@ class PlayCMHMEngine:
                     print(f"I'll play {move_number}. {my_move_choice[0]}")
                     self.engine.board.push(my_move_choice[0])
                 else:
+                    print(self.engine.board)
                     player_move_choice = chess.Move.from_uci(
                         input(f"You're white, and thus it's your move: {move_number}. ")
                     )
@@ -821,6 +981,7 @@ class PlayCMHMEngine:
                     self.engine.board.push(my_move_choice[0])
                     move_number += 1
                 else:
+                    print(self.engine.board)
                     player_move_choice = chess.Move.from_uci(
                         input(
                             f"You're black, and thus it's your move: {move_number}. {self.engine.board.move_stack[-1]} "
@@ -838,8 +999,10 @@ class PlayCMHMEngine:
                 print(f"My recommended move has a {pick_by} score of {my_move_choice[1]:.2f}: {my_move_choice[0]}")
             except ValueError:
                 outcome = self.engine.board.outcome()
-                print(f"Game Over: {outcome}\n{self.engine.board}")
                 game = pgn.Game.from_board(self.engine.board)
+                if isinstance(self.engine, CMHMEngine2):
+                    self.engine.update_q_values()
+                print(f"Game Over: {outcome}\n{self.engine.board}")
                 game_heads = game.headers
                 game_heads["Event"] = f"{self.player_name} vs {self.cpu_name}" if (
                     self.cpu_index
@@ -855,12 +1018,12 @@ class PlayCMHMEngine:
                 game_heads["Termination"] = outcome.termination.name
                 game_heads["CMHMEngineMode"] = f"pick_by='{pick_by}'"
                 game_heads["CMHMEngineDepth"] = str(self.engine.depth)
-                fname = path.join(
+                file_name: str = path.join(
                     ".",
                     "pgns",
                     f"{game_heads['Date']}_{game_heads['Event'].replace(' ', '_')}_{game_heads['Round']}.pgn"
                 )
-                with open(fname, "w", encoding="utf-8") as file:
+                with open(file_name, "w", encoding="utf-8") as file:
                     print(game, file=file, end="\n\n")
                 self.round_results.append(game)
                 self.engine.board = chess.Board()
