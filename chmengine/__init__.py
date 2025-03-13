@@ -1077,6 +1077,8 @@ class PlayCMHMEngine:
                 print(white_move_text if self.engine.board.turn else black_move_text)
                 self.engine.board.push(move)
             outcome: Outcome = self.engine.board.outcome()
+            if outcome is None:
+                outcome = self.engine.board.outcome(claim_draw=True)
             game = pgn.Game.from_board(self.engine.board)
             self.engine.update_q_values()
             game_heads = game.headers
