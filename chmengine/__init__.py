@@ -3,6 +3,7 @@ import datetime
 import random
 import sqlite3
 from bisect import bisect_left
+import datetime
 from os import makedirs, path
 from sqlite3 import Connection, Cursor
 from typing import Any, Callable, Dict, List, Optional, Tuple
@@ -13,6 +14,7 @@ import numpy
 from numpy import float_
 from numpy.typing import NDArray
 
+import chmengine
 import heatmaps
 import chmutils
 from heatmaps import GradientHeatmap
@@ -686,8 +688,14 @@ class CMHMEngine2(CMHMEngine):
             )
 
     def update_q_values(self) -> None:
+        """Update Q Table after game termination
+
+        pops all moves out of the board object
+
+        """
         outcome: Optional[Outcome] = self.board.outcome()
         if outcome.winner is None:
+            self.board.clear_stack()
             return
         while len(self.board.move_stack) > 0:
             state = self.board.fen()
@@ -954,7 +962,7 @@ class PlayCMHMEngine:
     def play(self, pick_by: str = "delta") -> None:
         """Play a game against the engine"""
         self.game_round += 1
-        local_time = datetime.datetime.now(datetime.datetime.now().astimezone().tzinfo)
+        local_time = self.get_local_time()
         print(f"Round: {self.game_round} | Time: {str(local_time)}\n{self.engine.board}")
         other_moves: List[chess.Move] = list(self.engine.board.legal_moves)
         print(f"All legal moves: {', '.join([m.uci() for m in other_moves])}\nCalculating move scores...")
@@ -1009,10 +1017,7 @@ class PlayCMHMEngine:
                 ) else f"{self.cpu_name} vs {self.player_name}"
                 game_heads["Site"] = self.site
                 game_heads["Round"] = str(self.game_round)
-                game_heads["Date"] = local_time.strftime("%Y.%m.%d")
-                game_heads["Timezone"] = str(local_time.tzinfo)
-                game_heads["UTCDate"] = local_time.astimezone(datetime.timezone.utc).strftime("%Y.%m.%d")
-                game_heads["UTCTime"] = local_time.astimezone(datetime.timezone.utc).strftime("%H:%M:%S")
+                self.set_all_datetime_headers(game_heads, local_time)
                 game_heads["White"] = self.player_name if self.cpu_index else self.cpu_name
                 game_heads["Black"] = self.cpu_name if self.cpu_index else self.player_name
                 game_heads["Termination"] = outcome.termination.name
@@ -1023,8 +1028,106 @@ class PlayCMHMEngine:
                     "pgns",
                     f"{game_heads['Date']}_{game_heads['Event'].replace(' ', '_')}_{game_heads['Round']}.pgn"
                 )
-                with open(file_name, "w", encoding="utf-8") as file:
-                    print(game, file=file, end="\n\n")
+                self.save_to_pgn(file_name, game)
                 self.round_results.append(game)
                 self.engine.board = chess.Board()
                 break
+
+    @staticmethod
+    def save_to_pgn(file_name: str, game: pgn.Game) -> None:
+        """
+
+        Parameters
+        ----------
+        file_name : str
+        game
+
+        """
+        with open(file_name, "w", encoding="utf-8") as file:
+            print(game, file=file, end="\n\n")
+
+    # pylint: disable=invalid-name
+    def trainCMHMEngine2(self, training_games: int = 1000) -> None:
+        """Trains engine. CMHMEngine2 specifically
+
+        Parameters
+        ----------
+        training_games : int
+        """
+        if not isinstance(self.engine, chmengine.CMHMEngine2):
+            raise TypeError(f"Current engine is not type chmengine.CMHMEngine2: {type(self.engine)}")
+        for i in range(training_games):
+            game_n: int = i + 1
+            print(f"Game {game_n}")
+            local_time: datetime = self.get_local_time()
+            print(local_time)
+            move_number: int = 0
+            last_move: str = ""
+            while self.engine.board.outcome() is None and not self.engine.board.can_claim_draw():
+                move_number += 1
+                print(self.engine.board)
+                move: Move
+                score: numpy.float64
+                move, score = self.engine.pick_move()
+                s_str: str = f"{score:.2f}"
+                white_move_text: str = f"{move_number}. {move.uci()}: {s_str}"
+                if len(self.engine.board.move_stack) > 0:
+                    last_move = self.engine.board.move_stack[-1].uci()
+                black_move_text: str = f"{move_number}. {last_move} {move.uci()}: {s_str}"
+                print(white_move_text if self.engine.board.turn else black_move_text)
+                self.engine.board.push(move)
+            outcome: Outcome = self.engine.board.outcome()
+            game = pgn.Game.from_board(self.engine.board)
+            self.engine.update_q_values()
+            game_heads = game.headers
+            game_heads["Event"] = "CMHMEngine2 vs CMHMEngine2"
+            game_heads["Site"] = "Kingdom of Phil"
+            game_heads["Round"] = str(i + 1)
+            self.set_all_datetime_headers(game_heads, local_time)
+            game_heads["White"] = "CMHMEngine2"
+            game_heads["Black"] = "CMHMEngine2"
+            game_heads["Termination"] = outcome.termination.name
+            game_heads["CMHMEngineDepth"] = str(self.engine.depth)
+            file_name: str = path.join(
+                ".",
+                "pgns",
+                f"{game_heads['Date']}_{game_heads['Event'].replace(' ', '_')}_{game_heads['Round']}.pgn"
+            )
+            self.save_to_pgn(file_name, game)
+            print(game)
+            self.engine.board = chess.Board()
+
+    def set_all_datetime_headers(self, game_heads: pgn.Headers, local_time: datetime) -> None:
+        """
+
+        Parameters
+        ----------
+        game_heads : chess.pgn.Headers
+        local_time : datetime.datetime
+        """
+        game_heads["Date"] = local_time.strftime("%Y.%m.%d")
+        game_heads["Timezone"] = str(local_time.tzinfo)
+        self.set_utc_headers(game_heads, local_time)
+
+    @staticmethod
+    def get_local_time() -> datetime:
+        """
+
+        Returns
+        -------
+        datetime.datetime
+
+        """
+        return datetime.datetime.now(datetime.datetime.now().astimezone().tzinfo)
+
+    @staticmethod
+    def set_utc_headers(game_heads: pgn.Headers, local_time: datetime) -> None:
+        """Sets UTC header info of pgn file data from local timestamp
+
+        Parameters
+        ----------
+        game_heads : chess.pgn.Headers
+        local_time : datetime.datetime
+        """
+        game_heads["UTCDate"] = local_time.astimezone(datetime.timezone.utc).strftime("%Y.%m.%d")
+        game_heads["UTCTime"] = local_time.astimezone(datetime.timezone.utc).strftime("%H:%M:%S")
