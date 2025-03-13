@@ -693,7 +693,7 @@ class CMHMEngine2(CMHMEngine):
         pops all moves out of the board object
 
         """
-        outcome: Optional[Outcome] = self.board.outcome()
+        outcome: Optional[Outcome] = self.board.outcome(claim_draw=True)
         if outcome.winner is None:
             self.board.clear_stack()
             return
