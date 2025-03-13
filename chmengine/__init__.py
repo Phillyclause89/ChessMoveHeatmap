@@ -708,8 +708,10 @@ class CMHMEngine2(CMHMEngine):
             else:
                 if current_q < 0:
                     new_q = current_q + abs(current_q * 0.2)
+                    new_q = numpy.float64(0.0) if new_q > 0 else new_q
                 elif current_q > 0:
                     new_q = current_q - abs(current_q * 0.2)
+                    new_q = numpy.float64(0.0) if new_q < 0 else new_q
                 else:
                     new_q = current_q
             self.set_q_value(state, new_q)
@@ -1051,16 +1053,17 @@ class PlayCMHMEngine:
             print(game, file=file, end="\n\n")
 
     # pylint: disable=invalid-name
-    def trainCMHMEngine2(self, training_games: int = 1000) -> None:
+    def trainCMHMEngine2(self, training_games: int = 1000, training_games_start:int=0) -> None:
         """Trains engine. CMHMEngine2 specifically
 
         Parameters
         ----------
         training_games : int
+        training_games_start : int
         """
         if not isinstance(self.engine, chmengine.CMHMEngine2):
             raise TypeError(f"Current engine is not type chmengine.CMHMEngine2: {type(self.engine)}")
-        for i in range(training_games):
+        for i in range(training_games_start, training_games):
             game_n: int = i + 1
             print(f"Game {game_n}")
             local_time: datetime = self.get_local_time()
