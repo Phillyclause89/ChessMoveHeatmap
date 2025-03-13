@@ -694,9 +694,6 @@ class CMHMEngine2(CMHMEngine):
 
         """
         outcome: Optional[Outcome] = self.board.outcome(claim_draw=True)
-        if outcome.winner is None:
-            self.board.clear_stack()
-            return
         while len(self.board.move_stack) > 0:
             state = self.board.fen()
             current_q = self.get_q_value(state)
@@ -706,8 +703,15 @@ class CMHMEngine2(CMHMEngine):
             # The q score of a board fen is relative to the player who just moved
             if self.board.turn != outcome.winner:
                 new_q = current_q + abs(current_q * 0.2)
-            else:
+            elif self.board.turn == outcome.winner:
                 new_q = current_q - abs(current_q * 0.2)
+            else:
+                if current_q < 0:
+                    new_q = current_q + abs(current_q * 0.2)
+                elif current_q > 0:
+                    new_q = current_q - abs(current_q * 0.2)
+                else:
+                    new_q = current_q
             self.set_q_value(state, new_q)
             self.board.pop()
 
