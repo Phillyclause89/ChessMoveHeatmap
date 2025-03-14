@@ -957,8 +957,6 @@ class PlayCMHMEngine:
         ('Phillyclause89', 'black', 1)
         """
         self.pgn_dir = os.path.join(".", self.pgn_dir)
-        if not path.isdir(self.pgn_dir):
-            makedirs(self.pgn_dir)
         self.training_dir = os.path.join(self.pgn_dir, self.training_dir)
         self.player_name = str(player_name)
         self.site = str(site)
@@ -1047,8 +1045,7 @@ class PlayCMHMEngine:
                 self.engine.board = chess.Board()
                 break
 
-    @staticmethod
-    def save_to_pgn(file_name: str, game: pgn.Game) -> None:
+    def save_to_pgn(self, file_name: str, game: pgn.Game) -> None:
         """
 
         Parameters
@@ -1057,6 +1054,10 @@ class PlayCMHMEngine:
         game
 
         """
+        if not path.isdir(self.pgn_dir):
+            makedirs(self.pgn_dir)
+        if not path.isdir(self.training_dir):
+            makedirs(self.training_dir)
         with open(file_name, "w", encoding="utf-8") as file:
             print(game, file=file, end="\n\n")
 
