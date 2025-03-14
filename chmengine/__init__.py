@@ -1,5 +1,6 @@
 """A silly chess engine that picks moves using heatmaps"""
 import datetime
+import os.path
 import random
 import sqlite3
 from bisect import bisect_left
@@ -908,6 +909,8 @@ class PlayCMHMEngine:
     cpu_color: str = chess.COLOR_NAMES[0]
     cpu_index: int = 1
     engine: CMHMEngine
+    pgn_dir: str = "pgns"
+    training_dir: str = "trainings"
 
     # pylint: disable=too-many-arguments
     def __init__(
@@ -953,6 +956,10 @@ class PlayCMHMEngine:
         >>> game2.player_name, game2.player_color, game2.player_index
         ('Phillyclause89', 'black', 1)
         """
+        self.pgn_dir = os.path.join(".", self.pgn_dir)
+        if not path.isdir(self.pgn_dir):
+            makedirs(self.pgn_dir)
+        self.training_dir = os.path.join(self.pgn_dir, self.training_dir)
         self.player_name = str(player_name)
         self.site = str(site)
         self.game_round = int(game_round)
@@ -1032,8 +1039,7 @@ class PlayCMHMEngine:
                 game_heads["CMHMEngineMode"] = f"pick_by='{pick_by}'"
                 game_heads["CMHMEngineDepth"] = str(self.engine.depth)
                 file_name: str = path.join(
-                    ".",
-                    "pgns",
+                    self.pgn_dir,
                     f"{game_heads['Date']}_{game_heads['Event'].replace(' ', '_')}_{game_heads['Round']}.pgn"
                 )
                 self.save_to_pgn(file_name, game)
@@ -1100,9 +1106,7 @@ class PlayCMHMEngine:
             game_heads["Termination"] = outcome.termination.name
             game_heads["CMHMEngineDepth"] = str(self.engine.depth)
             file_name: str = path.join(
-                ".",
-                "pgns",
-                "trainings",
+                self.training_dir,
                 f"{game_heads['Date']}_{game_heads['Event'].replace(' ', '_')}_{game_heads['Round']}.pgn"
             )
             self.save_to_pgn(file_name, game)
