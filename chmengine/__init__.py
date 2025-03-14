@@ -701,11 +701,7 @@ class CMHMEngine2(CMHMEngine):
                 self.board.pop()
                 continue
             # The q score of a board fen is relative to the player who just moved
-            if self.board.turn != outcome.winner:
-                new_q = current_q + abs(current_q * 0.2)
-            elif self.board.turn == outcome.winner:
-                new_q = current_q - abs(current_q * 0.2)
-            else:
+            if outcome.winner is None:
                 if current_q < 0:
                     new_q = current_q + abs(current_q * 0.2)
                     new_q = numpy.float64(0.0) if new_q > 0 else new_q
@@ -714,6 +710,12 @@ class CMHMEngine2(CMHMEngine):
                     new_q = numpy.float64(0.0) if new_q < 0 else new_q
                 else:
                     new_q = current_q
+            elif self.board.turn != outcome.winner:
+                new_q = current_q + abs(current_q * 0.2)
+            elif self.board.turn == outcome.winner:
+                new_q = current_q - abs(current_q * 0.2)
+            else:
+                raise ValueError(f"How did we get here? outcome:{outcome} board turn: {self.board.turn}")
             self.set_q_value(state, new_q)
             self.board.pop()
 
@@ -1053,7 +1055,7 @@ class PlayCMHMEngine:
             print(game, file=file, end="\n\n")
 
     # pylint: disable=invalid-name
-    def trainCMHMEngine2(self, training_games: int = 1000, training_games_start:int=0) -> None:
+    def trainCMHMEngine2(self, training_games: int = 1000, training_games_start: int = 0) -> None:
         """Trains engine. CMHMEngine2 specifically
 
         Parameters
@@ -1100,6 +1102,7 @@ class PlayCMHMEngine:
             file_name: str = path.join(
                 ".",
                 "pgns",
+                "trainings",
                 f"{game_heads['Date']}_{game_heads['Event'].replace(' ', '_')}_{game_heads['Round']}.pgn"
             )
             self.save_to_pgn(file_name, game)
