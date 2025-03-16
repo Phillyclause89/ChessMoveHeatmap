@@ -1,21 +1,15 @@
 """A silly chess engine that picks moves using heatmaps"""
-import datetime
-import os.path
 import random
 import sqlite3
 from bisect import bisect_left
 import datetime
 from os import makedirs, path
-from sqlite3 import Connection, Cursor
-from typing import Any, Callable, Dict, List, Optional, Tuple, Union
-
+from typing import Any, Callable, Dict, List, Optional, Tuple
 import chess
 from chess import Board, Move, Outcome, Piece, pgn
 import numpy
 from numpy import float_
 from numpy.typing import NDArray
-
-import chmengine
 import heatmaps
 import chmutils
 from heatmaps import GradientHeatmap
@@ -958,8 +952,8 @@ class PlayCMHMEngine:
         >>> game2.player_name, game2.player_color, game2.player_index
         ('Phillyclause89', 'black', 1)
         """
-        self.pgn_dir = os.path.join(".", self.pgn_dir)
-        self.training_dir = os.path.join(self.pgn_dir, self.training_dir)
+        self.pgn_dir = path.join(".", self.pgn_dir)
+        self.training_dir = path.join(self.pgn_dir, self.training_dir)
         self.player_name = str(player_name)
         self.site = str(site)
         self.game_round = int(game_round)
@@ -1072,7 +1066,7 @@ class PlayCMHMEngine:
         training_games : int
         training_games_start : int
         """
-        if not isinstance(self.engine, chmengine.CMHMEngine2):
+        if not isinstance(self.engine, CMHMEngine2):
             raise TypeError(f"Current engine is not type chmengine.CMHMEngine2: {type(self.engine)}")
         for i in range(training_games_start, training_games):
             game_n: int = i + 1
