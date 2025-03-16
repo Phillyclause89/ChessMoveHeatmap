@@ -1057,8 +1057,7 @@ class PlayCMHMEngine:
         with open(file_name, "w", encoding="utf-8") as file:
             print(game, file=file, end="\n\n")
 
-    # pylint: disable=invalid-name
-    def trainCMHMEngine2(self, training_games: int = 1000, training_games_start: int = 0) -> None:
+    def train_cmhmey_jr(self, training_games: int = 1000, training_games_start: int = 0) -> None:
         """Trains engine. CMHMEngine2 specifically
 
         Parameters
