@@ -706,6 +706,7 @@ class CMHMEngine2(CMHMEngine):
                 else:
                     new_q = current_q
             # In checkmate states, the board turn is equal to the loser (this also caused me bugs at first)
+            # TODO: Maybe cap these by the checkmate scores, but then I would need to calc the checkmate score for each
             elif self.board.turn != outcome.winner:
                 # Winner gets a 20% bump to their chosen move's scores (now with a +0.1 bump to brake past 0 if needed)
                 new_q = current_q + abs(current_q * 0.2) + numpy.float64(0.1)
