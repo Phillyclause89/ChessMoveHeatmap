@@ -768,7 +768,8 @@ class CMHMEngine2(CMHMEngine):
                 new_current_king_box: List[int]
                 new_other_king_box: List[int]
                 new_current_king_box, new_other_king_box = self.get_king_boxes(new_board)
-                new_heatmap: heatmaps.ChessMoveHeatmap = chmutils.get_or_compute_heatmap_with_better_discounts(
+                # It was fun building up a giant db of heatmaps, but we saw how that turned out in training
+                new_heatmap: heatmaps.ChessMoveHeatmap = chmutils.calculate_chess_move_heatmap_with_better_discount(
                     new_board, depth=self.depth
                 )
                 new_heatmap_transposed: NDArray[numpy.float64] = new_heatmap.data.transpose()
@@ -798,7 +799,8 @@ class CMHMEngine2(CMHMEngine):
                         next_current_king_box: List[int]
                         next_other_king_box: List[int]
                         next_current_king_box, next_other_king_box = self.get_king_boxes(next_board)
-                        next_heatmap: heatmaps.ChessMoveHeatmap = chmutils.get_or_compute_heatmap_with_better_discounts(
+                        next_heatmap: heatmaps.ChessMoveHeatmap
+                        next_heatmap = chmutils.calculate_chess_move_heatmap_with_better_discount(
                             next_board, depth=self.depth
                         )
                         next_heatmap_transposed: NDArray[numpy.float64] = next_heatmap.data.transpose()
@@ -1151,9 +1153,7 @@ class PlayCMHMEngine:
                 black_move_text: str = f"{move_number}. {last_move} {move.uci()}: {s_str}"
                 print(white_move_text if self.engine.board.turn else black_move_text)
                 self.engine.board.push(move)
-            outcome: Outcome = self.engine.board.outcome()
-            if outcome is None:
-                outcome = self.engine.board.outcome(claim_draw=True)
+            outcome: Outcome = self.engine.board.outcome(claim_draw=True)
             game = pgn.Game.from_board(self.engine.board)
             self.engine.update_q_values()
             game_heads = game.headers
