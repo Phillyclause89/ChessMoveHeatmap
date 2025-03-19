@@ -762,76 +762,71 @@ class CMHMEngine2(CMHMEngine):
             new_board: Board = self.board_copy_pushed(current_move)
             # new_state_fen represents the boards for the only q-values that we will make updates to
             new_state_fen = new_board.fen()
-            q_val = self.get_q_value(new_state_fen)
-            if q_val is None:
-                print(f"Calculating score for move: {current_move_uci}")
-                new_current_king_box: List[int]
-                new_other_king_box: List[int]
-                new_current_king_box, new_other_king_box = self.get_king_boxes(new_board)
-                # It was fun building up a giant db of heatmaps, but we saw how that turned out in training
-                new_heatmap: heatmaps.ChessMoveHeatmap = chmutils.calculate_chess_move_heatmap_with_better_discount(
-                    new_board, depth=self.depth
-                )
-                new_heatmap_transposed: NDArray[numpy.float64] = new_heatmap.data.transpose()
-                # I wanted to rely on the heatmap as much as possible, but any game termination state win or draw
-                # results in a zeros heatmap. Thus, we cheat with new_board.is_checkmate here. (draw scores stay zero.)
-                if self.heatmap_data_is_zeros(new_heatmap) and new_board.is_checkmate():
-                    self.update_heatmap_transposed_with_mate_values(new_heatmap_transposed, current_index, new_board)
-                    if early_exit:
-                        return current_move, sum(new_heatmap_transposed[current_index])
-                initial_move_score = self.calculate_score(
-                    current_index, other_index, new_heatmap_transposed,
-                    king_box_multiplier, new_current_king_box, new_other_king_box
-                )
-                # However, that is not our Final score,
-                # the score after finding the best response to our move should be the final score.
-                next_moves: List[Move] = self.current_moves_list(new_board)
-                response_moves: List[Tuple[Optional[Move], Optional[numpy.float64]]]
-                response_moves, = self.null_target_moves(1)
-                next_move: Move
-                for next_move in next_moves:
-                    # next_move score calculations stay in the perspective of current player
-                    next_board: Board = self.board_copy_pushed(next_move, new_board)
-                    next_state_fen = next_board.fen()
-                    # next_q_val should be the negative of the fetched q, but can't do that yet, must check for None
-                    next_q_val: Optional[numpy.float64] = self.get_q_value(next_state_fen)
-                    if next_q_val is None:
-                        next_current_king_box: List[int]
-                        next_other_king_box: List[int]
-                        next_current_king_box, next_other_king_box = self.get_king_boxes(next_board)
-                        next_heatmap: heatmaps.ChessMoveHeatmap
-                        next_heatmap = chmutils.calculate_chess_move_heatmap_with_better_discount(
-                            next_board, depth=self.depth
-                        )
-                        next_heatmap_transposed: NDArray[numpy.float64] = next_heatmap.data.transpose()
-                        if self.heatmap_data_is_zeros(next_heatmap) and next_board.is_checkmate():
-                            # No early exit here as this is a bad is_checkmate result :(
-                            self.update_heatmap_transposed_with_mate_values(next_heatmap_transposed, other_index,
-                                                                            next_board)
-                        next_move_score: numpy.float64 = self.calculate_score(
-                            current_index, other_index, next_heatmap_transposed,
-                            king_box_multiplier, next_current_king_box, next_other_king_box
-                        )
-                    else:
-                        # Here is where we can safely make next_q_val negative to match the current player's perspective
-                        next_move_score = numpy.float64(-next_q_val)
-                    if response_moves[0][0] is None:
-                        response_moves = [(next_move, next_move_score)]
-                    else:
-                        self.insert_ordered_worst_to_best(response_moves, next_move, next_move_score)
+            # No longer look at q-score at this level, only back prop q's into the calculation
+            print(f"Calculating score for move: {current_move_uci}")
+            new_current_king_box: List[int]
+            new_other_king_box: List[int]
+            new_current_king_box, new_other_king_box = self.get_king_boxes(new_board)
+            # It was fun building up a giant db of heatmaps, but we saw how that turned out in training
+            new_heatmap: heatmaps.ChessMoveHeatmap = chmutils.calculate_chess_move_heatmap_with_better_discount(
+                new_board, depth=self.depth
+            )
+            new_heatmap_transposed: NDArray[numpy.float64] = new_heatmap.data.transpose()
+            # I wanted to rely on the heatmap as much as possible, but any game termination state win or draw
+            # results in a zeros heatmap. Thus, we cheat with new_board.is_checkmate here. (draw scores stay zero.)
+            if self.heatmap_data_is_zeros(new_heatmap) and new_board.is_checkmate():
+                self.update_heatmap_transposed_with_mate_values(new_heatmap_transposed, current_index, new_board)
+                if early_exit:
+                    return current_move, sum(new_heatmap_transposed[current_index])
+            initial_move_score = self.calculate_score(
+                current_index, other_index, new_heatmap_transposed,
+                king_box_multiplier, new_current_king_box, new_other_king_box
+            )
+            # However, that is not our Final score,
+            # the score after finding the best response to our move should be the final score.
+            next_moves: List[Move] = self.current_moves_list(new_board)
+            response_moves: List[Tuple[Optional[Move], Optional[numpy.float64]]]
+            response_moves, = self.null_target_moves(1)
+            next_move: Move
+            for next_move in next_moves:
+                # next_move score calculations stay in the perspective of current player
+                next_board: Board = self.board_copy_pushed(next_move, new_board)
+                next_state_fen = next_board.fen()
+                # next_q_val should be the negative of the fetched q, but can't do that yet, must check for None
+                next_q_val: Optional[numpy.float64] = self.get_q_value(next_state_fen)
+                if next_q_val is None:
+                    next_current_king_box: List[int]
+                    next_other_king_box: List[int]
+                    next_current_king_box, next_other_king_box = self.get_king_boxes(next_board)
+                    next_heatmap: heatmaps.ChessMoveHeatmap
+                    next_heatmap = chmutils.calculate_chess_move_heatmap_with_better_discount(
+                        next_board, depth=self.depth
+                    )
+                    next_heatmap_transposed: NDArray[numpy.float64] = next_heatmap.data.transpose()
+                    if self.heatmap_data_is_zeros(next_heatmap) and next_board.is_checkmate():
+                        # No early exit here as this is a bad is_checkmate result :(
+                        self.update_heatmap_transposed_with_mate_values(next_heatmap_transposed, other_index,
+                                                                        next_board)
+                    next_move_score: numpy.float64 = self.calculate_score(
+                        current_index, other_index, next_heatmap_transposed,
+                        king_box_multiplier, next_current_king_box, next_other_king_box
+                    )
+                else:
+                    # Here is where we can safely make next_q_val negative to match the current player's perspective
+                    next_move_score = numpy.float64(-next_q_val)
+                if response_moves[0][0] is None:
+                    response_moves = [(next_move, next_move_score)]
+                else:
+                    self.insert_ordered_worst_to_best(response_moves, next_move, next_move_score)
                 print(
                     f"{current_move_uci} initial score: {initial_move_score:.2f} ->",
                     self.formatted_moves(response_moves)
                 )
-                # Once all responses to a move reviewed, final move score is the worst outcome to current player.
-                best_response_score: Optional[numpy.float64] = response_moves[0][1]
-            else:
-                print("Fetching Score From Q table...")
-                initial_move_score, best_response_score = numpy.float64(q_val), numpy.float64(q_val)
+            # Once all responses to a move reviewed, final move score is the worst outcome to current player.
+            best_response_score: Optional[numpy.float64] = response_moves[0][1]
             final_move_score: numpy.float64
             final_move_score = best_response_score if best_response_score is not None else initial_move_score
-            if q_val is None:
-                self.set_q_value(new_state_fen, final_move_score)
+            self.set_q_value(new_state_fen, final_move_score)
             if current_move_choices_ordered[0][0] is None:
                 current_move_choices_ordered = [(current_move, final_move_score)]
             else:
