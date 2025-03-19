@@ -818,10 +818,10 @@ class CMHMEngine2(CMHMEngine):
                     response_moves = [(next_move, next_move_score)]
                 else:
                     self.insert_ordered_worst_to_best(response_moves, next_move, next_move_score)
-                print(
-                    f"{current_move_uci} initial score: {initial_move_score:.2f} ->",
-                    self.formatted_moves(response_moves)
-                )
+            print(
+                f"{current_move_uci} initial score: {initial_move_score:.2f} ->",
+                self.formatted_moves(response_moves)
+            )
             # Once all responses to a move reviewed, final move score is the worst outcome to current player.
             best_response_score: Optional[numpy.float64] = response_moves[0][1]
             final_move_score: numpy.float64
