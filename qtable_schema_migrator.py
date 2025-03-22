@@ -4,18 +4,17 @@ import sqlite3
 from argparse import ArgumentParser, Namespace
 from sqlite3 import Connection, Cursor
 from os import path
-from typing import Any, List, Optional, TextIO, Tuple, Union
+from typing import List, Optional, TextIO, Tuple
 import numpy as np  # For calculating statistics
 from numpy.typing import NDArray
 from chess import Board
-from numpy import ndarray
 
 
 # Create a custom exception class for Easter egg "WTF" errors
 class WTF(Exception):
     r"""A WTF Exception, what more can I say ¯\_(ツ)_/¯"""
 
-    def __init__(self, row: Any, piece_count: int) -> None:
+    def __init__(self, row: Optional[Tuple[str, float]], piece_count: int) -> None:
         self.row = row
         self.piece_count = piece_count
         # Customize the message as an Easter egg surprise
@@ -91,8 +90,8 @@ def log_db_stats(cursor: Cursor, log_file_path: str) -> None:
         log.write("\nPiece Count Distribution:\n")
 
         # Count piece count occurrences
-        piece_count: Any
-        count: Any
+        piece_count: NDArray[int]
+        count: NDArray[int]
         for piece_count, count in zip(*np.unique(piece_counts_np, return_counts=True)):
             log.write(f"Piece Count {piece_count}: {count} positions\n")
 
@@ -115,36 +114,16 @@ def new_qtable_filename(depth: int, piece_count: int) -> str:
 
 # Create connections and tables for the new database files
 def create_new_db_files(folder: str, depth: int = 1) -> None:
-    """sets up our new q-table schema for , 31 db files total:
+    """sets up our new q-table schema for migration.
 
+    Creates upto 31 new db files:
+    -----------------------------
     os.path.join(folder, f"qtable_depth_{depth}_piece_count_2.db")
     os.path.join(folder, f"qtable_depth_{depth}_piece_count_3.db")
     os.path.join(folder, f"qtable_depth_{depth}_piece_count_4.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_5.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_6.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_7.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_8.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_9.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_10.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_11.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_12.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_13.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_14.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_15.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_16.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_17.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_18.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_19.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_20.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_21.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_22.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_23.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_24.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_25.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_26.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_27.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_28.db")
-    os.path.join(folder, f"qtable_depth_{depth}_piece_count_29.db")
+
+    *cont...*
+
     os.path.join(folder, f"qtable_depth_{depth}_piece_count_30.db")
     os.path.join(folder, f"qtable_depth_{depth}_piece_count_31.db")
     os.path.join(folder, f"qtable_depth_{depth}_piece_count_32.db")
@@ -153,6 +132,7 @@ def create_new_db_files(folder: str, depth: int = 1) -> None:
     ----------
     folder : str
     depth : int
+
     """
     piece_count: int
     for piece_count in range(2, 33):  # We are using dbs for 2-32 pieces
@@ -172,16 +152,30 @@ def create_new_db_files(folder: str, depth: int = 1) -> None:
 
 # Function to migrate data from old database to new schema based on piece count
 def migrate_data(old_cursor: Cursor, folder: str, depth: int = 1) -> None:
-    """Migrates data from old db schema to new schema"""
+    """Migrates data from old db schema to new db schema.
+
+    Warning:
+    --------
+    `create_new_db_files(folder: str, depth: int)`  should be called to create the new db files
+    before calling this function!
+
+    Parameters
+    ----------
+
+    old_cursor : sqlite3.Cursor
+    folder : str
+    depth : int
+
+    """
     # Fetch all data from the old database
     old_cursor.execute("SELECT state_fen, q_value FROM q_table")
-    rows: List[Any] = old_cursor.fetchall()
+    rows: List[Optional[Tuple[str, float]]] = old_cursor.fetchall()
 
     # For each row, calculate the piece count and insert into the appropriate new database
-    row: Any
+    row: Optional[Tuple[str, float]]
     for row in rows:
-        state_fen: Any
-        q_value: Any
+        state_fen: str
+        q_value: float
         state_fen, q_value = row
         piece_count: int = piece_count_from_fen(state_fen)
         if 2 <= piece_count <= 32:
