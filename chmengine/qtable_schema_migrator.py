@@ -1,11 +1,13 @@
 """A once off script to migrate data from old schema to new schema"""
-
+import argparse
 import sqlite3
+from argparse import ArgumentParser, Namespace
 from sqlite3 import Connection, Cursor
 from os import path
-from typing import Any, List
-
+from typing import Any, List, TextIO, Union
+import numpy as np  # For calculating statistics
 from chess import Board
+from numpy import ndarray
 
 
 # Create a custom exception class for Easter egg "WTF" errors
@@ -37,12 +39,92 @@ def piece_count_from_fen(fen: str) -> int:
     return len(board.piece_map())
 
 
+# Function to log stats about the original database
+def log_db_stats(cursor: Cursor, log_file_path: str) -> None:
+    """Logs statistics about the old database.
+
+    Parameters
+    ----------
+    cursor : sqlite3.Cursor
+    log_file_path : str
+    """
+    # Fetch all data from the old database
+    cursor.execute("SELECT state_fen, q_value FROM q_table")
+    rows: List[Any] = cursor.fetchall()
+
+    # Initialize lists to hold the q_values and piece counts
+    q_values: List[Any] = []
+    piece_counts: List[int] = []
+
+    row: Any
+    for row in rows:
+        state_fen: str
+        q_value: float
+        state_fen, q_value = row
+        q_values.append(q_value)
+        piece_counts.append(piece_count_from_fen(state_fen))
+
+    # Convert to numpy arrays for easier calculations
+    q_values_np: ndarray = np.array(q_values)
+    piece_counts_np: ndarray = np.array(piece_counts)
+
+    # Calculate statistics
+    min_q: Union[ndarray, int, float, complex] = np.min(q_values_np)
+    max_q: Union[ndarray, int, float, complex] = np.max(q_values_np)
+    mean_q: ndarray = np.mean(q_values_np)
+    min_piece_count: Union[ndarray, int, float, complex] = np.min(piece_counts_np)
+    max_piece_count: Union[ndarray, int, float, complex] = np.max(piece_counts_np)
+    mean_piece_count: ndarray = np.mean(piece_counts_np)
+
+    # Log the statistics
+    log: TextIO
+    with open(log_file_path, 'w', encoding='UTF-8') as log:
+        log.write("Database Statistics:\n")
+        log.write(f"Total Positions: {len(rows)}\n")
+        log.write(f"Min q_value: {min_q}\n")
+        log.write(f"Max q_value: {max_q}\n")
+        log.write(f"Mean q_value: {mean_q}\n")
+        log.write(f"Min Piece Count: {min_piece_count}\n")
+        log.write(f"Max Piece Count: {max_piece_count}\n")
+        log.write(f"Mean Piece Count: {mean_piece_count}\n")
+        log.write("\nPiece Count Distribution:\n")
+
+        # Count piece count occurrences
+        unique: ndarray
+        counts: ndarray
+        unique, counts = np.unique(piece_counts_np, return_counts=True)
+        for piece_count, count in zip(unique, counts):
+            log.write(f"Piece Count {piece_count}: {count} positions\n")
+
+
+def new_qtable_filename(depth: int, piece_count: int) -> str:
+    """
+
+    Parameters
+    ----------
+    depth : int
+    piece_count : int
+
+    Returns
+    -------
+    str
+
+    """
+    return f"qtable_depth_{depth}_piece_count_{piece_count}.db"
+
+
 # Create connections and tables for the new database files
-def create_new_db_files(folder, depth=1) -> None:
-    """sets up our new q-table schema"""
+def create_new_db_files(folder: str, depth: int = 1) -> None:
+    """sets up our new q-table schema
+
+    Parameters
+    ----------
+    folder : str
+    depth : int
+    """
     piece_count: int
     for piece_count in range(2, 33):  # We are using dbs for 2-32 pieces
-        db_path: str = path.join(folder, f"qtable_depth_{depth}_piece_count_{piece_count}.db")
+        db_path: str = path.join(folder, new_qtable_filename(depth, piece_count))
         conn: Connection = sqlite3.connect(db_path)
         cursor: Cursor = conn.cursor()
         cursor.execute("""
@@ -57,7 +139,7 @@ def create_new_db_files(folder, depth=1) -> None:
 
 
 # Function to migrate data from old database to new schema based on piece count
-def migrate_data(old_cursor) -> None:
+def migrate_data(old_cursor: Cursor, folder: str, depth: int = 1) -> None:
     """Migrates data from old db schema to new schema"""
     # Fetch all data from the old database
     old_cursor.execute("SELECT state_fen, q_value FROM q_table")
@@ -70,43 +152,52 @@ def migrate_data(old_cursor) -> None:
         q_value: Any
         state_fen, q_value = row
         piece_count: int = piece_count_from_fen(state_fen)
-
         if 2 <= piece_count <= 32:
             # Insert into the correct new database
-            db_path: str = path.join(db_folder, f"qtable_piece_count_{piece_count}.db")
-            conn: Connection = sqlite3.connect(db_path)
-            cursor: Cursor = conn.cursor()
-            try:
-                cursor.execute("""
-                    INSERT OR REPLACE INTO q_table (state_fen, q_value)
-                    VALUES (?, ?)
-                """, (state_fen, q_value))
-                conn.commit()
-            except sqlite3.IntegrityError as sql_error:
-                raise WTF(row, piece_count) from sql_error
-            finally:
-                conn.close()
+            db_path: str = path.join(folder, new_qtable_filename(depth, piece_count))
+            conn: Connection
+            with sqlite3.connect(db_path) as conn:
+                cursor: Cursor = conn.cursor()
+                try:
+                    cursor.execute("""
+                        INSERT OR REPLACE INTO q_table (state_fen, q_value)
+                        VALUES (?, ?)
+                    """, (state_fen, q_value))
+                    conn.commit()
+                except sqlite3.DatabaseError as sql_error:
+                    raise WTF(row, piece_count) from sql_error
         else:
             raise WTF(row, piece_count)
 
 
 if __name__ == "__main__":
+    # Set up argument parser
+    parser: ArgumentParser = argparse.ArgumentParser(
+        description="Migrate data from the old database to the new schema.")
+    parser.add_argument(
+        "depth",
+        type=int,
+        nargs="?",  # Makes it optional
+        default=1,  # Default value if no argument is provided
+        help="The depth of the source database file (e.g., 1 for qtable_depth_1.db)"
+    )
+    args: Namespace = parser.parse_args()
     # Paths to the old and new databases
     db_folder: str = path.join(".", "SQLite3Caches", "QTables")
-    old_db_path: str = path.join(db_folder, "qtable_depth_1.db")  # Your original DB path
-    # Where the new DB files will be stored
+    old_db_path: str = path.join(db_folder, f"qtable_depth_{args.depth}.db")  # Your original DB path
+    print(f"Old db path: {old_db_path}")
+    log_file: str = path.join(db_folder, f"migration_qtable_depth_{args.depth}.log")  # Log file for statistics
+    print(f"Log file path: {log_file}")
 
     # Initialize connections to old and new databases
-    old_conn: Connection = sqlite3.connect(old_db_path)
-    old_cur: Cursor = old_conn.cursor()
+    old_conn: Connection
+    with sqlite3.connect(old_db_path) as old_conn:
+        old_cur: Cursor = old_conn.cursor()
+        # Log the statistics about the original database
+        log_db_stats(old_cur, log_file)
+        # Create the new database files
+        create_new_db_files(db_folder, depth=args.depth)
+        # Migrate the data
+        migrate_data(old_cur, db_folder, depth=args.depth)
 
-    # Create the new database files
-    create_new_db_files(db_folder)
-
-    # Migrate the data
-    migrate_data(old_cur)
-
-    # Close the old connection
-    old_conn.close()
-
-    print("Migration complete!")
+    print(f"Migration complete! Check {log_file} for stats.")
