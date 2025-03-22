@@ -1026,7 +1026,7 @@ class CMHMEngine2(CMHMEngine):
             current_index: int,
             other_index: int,
             new_heatmap_transposed: NDArray[numpy.float64],
-            king_box_multiplier: int,
+            king_box_safety_multiplier: int,
             new_current_king_box: List[int],
             new_other_king_box: List[int]
     ) -> numpy.float64:
@@ -1037,7 +1037,7 @@ class CMHMEngine2(CMHMEngine):
         current_index : int
         other_index : int
         new_heatmap_transposed : NDArray[numpy.float64]
-        king_box_multiplier : int
+        king_box_safety_multiplier : int
         new_current_king_box : List[int]
         new_other_king_box : List[int]
 
@@ -1055,9 +1055,10 @@ class CMHMEngine2(CMHMEngine):
             new_heatmap_transposed[other_index]
         )
         # king box score adds weights to the scores of squares around the kings.
-        initial_king_box_score: numpy.float64 = sum(new_heatmap_transposed[current_index][new_other_king_box]) - (
-                sum(new_heatmap_transposed[other_index][new_current_king_box]) * king_box_multiplier
-        )
+        initial_king_box_score: numpy.float64 = sum(new_heatmap_transposed[current_index][new_other_king_box])
+        initial_king_box_score -= sum(
+            new_heatmap_transposed[other_index][new_current_king_box]
+        ) * king_box_safety_multiplier
         # Final score is the agg of both above.
         return numpy.float64(initial_move_score + initial_king_box_score)
 
