@@ -4,8 +4,9 @@ import sqlite3
 from argparse import ArgumentParser, Namespace
 from sqlite3 import Connection, Cursor
 from os import path
-from typing import Any, List, TextIO, Union
+from typing import Any, List, Optional, TextIO, Tuple, Union
 import numpy as np  # For calculating statistics
+from numpy.typing import NDArray
 from chess import Board
 from numpy import ndarray
 
@@ -50,13 +51,13 @@ def log_db_stats(cursor: Cursor, log_file_path: str) -> None:
     """
     # Fetch all data from the old database
     cursor.execute("SELECT state_fen, q_value FROM q_table")
-    rows: List[Any] = cursor.fetchall()
+    rows: List[Optional[Tuple[str, float]]] = cursor.fetchall()
 
     # Initialize lists to hold the q_values and piece counts
-    q_values: List[Any] = []
-    piece_counts: List[int] = []
+    q_values: List[Optional[float]] = []
+    piece_counts: List[Optional[int]] = []
 
-    row: Any
+    row: Tuple[str, float]
     for row in rows:
         state_fen: str
         q_value: float
@@ -65,16 +66,16 @@ def log_db_stats(cursor: Cursor, log_file_path: str) -> None:
         piece_counts.append(piece_count_from_fen(state_fen))
 
     # Convert to numpy arrays for easier calculations
-    q_values_np: ndarray = np.array(q_values)
-    piece_counts_np: ndarray = np.array(piece_counts)
+    q_values_np: NDArray[np.float64] = np.array(q_values, dtype=np.float64)
+    piece_counts_np: NDArray[int] = np.array(piece_counts, dtype=int)
 
     # Calculate statistics
-    min_q: Union[ndarray, int, float, complex] = np.min(q_values_np)
-    max_q: Union[ndarray, int, float, complex] = np.max(q_values_np)
-    mean_q: ndarray = np.mean(q_values_np)
-    min_piece_count: Union[ndarray, int, float, complex] = np.min(piece_counts_np)
-    max_piece_count: Union[ndarray, int, float, complex] = np.max(piece_counts_np)
-    mean_piece_count: ndarray = np.mean(piece_counts_np)
+    min_q: NDArray[np.float64] = np.min(q_values_np)
+    max_q: NDArray[np.float64] = np.max(q_values_np)
+    mean_q: NDArray[np.float64] = np.mean(q_values_np)
+    min_piece_count: NDArray[int] = np.min(piece_counts_np)
+    max_piece_count: NDArray[int] = np.max(piece_counts_np)
+    mean_piece_count: NDArray[np.float64] = np.mean(piece_counts_np)
 
     # Log the statistics
     log: TextIO
@@ -90,10 +91,9 @@ def log_db_stats(cursor: Cursor, log_file_path: str) -> None:
         log.write("\nPiece Count Distribution:\n")
 
         # Count piece count occurrences
-        unique: ndarray
-        counts: ndarray
-        unique, counts = np.unique(piece_counts_np, return_counts=True)
-        for piece_count, count in zip(unique, counts):
+        piece_count: Any
+        count: Any
+        for piece_count, count in zip(*np.unique(piece_counts_np, return_counts=True)):
             log.write(f"Piece Count {piece_count}: {count} positions\n")
 
 
@@ -115,7 +115,39 @@ def new_qtable_filename(depth: int, piece_count: int) -> str:
 
 # Create connections and tables for the new database files
 def create_new_db_files(folder: str, depth: int = 1) -> None:
-    """sets up our new q-table schema
+    """sets up our new q-table schema for , 31 db files total:
+
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_2.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_3.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_4.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_5.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_6.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_7.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_8.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_9.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_10.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_11.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_12.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_13.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_14.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_15.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_16.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_17.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_18.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_19.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_20.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_21.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_22.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_23.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_24.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_25.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_26.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_27.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_28.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_29.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_30.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_31.db")
+    os.path.join(folder, f"qtable_depth_{depth}_piece_count_32.db")
 
     Parameters
     ----------
@@ -183,13 +215,13 @@ if __name__ == "__main__":
     )
     args: Namespace = parser.parse_args()
     # Paths to the old and new databases
-    db_folder: str = path.join(".", "SQLite3Caches", "QTables")
+    db_folder: str = path.join("chmengine", "SQLite3Caches", "QTables")
     old_db_path: str = path.join(db_folder, f"qtable_depth_{args.depth}.db")  # Your original DB path
     print(f"Old db path: {old_db_path}")
     log_file: str = path.join(db_folder, f"migration_qtable_depth_{args.depth}.log")  # Log file for statistics
     print(f"Log file path: {log_file}")
 
-    # Initialize connections to old and new databases
+    # Initialize connection to old database
     old_conn: Connection
     with sqlite3.connect(old_db_path) as old_conn:
         old_cur: Cursor = old_conn.cursor()
