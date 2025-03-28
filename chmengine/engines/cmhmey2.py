@@ -146,6 +146,8 @@ class CMHMEngine2(CMHMEngine):
 
         pops all moves out of the board object
 
+
+
         """
         outcome: Optional[Outcome] = self.board.outcome(claim_draw=True)
         while len(self.board.move_stack) > 0:
@@ -198,7 +200,6 @@ class CMHMEngine2(CMHMEngine):
         --------
         >>> from chmengine import CMHMEngine2
         >>> engine = CMHMEngine2()
-        >>> engine.pick_move()
         """
         # Debated if I want to do any updates to the q-value for self.board.fen() if there is one...
         # If I did update it then it would be the negative of the q-value for the new_board

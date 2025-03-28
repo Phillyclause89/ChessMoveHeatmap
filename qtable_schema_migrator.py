@@ -7,7 +7,7 @@ from os import path
 from typing import List, Optional, TextIO, Tuple
 import numpy as np
 from numpy.typing import NDArray
-from chess import Board, Outcome
+from chess import Board, Outcome, Termination
 
 
 class WTF(Exception):
@@ -75,15 +75,15 @@ class OutcomeCounter:
 
         """
         if isinstance(outcome, Outcome):
-            if outcome.termination.name == Outcome.termination.CHECKMATE.name:
+            if outcome.termination.name == Termination.CHECKMATE.name:
                 self._checkmate_count += 1
                 if outcome.winner:
                     self._white_wins += 1
                 else:
                     self._black_wins += 1
-            elif outcome.termination.name == Outcome.termination.STALEMATE.name:
+            elif outcome.termination.name == Termination.STALEMATE.name:
                 self._stalemate_count += 1
-            elif outcome.termination.name == Outcome.termination.INSUFFICIENT_MATERIAL.name:
+            elif outcome.termination.name == Termination.INSUFFICIENT_MATERIAL.name:
                 self._insufficient_material_count += 1
             else:
                 raise WTF(row=None, piece_count=-1, outcome=outcome)
