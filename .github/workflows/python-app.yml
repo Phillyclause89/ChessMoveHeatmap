@@ -25,37 +25,51 @@ jobs:
 
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install flake8 pytest pylint
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Lint with flake8
-      run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Analysing heatmaps with pylint
-      run: |
+      -
+        uses: actions/checkout@v4
+      -
+        name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      -
+        name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest pylint
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      -
+        name: Lint with flake8
+        run: |
+          # stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+      -
+        name: Analysing heatmaps with pylint
+        run: |
           pylint heatmaps --exit-zero
-    - name: Analysing chmutils with pylint
-      run: |
+      -
+        name: Analysing chmutils with pylint
+        run: |
           pylint chmutils --exit-zero
-    - name: Analysing tooltips with pylint
-      run: |
+      -
+        name: Analysing chmengine with pylint
+        run: |
+          pylint chmengine --exit-zero
+      -
+        name: Analysing tooltips with pylint
+        run: |
           pylint tooltips --exit-zero
-    - name: Analysing main.py with pylint
-      run: |
+      -
+        name: Analysing main.py with pylint
+        run: |
           pylint main.py --exit-zero
-    - name: Analysing tests with pylint
-      run: |
+      -
+        name: Analysing tests with pylint
+        run: |
           pylint tests --exit-zero
-    - name: Test with unittest
-      run: |
-        python -m unittest discover -s tests
+      -
+        name: Test with unittest
+        run: |
+          python -m unittest discover -s tests

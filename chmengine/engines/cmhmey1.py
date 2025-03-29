@@ -66,7 +66,7 @@ class CMHMEngine:
         """Sets current depth setting if >= 0"""
         if new_depth < 0:
             raise ValueError(f"depth must be greater than or equal to 0, got {new_depth}")
-        self._depth = new_depth
+        self._depth = int(new_depth)
 
     @property
     def board(self) -> chess.Board:
@@ -92,7 +92,7 @@ class CMHMEngine:
     def board(self, board: chess.Board):
         try:
             assert board.is_valid()
-            self._board = board
+            self._board = board.copy()
         except AssertionError as assertion_error:
             raise ValueError(f"The board is invalid: {board}") from assertion_error
         except AttributeError as attribute_error:
@@ -165,7 +165,7 @@ class CMHMEngine:
         ) = self.null_target_moves()
         current_king_box: List[int]
         other_king_box: List[int]
-        current_king_box, other_king_box = self.get_king_boxes()
+        current_king_box, other_king_box = self.get_king_boxes(board=self.board)
 
         move: Move
         heatmap: GradientHeatmap
