@@ -2,14 +2,6 @@
 
 The `chmengine` module is a core component of the [ChessMoveHeatmap](https://github.com/Phillyclause89/ChessMoveHeatmap) project. This module provides a chess engine that visualizes possible future moves using heatmaps and allows for playing or training the engines.
 
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage - Play CMHMEngine](#usage---play-cmhmengine)
-- [Usage - Play CMHMEngine2](#usage---play-cmhmengine2)
-- [Usage - Train CMHMEngine2](#usage---train-cmhmengine2)
-- [License](#license)
-
 ## Installation
 
 To install the `chmengine` module, you need to clone the repository and install the required dependencies.
