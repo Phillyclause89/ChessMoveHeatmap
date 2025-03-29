@@ -2,7 +2,7 @@
 
 The `chmengine` module is an Easter egg component of
 the [ChessMoveHeatmap](https://github.com/Phillyclause89/ChessMoveHeatmap) project. This module provides a chess engine
-that visualizes possible future moves using heatmaps and allows for playing or training the engines.
+that uses the data produced by the heatmaps to pick moves and allows for playing or training the engines.
 
 ## Usage - Play CMHMEngine _(aka: Cmhmey Sr.)_
 
@@ -49,6 +49,13 @@ game_manager = PlayCMHMEngine(engine=CMHMEngine2)
 # Cmhmey Jr. only has one pick_by algorithm that evolves through reinforcement learning updates
 game_manager.train_cmhmey_jr(training_games=1)  # 1 training game is expected to take about ~45 minutes 
 ```
+
+Click the image below to watch Cmhmey Jr. Train On YouTube!
+<p align="center">
+  <a href="https://www.youtube.com/live/Fh1I9DALeEc?si=B9GV5rvNisaH5TOJ" target="_blank">
+    <img src="../docs/images/CMHEngine.png" alt="Watch Cmhmey Jr. Train On YouTube!" width="1000">
+  </a>
+</p>
 
 ## License
 
