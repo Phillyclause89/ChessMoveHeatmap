@@ -6,8 +6,10 @@ name: Python application
 on:
   push:
     branches: [ "main" ]
+    paths: [ '**/*.py' ]
   pull_request:
     branches: [ "main" ]
+    paths: [ '**/*.py' ]
 
 permissions:
   contents: read
