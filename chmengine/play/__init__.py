@@ -8,7 +8,7 @@ from chess import Move, Outcome, pgn
 from chmengine.engines.cmhmey1 import CMHMEngine
 from chmengine.engines.cmhmey2 import CMHMEngine2
 
-
+__all__ = ['PlayCMHMEngine']
 class PlayCMHMEngine:
     """Play a game against the engine."""
     player_name: str = "Unknown"
