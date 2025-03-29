@@ -1,20 +1,13 @@
 # chmengine
 
-The `chmengine` module is a core component of the [ChessMoveHeatmap](https://github.com/Phillyclause89/ChessMoveHeatmap) project. This module provides a chess engine that visualizes possible future moves using heatmaps and allows for playing or training the engines.
-
-## Installation
-
-To install the `chmengine` module, you need to clone the repository and install the required dependencies.
-
-```bash
-git clone https://github.com/Phillyclause89/ChessMoveHeatmap.git
-cd ChessMoveHeatmap/chmengine
-pip install -r requirements.txt
-```
+The `chmengine` module is an Easter egg component of
+the [ChessMoveHeatmap](https://github.com/Phillyclause89/ChessMoveHeatmap) project. This module provides a chess engine
+that visualizes possible future moves using heatmaps and allows for playing or training the engines.
 
 ## Usage - Play CMHMEngine _(aka: Cmhmey Sr.)_
 
-Below is an example of how to use the `chmengine` module to play a game against the `CMHMEngine` engine using the `PlayCMHMEngine` class.
+Below is an example of how to use the `chmengine` module to play a game against the `CMHMEngine` engine using
+the `PlayCMHMEngine` class.
 
 ```python
 from chmengine import PlayCMHMEngine
@@ -29,7 +22,8 @@ game_manager.play(pick_by="delta")
 
 ## Usage - Play CMHMEngine2 _(aka: Cmhmey Jr.)_
 
-Below is an example of how to use the `chmengine` module to play a game against the `CMHMEngine2` engine using the `PlayCMHMEngine` class.
+Below is an example of how to use the `chmengine` module to play a game against the `CMHMEngine2` engine using
+the `PlayCMHMEngine` class.
 
 ```python
 from chmengine import PlayCMHMEngine, CMHMEngine2
@@ -43,7 +37,8 @@ game_manager.play(pick_by="CMHMEngine2")
 
 ## Usage - Train CMHMEngine2 _(aka: Cmhmey Jr.)_
 
-Below is an example of how to use the `chmengine` module to train the `CMHMEngine2` engine using the `PlayCMHMEngine` class.
+Below is an example of how to use the `chmengine` module to train the `CMHMEngine2` engine using the `PlayCMHMEngine`
+class.
 
 ```python
 from chmengine import PlayCMHMEngine, CMHMEngine2
