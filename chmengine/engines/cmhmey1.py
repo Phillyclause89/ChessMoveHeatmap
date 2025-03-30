@@ -522,8 +522,9 @@ class CMHMEngine:
         -------
         Tuple[List[int], List[int]]
         """
-        other_king_square: int = self.board.king(not self.board.turn) if board is None else board.king(not board.turn)
-        current_king_square: int = self.board.king(self.board.turn) if board is None else board.king(board.turn)
+        board = self.board if board is None else board
+        other_king_square: int = board.king(not board.turn)
+        current_king_square: int = board.king(board.turn)
         other_king_box: List[int] = [other_king_square]
         current_king_box: List[int] = [current_king_square]
         long: int

@@ -169,13 +169,28 @@ class TestCMHMEngine(TestCase):
         pass
 
     def test_heatmap_data_is_zeros(self) -> None:
-        pass
+        """Tests heatmap_data_is_zeros method"""
+        heatmap_t = heatmaps.GradientHeatmapT()
+        heatmap = heatmaps.GradientHeatmap()
+        move_heatmap_t = heatmaps.ChessMoveHeatmapT()
+        move_heatmap = heatmaps.ChessMoveHeatmap()
+        for hmap in (heatmap_t, heatmap, move_heatmap_t, move_heatmap):
+            self.assertTrue(self.engine.heatmap_data_is_zeros(hmap))
+            hmap[0][0] = float64(0.1)
+            self.assertFalse(self.engine.heatmap_data_is_zeros(hmap))
 
     def test_get_king_boxes(self) -> None:
-        pass
+        king_box_current, king_box_other = self.engine.get_king_boxes()
+        testing.assert_array_equal(king_box_current, [4, 3, 11, 12, 5, 13])
+        testing.assert_array_equal(king_box_other, [60, 51, 59, 52, 53, 61])
+        board = chess.Board("8/4n3/3kB3/2n5/5N2/3bK3/3N4/8 w - - 0 1")
+        king_box_current, king_box_other = self.engine.get_king_boxes(board)
+        testing.assert_array_equal(king_box_current, [20, 11, 27, 12, 28, 13, 21, 29])
+        testing.assert_array_equal(king_box_other, [43, 34, 42, 50, 35, 51, 36, 52])
 
     def test_is_valid_king_box_square(self) -> None:
-        pass
+        self.assertFalse(self.engine.is_valid_king_box_square(self.engine.board, 4, 4))
+        self.assertFalse(self.engine.is_valid_king_box_square(self.engine.board, 60, 60))
 
     def test_get_or_calc_move_maps_list(self) -> None:
         pass
