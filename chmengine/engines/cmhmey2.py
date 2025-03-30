@@ -238,7 +238,9 @@ class CMHMEngine2(CMHMEngine):
                 self.update_heatmap_transposed_with_mate_values(new_heatmap_transposed, current_index, new_board)
                 if early_exit:
                     # TODO: Weigh the costs of this early exit feature that you are not actually using right now
-                    return current_move, sum(new_heatmap_transposed[current_index])
+                    mate_score = numpy.float64(sum(new_heatmap_transposed[current_index]))
+                    self.set_q_value(value=numpy.float64(-mate_score))
+                    return current_move, mate_score
             current_move_choices_ordered = self.update_current_move_choices(
                 current_move_choices_ordered, new_board,
                 current_move, new_heatmap_transposed,
@@ -252,6 +254,7 @@ class CMHMEngine2(CMHMEngine):
         picks = [(m, s) for m, s in current_move_choices_ordered if s == current_move_choices_ordered[0][1]]
         print("Engine moves:", self.formatted_moves(picks))
         chosen_move, chosen_q = random.choice(picks)
+        self.set_q_value(value=numpy.float64(-chosen_q))
         return chosen_move, chosen_q
 
     def update_current_move_choices(
