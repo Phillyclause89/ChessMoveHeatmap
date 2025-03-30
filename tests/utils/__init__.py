@@ -1,4 +1,6 @@
 """Test Helpers"""
+from os import path
+from shutil import rmtree
 from unittest import TestCase
 from typing import Any, Callable, Dict, Iterable, List, Optional, Union, Type, Tuple
 
@@ -215,3 +217,12 @@ def construct_all(
         return constructed
     except AttributeError:
         return [cls() for cls in classes]
+
+
+CACHE_DIR = "SQLite3TestCaches"
+
+
+def clear_test_cache(cache_dir: str = CACHE_DIR) -> None:
+    """Ensure a clean test environment by removing any existing cache file."""
+    if path.exists(cache_dir):
+        rmtree(cache_dir)

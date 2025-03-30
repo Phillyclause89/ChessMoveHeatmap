@@ -1,7 +1,6 @@
 """Tests chmutils"""
 from unittest import TestCase, main
 from os import path
-from shutil import rmtree
 from typing import Dict, List, Optional, Tuple
 
 from chess import Board, Piece
@@ -11,9 +10,8 @@ from chmutils import flatten_heatmap, calculate_chess_move_heatmap_with_better_d
 from chmutils import HeatmapCache, calculate_chess_move_heatmap, inflate_heatmap, get_or_compute_heatmap
 from heatmaps import ChessMoveHeatmap, GradientHeatmap
 
-from tests.utils import validate_data_types
+from tests.utils import CACHE_DIR, clear_test_cache, validate_data_types
 
-CACHE_DIR = "SQLite3TestCaches"
 HeatmapCache.cache_dir = CACHE_DIR
 
 
@@ -125,18 +123,12 @@ class TestCalculateChessMoveHeatmap(TestCase):
         validate_data_types([heatmap], self, True)
 
 
-def clear_test_cache(cache_dir: str = CACHE_DIR) -> None:
-    """Ensure a clean test environment by removing any existing cache file."""
-    if path.exists(cache_dir):
-        rmtree(cache_dir)
-
-
 class TestHeatmapCacheAndFunctions(TestCase):
     """Test Heatmap Cache And related Functions"""
     pawn: Piece
     board: Board
 
-    def setUp(self):
+    def setUp(self) -> None:
         """Set up test board, piece and clear any leftover test cache"""
         self.board = Board()
         self.pawn = Piece.from_symbol('P')

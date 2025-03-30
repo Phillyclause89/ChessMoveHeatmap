@@ -6,6 +6,10 @@ from numpy import float64
 from numpy import testing
 
 import heatmaps
+from chmutils import HeatmapCache
+from tests.utils import clear_test_cache, CACHE_DIR
+
+HeatmapCache.cache_dir = CACHE_DIR
 
 
 class TestCMHMEngine(TestCase):
@@ -15,6 +19,7 @@ class TestCMHMEngine(TestCase):
 
     def setUp(self) -> None:
         """Sets ups the engine instance to be tested with"""
+        clear_test_cache()
         # pylint: disable=import-outside-toplevel
         from chmengine import CMHMEngine
         self.engine = CMHMEngine()
