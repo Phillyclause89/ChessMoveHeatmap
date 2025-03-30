@@ -12,6 +12,7 @@ from tests.utils import clear_test_cache, CACHE_DIR
 HeatmapCache.cache_dir = CACHE_DIR
 BetterHeatmapCache.cache_dir = CACHE_DIR
 
+
 class TestCMHMEngine(TestCase):
     """Test Cmhmey Sr."""
     e2e4 = chess.Move.from_uci('e2e4')

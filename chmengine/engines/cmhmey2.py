@@ -45,11 +45,11 @@ class CMHMEngine2(CMHMEngine):
         if piece_count is None:
             if board is None:
                 if fen is None:
-                    piece_count = len(self.board.piece_map())
+                    piece_count = len([c for c in self.board.fen().split()[0] if c.isalpha()])
                 else:
-                    piece_count = len(chess.Board(fen=fen).piece_map())
+                    piece_count = len([c for c in fen.split()[0] if c.isalpha()])
             else:
-                piece_count = len(board.piece_map())
+                piece_count = len([c for c in board.fen().split()[0] if c.isalpha()])
         return f"qtable_depth_{self.depth}_piece_count_{piece_count}.db"
 
     def qdb_path(
