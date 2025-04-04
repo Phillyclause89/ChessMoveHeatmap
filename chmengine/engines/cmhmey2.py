@@ -92,6 +92,51 @@ class CMHMEngine2(CMHMEngine):
                     """
                 )
 
+    @property
+    def depth(self) -> int:
+        """Get the current recursion depth setting.
+
+        Returns
+        -------
+        int
+            The current recursion depth used for heatmap calculations.
+
+        Examples
+        --------
+        >>> from chmengine import CMHMEngine
+        >>> engine = CMHMEngine()
+        >>> engine.depth
+        1
+        """
+        return self._depth
+
+    @depth.setter
+    def depth(self, new_depth: int):
+        """Set the current recursion depth setting.
+
+        Parameters
+        ----------
+        new_depth : int
+            The new recursion depth. Must be greater than or equal to 0.
+
+        Raises
+        ------
+        ValueError
+            If new_depth is less than 0.
+
+        Examples
+        --------
+        >>> from chmengine import CMHMEngine
+        >>> engine = CMHMEngine()
+        >>> engine.depth = 3
+        >>> engine.depth
+        3
+        """
+        if new_depth < 0:
+            raise ValueError(f"depth must be greater than or equal to 0, got {new_depth}")
+        self._depth = int(new_depth)
+        self._init_qdb()
+
     def state_fen(self, board: Optional[Board] = None) -> str:
         """FEN string of board.fen() or self.board.fen() if board is None
 

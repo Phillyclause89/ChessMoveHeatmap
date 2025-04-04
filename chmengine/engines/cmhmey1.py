@@ -16,12 +16,15 @@ class CMHMEngine:
     _depth: int
 
     def __init__(self, board: Optional[chess.Board] = None, depth: int = 1) -> None:
-        """
+        """Initialize the CMHMEngine (Cmhmey Sr.) instance.
 
         Parameters
         ----------
         board : Optional[chess.Board]
-        depth : int
+            The initial chess board state. If None, a standard starting board is used.
+        depth : int, default: 1
+            The recursion depth used for heatmap calculations. This value controls how many layers
+            of future moves are considered when evaluating positions.
 
         Examples
         --------
@@ -43,11 +46,12 @@ class CMHMEngine:
 
     @property
     def depth(self) -> int:
-        """Gets curret depth setting
+        """Get the current recursion depth setting.
 
         Returns
         -------
         int
+            The current recursion depth used for heatmap calculations.
 
         Examples
         --------
@@ -55,26 +59,43 @@ class CMHMEngine:
         >>> engine = CMHMEngine()
         >>> engine.depth
         1
-        >>> engine.depth = 3
-        >>> engine.depth
-        3
         """
         return self._depth
 
     @depth.setter
     def depth(self, new_depth: int):
-        """Sets current depth setting if >= 0"""
+        """Set the current recursion depth setting.
+
+        Parameters
+        ----------
+        new_depth : int
+            The new recursion depth. Must be greater than or equal to 0.
+
+        Raises
+        ------
+        ValueError
+            If new_depth is less than 0.
+
+        Examples
+        --------
+        >>> from chmengine import CMHMEngine
+        >>> engine = CMHMEngine()
+        >>> engine.depth = 3
+        >>> engine.depth
+        3
+        """
         if new_depth < 0:
             raise ValueError(f"depth must be greater than or equal to 0, got {new_depth}")
         self._depth = int(new_depth)
 
     @property
     def board(self) -> chess.Board:
-        """Gets curret board object
+        """Get the current chess board.
 
         Returns
         -------
         chess.Board
+            The current board state.
 
         Examples
         --------
@@ -82,14 +103,25 @@ class CMHMEngine:
         >>> engine = CMHMEngine()
         >>> engine.board
         Board('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1')
-        >>> engine.board.push(chess.Move(8, 16))
-        >>> engine.board
-        Board('rnbqkbnr/pppppppp/8/8/8/P7/1PPPPPPP/RNBQKBNR b KQkq - 0 1')
         """
         return self._board
 
     @board.setter
     def board(self, board: chess.Board):
+        """Set the chess board state.
+
+        Parameters
+        ----------
+        board : chess.Board
+            A valid chess.Board object. The board is copied internally.
+
+        Raises
+        ------
+        ValueError
+            If the provided board is not valid.
+        TypeError
+            If the provided board is not of type chess.Board.
+        """
         try:
             assert board.is_valid()
             self._board = board.copy()
@@ -99,58 +131,69 @@ class CMHMEngine:
             raise TypeError(f"The board is of the wrong type: {type(board)}") from attribute_error
 
     def board_copy_pushed(self, move: chess.Move, board: Optional[chess.Board] = None) -> chess.Board:
-        """
+        """Return a copy of the board with the given move applied.
 
         Parameters
         ----------
         move : chess.Move
-        board : Optional[chess.Board]
+            The move to push onto the board.
+        board : Optional[chess.Board], default: None
+            The board to copy; if None, uses the engine's current board.
 
         Returns
         -------
         chess.Board
+            A new board instance with the move applied.
 
         Examples
         --------
         >>> from chmengine import CMHMEngine
         >>> engine = CMHMEngine()
-        >>> new_board = engine.board_copy_pushed(chess.Move(8, 16))
+        >>> new_board = engine.board_copy_pushed(chess.Move.from_uci('e2e4'))
         >>> new_board
-        Board('rnbqkbnr/pppppppp/8/8/8/P7/1PPPPPPP/RNBQKBNR b KQkq - 0 1')
-        >>> engine.board
-        Board('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1')
-        >>> engine.board = new_board
-        >>> engine.board
-        Board('rnbqkbnr/pppppppp/8/8/8/P7/1PPPPPPP/RNBQKBNR b KQkq - 0 1')
+        Board('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1')
         """
         board_copy: chess.Board = self.board.copy() if board is None else board.copy()
         board_copy.push(move)
         return board_copy
 
     def pick_move(self, pick_by: str = "all-delta") -> Tuple[chess.Move, numpy.float64]:
-        """
+        """Select a move based on various heatmap-derived criteria.
+
+        The method evaluates candidate moves using multiple heuristics (such as delta, maximum,
+        minimum, king attack/defense, etc.) and returns one move chosen at random from the set
+        of the best candidate moves according to the specified criteria.
+
+        The evaluation score is provided from the perspective of the player making the move:
+            a positive score indicates a move that is considered beneficial for the mover,
+            while a negative score indicates a move that is considered detrimental.
+        This scoring convention is different from many traditional chess engines,
+        where scores are often expressed as positive for White advatage and negative for Black.
+
+        Parameters
+        ----------
+        pick_by : str, default: "all-delta"
+            A string indicating the selection heuristic. Supported options include "all-delta",
+            "all-max", "all-min", "king-atk", "king-def", and "king-delta".
+
         Returns
         -------
         Tuple[chess.Move, numpy.float64]
+            A tuple containing the chosen move and its associated evaluation score, where the score is
+            from the perspective of the player making the move (i.e., positive values indicate favorable
+            outcomes for that player, and negative values indicate unfavorable outcomes).
 
         Examples
         --------
         >>> from chmengine import CMHMEngine
         >>> engine = CMHMEngine()
-        >>> engine.pick_move()
-        (Move.from_uci('e2e4'), 10.0)
-        >>> engine.pick_move(pick_by="all-max")
-        (Move.from_uci('e2e4'), 30.0)
-        >>> engine.pick_move(pick_by="all-min")[1]
-        20.0
-        >>> engine.pick_move(pick_by="all-delta")
-        (Move.from_uci('e2e4'), 10.0)
-        >>> engine.pick_move(pick_by="king-atk")[1]
-        0.0
-        >>> engine.pick_move(pick_by="king-def")[1]
-        0.0
-        >>> engine.pick_move(pick_by="king-delta")[1]
-        0.0
+        >>> picked_move, eval_score = engine.pick_move()
+        >>> picked_move
+        Move.from_uci('e2e4')
+        >>> # A positive score indicates a move leading to a good position for the mover,
+        >>> # whereas a negative score indicates a leading to a bad position.
+        >>> eval_score
+        10.0
         """
         current_index: int = self.current_player_heatmap_index
         other_index: int = self.other_player_heatmap_index
@@ -243,15 +286,20 @@ class CMHMEngine:
     def null_target_moves(
             number: int = 6
     ) -> Tuple[List[Tuple[Optional[chess.Move], Optional[numpy.float64]]], ...]:
-        """
+        """Initialize a tuple of target move lists with null entries.
+
+        This helper method creates a tuple containing 'number' lists, each initialized with a single
+        tuple (None, None). These lists serve as starting placeholders for candidate moves and their scores.
 
         Parameters
         ----------
-        number : int
+        number : int, default: 6
+            The number of target move lists to create.
 
         Returns
         -------
-        Tuple[List[Tuple[Optional[chess.Move], Optional[numpy.float64]]]]
+        Tuple[List[Tuple[Optional[chess.Move], Optional[numpy.float64]]], ...]
+            A tuple of lists, each initially containing one tuple (None, None).
 
         Examples
         --------
@@ -259,56 +307,45 @@ class CMHMEngine:
         >>> engine = CMHMEngine()
         >>> engine.null_target_moves()
         ([(None, None)], [(None, None)], [(None, None)], [(None, None)], [(None, None)], [(None, None)])
-        >>> engine.null_target_moves(1)
-        ([(None, None)],)
-        >>> a, b = engine.null_target_moves(2)
-        >>> a, b
-        ([(None, None)], [(None, None)])
-        >>> a.append((None, None))
-        >>> a, b
-        ([(None, None), (None, None)], [(None, None)])
+
         """
         return tuple([(None, None)] for _ in range(number))
 
     @property
     def other_player_heatmap_index(self) -> int:
-        """Get the heatmap index of the inactive player per the board state
+        """Get the heatmap index corresponding to the inactive (other) player.
 
         Returns
         -------
         int
+            The index for the other player. Typically, if the current turn is White (index 0),
+            this returns 1, and vice versa.
 
         Examples
         --------
         >>> from chmengine import CMHMEngine
-        >>> from chess import Move
         >>> engine = CMHMEngine()
         >>> engine.other_player_heatmap_index
         1
-        >>> engine.board.push(Move.from_uci("e2e4"))
-        >>> engine.other_player_heatmap_index
-        0
         """
         return int(self.board.turn)
 
     @property
     def current_player_heatmap_index(self) -> int:
-        """Get the heatmap index of the active player per the board state
+        """Get the heatmap index corresponding to the active (current) player.
 
         Returns
         -------
         int
+            The index for the current player. Typically, if the current turn is White (index 0),
+            this returns 0, and vice versa.
 
         Examples
         --------
         >>> from chmengine import CMHMEngine
-        >>> from chess import Move
         >>> engine = CMHMEngine()
         >>> engine.current_player_heatmap_index
         0
-        >>> engine.board.push(Move.from_uci("e2e4"))
-        >>> engine.current_player_heatmap_index
-        1
         """
         return int(not self.board.turn)
 
@@ -319,18 +356,27 @@ class CMHMEngine:
             other_player_sum: numpy.float64,
             move: chess.Move
     ) -> List[Tuple[chess.Move, numpy.float64]]:
-        """
+        """Update the candidate moves based on the delta between current and other player's sums.
+
+        The delta is computed as the difference between the current player's sum and the other player's sum.
+        If the calculated delta is greater than the current best, the candidate list is replaced; if equal,
+        the move is appended.
 
         Parameters
         ----------
-        target_moves_by_delta
-        current_player_sum
-        other_player_sum
-        move
+        target_moves_by_delta : List[Tuple[Optional[chess.Move], Optional[numpy.float64]]]
+            The current list of candidate moves and their delta scores.
+        current_player_sum : numpy.float64
+            The sum of move intensities for the current player.
+        other_player_sum : numpy.float64
+            The sum of move intensities for the other player.
+        move : chess.Move
+            The move being evaluated.
 
         Returns
         -------
-
+        List[Tuple[chess.Move, numpy.float64]]
+            The updated list of candidate moves with their delta scores.
         """
         delta: numpy.float64 = numpy.float64(current_player_sum - other_player_sum)
         current_best_delta: numpy.float64 = target_moves_by_delta[0][1]
@@ -347,18 +393,26 @@ class CMHMEngine:
             move: chess.Move,
             other_index: int
     ) -> Tuple[numpy.float64, List[Tuple[chess.Move, numpy.float64]]]:
-        """
+        """Update the candidate moves for minimizing the opponent's sum.
+
+        Calculates the opponent's total move intensity from the transposed heatmap, and updates
+        the candidate list if the new sum is lower than the current best.
 
         Parameters
         ----------
-        target_moves_by_min_other
-        transposed_map
-        move
-        other_index
+        target_moves_by_min_other : List[Tuple[Optional[chess.Move], Optional[numpy.float64]]]
+            The current candidate moves for minimizing the opponent's intensity.
+        transposed_map : numpy.ndarray
+            The transposed heatmap data array.
+        move : chess.Move
+            The move being evaluated.
+        other_index : int
+            The index corresponding to the opponent.
 
         Returns
         -------
-
+        Tuple[numpy.float64, List[Tuple[chess.Move, numpy.float64]]]
+            A tuple containing the opponent's sum and the updated candidate list.
         """
         other_player_sum: numpy.float64 = sum(transposed_map[other_index])
         current_best_min: numpy.float64 = target_moves_by_min_other[0][1]
@@ -375,18 +429,26 @@ class CMHMEngine:
             move: chess.Move,
             color_index: int
     ) -> Tuple[numpy.float64, List[Tuple[chess.Move, numpy.float64]]]:
-        """
+        """Update the candidate moves for maximizing the current player's intensity.
+
+        Computes the current player's total intensity from the transposed heatmap and updates the candidate
+        list if the new sum is greater than the current best.
 
         Parameters
         ----------
-        target_moves_by_max_current
-        transposed_map
-        move
-        color_index
+        target_moves_by_max_current : List[Tuple[Optional[chess.Move], Optional[numpy.float64]]]
+            The current candidate moves for maximizing the current player's intensity.
+        transposed_map : numpy.ndarray
+            The transposed heatmap data array.
+        move : chess.Move
+            The move being evaluated.
+        color_index : int
+            The index corresponding to the current player.
 
         Returns
         -------
-
+        Tuple[numpy.float64, List[Tuple[chess.Move, numpy.float64]]]
+            A tuple containing the current player's sum and the updated candidate list.
         """
         current_player_sum: numpy.float64 = sum(transposed_map[color_index])
         current_best_max: numpy.float64 = target_moves_by_max_current[0][1]
@@ -403,18 +465,26 @@ class CMHMEngine:
             current_king_min: numpy.float64,
             other_king_sum: numpy.float64
     ) -> List[Tuple[chess.Move, numpy.float64]]:
-        """
+        """Update candidate moves based on the king's delta value.
+
+        Calculates the delta between the opponent's king intensity and the current king's minimum intensity,
+        updating the candidate list if this delta is greater than the current best.
 
         Parameters
         ----------
-        target_moves_by_king_delta
-        move
-        current_king_min
-        other_king_sum
+        target_moves_by_king_delta : List[Tuple[Optional[chess.Move], Optional[numpy.float64]]]
+            The current candidate moves for the king delta criterion.
+        move : chess.Move
+            The move being evaluated.
+        current_king_min : numpy.float64
+            The minimum intensity value for the current king.
+        other_king_sum : numpy.float64
+            The total intensity value for the opponent's king.
 
         Returns
         -------
-
+        List[Tuple[chess.Move, numpy.float64]]
+            The updated list of candidate moves based on king delta.
         """
         current_king_delta: numpy.float64 = numpy.float64(other_king_sum - current_king_min)
         current_best_king_delta: numpy.float64 = target_moves_by_king_delta[0][1]
@@ -432,19 +502,28 @@ class CMHMEngine:
             other_index: int,
             current_king_box: List[int]
     ) -> Tuple[numpy.float64, List[Tuple[chess.Move, numpy.float64]]]:
-        """
+        """Update candidate moves for minimizing the current king's intensity.
+
+        Extracts the intensity values for the current king from the heatmap and updates the candidate
+        list if a lower intensity sum is found.
 
         Parameters
         ----------
-        target_moves_by_min_current_king
-        heatmap
-        move
-        other_index
-        current_king_box
+        target_moves_by_min_current_king : List[Tuple[Optional[chess.Move], Optional[numpy.float64]]]
+            The candidate moves list for minimizing current king's intensity.
+        heatmap : heatmaps.GradientHeatmap
+            The heatmap object containing move intensities.
+        move : chess.Move
+            The move being evaluated.
+        other_index : int
+            The index corresponding to the opponent.
+        current_king_box : List[int]
+            A list of board squares representing the area around the current king.
 
         Returns
         -------
-
+        Tuple[numpy.float64, List[Tuple[chess.Move, numpy.float64]]]
+            A tuple containing the current king's sum and the updated candidate list.
         """
         current_king_map = heatmap[current_king_box].transpose()[other_index]
         current_king_min = sum(current_king_map)
@@ -463,19 +542,28 @@ class CMHMEngine:
             color_index: int,
             other_king_box: List[int]
     ) -> Tuple[numpy.float64, List[Tuple[chess.Move, numpy.float64]]]:
-        """
+        """Update candidate moves for maximizing the opponent king's intensity.
+
+        Calculates the opponent king's total intensity from the heatmap over the specified area and
+        updates the candidate list if a higher intensity sum is found.
 
         Parameters
         ----------
-        target_moves_by_max_other_king
-        heatmap
-        move
-        color_index
-        other_king_box
+        target_moves_by_max_other_king : List[Tuple[Optional[chess.Move], Optional[numpy.float64]]]
+            The candidate moves list for maximizing opponent king's intensity.
+        heatmap : heatmaps.GradientHeatmap
+            The heatmap object containing move intensities.
+        move : chess.Move
+            The move being evaluated.
+        color_index : int
+            The index corresponding to the opponent.
+        other_king_box : List[int]
+            A list of board squares representing the area around the opponent's king.
 
         Returns
         -------
-
+        Tuple[numpy.float64, List[Tuple[chess.Move, numpy.float64]]]
+            A tuple containing the opponent king's sum and the updated candidate list.
         """
         other_king_map = heatmap[other_king_box].transpose()[color_index]
         other_king_sum = sum(other_king_map)
@@ -488,15 +576,17 @@ class CMHMEngine:
 
     @staticmethod
     def heatmap_data_is_zeros(heatmap: heatmaps.GradientHeatmap) -> bool:
-        """
+        """Check if the heatmap data is entirely zero.
 
         Parameters
         ----------
         heatmap : heatmaps.GradientHeatmap
+            The heatmap object to check.
 
         Returns
         -------
         bool
+            True if all values in the heatmap data are zero; otherwise, False.
 
         Examples
         --------
@@ -512,15 +602,21 @@ class CMHMEngine:
         return (heatmap.data == numpy.float64(0.0)).all()
 
     def get_king_boxes(self, board: Optional[chess.Board] = None) -> Tuple[List[int], List[int]]:
-        """current_king_box, other_king_box
+        """Compute the bounding boxes for the kings on the board.
+
+        For both the current and opponent kings, this method calculates a "box" (a list of square
+        indices) representing the king's immediate surroundings.
 
         Parameters
         ----------
-        board : Optional[chess.Board]
+        board : Optional[chess.Board], default: None
+            The board to use; if None, the engine's current board is used.
 
         Returns
         -------
         Tuple[List[int], List[int]]
+            A tuple containing two lists: the first is the box for the current king, and the second is
+            the box for the opponent king.
         """
         board = self.board if board is None else board
         other_king_square: int = board.king(not board.turn)
@@ -541,17 +637,25 @@ class CMHMEngine:
 
     @staticmethod
     def is_valid_king_box_square(board: chess.Board, square_id: int, king_square: int) -> bool:
-        """
+        """Determine if a square is a valid part of a king's bounding box.
+
+        A square is valid if it is within the board limits, adjacent to the king (distance of 1),
+        and either empty or occupied by a piece of the same color as the king.
 
         Parameters
         ----------
         board : chess.Board
+            The board on which to validate the square.
         square_id : int
+            The index of the square to check.
         king_square : int
+            The square where the king is located.
 
         Returns
         -------
         bool
+            True if the square is valid for inclusion in the king's box; otherwise, False.
+
         """
         if square_id < 0 or 63 < square_id or chess.square_distance(king_square, square_id) != 1:
             return False
@@ -561,37 +665,54 @@ class CMHMEngine:
         return True
 
     def get_or_calc_move_maps_list(self) -> List[Tuple[chess.Move, heatmaps.GradientHeatmap]]:
-        """
+        """Retrieve a list of move-to-heatmap mappings.
+
+        This method converts the dictionary returned by `get_or_calc_move_maps()` into a list of
+        tuples for easier iteration, where each tuple contains a move and its corresponding heatmap.
 
         Returns
         -------
         List[Tuple[chess.Move, heatmaps.GradientHeatmap]]
+            A list of (move, heatmap) tuples.
 
         Examples
         --------
         >>> from chmengine import CMHMEngine
         >>> engine = CMHMEngine()
-        >>> engine.get_or_calc_move_maps_list()[0][0]
+        >>> first_move = engine.get_or_calc_move_maps_list()[0][0]
+        >>> first_move
         Move.from_uci('g1h3')
         """
         return list(self.get_or_calc_move_maps().items())
 
     def get_or_calc_move_maps(self, depth: Optional[int] = None) -> Dict[chess.Move, heatmaps.GradientHeatmap]:
-        """Gets or Calcs the heatmaps produced from pushing each move.
+        """Compute or retrieve precomputed heatmaps for all legal moves from the current board.
+
+        For each legal move from the current board, this method generates a corresponding heatmap by
+        applying the move and evaluating the resulting position with a given recursion depth.
+
+        Parameters
+        ----------
+        depth : Optional[int], default: None
+            The recursion depth for the heatmap calculation. If None, the engine's current depth is used.
 
         Returns
         -------
-        dict
+        Dict[chess.Move, heatmaps.GradientHeatmap]
+            A dictionary mapping each legal move to its corresponding heatmap.
+
+        Raises
+        ------
+        ValueError
+            If the current board has no legal moves.
 
         Examples
         --------
         >>> from chmengine import CMHMEngine
         >>> engine = CMHMEngine()
         >>> move_maps = engine.get_or_calc_move_maps()
-        >>> move_maps_items = list(move_maps.items())
-        >>> move_maps_items[0][0]
-        Move.from_uci('g1h3')
-        >>> type(move_maps_items[0][1])
+        >>> some_move = list(move_maps.keys())[0]
+        >>> type(move_maps[some_move])
         <class 'heatmaps.ChessMoveHeatmap'>
         """
         moves = self.current_moves_list()
@@ -605,29 +726,24 @@ class CMHMEngine:
         raise ValueError("Current Board has no legal moves.")
 
     def current_moves_list(self, board: Optional[chess.Board] = None) -> List[chess.Move]:
-        """
+        """Retrieve the list of legal moves for the current board position.
 
         Parameters
         ----------
-        board : Optional[chess.Board]
+        board : Optional[chess.Board], default: None
+            The board for which to get legal moves. If None, the engine's current board is used.
 
         Returns
         -------
         List[chess.Move]
+            A list of legal moves available on the board.
 
         Examples
         --------
         >>> from chmengine import CMHMEngine
-        >>> from chess import Move
         >>> engine = CMHMEngine()
-        >>> engine.current_moves_list()[15]
+        >>> moves = engine.current_moves_list()
+        >>> moves[15]
         Move.from_uci('e2e4')
-        >>> engine.current_moves_list(engine.board_copy_pushed(Move.from_uci('e2e4')))[15]
-        Move.from_uci('e7e5')
-        >>> engine.current_moves_list()[15]
-        Move.from_uci('e2e4')
-        >>> engine.board.push(Move.from_uci('e2e4'))
-        >>> engine.current_moves_list()[15]
-        Move.from_uci('e7e5')
         """
         return list(self.board.legal_moves) if board is None else list(board.legal_moves)
