@@ -300,13 +300,15 @@ class CMHMEngine2(CMHMEngine):
             else:
                 raise ValueError(f"How did we get here? outcome:{outcome} board turn: {self.board.turn}")
             self.set_q_value(value=new_q, state_fen=state, board=self.board)
+            self.pick_move()  # Call pick_move to back-pop the updated score
             self.board.pop()
 
     def pick_move(
             self,
             pick_by: str = "",
             early_exit: bool = False,
-            king_box_multiplier: int = 1
+            king_box_multiplier: int = 1,
+            debug: bool = False
     ) -> Tuple[chess.Move, numpy.float64]:
         """Select a move based on heatmap evaluations and Q-table integration.
 
@@ -326,6 +328,8 @@ class CMHMEngine2(CMHMEngine):
         king_box_multiplier : int, default: 1
             A multiplier that weights the scores of squares in the "king box" (the area around the kings)
             to adjust for king safety.
+        debug : bool, default: False
+            Allows for a print call showing the current evals of each move choice during anaylsis.
 
         Returns
         -------
@@ -333,6 +337,11 @@ class CMHMEngine2(CMHMEngine):
             A tuple containing the chosen move and its associated evaluation score. The evaluation score is
             expressed from the perspective of the player making the move—positive values indicate favorable
             outcomes and negative values indicate unfavorable outcomes.
+
+        Raises
+        ------
+        ValueError
+            If Current Board has no legal moves.
 
         Examples
         --------
@@ -357,12 +366,11 @@ class CMHMEngine2(CMHMEngine):
         for current_move in current_moves:
             # Phil, I know you keep thinking you don't need to calculate a score here,
             # but you do sometimes (keep that in mind.)
-            current_move_uci: str = current_move.uci()
             new_board: Board = self.board_copy_pushed(current_move)
             # new_state_fen represents the boards for the only q-values that we will make updates to
             new_state_fen = new_board.fen()
             # No longer look at q-score at this level, only back prop q's into the calculation
-            print(f"Calculating score for move: {current_move_uci}")
+            # print(f"Calculating score for move: {current_move.uci()}")
             new_current_king_box: List[int]
             new_other_king_box: List[int]
             new_current_king_box, new_other_king_box = self.get_king_boxes(new_board)
@@ -385,13 +393,13 @@ class CMHMEngine2(CMHMEngine):
                 current_move, new_heatmap_transposed,
                 current_index, other_index,
                 new_current_king_box, new_other_king_box,
-                king_box_multiplier, new_state_fen,
-                current_move_uci
+                king_box_multiplier, new_state_fen
             )
         # Final pick is a random choice of all moves equal to the highest scoring move
-        print("All moves ranked:", self.formatted_moves(current_move_choices_ordered))
+        if debug:
+            print("All moves ranked:", self.formatted_moves(current_move_choices_ordered))
         picks = [(m, s) for m, s in current_move_choices_ordered if s == current_move_choices_ordered[0][1]]
-        print("Engine moves:", self.formatted_moves(picks))
+        # print("Engine moves:", self.formatted_moves(picks))
         chosen_move, chosen_q = random.choice(picks)
         self.set_q_value(value=numpy.float64(-chosen_q))
         return chosen_move, chosen_q
@@ -407,8 +415,7 @@ class CMHMEngine2(CMHMEngine):
             new_current_king_box: List[int],
             new_other_king_box: List[int],
             king_box_multiplier: int,
-            new_state_fen: str,
-            current_move_uci: str
+            new_state_fen: str
     ) -> List[Tuple[Move, numpy.float64]]:
         """Update the ordered list of candidate moves based on a newly calculated heatmap score.
 
@@ -438,24 +445,26 @@ class CMHMEngine2(CMHMEngine):
             The multiplier applied to king box scores.
         new_state_fen : str
             The FEN string representing the new board state.
-        current_move_uci : str
-            The UCI string of the candidate move.
 
         Returns
         -------
         List[Tuple[Move, numpy.float64]]
             The updated ordered list of candidate moves with their evaluation scores.
         """
-        initial_move_score: numpy.float64 = self.calculate_score(
-            current_index, other_index, new_heatmap_transposed,
-            king_box_multiplier, new_current_king_box, new_other_king_box
-        )
+        initial_q_val: Optional[numpy.float64] = self.get_q_value(state_fen=new_state_fen, board=new_board)
+        if initial_q_val is None:
+            initial_move_score: numpy.float64 = self.calculate_score(
+                current_index, other_index, new_heatmap_transposed,
+                king_box_multiplier, new_current_king_box, new_other_king_box
+            )
+        else:
+            initial_move_score = initial_q_val
         response_moves: List[Tuple[Optional[Move], Optional[numpy.float64]]]
         response_moves = self.get_or_calculate_responses(new_board, other_index, current_index, king_box_multiplier)
-        print(
-            f"{current_move_uci} initial score: {initial_move_score:.2f} ->",
-            self.formatted_moves(response_moves)
-        )
+        # print(
+        #     f"{current_move} initial score: {initial_move_score:.2f} ->",
+        #     self.formatted_moves(response_moves)
+        # )
         # Once all responses to a move reviewed, final move score is the worst outcome to current player.
         best_response_score: Optional[numpy.float64] = response_moves[0][1]
         final_move_score: numpy.float64
@@ -465,7 +474,7 @@ class CMHMEngine2(CMHMEngine):
             current_move_choices_ordered = [(current_move, final_move_score)]
         else:
             self.insert_ordered_best_to_worst(current_move_choices_ordered, current_move, final_move_score)
-        print(f"{current_move_uci} final score: {final_move_score:.2f}")
+        # print(f"{current_move} final score: {final_move_score:.2f}")
         return current_move_choices_ordered
 
     def get_or_calculate_responses(
