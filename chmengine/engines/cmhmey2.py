@@ -310,6 +310,29 @@ class CMHMEngine2(CMHMEngine):
         Side Effects
         ------------
         Updates the Q-values in the Q-table database for each board state in the move history.
+
+        Examples
+        --------
+        >>> from io import StringIO
+        >>> from chess import pgn
+        >>> from chmengine import CMHMEngine2
+        >>> pgn_buffer = StringIO(
+        ...    '''
+        ...    1. f3 e5 2. g4 Qh4# 0-1
+        ...
+        ...
+        ...    '''
+        ... )
+        >>> game = pgn.read_game(pgn_buffer)
+        >>> board = game.board()
+        >>> for move in game.mainline_moves():
+        ...     board.push(move)
+        >>> engine = CMHMEngine2(board=board)
+        >>> engine.state_fen()
+        'rnb1kbnr/pppp1ppp/8/4p3/6Pq/5P2/PPPPP2P/RNBQKBNR w KQkq - 1 3'
+        >>> engine.update_q_values()
+        >>> engine.state_fen()
+        'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
         """
         outcome: Optional[Outcome] = self.board.outcome(claim_draw=True)
         while len(self.board.move_stack) > 0:
@@ -317,6 +340,12 @@ class CMHMEngine2(CMHMEngine):
             current_q: Optional[float] = self.get_q_value(state_fen=state, board=self.board)
             if current_q is None:
                 self.board.pop()
+                try:
+                    self.pick_move()
+                except ValueError as value_error:
+                    raise ValueError(
+                        f"Engine's board has an invalid move stack: {self.board.move_stack}"
+                    ) from value_error
                 continue
             # The q score of a board fen is relative to the player who just moved
             if outcome.winner is None:  # Not checking for draws first causes bugs in training
@@ -787,7 +816,8 @@ class CMHMEngine2(CMHMEngine):
         return numpy.float64(initial_move_score + initial_king_box_score)
 
     @staticmethod
-    def _formatted_moves_(moves: List[Tuple[Optional[Move], Optional[numpy.float64]]]) -> List[Optional[Tuple[str, str]]]:
+    def _formatted_moves_(moves: List[Tuple[Optional[Move], Optional[numpy.float64]]]) -> List[
+        Optional[Tuple[str, str]]]:
         """Generate a formatted list of moves and their scores for display.
 
         This static method converts a list of move-score tuples into a list of tuples containing the move
