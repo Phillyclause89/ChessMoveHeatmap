@@ -340,12 +340,6 @@ class CMHMEngine2(CMHMEngine):
             current_q: Optional[float] = self.get_q_value(state_fen=state, board=self.board)
             if current_q is None:
                 self.board.pop()
-                try:
-                    self.pick_move()
-                except ValueError as value_error:
-                    raise ValueError(
-                        f"Engine's board has an invalid move stack: {self.board.move_stack}"
-                    ) from value_error
                 continue
             # The q score of a board fen is relative to the player who just moved
             if outcome.winner is None:  # Not checking for draws first causes bugs in training
@@ -367,8 +361,8 @@ class CMHMEngine2(CMHMEngine):
             else:
                 raise ValueError(f"How did we get here? outcome:{outcome} board turn: {self.board.turn}")
             self.set_q_value(value=new_q, state_fen=state, board=self.board)
-            self.pick_move()  # Call pick_move to back-pop the updated score
             self.board.pop()
+            self.pick_move()  # Call pick_move to back-pop the updated score
 
     def pick_move(
             self,

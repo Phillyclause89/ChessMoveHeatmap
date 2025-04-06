@@ -143,6 +143,7 @@ class TestCMHMEngine2(TestCase):
         self.assertLess(new_duration, duration_first)
         avg_duration = numpy.mean(durations)
         avg_response = numpy.mean(response_pick_times)
+        self.assertLess(avg_duration, avg_response)
         pre_durations = numpy.percentile(durations, [0, 1, 10, 25, 50, 75, 90, 99, 100])
         pre_response = numpy.percentile(response_pick_times, [0, 1, 10, 25, 50, 75, 90, 99, 100])
         print(f"mean pick time: {avg_duration:.3f}s\npercentiles (0, 1, 10, 25, 50, 75, 90, 99, 100):\n{pre_durations}")
