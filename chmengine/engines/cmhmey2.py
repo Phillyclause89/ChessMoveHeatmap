@@ -300,12 +300,16 @@ class CMHMEngine2(CMHMEngine):
                 (state_fen, value)
             )
 
-    def update_q_values(self) -> None:
+    def update_q_values(self, debug: bool = False) -> None:
         """Update the Q-table values after game termination.
 
         This method back-propagates the outcome of the game by iteratively popping moves off the
         board stack and adjusting their Q-values based on the game outcome. For draws, scores are
         converged toward zero; for wins/losses, scores are bumped or penalized accordingly.
+
+        Parameters
+        ----------
+        debug : bool
 
         Side Effects
         ------------
@@ -362,7 +366,7 @@ class CMHMEngine2(CMHMEngine):
                 raise ValueError(f"How did we get here? outcome:{outcome} board turn: {self.board.turn}")
             self.set_q_value(value=new_q, state_fen=state, board=self.board)
             self.board.pop()
-            self.pick_move()  # Call pick_move to back-pop the updated score
+            self.pick_move(debug=debug)  # Call pick_move to back-pop the updated score
 
     def pick_move(
             self,

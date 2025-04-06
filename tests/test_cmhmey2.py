@@ -1,12 +1,13 @@
 """Test Cmhmey Jr."""
 import time
+from io import StringIO
 from unittest import TestCase, main
 from os import path
 import chess
+from chess import pgn
 import numpy
 
-from numpy import float64
-from numpy import testing
+from numpy import float64, testing
 
 import chmutils
 import heatmaps
@@ -113,7 +114,40 @@ class TestCMHMEngine2(TestCase):
         self.assertEqual(saved_value, value_3)
 
     def test_update_q_values(self) -> None:
-        pass
+        """Tests update_q_values method (rewards function)"""
+        pgn_buffer = StringIO(
+            """
+            1. f3 e5 2. g4 Qh4# 0-1
+            
+            
+            """
+        )
+        game = pgn.read_game(pgn_buffer)
+        for move in game.mainline_moves():
+            print(self.engine.board.fen())
+            pick = self.engine.pick_move(debug=True)
+            move_board = self.engine.board_copy_pushed(move)
+            move_score = self.engine.get_q_value(state_fen=move_board.fen(), board=move_board)
+            if self.engine.board.turn:
+                self.assertGreater(pick[1], move_score)
+            else:
+                self.assertEqual(pick[1], move_score)
+            print(' game line move:', (move, move_score), '\n', 'engine line move:', pick)
+            self.engine.board.push(move)
+        print(self.engine.board.fen())
+        self.engine.update_q_values(debug=True)
+        for move in game.mainline_moves():
+            print(self.engine.board.fen())
+            pick = self.engine.pick_move(debug=True)
+            move_board = self.engine.board_copy_pushed(move)
+            move_score = self.engine.get_q_value(state_fen=move_board.fen(), board=move_board)
+            if self.engine.board.turn:
+                self.assertGreater(pick[1], move_score)
+            else:
+                self.assertEqual(pick[1], move_score)
+            print(' game line move:', (move, move_score), '\n', 'engine line move:', pick)
+            self.engine.board.push(move)
+        print(self.engine.board.fen())
 
     def test_pick_move(self) -> None:
         """Tests pick_move method."""
