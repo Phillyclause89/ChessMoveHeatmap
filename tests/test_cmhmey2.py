@@ -147,7 +147,7 @@ class TestCMHMEngine2(TestCase):
         pre_response = numpy.percentile(response_pick_times, [0, 1, 10, 25, 50, 75, 90, 99, 100])
         print(f"mean pick time: {avg_duration:.3f}s\npercentiles (0, 1, 10, 25, 50, 75, 90, 99, 100):\n{pre_durations}")
         print(
-            f"mean response tome: {avg_response:.3f}s\npercentiles (0, 1, 10, 25, 50, 75, 90, 99, 100):\n{pre_response}"
+            f"mean response time: {avg_response:.3f}s\npercentiles (0, 1, 10, 25, 50, 75, 90, 99, 100):\n{pre_response}"
         )
 
     def test__update_current_move_choices_(self) -> None:

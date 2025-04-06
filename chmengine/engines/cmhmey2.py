@@ -631,6 +631,7 @@ class CMHMEngine2(CMHMEngine):
                 next_board, current_index,
                 other_index, king_box_multiplier
             )
+            self.set_q_value(value=numpy.float64(-next_move_score), state_fen=next_state_fen, board=next_board)
         else:
             # Here is where we can safely make next_q_val negative to match the current player's perspective
             next_move_score = numpy.float64(-next_q_val)
