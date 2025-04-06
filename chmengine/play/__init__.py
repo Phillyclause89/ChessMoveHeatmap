@@ -175,13 +175,14 @@ class PlayCMHMEngine:
         with open(file_name, "w", encoding="utf-8") as file:
             print(game, file=file, end="\n\n")
 
-    def train_cmhmey_jr(self, training_games: int = 1000, training_games_start: int = 0) -> None:
+    def train_cmhmey_jr(self, training_games: int = 1000, training_games_start: int = 0, debug: bool = False) -> None:
         """Trains engine. CMHMEngine2 specifically
 
         Parameters
         ----------
         training_games : int
         training_games_start : int
+        debug : bool
         """
         if not isinstance(self.engine, CMHMEngine2):
             raise TypeError(f"Current engine is not type chmengine.CMHMEngine2: {type(self.engine)}")
@@ -197,7 +198,7 @@ class PlayCMHMEngine:
                 print(self.engine.board)
                 move: Move
                 score: numpy.float64
-                move, score = self.engine.pick_move()
+                move, score = self.engine.pick_move(debug=debug)
                 s_str: str = f"{score:.2f}"
                 white_move_text: str = f"{move_number}. {move.uci()}: {s_str}"
                 if len(self.engine.board.move_stack) > 0:
@@ -207,7 +208,7 @@ class PlayCMHMEngine:
                 self.engine.board.push(move)
             outcome: Outcome = self.engine.board.outcome(claim_draw=True)
             game = pgn.Game.from_board(self.engine.board)
-            self.engine.update_q_values()
+            self.engine.update_q_values(debug=debug)
             game_heads = game.headers
             game_heads["Event"] = "CMHMEngine2 vs CMHMEngine2"
             game_heads["Site"] = "Kingdom of Phil"
