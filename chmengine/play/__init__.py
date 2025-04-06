@@ -86,7 +86,7 @@ class PlayCMHMEngine:
             self.player_index, self.cpu_index = self.cpu_index, self.player_index
             self.player_color, self.cpu_color = self.cpu_color, self.player_color
 
-    def play(self, pick_by: str = "delta") -> None:
+    def play(self, pick_by: str = "all-delta") -> None:
         """Play a game against the engine"""
         self.game_round += 1
         local_time = self.get_local_time()

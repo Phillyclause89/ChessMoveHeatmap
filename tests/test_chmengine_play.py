@@ -2,7 +2,7 @@
 import datetime
 import time
 from io import StringIO
-from unittest import TestCase, main
+from unittest import TestCase, main, mock
 from os import path
 import chess
 from chess import pgn
@@ -29,6 +29,7 @@ class TestPlayCMHMEngine(TestCase):
         # pylint: disable=import-outside-toplevel
         from chmengine import PlayCMHMEngine, CMHMEngine2, CMHMEngine
         CMHMEngine2.cache_dir = CACHE_DIR
+        PlayCMHMEngine.pgn_dir = CACHE_DIR
         self.engine1_handler = PlayCMHMEngine(engine=CMHMEngine, player_name=YHWH, site='Kingdom of Phil')
         self.engine1 = self.engine1_handler.engine
         self.engine2_handler = PlayCMHMEngine(engine=CMHMEngine2, player_name=YHVH, site='Kingdom of Phil')
@@ -44,9 +45,44 @@ class TestPlayCMHMEngine(TestCase):
 
     def test_play(self) -> None:
         """tests play method. (TBD)"""
+        moves_1 = iter(list(m for m in ('f2f3', 'g2g4')))
+        moves_2 = iter(list(m for m in ('f2f3', 'g2g4')))
+
+        def next_move(prompt: str):
+            """Gets the next user move to mock."""
+            print(prompt)
+            self.assertIn('white', prompt)
+            try:
+                return next(moves_1)
+            except StopIteration:
+                return next(moves_2)
+
+        for handler in self.handlers:
+            self.assertEqual(len(handler.round_results), 0)
+            with mock.patch('builtins.input', next_move):
+                handler.play()
+            self.assertEqual(len(handler.round_results), 1)
 
     def test_save_to_pgn(self) -> None:
         """Tests save_to_pgn method. (TBD)"""
+        pgn_buffer = StringIO(
+            """
+            1. f3 e5 2. g4 Qh4# 0-1
+
+
+            """
+        )
+        game = pgn.read_game(pgn_buffer)
+        for handler in self.handlers:
+            pgn_path = path.join(handler.pgn_dir, 'test.pgn')
+            handler.save_to_pgn(pgn_path, game)
+            with open(pgn_path, encoding='UTF8') as pgn_file:
+                same_game = pgn.read_game(pgn_file)
+                testing.assert_array_equal(
+                    list(m.uci() for m in same_game.mainline()),
+                    list(m.uci() for m in game.mainline())
+                )
+        self.assertEqual(same_game.headers['Result'], '0-1')
 
     def test_train_cmhmey_jr(self) -> None:
         """Tests train_cmhmey_jr method. (TBD)"""
