@@ -1,0 +1,15 @@
+[Event "CMHMEngine2 vs CMHMEngine2"]
+[Site "Kingdom of Phil"]
+[Date "2025.04.06"]
+[Round "12"]
+[White "CMHMEngine2"]
+[Black "CMHMEngine2"]
+[Result "*"]
+[Timezone "Pacific Daylight Time"]
+[UTCDate "2025.04.06"]
+[UTCTime "20:57:52"]
+[Termination "THREEFOLD_REPETITION"]
+[CMHMEngineDepth "1"]
+
+1. e3 e5 2. Qg4 Qe7 3. Bb5 c6 4. Nc3 cxb5 5. Nd5 Kd8 6. Nxe7 Bxe7 7. Ne2 f5 8. Qxg7 Nf6 9. Nf4 exf4 10. Qxh8+ Ne8 11. Qe5 Nc6 12. Qxf5 f3 13. Rg1 b6 14. gxf3 Nd4 15. exd4 Bb7 16. Rg8 Bd5 17. Qxd5 Rc8 18. Qe5 a5 19. Kf1 a4 20. b4 a3 21. Bxa3 Rc7 22. Bb2 h6 23. Kg2 Bf8 24. Rxf8 Kc8 25. Rxe8+ Kb7 26. Qd5+ Ka6 27. Ra8+ Ra7 28. Re8 d6 29. Kh3 Rg7 30. Ra8+ Ra7 31. Re1 h5 32. Rxa7+ Kxa7 33. Qf7+ Ka6 34. d5 h4 35. Kg4 h3 36. Qe8 Ka7 37. Bf6 Kb7 38. f4 Ka7 39. f5 Kb7 40. Bd4 Ka7 41. Bf6 Kb7 42. Bd4 Ka7 *
+
