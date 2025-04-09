@@ -659,9 +659,6 @@ class CMHMEngine:
         """
         if square_id < 0 or 63 < square_id or chess.square_distance(king_square, square_id) != 1:
             return False
-        piece_at_square: Optional[Piece] = board.piece_at(square_id)
-        if isinstance(piece_at_square, chess.Piece) and piece_at_square.color != board.piece_at(king_square).color:
-            return False
         return True
 
     def get_or_calc_move_maps_list(self) -> List[Tuple[chess.Move, heatmaps.GradientHeatmap]]:

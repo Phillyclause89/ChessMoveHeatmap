@@ -185,8 +185,8 @@ class TestCMHMEngine(TestCase):
         testing.assert_array_equal(king_box_other, [60, 51, 59, 52, 53, 61])
         board = chess.Board("8/4n3/3kB3/2n5/5N2/3bK3/3N4/8 w - - 0 1")
         king_box_current, king_box_other = self.engine.get_king_boxes(board)
-        testing.assert_array_equal(king_box_current, [20, 11, 27, 12, 28, 13, 21, 29])
-        testing.assert_array_equal(king_box_other, [43, 34, 42, 50, 35, 51, 36, 52])
+        testing.assert_array_equal(king_box_current, [20, 11, 19, 27, 12, 28, 13, 21, 29])
+        testing.assert_array_equal(king_box_other, [43, 34, 42, 50, 35, 51, 36, 44, 52])
 
     def test_is_valid_king_box_square(self) -> None:
         self.assertFalse(self.engine.is_valid_king_box_square(self.engine.board, 4, 4))
