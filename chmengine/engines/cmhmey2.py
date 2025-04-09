@@ -681,11 +681,7 @@ class CMHMEngine2(CMHMEngine):
             self._update_heatmap_transposed_with_mate_values_(
                 next_heatmap_transposed, other_index, next_board
             )
-        next_move_score: numpy.float64 = self._calculate_score_(
-            current_index, other_index, next_heatmap_transposed,
-            king_box_multiplier, next_current_king_box, next_other_king_box
-        )
-        if next_board.is_check():
+        elif next_board.is_check():
             # It will be interesting if we hit inf recursion here, that would be a position of inf counter checks?
             check_responses = self._get_or_calculate_responses_(
                 new_board=next_board,
@@ -695,6 +691,10 @@ class CMHMEngine2(CMHMEngine):
             )
             if check_responses[-1][1] is not None:
                 return check_responses[-1][1]
+        next_move_score: numpy.float64 = self._calculate_score_(
+            current_index, other_index, next_heatmap_transposed,
+            king_box_multiplier, next_current_king_box, next_other_king_box
+        )
         return next_move_score
 
     def _update_heatmap_transposed_with_mate_values_(
