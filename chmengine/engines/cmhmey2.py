@@ -525,7 +525,13 @@ class CMHMEngine2(CMHMEngine):
         else:
             initial_move_score = initial_q_val
         response_moves: List[Tuple[Optional[Move], Optional[numpy.float64]]]
-        response_moves = self._get_or_calculate_responses_(new_board, other_index, current_index, king_box_multiplier)
+        response_moves = self._get_or_calculate_responses_(
+            new_board,
+            other_index,
+            current_index,
+            king_box_multiplier,
+            check_check=False
+        )
         # print(
         #     f"{current_move} initial score: {initial_move_score:.2f} ->",
         #     self._formatted_moves_(response_moves)
@@ -547,7 +553,8 @@ class CMHMEngine2(CMHMEngine):
             new_board: chess.Board,
             other_index: int,
             current_index: int,
-            king_box_multiplier: int
+            king_box_multiplier: int,
+            check_check: bool
     ) -> List[Tuple[Optional[Move], Optional[numpy.float64]]]:
         """Retrieve the opponent's response moves and evaluate them.
 
@@ -580,7 +587,7 @@ class CMHMEngine2(CMHMEngine):
         for next_move in next_moves:
             response_moves = self._get_or_calc_next_move_score_(
                 next_move, response_moves, new_board, current_index,
-                other_index, king_box_multiplier
+                other_index, king_box_multiplier, check_check
             )
         return response_moves
 
@@ -591,7 +598,8 @@ class CMHMEngine2(CMHMEngine):
             new_board: chess.Board,
             current_index: int,
             other_index: int,
-            king_box_multiplier: int
+            king_box_multiplier: int,
+            check_check: bool
     ) -> List[Tuple[chess.Move, numpy.float64]]:
         """Calculate the evaluation score for a given opponent response move.
 
@@ -625,14 +633,17 @@ class CMHMEngine2(CMHMEngine):
         # next_q_val should be the negative of the fetched q, but can't do that yet, must check for None first
         next_q_val: Optional[numpy.float64] = self.get_q_value(state_fen=next_state_fen, board=next_board)
         if next_q_val is None:
-            next_move_score = self._calculate_next_move_score_(
+            next_move_score: numpy.float64 = self._calculate_next_move_score_(
                 next_board, current_index,
                 other_index, king_box_multiplier
             )
-            self.set_q_value(value=numpy.float64(-next_move_score), state_fen=next_state_fen, board=next_board)
+            set_value: numpy.float64 = numpy.float64(-next_move_score) if not check_check else numpy.float64(
+                next_move_score
+            )
+            self.set_q_value(value=set_value, state_fen=next_state_fen, board=next_board)
         else:
             # Here is where we can safely make next_q_val negative to match the current player's perspective
-            next_move_score = numpy.float64(-next_q_val)
+            next_move_score = numpy.float64(-next_q_val) if not check_check else numpy.float64(next_q_val)
         if response_moves[0][0] is None:
             response_moves = [(next_move, next_move_score)]
         else:
@@ -687,7 +698,8 @@ class CMHMEngine2(CMHMEngine):
                 new_board=next_board,
                 other_index=other_index,
                 current_index=current_index,
-                king_box_multiplier=king_box_multiplier
+                king_box_multiplier=king_box_multiplier,
+                check_check=True
             )
             if check_responses[-1][1] is not None:
                 return check_responses[-1][1]
