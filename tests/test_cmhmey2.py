@@ -154,36 +154,56 @@ class TestCMHMEngine2(TestCase):
         start = time.perf_counter()
         pick = self.engine.pick_move()
         duration_first = time.perf_counter() - start
-        print(f"First initial pick: ({pick[0].uci()}, {pick[1]:.2f}) {duration_first:.3f}s")
+        print(f"{self.engine.state_fen()} pick_move call: ({pick[0].uci()}, {pick[1]:.2f}) {duration_first:.3f}s")
         testing.assert_array_equal(pick, (self.E3, 0.23333333333333428))
         init_w_moves = list(self.engine.board.legal_moves)
         move: chess.Move
-        response_pick_times = []
-        durations = [duration_first]
+        first_time_pick_times = [duration_first]
+        init_board_pick_times = [duration_first]
+        revisit_pick_times = []
         new_duration = 999999.99
-        for move in init_w_moves:
+        for i, move in enumerate(init_w_moves, 2):
             self.engine.board.push(move)
             start = time.perf_counter()
             response_pick = self.engine.pick_move()
             duration_rep_pick = time.perf_counter() - start
-            response_pick_times.append(duration_rep_pick)
-            print(f"{move.uci()} response: ({response_pick[0].uci()}, {response_pick[1]:.2f}) {duration_rep_pick:.3f}s")
+            first_time_pick_times.append(duration_rep_pick)
+            print(
+                f"{self.engine.state_fen()} pick_move call: "
+                f"({response_pick[0].uci()}, {response_pick[1]:.2f}) {duration_rep_pick:.3f}s"
+            )
             self.engine.board.pop()
             start = time.perf_counter()
             new_pick = self.engine.pick_move()
             new_duration = time.perf_counter() - start
-            durations.append(new_duration)
-            print(f"New initial pick: ({new_pick[0].uci()}, {new_pick[1]:.2f}) {new_duration:.3f}s")
+            init_board_pick_times.append(new_duration)
+            revisit_pick_times.append(new_duration)
+            print(f"{self.engine.state_fen()} pick_move call {i}: ({new_pick[0].uci()}, {new_pick[1]:.2f}) {new_duration:.3f}s")
         self.assertLess(new_duration, duration_first)
-        avg_duration = numpy.mean(durations)
-        avg_response = numpy.mean(response_pick_times)
+        avg_duration = numpy.mean(init_board_pick_times)
+        avg_response = numpy.mean(first_time_pick_times)
+        avg_revisit = numpy.mean(revisit_pick_times)
         self.assertLess(avg_duration, avg_response)
-        pre_durations = numpy.percentile(durations, [0, 1, 10, 25, 50, 75, 90, 99, 100])
-        pre_response = numpy.percentile(response_pick_times, [0, 1, 10, 25, 50, 75, 90, 99, 100])
+        pre_durations = numpy.percentile(init_board_pick_times, [0, 1, 10, 25, 50, 75, 90, 99, 100])
+        pre_response = numpy.percentile(first_time_pick_times, [0, 1, 10, 25, 50, 75, 90, 99, 100])
+        pre_revisit = numpy.percentile(revisit_pick_times, [0, 1, 10, 25, 50, 75, 90, 99, 100])
         print(f"mean pick time: {avg_duration:.3f}s\npercentiles (0, 1, 10, 25, 50, 75, 90, 99, 100):\n{pre_durations}")
         print(
             f"mean response time: {avg_response:.3f}s\npercentiles (0, 1, 10, 25, 50, 75, 90, 99, 100):\n{pre_response}"
         )
+        print(
+            f"mean revisit time: {avg_revisit:.3f}s\npercentiles (0, 1, 10, 25, 50, 75, 90, 99, 100):\n{pre_revisit}"
+        )
+        false_positive_fen = "r1b1kb1r/1p1pqppp/5n2/pp3Q2/3p4/1P1PP3/PB1PNPPP/2RK3R b kq - 1 12"
+        self.engine.board = chess.Board(fen=false_positive_fen)
+        print(self.engine.board)
+        start = time.perf_counter()
+        pick = self.engine.pick_move(debug=True)
+        duration_ = time.perf_counter() - start
+        print(f"{self.engine.board.fen()} pick: ({pick[0].uci()}, {pick[1]:.1f}) {duration_:.3f}s")
+        self.assertNotEqual(pick[0].uci(), 'e7c5')
+        self.engine.board.push(pick[0])
+        print(self.engine.board)
 
     def test__update_current_move_choices_(self) -> None:
         """Tests internal _update_current_move_choices_ method."""
