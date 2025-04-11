@@ -3,7 +3,7 @@ import random
 import sqlite3
 from os import makedirs, path
 from sqlite3 import Connection, Cursor
-from typing import List, Optional, Tuple
+from typing import Any, List, Optional, Tuple, Union
 from _bisect import bisect_left
 import chess
 import numpy
@@ -338,41 +338,20 @@ class CMHMEngine2(CMHMEngine):
         >>> engine.state_fen()
         'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
         """
-        outcome: Optional[Outcome] = self.board.outcome(claim_draw=True)
         while len(self.board.move_stack) > 0:
-            last_move = self.board.move_stack[-1]
+            last_move: Move = self.board.move_stack[-1]
             state: str = self.board.fen()
-            current_q: Optional[float] = self.get_q_value(state_fen=state, board=self.board)
-            if current_q is None:
-                self.board.pop()
-                continue
-            # The q score of a board fen is relative to the player who just moved
-            if outcome.winner is None:  # Not checking for draws first causes bugs in training
-                # In draw state we converge all scores on zero by 20%
-                if current_q < 0:
-                    new_q = current_q + abs(current_q * 0.2)
-                elif current_q > 0:
-                    new_q = current_q - abs(current_q * 0.2)
-                else:
-                    new_q = current_q
-            # In checkmate states, the board turn is equal to the loser (this also caused me bugs at first)
-            # TODO: Maybe cap these by the checkmate scores, but then I would need to calc the checkmate score for each
-            elif self.board.turn != outcome.winner:
-                # Winner gets a 20% bump to their chosen move's scores (now with a +0.1 bump to brake past 0 if needed)
-                new_q = current_q + abs(current_q * 0.2) + numpy.float64(0.1)
-            elif self.board.turn == outcome.winner:
-                # Loser gets a -20% anti-bump  to their chosen move's scores (now with a -0.1 anti-bump to brake past 0)
-                new_q = current_q - abs(current_q * 0.2) - numpy.float64(0.1)
-            else:
-                raise ValueError(f"How did we get here? outcome:{outcome} board turn: {self.board.turn}")
-            self.set_q_value(value=new_q, state_fen=state, board=self.board)
+            current_q: Optional[numpy.float64] = self.get_q_value(state_fen=state, board=self.board)
             self.board.pop()
+            new_move: Move
+            new_score: numpy.float64
             new_move, new_score = self.pick_move(debug=debug)  # Call pick_move to back-pop the updated
+            new_q: Optional[numpy.float64] = self.get_q_value(state)
             if debug:
                 print(
-                    f"({last_move.uci()}, {current_q}) --> "
-                    f"({last_move.uci()}, {new_q}) --> "
-                    f"({new_move.uci()}, {new_score})"
+                    f"Game Pick, Score: ({last_move.uci()}, {current_q}) --> "
+                    f"Game Pick, New Score: ({last_move.uci()}, {new_q}) --> "
+                    f"New Pick, Score: ({new_move.uci()}, {new_score})\n"
                 )
 
     def pick_move(
