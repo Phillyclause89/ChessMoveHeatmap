@@ -340,6 +340,7 @@ class CMHMEngine2(CMHMEngine):
         """
         outcome: Optional[Outcome] = self.board.outcome(claim_draw=True)
         while len(self.board.move_stack) > 0:
+            last_move = self.board.move_stack[-1]
             state: str = self.board.fen()
             current_q: Optional[float] = self.get_q_value(state_fen=state, board=self.board)
             if current_q is None:
@@ -366,7 +367,13 @@ class CMHMEngine2(CMHMEngine):
                 raise ValueError(f"How did we get here? outcome:{outcome} board turn: {self.board.turn}")
             self.set_q_value(value=new_q, state_fen=state, board=self.board)
             self.board.pop()
-            self.pick_move(debug=debug)  # Call pick_move to back-pop the updated score
+            new_move, new_score = self.pick_move(debug=debug)  # Call pick_move to back-pop the updated
+            if debug:
+                print(
+                    f"({last_move.uci()}, {current_q}) --> "
+                    f"({last_move.uci()}, {new_q}) --> "
+                    f"({new_move.uci()}, {new_score})"
+                )
 
     def pick_move(
             self,
@@ -632,7 +639,10 @@ class CMHMEngine2(CMHMEngine):
         next_state_fen: str = next_board.fen()
         # next_q_val should be the negative of the fetched q, but can't do that yet, must check for None first
         next_q_val: Optional[numpy.float64] = self.get_q_value(state_fen=next_state_fen, board=next_board)
-        if next_q_val is None:
+        next_outcome: Optional[Outcome] = next_board.outcome(claim_draw=True)
+        not_draw: bool = next_outcome is None or next_outcome.winner is not None
+        null_q: bool = next_q_val is None
+        if null_q and not_draw:
             next_move_score: numpy.float64 = self._calculate_next_move_score_(
                 next_board, current_index,
                 other_index, king_box_multiplier
@@ -641,6 +651,9 @@ class CMHMEngine2(CMHMEngine):
                 next_move_score
             )
             self.set_q_value(value=set_value, state_fen=next_state_fen, board=next_board)
+        elif null_q:
+            next_move_score: numpy.float64 = numpy.float64(0.0)
+            self.set_q_value(value=next_move_score, state_fen=next_state_fen, board=next_board)
         else:
             # Here is where we can safely make next_q_val negative to match the current player's perspective
             next_move_score = numpy.float64(-next_q_val) if not check_check else numpy.float64(next_q_val)
@@ -837,8 +850,9 @@ class CMHMEngine2(CMHMEngine):
         return numpy.float64(initial_move_score + initial_king_box_score)
 
     @staticmethod
-    def _formatted_moves_(moves: List[Tuple[Optional[Move], Optional[numpy.float64]]]) -> List[
-        Optional[Tuple[str, str]]]:
+    def _formatted_moves_(
+            moves: List[Tuple[Optional[Move], Optional[numpy.float64]]]
+    ) -> List[Optional[Tuple[str, str]]]:
         """Generate a formatted list of moves and their scores for display.
 
         This static method converts a list of move-score tuples into a list of tuples containing the move
