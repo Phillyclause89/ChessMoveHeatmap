@@ -53,7 +53,7 @@ class TestCMHMEngine2(TestCase):
         self.assertEqual(filename_2, self.filename_2)
         filename_3 = self.engine.qtable_filename(board=chess.Board(fen=self.fen_3))
         self.assertEqual(filename_3, filename_3)
-        filename_17 = self.engine.qtable_filename(piece_count=17)
+        filename_17 = self.engine.qtable_filename(pieces_count=17)
         self.assertEqual(filename_17, self.filename_17)
 
     def test_qdb_path(self) -> None:
@@ -64,7 +64,7 @@ class TestCMHMEngine2(TestCase):
         self.assertEqual(q_path_2, path.join(CACHE_DIR, self.filename_2))
         q_path_3 = self.engine.qdb_path(board=chess.Board(fen=self.fen_3))
         self.assertEqual(q_path_3, path.join(CACHE_DIR, self.filename_3))
-        q_path_17 = self.engine.qdb_path(piece_count=17)
+        q_path_17 = self.engine.qdb_path(pieces_count=17)
         self.assertEqual(q_path_17, path.join(CACHE_DIR, self.filename_17))
 
     def test__init_qdb(self) -> None:
@@ -77,15 +77,15 @@ class TestCMHMEngine2(TestCase):
         self.assertTrue(path.exists(CACHE_DIR))
 
     def test_state_fen(self) -> None:
-        """Tests state_fen method"""
+        """Tests fen method"""
         board = chess.Board()
-        fen = self.engine.state_fen()
+        fen = self.engine.fen()
         self.assertEqual(fen, board.fen())
         move = tuple(self.engine.board.legal_moves)[0]
         self.engine.board.push(move)
-        other_fen = self.engine.state_fen(board)
+        other_fen = self.engine.fen(board)
         self.assertEqual(other_fen, fen)
-        fen = self.engine.state_fen()
+        fen = self.engine.fen()
         board.push(move)
         self.assertEqual(fen, board.fen())
 
@@ -93,7 +93,7 @@ class TestCMHMEngine2(TestCase):
         """Tests q-value getter, somewhat... see test_set_q_value."""
         nothing = self.engine.get_q_value()
         self.assertIs(nothing, None)
-        more_nothing = self.engine.get_q_value(state_fen=self.fen_2)
+        more_nothing = self.engine.get_q_value(fen=self.fen_2)
         self.assertIs(more_nothing, None)
         even_more_nothing = self.engine.get_q_value(board=chess.Board(fen=self.fen_3))
         self.assertIs(even_more_nothing, None)
@@ -105,12 +105,12 @@ class TestCMHMEngine2(TestCase):
         saved_value = self.engine.get_q_value()
         self.assertEqual(saved_value, value)
         value_2 = float64(-16)
-        self.engine.set_q_value(value=value_2, state_fen=self.fen_2)
-        saved_value = self.engine.get_q_value(state_fen=self.fen_2)
+        self.engine.set_q_value(value=value_2, fen=self.fen_2)
+        saved_value = self.engine.get_q_value(fen=self.fen_2)
         self.assertEqual(saved_value, value_2)
         value_3 = float64(99)
         self.engine.set_q_value(value_3, board=chess.Board(self.fen_3))
-        saved_value = self.engine.get_q_value(state_fen=self.fen_3)
+        saved_value = self.engine.get_q_value(fen=self.fen_3)
         self.assertEqual(saved_value, value_3)
 
     def test_update_q_values(self) -> None:
@@ -127,7 +127,7 @@ class TestCMHMEngine2(TestCase):
             print(self.engine.board.fen())
             pick = self.engine.pick_move(debug=True)
             move_board = self.engine.board_copy_pushed(move)
-            move_score = self.engine.get_q_value(state_fen=move_board.fen(), board=move_board)
+            move_score = self.engine.get_q_value(fen=move_board.fen(), board=move_board)
             if self.engine.board.turn:
                 self.assertGreater(pick[1], move_score)
             else:
@@ -140,7 +140,7 @@ class TestCMHMEngine2(TestCase):
             print(self.engine.board.fen())
             pick = self.engine.pick_move(debug=True)
             move_board = self.engine.board_copy_pushed(move)
-            move_score = self.engine.get_q_value(state_fen=move_board.fen(), board=move_board)
+            move_score = self.engine.get_q_value(fen=move_board.fen(), board=move_board)
             if self.engine.board.turn:
                 self.assertGreater(pick[1], move_score)
             else:
@@ -154,7 +154,7 @@ class TestCMHMEngine2(TestCase):
         start = time.perf_counter()
         pick = self.engine.pick_move()
         duration_first = time.perf_counter() - start
-        print(f"{self.engine.state_fen()} pick_move call: ({pick[0].uci()}, {pick[1]:.2f}) {duration_first:.3f}s")
+        print(f"{self.engine.fen()} pick_move call: ({pick[0].uci()}, {pick[1]:.2f}) {duration_first:.3f}s")
         testing.assert_array_equal(pick, (self.E3, 0.23333333333333428))
         init_w_moves = list(self.engine.board.legal_moves)
         move: chess.Move
@@ -169,7 +169,7 @@ class TestCMHMEngine2(TestCase):
             duration_rep_pick = time.perf_counter() - start
             first_time_pick_times.append(duration_rep_pick)
             print(
-                f"{self.engine.state_fen()} pick_move call: "
+                f"{self.engine.fen()} pick_move call: "
                 f"({response_pick[0].uci()}, {response_pick[1]:.2f}) {duration_rep_pick:.3f}s"
             )
             self.engine.board.pop()
@@ -178,7 +178,7 @@ class TestCMHMEngine2(TestCase):
             new_duration = time.perf_counter() - start
             init_board_pick_times.append(new_duration)
             revisit_pick_times.append(new_duration)
-            print(f"{self.engine.state_fen()} pick_move call {i}: ({new_pick[0].uci()}, {new_pick[1]:.2f}) {new_duration:.3f}s")
+            print(f"{self.engine.fen()} pick_move call {i}: ({new_pick[0].uci()}, {new_pick[1]:.2f}) {new_duration:.3f}s")
         self.assertLess(new_duration, duration_first)
         avg_duration = numpy.mean(init_board_pick_times)
         avg_response = numpy.mean(first_time_pick_times)
@@ -217,8 +217,7 @@ class TestCMHMEngine2(TestCase):
             self.engine.current_player_heatmap_index,
             self.engine.other_player_heatmap_index,
             *self.engine.get_king_boxes(e4_board),
-            king_box_multiplier=1,
-            new_state_fen=e4_board.fen()
+            new_fen=e4_board.fen()
         )
         testing.assert_array_equal(move_choices, [(self.E4, 0.20689655172414234)])
         e3_board = self.engine.board_copy_pushed(self.E3)
@@ -230,8 +229,7 @@ class TestCMHMEngine2(TestCase):
             self.engine.current_player_heatmap_index,
             self.engine.other_player_heatmap_index,
             *self.engine.get_king_boxes(e3_board),
-            king_box_multiplier=1,
-            new_state_fen=e3_board.fen()
+            new_fen=e3_board.fen()
         )
         testing.assert_array_equal(move_choices, [(self.E3, 0.23333333333333428), (self.E4, 0.20689655172414234)])
 
@@ -242,7 +240,6 @@ class TestCMHMEngine2(TestCase):
             self.engine.board,
             self.engine.other_player_heatmap_index,
             self.engine.current_player_heatmap_index,
-            1,
             False
         )
         current_moves = self.engine.current_moves_list()
@@ -264,7 +261,6 @@ class TestCMHMEngine2(TestCase):
             self.engine.board,
             self.engine.current_player_heatmap_index,
             self.engine.other_player_heatmap_index,
-            1,
             False
         )
         testing.assert_array_equal(next_move_scores, [(self.E4, 14.0)])
@@ -274,7 +270,6 @@ class TestCMHMEngine2(TestCase):
             self.engine.board,
             self.engine.current_player_heatmap_index,
             self.engine.other_player_heatmap_index,
-            1,
             False
         )
         testing.assert_array_equal(next_move_scores, [(self.E3, 13.95), (self.E4, 14.0)])
@@ -286,7 +281,6 @@ class TestCMHMEngine2(TestCase):
             self.engine.board_copy_pushed(self.E4),
             self.engine.current_player_heatmap_index,
             self.engine.other_player_heatmap_index,
-            1
         )
         self.assertEqual(e4_next_move_score, 14.0)
         self.assertIsInstance(e4_next_move_score, float64)
@@ -334,7 +328,7 @@ class TestCMHMEngine2(TestCase):
     def test__calculate_score_(self) -> None:
         """tests internal _calculate_score_ method"""
         # pylint: disable=protected-access
-        null_score = self.engine._calculate_score_(0, 1, heatmaps.ChessMoveHeatmap().data.transpose(), 1, [4], [60])
+        null_score = self.engine._calculate_score_(0, 1, heatmaps.ChessMoveHeatmap().data.transpose(), [4], [60])
         self.assertEqual(null_score, 0)
         self.assertIsInstance(null_score, float64)
         hmap_data_transposed = chmutils.calculate_chess_move_heatmap_with_better_discount(
@@ -344,7 +338,6 @@ class TestCMHMEngine2(TestCase):
             self.engine.current_player_heatmap_index,
             self.engine.other_player_heatmap_index,
             hmap_data_transposed,
-            1,
             *self.engine.get_king_boxes()
         )
         self.assertEqual(score, 0)
@@ -357,7 +350,6 @@ class TestCMHMEngine2(TestCase):
             self.engine.current_player_heatmap_index,
             self.engine.other_player_heatmap_index,
             e4_hmap_data_transposed,
-            1,
             *self.engine.get_king_boxes()
         )
         self.assertEqual(e4_score, -10.0)
@@ -370,7 +362,6 @@ class TestCMHMEngine2(TestCase):
             self.engine.current_player_heatmap_index,
             self.engine.other_player_heatmap_index,
             e5_hmap_data_transposed,
-            1,
             *self.engine.get_king_boxes()
         )
         self.assertEqual(e5_score, 0.20689655172414234)
