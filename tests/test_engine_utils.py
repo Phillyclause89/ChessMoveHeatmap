@@ -1,14 +1,8 @@
 """Tests engine utilities"""
-import time
-from io import StringIO
 from unittest import TestCase
 from os import path
 import chess
-from chess import pgn
-import numpy
-
 from numpy import float64, testing
-
 import chmutils
 import heatmaps
 from chmutils import HeatmapCache, BetterHeatmapCache
