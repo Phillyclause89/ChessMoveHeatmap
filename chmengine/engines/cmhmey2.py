@@ -442,8 +442,10 @@ class CMHMEngine2(CMHMEngine):
         new_current_king_box, new_other_king_box = self.get_king_boxes(board=new_board)
         new_outcome: Optional[Outcome] = new_board.outcome(claim_draw=True)
         if new_outcome is not None:
+            is_mate: bool = new_outcome.winner is not None
             new_heatmap: ChessMoveHeatmap = ChessMoveHeatmap()
         else:
+            is_mate = False
             # It was fun building up a giant db of heatmaps, but we saw how that turned out in training
             new_heatmap = calculate_chess_move_heatmap_with_better_discount(
                 board=new_board, depth=self.depth
@@ -451,7 +453,6 @@ class CMHMEngine2(CMHMEngine):
         new_heatmap_transposed: NDArray[float64] = new_heatmap.data.transpose()
         # I wanted to rely on the heatmap as much as possible, but any game termination state win or draw
         # results in a zeros heatmap.
-        is_mate: bool = new_outcome is not None and new_outcome.winner is not None
         if is_mate:
             self._update_heatmap_transposed_with_mate_values_(
                 heatmap_transposed=new_heatmap_transposed,
