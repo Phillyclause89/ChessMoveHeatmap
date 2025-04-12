@@ -1,17 +1,13 @@
 """Cmhmey Jr."""
-import random
-import sqlite3
-# from concurrent.futures import ThreadPoolExecutor
-from os import makedirs, path  # , cpu_count
-from sqlite3 import Connection, Cursor
+from random import choice
+from os import makedirs, path
+from sqlite3 import Connection, Cursor, connect
 from typing import List, Optional, Tuple, Union
-import chess
-import numpy
-from chess import Board, Move, Outcome
-from numpy import float_
+from numpy import float64
 from numpy.typing import NDArray
-import chmutils
-import heatmaps
+from chess import Board, Move, Outcome
+from chmutils import calculate_chess_move_heatmap_with_better_discount, CACHE_DIR
+from heatmaps import ChessMoveHeatmap
 from chmengine.engines.cmhmey1 import CMHMEngine
 from chmengine.utils import (
     calculate_score,
@@ -24,9 +20,9 @@ from chmengine.utils import (
 
 class CMHMEngine2(CMHMEngine):
     """Overrides CMHMEngine.pick_move"""
-    cache_dir: str = path.join(".", chmutils.CACHE_DIR, "QTables")
+    cache_dir: str = path.join(".", CACHE_DIR, "QTables")
 
-    def __init__(self, board: Optional[chess.Board] = None, depth: int = 1) -> None:
+    def __init__(self, board: Optional[Board] = None, depth: int = 1) -> None:
         """Initialize the CMHMEngine2 instance.
 
         This constructor extends the parent CMHMEngine by initializing the Q-table database.
@@ -91,7 +87,7 @@ class CMHMEngine2(CMHMEngine):
             f"piece_count_{self.pieces_count(board=board, fen=fen) if pieces_count is None else pieces_count}.db"
         )
 
-    def pieces_count(self, board: Optional[chess.Board] = None, fen: Optional[str] = None) -> int:
+    def pieces_count(self, board: Optional[Board] = None, fen: Optional[str] = None) -> int:
         """Get pieces count from board state.
 
         Parameters
@@ -168,7 +164,7 @@ class CMHMEngine2(CMHMEngine):
         for pieces_count in range(2, 33):  # We are using dbs for 2-32 pieces
             qdb_path: str = self.qdb_path(pieces_count=pieces_count)
             q_conn: Connection
-            with sqlite3.connect(qdb_path) as q_conn:
+            with connect(qdb_path) as q_conn:
                 q_cursor: Cursor = q_conn.cursor()
                 q_cursor.execute(
                     """
@@ -230,7 +226,7 @@ class CMHMEngine2(CMHMEngine):
             fen: Optional[str] = None,
             board: Optional[Board] = None,
             pieces_count: Optional[int] = None
-    ) -> Optional[numpy.float64]:
+    ) -> Optional[float64]:
         """Retrieve the Q-value for a given board state from the Q-table database.
 
         If the state is not found in the database, returns None.
@@ -257,14 +253,14 @@ class CMHMEngine2(CMHMEngine):
         """
         fen = self.fen(board=board) if fen is None else fen
         q_conn: Connection
-        with sqlite3.connect(self.qdb_path(fen=fen, board=board, pieces_count=pieces_count)) as q_conn:
+        with connect(self.qdb_path(fen=fen, board=board, pieces_count=pieces_count)) as q_conn:
             q_cursor: Cursor = q_conn.cursor()
             q_cursor.execute(
                 "SELECT q_value FROM q_table WHERE fen = ?",
                 (fen,)
             )
             row: Optional[Tuple[float]] = q_cursor.fetchone()
-            return numpy.float64(row[0]) if row is not None else None
+            return float64(row[0]) if row is not None else None
 
     def set_q_value(
             self,
@@ -294,7 +290,7 @@ class CMHMEngine2(CMHMEngine):
         """
         if fen is None:
             fen = self.fen(board=board)
-        with sqlite3.connect(self.qdb_path(fen=fen, board=board, pieces_count=pieces_count)) as q_conn:
+        with connect(self.qdb_path(fen=fen, board=board, pieces_count=pieces_count)) as q_conn:
             q_cursor = q_conn.cursor()
             q_cursor.execute(
                 "INSERT OR REPLACE INTO q_table (fen, q_value) VALUES (?, ?)",
@@ -342,12 +338,12 @@ class CMHMEngine2(CMHMEngine):
         while len(self.board.move_stack) > 0:
             last_move: Move = self.board.move_stack[-1]
             fen: str = self.fen()
-            current_q: Optional[numpy.float64] = self.get_q_value(fen=fen, board=self.board)
+            current_q: Optional[float64] = self.get_q_value(fen=fen, board=self.board)
             self.board.pop()
             new_move: Move
-            new_score: numpy.float64
+            new_score: float64
             new_move, new_score = self.pick_move(debug=debug)  # Call pick_move to back-pop the updated
-            new_q: Optional[numpy.float64] = self.get_q_value(fen=fen)
+            new_q: Optional[float64] = self.get_q_value(fen=fen)
             if debug:
                 print(
                     f"Game Pick & Score: ({last_move.uci()}, {current_q}) --> "
@@ -358,9 +354,9 @@ class CMHMEngine2(CMHMEngine):
     def pick_move(
             self,
             pick_by: str = "",
-            board: Optional[chess.Board] = None,
+            board: Optional[Board] = None,
             debug: bool = False
-    ) -> Tuple[chess.Move, numpy.float64]:
+    ) -> Tuple[Move, float64]:
         """Select a move based on heatmap evaluations and Q-table integration.
 
         This overridden method combines heatmap evaluations with Q-value updates. It evaluates all
@@ -407,7 +403,7 @@ class CMHMEngine2(CMHMEngine):
         # Index of heatmap colors is opposite the chess lib's color mapping
         current_index: int = self.current_player_heatmap_index(board=board)
         # moves will be current moves ordered by engine's score best to worst
-        current_move_choices_ordered: List[Tuple[Optional[Move], Optional[float_]]]
+        current_move_choices_ordered: List[Tuple[Optional[Move], Optional[float64]]]
         current_move_choices_ordered, = self.null_target_moves(number=1)
         current_move: Move
         for current_move in current_moves:
@@ -419,22 +415,22 @@ class CMHMEngine2(CMHMEngine):
         # Final pick is a random choice of all moves equal to the highest scoring move
         if debug:
             print("All moves ranked:", format_moves(moves=current_move_choices_ordered))
-        picks: List[Tuple[Move, numpy.float64]] = [
+        picks: List[Tuple[Move, float64]] = [
             (m, s) for m, s in current_move_choices_ordered if s == current_move_choices_ordered[0][1]
         ]
         chosen_move: Move
-        chosen_q: numpy.float64
-        chosen_move, chosen_q = random.choice(picks)
-        self.set_q_value(value=numpy.float64(-chosen_q), board=board)
+        chosen_q: float64
+        chosen_move, chosen_q = choice(picks)
+        self.set_q_value(value=float64(-chosen_q), board=board)
         return chosen_move, chosen_q
 
     def _update_current_move_choices_ordered_(
             self,
-            current_move_choices_ordered: List[Tuple[Optional[Move], Optional[numpy.float64]]],
+            current_move_choices_ordered: List[Tuple[Optional[Move], Optional[float64]]],
             current_move: Move,
             current_index: int,
             board: Board
-    ) -> List[Tuple[Optional[Move], Optional[numpy.float64]]]:
+    ) -> List[Tuple[Optional[Move], Optional[float64]]]:
         # Phil, I know you keep thinking you don't need to calculate a score here,
         # but you do sometimes (keep that in mind.)
         new_board: Board = self.board_copy_pushed(move=current_move, board=board)
@@ -444,14 +440,19 @@ class CMHMEngine2(CMHMEngine):
         new_current_king_box: List[int]
         new_other_king_box: List[int]
         new_current_king_box, new_other_king_box = self.get_king_boxes(board=new_board)
-        # It was fun building up a giant db of heatmaps, but we saw how that turned out in training
-        new_heatmap: heatmaps.ChessMoveHeatmap = chmutils.calculate_chess_move_heatmap_with_better_discount(
-            board=new_board, depth=self.depth
-        )
-        new_heatmap_transposed: NDArray[numpy.float64] = new_heatmap.data.transpose()
+        new_outcome: Optional[Outcome] = new_board.outcome(claim_draw=True)
+        if new_outcome is not None:
+            new_heatmap: ChessMoveHeatmap = ChessMoveHeatmap()
+        else:
+            # It was fun building up a giant db of heatmaps, but we saw how that turned out in training
+            new_heatmap = calculate_chess_move_heatmap_with_better_discount(
+                board=new_board, depth=self.depth
+            )
+        new_heatmap_transposed: NDArray[float64] = new_heatmap.data.transpose()
         # I wanted to rely on the heatmap as much as possible, but any game termination state win or draw
-        # results in a zeros heatmap. Thus, we cheat with new_board.is_checkmate here. (draw scores stay zero.)
-        if self.heatmap_data_is_zeros(heatmap=new_heatmap) and new_board.is_checkmate():
+        # results in a zeros heatmap.
+        is_mate: bool = new_outcome is not None and new_outcome.winner is not None
+        if is_mate:
             self._update_heatmap_transposed_with_mate_values_(
                 heatmap_transposed=new_heatmap_transposed,
                 player_index=current_index,
@@ -468,15 +469,15 @@ class CMHMEngine2(CMHMEngine):
     # pylint: disable=too-many-arguments
     def _update_current_move_choices_(
             self,
-            current_move_choices_ordered: List[Tuple[Optional[Move], Optional[numpy.float64]]],
-            new_board: chess.Board,
-            current_move: chess.Move,
-            new_heatmap_transposed: NDArray[numpy.float64],
+            current_move_choices_ordered: List[Tuple[Optional[Move], Optional[float64]]],
+            new_board: Board,
+            current_move: Move,
+            new_heatmap_transposed: NDArray[float64],
             current_index: int,
             new_current_king_box: List[int],
             new_other_king_box: List[int],
             new_fen: str
-    ) -> List[Tuple[Move, numpy.float64]]:
+    ) -> List[Tuple[Move, float64]]:
         """Update the ordered list of candidate moves based on a newly calculated heatmap score.
 
         This method calculates an initial move score using the transposed heatmap data and king box areas,
@@ -507,22 +508,22 @@ class CMHMEngine2(CMHMEngine):
         List[Tuple[Move, numpy.float64]]
             The updated ordered list of candidate moves with their evaluation scores.
         """
-        initial_q_val: Optional[numpy.float64] = self.get_q_value(fen=new_fen, board=new_board)
+        initial_q_val: Optional[float64] = self.get_q_value(fen=new_fen, board=new_board)
         if initial_q_val is None:
-            initial_move_score: numpy.float64 = calculate_score(
+            initial_move_score: float64 = calculate_score(
                 current_index=current_index, new_heatmap_transposed=new_heatmap_transposed,
                 new_current_king_box=new_current_king_box, new_other_king_box=new_other_king_box
             )
         else:
             initial_move_score = initial_q_val
-        response_moves: List[Tuple[Optional[Move], Optional[numpy.float64]]]
+        response_moves: List[Tuple[Optional[Move], Optional[float64]]]
         response_moves = self._get_or_calculate_responses_(
             new_board=new_board,
             current_index=current_index
         )
         # Once all responses to a move reviewed, final move score is the worst outcome to current player.
-        best_response_score: Optional[numpy.float64] = response_moves[0][1]
-        final_move_score: numpy.float64
+        best_response_score: Optional[float64] = response_moves[0][1]
+        final_move_score: float64
         final_move_score = best_response_score if best_response_score is not None else initial_move_score
         self.set_q_value(value=final_move_score, fen=new_fen, board=new_board)
         if current_move_choices_ordered[0][0] is None:
@@ -535,9 +536,9 @@ class CMHMEngine2(CMHMEngine):
 
     def _get_or_calculate_responses_(
             self,
-            new_board: chess.Board,
+            new_board: Board,
             current_index: int
-    ) -> List[Tuple[Optional[Move], Optional[numpy.float64]]]:
+    ) -> List[Tuple[Optional[Move], Optional[float64]]]:
         """Retrieve the opponent's response moves and evaluate them.
 
         This method computes heatmap-based evaluation scores for each legal response move from the new board
@@ -559,7 +560,7 @@ class CMHMEngine2(CMHMEngine):
         # However, that is not our Final score,
         # the score after finding the best response to our move should be the final score.
         next_moves: List[Move] = self.current_moves_list(board=new_board)
-        response_moves: List[Tuple[Optional[Move], Optional[numpy.float64]]]
+        response_moves: List[Tuple[Optional[Move], Optional[float64]]]
         response_moves, = self.null_target_moves(number=1)
         next_move: Move
         for next_move in next_moves:
@@ -570,11 +571,11 @@ class CMHMEngine2(CMHMEngine):
 
     def _get_or_calc_response_move_scores_(
             self,
-            next_move: chess.Move,
-            response_moves: List[Tuple[Optional[Move], Optional[numpy.float64]]],
-            new_board: chess.Board,
+            next_move: Move,
+            response_moves: List[Tuple[Optional[Move], Optional[float64]]],
+            new_board: Board,
             current_index: int
-    ) -> List[Tuple[chess.Move, numpy.float64]]:
+    ) -> List[Tuple[Move, float64]]:
         """Calculate the evaluation score for a given opponent response move.
 
         This method computes the Q-score for the next move in the perspective of the current player.
@@ -601,26 +602,26 @@ class CMHMEngine2(CMHMEngine):
         next_board: Board = self.board_copy_pushed(move=next_move, board=new_board)
         next_fen: str = next_board.fen()
         # next_q_val should be the negative of the fetched q, but can't do that yet, must check for None first
-        next_q_val: Optional[numpy.float64] = self.get_q_value(fen=next_fen, board=next_board)
+        next_q_val: Optional[float64] = self.get_q_value(fen=next_fen, board=next_board)
         next_outcome: Optional[Outcome] = next_board.outcome(claim_draw=True)
         not_draw: bool = next_outcome is None or next_outcome.winner is not None
         null_q: bool = next_q_val is None
         if null_q and not_draw:
-            next_move_score: numpy.float64 = self._calculate_next_move_score_(
+            next_move_score: float64 = self._calculate_next_move_score_(
                 next_board=next_board, current_index=current_index
             )
-            set_value: numpy.float64 = numpy.float64(-next_move_score) if (
+            set_value: float64 = float64(-next_move_score) if (
                     self.current_player_heatmap_index(board=next_board) == self.current_player_heatmap_index()
-            ) else numpy.float64(next_move_score)
+            ) else float64(next_move_score)
             self.set_q_value(value=set_value, fen=next_fen, board=next_board)
         elif null_q:
-            next_move_score: numpy.float64 = numpy.float64(0.0)
+            next_move_score: float64 = float64(0.0)
             self.set_q_value(value=next_move_score, fen=next_fen, board=next_board)
         else:
             # Here is where we can safely make next_q_val negative to match the current player's perspective
-            next_move_score = numpy.float64(-next_q_val) if (  # pylint: disable=invalid-unary-operand-type
+            next_move_score = float64(-next_q_val) if (  # pylint: disable=invalid-unary-operand-type
                     self.current_player_heatmap_index(board=next_board) == self.current_player_heatmap_index()
-            ) else numpy.float64(next_q_val)
+            ) else float64(next_q_val)
         if response_moves[0][0] is None:
             response_moves = [(next_move, next_move_score)]
         else:
@@ -629,9 +630,9 @@ class CMHMEngine2(CMHMEngine):
 
     def _calculate_next_move_score_(
             self,
-            next_board: chess.Board,
+            next_board: Board,
             current_index: int
-    ) -> numpy.float64:
+    ) -> float64:
         """Calculate the evaluation score for a potential next move.
 
         This method computes the score for a board state resulting from an opponent's move. It uses
@@ -653,11 +654,11 @@ class CMHMEngine2(CMHMEngine):
         next_current_king_box: List[int]
         next_other_king_box: List[int]
         next_current_king_box, next_other_king_box = self.get_king_boxes(board=next_board)
-        next_heatmap: heatmaps.ChessMoveHeatmap
-        next_heatmap = chmutils.calculate_chess_move_heatmap_with_better_discount(
+        next_heatmap: ChessMoveHeatmap
+        next_heatmap = calculate_chess_move_heatmap_with_better_discount(
             board=next_board, depth=self.depth
         )
-        next_heatmap_transposed: NDArray[numpy.float64] = next_heatmap.data.transpose()
+        next_heatmap_transposed: NDArray[float64] = next_heatmap.data.transpose()
         if self.heatmap_data_is_zeros(heatmap=next_heatmap) and next_board.is_checkmate():
             # No early exit here as this is a bad is_checkmate result :(
             self._update_heatmap_transposed_with_mate_values_(
@@ -675,7 +676,7 @@ class CMHMEngine2(CMHMEngine):
             )
             if check_responses[-1][1] is not None:
                 return check_responses[-1][1]
-        next_move_score: numpy.float64 = calculate_score(
+        next_move_score: float64 = calculate_score(
             current_index=current_index, new_heatmap_transposed=next_heatmap_transposed,
             new_current_king_box=next_current_king_box, new_other_king_box=next_other_king_box
         )
@@ -683,9 +684,9 @@ class CMHMEngine2(CMHMEngine):
 
     def _update_heatmap_transposed_with_mate_values_(
             self,
-            heatmap_transposed: NDArray[numpy.float64],
+            heatmap_transposed: NDArray[float64],
             player_index: int,
-            board: chess.Board
+            board: Board
     ) -> None:
         """Update the transposed heatmap data with mate values for checkmate scenarios.
 
@@ -705,7 +706,7 @@ class CMHMEngine2(CMHMEngine):
         """
         heatmap_transposed[player_index] = self.get_mate_value(board)
 
-    def get_mate_value(self, board: chess.Board) -> numpy.float64:
+    def get_mate_value(self, board: Board) -> float64:
         """Gets checkmate value for a square
 
         Parameters
@@ -723,4 +724,4 @@ class CMHMEngine2(CMHMEngine):
         >>> engine.get_mate_value(board=engine.board)
         64.0
         """
-        return numpy.float64(self.pieces_count(board=board) * (self.depth + 1))
+        return float64(self.pieces_count(board=board) * (self.depth + 1))
