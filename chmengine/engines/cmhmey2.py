@@ -225,29 +225,6 @@ class CMHMEngine2(CMHMEngine):
         self._depth = int(new_depth)
         self._init_qdb()
 
-    def fen(self, board: Optional[Board] = None) -> str:
-        """Obtain the FEN string for a given board state.
-        If no board is provided, the engine's current board is used.
-
-        Parameters
-        ----------
-        board : Optional[Board]
-            The board for which to retrieve the FEN string.
-
-        Returns
-        -------
-        str
-            The FEN string representing the board state.
-
-        Examples
-        --------
-        >>> from chmengine import CMHMEngine2
-        >>> engine = CMHMEngine2()
-        >>> engine.fen()
-        'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
-        """
-        return self.board.fen() if board is None else board.fen()
-
     def get_q_value(
             self,
             fen: Optional[str] = None,
@@ -726,6 +703,24 @@ class CMHMEngine2(CMHMEngine):
         board : chess.Board
             The board state where checkmate has been detected.
         """
-        heatmap_transposed[player_index] = numpy.float64(
-            len(board.piece_map()) * (self.depth + 1)
-        )
+        heatmap_transposed[player_index] = self.get_mate_value(board)
+
+    def get_mate_value(self, board: chess.Board) -> numpy.float64:
+        """Gets checkmate value for a square
+
+        Parameters
+        ----------
+        board : chess.Board
+
+        Returns
+        -------
+        numpy.float64
+
+        Examples
+        --------
+        >>> from chmengine.engines.cmhmey2 import CMHMEngine2
+        >>> engine = CMHMEngine2()
+        >>> engine.get_mate_value(board=engine.board)
+        64.0
+        """
+        return numpy.float64(self.pieces_count(board=board) * (self.depth + 1))

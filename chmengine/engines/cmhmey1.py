@@ -3,7 +3,7 @@ import random
 from typing import Any, Dict, List, Optional, Tuple
 import chess
 import numpy
-from chess import Move, Piece
+from chess import Board, Move
 from numpy.typing import NDArray
 import chmutils
 import heatmaps
@@ -157,7 +157,11 @@ class CMHMEngine:
         board_copy.push(move)
         return board_copy
 
-    def pick_move(self, pick_by: str = "all-delta") -> Tuple[chess.Move, numpy.float64]:
+    def pick_move(
+            self,
+            pick_by: str = "all-delta",
+            board: Optional[chess.Board] = None
+    ) -> Tuple[chess.Move, numpy.float64]:
         """Select a move based on various heatmap-derived criteria.
 
         The method evaluates candidate moves using multiple heuristics (such as delta, maximum,
@@ -175,6 +179,8 @@ class CMHMEngine:
         pick_by : str, default: "all-delta"
             A string indicating the selection heuristic. Supported options include "all-delta",
             "all-max", "all-min", "king-atk", "king-def", and "king-delta".
+        board : chess.Board, default: None
+            Used by child classes; pick_move method
 
         Returns
         -------
@@ -746,3 +752,26 @@ class CMHMEngine:
         Move.from_uci('e2e4')
         """
         return list(self.board.legal_moves) if board is None else list(board.legal_moves)
+
+    def fen(self, board: Optional[Board] = None) -> str:
+        """Obtain the FEN string for a given board state.
+        If no board is provided, the engine's current board is used.
+
+        Parameters
+        ----------
+        board : Optional[Board]
+            The board for which to retrieve the FEN string.
+
+        Returns
+        -------
+        str
+            The FEN string representing the board state.
+
+        Examples
+        --------
+        >>> from chmengine import CMHMEngine2
+        >>> engine = CMHMEngine2()
+        >>> engine.fen()
+        'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
+        """
+        return self.board.fen() if board is None else board.fen()

@@ -4,7 +4,9 @@ from os import makedirs, path
 from typing import Callable, List, Optional, Tuple
 import chess
 import numpy
-from chess import Move, Outcome, pgn
+from chess import Board, Move, Outcome, pgn
+from numpy import float_
+
 from chmengine.engines.cmhmey1 import CMHMEngine
 from chmengine.engines.cmhmey2 import CMHMEngine2
 
@@ -36,7 +38,8 @@ class PlayCMHMEngine:
             player_name: str = player_name,
             site: str = site,
             game_round: int = game_round,
-            engine: Optional[Callable] = None
+            engine: Optional[Callable] = None,
+            fill_initial_q_table_values: bool = False
     ) -> None:
         """
 
@@ -77,6 +80,8 @@ class PlayCMHMEngine:
         self.game_round = int(game_round)
         self.round_results = []
         self.engine = CMHMEngine(depth=depth, board=board) if engine is None else engine(depth=depth, board=board)
+        if fill_initial_q_table_values and isinstance(self.engine, CMHMEngine2) and self.engine.get_q_value() is None:
+            self.fill_initial_q_values()
         self.cpu_name = f"""{str(self.engine.__class__).split("'")[1]}(depth={self.engine.depth})"""
         if (
                 player_color != self.player_color and player_color.lower() in chess.COLOR_NAMES
@@ -85,6 +90,20 @@ class PlayCMHMEngine:
         ):
             self.player_index, self.cpu_index = self.cpu_index, self.player_index
             self.player_color, self.cpu_color = self.cpu_color, self.player_color
+
+    def fill_initial_q_values(self) -> None:
+        """Fills initial q-values for board state"""
+        print(f"Filling initial position values for board: {self.engine.fen()}")
+        pick: Tuple[Move, numpy.float64] = self.engine.pick_move()
+        print(f"Initial pick: ({pick[0].uci()}, {pick[1]:.2f})")
+        move: Move
+        for move in self.engine.current_moves_list():
+            new_board: Board = self.engine.board_copy_pushed(move=move)
+            print(f"Filling initial position values for board: {self.engine.fen(board=new_board)}")
+            pick = self.engine.pick_move(board=new_board)
+            print(f"Response pick: ({pick[0].uci()}, {pick[1]:.2f})")
+        pick = self.engine.pick_move()
+        print(f"Initial pick: ({pick[0].uci()}, {pick[1]:.2f})")
 
     def play(self, pick_by: str = "all-delta") -> None:
         """Play a game against the engine"""
