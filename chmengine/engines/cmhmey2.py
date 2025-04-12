@@ -437,7 +437,6 @@ class CMHMEngine2(CMHMEngine):
             raise ValueError(f"Current Board has no legal moves: {self.fen(board=board)}")
         # Index of heatmap colors is opposite the chess lib's color mapping
         current_index: int = self.current_player_heatmap_index(board=board)
-        other_index: int = self.other_player_heatmap_index(board=board)
         # moves will be current moves ordered by engine's score best to worst
         current_move_choices_ordered: List[Tuple[Optional[Move], Optional[float_]]]
         current_move_choices_ordered, = self.null_target_moves(number=1)
@@ -468,7 +467,7 @@ class CMHMEngine2(CMHMEngine):
             current_move_choices_ordered = self._update_current_move_choices_(
                 current_move_choices_ordered=current_move_choices_ordered, new_board=new_board,
                 current_move=current_move, new_heatmap_transposed=new_heatmap_transposed,
-                current_index=current_index, other_index=other_index, new_current_king_box=new_current_king_box,
+                current_index=current_index, new_current_king_box=new_current_king_box,
                 new_other_king_box=new_other_king_box, new_fen=new_fen
             )
         # Final pick is a random choice of all moves equal to the highest scoring move
@@ -490,7 +489,6 @@ class CMHMEngine2(CMHMEngine):
             current_move: chess.Move,
             new_heatmap_transposed: NDArray[numpy.float64],
             current_index: int,
-            other_index: int,
             new_current_king_box: List[int],
             new_other_king_box: List[int],
             new_fen: str
@@ -513,8 +511,6 @@ class CMHMEngine2(CMHMEngine):
             The transposed heatmap data for the new board state.
         current_index : int
             The index corresponding to the current player's heatmap data.
-        other_index : int
-            The index corresponding to the opponent's heatmap data.
         new_current_king_box : List[int]
             A list of squares representing the area around the current king.
         new_other_king_box : List[int]
@@ -530,7 +526,7 @@ class CMHMEngine2(CMHMEngine):
         initial_q_val: Optional[numpy.float64] = self.get_q_value(fen=new_fen, board=new_board)
         if initial_q_val is None:
             initial_move_score: numpy.float64 = self._calculate_score_(
-                current_index=current_index, other_index=other_index, new_heatmap_transposed=new_heatmap_transposed,
+                current_index=current_index, new_heatmap_transposed=new_heatmap_transposed,
                 new_current_king_box=new_current_king_box, new_other_king_box=new_other_king_box
             )
         else:
@@ -538,7 +534,6 @@ class CMHMEngine2(CMHMEngine):
         response_moves: List[Tuple[Optional[Move], Optional[numpy.float64]]]
         response_moves = self._get_or_calculate_responses_(
             new_board=new_board,
-            other_index=other_index,
             current_index=current_index
         )
         # Once all responses to a move reviewed, final move score is the worst outcome to current player.
@@ -557,7 +552,6 @@ class CMHMEngine2(CMHMEngine):
     def _get_or_calculate_responses_(
             self,
             new_board: chess.Board,
-            other_index: int,
             current_index: int
     ) -> List[Tuple[Optional[Move], Optional[numpy.float64]]]:
         """Retrieve the opponent's response moves and evaluate them.
@@ -570,8 +564,6 @@ class CMHMEngine2(CMHMEngine):
         ----------
         new_board : chess.Board
             The board state after a candidate move is applied.
-        other_index : int
-            The index corresponding to the opponent in the heatmap.
         current_index : int
             The index corresponding to the current player in the heatmap.
 
@@ -587,19 +579,17 @@ class CMHMEngine2(CMHMEngine):
         response_moves, = self.null_target_moves(number=1)
         next_move: Move
         for next_move in next_moves:
-            response_moves = self._get_or_calc_next_move_score_(
-                next_move=next_move, response_moves=response_moves, new_board=new_board, current_index=current_index,
-                other_index=other_index
+            response_moves = self._get_or_calc_response_move_scores_(
+                next_move=next_move, response_moves=response_moves, new_board=new_board, current_index=current_index
             )
         return response_moves
 
-    def _get_or_calc_next_move_score_(
+    def _get_or_calc_response_move_scores_(
             self,
             next_move: chess.Move,
             response_moves: List[Tuple[Optional[Move], Optional[numpy.float64]]],
             new_board: chess.Board,
-            current_index: int,
-            other_index: int
+            current_index: int
     ) -> List[Tuple[chess.Move, numpy.float64]]:
         """Calculate the evaluation score for a given opponent response move.
 
@@ -617,8 +607,6 @@ class CMHMEngine2(CMHMEngine):
             The board state after the candidate move is applied.
         current_index : int
             The index for the current player's data in the heatmap.
-        other_index : int
-            The index for the opponent's data in the heatmap.bool
 
         Returns
         -------
@@ -635,7 +623,7 @@ class CMHMEngine2(CMHMEngine):
         null_q: bool = next_q_val is None
         if null_q and not_draw:
             next_move_score: numpy.float64 = self._calculate_next_move_score_(
-                next_board=next_board, current_index=current_index, other_index=other_index
+                next_board=next_board, current_index=current_index
             )
             set_value: numpy.float64 = numpy.float64(-next_move_score) if (
                     self.current_player_heatmap_index(board=next_board) == self.current_player_heatmap_index()
@@ -646,7 +634,7 @@ class CMHMEngine2(CMHMEngine):
             self.set_q_value(value=next_move_score, fen=next_fen, board=next_board)
         else:
             # Here is where we can safely make next_q_val negative to match the current player's perspective
-            next_move_score = numpy.float64(-next_q_val) if (
+            next_move_score = numpy.float64(-next_q_val) if (  # pylint: disable=invalid-unary-operand-type
                     self.current_player_heatmap_index(board=next_board) == self.current_player_heatmap_index()
             ) else numpy.float64(next_q_val)
         if response_moves[0][0] is None:
@@ -658,8 +646,7 @@ class CMHMEngine2(CMHMEngine):
     def _calculate_next_move_score_(
             self,
             next_board: chess.Board,
-            current_index: int,
-            other_index: int
+            current_index: int
     ) -> numpy.float64:
         """Calculate the evaluation score for a potential next move.
 
@@ -673,8 +660,6 @@ class CMHMEngine2(CMHMEngine):
             The board state after the opponent's move.
         current_index : int
             The index corresponding to the current player in the heatmap.
-        other_index : int
-            The index corresponding to the opponent in the heatmap.
 
         Returns
         -------
@@ -683,29 +668,32 @@ class CMHMEngine2(CMHMEngine):
         """
         next_current_king_box: List[int]
         next_other_king_box: List[int]
-        next_current_king_box, next_other_king_box = self.get_king_boxes(next_board)
+        next_current_king_box, next_other_king_box = self.get_king_boxes(board=next_board)
         next_heatmap: heatmaps.ChessMoveHeatmap
         next_heatmap = chmutils.calculate_chess_move_heatmap_with_better_discount(
-            next_board, depth=self.depth
+            board=next_board, depth=self.depth
         )
         next_heatmap_transposed: NDArray[numpy.float64] = next_heatmap.data.transpose()
-        if self.heatmap_data_is_zeros(next_heatmap) and next_board.is_checkmate():
+        if self.heatmap_data_is_zeros(heatmap=next_heatmap) and next_board.is_checkmate():
             # No early exit here as this is a bad is_checkmate result :(
             self._update_heatmap_transposed_with_mate_values_(
-                next_heatmap_transposed, other_index, next_board
+                heatmap_transposed=next_heatmap_transposed,
+                player_index=(
+                    int(current_index != next_board.turn)
+                ),
+                board=next_board
             )
         elif next_board.is_check():
             # It will be interesting if we hit inf recursion here, that would be a position of inf counter checks?
             check_responses = self._get_or_calculate_responses_(
                 new_board=next_board,
-                other_index=other_index,
                 current_index=current_index
             )
             if check_responses[-1][1] is not None:
                 return check_responses[-1][1]
         next_move_score: numpy.float64 = self._calculate_score_(
-            current_index, other_index, next_heatmap_transposed,
-            next_current_king_box, next_other_king_box
+            current_index=current_index, new_heatmap_transposed=next_heatmap_transposed,
+            new_current_king_box=next_current_king_box, new_other_king_box=next_other_king_box
         )
         return next_move_score
 
@@ -787,7 +775,6 @@ class CMHMEngine2(CMHMEngine):
     @staticmethod
     def _calculate_score_(
             current_index: int,
-            other_index: int,
             new_heatmap_transposed: NDArray[numpy.float64],
             new_current_king_box: List[int],
             new_other_king_box: List[int]
@@ -803,8 +790,6 @@ class CMHMEngine2(CMHMEngine):
         ----------
         current_index : int
             The index for the current player's heatmap data.
-        other_index : int
-            The index for the opponent's heatmap data.
         new_heatmap_transposed : NDArray[numpy.float64]
             The transposed heatmap data array.
         new_current_king_box : List[int]
@@ -820,6 +805,7 @@ class CMHMEngine2(CMHMEngine):
         # Calculating score at this level is only needed in corner-case scenarios
         # where every possible move results in game termination.
         # score is initially, the delta of the sums of each player's heatmap.data values.
+        other_index: int = int(not current_index)
         initial_move_score: numpy.float64 = sum(
             new_heatmap_transposed[current_index]
         ) - sum(

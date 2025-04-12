@@ -215,7 +215,6 @@ class TestCMHMEngine2(TestCase):
             self.E4,
             chmutils.calculate_chess_move_heatmap_with_better_discount(e4_board).data.transpose(),
             self.engine.current_player_heatmap_index(),
-            self.engine.other_player_heatmap_index(),
             *self.engine.get_king_boxes(e4_board),
             new_fen=e4_board.fen()
         )
@@ -227,7 +226,6 @@ class TestCMHMEngine2(TestCase):
             self.E3,
             chmutils.calculate_chess_move_heatmap_with_better_discount(e3_board).data.transpose(),
             self.engine.current_player_heatmap_index(),
-            self.engine.other_player_heatmap_index(),
             *self.engine.get_king_boxes(e3_board),
             new_fen=e3_board.fen()
         )
@@ -238,7 +236,6 @@ class TestCMHMEngine2(TestCase):
         # pylint: disable=protected-access
         responses = self.engine._get_or_calculate_responses_(
             self.engine.board,
-            self.engine.other_player_heatmap_index(),
             self.engine.current_player_heatmap_index()
         )
         current_moves = self.engine.current_moves_list()
@@ -252,22 +249,20 @@ class TestCMHMEngine2(TestCase):
             last_response_score = response_score
 
     def test__get_or_calc_next_move_score_(self) -> None:
-        """Tests internal _get_or_calc_next_move_score_ method."""
+        """Tests internal _get_or_calc_response_move_scores_ method."""
         # pylint: disable=protected-access
-        next_move_scores = self.engine._get_or_calc_next_move_score_(
+        next_move_scores = self.engine._get_or_calc_response_move_scores_(
             self.E4,
             [(None, None)],
             self.engine.board,
-            self.engine.current_player_heatmap_index(),
-            self.engine.other_player_heatmap_index()
+            self.engine.current_player_heatmap_index()
         )
         testing.assert_array_equal(next_move_scores, [(self.E4, 14.0)])
-        next_move_scores = self.engine._get_or_calc_next_move_score_(
+        next_move_scores = self.engine._get_or_calc_response_move_scores_(
             self.E3,
             next_move_scores,
             self.engine.board,
-            self.engine.current_player_heatmap_index(),
-            self.engine.other_player_heatmap_index()
+            self.engine.current_player_heatmap_index()
         )
         testing.assert_array_equal(next_move_scores, [(self.E3, 13.95), (self.E4, 14.0)])
 
@@ -277,7 +272,6 @@ class TestCMHMEngine2(TestCase):
         e4_next_move_score = self.engine._calculate_next_move_score_(
             self.engine.board_copy_pushed(self.E4),
             self.engine.current_player_heatmap_index(),
-            self.engine.other_player_heatmap_index(),
         )
         self.assertEqual(e4_next_move_score, 14.0)
         self.assertIsInstance(e4_next_move_score, float64)
@@ -325,7 +319,7 @@ class TestCMHMEngine2(TestCase):
     def test__calculate_score_(self) -> None:
         """tests internal _calculate_score_ method"""
         # pylint: disable=protected-access
-        null_score = self.engine._calculate_score_(0, 1, heatmaps.ChessMoveHeatmap().data.transpose(), [4], [60])
+        null_score = self.engine._calculate_score_(0, heatmaps.ChessMoveHeatmap().data.transpose(), [4], [60])
         self.assertEqual(null_score, 0)
         self.assertIsInstance(null_score, float64)
         hmap_data_transposed = chmutils.calculate_chess_move_heatmap_with_better_discount(
@@ -333,7 +327,6 @@ class TestCMHMEngine2(TestCase):
         ).data.transpose()
         score = self.engine._calculate_score_(
             self.engine.current_player_heatmap_index(),
-            self.engine.other_player_heatmap_index(),
             hmap_data_transposed,
             *self.engine.get_king_boxes()
         )
@@ -345,7 +338,6 @@ class TestCMHMEngine2(TestCase):
         ).data.transpose()
         e4_score = self.engine._calculate_score_(
             self.engine.current_player_heatmap_index(),
-            self.engine.other_player_heatmap_index(),
             e4_hmap_data_transposed,
             *self.engine.get_king_boxes()
         )
@@ -357,7 +349,6 @@ class TestCMHMEngine2(TestCase):
         ).data.transpose()
         e5_score = self.engine._calculate_score_(
             self.engine.current_player_heatmap_index(),
-            self.engine.other_player_heatmap_index(),
             e5_hmap_data_transposed,
             *self.engine.get_king_boxes()
         )
