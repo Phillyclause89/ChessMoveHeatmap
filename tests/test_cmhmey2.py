@@ -239,8 +239,7 @@ class TestCMHMEngine2(TestCase):
         responses = self.engine._get_or_calculate_responses_(
             self.engine.board,
             self.engine.other_player_heatmap_index(),
-            self.engine.current_player_heatmap_index(),
-            False
+            self.engine.current_player_heatmap_index()
         )
         current_moves = self.engine.current_moves_list()
         self.assertEqual(len(responses), len(current_moves))
@@ -260,8 +259,7 @@ class TestCMHMEngine2(TestCase):
             [(None, None)],
             self.engine.board,
             self.engine.current_player_heatmap_index(),
-            self.engine.other_player_heatmap_index(),
-            False
+            self.engine.other_player_heatmap_index()
         )
         testing.assert_array_equal(next_move_scores, [(self.E4, 14.0)])
         next_move_scores = self.engine._get_or_calc_next_move_score_(
@@ -269,8 +267,7 @@ class TestCMHMEngine2(TestCase):
             next_move_scores,
             self.engine.board,
             self.engine.current_player_heatmap_index(),
-            self.engine.other_player_heatmap_index(),
-            False
+            self.engine.other_player_heatmap_index()
         )
         testing.assert_array_equal(next_move_scores, [(self.E3, 13.95), (self.E4, 14.0)])
 

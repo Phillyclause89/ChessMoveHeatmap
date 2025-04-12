@@ -539,8 +539,7 @@ class CMHMEngine2(CMHMEngine):
         response_moves = self._get_or_calculate_responses_(
             new_board=new_board,
             other_index=other_index,
-            current_index=current_index,
-            check_check=False
+            current_index=current_index
         )
         # Once all responses to a move reviewed, final move score is the worst outcome to current player.
         best_response_score: Optional[numpy.float64] = response_moves[0][1]
@@ -559,8 +558,7 @@ class CMHMEngine2(CMHMEngine):
             self,
             new_board: chess.Board,
             other_index: int,
-            current_index: int,
-            check_check: bool
+            current_index: int
     ) -> List[Tuple[Optional[Move], Optional[numpy.float64]]]:
         """Retrieve the opponent's response moves and evaluate them.
 
@@ -591,7 +589,7 @@ class CMHMEngine2(CMHMEngine):
         for next_move in next_moves:
             response_moves = self._get_or_calc_next_move_score_(
                 next_move=next_move, response_moves=response_moves, new_board=new_board, current_index=current_index,
-                other_index=other_index, check_check=check_check
+                other_index=other_index
             )
         return response_moves
 
@@ -601,8 +599,7 @@ class CMHMEngine2(CMHMEngine):
             response_moves: List[Tuple[Optional[Move], Optional[numpy.float64]]],
             new_board: chess.Board,
             current_index: int,
-            other_index: int,
-            check_check: bool
+            other_index: int
     ) -> List[Tuple[chess.Move, numpy.float64]]:
         """Calculate the evaluation score for a given opponent response move.
 
@@ -621,8 +618,7 @@ class CMHMEngine2(CMHMEngine):
         current_index : int
             The index for the current player's data in the heatmap.
         other_index : int
-            The index for the opponent's data in the heatmap.
-        check_check : bool
+            The index for the opponent's data in the heatmap.bool
 
         Returns
         -------
@@ -641,16 +637,18 @@ class CMHMEngine2(CMHMEngine):
             next_move_score: numpy.float64 = self._calculate_next_move_score_(
                 next_board=next_board, current_index=current_index, other_index=other_index
             )
-            set_value: numpy.float64 = numpy.float64(-next_move_score) if not check_check else numpy.float64(
-                next_move_score
-            )
+            set_value: numpy.float64 = numpy.float64(-next_move_score) if (
+                    self.current_player_heatmap_index(board=next_board) == self.current_player_heatmap_index()
+            ) else numpy.float64(next_move_score)
             self.set_q_value(value=set_value, fen=next_fen, board=next_board)
         elif null_q:
             next_move_score: numpy.float64 = numpy.float64(0.0)
             self.set_q_value(value=next_move_score, fen=next_fen, board=next_board)
         else:
             # Here is where we can safely make next_q_val negative to match the current player's perspective
-            next_move_score = numpy.float64(-next_q_val) if not check_check else numpy.float64(next_q_val)
+            next_move_score = numpy.float64(-next_q_val) if (
+                    self.current_player_heatmap_index(board=next_board) == self.current_player_heatmap_index()
+            ) else numpy.float64(next_q_val)
         if response_moves[0][0] is None:
             response_moves = [(next_move, next_move_score)]
         else:
@@ -701,8 +699,7 @@ class CMHMEngine2(CMHMEngine):
             check_responses = self._get_or_calculate_responses_(
                 new_board=next_board,
                 other_index=other_index,
-                current_index=current_index,
-                check_check=True
+                current_index=current_index
             )
             if check_responses[-1][1] is not None:
                 return check_responses[-1][1]
