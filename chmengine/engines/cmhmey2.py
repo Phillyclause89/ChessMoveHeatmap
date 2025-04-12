@@ -2,7 +2,7 @@
 import random
 import sqlite3
 # from concurrent.futures import ThreadPoolExecutor
-from os import makedirs, path  #, cpu_count
+from os import makedirs, path  # , cpu_count
 from sqlite3 import Connection, Cursor
 from typing import List, Optional, Tuple, Union
 from _bisect import bisect_left
@@ -497,6 +497,7 @@ class CMHMEngine2(CMHMEngine):
         )
         return current_move_choices_ordered
 
+    # pylint: disable=too-many-arguments
     def _update_current_move_choices_(
             self,
             current_move_choices_ordered: List[Tuple[Optional[Move], Optional[numpy.float64]]],

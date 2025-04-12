@@ -1,7 +1,7 @@
 """Test Cmhmey Jr."""
 import time
 from io import StringIO
-from unittest import TestCase, main
+from unittest import TestCase
 from os import path
 import chess
 from chess import pgn
@@ -68,7 +68,7 @@ class TestCMHMEngine2(TestCase):
         self.assertEqual(q_path_17, path.join(CACHE_DIR, self.filename_17))
 
     def test__init_qdb(self) -> None:
-        """Tests method that inits DB files"""
+        """Tests method that initiates DB files"""
         self.assertTrue(path.exists(CACHE_DIR))
         clear_test_cache()
         self.assertFalse(path.exists(CACHE_DIR))
@@ -178,7 +178,9 @@ class TestCMHMEngine2(TestCase):
             new_duration = time.perf_counter() - start
             init_board_pick_times.append(new_duration)
             revisit_pick_times.append(new_duration)
-            print(f"{self.engine.fen()} pick_move call {i}: ({new_pick[0].uci()}, {new_pick[1]:.2f}) {new_duration:.3f}s")
+            print(
+                f"{self.engine.fen()} pick_move call {i}: ({new_pick[0].uci()}, {new_pick[1]:.2f}) {new_duration:.3f}s"
+            )
         self.assertLess(new_duration, duration_first)
         avg_duration = numpy.mean(init_board_pick_times)
         avg_response = numpy.mean(first_time_pick_times)
