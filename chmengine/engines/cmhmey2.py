@@ -5,7 +5,6 @@ import sqlite3
 from os import makedirs, path  # , cpu_count
 from sqlite3 import Connection, Cursor
 from typing import List, Optional, Tuple, Union
-from _bisect import bisect_left
 import chess
 import numpy
 from chess import Board, Move, Outcome
@@ -14,6 +13,13 @@ from numpy.typing import NDArray
 import chmutils
 import heatmaps
 from chmengine.engines.cmhmey1 import CMHMEngine
+from chmengine.utils import (
+    calculate_score,
+    format_moves,
+    insert_ordered_best_to_worst,
+    insert_ordered_worst_to_best,
+    pieces_count_from_fen
+)
 
 
 class CMHMEngine2(CMHMEngine):
@@ -104,24 +110,9 @@ class CMHMEngine2(CMHMEngine):
         >>> engine.pieces_count()
         32
         """
-        return self._pieces_count_from_fen_(
+        return pieces_count_from_fen(
             fen=self.fen(board=board)
-        ) if fen is None else self._pieces_count_from_fen_(fen=fen)
-
-    @staticmethod
-    def _pieces_count_from_fen_(fen: str) -> int:
-        """Get pieces count from fen string
-
-        Parameters
-        ----------
-        fen : str
-
-        Returns
-        -------
-        int
-        """
-        _c: str
-        return len([_c for _c in fen.split()[0] if _c.isalpha()])
+        ) if fen is None else pieces_count_from_fen(fen=fen)
 
     def qdb_path(
             self,
@@ -450,7 +441,7 @@ class CMHMEngine2(CMHMEngine):
             )
         # Final pick is a random choice of all moves equal to the highest scoring move
         if debug:
-            print("All moves ranked:", self._formatted_moves_(moves=current_move_choices_ordered))
+            print("All moves ranked:", format_moves(moves=current_move_choices_ordered))
         picks: List[Tuple[Move, numpy.float64]] = [
             (m, s) for m, s in current_move_choices_ordered if s == current_move_choices_ordered[0][1]
         ]
@@ -541,7 +532,7 @@ class CMHMEngine2(CMHMEngine):
         """
         initial_q_val: Optional[numpy.float64] = self.get_q_value(fen=new_fen, board=new_board)
         if initial_q_val is None:
-            initial_move_score: numpy.float64 = self._calculate_score_(
+            initial_move_score: numpy.float64 = calculate_score(
                 current_index=current_index, new_heatmap_transposed=new_heatmap_transposed,
                 new_current_king_box=new_current_king_box, new_other_king_box=new_other_king_box
             )
@@ -560,7 +551,7 @@ class CMHMEngine2(CMHMEngine):
         if current_move_choices_ordered[0][0] is None:
             current_move_choices_ordered = [(current_move, final_move_score)]
         else:
-            self._insert_ordered_best_to_worst_(
+            insert_ordered_best_to_worst(
                 ordered_moves=current_move_choices_ordered, move=current_move, score=final_move_score
             )
         return current_move_choices_ordered
@@ -656,7 +647,7 @@ class CMHMEngine2(CMHMEngine):
         if response_moves[0][0] is None:
             response_moves = [(next_move, next_move_score)]
         else:
-            self._insert_ordered_worst_to_best_(response_moves, next_move, next_move_score)
+            insert_ordered_worst_to_best(response_moves, next_move, next_move_score)
         return response_moves
 
     def _calculate_next_move_score_(
@@ -707,7 +698,7 @@ class CMHMEngine2(CMHMEngine):
             )
             if check_responses[-1][1] is not None:
                 return check_responses[-1][1]
-        next_move_score: numpy.float64 = self._calculate_score_(
+        next_move_score: numpy.float64 = calculate_score(
             current_index=current_index, new_heatmap_transposed=next_heatmap_transposed,
             new_current_king_box=next_current_king_box, new_other_king_box=next_other_king_box
         )
@@ -738,120 +729,3 @@ class CMHMEngine2(CMHMEngine):
         heatmap_transposed[player_index] = numpy.float64(
             len(board.piece_map()) * (self.depth + 1)
         )
-
-    @staticmethod
-    def _insert_ordered_best_to_worst_(
-            ordered_moves: List[Tuple[chess.Move, numpy.float64]],
-            move: chess.Move,
-            score: numpy.float64
-    ) -> None:
-        """Insert a move and its score into an ordered list (from best to worst).
-
-        This static method uses a binary insertion (via bisect_left) to insert the new move into
-        the list such that the list remains ordered from the highest score to lowest.
-
-        Parameters
-        ----------
-        ordered_moves : List[Tuple[chess.Move, numpy.float64]]
-            The current list of moves and their scores, ordered from best to worst.
-        move : chess.Move
-            The move to be inserted.
-        score : numpy.float64
-            The evaluation score for the move.
-        """
-        # current moves are inserted into our moves list in order of best scores to worst
-        ordered_index = bisect_left([-x[1] for x in ordered_moves], -score)
-        ordered_moves.insert(ordered_index, (move, score))
-
-    @staticmethod
-    def _insert_ordered_worst_to_best_(
-            ordered_moves: List[Tuple[chess.Move, numpy.float64]],
-            move: chess.Move,
-            score: numpy.float64
-    ) -> None:
-        """Insert a move and its score into an ordered list (from worst to best).
-
-        This static method uses a binary insertion (via bisect_left) to insert the new move into
-        the list such that the list remains ordered from the lowest score to highest, suitable for response
-        move evaluations from the perspective of the current player.
-
-        Parameters
-        ----------
-        ordered_moves : List[Tuple[chess.Move, numpy.float64]]
-            The current list of moves and their scores, ordered from worst to best.
-        move : chess.Move
-            The move to be inserted.
-        score : numpy.float64
-            The evaluation score for the move.
-        """
-        # response moves are inserted to form worst scores to best order (perspective of current player)
-        ordered_index: int = bisect_left([x[1] for x in ordered_moves], score)
-        ordered_moves.insert(ordered_index, (move, score))
-
-    @staticmethod
-    def _calculate_score_(
-            current_index: int,
-            new_heatmap_transposed: NDArray[numpy.float64],
-            new_current_king_box: List[int],
-            new_other_king_box: List[int]
-    ) -> numpy.float64:
-        """Calculate the evaluation score for a move based on heatmap data and king safety.
-
-        This static method computes the move score as the sum of two components:
-        - The difference between the current player's total heatmap intensity and the opponent's.
-        - A weighted difference based on the intensity values within the "king box" areas.
-        The final score reflects the overall benefit of the move from the perspective of the current player.
-
-        Parameters
-        ----------
-        current_index : int
-            The index for the current player's heatmap data.
-        new_heatmap_transposed : NDArray[numpy.float64]
-            The transposed heatmap data array.
-        new_current_king_box : List[int]
-            The list of squares surrounding the current king.
-        new_other_king_box : List[int]
-            The list of squares surrounding the opponent's king.
-
-        Returns
-        -------
-        numpy.float64
-            The computed evaluation score for the move.
-        """
-        # Calculating score at this level is only needed in corner-case scenarios
-        # where every possible move results in game termination.
-        # score is initially, the delta of the sums of each player's heatmap.data values.
-        other_index: int = int(not current_index)
-        initial_move_score: numpy.float64 = sum(
-            new_heatmap_transposed[current_index]
-        ) - sum(
-            new_heatmap_transposed[other_index]
-        )
-        # king box score adds weights to the scores of squares around the kings.
-        initial_king_box_score: numpy.float64 = sum(new_heatmap_transposed[current_index][new_other_king_box])
-        initial_king_box_score -= sum(
-            new_heatmap_transposed[other_index][new_current_king_box]
-        )
-        # Final score is the agg of both above.
-        return numpy.float64(initial_move_score + initial_king_box_score)
-
-    @staticmethod
-    def _formatted_moves_(
-            moves: List[Tuple[Optional[Move], Optional[numpy.float64]]]
-    ) -> List[Optional[Tuple[str, str]]]:
-        """Generate a formatted list of moves and their scores for display.
-
-        This static method converts a list of move-score tuples into a list of tuples containing the move
-        in UCI format and the score formatted as a string with two decimal places.
-
-        Parameters
-        ----------
-        moves : List[Tuple[Optional[Move], Optional[numpy.float64]]]
-            The list of moves with their evaluation scores.
-
-        Returns
-        -------
-        List[Optional[Tuple[str, str]]]
-            A list of formatted move representations (UCI, score) suitable for printing or logging.
-        """
-        return [(m.uci(), f"{s:.2f}") for m, s in moves if m is not None]
