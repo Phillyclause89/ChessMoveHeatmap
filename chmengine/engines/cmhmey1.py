@@ -195,8 +195,8 @@ class CMHMEngine:
         >>> eval_score
         10.0
         """
-        current_index: int = self.current_player_heatmap_index
-        other_index: int = self.other_player_heatmap_index
+        current_index: int = self.current_player_heatmap_index()
+        other_index: int = self.other_player_heatmap_index()
         move_maps_items: List[Tuple[chess.Move, heatmaps.GradientHeatmap]] = self.get_or_calc_move_maps_list()
         (
             target_moves_by_delta,
@@ -311,8 +311,7 @@ class CMHMEngine:
         """
         return tuple([(None, None)] for _ in range(number))
 
-    @property
-    def other_player_heatmap_index(self) -> int:
+    def other_player_heatmap_index(self, board: Optional[chess.Board] = None) -> int:
         """Get the heatmap index corresponding to the inactive (other) player.
 
         Returns
@@ -325,14 +324,17 @@ class CMHMEngine:
         --------
         >>> from chmengine import CMHMEngine
         >>> engine = CMHMEngine()
-        >>> engine.other_player_heatmap_index
+        >>> engine.other_player_heatmap_index()
         1
         """
-        return int(self.board.turn)
+        return int((self.board.turn if board is None else board.turn))
 
-    @property
-    def current_player_heatmap_index(self) -> int:
+    def current_player_heatmap_index(self, board: Optional[chess.Board] = None) -> int:
         """Get the heatmap index corresponding to the active (current) player.
+
+        Parameters
+        ----------
+        board : Optional[chess.Board]
 
         Returns
         -------
@@ -344,10 +346,10 @@ class CMHMEngine:
         --------
         >>> from chmengine import CMHMEngine
         >>> engine = CMHMEngine()
-        >>> engine.current_player_heatmap_index
+        >>> engine.current_player_heatmap_index()
         0
         """
-        return int(not self.board.turn)
+        return int(not (self.board.turn if board is None else board.turn))
 
     @staticmethod
     def update_target_moves_by_delta(

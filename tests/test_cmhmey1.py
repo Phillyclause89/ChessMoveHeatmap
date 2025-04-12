@@ -99,22 +99,18 @@ class TestCMHMEngine(TestCase):
 
     def test_other_player_heatmap_index(self) -> None:
         """Tests other_player_heatmap_index property"""
-        other_index = self.engine.other_player_heatmap_index
+        other_index = self.engine.other_player_heatmap_index()
         self.assertEqual(other_index, 1)
-        with self.assertRaises(AttributeError):
-            self.engine.other_player_heatmap_index = 5
         self.engine.board.push(self.e2e4)
-        other_index = self.engine.other_player_heatmap_index
+        other_index = self.engine.other_player_heatmap_index()
         self.assertEqual(other_index, 0)
 
     def test_current_player_heatmap_index(self) -> None:
         """Tests current_player_heatmap_index property"""
-        current_index = self.engine.current_player_heatmap_index
+        current_index = self.engine.current_player_heatmap_index()
         self.assertEqual(current_index, 0)
-        with self.assertRaises(AttributeError):
-            self.engine.other_player_heatmap_index = 5
         self.engine.board.push(self.e2e4)
-        current_index = self.engine.current_player_heatmap_index
+        current_index = self.engine.current_player_heatmap_index()
         self.assertEqual(current_index, 1)
 
     def test_update_target_moves_by_delta(self) -> None:
@@ -150,7 +146,7 @@ class TestCMHMEngine(TestCase):
             null_target_moves,
             heatmap_t,
             self.e2e4,
-            self.engine.other_player_heatmap_index
+            self.engine.other_player_heatmap_index()
         )
         self.assertEqual(null_target_moves, [(None, None)])
         self.assertEqual(target_moves_by_min, [(self.e2e4, float64(0))])

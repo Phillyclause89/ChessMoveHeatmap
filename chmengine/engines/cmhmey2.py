@@ -388,8 +388,8 @@ class CMHMEngine2(CMHMEngine):
 
     def pick_move(
             self,
-            board: Optional[chess.Board] = None,
             pick_by: str = "",
+            board: Optional[chess.Board] = None,
             debug: bool = False
     ) -> Tuple[chess.Move, numpy.float64]:
         """Select a move based on heatmap evaluations and Q-table integration.
@@ -403,9 +403,10 @@ class CMHMEngine2(CMHMEngine):
 
         Parameters
         ----------
-        board : Optional[chess.Board]
         pick_by : str, default: ""
             Legecy param from parent class pick_move method. Args are ignored by this classe's overide.
+        board : Optional[chess.Board], default: None
+            Pick from a given board instead of intstance board
         debug : bool, default: False
             Allows for a print call showing the current evals of each move choice during anaylsis.
 
@@ -435,8 +436,8 @@ class CMHMEngine2(CMHMEngine):
         if len(current_moves) == 0:
             raise ValueError(f"Current Board has no legal moves: {self.fen(board=board)}")
         # Index of heatmap colors is opposite the chess lib's color mapping
-        current_index: int = self.current_player_heatmap_index
-        other_index: int = self.other_player_heatmap_index
+        current_index: int = self.current_player_heatmap_index(board=board)
+        other_index: int = self.other_player_heatmap_index(board=board)
         # moves will be current moves ordered by engine's score best to worst
         current_move_choices_ordered: List[Tuple[Optional[Move], Optional[float_]]]
         current_move_choices_ordered, = self.null_target_moves(number=1)
@@ -448,7 +449,6 @@ class CMHMEngine2(CMHMEngine):
             # new_fen represents the boards for the only q-values that we will make updates to
             new_fen = new_board.fen()
             # No longer look at q-score at this level, only back prop q's into the calculation
-            # print(f"Calculating score for move: {current_move.uci()}")
             new_current_king_box: List[int]
             new_other_king_box: List[int]
             new_current_king_box, new_other_king_box = self.get_king_boxes(board=new_board)
@@ -477,7 +477,6 @@ class CMHMEngine2(CMHMEngine):
         picks: List[Tuple[Move, numpy.float64]] = [
             (m, s) for m, s in current_move_choices_ordered if s == current_move_choices_ordered[0][1]
         ]
-        # print("Engine moves:", self._formatted_moves_(picks))
         chosen_move: Move
         chosen_q: numpy.float64
         chosen_move, chosen_q = random.choice(picks)
@@ -531,22 +530,18 @@ class CMHMEngine2(CMHMEngine):
         initial_q_val: Optional[numpy.float64] = self.get_q_value(fen=new_fen, board=new_board)
         if initial_q_val is None:
             initial_move_score: numpy.float64 = self._calculate_score_(
-                current_index, other_index, new_heatmap_transposed,
-                new_current_king_box, new_other_king_box
+                current_index=current_index, other_index=other_index, new_heatmap_transposed=new_heatmap_transposed,
+                new_current_king_box=new_current_king_box, new_other_king_box=new_other_king_box
             )
         else:
             initial_move_score = initial_q_val
         response_moves: List[Tuple[Optional[Move], Optional[numpy.float64]]]
         response_moves = self._get_or_calculate_responses_(
-            new_board,
-            other_index,
-            current_index,
+            new_board=new_board,
+            other_index=other_index,
+            current_index=current_index,
             check_check=False
         )
-        # print(
-        #     f"{current_move} initial score: {initial_move_score:.2f} ->",
-        #     self._formatted_moves_(response_moves)
-        # )
         # Once all responses to a move reviewed, final move score is the worst outcome to current player.
         best_response_score: Optional[numpy.float64] = response_moves[0][1]
         final_move_score: numpy.float64
@@ -555,8 +550,9 @@ class CMHMEngine2(CMHMEngine):
         if current_move_choices_ordered[0][0] is None:
             current_move_choices_ordered = [(current_move, final_move_score)]
         else:
-            self._insert_ordered_best_to_worst_(current_move_choices_ordered, current_move, final_move_score)
-        # print(f"{current_move} final score: {final_move_score:.2f}")
+            self._insert_ordered_best_to_worst_(
+                ordered_moves=current_move_choices_ordered, move=current_move, score=final_move_score
+            )
         return current_move_choices_ordered
 
     def _get_or_calculate_responses_(
@@ -588,14 +584,14 @@ class CMHMEngine2(CMHMEngine):
         """
         # However, that is not our Final score,
         # the score after finding the best response to our move should be the final score.
-        next_moves: List[Move] = self.current_moves_list(new_board)
+        next_moves: List[Move] = self.current_moves_list(board=new_board)
         response_moves: List[Tuple[Optional[Move], Optional[numpy.float64]]]
-        response_moves, = self.null_target_moves(1)
+        response_moves, = self.null_target_moves(number=1)
         next_move: Move
         for next_move in next_moves:
             response_moves = self._get_or_calc_next_move_score_(
-                next_move, response_moves, new_board, current_index,
-                other_index, check_check
+                next_move=next_move, response_moves=response_moves, new_board=new_board, current_index=current_index,
+                other_index=other_index, check_check=check_check
             )
         return response_moves
 
@@ -634,7 +630,7 @@ class CMHMEngine2(CMHMEngine):
             The updated list of response moves with their evaluation scores.
         """
         # next_move score calculations stay in the perspective of current player
-        next_board: Board = self.board_copy_pushed(next_move, new_board)
+        next_board: Board = self.board_copy_pushed(move=next_move, board=new_board)
         next_fen: str = next_board.fen()
         # next_q_val should be the negative of the fetched q, but can't do that yet, must check for None first
         next_q_val: Optional[numpy.float64] = self.get_q_value(fen=next_fen, board=next_board)
@@ -643,8 +639,7 @@ class CMHMEngine2(CMHMEngine):
         null_q: bool = next_q_val is None
         if null_q and not_draw:
             next_move_score: numpy.float64 = self._calculate_next_move_score_(
-                next_board, current_index,
-                other_index
+                next_board=next_board, current_index=current_index, other_index=other_index
             )
             set_value: numpy.float64 = numpy.float64(-next_move_score) if not check_check else numpy.float64(
                 next_move_score
