@@ -1,7 +1,8 @@
 """Cmhmey Jr."""
 import random
 import sqlite3
-from os import makedirs, path
+# from concurrent.futures import ThreadPoolExecutor
+from os import makedirs, path  #, cpu_count
 from sqlite3 import Connection, Cursor
 from typing import List, Optional, Tuple, Union
 from _bisect import bisect_left
@@ -442,33 +443,10 @@ class CMHMEngine2(CMHMEngine):
         current_move_choices_ordered, = self.null_target_moves(number=1)
         current_move: Move
         for current_move in current_moves:
-            # Phil, I know you keep thinking you don't need to calculate a score here,
-            # but you do sometimes (keep that in mind.)
-            new_board: Board = self.board_copy_pushed(move=current_move, board=board)
-            # new_fen represents the boards for the only q-values that we will make updates to
-            new_fen = new_board.fen()
-            # No longer look at q-score at this level, only back prop q's into the calculation
-            new_current_king_box: List[int]
-            new_other_king_box: List[int]
-            new_current_king_box, new_other_king_box = self.get_king_boxes(board=new_board)
-            # It was fun building up a giant db of heatmaps, but we saw how that turned out in training
-            new_heatmap: heatmaps.ChessMoveHeatmap = chmutils.calculate_chess_move_heatmap_with_better_discount(
-                board=new_board, depth=self.depth
-            )
-            new_heatmap_transposed: NDArray[numpy.float64] = new_heatmap.data.transpose()
-            # I wanted to rely on the heatmap as much as possible, but any game termination state win or draw
-            # results in a zeros heatmap. Thus, we cheat with new_board.is_checkmate here. (draw scores stay zero.)
-            if self.heatmap_data_is_zeros(heatmap=new_heatmap) and new_board.is_checkmate():
-                self._update_heatmap_transposed_with_mate_values_(
-                    heatmap_transposed=new_heatmap_transposed,
-                    player_index=current_index,
-                    board=new_board
-                )
-            current_move_choices_ordered = self._update_current_move_choices_(
-                current_move_choices_ordered=current_move_choices_ordered, new_board=new_board,
-                current_move=current_move, new_heatmap_transposed=new_heatmap_transposed,
-                current_index=current_index, new_current_king_box=new_current_king_box,
-                new_other_king_box=new_other_king_box, new_fen=new_fen
+            current_move_choices_ordered = self._update_current_move_choices_ordered_(
+                current_move_choices_ordered=current_move_choices_ordered,
+                current_move=current_move, current_index=current_index,
+                board=board
             )
         # Final pick is a random choice of all moves equal to the highest scoring move
         if debug:
@@ -481,6 +459,43 @@ class CMHMEngine2(CMHMEngine):
         chosen_move, chosen_q = random.choice(picks)
         self.set_q_value(value=numpy.float64(-chosen_q), board=board)
         return chosen_move, chosen_q
+
+    def _update_current_move_choices_ordered_(
+            self,
+            current_move_choices_ordered: List[Tuple[Optional[Move], Optional[numpy.float64]]],
+            current_move: Move,
+            current_index: int,
+            board: Board
+    ) -> List[Tuple[Optional[Move], Optional[numpy.float64]]]:
+        # Phil, I know you keep thinking you don't need to calculate a score here,
+        # but you do sometimes (keep that in mind.)
+        new_board: Board = self.board_copy_pushed(move=current_move, board=board)
+        # new_fen represents the boards for the only q-values that we will make updates to
+        new_fen: str = new_board.fen()
+        # No longer look at q-score at this level, only back prop q's into the calculation
+        new_current_king_box: List[int]
+        new_other_king_box: List[int]
+        new_current_king_box, new_other_king_box = self.get_king_boxes(board=new_board)
+        # It was fun building up a giant db of heatmaps, but we saw how that turned out in training
+        new_heatmap: heatmaps.ChessMoveHeatmap = chmutils.calculate_chess_move_heatmap_with_better_discount(
+            board=new_board, depth=self.depth
+        )
+        new_heatmap_transposed: NDArray[numpy.float64] = new_heatmap.data.transpose()
+        # I wanted to rely on the heatmap as much as possible, but any game termination state win or draw
+        # results in a zeros heatmap. Thus, we cheat with new_board.is_checkmate here. (draw scores stay zero.)
+        if self.heatmap_data_is_zeros(heatmap=new_heatmap) and new_board.is_checkmate():
+            self._update_heatmap_transposed_with_mate_values_(
+                heatmap_transposed=new_heatmap_transposed,
+                player_index=current_index,
+                board=new_board
+            )
+        current_move_choices_ordered = self._update_current_move_choices_(
+            current_move_choices_ordered=current_move_choices_ordered, new_board=new_board,
+            current_move=current_move, new_heatmap_transposed=new_heatmap_transposed,
+            current_index=current_index, new_current_king_box=new_current_king_box,
+            new_other_king_box=new_other_king_box, new_fen=new_fen
+        )
+        return current_move_choices_ordered
 
     def _update_current_move_choices_(
             self,
