@@ -14,6 +14,10 @@ import heatmaps
 from chmutils import HeatmapCache, BetterHeatmapCache
 from tests.utils import clear_test_cache, CACHE_DIR
 
+MATE_IN_ONE_3 = 'kb6/p7/5p2/2RPpp2/2RK4/2BPP3/6B1/8 w - e6 0 2'
+
+MATE_IN_ONE_2 = 'kb6/p3p3/5p2/2RP1p2/2RK4/2BPP3/6B1/8 b - - 0 1'
+
 MATE_IN_ONE_1 = '4k2r/ppp4p/4pBp1/2Q5/4B3/4p1PK/PP1r3P/5R2 w - - 2 32'
 
 HeatmapCache.cache_dir = CACHE_DIR
@@ -264,6 +268,35 @@ class TestCMHMEngine2(TestCase):
         outcome = self.engine.board.outcome(claim_draw=True)
         print(outcome)
         self.assertTrue(outcome is not None and outcome.winner is not None and outcome.winner)
+
+    def test_forced_mate_pick_move(self) -> None:
+        """Tests two possible back to back mate-in-one scenarios"""
+        self.engine.board = chess.Board(fen=MATE_IN_ONE_2)
+        print(self.engine.board.fen(), self.engine.board, sep='\n')
+        move, score = self.engine.pick_move(debug=True)
+        self.assertGreater(score, 0)
+        self.engine.board.push(move)
+        print(self.engine.board.fen(), self.engine.board, sep='\n')
+        self.assertNotEqual(self.engine.fen(), MATE_IN_ONE_3)
+        outcome = self.engine.board.outcome(claim_draw=True)
+        print(outcome)
+        self.assertIsNotNone(outcome)
+        self.assertIsNotNone(outcome.winner)
+        self.assertFalse(outcome.winner)
+        self.test_forced_mate_scenario_3()
+
+    def test_forced_mate_scenario_3(self) -> None:
+        """Tests a mate-in-one scenario that requires the previous move miss a different mate in one."""
+        self.engine.board = chess.Board(fen=MATE_IN_ONE_3)
+        print(self.engine.board.fen(), self.engine.board, sep='\n')
+        move, score = self.engine.pick_move(debug=True)
+        self.assertGreater(score, 0)
+        self.engine.board.push(move)
+        print(self.engine.board.fen(), self.engine.board, sep='\n')
+        outcome = self.engine.board.outcome(claim_draw=True)
+        print(outcome)
+        self.assertIsNotNone(outcome)
+        self.assertTrue(outcome.winner)
 
     def test__update_current_move_choices_(self) -> None:
         """Tests internal _update_current_move_choices_ method."""
