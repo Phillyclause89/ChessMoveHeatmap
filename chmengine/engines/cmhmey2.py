@@ -414,7 +414,10 @@ class CMHMEngine2(CMHMEngine):
             )
         # Final pick is a random choice of all moves equal to the highest scoring move
         if debug:
-            print("All moves ranked:", format_moves(moves=current_move_choices_ordered))
+            print(
+                f"All {len(current_move_choices_ordered)} moves ranked:",
+                format_moves(moves=current_move_choices_ordered)
+            )
         picks: List[Tuple[Move, float64]] = [
             (m, s) for m, s in current_move_choices_ordered if s == current_move_choices_ordered[0][1]
         ]

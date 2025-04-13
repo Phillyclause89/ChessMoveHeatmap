@@ -210,10 +210,9 @@ class PlayCMHMEngine:
             print(f"Game {game_n}")
             local_time: datetime = self.get_local_time()
             print(local_time)
-            move_number: int = 0
             last_move: str = ""
             while self.engine.board.outcome() is None and not self.engine.board.can_claim_draw():
-                move_number += 1
+                move_number: int = self.engine.board.fullmove_number
                 print(self.engine.board)
                 move: Move
                 score: numpy.float64
@@ -223,15 +222,16 @@ class PlayCMHMEngine:
                 if len(self.engine.board.move_stack) > 0:
                     last_move = self.engine.board.move_stack[-1].uci()
                 black_move_text: str = f"{move_number}. {last_move} {move.uci()}: {s_str}"
-                print(white_move_text if self.engine.board.turn else black_move_text)
+                print(white_move_text if self.engine.board.turn else black_move_text, end='\n\n')
                 self.engine.board.push(move)
+            print(self.engine.board)
             outcome: Outcome = self.engine.board.outcome(claim_draw=True)
             game = pgn.Game.from_board(self.engine.board)
             self.engine.update_q_values(debug=debug)
             game_heads = game.headers
             game_heads["Event"] = "CMHMEngine2 vs CMHMEngine2"
             game_heads["Site"] = "Kingdom of Phil"
-            game_heads["Round"] = str(i + 1)
+            game_heads["Round"] = str(game_n)
             self.set_all_datetime_headers(game_heads, local_time)
             game_heads["White"] = "CMHMEngine2"
             game_heads["Black"] = "CMHMEngine2"
