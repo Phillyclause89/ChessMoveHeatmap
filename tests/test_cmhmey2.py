@@ -207,6 +207,26 @@ class TestCMHMEngine2(TestCase):
         self.engine.board.push(pick[0])
         print(self.engine.board)
 
+    def test_pick_move_regressions(self) -> None:
+        """Regression tests on pick_move method"""
+        missed_mate = "4k2r/ppp4p/4p1p1/2Q1B3/4B3/4p1PK/PP2r2P/5R2 w - - 0 31"
+        self.engine.board = chess.Board(fen=missed_mate)
+        print(self.engine.board)
+        move0, score0 = self.engine.pick_move()
+        print(f"({move0.uci()}, {score0:.2f})")
+        self.assertEqual(move0.uci(), 'e5f6')
+        self.assertGreater(score0, 0)
+        self.engine.board.push(move0)
+        print(self.engine.board)
+        move1, score1 = self.engine.pick_move()
+        print(f"({move1.uci()}, {score1:.2f})")
+        self.assertLess(score1, 0)
+        self.engine.board.push(move1)
+        print(self.engine.board)
+        move2, score2 = self.engine.pick_move()
+        print(f"({move2.uci()}, {score2:.2f})")
+        self.assertGreater(score2, 0)
+
     def test__update_current_move_choices_(self) -> None:
         """Tests internal _update_current_move_choices_ method."""
         e4_board = self.engine.board_copy_pushed(self.E4)
