@@ -14,6 +14,8 @@ import heatmaps
 from chmutils import HeatmapCache, BetterHeatmapCache
 from tests.utils import clear_test_cache, CACHE_DIR
 
+MATE_IN_ONE_1 = '4k2r/ppp4p/4pBp1/2Q5/4B3/4p1PK/PP1r3P/5R2 w - - 2 32'
+
 HeatmapCache.cache_dir = CACHE_DIR
 BetterHeatmapCache.cache_dir = CACHE_DIR
 
@@ -207,8 +209,19 @@ class TestCMHMEngine2(TestCase):
         self.engine.board.push(pick[0])
         print(self.engine.board)
 
-    def test_pick_move_regressions(self) -> None:
-        """Regression tests on pick_move method"""
+    def test_pick_move_regressions_mate_in_1_avoidance(self) -> None:
+        """Regression tests on pick_move method
+        test scenario where a mate in one was both
+        not avoided and not followed through when allowed.
+
+        mate in one can be avoided if black plays the right move(s) from:
+            4k2r/ppp4p/4p1p1/2Q1B3/4B3/4p1PK/PP2r2P/5R2 w - - 0 31
+
+        mate in one is possible from:
+            4k2r/ppp4p/4pBp1/2Q5/4B3/4p1PK/PP1r3P/5R2 w - - 2 32
+
+        test case tests that black avoids the mate in one and white follows through on mate in one
+        """
         missed_mate = "4k2r/ppp4p/4p1p1/2Q1B3/4B3/4p1PK/PP2r2P/5R2 w - - 0 31"
         self.engine.board = chess.Board(fen=missed_mate)
         print(self.engine.board)
@@ -226,6 +239,31 @@ class TestCMHMEngine2(TestCase):
         move2, score2 = self.engine.pick_move()
         print(f"({move2.uci()}, {score2:.2f})")
         self.assertGreater(score2, 0)
+        self.engine.board.push(move2)
+        print(self.engine.board)
+        # run through the mate in one scenario with the mate score in q-table already
+        self.test_pick_move_regression_mate_in_1()
+
+    def test_pick_move_regression_mate_in_1(self) -> None:
+        """Tests mate in one regression scenario
+
+        mate in one is possible from:
+            4k2r/ppp4p/4pBp1/2Q5/4B3/4p1PK/PP1r3P/5R2 w - - 2 32
+
+        Tests that White follows through on playing the mate in one move
+        """
+        missed_mate = MATE_IN_ONE_1
+        self.engine.board = chess.Board(fen=missed_mate)
+        print(self.engine.board)
+        move0, score0 = self.engine.pick_move()
+        print(f"({move0.uci()}, {score0:.2f})")
+        self.assertEqual(move0.uci(), 'c5e7')
+        self.assertGreater(score0, 0)
+        self.engine.board.push(move0)
+        print(self.engine.board)
+        outcome = self.engine.board.outcome(claim_draw=True)
+        print(outcome)
+        self.assertTrue(outcome is not None and outcome.winner is not None and outcome.winner)
 
     def test__update_current_move_choices_(self) -> None:
         """Tests internal _update_current_move_choices_ method."""

@@ -660,13 +660,13 @@ class CMHMEngine2(CMHMEngine):
             board=next_board, depth=self.depth
         )
         next_heatmap_transposed: NDArray[float64] = next_heatmap.data.transpose()
-        if self.heatmap_data_is_zeros(heatmap=next_heatmap) and next_board.is_checkmate():
+        if next_board.is_checkmate():
+            next_board_copy = next_board.copy()
+            next_board_copy.pop()
             # No early exit here as this is a bad is_checkmate result :(
             self._update_heatmap_transposed_with_mate_values_(
                 heatmap_transposed=next_heatmap_transposed,
-                player_index=(
-                    int(current_index != next_board.turn)
-                ),
+                player_index=self.current_player_heatmap_index(board=next_board_copy),
                 board=next_board
             )
         elif next_board.is_check():
