@@ -1,0 +1,15 @@
+[Event "CMHMEngine2 vs CMHMEngine2"]
+[Site "Kingdom of Phil"]
+[Date "2025.04.13"]
+[Round "13"]
+[White "CMHMEngine2"]
+[Black "CMHMEngine2"]
+[Result "1-0"]
+[Timezone "Pacific Daylight Time"]
+[UTCDate "2025.04.13"]
+[UTCTime "21:20:31"]
+[Termination "CHECKMATE"]
+[CMHMEngineDepth "1"]
+
+1. b4 b6 2. e3 e5 3. Qg4 Qf6 4. Bb5 Bb7 5. Nc3 Nc6 6. Nd5 e4 7. Nxf6+ Nxf6 8. Qf5 Bxb4 9. Bb2 Ke7 10. Bxc6 Bxc6 11. Qe5+ Kd8 12. Ne2 Ng4 13. Qg5+ f6 14. Qxg7 Bd5 15. Qxg4 Bc4 16. Bxf6+ Kc8 17. Qxe4 c6 18. Qxc4 Kb7 19. Qxb4 Rhg8 20. Qd6 Rg4 21. Qxd7+ Ka6 22. Rb1 Rxg2 23. Rb4 Rag8 24. Qxc6 R8g4 25. Qc8+ Ka5 26. Nf4 Rxf4 27. Rxf4 h5 28. Qd7 Rg1+ 29. Rxg1 b5 30. Qxa7# 1-0
+

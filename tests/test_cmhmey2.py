@@ -1,6 +1,7 @@
 """Test Cmhmey Jr."""
 import time
 from io import StringIO
+from typing import Iterable, Optional
 from unittest import TestCase
 from os import path
 import chess
@@ -204,14 +205,24 @@ class TestCMHMEngine2(TestCase):
         )
         false_positive_fen = "r1b1kb1r/1p1pqppp/5n2/pp3Q2/3p4/1P1PP3/PB1PNPPP/2RK3R b kq - 1 12"
         self.engine.board = chess.Board(fen=false_positive_fen)
-        print(self.engine.board)
+        self.print_board()
         start = time.perf_counter()
         pick = self.engine.pick_move(debug=True)
         duration_ = time.perf_counter() - start
         print(f"{self.engine.board.fen()} pick: ({pick[0].uci()}, {pick[1]:.1f}) {duration_:.3f}s")
         self.assertNotEqual(pick[0].uci(), 'e7c5')
         self.engine.board.push(pick[0])
-        print(self.engine.board)
+        self.print_board()
+
+    def print_board(self, board: Optional[chess.Board] = None) -> None:
+        """Prints the engine board (or any other board)
+
+        Parameters
+        ----------
+        board : Optional[chess.Board]
+        """
+        board = self.engine.board if board is None else board
+        print(board.fen(), board, sep='\n')
 
     def test_pick_move_regressions_mate_in_1_avoidance(self) -> None:
         """Regression tests on pick_move method
@@ -228,23 +239,23 @@ class TestCMHMEngine2(TestCase):
         """
         missed_mate = "4k2r/ppp4p/4p1p1/2Q1B3/4B3/4p1PK/PP2r2P/5R2 w - - 0 31"
         self.engine.board = chess.Board(fen=missed_mate)
-        print(self.engine.board)
+        self.print_board()
         move0, score0 = self.engine.pick_move()
         print(f"({move0.uci()}, {score0:.2f})")
         self.assertEqual(move0.uci(), 'e5f6')
         self.assertGreater(score0, 0)
         self.engine.board.push(move0)
-        print(self.engine.board)
+        self.print_board()
         move1, score1 = self.engine.pick_move()
         print(f"({move1.uci()}, {score1:.2f})")
         self.assertLess(score1, 0)
         self.engine.board.push(move1)
-        print(self.engine.board)
+        self.print_board()
         move2, score2 = self.engine.pick_move()
         print(f"({move2.uci()}, {score2:.2f})")
         self.assertGreater(score2, 0)
         self.engine.board.push(move2)
-        print(self.engine.board)
+        self.print_board()
         # run through the mate in one scenario with the mate score in q-table already
         self.test_pick_move_regression_mate_in_1()
 
@@ -256,43 +267,80 @@ class TestCMHMEngine2(TestCase):
 
         Tests that White follows through on playing the mate in one move
         """
-        missed_mate = MATE_IN_ONE_1
-        self.engine.board = chess.Board(fen=missed_mate)
-        print(self.engine.board)
+        self.engine.board = chess.Board(fen=MATE_IN_ONE_1)
+        self.print_board()
         move0, score0 = self.engine.pick_move()
         print(f"({move0.uci()}, {score0:.2f})")
         self.assertEqual(move0.uci(), 'c5e7')
         self.assertGreater(score0, 0)
         self.engine.board.push(move0)
-        print(self.engine.board)
+        self.print_board()
         outcome = self.engine.board.outcome(claim_draw=True)
         print(outcome)
         self.assertTrue(outcome is not None and outcome.winner is not None and outcome.winner)
 
     def test_forced_mate_pick_move(self) -> None:
         """Tests two possible back to back mate-in-one scenarios"""
+        self.assertQValueIsNone()
         self.engine.board = chess.Board(fen=MATE_IN_ONE_2)
-        print(self.engine.board.fen(), self.engine.board, sep='\n')
+        self.print_board()
         move, score = self.engine.pick_move(debug=True)
+        self.assertNegativeQValue()
         self.assertGreater(score, 0)
         self.engine.board.push(move)
-        print(self.engine.board.fen(), self.engine.board, sep='\n')
+        self.assertNegativeQValue()
+        self.print_board()
         self.assertNotEqual(self.engine.fen(), MATE_IN_ONE_3)
         outcome = self.engine.board.outcome(claim_draw=True)
         print(outcome)
         self.assertIsNotNone(outcome)
         self.assertIsNotNone(outcome.winner)
         self.assertFalse(outcome.winner)
-        self.test_forced_mate_scenario_3()
+        self.test_forced_mate_scenario_3(confirm_null_q=False)
+        self.assertNegativeQValue(fens=[MATE_IN_ONE_2])
 
-    def test_forced_mate_scenario_3(self) -> None:
-        """Tests a mate-in-one scenario that requires the previous move miss a different mate in one."""
+    # pylint: disable=invalid-name
+    def assertNegativeQValue(self, fens: Iterable[str] = (MATE_IN_ONE_2, MATE_IN_ONE_3)) -> None:
+        """Asserts cached q-value is negative (i.e. bad position for the player who last moved)
+
+        Parameters
+        ----------
+        fens : Iterable[str]
+        """
+        for fen in fens:
+            q_value = self.engine.get_q_value(fen=fen)
+            self.assertIsNotNone(q_value)
+            self.assertLess(q_value, 0)
+
+    # pylint: disable=invalid-name
+    def assertQValueIsNone(self, fens: Iterable[str] = (MATE_IN_ONE_2, MATE_IN_ONE_3)) -> None:
+        """Asserts the Q-value for the board position is None
+
+        Parameters
+        ----------
+        fens : Iterable[str]
+        """
+        for fen in fens:
+            q_value = self.engine.get_q_value(fen=fen)
+            self.assertIsNone(q_value)
+
+    def test_forced_mate_scenario_3(self, confirm_null_q: bool = True) -> None:
+        """Tests a mate-in-one scenario that requires the previous move miss a different mate in one.
+
+        Parameters
+        ----------
+        confirm_null_q : bool
+        """
+        if confirm_null_q:
+            self.assertQValueIsNone()
         self.engine.board = chess.Board(fen=MATE_IN_ONE_3)
-        print(self.engine.board.fen(), self.engine.board, sep='\n')
+        self.print_board()
         move, score = self.engine.pick_move(debug=True)
+        self.assertNegativeQValue(fens=[MATE_IN_ONE_3])
         self.assertGreater(score, 0)
         self.engine.board.push(move)
-        print(self.engine.board.fen(), self.engine.board, sep='\n')
+        self.assertNegativeQValue(fens=[MATE_IN_ONE_3])
+        self.print_board()
         outcome = self.engine.board.outcome(claim_draw=True)
         print(outcome)
         self.assertIsNotNone(outcome)
