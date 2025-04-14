@@ -74,10 +74,9 @@ jobs:
         id: changes
         run: |
           git fetch origin main
-          CHANGED=$(git diff --name-only origin/main...HEAD -- '*.py' | paste -sd ' ' -)
+          CHANGED=$(git diff --name-only FETCH_HEAD -- '*.py' | paste -sd ' ' -)
           echo "Changed files: $CHANGED"
           echo "changed_files=$CHANGED" >> "$GITHUB_OUTPUT"
-
       -
         name: Run affected unit tests
         if: steps.changes.outputs.changed_files != ''
