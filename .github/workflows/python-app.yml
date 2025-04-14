@@ -1,3 +1,6 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
 name: Python application
 
 on:
@@ -13,60 +16,60 @@ permissions:
 
 jobs:
   build:
+
     runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ "3.7", "3.8", "3.9", "3.10" ]
+        python-version: [ "3.7","3.8","3.9", "3.10" ]
+
 
     steps:
       -
-        name: Check out code
         uses: actions/checkout@v4
-
       -
         name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
-
       -
         name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install flake8 pylint pytest
+          pip install flake8 pytest pylint
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
       -
-        name: Get list of changed files
-        id: changed
+        name: Lint with flake8
         run: |
-          git fetch origin main
-          git diff --name-only origin/main...HEAD -- '*.py' > changed.txt
-
+          # stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       -
-        name: Analyze affected dependencies
+        name: Analysing heatmaps with pylint
         run: |
-          python .github/scripts/scripts_analyze_dependencies.py changed.txt
-
+          pylint heatmaps --exit-zero
       -
-        name: Lint affected non-test files with pylint
+        name: Analysing chmutils with pylint
         run: |
-          if [ -s affected_files.txt ]; then
-            echo "Linting affected files:"
-            cat affected_files.txt
-            xargs pylint < affected_files.txt --exit-zero
-          else
-            echo "No affected non-test files to lint."
-          fi
-
+          pylint chmutils --exit-zero
       -
-        name: Run affected tests with unittest
+        name: Analysing chmengine with pylint
         run: |
-          if [ -s affected_tests.txt ]; then
-            echo "Running affected test files:"
-            cat affected_tests.txt
-            xargs -n 1 python -m unittest
-          else
-            echo "No affected test files to run."
-          fi
+          pylint chmengine --exit-zero
+      -
+        name: Analysing tooltips with pylint
+        run: |
+          pylint tooltips --exit-zero
+      -
+        name: Analysing main.py with pylint
+        run: |
+          pylint main.py --exit-zero
+      -
+        name: Analysing tests with pylint
+        run: |
+          pylint tests --exit-zero
+      -
+        name: Test with unittest
+        run: |
+          python -m unittest discover -s tests
