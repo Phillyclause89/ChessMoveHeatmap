@@ -1,5 +1,5 @@
 """Tooltips"""
-from tkinter import Frame, NSEW, LEFT, Tk, Canvas, Event, Toplevel, ttk, SOLID
+from tkinter import Canvas, Event, Frame, LEFT, NSEW, SOLID, Tk, Toplevel, ttk
 from tkinter.ttk import Label
 from typing import Optional, Tuple
 
