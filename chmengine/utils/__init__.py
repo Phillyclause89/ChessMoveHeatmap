@@ -1,14 +1,14 @@
 """utilities for the engines"""
 from typing import List, Optional, Tuple
 from _bisect import bisect_left
-import chess
-import numpy
+
 from chess import Move
+from numpy import float64
 from numpy.typing import NDArray
 
 
 def format_moves(
-        moves: List[Tuple[Optional[Move], Optional[numpy.float64]]]
+        moves: List[Tuple[Optional[Move], Optional[float64]]]
 ) -> List[Optional[Tuple[str, str]]]:
     """Generate a formatted list of moves and their scores for display.
 
@@ -30,10 +30,10 @@ def format_moves(
 
 def calculate_score(
         current_index: int,
-        new_heatmap_transposed: NDArray[numpy.float64],
+        new_heatmap_transposed: NDArray[float64],
         new_current_king_box: List[int],
         new_other_king_box: List[int]
-) -> numpy.float64:
+) -> float64:
     """Calculate the evaluation score for a move based on heatmap data and king safety.
 
     This static method computes the move score as the sum of two components:
@@ -61,24 +61,24 @@ def calculate_score(
     # where every possible move results in game termination.
     # score is initially, the delta of the sums of each player's heatmap.data values.
     other_index: int = int(not current_index)
-    initial_move_score: numpy.float64 = sum(
+    initial_move_score: float64 = sum(
         new_heatmap_transposed[current_index]
     ) - sum(
         new_heatmap_transposed[other_index]
     )
     # king box score adds weights to the scores of squares around the kings.
-    initial_king_box_score: numpy.float64 = sum(new_heatmap_transposed[current_index][new_other_king_box])
+    initial_king_box_score: float64 = sum(new_heatmap_transposed[current_index][new_other_king_box])
     initial_king_box_score -= sum(
         new_heatmap_transposed[other_index][new_current_king_box]
     )
     # Final score is the agg of both above.
-    return numpy.float64(initial_move_score + initial_king_box_score)
+    return float64(initial_move_score + initial_king_box_score)
 
 
 def insert_ordered_worst_to_best(
-        ordered_moves: List[Tuple[chess.Move, numpy.float64]],
-        move: chess.Move,
-        score: numpy.float64
+        ordered_moves: List[Tuple[Move, float64]],
+        move: Move,
+        score: float64
 ) -> None:
     """Insert a move and its score into an ordered list (from worst to best).
 
@@ -101,9 +101,9 @@ def insert_ordered_worst_to_best(
 
 
 def insert_ordered_best_to_worst(
-        ordered_moves: List[Tuple[chess.Move, numpy.float64]],
-        move: chess.Move,
-        score: numpy.float64
+        ordered_moves: List[Tuple[Move, float64]],
+        move: Move,
+        score: float64
 ) -> None:
     """Insert a move and its score into an ordered list (from best to worst).
 
