@@ -1,13 +1,13 @@
 """Tests Heatmaps"""
+from re import fullmatch
 from typing import Dict, List, Optional
 from unittest import TestCase, main
-from re import fullmatch
 
 from chess import Piece
+from numpy import array, float64, ndarray, random as np_random, testing as np_testing, zeros
 from numpy.typing import NDArray
-from numpy import random as np_random, array, testing as np_testing, float64, zeros, ndarray
 
-from heatmaps import GradientHeatmapT, GradientHeatmap, ChessMoveHeatmapT, ChessMoveHeatmap
+from heatmaps import ChessMoveHeatmap, ChessMoveHeatmapT, GradientHeatmap, GradientHeatmapT
 from tests.utils import INVALID_OBJ_STR, PIECES, SHAPE, validate_data_types
 
 

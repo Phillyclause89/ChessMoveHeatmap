@@ -1,16 +1,22 @@
 """Tests chmutils"""
-from unittest import TestCase, main
 from os import path
 from typing import Dict, List, Optional, Tuple
+from unittest import TestCase, main
 
 from chess import Board, Piece
-from numpy import float64, float_, array, testing
+from numpy import array, float64, float_, testing
 
-from chmutils import flatten_heatmap, calculate_chess_move_heatmap_with_better_discount, calculate_heatmap
-from chmutils import HeatmapCache, BetterHeatmapCache, calculate_chess_move_heatmap
-from chmutils import get_or_compute_heatmap, inflate_heatmap
+from chmutils import (
+    BetterHeatmapCache,
+    HeatmapCache,
+    calculate_chess_move_heatmap,
+    calculate_chess_move_heatmap_with_better_discount,
+    calculate_heatmap,
+    flatten_heatmap,
+    get_or_compute_heatmap,
+    inflate_heatmap
+)
 from heatmaps import ChessMoveHeatmap, GradientHeatmap
-
 from tests.utils import CACHE_DIR, clear_test_cache, validate_data_types
 
 HeatmapCache.cache_dir = CACHE_DIR

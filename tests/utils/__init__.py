@@ -1,14 +1,14 @@
 """Test Helpers"""
 from os import path
 from shutil import rmtree
+from typing import Any, Callable, Dict, Iterable, List, Optional, Tuple, Type, Union
 from unittest import TestCase
-from typing import Any, Callable, Dict, Iterable, List, Optional, Union, Type, Tuple
 
+from chess import COLORS, PIECE_TYPES, Piece
 from numpy import float64, ndarray
 from numpy.typing import NDArray
-from chess import COLORS, PIECE_TYPES, Piece
 
-from heatmaps import GradientHeatmap, GradientHeatmapT, ChessMoveHeatmapT, ChessMoveHeatmap
+from heatmaps import ChessMoveHeatmap, ChessMoveHeatmapT, GradientHeatmap, GradientHeatmapT
 
 PIECES: Tuple[Piece, ...] = tuple(Piece(p, c) for c in COLORS for p in PIECE_TYPES)
 SHAPE: Tuple[int, int] = (64, 2)

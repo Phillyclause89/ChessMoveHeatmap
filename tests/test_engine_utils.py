@@ -1,11 +1,12 @@
 """Tests engine utilities"""
-from unittest import TestCase
 from os import path
-import chess
+from unittest import TestCase
+
+from chess import Move
 from numpy import float64, testing
-import chmutils
-import heatmaps
-from chmutils import HeatmapCache, BetterHeatmapCache
+
+from chmutils import calculate_chess_move_heatmap_with_better_discount
+from heatmaps import ChessMoveHeatmap
 from chmengine.utils import (
     calculate_score,
     format_moves,
@@ -13,7 +14,8 @@ from chmengine.utils import (
     insert_ordered_worst_to_best,
     pieces_count_from_fen
 )
-from tests.utils import clear_test_cache, CACHE_DIR
+from chmutils import BetterHeatmapCache, HeatmapCache
+from tests.utils import CACHE_DIR, clear_test_cache
 
 HeatmapCache.cache_dir = CACHE_DIR
 BetterHeatmapCache.cache_dir = CACHE_DIR
@@ -27,9 +29,9 @@ class TestEngineUtils(TestCase):
     filename_17 = "qtable_depth_1_piece_count_17.db"
     fen_2 = "8/8/4k3/8/8/3K4/8/8 w - - 0 1"
     fen_3 = "8/8/4k3/8/8/p2K4/8/8 w - - 0 1"
-    E3 = chess.Move.from_uci('e2e3')
-    E4 = chess.Move.from_uci('e2e4')
-    E5 = chess.Move.from_uci('e7e5')
+    E3 = Move.from_uci('e2e3')
+    E4 = Move.from_uci('e2e4')
+    E5 = Move.from_uci('e7e5')
 
     def setUp(self) -> None:
         """Sets ups the engine instance to be tested with"""
@@ -58,10 +60,10 @@ class TestEngineUtils(TestCase):
     def test_calculate_score(self):
         """tests internal calculate_score method"""
         # pylint: disable=protected-access
-        null_score = calculate_score(0, heatmaps.ChessMoveHeatmap().data.transpose(), [4], [60])
+        null_score = calculate_score(0, ChessMoveHeatmap().data.transpose(), [4], [60])
         self.assertEqual(null_score, 0)
         self.assertIsInstance(null_score, float64)
-        hmap_data_transposed = chmutils.calculate_chess_move_heatmap_with_better_discount(
+        hmap_data_transposed = calculate_chess_move_heatmap_with_better_discount(
             self.engine.board
         ).data.transpose()
         score = calculate_score(
@@ -72,7 +74,7 @@ class TestEngineUtils(TestCase):
         self.assertEqual(score, 0)
         self.assertIsInstance(score, float64)
         self.engine.board.push(self.E4)
-        e4_hmap_data_transposed = chmutils.calculate_chess_move_heatmap_with_better_discount(
+        e4_hmap_data_transposed = calculate_chess_move_heatmap_with_better_discount(
             self.engine.board
         ).data.transpose()
         e4_score = calculate_score(
@@ -83,7 +85,7 @@ class TestEngineUtils(TestCase):
         self.assertEqual(e4_score, -10.0)
         self.assertIsInstance(e4_score, float64)
         self.engine.board.push(self.E5)
-        e5_hmap_data_transposed = chmutils.calculate_chess_move_heatmap_with_better_discount(
+        e5_hmap_data_transposed = calculate_chess_move_heatmap_with_better_discount(
             self.engine.board
         ).data.transpose()
         e5_score = calculate_score(
@@ -97,8 +99,8 @@ class TestEngineUtils(TestCase):
     def test_insert_ordered_worst_to_best(self):
         """Tests internal insert_ordered_worst_to_best method"""
         all_moves = [
-            (chess.Move.from_uci('a2a4'), float64(-100)),
-            (chess.Move.from_uci('d2d4'), float64(80)),
+            (Move.from_uci('a2a4'), float64(-100)),
+            (Move.from_uci('d2d4'), float64(80)),
             (self.E4, float64(100))
         ]
         # pylint: disable=protected-access
@@ -112,8 +114,8 @@ class TestEngineUtils(TestCase):
         """Tests internal insert_ordered_best_to_worst method"""
         all_moves = [
             (self.E4, float64(100)),
-            (chess.Move.from_uci('d2d4'), float64(80)),
-            (chess.Move.from_uci('a2a4'), float64(-100))
+            (Move.from_uci('d2d4'), float64(80)),
+            (Move.from_uci('a2a4'), float64(-100))
         ]
         # pylint: disable=protected-access
         moves = [all_moves[0]]

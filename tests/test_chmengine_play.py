@@ -1,19 +1,14 @@
 """Test the engine handler"""
-import datetime
-import time
+from datetime import datetime
 from io import StringIO
-from unittest import TestCase, main, mock
 from os import path
-import chess
+from unittest import TestCase, mock
+
 from chess import pgn
-import numpy
+from numpy import testing
 
-from numpy import float64, testing
-
-import chmutils
-import heatmaps
-from chmutils import HeatmapCache, BetterHeatmapCache
-from tests.utils import clear_test_cache, CACHE_DIR, YHWH, YHVH
+from chmutils import BetterHeatmapCache, HeatmapCache
+from tests.utils import CACHE_DIR, YHVH, YHWH, clear_test_cache
 
 HeatmapCache.cache_dir = CACHE_DIR
 BetterHeatmapCache.cache_dir = CACHE_DIR
@@ -116,7 +111,7 @@ class TestPlayCMHMEngine(TestCase):
         """Tests get_local_time method."""
         for handler in self.handlers:
             local_time = handler.get_local_time()
-            self.assertIsInstance(local_time, datetime.datetime)
+            self.assertIsInstance(local_time, datetime)
 
     def test_set_utc_headers(self) -> None:
         """Tests set_utc_headers method (TBD)"""
