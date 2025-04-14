@@ -1,20 +1,20 @@
 """Chess Heat Map App"""
-from typing import Dict, List, Optional, Set, TextIO, Tuple
-from concurrent.futures import ProcessPoolExecutor, Future
+from concurrent.futures import Future, ProcessPoolExecutor
 # noinspection PyProtectedMember
 from multiprocessing.context import Process
-from os import kill, cpu_count
+from os import cpu_count, kill
 from signal import SIGTERM
-from tkinter import Tk, Canvas, Menu, filedialog, colorchooser, messagebox, font as tk_font, Event, simpledialog
+from tkinter import Canvas, Event, Menu, Tk, colorchooser, filedialog, font as tk_font, messagebox, simpledialog
+from typing import Dict, List, Optional, Set, TextIO, Tuple
 
+from chess import Board, Move, Piece, SQUARES, pgn, square_name
+from chess.pgn import Game, GameBuilder, Headers
 from numpy import float64
 from numpy.typing import NDArray
-from chess import square_name, pgn, SQUARES, Board, Piece, Move
-from chess.pgn import GameBuilder, Game, Headers
 
-from tooltips import CanvasTooltip
 from chmutils import get_or_compute_heatmap_with_better_discounts
 from heatmaps import ChessMoveHeatmap
+from tooltips import CanvasTooltip
 
 DARK_SQUARE_COLOR_PROMPT: str = "Pick Dark Square Color"
 LIGHT_SQUARE_COLOR_PROMPT: str = "Pick Light Square Color"
