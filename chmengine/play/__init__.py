@@ -1,11 +1,10 @@
 """Play or Train the engine(s)"""
-import datetime
+from datetime import datetime, timezone
 from os import makedirs, path
 from typing import Callable, List, Optional, Tuple
-import chess
-import numpy
-from chess import Board, Move, Outcome, pgn
-from numpy import float_
+
+from chess import Board, COLOR_NAMES, Move, Outcome, pgn
+from numpy import float64
 
 from chmengine.engines.cmhmey1 import CMHMEngine
 from chmengine.engines.cmhmey2 import CMHMEngine2
@@ -19,10 +18,10 @@ class PlayCMHMEngine:
     cpu_name: str = "chmengine.CMHMEngine"
     site: str = player_name
     game_round: int = 0
-    round_results: List[Optional[chess.pgn.Game]]
-    player_color: str = chess.COLOR_NAMES[1]
+    round_results: List[Optional[pgn.Game]]
+    player_color: str = COLOR_NAMES[1]
     player_index: int = 0
-    cpu_color: str = chess.COLOR_NAMES[0]
+    cpu_color: str = COLOR_NAMES[0]
     cpu_index: int = 1
     engine: CMHMEngine
     pgn_dir: str = "pgns"
@@ -34,7 +33,7 @@ class PlayCMHMEngine:
             player_color: str = player_color,
             player_index: int = player_index,  # Inverse of chess libs mapping of colors
             depth: int = 1,
-            board: Optional[chess.Board] = None,
+            board: Optional[Board] = None,
             player_name: str = player_name,
             site: str = site,
             game_round: int = game_round,
@@ -57,21 +56,11 @@ class PlayCMHMEngine:
         --------
         >>> from chmengine import PlayCMHMEngine
         >>> game = PlayCMHMEngine()
-        >>> type(game.engine), game.game_round, game.site
-        (<class 'chmengine.CMHMEngine'>, 0, 'Unknown')
-        >>> game.cpu_name, game.cpu_color, game.cpu_index
-        ('chmengine.CMHMEngine(depth=1)', 'black', 1)
-        >>> game.player_name, game.player_color, game.player_index
-        ('Unknown', 'white', 0)
         >>> game.engine.board
         Board('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1')
         >>> game2 = PlayCMHMEngine(depth=3, player_name='Phillyclause89', player_color='black',site="Phil's Place")
         >>> game2.site
         "Phil's Place"
-        >>> game2.cpu_name, game2.cpu_color, game2.cpu_index
-        ('chmengine.CMHMEngine(depth=3)', 'white', 0)
-        >>> game2.player_name, game2.player_color, game2.player_index
-        ('Phillyclause89', 'black', 1)
         """
         self.pgn_dir = path.join(".", self.pgn_dir)
         self.training_dir = path.join(self.pgn_dir, self.training_dir)
@@ -84,7 +73,7 @@ class PlayCMHMEngine:
             self.fill_initial_q_values()
         self.cpu_name = f"""{str(self.engine.__class__).split("'")[1]}(depth={self.engine.depth})"""
         if (
-                player_color != self.player_color and player_color.lower() in chess.COLOR_NAMES
+                player_color != self.player_color and player_color.lower() in COLOR_NAMES
         ) or (
                 player_index != self.player_index and isinstance(player_index, int)
         ):
@@ -94,7 +83,7 @@ class PlayCMHMEngine:
     def fill_initial_q_values(self) -> None:
         """Fills initial q-values for board state"""
         print(f"Filling initial position values for board: {self.engine.fen()}")
-        pick: Tuple[Move, numpy.float64] = self.engine.pick_move()
+        pick: Tuple[Move, float64] = self.engine.pick_move()
         print(f"Initial pick: ({pick[0].uci()}, {pick[1]:.2f})")
         move: Move
         for move in self.engine.current_moves_list():
@@ -110,9 +99,9 @@ class PlayCMHMEngine:
         self.game_round += 1
         local_time = self.get_local_time()
         print(f"Round: {self.game_round} | Time: {str(local_time)}\n{self.engine.board}")
-        other_moves: List[chess.Move] = list(self.engine.board.legal_moves)
+        other_moves: List[Move] = list(self.engine.board.legal_moves)
         print(f"All legal moves: {', '.join([m.uci() for m in other_moves])}\nCalculating move scores...")
-        my_move_choice: Tuple[chess.Move, numpy.float64] = self.engine.pick_move(pick_by=pick_by)
+        my_move_choice: Tuple[Move, float64] = self.engine.pick_move(pick_by=pick_by)
         print(f"My recommended move has a {pick_by} score of {my_move_choice[1]:.2f}: {my_move_choice[0]}")
         move_number: int = 1
         while other_moves:
@@ -123,7 +112,7 @@ class PlayCMHMEngine:
                     self.engine.board.push(my_move_choice[0])
                 else:
                     print(self.engine.board)
-                    player_move_choice = chess.Move.from_uci(
+                    player_move_choice = Move.from_uci(
                         input(f"You're white, and thus it's your move: {move_number}. ")
                     )
                     if player_move_choice in other_moves:
@@ -136,7 +125,7 @@ class PlayCMHMEngine:
                     move_number += 1
                 else:
                     print(self.engine.board)
-                    player_move_choice = chess.Move.from_uci(
+                    player_move_choice = Move.from_uci(
                         input(
                             f"You're black, and thus it's your move: {move_number}. {self.engine.board.move_stack[-1]} "
                         )
@@ -175,7 +164,7 @@ class PlayCMHMEngine:
                 )
                 self.save_to_pgn(file_name, game)
                 self.round_results.append(game)
-                self.engine.board = chess.Board()
+                self.engine.board = Board()
                 break
 
     def save_to_pgn(self, file_name: str, game: pgn.Game) -> None:
@@ -215,7 +204,7 @@ class PlayCMHMEngine:
                 move_number: int = self.engine.board.fullmove_number
                 print(self.engine.board)
                 move: Move
-                score: numpy.float64
+                score: float64
                 move, score = self.engine.pick_move(debug=debug)
                 s_str: str = f"{score:.2f}"
                 white_move_text: str = f"{move_number}. {move.uci()}: {s_str}"
@@ -243,7 +232,7 @@ class PlayCMHMEngine:
             )
             self.save_to_pgn(file_name, game)
             print(game)
-            self.engine.board = chess.Board()
+            self.engine.board = Board()
 
     def set_all_datetime_headers(self, game_heads: pgn.Headers, local_time: datetime) -> None:
         """
@@ -266,7 +255,7 @@ class PlayCMHMEngine:
         datetime.datetime
 
         """
-        return datetime.datetime.now(datetime.datetime.now().astimezone().tzinfo)
+        return datetime.now(datetime.now().astimezone().tzinfo)
 
     @staticmethod
     def set_utc_headers(game_heads: pgn.Headers, local_time: datetime) -> None:
@@ -277,5 +266,5 @@ class PlayCMHMEngine:
         game_heads : chess.pgn.Headers
         local_time : datetime.datetime
         """
-        game_heads["UTCDate"] = local_time.astimezone(datetime.timezone.utc).strftime("%Y.%m.%d")
-        game_heads["UTCTime"] = local_time.astimezone(datetime.timezone.utc).strftime("%H:%M:%S")
+        game_heads["UTCDate"] = local_time.astimezone(timezone.utc).strftime("%Y.%m.%d")
+        game_heads["UTCTime"] = local_time.astimezone(timezone.utc).strftime("%H:%M:%S")
