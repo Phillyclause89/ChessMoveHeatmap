@@ -248,12 +248,11 @@ class PlayCMHMEngine:
 
     @staticmethod
     def get_local_time() -> datetime:
-        """
+        """Gets time in local system time
 
         Returns
         -------
         datetime.datetime
-
         """
         return datetime.now(datetime.now().astimezone().tzinfo)
 
