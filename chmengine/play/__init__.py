@@ -235,7 +235,7 @@ class PlayCMHMEngine:
             self.engine.board = Board()
 
     def set_all_datetime_headers(self, game_heads: pgn.Headers, local_time: datetime) -> None:
-        """
+        """Sets all datetime related game headers for the pgn file.
 
         Parameters
         ----------
