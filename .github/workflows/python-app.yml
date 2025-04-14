@@ -70,6 +70,18 @@ jobs:
         run: |
           pylint tests --exit-zero
       -
-        name: Test with unittest
+        name: Get list of changed Python files
+        id: changes
         run: |
-          python -m unittest discover -s tests
+          git fetch origin main
+          echo "CHANGED=$(git diff --name-only origin/main...HEAD -- '*.py' | paste -sd ' ' -)" >> $GITHUB_ENV
+          $CHANGED
+      -
+        name: Run affected unit tests
+        if: $CHANGED != ''
+        run: |
+          echo "Changed files: $CHANGED"
+          python .github/scripts/scripts_analyze_dependencies.py "$CHANGED" | while read test_file; do
+            echo "Running $test_file"
+            python -m unittest "$test_file"
+          done
