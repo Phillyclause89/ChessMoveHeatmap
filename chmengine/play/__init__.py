@@ -137,7 +137,7 @@ class PlayCMHMEngine:
                 print(my_move_choice)
                 print(f"My recommended move has a {pick_by} score of {my_move_choice[1]:.2f}: {my_move_choice[0]}")
             except ValueError:
-                outcome = self.engine.board.outcome()
+                outcome: Optional[Outcome] = self.engine.board.outcome()
                 game = pgn.Game.from_board(self.engine.board)
                 if isinstance(self.engine, CMHMEngine2):
                     self.engine.update_q_values()

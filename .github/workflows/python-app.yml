@@ -76,8 +76,7 @@ jobs:
         name: Get changed files
         id: get_files
         run: |
-          # Get the list of changed files for a push event
-          CHANGED_FILES=$(jq -r '[.commits[] | select(.added != null) | .added[], .commits[] | select(.modified != null) | .modified[]] | unique | .[]' $GITHUB_EVENT_PATH)
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }})
           if [ -z "$CHANGED_FILES" ]; then
             echo "No changed files found."
             echo "files=" >> $GITHUB_ENV
@@ -85,8 +84,6 @@ jobs:
             echo "Changed files: $CHANGED_FILES"
             echo "files=$CHANGED_FILES" >> $GITHUB_ENV
           fi
-          echo "Changed files: $CHANGED_FILES"
-          echo "files=$CHANGED_FILES" >> $GITHUB_ENV
 
       -
         name: Run affected unit tests
