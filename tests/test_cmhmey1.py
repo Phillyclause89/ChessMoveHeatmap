@@ -5,8 +5,8 @@ from unittest import TestCase, main
 from chess import Board, Move
 from numpy import float64, testing
 
-from heatmaps import ChessMoveHeatmapT, GradientHeatmapT, GradientHeatmap, ChessMoveHeatmap
 from chmutils import BetterHeatmapCache, HeatmapCache
+from heatmaps import ChessMoveHeatmap, ChessMoveHeatmapT, GradientHeatmap, GradientHeatmapT
 from tests.utils import CACHE_DIR, clear_test_cache
 
 HeatmapCache.cache_dir = CACHE_DIR

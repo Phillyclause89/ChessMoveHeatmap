@@ -5,8 +5,6 @@ from unittest import TestCase
 from chess import Move
 from numpy import float64, testing
 
-from chmutils import calculate_chess_move_heatmap_with_better_discount
-from heatmaps import ChessMoveHeatmap
 from chmengine.utils import (
     calculate_score,
     format_moves,
@@ -14,7 +12,8 @@ from chmengine.utils import (
     insert_ordered_worst_to_best,
     pieces_count_from_fen
 )
-from chmutils import BetterHeatmapCache, HeatmapCache
+from chmutils import BetterHeatmapCache, HeatmapCache, calculate_chess_move_heatmap_with_better_discount
+from heatmaps import ChessMoveHeatmap
 from tests.utils import CACHE_DIR, clear_test_cache
 
 HeatmapCache.cache_dir = CACHE_DIR

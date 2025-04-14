@@ -1,14 +1,14 @@
 """Test Cmhmey Jr."""
-from time import perf_counter
 from io import StringIO
 from os import path
+from time import perf_counter
 from typing import Iterable, Optional
 from unittest import TestCase
 
 from chess import Board, Move, pgn
-from numpy import percentile, mean, float64, testing
+from numpy import float64, mean, percentile, testing
 
-from chmutils import calculate_chess_move_heatmap_with_better_discount, BetterHeatmapCache, HeatmapCache
+from chmutils import BetterHeatmapCache, HeatmapCache, calculate_chess_move_heatmap_with_better_discount
 from heatmaps import ChessMoveHeatmap
 from tests.utils import CACHE_DIR, clear_test_cache
 

@@ -1,7 +1,7 @@
 """Tests chmengine packaging"""
 
-from unittest import TestCase, main
 from typing import Callable
+from unittest import TestCase, main
 
 from numpy import testing
 
