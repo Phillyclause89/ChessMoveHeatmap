@@ -1,10 +1,12 @@
 """CHMUtils"""
 from os import makedirs, path
-from sqlite3 import connect, Connection, Cursor
+from sqlite3 import Connection, Cursor, connect
 from typing import Dict, List, Optional, Tuple, Union
-from chess import Move, Board, Piece
+
+from chess import Board, Move, Piece
 from numpy import float64, float_
-from heatmaps import GradientHeatmap, PIECES, ChessMoveHeatmap
+
+from heatmaps import ChessMoveHeatmap, GradientHeatmap, PIECES
 
 
 def calculate_heatmap(
