@@ -13,7 +13,14 @@ The analysis works by:
 5. Printing out paths of affected test files.
 
 Example usage from the command line:
-    python script.py "chmutils/foo.py tests/test_bar.py"
+    (venv) PS ChessMoveHeatmap> python .github/scripts/scripts_analyze_dependencies.py "chmengine/engines/cmhmey2.py"
+    tests\test_chmengine.py
+    tests\test_chmengine_play.py
+    tests\test_cmhmey1.py
+    tests\test_cmhmey2.py
+    tests\test_engine_utils.py
+
+    Process finished with exit code 0
 
 This will print all test files that should be re-run.
 """
