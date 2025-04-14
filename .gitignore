@@ -156,4 +156,3 @@ chmutils/heatmap_cache.db
 SQLite3Caches/QTables/qtable_depth_1.db-journal
 SQLite3Caches/Better/heatmap_cache_depth_1.db-wal
 *.db-journal
-.github/scripts/scripts_analyze_dependencies.py
