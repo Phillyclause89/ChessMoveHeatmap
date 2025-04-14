@@ -1,10 +1,11 @@
 """Heatmaps"""
-from numbers import Real
-from typing import Dict, Optional, Tuple, Union, Iterable
 from copy import deepcopy
-from chess import PIECE_TYPES, Piece, COLORS
-from numpy.typing import NDArray, ArrayLike
-from numpy import asarray, abs as np_abs, array, str_, float64, zeros, ndarray, seterr
+from numbers import Real
+from typing import Dict, Iterable, Optional, Tuple, Union
+
+from chess import COLORS, PIECE_TYPES, Piece
+from numpy import abs as np_abs, array, asarray, float64, ndarray, seterr, str_, zeros
+from numpy.typing import ArrayLike, NDArray
 
 PIECES: Tuple[Piece, ...] = tuple(Piece(p, c) for c in COLORS for p in PIECE_TYPES)
 
