@@ -68,14 +68,15 @@ jobs:
             echo "No changed files found."
             echo "files=" >> $GITHUB_ENV
           else
+            # Convert newline-separated file list to space-separated
             echo "Changed files: $CHANGED_FILES"
-            echo "files=$CHANGED_FILES" >> $GITHUB_ENV
+            echo "files=$(echo $CHANGED_FILES | tr '\n' ' ')" >> $GITHUB_ENV
           fi
 
       -
         name: Run affected unit tests
         run: |
-          python .github/scripts/scripts_analyze_dependencies.py "$CHANGED_FILES" | while read test_file; do
+          python .github/scripts/scripts_analyze_dependencies.py "${{ env.files }}" | while read test_file; do
             if [ -f "$test_file" ]; then
               echo "Running $test_file"
               python -m unittest "$test_file"

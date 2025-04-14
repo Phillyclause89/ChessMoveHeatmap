@@ -4,7 +4,7 @@ from os import makedirs, path
 from typing import Callable, List, Optional, Tuple
 
 from chess import Board, COLOR_NAMES, Move, Outcome, pgn
-from chess.pgn import Game
+from chess.pgn import Game, Headers
 from numpy import float64
 
 from chmengine.engines.cmhmey1 import CMHMEngine
@@ -143,7 +143,7 @@ class PlayCMHMEngine:
                 if isinstance(self.engine, CMHMEngine2):
                     self.engine.update_q_values()
                 print(f"Game Over: {outcome}\n{self.engine.board}")
-                game_heads = game.headers
+                game_heads: Headers = game.headers
                 game_heads["Event"] = f"{self.player_name} vs {self.cpu_name}" if (
                     self.cpu_index
                 ) else f"{self.cpu_name} vs {self.player_name}"
