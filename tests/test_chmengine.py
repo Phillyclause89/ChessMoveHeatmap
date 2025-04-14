@@ -1,11 +1,12 @@
 """Tests chmengine packaging"""
 
-import unittest
+from unittest import TestCase, main
 from typing import Callable
+
 from numpy import testing
 
 
-class TestCMHEngineImports(unittest.TestCase):
+class TestCMHEngineImports(TestCase):
     """Tests chmengine package imports"""
     _dir = ['self']
     _name = ['chmengine']
@@ -49,4 +50,4 @@ class TestCMHEngineImports(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    main()

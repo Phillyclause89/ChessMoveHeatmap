@@ -1,13 +1,13 @@
 """Test Cmhmey Sr."""
-from unittest import TestCase, main
 from os import path
-import chess
-from numpy import float64
-from numpy import testing
+from unittest import TestCase, main
 
-import heatmaps
-from chmutils import HeatmapCache, BetterHeatmapCache
-from tests.utils import clear_test_cache, CACHE_DIR
+from chess import Board, Move
+from numpy import float64, testing
+
+from heatmaps import ChessMoveHeatmapT, GradientHeatmapT, GradientHeatmap, ChessMoveHeatmap
+from chmutils import BetterHeatmapCache, HeatmapCache
+from tests.utils import CACHE_DIR, clear_test_cache
 
 HeatmapCache.cache_dir = CACHE_DIR
 BetterHeatmapCache.cache_dir = CACHE_DIR
@@ -15,8 +15,8 @@ BetterHeatmapCache.cache_dir = CACHE_DIR
 
 class TestCMHMEngine(TestCase):
     """Test Cmhmey Sr."""
-    e2e4 = chess.Move.from_uci('e2e4')
-    e7e5 = chess.Move.from_uci('e7e5')
+    e2e4 = Move.from_uci('e2e4')
+    e7e5 = Move.from_uci('e7e5')
 
     def setUp(self) -> None:
         """Sets ups the engine instance to be tested with"""
@@ -46,8 +46,8 @@ class TestCMHMEngine(TestCase):
 
     def test_board(self) -> None:
         """tests board property"""
-        self.assertIsInstance(self.engine.board, chess.Board)
-        board = chess.Board()
+        self.assertIsInstance(self.engine.board, Board)
+        board = Board()
         self.assertEqual(board.fen(), self.engine.board.fen())
         board.push(tuple(board.legal_moves)[0])
         self.assertNotEqual(board.fen(), self.engine.board.fen())
@@ -59,7 +59,7 @@ class TestCMHMEngine(TestCase):
         self.assertEqual(board.fen(), self.engine.board.fen())
         self.engine.board.push(tuple(board.legal_moves)[1])
         self.assertNotEqual(board.fen(), self.engine.board.fen())
-        bad_board = chess.Board("rnbqkbnp/pppppppr/8/8/8/7N/PPPPPPPR/RNBQKB1P b KQkq - 1 1")
+        bad_board = Board("rnbqkbnp/pppppppr/8/8/8/7N/PPPPPPPR/RNBQKB1P b KQkq - 1 1")
         with self.assertRaises(TypeError):
             self.engine.board = []
         with self.assertRaises(ValueError):
@@ -81,7 +81,7 @@ class TestCMHMEngine(TestCase):
         self.engine.board.push(move)
         new_move_response = self.engine.pick_move()
         self.assertEqual(new_move_response, (self.e7e5, float64(-0.20689655172414234)))
-        self.engine.board = chess.Board()
+        self.engine.board = Board()
         move_response = (move, _) = self.engine.pick_move(pick_by='all-max')
         self.assertEqual(move_response, (self.e2e4, float64(30.0)))
         self.engine.board.push(move)
@@ -141,7 +141,7 @@ class TestCMHMEngine(TestCase):
 
     def test_update_target_moves_by_min_other(self) -> None:
         null_target_moves, = self.engine.null_target_moves(1)
-        heatmap_t = heatmaps.ChessMoveHeatmap().data.transpose()
+        heatmap_t = ChessMoveHeatmap().data.transpose()
         score, target_moves_by_min = self.engine.update_target_moves_by_min_other(
             null_target_moves,
             heatmap_t,
@@ -166,10 +166,10 @@ class TestCMHMEngine(TestCase):
 
     def test_heatmap_data_is_zeros(self) -> None:
         """Tests heatmap_data_is_zeros method"""
-        heatmap_t = heatmaps.GradientHeatmapT()
-        heatmap = heatmaps.GradientHeatmap()
-        move_heatmap_t = heatmaps.ChessMoveHeatmapT()
-        move_heatmap = heatmaps.ChessMoveHeatmap()
+        heatmap_t = GradientHeatmapT()
+        heatmap = GradientHeatmap()
+        move_heatmap_t = ChessMoveHeatmapT()
+        move_heatmap = ChessMoveHeatmap()
         for hmap in (heatmap_t, heatmap, move_heatmap_t, move_heatmap):
             self.assertTrue(self.engine.heatmap_data_is_zeros(hmap))
             hmap[0][0] = float64(0.1)
@@ -179,7 +179,7 @@ class TestCMHMEngine(TestCase):
         king_box_current, king_box_other = self.engine.get_king_boxes()
         testing.assert_array_equal(king_box_current, [4, 3, 11, 12, 5, 13])
         testing.assert_array_equal(king_box_other, [60, 51, 59, 52, 53, 61])
-        board = chess.Board("8/4n3/3kB3/2n5/5N2/3bK3/3N4/8 w - - 0 1")
+        board = Board("8/4n3/3kB3/2n5/5N2/3bK3/3N4/8 w - - 0 1")
         king_box_current, king_box_other = self.engine.get_king_boxes(board)
         testing.assert_array_equal(king_box_current, [20, 11, 19, 27, 12, 28, 13, 21, 29])
         testing.assert_array_equal(king_box_other, [43, 34, 42, 50, 35, 51, 36, 44, 52])

@@ -1,19 +1,16 @@
 """Test Cmhmey Jr."""
-import time
+from time import perf_counter
 from io import StringIO
+from os import path
 from typing import Iterable, Optional
 from unittest import TestCase
-from os import path
-import chess
-from chess import pgn
-import numpy
 
-from numpy import float64, testing
+from chess import Board, Move, pgn
+from numpy import percentile, mean, float64, testing
 
-import chmutils
-import heatmaps
-from chmutils import HeatmapCache, BetterHeatmapCache
-from tests.utils import clear_test_cache, CACHE_DIR
+from chmutils import calculate_chess_move_heatmap_with_better_discount, BetterHeatmapCache, HeatmapCache
+from heatmaps import ChessMoveHeatmap
+from tests.utils import CACHE_DIR, clear_test_cache
 
 MATE_IN_ONE_4 = '2k5/Q1p5/2K5/8/8/8/8/8 w - - 0 1'
 
@@ -35,9 +32,9 @@ class TestCMHMEngine2(TestCase):
     filename_17 = "qtable_depth_1_piece_count_17.db"
     fen_2 = "8/8/4k3/8/8/3K4/8/8 w - - 0 1"
     fen_3 = "8/8/4k3/8/8/p2K4/8/8 w - - 0 1"
-    E3 = chess.Move.from_uci('e2e3')
-    E4 = chess.Move.from_uci('e2e4')
-    E5 = chess.Move.from_uci('e7e5')
+    E3 = Move.from_uci('e2e3')
+    E4 = Move.from_uci('e2e4')
+    E5 = Move.from_uci('e7e5')
 
     def setUp(self) -> None:
         """Sets ups the engine instance to be tested with"""
@@ -60,7 +57,7 @@ class TestCMHMEngine2(TestCase):
         self.assertEqual(filename_32, self.filename_32)
         filename_2 = self.engine.qtable_filename(fen=self.fen_2)
         self.assertEqual(filename_2, self.filename_2)
-        filename_3 = self.engine.qtable_filename(board=chess.Board(fen=self.fen_3))
+        filename_3 = self.engine.qtable_filename(board=Board(fen=self.fen_3))
         self.assertEqual(filename_3, filename_3)
         filename_17 = self.engine.qtable_filename(pieces_count=17)
         self.assertEqual(filename_17, self.filename_17)
@@ -71,7 +68,7 @@ class TestCMHMEngine2(TestCase):
         self.assertEqual(q_path_32, path.join(CACHE_DIR, self.filename_32))
         q_path_2 = self.engine.qdb_path(fen=self.fen_2)
         self.assertEqual(q_path_2, path.join(CACHE_DIR, self.filename_2))
-        q_path_3 = self.engine.qdb_path(board=chess.Board(fen=self.fen_3))
+        q_path_3 = self.engine.qdb_path(board=Board(fen=self.fen_3))
         self.assertEqual(q_path_3, path.join(CACHE_DIR, self.filename_3))
         q_path_17 = self.engine.qdb_path(pieces_count=17)
         self.assertEqual(q_path_17, path.join(CACHE_DIR, self.filename_17))
@@ -87,7 +84,7 @@ class TestCMHMEngine2(TestCase):
 
     def test_state_fen(self) -> None:
         """Tests fen method"""
-        board = chess.Board()
+        board = Board()
         fen = self.engine.fen()
         self.assertEqual(fen, board.fen())
         move = tuple(self.engine.board.legal_moves)[0]
@@ -104,7 +101,7 @@ class TestCMHMEngine2(TestCase):
         self.assertIs(nothing, None)
         more_nothing = self.engine.get_q_value(fen=self.fen_2)
         self.assertIs(more_nothing, None)
-        even_more_nothing = self.engine.get_q_value(board=chess.Board(fen=self.fen_3))
+        even_more_nothing = self.engine.get_q_value(board=Board(fen=self.fen_3))
         self.assertIs(even_more_nothing, None)
 
     def test_set_q_value(self) -> None:
@@ -118,7 +115,7 @@ class TestCMHMEngine2(TestCase):
         saved_value = self.engine.get_q_value(fen=self.fen_2)
         self.assertEqual(saved_value, value_2)
         value_3 = float64(99)
-        self.engine.set_q_value(value_3, board=chess.Board(self.fen_3))
+        self.engine.set_q_value(value_3, board=Board(self.fen_3))
         saved_value = self.engine.get_q_value(fen=self.fen_3)
         self.assertEqual(saved_value, value_3)
 
@@ -160,44 +157,44 @@ class TestCMHMEngine2(TestCase):
 
     def test_pick_move(self) -> None:
         """Tests pick_move method."""
-        start = time.perf_counter()
+        start = perf_counter()
         pick = self.engine.pick_move()
-        duration_first = time.perf_counter() - start
+        duration_first = perf_counter() - start
         print(f"{self.engine.fen()} pick_move call: ({pick[0].uci()}, {pick[1]:.2f}) {duration_first:.3f}s")
         testing.assert_array_equal(pick, (self.E3, 0.23333333333333428))
         init_w_moves = list(self.engine.board.legal_moves)
-        move: chess.Move
+        move: Move
         first_time_pick_times = [duration_first]
         init_board_pick_times = [duration_first]
         revisit_pick_times = []
         new_duration = 999999.99
         for i, move in enumerate(init_w_moves, 2):
             self.engine.board.push(move)
-            start = time.perf_counter()
+            start = perf_counter()
             response_pick = self.engine.pick_move()
-            duration_rep_pick = time.perf_counter() - start
+            duration_rep_pick = perf_counter() - start
             first_time_pick_times.append(duration_rep_pick)
             print(
                 f"{self.engine.fen()} pick_move call: "
                 f"({response_pick[0].uci()}, {response_pick[1]:.2f}) {duration_rep_pick:.3f}s"
             )
             self.engine.board.pop()
-            start = time.perf_counter()
+            start = perf_counter()
             new_pick = self.engine.pick_move()
-            new_duration = time.perf_counter() - start
+            new_duration = perf_counter() - start
             init_board_pick_times.append(new_duration)
             revisit_pick_times.append(new_duration)
             print(
                 f"{self.engine.fen()} pick_move call {i}: ({new_pick[0].uci()}, {new_pick[1]:.2f}) {new_duration:.3f}s"
             )
         self.assertLess(new_duration, duration_first)
-        avg_duration = numpy.mean(init_board_pick_times)
-        avg_response = numpy.mean(first_time_pick_times)
-        avg_revisit = numpy.mean(revisit_pick_times)
+        avg_duration = mean(init_board_pick_times)
+        avg_response = mean(first_time_pick_times)
+        avg_revisit = mean(revisit_pick_times)
         self.assertLess(avg_duration, avg_response)
-        pre_durations = numpy.percentile(init_board_pick_times, [0, 1, 10, 25, 50, 75, 90, 99, 100])
-        pre_response = numpy.percentile(first_time_pick_times, [0, 1, 10, 25, 50, 75, 90, 99, 100])
-        pre_revisit = numpy.percentile(revisit_pick_times, [0, 1, 10, 25, 50, 75, 90, 99, 100])
+        pre_durations = percentile(init_board_pick_times, [0, 1, 10, 25, 50, 75, 90, 99, 100])
+        pre_response = percentile(first_time_pick_times, [0, 1, 10, 25, 50, 75, 90, 99, 100])
+        pre_revisit = percentile(revisit_pick_times, [0, 1, 10, 25, 50, 75, 90, 99, 100])
         print(f"mean pick time: {avg_duration:.3f}s\npercentiles (0, 1, 10, 25, 50, 75, 90, 99, 100):\n{pre_durations}")
         print(
             f"mean response time: {avg_response:.3f}s\npercentiles (0, 1, 10, 25, 50, 75, 90, 99, 100):\n{pre_response}"
@@ -206,16 +203,16 @@ class TestCMHMEngine2(TestCase):
             f"mean revisit time: {avg_revisit:.3f}s\npercentiles (0, 1, 10, 25, 50, 75, 90, 99, 100):\n{pre_revisit}"
         )
         false_positive_fen = "r1b1kb1r/1p1pqppp/5n2/pp3Q2/3p4/1P1PP3/PB1PNPPP/2RK3R b kq - 1 12"
-        self.engine.board = chess.Board(fen=false_positive_fen)
+        self.engine.board = Board(fen=false_positive_fen)
         self.print_board()
-        start = time.perf_counter()
+        start = perf_counter()
         pick = self.engine.pick_move(debug=True)
-        duration_ = time.perf_counter() - start
+        duration_ = perf_counter() - start
         print(f"{self.engine.board.fen()} pick: ({pick[0].uci()}, {pick[1]:.1f}) {duration_:.3f}s")
         self.assertNotEqual(pick[0].uci(), 'e7c5')
         self.push_and_print(pick[0])
 
-    def print_board(self, board: Optional[chess.Board] = None) -> None:
+    def print_board(self, board: Optional[Board] = None) -> None:
         """Prints the engine board (or any other board)
 
         Parameters
@@ -370,10 +367,10 @@ class TestCMHMEngine2(TestCase):
 
     def set_and_print(self, fen: str = MATE_IN_ONE_4):
         """Updates engine board to a new board from fen string"""
-        self.engine.board = chess.Board(fen=fen)
+        self.engine.board = Board(fen=fen)
         self.print_board()
 
-    def push_and_print(self, move: chess.Move):
+    def push_and_print(self, move: Move):
         """push move and print resulting board state"""
         self.engine.board.push(move)
         self.print_board()
@@ -386,7 +383,7 @@ class TestCMHMEngine2(TestCase):
             [(None, None)],
             e4_board,
             self.E4,
-            chmutils.calculate_chess_move_heatmap_with_better_discount(e4_board).data.transpose(),
+            calculate_chess_move_heatmap_with_better_discount(e4_board).data.transpose(),
             self.engine.current_player_heatmap_index(),
             *self.engine.get_king_boxes(e4_board),
             new_fen=e4_board.fen()
@@ -397,7 +394,7 @@ class TestCMHMEngine2(TestCase):
             move_choices,
             e3_board,
             self.E3,
-            chmutils.calculate_chess_move_heatmap_with_better_discount(e3_board).data.transpose(),
+            calculate_chess_move_heatmap_with_better_discount(e3_board).data.transpose(),
             self.engine.current_player_heatmap_index(),
             *self.engine.get_king_boxes(e3_board),
             new_fen=e3_board.fen()
@@ -415,7 +412,7 @@ class TestCMHMEngine2(TestCase):
         self.assertEqual(len(responses), len(current_moves))
         last_response_score = min(s for _, s in responses)
         for response_move, response_score in responses:
-            self.assertIsInstance(response_move, chess.Move)
+            self.assertIsInstance(response_move, Move)
             self.assertIsInstance(response_score, float64)
             self.assertIn(response_move, current_moves)
             self.assertGreaterEqual(response_score, last_response_score)
@@ -451,7 +448,7 @@ class TestCMHMEngine2(TestCase):
 
     def test__update_heatmap_transposed_with_mate_values_(self) -> None:
         """Tests internal _update_heatmap_transposed_with_mate_values_ method."""
-        hmap_data_transposed = heatmaps.ChessMoveHeatmap().data.transpose()
+        hmap_data_transposed = ChessMoveHeatmap().data.transpose()
         # pylint: disable=protected-access
         self.engine._update_heatmap_transposed_with_mate_values_(
             hmap_data_transposed,
