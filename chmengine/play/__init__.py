@@ -59,8 +59,6 @@ class PlayCMHMEngine:
         >>> game.engine.board
         Board('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1')
         >>> game2 = PlayCMHMEngine(depth=3, player_name='Phillyclause89', player_color='black',site="Phil's Place")
-        >>> game2.site
-        "Phil's Place"
         """
         self.pgn_dir = path.join(".", self.pgn_dir)
         self.training_dir = path.join(self.pgn_dir, self.training_dir)

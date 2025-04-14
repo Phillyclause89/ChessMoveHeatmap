@@ -74,6 +74,7 @@ jobs:
         id: changes
         run: |
           git fetch origin main
+          git diff --name-only FETCH_HEAD
           CHANGED=$(git diff --name-only FETCH_HEAD -- '*.py' | paste -sd ' ' -)
           echo "Changed files: $CHANGED"
           echo "changed_files=$CHANGED" >> "$GITHUB_OUTPUT"
