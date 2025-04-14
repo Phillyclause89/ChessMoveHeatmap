@@ -120,7 +120,6 @@ class PlayCMHMEngine:
                     print("I'm black, and thus it's my move!")
                     print(f"I'll play {move_number}. {self.engine.board.move_stack[-1]} {my_move_choice[0]}")
                     self.engine.board.push(my_move_choice[0])
-                    move_number += 1
                 else:
                     print(self.engine.board)
                     player_move_choice = Move.from_uci(
@@ -130,7 +129,6 @@ class PlayCMHMEngine:
                     )
                     if player_move_choice in other_moves:
                         self.engine.board.push(player_move_choice)
-                        move_number += 1
             print(self.engine.board)
             try:
                 other_moves = list(self.engine.board.legal_moves)
