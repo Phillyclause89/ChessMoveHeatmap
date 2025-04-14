@@ -1,13 +1,13 @@
 """Cmhmey Jr."""
-from random import choice
 from os import makedirs, path
+from random import choice
 from sqlite3 import Connection, Cursor, connect
 from typing import List, Optional, Tuple, Union
+
+from chess import Board, Move, Outcome
 from numpy import float64
 from numpy.typing import NDArray
-from chess import Board, Move, Outcome
-from chmutils import calculate_chess_move_heatmap_with_better_discount, CACHE_DIR
-from heatmaps import ChessMoveHeatmap
+
 from chmengine.engines.cmhmey1 import CMHMEngine
 from chmengine.utils import (
     calculate_score,
@@ -16,6 +16,8 @@ from chmengine.utils import (
     insert_ordered_worst_to_best,
     pieces_count_from_fen
 )
+from chmutils import CACHE_DIR, calculate_chess_move_heatmap_with_better_discount
+from heatmaps import ChessMoveHeatmap
 
 
 class CMHMEngine2(CMHMEngine):
