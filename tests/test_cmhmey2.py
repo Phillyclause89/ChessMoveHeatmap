@@ -15,6 +15,8 @@ import heatmaps
 from chmutils import HeatmapCache, BetterHeatmapCache
 from tests.utils import clear_test_cache, CACHE_DIR
 
+MATE_IN_ONE_4 = '2k5/Q1p5/2K5/8/8/8/8/8 w - - 0 1'
+
 MATE_IN_ONE_3 = 'kb6/p7/5p2/2RPpp2/2RK4/2BPP3/6B1/8 w - e6 0 2'
 
 MATE_IN_ONE_2 = 'kb6/p3p3/5p2/2RP1p2/2RK4/2BPP3/6B1/8 b - - 0 1'
@@ -211,8 +213,7 @@ class TestCMHMEngine2(TestCase):
         duration_ = time.perf_counter() - start
         print(f"{self.engine.board.fen()} pick: ({pick[0].uci()}, {pick[1]:.1f}) {duration_:.3f}s")
         self.assertNotEqual(pick[0].uci(), 'e7c5')
-        self.engine.board.push(pick[0])
-        self.print_board()
+        self.push_and_print(pick[0])
 
     def print_board(self, board: Optional[chess.Board] = None) -> None:
         """Prints the engine board (or any other board)
@@ -238,24 +239,20 @@ class TestCMHMEngine2(TestCase):
         test case tests that black avoids the mate in one and white follows through on mate in one
         """
         missed_mate = "4k2r/ppp4p/4p1p1/2Q1B3/4B3/4p1PK/PP2r2P/5R2 w - - 0 31"
-        self.engine.board = chess.Board(fen=missed_mate)
-        self.print_board()
+        self.set_and_print(fen=missed_mate)
         move0, score0 = self.engine.pick_move()
         print(f"({move0.uci()}, {score0:.2f})")
         self.assertEqual(move0.uci(), 'e5f6')
         self.assertGreater(score0, 0)
-        self.engine.board.push(move0)
-        self.print_board()
+        self.push_and_print(move0)
         move1, score1 = self.engine.pick_move()
         print(f"({move1.uci()}, {score1:.2f})")
         self.assertLess(score1, 0)
-        self.engine.board.push(move1)
-        self.print_board()
+        self.push_and_print(move1)
         move2, score2 = self.engine.pick_move()
         print(f"({move2.uci()}, {score2:.2f})")
         self.assertGreater(score2, 0)
-        self.engine.board.push(move2)
-        self.print_board()
+        self.push_and_print(move2)
         # run through the mate in one scenario with the mate score in q-table already
         self.test_pick_move_regression_mate_in_1()
 
@@ -267,14 +264,12 @@ class TestCMHMEngine2(TestCase):
 
         Tests that White follows through on playing the mate in one move
         """
-        self.engine.board = chess.Board(fen=MATE_IN_ONE_1)
-        self.print_board()
+        self.set_and_print(fen=MATE_IN_ONE_1)
         move0, score0 = self.engine.pick_move()
         print(f"({move0.uci()}, {score0:.2f})")
         self.assertEqual(move0.uci(), 'c5e7')
         self.assertGreater(score0, 0)
-        self.engine.board.push(move0)
-        self.print_board()
+        self.push_and_print(move0)
         outcome = self.engine.board.outcome(claim_draw=True)
         print(outcome)
         self.assertTrue(outcome is not None and outcome.winner is not None and outcome.winner)
@@ -282,22 +277,25 @@ class TestCMHMEngine2(TestCase):
     def test_forced_mate_pick_move(self) -> None:
         """Tests two possible back to back mate-in-one scenarios"""
         self.assertQValueIsNone()
-        self.engine.board = chess.Board(fen=MATE_IN_ONE_2)
-        self.print_board()
+        self.set_and_print(fen=MATE_IN_ONE_2)
         move, score = self.engine.pick_move(debug=True)
         self.assertNegativeQValue()
         self.assertGreater(score, 0)
-        self.engine.board.push(move)
+        self.push_and_print(move)
         self.assertNegativeQValue()
-        self.print_board()
         self.assertNotEqual(self.engine.fen(), MATE_IN_ONE_3)
+        self.assertOutcomeIsBlackWin()
+        self.test_forced_mate_scenario_3(confirm_null_q=False)
+        self.assertNegativeQValue(fens=[MATE_IN_ONE_2])
+
+    # pylint: disable=invalid-name
+    def assertOutcomeIsBlackWin(self) -> None:
+        """Asserts outcome is 0-1"""
         outcome = self.engine.board.outcome(claim_draw=True)
         print(outcome)
         self.assertIsNotNone(outcome)
         self.assertIsNotNone(outcome.winner)
         self.assertFalse(outcome.winner)
-        self.test_forced_mate_scenario_3(confirm_null_q=False)
-        self.assertNegativeQValue(fens=[MATE_IN_ONE_2])
 
     # pylint: disable=invalid-name
     def assertNegativeQValue(self, fens: Iterable[str] = (MATE_IN_ONE_2, MATE_IN_ONE_3)) -> None:
@@ -333,18 +331,52 @@ class TestCMHMEngine2(TestCase):
         """
         if confirm_null_q:
             self.assertQValueIsNone()
-        self.engine.board = chess.Board(fen=MATE_IN_ONE_3)
-        self.print_board()
+        self.set_and_print(fen=MATE_IN_ONE_3)
         move, score = self.engine.pick_move(debug=True)
         self.assertNegativeQValue(fens=[MATE_IN_ONE_3])
         self.assertGreater(score, 0)
-        self.engine.board.push(move)
+        self.push_and_print(move)
         self.assertNegativeQValue(fens=[MATE_IN_ONE_3])
-        self.print_board()
+        self.assertOutcomeIsWhiteWin()
+
+    def assertOutcomeIsWhiteWin(self) -> None:
+        """asserts outcome is 1-0"""
         outcome = self.engine.board.outcome(claim_draw=True)
         print(outcome)
         self.assertIsNotNone(outcome)
         self.assertTrue(outcome.winner)
+
+    def test_mate_capture_scenario(self) -> None:
+        """Tests that when faced with 2 mate positions the winner picks the one with the higher score.
+        Checkmate scores are higher with more pieces on the board. Thus, when faced with a position
+        where a checkmate that involves a capture as well as a checkmate that does not involve a capture,
+        the engine should pick the mate that does NOT involve the capture as that should have a higher score.
+        """
+        self.assertQValueIsNone(fens=[MATE_IN_ONE_4])
+        self.set_and_print()
+        move, score = self.engine.pick_move(debug=True)
+        self.assertNegativeQValue(fens=[MATE_IN_ONE_4])
+        self.assertGreater(score, 0)
+        self.assertEqual(move.uci(), 'a7a8')
+        self.push_and_print(move)
+        self.assertOutcomeIsWhiteWin()
+        self.engine.board.pop()
+        move, score = self.engine.pick_move(debug=True)
+        self.assertNegativeQValue(fens=[MATE_IN_ONE_4])
+        self.assertGreater(score, 0)
+        self.assertEqual(move.uci(), 'a7a8')
+        self.push_and_print(move)
+        self.assertOutcomeIsWhiteWin()
+
+    def set_and_print(self, fen: str = MATE_IN_ONE_4):
+        """Updates engine board to a new board from fen string"""
+        self.engine.board = chess.Board(fen=fen)
+        self.print_board()
+
+    def push_and_print(self, move: chess.Move):
+        """push move and print resulting board state"""
+        self.engine.board.push(move)
+        self.print_board()
 
     def test__update_current_move_choices_(self) -> None:
         """Tests internal _update_current_move_choices_ method."""
