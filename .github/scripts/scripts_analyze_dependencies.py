@@ -78,8 +78,10 @@ def find_all_dependents(
     return dependents
 
 
-def main(changed_files: List[str]):
+def main(changed_files_path: str):
     """main"""
+    with open(changed_files_path, encoding='utf-8') as file:
+        changed_files = [line.strip() for line in file if line.strip()]
     py_files = list_all_py_files(
         ["chmengine", "chmutils", "heatmaps", "tests", "tooltips"]
     ) + ["main.py", "standalone_color_legend.py"]
@@ -94,9 +96,13 @@ def main(changed_files: List[str]):
     affected_tests = {f for f in affected if os.path.normpath(f).startswith("tests" + os.sep)}
     for test_file in sorted(affected_tests):
         print(test_file)
+    with open("affected_tests.txt", "w", encoding='utf-8') as file:
+        file.write("\n".join(affected_tests))
+    with open("affected_files.txt", "w", encoding='utf-8') as file:
+        file.write("\n".join(changed_files))
 
 
 if __name__ == "__main__":
     # Example usage: python script.py "foo/bar.py tests/test_foo.py"
-    input_files = sys.argv[1].split()
+    input_files = sys.argv[1]
     main(input_files)
