@@ -95,7 +95,7 @@ class PlayCMHMEngine:
     def play(self, pick_by: str = "all-delta") -> None:
         """Play a game against the engine"""
         self.game_round += 1
-        local_time = self.get_local_time()
+        local_time: datetime = self.get_local_time()
         print(f"Round: {self.game_round} | Time: {str(local_time)}\n{self.engine.board}")
         other_moves: List[Move] = list(self.engine.board.legal_moves)
         print(f"All legal moves: {', '.join([m.uci() for m in other_moves])}\nCalculating move scores...")

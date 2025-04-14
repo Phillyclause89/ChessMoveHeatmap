@@ -73,9 +73,8 @@ jobs:
         name: Get list of changed Python files
         id: changes
         run: |
-          git fetch origin main
-          git diff --name-only FETCH_HEAD
-          CHANGED=$(git diff --name-only FETCH_HEAD -- '*.py' | paste -sd ' ' -)
+          git fetch origin main:origin/main
+          CHANGED=$(git diff --name-only origin/main...HEAD -- '*.py' | paste -sd ' ' -)
           echo "Changed files: $CHANGED"
           echo "changed_files=$CHANGED" >> "$GITHUB_OUTPUT"
       -
