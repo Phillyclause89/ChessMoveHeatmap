@@ -4,6 +4,7 @@ from os import makedirs, path
 from typing import Callable, List, Optional, Tuple
 
 from chess import Board, COLOR_NAMES, Move, Outcome, pgn
+from chess.pgn import Game
 from numpy import float64
 
 from chmengine.engines.cmhmey1 import CMHMEngine
@@ -138,7 +139,7 @@ class PlayCMHMEngine:
                 print(f"My recommended move has a {pick_by} score of {my_move_choice[1]:.2f}: {my_move_choice[0]}")
             except ValueError:
                 outcome: Optional[Outcome] = self.engine.board.outcome()
-                game = pgn.Game.from_board(self.engine.board)
+                game: Game = pgn.Game.from_board(self.engine.board)
                 if isinstance(self.engine, CMHMEngine2):
                     self.engine.update_q_values()
                 print(f"Game Over: {outcome}\n{self.engine.board}")

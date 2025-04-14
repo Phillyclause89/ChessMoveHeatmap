@@ -1,6 +1,4 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
-
 name: Python application
 
 on:
@@ -16,67 +14,56 @@ permissions:
 
 jobs:
   build:
-
     runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ "3.7","3.8","3.9", "3.10" ]
-
+        python-version: [ "3.7", "3.8", "3.9", "3.10" ]
 
     steps:
       -
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch the entire Git history to ensure all commits are available
+
       -
         name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
+
       -
         name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install flake8 pytest pylint
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
       -
         name: Lint with flake8
         run: |
-          # stop the build if there are Python syntax errors or undefined names
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
       -
-        name: Analysing heatmaps with pylint
+        name: Lint directories with pylint
         run: |
-          pylint heatmaps --exit-zero
+          for dir in heatmaps chmutils chmengine tooltips tests; do
+            if [ -d "$dir" ]; then
+              pylint "$dir" --exit-zero
+            fi
+          done
+          if [ -f main.py ]; then pylint main.py --exit-zero; fi
+
       -
-        name: Analysing chmutils with pylint
-        run: |
-          pylint chmutils --exit-zero
-      -
-        name: Analysing chmengine with pylint
-        run: |
-          pylint chmengine --exit-zero
-      -
-        name: Analysing tooltips with pylint
-        run: |
-          pylint tooltips --exit-zero
-      -
-        name: Analysing main.py with pylint
-        run: |
-          pylint main.py --exit-zero
-      -
-        name: Analysing tests with pylint
-        run: |
-          pylint tests --exit-zero
-      -
-        name: Debug GITHUB_EVENT_PATH
+        name: Debug GITHUB_EVENT_PATH (remove in production)
         run: cat $GITHUB_EVENT_PATH
+
       -
         name: Get changed files
         id: get_files
         run: |
-          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }})
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} || echo "")
           if [ -z "$CHANGED_FILES" ]; then
             echo "No changed files found."
             echo "files=" >> $GITHUB_ENV
@@ -88,7 +75,11 @@ jobs:
       -
         name: Run affected unit tests
         run: |
-          python .github/scripts/scripts_analyze_dependencies.py "${{ steps.changes.outputs.changed_files }}" | while read test_file; do
-            echo "Running $test_file"
-            python -m unittest "$test_file"
+          python .github/scripts/scripts_analyze_dependencies.py "$CHANGED_FILES" | while read test_file; do
+            if [ -f "$test_file" ]; then
+              echo "Running $test_file"
+              python -m unittest "$test_file"
+            else
+              echo "Test file $test_file does not exist. Skipping."
+            fi
           done
