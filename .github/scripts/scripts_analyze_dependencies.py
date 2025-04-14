@@ -54,8 +54,8 @@ def normalize_module_name(name: str) -> str:
 
 def build_reverse_dependency_graph(py_files: List[str]) -> Dict[str, Set[str]]:
     """Build a reverse dependency graph: file X is imported by set(Y, Z...)"""
-    file_to_module: dict = {f: filepath_to_module(f) for f in py_files}
-    module_to_file: dict = {normalize_module_name(v): k for k, v in file_to_module.items()}
+    file_to_module: Dict[str, str] = {f: filepath_to_module(f) for f in py_files}
+    module_to_file: Dict[str, str] = {normalize_module_name(v): k for k, v in file_to_module.items()}
     reverse_deps: Dict[str, Set[str]] = {f: set() for f in py_files}
     py_file: str
     for py_file in py_files:
@@ -86,7 +86,7 @@ def find_all_dependents(
     return dependents
 
 
-def main(changed_files: List[str]):
+def main(changed_files: List[str]) -> None:
     """main"""
     py_files: List[str] = list_all_py_files(
         ["chmengine", "chmutils", "heatmaps", "tests", "tooltips"]
@@ -99,7 +99,7 @@ def main(changed_files: List[str]):
     # Add anything that depends on them
     affected |= find_all_dependents(changed_files, reverse_graph)
     # Filter to test files
-    affected_tests: set = {f for f in affected if path.normpath(f).startswith("tests" + sep)}
+    affected_tests: Set[str] = {f for f in affected if path.normpath(f).startswith("tests" + sep)}
     test_file: Optional[str]
     for test_file in sorted(affected_tests):
         print(test_file)
