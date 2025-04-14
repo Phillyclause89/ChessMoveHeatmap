@@ -184,7 +184,7 @@ class PlayCMHMEngine:
             print(game, file=file, end="\n\n")
 
     def train_cmhmey_jr(self, training_games: int = 1000, training_games_start: int = 0, debug: bool = False) -> None:
-        """Trains engine. CMHMEngine2 specifically
+        """Trains engine. CMHMEngine2 specifically.
 
         Parameters
         ----------

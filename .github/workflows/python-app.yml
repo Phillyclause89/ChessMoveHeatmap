@@ -78,7 +78,7 @@ jobs:
           $CHANGED
       -
         name: Run affected unit tests
-        if: $CHANGED != ''
+        if: env.CHANGED != ''
         run: |
           echo "Changed files: $CHANGED"
           python .github/scripts/scripts_analyze_dependencies.py "$CHANGED" | while read test_file; do
