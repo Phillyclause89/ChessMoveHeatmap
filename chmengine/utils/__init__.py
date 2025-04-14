@@ -120,7 +120,7 @@ def insert_ordered_best_to_worst(
         The evaluation score for the move.
     """
     # current moves are inserted into our moves list in order of best scores to worst
-    ordered_index = bisect_left([-x[1] for x in ordered_moves], -score)
+    ordered_index: int = bisect_left([-x[1] for x in ordered_moves], -score)
     ordered_moves.insert(ordered_index, (move, score))
 
 

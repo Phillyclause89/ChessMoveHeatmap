@@ -1,4 +1,4 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# This workflow will install Python dependencies, run tests, and lint only changed Python files.
 name: Python application
 
 on:
@@ -22,6 +22,7 @@ jobs:
 
     steps:
       -
+        name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Fetch the entire Git history to ensure all commits are available
@@ -40,42 +41,40 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       -
-        name: Lint with flake8
-        run: |
-          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-
-      -
-        name: Lint directories with pylint
-        run: |
-          for dir in heatmaps chmutils chmengine tooltips tests; do
-            if [ -d "$dir" ]; then
-              pylint "$dir" --exit-zero
-            fi
-          done
-          if [ -f main.py ]; then pylint main.py --exit-zero; fi
-
-      -
-        name: Debug GITHUB_EVENT_PATH (remove in production)
-        run: cat $GITHUB_EVENT_PATH
-
-      -
         name: Get changed files
         id: get_files
         run: |
-          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} || echo "")
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep '\.py$' || echo "")
           if [ -z "$CHANGED_FILES" ]; then
-            echo "No changed files found."
+            echo "No changed Python files found."
             echo "files=" >> $GITHUB_ENV
           else
             # Convert newline-separated file list to space-separated
-            echo "Changed files: $CHANGED_FILES"
+            echo "Changed Python files: $CHANGED_FILES"
             echo "files=$(echo $CHANGED_FILES | tr '\n' ' ')" >> $GITHUB_ENV
           fi
 
       -
+        name: Lint only changed Python files with flake8
+        if: ${{ env.files && env.files != '' }}
+        run: |
+          echo "Linting the following changed Python files with flake8:"
+          echo "${{ env.files }}"
+          flake8 ${{ env.files }} --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 ${{ env.files }} --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+      -
+        name: Lint only changed Python files with pylint
+        if: ${{ env.files && env.files != '' }}
+        run: |
+          echo "Linting the following changed Python files with pylint:"
+          echo "${{ env.files }}"
+          pylint ${{ env.files }} --exit-zero
+
+      -
         name: Run affected unit tests
         run: |
+          echo "Running the following test files:"
           python .github/scripts/scripts_analyze_dependencies.py "${{ env.files }}" | while read test_file; do
             if [ -f "$test_file" ]; then
               echo "Running $test_file"
