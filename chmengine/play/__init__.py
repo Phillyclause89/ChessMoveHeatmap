@@ -101,8 +101,8 @@ class PlayCMHMEngine:
         print(f"All legal moves: {', '.join([m.uci() for m in other_moves])}\nCalculating move scores...")
         my_move_choice: Tuple[Move, float64] = self.engine.pick_move(pick_by=pick_by)
         print(f"My recommended move has a {pick_by} score of {my_move_choice[1]:.2f}: {my_move_choice[0]}")
-        move_number: int = 1
         while other_moves:
+            move_number: int = self.engine.board.fullmove_number
             if self.engine.board.turn:
                 if int(not self.engine.board.turn) == self.cpu_index:
                     print("I'm white, and thus it's my move!")
