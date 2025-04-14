@@ -70,16 +70,16 @@ jobs:
         run: |
           pylint tests --exit-zero
       -
-        name: Get list of changed Python files
-        id: changes
+        name: Get changed files
+        id: get_files
         run: |
-          git fetch origin main
-          CHANGED=$(git diff --name-only origin/main...HEAD -- '*.py' | paste -sd ' ' -)
-          echo "Changed files: $CHANGED"
-          echo "changed_files=$CHANGED" >> "$GITHUB_OUTPUT"
+          # Get the list of changed files for a push event
+          CHANGED_FILES=$(jq -r '.commits[].added[], .commits[].modified[]' $GITHUB_EVENT_PATH)
+          echo "Changed files: $CHANGED_FILES"
+          echo "files=$CHANGED_FILES" >> $GITHUB_ENV
+
       -
         name: Run affected unit tests
-        if: steps.changes.outputs.changed_files != ''
         run: |
           python .github/scripts/scripts_analyze_dependencies.py "${{ steps.changes.outputs.changed_files }}" | while read test_file; do
             echo "Running $test_file"

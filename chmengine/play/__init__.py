@@ -110,7 +110,7 @@ class PlayCMHMEngine:
                     self.engine.board.push(my_move_choice[0])
                 else:
                     print(self.engine.board)
-                    player_move_choice = Move.from_uci(
+                    player_move_choice: Move = Move.from_uci(
                         input(f"You're white, and thus it's your move: {move_number}. ")
                     )
                     if player_move_choice in other_moves:
