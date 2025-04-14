@@ -74,14 +74,15 @@ jobs:
         id: changes
         run: |
           git fetch origin main
-          echo "CHANGED=$(git diff --name-only origin/main...HEAD -- '*.py' | paste -sd ' ' -)" >> $GITHUB_ENV
-          $CHANGED
+          CHANGED=$(git diff --name-only origin/main...HEAD -- '*.py' | paste -sd ' ' -)
+          echo "Changed files: $CHANGED"
+          echo "changed_files=$CHANGED" >> "$GITHUB_OUTPUT"
+
       -
         name: Run affected unit tests
-        if: env.CHANGED != ''
+        if: steps.changes.outputs.changed_files != ''
         run: |
-          echo "Changed files: $CHANGED"
-          python .github/scripts/scripts_analyze_dependencies.py "$CHANGED" | while read test_file; do
+          python .github/scripts/scripts_analyze_dependencies.py "${{ steps.changes.outputs.changed_files }}" | while read test_file; do
             echo "Running $test_file"
             python -m unittest "$test_file"
           done
