@@ -168,7 +168,7 @@ class PlayCMHMEngine:
                 break
 
     def save_to_pgn(self, file_name: str, game: pgn.Game) -> None:
-        """
+        """Saves a game to a pgn file
 
         Parameters
         ----------
