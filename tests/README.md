@@ -55,13 +55,41 @@ This issue was demonstrated in [commit 6088510](https://github.com/Phillyclause8
 By adhering to these practices, you ensure that the pipeline runs only the necessary tests, 
 making the CI/CD process efficient and accurate.
 
+Here’s how we can update the `README.md` to include an additional example under the **Running Tests Locally** section that demonstrates using the script to select which test files are executed when a specific file, such as `chmengine.play.__init__.py`, is modified:
+
+---
+
 ## Running Tests Locally
 
-To execute the tests locally, navigate to the root of the repository and run:
+To execute all tests in the `/tests` directory, use the following command:
 ```bash
 python -m unittest discover
 ```
 
-This command will automatically discover and execute all tests in the `/tests` directory.
+### Running Specific Tests Based on Changed Files
 
----
+The repository includes a script, `.github/scripts/scripts_analyze_dependencies.py`, 
+which identifies the specific test files that should be executed based on the files that have been modified. 
+This script can be used locally to replicate the behavior of the pipeline.
+
+Here’s an example where the only modified file is `chmengine.play.__init__.py`:
+
+1. Run the dependency analysis script:
+   ```bash
+   python .github/scripts/scripts_analyze_dependencies.py chmengine.play.__init__.py
+   ```
+
+   Expected output:
+   ```
+   tests\test_chmengine.py
+   tests\test_chmengine_play.py
+   ```
+
+2. Capture the output of the script and pass it to the `unittest` runner:
+   ```bash
+   test_files=$(python .github/scripts/scripts_analyze_dependencies.py chmengine.play.__init__.py)
+   python -m unittest $test_files
+   ```
+
+This ensures that only the relevant test files (`tests/test_chmengine.py` and `tests/test_chmengine_play.py` in this case) 
+are executed, providing a more efficient testing process tailored to the changes made.
