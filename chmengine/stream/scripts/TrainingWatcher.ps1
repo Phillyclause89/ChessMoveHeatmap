@@ -1,33 +1,32 @@
 <#
 .SYNOPSIS
-    <Overview of script>
+    A simple PowerShell script to watch the .\pgns\trainings\ and .\SQLite3Caches\QTables\ dirs during engine training.
 .DESCRIPTION
-    <Brief description of script>
+    Used for the training YouTube stream here: https://www.youtube.com/live/Fh1I9DALeEc
 .PARAMETER TrainingDirectory
-    <Brief description of parameter input required. Repeat this attribute if required>
-.PARAMETER QTablePath
-    <Brief description of parameter input required. Repeat this attribute if required>
+    Relative path to the Dir that the training files to watch are saved to. By default this is pgns\trainings from repo root.
+.PARAMETER QTableDirectory
+    Relative path to the Dir that the q-table .db files to watch are saved to. By default this is SQLite3Caches\QTables from repo root.
 .PARAMETER MaxGames
-    <Brief description of parameter input required. Repeat this attribute if required>
+    Governs the exit logic for the script. By default, this script will continue to watch until 1000 pgn files are detected.
 .PARAMETER PollIntervalSeconds
-    <Brief description of parameter input required. Repeat this attribute if required>
+    Sleep time between pulls of the output dirs. By default this is 2 seconds.
 .INPUTS
-    <Inputs if any, otherwise state None>
+    None - No pipeline input accepted.
 .OUTPUTS
-    <Outputs if any, otherwise state None - example: Log file stored in C:\Windows\Temp\<name>.log>
+    None - Prints summary of training to host.
 .NOTES
-    Version:        1.0
     Author:         Phillyclause89
     Creation Date:  4/15/2025
     Purpose/Change: Initial script development
 
 .EXAMPLE
-    <Example goes here. Repeat this attribute for more than one example>
+    PS C:\Users\PhillyClause89\Documents\ChessMoveHeatmap> .\chmengine\stream\scripts\TrainingWatcher.ps1 -MaxGames 5 -PollIntervalSeconds 1
 #>
 [CmdletBinding()]
 param(
     [string]$TrainingDirectory = ".\pgns\trainings\",
-    [string]$QTablePath = ".\SQLite3Caches\QTables\",
+    [string]$QTableDirectory = ".\SQLite3Caches\QTables\",
     [int]$MaxGames = 1000,
     [int]$PollIntervalSeconds = 2
 )
@@ -36,7 +35,7 @@ function Watch-TrainingGames {
     [CmdletBinding()]
     param (
         [string]$TrainingDirectory = ".\pgns\trainings\",
-        [string]$QTablePath = ".\SQLite3Caches\QTables\",
+        [string]$QTableDirectory = ".\SQLite3Caches\QTables\",
         [int]$MaxGames = 1000,
         [int]$PollIntervalSeconds = 2
     )
@@ -93,7 +92,7 @@ function Watch-TrainingGames {
         }
 
         # Monitor Q-table size
-        $fileSize = (Get-ChildItem -Path $QTablePath -File | Measure-Object -Property Length -Sum).Sum
+        $fileSize = (Get-ChildItem -Path $QTableDirectory -File | Measure-Object -Property Length -Sum).Sum
         $sizeMB = [math]::Round($fileSize / 1MB, 3)
 
         if ($sizeMB -gt $lastSize) {
@@ -105,4 +104,10 @@ function Watch-TrainingGames {
     }
 }
 
-Watch-TrainingGames -TrainingDirectory $TrainingDirectory -QTablePath $QTablePath -MaxGames $MaxGames -PollIntervalSeconds $PollIntervalSeconds
+# This simulates: `if __name__ == "__main__":` from python. kinda...
+if ($MyInvocation.InvocationName -ne '.') {
+    Watch-TrainingGames -TrainingDirectory $TrainingDirectory -QTableDirectory $QTableDirectory -MaxGames $MaxGames -PollIntervalSeconds $PollIntervalSeconds
+}
+# P.s. I think PowerShell is a terrible scripting language and the guy who created it is certainly not Dutch.
+
+
