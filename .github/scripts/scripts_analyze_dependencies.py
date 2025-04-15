@@ -1,4 +1,4 @@
-"""
+r"""
 Identify what unittests to run based on changes to source files.
 
 This script analyzes a given list of changed Python source files and determines
@@ -13,16 +13,38 @@ The analysis works by:
 5. Printing out paths of affected test files.
 
 Example usage from the command line:
-    (venv) PS ChessMoveHeatmap> python .github/scripts/scripts_analyze_dependencies.py "chmengine/engines/cmhmey2.py"
+    (venv) PS ChessMoveHeatmap> python .github/scripts/scripts_analyze_dependencies.py "chmengine/play/__init__.py"
     tests\test_chmengine.py
     tests\test_chmengine_play.py
-    tests\test_cmhmey1.py
-    tests\test_cmhmey2.py
-    tests\test_engine_utils.py
 
     Process finished with exit code 0
 
-This will print all test files that should be re-run.
+This will print all test files that should be run in this action. A pipeline call of this script looks like:
+        -
+            name: Get changed files
+            id: get_files
+            run: |
+                CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep '\.py$' || echo "")
+                if [ -z "$CHANGED_FILES" ]; then
+                    echo "No changed Python files found."
+                    echo "files=" >> $GITHUB_ENV
+                else
+                    # Convert newline-separated file list to space-separated
+                    echo "Changed Python files: $CHANGED_FILES"
+                    echo "files=$(echo $CHANGED_FILES | tr '\n' ' ')" >> $GITHUB_ENV
+                fi
+        -
+            name: Run affected unit tests
+            run: |
+                echo "Running the following test files:"
+                python .github/scripts/scripts_analyze_dependencies.py "${{ env.files }}" | while read test_file; do
+                    if [ -f "$test_file" ]; then
+                        echo "Running $test_file"
+                        python -m unittest "$test_file"
+                    else
+                        echo "Test file $test_file does not exist. Skipping."
+                    fi
+                done
 """
 
 from _ast import AST, Module
