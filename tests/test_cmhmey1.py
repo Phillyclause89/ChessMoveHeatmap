@@ -23,7 +23,7 @@ class TestCMHMEngine(TestCase):
         clear_test_cache()
         self.assertFalse(path.exists(CACHE_DIR))
         # pylint: disable=import-outside-toplevel
-        from chmengine import CMHMEngine
+        from chmengine.engines.cmhmey1 import CMHMEngine
         self.engine = CMHMEngine()
         self.assertIsInstance(self.engine, CMHMEngine)
 
