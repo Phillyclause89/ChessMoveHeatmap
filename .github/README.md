@@ -1,0 +1,129 @@
+# GitHub Actions Configuration
+
+This directory contains configurations and scripts for automating workflows using GitHub Actions in the 
+**ChessMoveHeatmap** repository. GitHub Actions enables continuous integration (CI), deployment pipelines, 
+and other automated tasks to ensure the efficiency, quality, and reliability of the project.
+
+## Structure of the `.github` Directory
+
+### 1. `.github/workflows/`
+The `workflows` directory contains YAML files that define GitHub Actions workflows. Each workflow specifies a series of 
+automated tasks that are triggered by events such as code pushes, pull requests, or scheduled intervals.
+
+#### Key Features:
+- **Event-Based Triggers:** Workflows are triggered by events like `push`, `pull_request`, or custom-defined events.
+- **Job Definitions:** Each workflow defines one or more jobs that run on GitHub-hosted runners or self-hosted runners.
+- **CI/CD Tasks:** Common tasks include running tests, building the project, deploying code, or generating reports.
+
+#### Example Workflow File:
+```yaml
+# This workflow will install Python dependencies, run tests, and lint only changed Python files.
+name: Python application
+
+on:
+  push:
+    branches: [ "main" ]
+    paths: [ '**/*.py' ]
+  pull_request:
+    branches: [ "main" ]
+    paths: [ '**/*.py' ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ "3.7", "3.8", "3.9", "3.10" ]
+
+    steps:
+      -
+        name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch the entire Git history to ensure all commits are available
+
+      -
+        name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      -
+        name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest pylint
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      -
+        name: Get changed files
+        id: get_files
+        run: |
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep '\.py$' || echo "")
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "No changed Python files found."
+            echo "files=" >> $GITHUB_ENV
+          else
+            # Convert newline-separated file list to space-separated
+            echo "Changed Python files: $CHANGED_FILES"
+            echo "files=$(echo $CHANGED_FILES | tr '\n' ' ')" >> $GITHUB_ENV
+          fi
+
+      -
+        name: Lint only changed Python files with flake8
+        if: ${{ env.files && env.files != '' }}
+        run: |
+          echo "Linting the following changed Python files with flake8:"
+          echo "${{ env.files }}"
+          flake8 ${{ env.files }} --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 ${{ env.files }} --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+      -
+        name: Lint only changed Python files with pylint
+        if: ${{ env.files && env.files != '' }}
+        run: |
+          echo "Linting the following changed Python files with pylint:"
+          echo "${{ env.files }}"
+          pylint ${{ env.files }} --exit-zero
+
+      -
+        name: Run affected unit tests
+        run: |
+          echo "Running the following test files:"
+          python .github/scripts/scripts_analyze_dependencies.py "${{ env.files }}" | while read test_file; do
+            if [ -f "$test_file" ]; then
+              echo "Running $test_file"
+              python -m unittest "$test_file"
+            else
+              echo "Test file $test_file does not exist. Skipping."
+            fi
+          done
+```
+
+### 2. `.github/scripts/`
+The `scripts` directory contains custom scripts used within the workflows. These scripts are written in languages like 
+Python, Bash, or JavaScript and provide reusable logic to simplify workflows.
+
+#### Purpose:
+- **Modularization:** Scripts allow for cleaner and more maintainable workflow files by separating logic.
+- **Re-usability:** Shared scripts can be reused across multiple workflows.
+- **Flexibility:** Scripts provide the flexibility to implement custom logic not supported natively by GitHub Actions.
+
+#### Example Usage:
+A script from `.github/scripts/` can be invoked in a workflow like this:
+```yaml
+steps:
+  - name: Run scripts_analyze_dependencies script
+    run: python .github/scripts/scripts_analyze_dependencies.py "${{ env.files }}"
+```
+
+## How This Directory Supports the Project
+- **Automation:** Streamlines repetitive tasks like running tests, building the project, or deploying changes.
+- **Quality Assurance:** Ensures code quality through automated testing and linting.
+- **Collaboration:** Helps maintain consistency and efficiency in collaborative development efforts.
+
+For more details on GitHub Actions, refer to the [GitHub Actions documentation](https://docs.github.com/en/actions).
