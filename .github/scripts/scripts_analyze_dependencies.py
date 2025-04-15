@@ -1,3 +1,4 @@
+# pylint: disable=line-too-long
 r"""
 Identify what unittests to run based on changes to source files.
 
