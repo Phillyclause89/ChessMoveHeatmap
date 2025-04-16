@@ -137,3 +137,29 @@ def pieces_count_from_fen(fen: str) -> int:
     """
     _c: str
     return len([_c for _c in fen.split()[0] if _c.isalpha()])
+
+
+def insert_choice_into_current_moves(
+        current_move_choices_ordered: List[Tuple[Optional[Move], Optional[float64]]],
+        current_move: Move,
+        final_move_score: float64
+) -> List[Tuple[Move, float64]]:
+    """
+
+    Parameters
+    ----------
+    current_move_choices_ordered : List[Tuple[Optional[Move], Optional[float64]]]
+    current_move : Move
+    final_move_score : float64
+
+    Returns
+    -------
+    List[Tuple[Move, float64]]
+    """
+    if current_move_choices_ordered[0][0] is None:
+        current_move_choices_ordered = [(current_move, final_move_score)]
+    else:
+        insert_ordered_best_to_worst(
+            ordered_moves=current_move_choices_ordered, move=current_move, score=final_move_score
+        )
+    return current_move_choices_ordered

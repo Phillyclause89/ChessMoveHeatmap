@@ -9,9 +9,9 @@ from numpy.typing import NDArray
 from chmengine.engines.cmhmey1 import CMHMEngine
 from chmengine.engines.quartney import Quartney
 from chmengine.utils import (
+    insert_choice_into_current_moves,
     calculate_score,
     format_moves,
-    insert_ordered_best_to_worst,
     insert_ordered_worst_to_best,
 )
 from chmutils import calculate_chess_move_heatmap_with_better_discount
@@ -174,6 +174,7 @@ class CMHMEngine2(CMHMEngine, Quartney):
         chosen_move: Move
         chosen_q: float64
         chosen_move, chosen_q = choice(picks)
+        # The initial board state is a choice for the other player, thus it's q is the negative of the picked q.
         self.set_q_value(value=float64(-chosen_q), board=board)
         return chosen_move, chosen_q
 
@@ -193,29 +194,9 @@ class CMHMEngine2(CMHMEngine, Quartney):
         new_current_king_box: List[int]
         new_other_king_box: List[int]
         new_current_king_box, new_other_king_box = self.get_king_boxes(board=new_board)
-        new_outcome: Optional[Outcome] = new_board.outcome(claim_draw=True)
-        if new_outcome is not None:
-            is_mate: bool = new_outcome.winner is not None
-            new_heatmap: ChessMoveHeatmap = ChessMoveHeatmap()
-        else:
-            is_mate = False
-            # It was fun building up a giant db of heatmaps, but we saw how that turned out in training
-            new_heatmap = calculate_chess_move_heatmap_with_better_discount(
-                board=new_board, depth=self.depth
-            )
-        new_heatmap_transposed: NDArray[float64] = new_heatmap.data.transpose()
-        # I wanted to rely on the heatmap as much as possible, but any game termination state win or draw
-        # results in a zeros heatmap.
-        if is_mate:
-            self._update_heatmap_transposed_with_mate_values_(
-                heatmap_transposed=new_heatmap_transposed,
-                player_index=current_index,
-                board=new_board
-            )
         current_move_choices_ordered = self._update_current_move_choices_(
             current_move_choices_ordered=current_move_choices_ordered, new_board=new_board,
-            current_move=current_move, new_heatmap_transposed=new_heatmap_transposed,
-            current_index=current_index, new_current_king_box=new_current_king_box,
+            current_move=current_move, current_index=current_index, new_current_king_box=new_current_king_box,
             new_other_king_box=new_other_king_box, new_fen=new_fen
         )
         return current_move_choices_ordered
@@ -226,7 +207,6 @@ class CMHMEngine2(CMHMEngine, Quartney):
             current_move_choices_ordered: List[Tuple[Optional[Move], Optional[float64]]],
             new_board: Board,
             current_move: Move,
-            new_heatmap_transposed: NDArray[float64],
             current_index: int,
             new_current_king_box: List[int],
             new_other_king_box: List[int],
@@ -246,8 +226,6 @@ class CMHMEngine2(CMHMEngine, Quartney):
             The board state after the candidate move is applied.
         current_move : chess.Move
             The candidate move being evaluated.
-        new_heatmap_transposed : NDArray[numpy.float64]
-            The transposed heatmap data for the new board state.
         current_index : int
             The index corresponding to the current player's heatmap data.
         new_current_king_box : List[int]
@@ -262,14 +240,6 @@ class CMHMEngine2(CMHMEngine, Quartney):
         List[Tuple[Move, numpy.float64]]
             The updated ordered list of candidate moves with their evaluation scores.
         """
-        initial_q_val: Optional[float64] = self.get_q_value(fen=new_fen, board=new_board)
-        if initial_q_val is None:
-            initial_move_score: float64 = calculate_score(
-                current_index=current_index, new_heatmap_transposed=new_heatmap_transposed,
-                new_current_king_box=new_current_king_box, new_other_king_box=new_other_king_box
-            )
-        else:
-            initial_move_score = initial_q_val
         response_moves: List[Tuple[Optional[Move], Optional[float64]]]
         response_moves = self._get_or_calculate_responses_(
             new_board=new_board,
@@ -277,16 +247,43 @@ class CMHMEngine2(CMHMEngine, Quartney):
         )
         # Once all responses to a move reviewed, final move score is the worst outcome to current player.
         best_response_score: Optional[float64] = response_moves[0][1]
-        final_move_score: float64
-        final_move_score = best_response_score if best_response_score is not None else initial_move_score
-        self.set_q_value(value=final_move_score, fen=new_fen, board=new_board)
-        if current_move_choices_ordered[0][0] is None:
-            current_move_choices_ordered = [(current_move, final_move_score)]
+        if best_response_score is None:
+            initial_q_val: Optional[float64] = self.get_q_value(fen=new_fen, board=new_board)
+            if initial_q_val is None:
+                new_outcome: Optional[Outcome] = new_board.outcome(claim_draw=True)
+                if new_outcome is not None:
+                    is_mate: bool = new_outcome.winner is not None
+                    new_heatmap: ChessMoveHeatmap = ChessMoveHeatmap()
+                else:
+                    is_mate = False
+                    # It was fun building up a giant db of heatmaps, but we saw how that turned out in training
+                    new_heatmap = calculate_chess_move_heatmap_with_better_discount(
+                        board=new_board, depth=self.depth
+                    )
+                new_heatmap_transposed: NDArray[float64] = new_heatmap.data.transpose()
+                # I wanted to rely on the heatmap as much as possible, but any game termination state win or draw
+                # results in a zeros heatmap.
+                if is_mate:
+                    self._update_heatmap_transposed_with_mate_values_(
+                        heatmap_transposed=new_heatmap_transposed,
+                        player_index=current_index,
+                        board=new_board
+                    )
+                final_move_score: float64 = calculate_score(
+                    current_index=current_index, new_heatmap_transposed=new_heatmap_transposed,
+                    new_current_king_box=new_current_king_box, new_other_king_box=new_other_king_box
+                )
+            else:
+                final_move_score = initial_q_val
         else:
-            insert_ordered_best_to_worst(
-                ordered_moves=current_move_choices_ordered, move=current_move, score=final_move_score
-            )
-        return current_move_choices_ordered
+            final_move_score: float64 = best_response_score
+
+        self.set_q_value(value=final_move_score, fen=new_fen, board=new_board)
+        return insert_choice_into_current_moves(
+            current_move_choices_ordered=current_move_choices_ordered,
+            current_move=current_move,
+            final_move_score=final_move_score
+        )
 
     def _get_or_calculate_responses_(
             self,
