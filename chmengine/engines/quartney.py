@@ -4,7 +4,7 @@ from os import makedirs, path
 from sqlite3 import Connection, Cursor, connect
 from typing import Optional, Tuple, Union
 
-from chess import Board
+from chess import Board, Move
 from numpy import float64
 
 from chmengine.utils import pieces_count_from_fen
@@ -16,10 +16,6 @@ class Quartney(metaclass=ABCMeta):
     _depth: int
     board: Optional[Board]
     cache_dir: str = path.join(".", CACHE_DIR, "QTables")
-
-    def __init__(self, board: Optional[Board] = None, depth: int = 1):
-        self.board = board
-        self._depth = int(depth)
 
     def qtable_filename(
             self,
@@ -239,7 +235,7 @@ class Quartney(metaclass=ABCMeta):
         """
 
     @abstractmethod
-    def update_q_values(self, debug):
+    def update_q_values(self, debug: bool = False) -> None:
         """Update the Q-table values after game termination.
 
         This method back-propagates the outcome of the game by iteratively popping moves off the
@@ -279,7 +275,12 @@ class Quartney(metaclass=ABCMeta):
         """
 
     @abstractmethod
-    def pick_move(self, pick_by, board, debug):
+    def pick_move(
+            self,
+            pick_by: str = "",
+            board: Optional[Board] = None,
+            debug: bool = False
+    ) -> Tuple[Move, float64]:
         """Select a move based on heatmap evaluations and Q-table integration.
 
         This overridden method combines heatmap evaluations with Q-value updates. It evaluates all
