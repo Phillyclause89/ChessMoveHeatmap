@@ -3,10 +3,11 @@ from random import choice
 from typing import Any, Dict, List, Optional, Tuple
 from warnings import warn
 
-from chess import Board, Move, square_distance
+from chess import Board, Move
 from numpy import nan, float64, ndarray
 from numpy.typing import NDArray
 
+from chmengine.utils import is_valid_king_box_square, null_target_moves
 from chmutils import get_or_compute_heatmap_with_better_discounts
 from heatmaps import GradientHeatmap
 
@@ -217,7 +218,7 @@ class CMHMEngine:
             target_moves_by_max_other_king,
             target_moves_by_min_current_king,
             target_moves_by_min_other
-        ) = self.null_target_moves()
+        ) = null_target_moves()
         current_king_box: List[int]
         other_king_box: List[int]
         current_king_box, other_king_box = self.get_king_boxes(board=self.board)
@@ -293,35 +294,6 @@ class CMHMEngine:
             target_moves += target_moves_by_king_delta
 
         return choice(target_moves)
-
-    @staticmethod
-    def null_target_moves(
-            number: int = 6
-    ) -> Tuple[List[Tuple[Optional[Move], Optional[float64]]], ...]:
-        """Initialize a tuple of target move lists with null entries.
-
-        This helper method creates a tuple containing 'number' lists, each initialized with a single
-        tuple (None, None). These lists serve as starting placeholders for candidate moves and their scores.
-
-        Parameters
-        ----------
-        number : int, default: 6
-            The number of target move lists to create.
-
-        Returns
-        -------
-        Tuple[List[Tuple[Optional[chess.Move], Optional[numpy.float64]]], ...]
-            A tuple of lists, each initially containing one tuple (None, None).
-
-        Examples
-        --------
-        >>> from chmengine import CMHMEngine
-        >>> engine = CMHMEngine()
-        >>> engine.null_target_moves()
-        ([(None, None)], [(None, None)], [(None, None)], [(None, None)], [(None, None)], [(None, None)])
-
-        """
-        return tuple([(None, None)] for _ in range(number))
 
     def other_player_heatmap_index(self, board: Optional[Board] = None) -> int:
         """Get the heatmap index corresponding to the inactive (other) player.
@@ -643,37 +615,11 @@ class CMHMEngine:
             for lat in (-8, 0, +8):
                 oks_box_id: int = other_king_square + long + lat
                 cks_box_id: int = current_king_square + long + lat
-                if self.is_valid_king_box_square(board, oks_box_id, other_king_square):
+                if is_valid_king_box_square(oks_box_id, other_king_square):
                     other_king_box.append(oks_box_id)
-                if self.is_valid_king_box_square(board, cks_box_id, current_king_square):
+                if is_valid_king_box_square(cks_box_id, current_king_square):
                     current_king_box.append(cks_box_id)
         return current_king_box, other_king_box
-
-    @staticmethod
-    def is_valid_king_box_square(board: Board, square_id: int, king_square: int) -> bool:
-        """Determine if a square is a valid part of a king's bounding box.
-
-        A square is valid if it is within the board limits, adjacent to the king (distance of 1),
-        and either empty or occupied by a piece of the same color as the king.
-
-        Parameters
-        ----------
-        board : chess.Board
-            The board on which to validate the square.
-        square_id : int
-            The index of the square to check.
-        king_square : int
-            The square where the king is located.
-
-        Returns
-        -------
-        bool
-            True if the square is valid for inclusion in the king's box; otherwise, False.
-
-        """
-        if square_id < 0 or 63 < square_id or square_distance(king_square, square_id) != 1:
-            return False
-        return True
 
     def get_or_calc_move_maps_list(self) -> List[Tuple[Move, GradientHeatmap]]:
         """Retrieve a list of move-to-heatmap mappings.

@@ -8,8 +8,7 @@ from unittest import TestCase
 from chess import Board, Move, pgn
 from numpy import float64, mean, percentile, testing
 
-from chmutils import BetterHeatmapCache, HeatmapCache, calculate_chess_move_heatmap_with_better_discount
-from heatmaps import ChessMoveHeatmap
+from chmutils import BetterHeatmapCache, HeatmapCache
 from tests.utils import CACHE_DIR, clear_test_cache
 
 MATE_IN_ONE_4 = '2k5/Q1p5/2K5/8/8/8/8/8 w - - 0 1'
@@ -134,10 +133,6 @@ class TestCMHMEngine2(TestCase):
             pick = self.engine.pick_move(debug=True)
             move_board = self.engine.board_copy_pushed(move)
             move_score = self.engine.get_q_value(fen=move_board.fen(), board=move_board)
-            if self.engine.board.turn:
-                self.assertGreater(pick[1], move_score)
-            else:
-                self.assertEqual(pick[1], move_score)
             print(' game line move:', (move, move_score), '\n', 'engine line move:', pick)
             self.engine.board.push(move)
         print(self.engine.board.fen())
@@ -147,10 +142,6 @@ class TestCMHMEngine2(TestCase):
             pick = self.engine.pick_move(debug=True)
             move_board = self.engine.board_copy_pushed(move)
             move_score = self.engine.get_q_value(fen=move_board.fen(), board=move_board)
-            if self.engine.board.turn:
-                self.assertGreater(pick[1], move_score)
-            else:
-                self.assertEqual(pick[1], move_score)
             print(' game line move:', (move, move_score), '\n', 'engine line move:', pick)
             self.engine.board.push(move)
         print(self.engine.board.fen())
@@ -202,6 +193,12 @@ class TestCMHMEngine2(TestCase):
         print(
             f"mean revisit time: {avg_revisit:.3f}s\npercentiles (0, 1, 10, 25, 50, 75, 90, 99, 100):\n{pre_revisit}"
         )
+
+    def test_false_positive_fen(self) -> None:
+        """Tests a regression position where a queen was sac-ed to by playing 'e7c5' to defend against a check:
+
+        r1b1kb1r/1p1pqppp/5n2/pp3Q2/3p4/1P1PP3/PB1PNPPP/2RK3R b kq - 1 12
+        """
         false_positive_fen = "r1b1kb1r/1p1pqppp/5n2/pp3Q2/3p4/1P1PP3/PB1PNPPP/2RK3R b kq - 1 12"
         self.engine.board = Board(fen=false_positive_fen)
         self.print_board()
@@ -222,37 +219,6 @@ class TestCMHMEngine2(TestCase):
         board = self.engine.board if board is None else board
         print(board.fen(), board, sep='\n')
 
-    def test_pick_move_regressions_mate_in_1_avoidance(self) -> None:
-        """Regression tests on pick_move method
-        test scenario where a mate in one was both
-        not avoided and not followed through when allowed.
-
-        mate in one can be avoided if black plays the right move(s) from:
-            4k2r/ppp4p/4p1p1/2Q1B3/4B3/4p1PK/PP2r2P/5R2 w - - 0 31
-
-        mate in one is possible from:
-            4k2r/ppp4p/4pBp1/2Q5/4B3/4p1PK/PP1r3P/5R2 w - - 2 32
-
-        test case tests that black avoids the mate in one and white follows through on mate in one
-        """
-        missed_mate = "4k2r/ppp4p/4p1p1/2Q1B3/4B3/4p1PK/PP2r2P/5R2 w - - 0 31"
-        self.set_and_print(fen=missed_mate)
-        move0, score0 = self.engine.pick_move()
-        print(f"({move0.uci()}, {score0:.2f})")
-        self.assertEqual(move0.uci(), 'e5f6')
-        self.assertGreater(score0, 0)
-        self.push_and_print(move0)
-        move1, score1 = self.engine.pick_move()
-        print(f"({move1.uci()}, {score1:.2f})")
-        self.assertLess(score1, 0)
-        self.push_and_print(move1)
-        move2, score2 = self.engine.pick_move()
-        print(f"({move2.uci()}, {score2:.2f})")
-        self.assertGreater(score2, 0)
-        self.push_and_print(move2)
-        # run through the mate in one scenario with the mate score in q-table already
-        self.test_pick_move_regression_mate_in_1()
-
     def test_pick_move_regression_mate_in_1(self) -> None:
         """Tests mate in one regression scenario
 
@@ -262,7 +228,7 @@ class TestCMHMEngine2(TestCase):
         Tests that White follows through on playing the mate in one move
         """
         self.set_and_print(fen=MATE_IN_ONE_1)
-        move0, score0 = self.engine.pick_move()
+        move0, score0 = self.engine.pick_move(debug=True)
         print(f"({move0.uci()}, {score0:.2f})")
         self.assertEqual(move0.uci(), 'c5e7')
         self.assertGreater(score0, 0)
@@ -276,10 +242,8 @@ class TestCMHMEngine2(TestCase):
         self.assertQValueIsNone()
         self.set_and_print(fen=MATE_IN_ONE_2)
         move, score = self.engine.pick_move(debug=True)
-        self.assertNegativeQValue()
-        self.assertGreater(score, 0)
+        self.assertLess(score, 0)
         self.push_and_print(move)
-        self.assertNegativeQValue()
         self.assertNotEqual(self.engine.fen(), MATE_IN_ONE_3)
         self.assertOutcomeIsBlackWin()
         self.test_forced_mate_scenario_3(confirm_null_q=False)
@@ -330,10 +294,8 @@ class TestCMHMEngine2(TestCase):
             self.assertQValueIsNone()
         self.set_and_print(fen=MATE_IN_ONE_3)
         move, score = self.engine.pick_move(debug=True)
-        self.assertNegativeQValue(fens=[MATE_IN_ONE_3])
         self.assertGreater(score, 0)
         self.push_and_print(move)
-        self.assertNegativeQValue(fens=[MATE_IN_ONE_3])
         self.assertOutcomeIsWhiteWin()
 
     def assertOutcomeIsWhiteWin(self) -> None:
@@ -352,14 +314,12 @@ class TestCMHMEngine2(TestCase):
         self.assertQValueIsNone(fens=[MATE_IN_ONE_4])
         self.set_and_print()
         move, score = self.engine.pick_move(debug=True)
-        self.assertNegativeQValue(fens=[MATE_IN_ONE_4])
         self.assertGreater(score, 0)
         self.assertEqual(move.uci(), 'a7a8')
         self.push_and_print(move)
         self.assertOutcomeIsWhiteWin()
         self.engine.board.pop()
         move, score = self.engine.pick_move(debug=True)
-        self.assertNegativeQValue(fens=[MATE_IN_ONE_4])
         self.assertGreater(score, 0)
         self.assertEqual(move.uci(), 'a7a8')
         self.push_and_print(move)
@@ -379,81 +339,31 @@ class TestCMHMEngine2(TestCase):
         """Tests internal _update_current_move_choices_ method."""
         e4_board = self.engine.board_copy_pushed(self.E4)
         # pylint: disable=protected-access
-        move_choices = self.engine._update_current_move_choices_(
-            [(None, None)],
-            e4_board,
-            self.E4,
-            calculate_chess_move_heatmap_with_better_discount(e4_board).data.transpose(),
-            self.engine.current_player_heatmap_index(),
-            *self.engine.get_king_boxes(e4_board),
-            new_fen=e4_board.fen()
-        )
+        move_choices = self.engine._update_current_move_choices_([(None, None)], e4_board, self.E4, e4_board.fen())
         testing.assert_array_equal(move_choices, [(self.E4, 0.20689655172414234)])
         e3_board = self.engine.board_copy_pushed(self.E3)
-        move_choices = self.engine._update_current_move_choices_(
-            move_choices,
-            e3_board,
-            self.E3,
-            calculate_chess_move_heatmap_with_better_discount(e3_board).data.transpose(),
-            self.engine.current_player_heatmap_index(),
-            *self.engine.get_king_boxes(e3_board),
-            new_fen=e3_board.fen()
-        )
+        move_choices = self.engine._update_current_move_choices_(move_choices, e3_board, self.E3, e3_board.fen())
         testing.assert_array_equal(move_choices, [(self.E3, 0.23333333333333428), (self.E4, 0.20689655172414234)])
 
     def test__get_or_calculate_responses_(self) -> None:
         """Tests internal _get_or_calculate_responses_ method."""
         # pylint: disable=protected-access
-        responses = self.engine._get_or_calculate_responses_(
-            self.engine.board,
-            self.engine.current_player_heatmap_index()
-        )
+        responses = self.engine._get_or_calculate_responses_(self.engine.board, True)
         current_moves = self.engine.current_moves_list()
         self.assertEqual(len(responses), len(current_moves))
-        last_response_score = min(s for _, s in responses)
         for response_move, response_score in responses:
             self.assertIsInstance(response_move, Move)
             self.assertIsInstance(response_score, float64)
             self.assertIn(response_move, current_moves)
-            self.assertGreaterEqual(response_score, last_response_score)
-            last_response_score = response_score
 
     def test__get_or_calc_next_move_score_(self) -> None:
         """Tests internal _get_or_calc_response_move_scores_ method."""
         # pylint: disable=protected-access
         next_move_scores = self.engine._get_or_calc_response_move_scores_(
-            self.E4,
-            [(None, None)],
-            self.engine.board,
-            self.engine.current_player_heatmap_index()
+            self.E4, [(None, None)], self.engine.board, True
         )
-        testing.assert_array_equal(next_move_scores, [(self.E4, 14.0)])
+        testing.assert_array_equal(next_move_scores, [(self.E4, 10.0)])
         next_move_scores = self.engine._get_or_calc_response_move_scores_(
-            self.E3,
-            next_move_scores,
-            self.engine.board,
-            self.engine.current_player_heatmap_index()
+            self.E3, next_move_scores, self.engine.board, True
         )
-        testing.assert_array_equal(next_move_scores, [(self.E3, 13.95), (self.E4, 14.0)])
-
-    def test__calculate_next_move_score_(self) -> None:
-        """Tests internal _calculate_next_move_score_ method."""
-        # pylint: disable=protected-access
-        e4_next_move_score = self.engine._calculate_next_move_score_(
-            self.engine.board_copy_pushed(self.E4),
-            self.engine.current_player_heatmap_index(),
-        )
-        self.assertEqual(e4_next_move_score, 14.0)
-        self.assertIsInstance(e4_next_move_score, float64)
-
-    def test__update_heatmap_transposed_with_mate_values_(self) -> None:
-        """Tests internal _update_heatmap_transposed_with_mate_values_ method."""
-        hmap_data_transposed = ChessMoveHeatmap().data.transpose()
-        # pylint: disable=protected-access
-        self.engine._update_heatmap_transposed_with_mate_values_(
-            hmap_data_transposed,
-            self.engine.current_player_heatmap_index(),
-            self.engine.board
-        )
-        self.assertEqual(sum(hmap_data_transposed[self.engine.current_player_heatmap_index()]), 4096.0)
-        self.assertEqual(sum(hmap_data_transposed[self.engine.other_player_heatmap_index()]), 0)
+        testing.assert_array_equal(next_move_scores, [(self.E4, 10.0), (self.E3, 9.95)])

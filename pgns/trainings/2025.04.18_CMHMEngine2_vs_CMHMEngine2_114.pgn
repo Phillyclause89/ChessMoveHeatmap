@@ -1,0 +1,15 @@
+[Event "CMHMEngine2 vs CMHMEngine2"]
+[Site "Kingdom of Phil"]
+[Date "2025.04.18"]
+[Round "114"]
+[White "CMHMEngine2"]
+[Black "CMHMEngine2"]
+[Result "*"]
+[Timezone "Pacific Daylight Time"]
+[UTCDate "2025.04.18"]
+[UTCTime "21:13:13"]
+[Termination "THREEFOLD_REPETITION"]
+[CMHMEngineDepth "1"]
+
+1. g3 Nf6 2. e3 d5 3. Bb5+ c6 4. Qh5 Nxh5 5. Nf3 Qa5 6. Ne5 Qxb5 7. Nc3 Qb4 8. Ke2 Bh3 9. g4 Nd7 10. Nc4 e6 11. Nxd5 exd5 12. b3 Bd6 13. Bb2 Ke7 14. Nxd6 Qxg4+ 15. f3 Qg2+ 16. Kd3 Nc5+ 17. Kd4 Qxd2+ 18. Kxc5 Qxe3+ 19. Bd4 b6+ 20. Kxc6 Bd7+ 21. Kb7 Qxd4 22. Rhe1+ Kxd6 23. Rad1 Rab8+ 24. Ka6 Bc8+ 25. Kxa7 Rb7+ 26. Ka8 Rb8+ 27. Kxb8 Be6+ 28. Ka7 Ra8+ 29. Kxa8 Qc3 30. Rd4 Qc8+ 31. Ka7 Qc7+ 32. Ka6 b5 33. c3 Nf4 34. Rxf4 Ke7 35. Rg4 b4 36. Kb5 Qb8+ 37. Ka6 bxc3 38. Rxg7 Qa8+ 39. Kb5 Qb8+ 40. Kc6 c2 41. Rg8 c1=Q+ 42. Rxc1 Bd7+ 43. Kc5 Qxg8 44. Re1+ Kf6 45. Kd4 Qb8 46. Kc3 Kg7 47. Rg1+ Kf6 48. Kc2 Qb4 49. Kb1 Qc3 50. a4 Ke7 51. Rg8 Bf5+ 52. Ka2 Qd2+ 53. Ka3 Qc1+ 54. Kb4 Kd6 55. Rd8+ Ke5 56. Re8+ Kd6 57. Ka5 Qc5+ 58. Ka6 Qc6+ 59. Ka7 Qxe8 60. Kb7 Qc6+ 61. Ka7 Qc7+ 62. Ka8 Qc8+ 63. Ka7 Bd3 64. a5 Ke7 65. Kb6 h5 66. f4 Qb8+ 67. Kc6 Qc8+ 68. Kxd5 Qe6+ 69. Kd4 Qd6+ 70. Ke3 Qc6 71. Kxd3 Qd5+ 72. Ke2 Qd4 73. f5 h4 74. b4 h3 75. Kf1 Qd3+ 76. Ke1 Qd4 77. Kf1 Qd3+ 78. Kg1 Qd1+ 79. Kf2 Qd3 80. Kg1 Qd1+ 81. Kf2 f6 82. a6 Qd4+ 83. Ke1 Qe3+ 84. Kd1 Qd3+ 85. Kc1 Qc4+ 86. Kb1 Kd7 87. a7 Qxb4+ 88. Ka1 Qc3+ 89. Kb1 Qb3+ 90. Ka1 Qc3+ 91. Ka2 Qa5+ 92. Kb1 Qb6+ 93. Ka2 Qa6+ 94. Kb3 Qb6+ 95. Ka4 Qd4+ 96. Kb5 Qe5+ 97. Ka6 Qe2+ 98. Kb6 Qe3+ 99. Ka6 Qe2+ 100. Kb6 Qc4 101. a8=Q Qb4+ 102. Ka6 Qc4+ 103. Kb6 Qb4+ 104. Ka6 Kc7 105. Qa7+ Kc6 106. Qa8+ Kd7 107. Qg8 Qd6+ 108. Kb5 Qc6+ 109. Kb4 Qe4+ 110. Ka5 Qe1+ 111. Kb5 Qe2+ 112. Ka5 Qe1+ 113. Ka6 Qe5 114. Qf7+ Kd8 115. Qe6 Qxe6+ 116. fxe6 Ke7 117. Kb5 Kxe6 118. Ka6 f5 119. Ka5 f4 120. Kb4 Kf7 121. Kb3 Kg7 122. Kb4 Kg6 123. Kc3 Kf7 124. Kb4 Kf6 125. Kb3 Ke7 126. Kc3 f3 127. Kc4 f2 128. Kb3 f1=Q 129. Kc3 Qf3+ 130. Kb2 Qd5 131. Kb1 Qd4 132. Kc1 Qf2 133. Kb1 Qd4 134. Ka2 Qe4 135. Ka3 Qd4 136. Ka2 Qb6 137. Ka1 Qb4 138. Ka2 Qd4 139. Kb1 Qc3 140. Ka2 Qc2+ 141. Ka1 Qd3 142. Ka2 Qb5 143. Ka1 Qd3 144. Ka2 Qd4 145. Kb1 Qf2 146. Ka1 Kd6 147. Kb1 Qf5+ 148. Kc1 Qf2 149. Kb1 Qf5+ 150. Kc1 Qe4 151. Kb2 Qb7+ 152. Ka2 Qe4 153. Ka1 Qb7 154. Ka2 Qe4 155. Ka1 Qe2 156. Kb1 Qb5+ 157. Ka1 Qc4 158. Kb2 Qb5+ 159. Ka1 Qc4 160. Kb2 Qa4 161. Kb1 Ke5 162. Kb2 Qb4+ 163. Ka2 Qd2+ 164. Ka1 Qb4 165. Ka2 Qd2+ 166. Ka1 Kf5 167. Kb1 Qd4 168. Ka2 Qc3 169. Kb1 Qb3+ 170. Kc1 Qc3+ 171. Kb1 Qb3+ 172. Ka1 Qb4 173. Ka2 Qd4 174. Kb1 Qc3 175. Ka2 Qd4 176. Kb1 Qc4 177. Ka1 Qa2+ 178. Kxa2 Ke4 179. Kb2 Kf5 180. Kb3 Kg6 181. Kc2 Kf6 182. Kd2 Kg6 183. Kc3 Kf7 184. Kd3 Kg7 185. Ke3 Kf7 186. Ke2 Ke6 187. Kd2 Kf7 188. Kc3 Kg7 189. Kb4 Kg6 190. Kc5 Kg5 191. Kc4 Kg6 192. Kb4 Kf5 193. Kb5 Kg5 194. Kc5 Kg6 195. Kb6 Kg7 196. Kc7 Kg6 197. Kb6 Kg7 198. Kc6 Kg6 *
+

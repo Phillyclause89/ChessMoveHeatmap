@@ -5,6 +5,7 @@ from unittest import TestCase, main
 from chess import Board, Move
 from numpy import float64, testing
 
+from chmengine.utils import is_valid_king_box_square, null_target_moves
 from chmutils import BetterHeatmapCache, HeatmapCache
 from heatmaps import ChessMoveHeatmap, ChessMoveHeatmapT, GradientHeatmap, GradientHeatmapT
 from tests.utils import CACHE_DIR, clear_test_cache
@@ -90,11 +91,11 @@ class TestCMHMEngine(TestCase):
 
     def test_null_target_moves(self) -> None:
         """test null_target_moves method"""
-        ntm = self.engine.null_target_moves(1)
+        ntm = null_target_moves(1)
         self.assertEqual(ntm, ([(None, None)],))
-        ntm1, ntm2 = self.engine.null_target_moves(2)
+        ntm1, ntm2 = null_target_moves(2)
         self.assertEqual((ntm1, ntm2), ([(None, None)], [(None, None)]))
-        ntm0 = self.engine.null_target_moves(0)
+        ntm0 = null_target_moves(0)
         self.assertEqual(ntm0, ())
 
     def test_other_player_heatmap_index(self) -> None:
@@ -115,9 +116,9 @@ class TestCMHMEngine(TestCase):
 
     def test_update_target_moves_by_delta(self) -> None:
         """Tests the update_target_moves_by_delta method"""
-        null_target_moves, = self.engine.null_target_moves(1)
+        target_moves, = null_target_moves(1)
         target_moves_by_delta = self.engine.update_target_moves_by_delta(
-            null_target_moves,
+            target_moves,
             float64(1.0),
             float64(2.0),
             self.e2e4
@@ -134,21 +135,21 @@ class TestCMHMEngine(TestCase):
             float64(1.0),
             self.e2e4
         )
-        self.assertEqual(null_target_moves, [(None, None)])
+        self.assertEqual(target_moves, [(None, None)])
         self.assertEqual(target_moves_by_delta, [(self.e2e4, float64(-1.0))])
         self.assertEqual(target_moves_by_delta2, [(self.e7e5, float64(0.0))])
         self.assertEqual(target_moves_by_delta3, target_moves_by_delta2)
 
     def test_update_target_moves_by_min_other(self) -> None:
-        null_target_moves, = self.engine.null_target_moves(1)
+        target_moves, = null_target_moves(1)
         heatmap_t = ChessMoveHeatmap().data.transpose()
         score, target_moves_by_min = self.engine.update_target_moves_by_min_other(
-            null_target_moves,
+            target_moves,
             heatmap_t,
             self.e2e4,
             self.engine.other_player_heatmap_index()
         )
-        self.assertEqual(null_target_moves, [(None, None)])
+        self.assertEqual(target_moves, [(None, None)])
         self.assertEqual(target_moves_by_min, [(self.e2e4, float64(0))])
         self.assertEqual(score, float64(0.0))
 
@@ -185,8 +186,8 @@ class TestCMHMEngine(TestCase):
         testing.assert_array_equal(king_box_other, [43, 34, 42, 50, 35, 51, 36, 44, 52])
 
     def test_is_valid_king_box_square(self) -> None:
-        self.assertFalse(self.engine.is_valid_king_box_square(self.engine.board, 4, 4))
-        self.assertFalse(self.engine.is_valid_king_box_square(self.engine.board, 60, 60))
+        self.assertFalse(is_valid_king_box_square(4, 4))
+        self.assertFalse(is_valid_king_box_square(60, 60))
 
     def test_get_or_calc_move_maps_list(self) -> None:
         pass
