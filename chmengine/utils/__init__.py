@@ -1,14 +1,19 @@
 """utilities for the engines"""
-from typing import List, Optional, Tuple
+from typing import List, Optional, Tuple, Callable
 from _bisect import bisect_left
 
-import chess
 from chess import Board, Move, Outcome, square_distance
 from numpy import float64
 from numpy.typing import NDArray
 
 from chmutils import calculate_chess_move_heatmap_with_better_discount
-from heatmaps import ChessMoveHeatmap
+
+# Python 3.8+ has bit_count(); otherwise count the '1's in the binary repr
+try:
+    _bit_count: Callable[[int], int] = int.bit_count
+except AttributeError:
+    def _bit_count(occ: int) -> int:
+        return bin(occ).count('1')
 
 
 def format_moves(
@@ -38,6 +43,8 @@ def calculate_score(
         new_other_king_box: List[int]
 ) -> float64:
     """Compute a score for a board state based on heatmap control and king box pressure.
+
+    (Deprecated legacy score calc function)
 
     Parameters
     ----------
@@ -152,21 +159,30 @@ def calculate_white_minus_black_score(
     >>> calculate_white_minus_black_score(board=draw_board, depth=d)
     0.0
     """
+    # Early exit if Game Over.
     outcome: Optional[Outcome] = board.outcome(claim_draw=True)
     is_terminated: bool = outcome is not None
     if is_terminated and is_draw(outcome.winner):
+        # Draws are easy to score: zero
         return float64(0)
     if is_terminated:
+        # Checkmate score is an unrealistically high upperbound in possible moves (all pieces can move to every square.)
         return checkmate_score(board, depth)
-    heatmap: ChessMoveHeatmap = calculate_chess_move_heatmap_with_better_discount(board=board, depth=depth)
-    heatmap_transposed: NDArray[float64] = heatmap.data.transpose()
+    # See docs on time-complexity of calculate_chess_move_heatmap_with_better_discount
+    heatmap_transposed: NDArray[float64] = calculate_chess_move_heatmap_with_better_discount(
+        board=board,
+        depth=depth
+    ).data.transpose()
     transposed_white: NDArray[float64] = heatmap_transposed[0]
     transposed_black: NDArray[float64] = heatmap_transposed[1]
+    # General move score is the delta in possible moves for White and Black
     general_move_score: float64 = sum(transposed_white) - sum(transposed_black)
+    # King-box move score is the delta in attacking moves on the squares at and around the kings
     king_box_white: List[int]
     king_box_black: List[int]
     king_box_white, king_box_black = get_white_and_black_king_boxes(board=board)
     king_box_score: float64 = sum(transposed_white[king_box_black]) - sum(transposed_black[king_box_white])
+    # Final score is the sum of both
     return float64(general_move_score + king_box_score)
 
 
@@ -196,8 +212,8 @@ def checkmate_score(board: Board, depth: int) -> float64:
     >>> checkmate_score(board=blk_win_board, depth=1)
     -1024.0
     """
-    mate_score_abs = float64(pieces_count_from_fen(fen=board.fen()) * (depth + 1) * 64)
-    return mate_score_abs if not board.turn else float64(-mate_score_abs)
+    mate_score_abs: float64 = float64(pieces_count_from_board(board=board) * (depth + 1) * 64)
+    return float64(-mate_score_abs) if board.turn else mate_score_abs
 
 
 def get_white_and_black_king_boxes(board: Board) -> Tuple[List[int], List[int]]:
@@ -284,12 +300,50 @@ def insert_ordered_best_to_worst(
 
 
 def pieces_count_from_fen(fen: str) -> int:
-    """Count the number of non-empty pieces in a FEN string.
+    """Return the number of pieces on the board represented by `fen`.
+
+    This function converts the FEN string into a `Board` object, then uses the internal
+    bitboard to count occupied squares in O(1) time. On Python ≥ 3.8, it calls `int.bit_count()`;
+    on Python 3.7, it falls back to `bin(...).count('1')` for compatibility.
+
+    Note
+    ----
+    For most use cases, especially when you already have a `Board` object,
+    prefer using `pieces_count_from_board(board)` instead. This avoids the overhead
+    of FEN parsing and achieves the same result more efficiently.
 
     Parameters
     ----------
     fen : str
-        A full FEN string.
+        A full FEN string representing a chess position.
+
+    Returns
+    -------
+    int
+        The count of non‑empty squares (i.e. total pieces) on the board.
+
+    Examples
+    --------
+    >>> from chess import Board
+    >>> pieces_count_from_fen('8/2p2p2/4p3/2k5/8/6q1/2K5/1r1q4 w - - 2 59')
+    8
+    >>> pieces_count_from_fen(Board().fen())
+    32
+    """
+    return _bit_count(Board(fen).occupied)
+
+
+def pieces_count_from_board(board: Board) -> int:
+    """Return the number of pieces on the board
+
+    This uses the internal bitboard to count occupied squares in O(1) time.
+    On Python ≥ 3.8 it calls `int.bit_count()`. On Python 3.7 it falls back
+    to `bin(...).count('1')` for compatibility.
+
+    Parameters
+    ----------
+    board : chess.Board
+        A board object to count pieces from
 
     Returns
     -------
@@ -298,16 +352,14 @@ def pieces_count_from_fen(fen: str) -> int:
 
     Examples
     --------
-    >>> from chmengine.utils import is_draw
     >>> from chess import Board
     >>> mate_board = Board('8/2p2p2/4p3/2k5/8/6q1/2K5/1r1q4 w - - 2 59')
-    >>> pieces_count_from_fen(fen=mate_board.fen())
+    >>> pieces_count_from_board(mate_board)
     8
-    >>> pieces_count_from_fen(Board().fen())
+    >>> pieces_count_from_board(Board())
     32
     """
-    _c: str
-    return len([_c for _c in fen.split()[0] if _c.isalpha()])
+    return _bit_count(board.occupied)
 
 
 def insert_choice_into_current_moves(
