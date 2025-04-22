@@ -28,6 +28,8 @@ __all__ = [
     'insert_ordered_best_to_worst',
     'pieces_count_from_fen',
     'pieces_count_from_board',
+    'insert_choice_into_current_moves',
+    'null_target_moves'
 ]
 
 
