@@ -172,32 +172,52 @@ class Quartney(metaclass=ABCMeta):
             return float64(row[0]) if row is not None else None
 
     def _resolve_board_and_fen_(self, board: Optional[Board], fen: Optional[str]) -> Tuple[Board, str]:
-        """Ensures both `board` and `fen` are populated by resolving from each other or from internal state.
+        """Ensure both `board` and `fen` are non-None, resolving missing values using fallback logic.
 
-        This utility guarantees a valid `(board, fen)` pair, allowing downstream logic to rely on both values
-        being available. The resolution priority is as follows:
+        This method resolves a complete (board, fen) pair, even if one or both values are not passed
+        explicitly. If `fen` is missing, it is generated using `self.fen(board)`. If `board` is missing,
+        it is reconstructed from the provided `fen`, or falls back to `self.board`.
 
-        - If `fen` is provided, it is used to generate a `Board` unless a `board` is already provided.
-        - If `fen` is not provided, it is derived from the given `board` (if provided) or from `self.board`.
-        - If neither `board` nor `fen` is provided, defaults to `self.board` for both.
-
-        Note
-        ----
-        This method uses Python’s ternary expression (`x if cond else y if cond2 else z`) for compactness and
-        performance, which may reduce readability at first glance. Each value is resolved inline without intermediate
-        variable assignments to minimize overhead in performance-critical paths.
+        The ternary logic may appear dense, but it guarantees correct handling of all input permutations.
 
         Parameters
         ----------
         board : Optional[chess.Board]
-            A specific board object to resolve from, or `None` to infer from `fen` or `self.board`.
+            A board object to evaluate, or `None` if it should be derived from `fen` or fallback context.
         fen : Optional[str]
-            A FEN string representing the board state, or `None` to derive from `board` or `self.board`.
+            A FEN string to evaluate, or `None` if it should be derived from `board`.
 
         Returns
         -------
-        Tuple[chess.Board, str]
-            A fully resolved `(board, fen)` pair, guaranteed to be non-None.
+        Tuple[Board, str]
+            A resolved `(board, fen)` tuple where neither value is `None`.
+
+        Notes
+        -----
+        If both arguments are `None`, the method falls back to `self.board` and generates the FEN from it
+        using the `.fen()` method, which is expected to be implemented by child classes.
+
+        Truth Table for Logic Flow:
+        ---------------------------
+        || `board is None` | `fen is None` | 📥 `board` is resolved from  | 📥 `fen` is resolved from   ||
+
+        ||✅ `True`        | ✅ `True`    | `self.board`                  | `self.board.fen()`          ||
+
+        ||✅ `True`        | ❌ `False`   | `Board(fen)`                  | `fen (direct pass-through)` ||
+
+        ||❌ `False`       | ✅ `True`    | `board` (direct pass-through) | `board.fen()`               ||
+
+        ||❌ `False`       | ❌ `False`   | `board` (direct pass-through) | `fen` (direct pass-through) ||
+
+        Examples
+        --------
+        >>> from chmengine import CMHMEngine2
+        >>> engine = CMHMEngine2()
+        >>> b, f = engine._resolve_board_and_fen_(None, None)
+        >>> b
+        Board('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1')
+        >>> f
+        'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
         """
         return (
             Board(fen=fen) if fen is not None else self.board if board is None else board,
