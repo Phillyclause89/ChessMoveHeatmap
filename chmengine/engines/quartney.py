@@ -7,7 +7,7 @@ from typing import Optional, Tuple, Union
 from chess import Board, Move
 from numpy import float64
 
-from chmengine.utils import pieces_count_from_fen
+from chmengine.utils import pieces_count_from_board
 from chmutils import CACHE_DIR
 
 
@@ -19,7 +19,6 @@ class Quartney(metaclass=ABCMeta):
 
     def qtable_filename(
             self,
-            fen: Optional[str] = None,
             board: Optional[Board] = None,
             pieces_count: Optional[Union[int, str]] = None
     ) -> str:
@@ -27,8 +26,6 @@ class Quartney(metaclass=ABCMeta):
 
         Parameters
         ----------
-        fen : str, optional
-            FEN string of the position. **Deprecated**—pass `board` instead.
         board : chess.Board, optional
             Board object to derive FEN (and piece count) if `fen` is not given.
         pieces_count : int or str, optional
@@ -50,21 +47,18 @@ class Quartney(metaclass=ABCMeta):
         """
         return (
             f"qtable_depth_{self.depth}_"
-            f"piece_count_{self.pieces_count(board=board, fen=fen) if pieces_count is None else pieces_count}.db"
+            f"piece_count_{self.pieces_count(board=board) if pieces_count is None else pieces_count}.db"
         )
 
-    def pieces_count(self, board: Optional[Board] = None, fen: Optional[str] = None) -> int:
+    def pieces_count(self, board: Optional[Board] = None) -> int:
         """Return the number of pieces on the board in O(1) time.
 
         This uses `Board.occupied.bit_count()` when given a `board`.
-        The `fen` argument is supported for backward compatibility **but deprecated**.
 
         Parameters
         ----------
         board : chess.Board, optional
             Board whose pieces to count. Preferred parameter.
-        fen : str, optional
-            FEN string of position (fallback; deprecated).
 
         Returns
         -------
@@ -78,13 +72,10 @@ class Quartney(metaclass=ABCMeta):
         >>> engine.pieces_count()
         32
         """
-        return pieces_count_from_fen(
-            fen=self.fen(board=board)
-        ) if fen is None else pieces_count_from_fen(fen=fen)
+        return pieces_count_from_board(board=self.board) if board is None else pieces_count_from_board(board=board)
 
     def qdb_path(
             self,
-            fen: Optional[str] = None,
             board: Optional[Board] = None,
             pieces_count: Optional[Union[int, str]] = None,
     ) -> str:
@@ -92,8 +83,6 @@ class Quartney(metaclass=ABCMeta):
 
         Parameters
         ----------
-        fen : str, optional
-            FEN string for file naming (deprecated).
         board : chess.Board, optional
             Board object for file naming.
         pieces_count : int or str, optional
@@ -112,7 +101,7 @@ class Quartney(metaclass=ABCMeta):
         >>> engine.qdb_path() == os.path.join(engine.cache_dir, engine.qtable_filename())
         True
         """
-        return path.join(self.cache_dir, self.qtable_filename(fen=fen, board=board, pieces_count=pieces_count))
+        return path.join(self.cache_dir, self.qtable_filename(board=board, pieces_count=pieces_count))
 
     def _init_qdb(self) -> None:
         """Ensure the cache directory exists and initialize all Q‑table DBs.
@@ -172,8 +161,9 @@ class Quartney(metaclass=ABCMeta):
         >>> q = engine.get_q_value()
         """
         fen = self.fen(board=board) if fen is None else fen
+        board = Board(fen=fen) if board is None and fen is not None else board
         q_conn: Connection
-        with connect(self.qdb_path(fen=fen, board=board, pieces_count=pieces_count)) as q_conn:
+        with connect(self.qdb_path(board=board, pieces_count=pieces_count)) as q_conn:
             q_cursor: Cursor = q_conn.cursor()
             q_cursor.execute(
                 "SELECT q_value FROM q_table WHERE fen = ?",
@@ -208,9 +198,9 @@ class Quartney(metaclass=ABCMeta):
         >>> engine = CMHMEngine2()
         >>> engine.set_q_value(0.0, '1k6/8/8/8/8/3K4/8/8 w - - 0 1')
         """
-        if fen is None:
-            fen = self.fen(board=board)
-        with connect(self.qdb_path(fen=fen, board=board, pieces_count=pieces_count)) as q_conn:
+        fen = self.fen(board=board) if fen is None else fen
+        board = Board(fen=fen) if board is None and fen is not None else board
+        with connect(self.qdb_path(board=board, pieces_count=pieces_count)) as q_conn:
             q_cursor = q_conn.cursor()
             q_cursor.execute(
                 "INSERT OR REPLACE INTO q_table (fen, q_value) VALUES (?, ?)",
@@ -236,7 +226,7 @@ class Quartney(metaclass=ABCMeta):
     def update_q_values(self, debug: bool = False) -> None:
         """Back‑propagate game outcome through the Q‑table.
 
-        Pops moves from the current board history and adjusts each
+        Pops all moves from the current board history and adjusts each
         stored Q‑value in the database based on the final result
         (win/lose/draw).
 
