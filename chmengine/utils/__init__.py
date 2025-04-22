@@ -1,11 +1,12 @@
-"""utilities for the engines"""
-from typing import List, Optional, Tuple, Callable
+"""Utilities for engine evaluation and scoring logic."""
+from typing import Callable, List, Optional, Tuple
 from _bisect import bisect_left
 
 from chess import Board, Move, Outcome, square_distance
 from numpy import float64
 from numpy.typing import NDArray
 
+from chmengine.utils.pick import Pick
 from chmutils import calculate_chess_move_heatmap_with_better_discount
 
 # Python 3.8+ has bit_count(); otherwise count the '1's in the binary repr
@@ -14,6 +15,20 @@ try:
 except AttributeError:
     def _bit_count(occ: int) -> int:
         return bin(occ).count('1')
+
+__all__ = [
+    'Pick',
+    'format_moves',
+    'calculate_score',
+    'is_draw',
+    'calculate_white_minus_black_score',
+    'checkmate_score',
+    'get_white_and_black_king_boxes',
+    'insert_ordered_worst_to_best',
+    'insert_ordered_best_to_worst',
+    'pieces_count_from_fen',
+    'pieces_count_from_board',
+]
 
 
 def format_moves(
@@ -402,7 +417,7 @@ def insert_choice_into_response_moves(
     Parameters
     ----------
     choices_ordered_worst_to_best : list of (Optional[chess.Move], Optional[float64])
-        Opponent's candidate responses, sorted from lowest score to highest.
+        Opponent's candidate responses, sorted from the lowest score to highest.
     move : chess.Move
         Move to insert.
     score : float64

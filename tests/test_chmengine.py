@@ -21,7 +21,7 @@ class TestCMHEngineImports(TestCase):
         _dir_0 = dir()
         self.assertEqual(_dir_0, self._dir)
 
-    def test_mod_level_imports(self):
+    def test_mod_level_imports(self) -> None:
         """tests imports"""
         # pylint: disable=import-outside-toplevel
         import chmengine
@@ -30,8 +30,9 @@ class TestCMHEngineImports(TestCase):
         testing.assert_array_equal(chmengine.__all__, self._all)
         testing.assert_array_equal(chmengine.engines.__all__, self._engines)
         testing.assert_array_equal(chmengine.play.__all__, self._engine_manager)
+        self.assertTrue(callable(getattr(chmengine, "CMHMEngine")))
 
-    def test_from_imports(self):
+    def test_from_imports(self) -> None:
         """test from chmengine imports"""
         # pylint: disable=import-outside-toplevel
         from chmengine import CMHMEngine, CMHMEngine2, PlayCMHMEngine
@@ -41,7 +42,7 @@ class TestCMHEngineImports(TestCase):
         self.assertIsInstance(CMHMEngine2, Callable)
         self.assertIsInstance(PlayCMHMEngine, Callable)
 
-    def test_star_imports(self):
+    def test_star_imports(self) -> None:
         """test from chmengine import *"""
         # pylint: disable=exec-used
         exec("from chmengine import *")
