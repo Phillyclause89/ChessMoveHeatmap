@@ -54,7 +54,7 @@ class TestCMHMEngine2(TestCase):
         """Tests q-table filename builder"""
         filename_32 = self.engine.qtable_filename()
         self.assertEqual(filename_32, self.filename_32)
-        filename_2 = self.engine.qtable_filename(fen=self.fen_2)
+        filename_2 = self.engine.qtable_filename(board=Board(fen=self.fen_2))
         self.assertEqual(filename_2, self.filename_2)
         filename_3 = self.engine.qtable_filename(board=Board(fen=self.fen_3))
         self.assertEqual(filename_3, filename_3)
@@ -65,7 +65,7 @@ class TestCMHMEngine2(TestCase):
         """Tests q-table path builder"""
         q_path_32 = self.engine.qdb_path()
         self.assertEqual(q_path_32, path.join(CACHE_DIR, self.filename_32))
-        q_path_2 = self.engine.qdb_path(fen=self.fen_2)
+        q_path_2 = self.engine.qdb_path(board=Board(fen=self.fen_2))
         self.assertEqual(q_path_2, path.join(CACHE_DIR, self.filename_2))
         q_path_3 = self.engine.qdb_path(board=Board(fen=self.fen_3))
         self.assertEqual(q_path_3, path.join(CACHE_DIR, self.filename_3))
