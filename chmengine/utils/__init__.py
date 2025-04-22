@@ -14,20 +14,19 @@ from heatmaps import ChessMoveHeatmap
 def format_moves(
         moves: List[Tuple[Optional[Move], Optional[float64]]]
 ) -> List[Optional[Tuple[str, str]]]:
-    """Generate a formatted list of moves and their scores for display.
-
-    This static method converts a list of move-score tuples into a list of tuples containing the move
-    in UCI format and the score formatted as a string with two decimal places.
+    """Format a list of (move, score) tuples into UCI strings and formatted scores.
 
     Parameters
     ----------
-    moves : list
-        The list of moves with their evaluation scores.
+    moves : list of tuple of (chess.Move or None, float64 or None)
+        The list of moves and their evaluation scores.
 
     Returns
     -------
-    List[Optional[Tuple[str, str]]]
-        A list of formatted move representations (UCI, score) suitable for printing or logging.
+    list of tuple of (str, str) or None
+        Formatted list where each tuple contains the move in UCI format
+        and the score rounded to two decimal places.
+        Entries with `None` moves are excluded.
     """
     return [(m.uci(), f"{s:.2f}") for m, s in moves if m is not None]
 
@@ -38,28 +37,23 @@ def calculate_score(
         new_current_king_box: List[int],
         new_other_king_box: List[int]
 ) -> float64:
-    """Calculate the evaluation score for a move based on heatmap data and king safety.
-
-    This static method computes the move score as the sum of two components:
-    - The difference between the current player's total heatmap intensity and the opponent's.
-    - A weighted difference based on the intensity values within the "king box" areas.
-    The final score reflects the overall benefit of the move from the perspective of the current player.
+    """Compute a score for a board state based on heatmap control and king box pressure.
 
     Parameters
     ----------
     current_index : int
-        The index for the current player's heatmap data.
-    new_heatmap_transposed : NDArray[numpy.float64]
-        The transposed heatmap data array.
-    new_current_king_box : List[int]
-        The list of squares surrounding the current king.
-    new_other_king_box : List[int]
-        The list of squares surrounding the opponent's king.
+        Index of the current player in the heatmap data (0 for White, 1 for Black).
+    new_heatmap_transposed : numpy.typing.NDArray[numpy.float64]
+        A transposed 2x64 array of heatmap intensities (player x squares).
+    new_current_king_box : list of int
+        Indices of squares surrounding the current player's king.
+    new_other_king_box : list of int
+        Indices of squares surrounding the opponent's king.
 
     Returns
     -------
     numpy.float64
-        The computed evaluation score for the move.
+        Total score computed by summing general control delta and weighted king box pressure.
     """
     # Calculating score at this level is only needed in corner-case scenarios
     # where every possible move results in game termination.
@@ -80,15 +74,17 @@ def calculate_score(
 
 
 def is_draw(winner: Optional[bool]) -> bool:
-    """
+    """Check if a game result is a draw based on the winner field.
 
     Parameters
     ----------
-    winner : Optional[bool]
+    winner : bool or None
+        Result of Board.outcome(...).winner. True for White win, False for Black win, None for draw.
 
     Returns
     -------
     bool
+        True if the game is a draw, False otherwise.
 
     Examples
     --------
@@ -108,16 +104,24 @@ def calculate_white_minus_black_score(
         board: Board,
         depth: int,
 ) -> float64:
-    """Calculates a white minus black score (more traditional scoring perspective...)
+    """Evaluate the board from a White-minus-Black perspective using heatmap evaluation.
+
+    This function returns a net evaluation score. Positive values favor White, negative values favor Black.
+    Terminal game states return fixed scores. Otherwise, the score is derived from:
+    - Heatmap intensity differences
+    - Control over king box areas
 
     Parameters
     ----------
     board : chess.Board
+        The chess board to evaluate.
     depth : int
+        Depth of future move evaluation.
 
     Returns
     -------
     numpy.float64
+        Net evaluation score (White - Black). Terminal states return extreme values.
 
     Examples
     --------
@@ -167,16 +171,22 @@ def calculate_white_minus_black_score(
 
 
 def checkmate_score(board: Board, depth: int) -> float64:
-    """checkmate_score from board and depth
+    """Return a large signed score for checkmate results.
+
+    The score is scaled by number of remaining pieces and depth.
+    Negative if the current player is mated, positive if they deliver mate.
 
     Parameters
     ----------
     board : chess.Board
+        Board state assumed to be in a terminal position.
     depth : int
+        Search depth used, for scaling the final score.
 
     Returns
     -------
     numpy.float64
+        Large positive or negative score depending on the outcome.
 
     Examples
     --------
@@ -191,21 +201,20 @@ def checkmate_score(board: Board, depth: int) -> float64:
 
 
 def get_white_and_black_king_boxes(board: Board) -> Tuple[List[int], List[int]]:
-    """Compute the bounding boxes for the kings on the board.
+    """Compute the list of squares surrounding each king on the board.
 
-    For both the current and opponent kings, this method calculates a "box" (a list of square
-    indices) representing the king's immediate surroundings.
+    These "king boxes" are used for evaluating positional pressure around the kings.
 
     Parameters
     ----------
     board : chess.Board
-        The board to use.
+        The board from which to extract king square surroundings.
 
     Returns
     -------
-    Tuple[List[int], List[int]]
-        A tuple containing two lists: the first is the box for the current king, and the second is
-        the box for the opponent king. (white_king_box, black_king_box)
+    tuple of (list of int, list of int)
+        Tuple containing white king box and black king box square indices.
+        (white_king_box, black_king_box)
 
     Examples
     --------
@@ -237,20 +246,16 @@ def insert_ordered_worst_to_best(
         move: Move,
         score: float64
 ) -> None:
-    """Insert a move and its score into an ordered list (from worst to best).
-
-    This static method uses a binary insertion (via bisect_left) to insert the new move into
-    the list such that the list remains ordered from the lowest score to highest, suitable for response
-    move evaluations from the perspective of the current player.
+    """Insert a move into a list of moves sorted from worst to best.
 
     Parameters
     ----------
-    ordered_moves : List[Tuple[chess.Move, numpy.float64]]
-        The current list of moves and their scores, ordered from worst to best.
+    ordered_moves : list of (chess.Move, numpy.float64)
+        Existing list sorted in ascending order of score.
     move : chess.Move
-        The move to be inserted.
+        The move to insert.
     score : numpy.float64
-        The evaluation score for the move.
+        Evaluation score to insert with the move.
     """
     # response moves are inserted to form worst scores to best order (perspective of current player)
     ordered_index: int = bisect_left([x[1] for x in ordered_moves], score)
@@ -262,37 +267,34 @@ def insert_ordered_best_to_worst(
         move: Move,
         score: float64
 ) -> None:
-    """Insert a move and its score into an ordered list (from best to worst).
-
-    This static method uses a binary insertion (via bisect_left) to insert the new move into
-    the list such that the list remains ordered from the highest score to lowest.
+    """Insert a move into a list of moves sorted from best to worst.
 
     Parameters
     ----------
-    ordered_moves : List[Tuple[chess.Move, numpy.float64]]
-        The current list of moves and their scores, ordered from best to worst.
+    ordered_moves : list of (chess.Move, numpy.float64)
+        Existing list sorted in descending order of score.
     move : chess.Move
-        The move to be inserted.
+        The move to insert.
     score : numpy.float64
-        The evaluation score for the move.
+        Evaluation score to insert with the move.
     """
-    if score is None:
-        raise ValueError()
     # current moves are inserted into our moves list in order of best scores to worst
     ordered_index: int = bisect_left([-x[1] for x in ordered_moves], -score)
     ordered_moves.insert(ordered_index, (move, score))
 
 
 def pieces_count_from_fen(fen: str) -> int:
-    """Get pieces count from fen string
+    """Count the number of non-empty pieces in a FEN string.
 
     Parameters
     ----------
     fen : str
+        A full FEN string.
 
     Returns
     -------
     int
+        Number of pieces on the board.
 
     Examples
     --------
@@ -313,17 +315,21 @@ def insert_choice_into_current_moves(
         move: Move,
         score: float64
 ) -> List[Tuple[Move, float64]]:
-    """inserts ordered best to worst...
+    """Insert a new candidate move into the current player's move list (best to worst).
 
     Parameters
     ----------
-    choices_ordered_best_to_worst : List[Tuple[Optional[Move], Optional[float64]]]
-    move : Move
+    choices_ordered_best_to_worst : list of (Optional[chess.Move], Optional[float64])
+        Current ordered list of move choices.
+    move : chess.Move
+        Move to insert.
     score : float64
+        Evaluation score.
 
     Returns
     -------
-    List[Tuple[Move, float64]]
+    list of (chess.Move, float64)
+        Updated list with the move inserted.
     """
     if choices_ordered_best_to_worst[0][0] is None:
         choices_ordered_best_to_worst = [(move, score)]
@@ -339,17 +345,21 @@ def insert_choice_into_response_moves(
         move: Move,
         score: float64
 ) -> List[Tuple[Move, float64]]:
-    """inserts ordered worst to best..
+    """Insert a new candidate move into the opponent's response list (worst to best).
 
     Parameters
     ----------
-    choices_ordered_worst_to_best : List[Tuple[Optional[Move], Optional[float64]]]
-    move : Move
+    choices_ordered_worst_to_best : list of (Optional[chess.Move], Optional[float64])
+        Opponent's candidate responses, sorted from lowest score to highest.
+    move : chess.Move
+        Move to insert.
     score : float64
+        Evaluation score.
 
     Returns
     -------
-    List[Tuple[Move, float64]]
+    list of (chess.Move, float64)
+        Updated response list.
     """
     if choices_ordered_worst_to_best[0][0] is None:
         choices_ordered_worst_to_best = [(move, score)]
@@ -361,22 +371,23 @@ def insert_choice_into_response_moves(
 
 
 def is_valid_king_box_square(square_id: int, king_square: int) -> bool:
-    """Determine if a square is a valid part of a king's bounding box.
+    """Check if a square is valid for inclusion in a king's bounding box.
 
-    A square is valid if it is within the board limits, adjacent to the king (distance of 1),
-    and either empty or occupied by a piece of the same color as the king.
+    A square is valid if:
+    - It lies on the board (0–63)
+    - It is adjacent to the king's square (distance ≤ 1)
 
     Parameters
     ----------
     square_id : int
-        The index of the square to check.
+        Index of the square to evaluate.
     king_square : int
-        The square where the king is located.
+        Index of the king's square.
 
     Returns
     -------
     bool
-        True if the square is valid for inclusion in the king's box; otherwise, False.
+        True if the square should be included in the king box.
 
     """
     return 0 <= square_id <= 63 and square_distance(king_square, square_id) == 1
