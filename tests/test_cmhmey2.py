@@ -150,8 +150,8 @@ class TestCMHMEngine2(TestCase):
         """Tests pick_move method."""
         start = perf_counter()
         pick = self.engine.pick_move()
-        duration_first = perf_counter() - start
-        print(f"{self.engine.fen()} pick_move call: ({pick[0].uci()}, {pick[1]:.2f}) {duration_first:.3f}s")
+        duration_first = (perf_counter() - start) / self.engine.board.legal_moves.count()
+        print(f"{self.engine.fen()} pick_move call: ({pick[0].uci()}, {pick[1]:.2f}) {duration_first:.3f}s/branch")
         testing.assert_array_equal(pick, (self.E3, 0.23333333333333428))
         init_w_moves = list(self.engine.board.legal_moves)
         move: Move
@@ -163,20 +163,21 @@ class TestCMHMEngine2(TestCase):
             self.engine.board.push(move)
             start = perf_counter()
             response_pick = self.engine.pick_move()
-            duration_rep_pick = perf_counter() - start
+            duration_rep_pick = (perf_counter() - start) / self.engine.board.legal_moves.count()
             first_time_pick_times.append(duration_rep_pick)
             print(
                 f"{self.engine.fen()} pick_move call: "
-                f"({response_pick[0].uci()}, {response_pick[1]:.2f}) {duration_rep_pick:.3f}s"
+                f"({response_pick[0].uci()}, {response_pick[1]:.2f}) {duration_rep_pick:.3f}s/branch"
             )
             self.engine.board.pop()
             start = perf_counter()
             new_pick = self.engine.pick_move()
-            new_duration = perf_counter() - start
+            new_duration = (perf_counter() - start) / self.engine.board.legal_moves.count()
             init_board_pick_times.append(new_duration)
             revisit_pick_times.append(new_duration)
             print(
-                f"{self.engine.fen()} pick_move call {i}: ({new_pick[0].uci()}, {new_pick[1]:.2f}) {new_duration:.3f}s"
+                f"{self.engine.fen()} pick_move call {i}: ({new_pick[0].uci()},"
+                f" {new_pick[1]:.2f}) {new_duration:.3f}s/branch"
             )
         self.assertLess(new_duration, duration_first)
         avg_duration = mean(init_board_pick_times)
@@ -204,8 +205,8 @@ class TestCMHMEngine2(TestCase):
         self.print_board()
         start = perf_counter()
         pick = self.engine.pick_move(debug=True)
-        duration_ = perf_counter() - start
-        print(f"{self.engine.board.fen()} pick: ({pick[0].uci()}, {pick[1]:.1f}) {duration_:.3f}s")
+        duration_ = (perf_counter() - start) / self.engine.board.legal_moves.count()
+        print(f"{self.engine.board.fen()} pick: ({pick[0].uci()}, {pick[1]:.1f}) {duration_:.3f}s/branch")
         self.assertNotEqual(pick[0].uci(), 'e7c5')
         self.push_and_print(pick[0])
 
