@@ -160,8 +160,7 @@ class Quartney(metaclass=ABCMeta):
         >>> engine = CMHMEngine2()
         >>> q = engine.get_q_value()
         """
-        fen = self.fen(board=board) if fen is None else fen
-        board = Board(fen=fen) if board is None and fen is not None else board
+        board, fen = self._resolve_board_and_fen_(board, fen)
         q_conn: Connection
         with connect(self.qdb_path(board=board, pieces_count=pieces_count)) as q_conn:
             q_cursor: Cursor = q_conn.cursor()
@@ -171,6 +170,39 @@ class Quartney(metaclass=ABCMeta):
             )
             row: Optional[Tuple[float]] = q_cursor.fetchone()
             return float64(row[0]) if row is not None else None
+
+    def _resolve_board_and_fen_(self, board: Optional[Board], fen: Optional[str]) -> Tuple[Board, str]:
+        """Ensures both `board` and `fen` are populated by resolving from each other or from internal state.
+
+        This utility guarantees a valid `(board, fen)` pair, allowing downstream logic to rely on both values
+        being available. The resolution priority is as follows:
+
+        - If `fen` is provided, it is used to generate a `Board` unless a `board` is already provided.
+        - If `fen` is not provided, it is derived from the given `board` (if provided) or from `self.board`.
+        - If neither `board` nor `fen` is provided, defaults to `self.board` for both.
+
+        Note
+        ----
+        This method uses Python’s ternary expression (`x if cond else y if cond2 else z`) for compactness and
+        performance, which may reduce readability at first glance. Each value is resolved inline without intermediate
+        variable assignments to minimize overhead in performance-critical paths.
+
+        Parameters
+        ----------
+        board : Optional[chess.Board]
+            A specific board object to resolve from, or `None` to infer from `fen` or `self.board`.
+        fen : Optional[str]
+            A FEN string representing the board state, or `None` to derive from `board` or `self.board`.
+
+        Returns
+        -------
+        Tuple[chess.Board, str]
+            A fully resolved `(board, fen)` pair, guaranteed to be non-None.
+        """
+        return (
+            Board(fen=fen) if fen is not None else self.board if board is None else board,
+            self.fen(board=board) if fen is None else fen
+        )
 
     def set_q_value(
             self,
@@ -198,8 +230,7 @@ class Quartney(metaclass=ABCMeta):
         >>> engine = CMHMEngine2()
         >>> engine.set_q_value(0.0, '1k6/8/8/8/8/3K4/8/8 w - - 0 1')
         """
-        fen = self.fen(board=board) if fen is None else fen
-        board = Board(fen=fen) if board is None and fen is not None else board
+        board, fen = self._resolve_board_and_fen_(board, fen)
         with connect(self.qdb_path(board=board, pieces_count=pieces_count)) as q_conn:
             q_cursor = q_conn.cursor()
             q_cursor.execute(
@@ -208,7 +239,7 @@ class Quartney(metaclass=ABCMeta):
             )
 
     @abstractmethod
-    def fen(self, board: Board) -> str:
+    def fen(self, board: Optional[Board] = None) -> str:
         """Return the FEN string representing `board`.
 
         Parameters
