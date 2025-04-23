@@ -309,8 +309,8 @@ class CMHMEngine2(CMHMEngine, Quartney):
                 new_board=next_board,
                 go_deeper=False
             )
-            # `[-1 if next_board.turn else 0]` slice here is confusing
-            # since similar slices in the outer scope use: `[0 if new_board.turn else -1]`.
+            # `[-1 if next_board.turn else 0]` slice here is confusing since
+            # similar slices in the outer scope use: `[0 if new_board.turn else -1]`.
             # I think the reason we need `[-1 if next_board.turn else 0]` here is that we come out of a recursive call.
             # This part is confusing as heck, but it is the only way TestCMHMEngine2.test_false_positive_fen passes.
             next_move_score: Optional[float64] = next_response_moves[-1 if next_board.turn else 0][1]
