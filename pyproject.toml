@@ -1,0 +1,30 @@
+[build-system]
+requires = [
+    "setuptools>=60.2.0",
+    "Cython>=3.0.12"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ChessMoveHeatmap"  # Update this to your actual project name
+version = "00.069.420"
+description = "Chess heatmap and engine experimentation"
+authors = [
+    { name = "Phillyclause89" }
+]
+readme = "README.md"
+license = { text = "MIT" }  # Or "Apache-2.0", "GPL-3.0-only", etc.
+requires-python = ">=3.7"
+
+dependencies = [
+    "chess==1.10.0",
+    "numpy==1.21.6"
+]
+
+[tool.setuptools]
+# Optional: Explicit package directory layout, if needed
+# e.g. if you use `src/` layout
+# packages = ["heatmaps", "chmutils", "chmengine"]
+
+[tool.cython]
+language_level = 3  # Matches compiler_directives
