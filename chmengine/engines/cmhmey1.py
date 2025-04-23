@@ -1,13 +1,13 @@
 """Cmhmey Sr."""
 from random import choice
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, Union
 from warnings import warn
 
 from chess import Board, Move
 from numpy import nan, float64, ndarray
 from numpy.typing import NDArray
 
-from chmengine.utils import is_valid_king_box_square, null_target_moves
+from chmengine.utils import is_valid_king_box_square, null_target_moves, Pick
 from chmutils import get_or_compute_heatmap_with_better_discounts
 from heatmaps import GradientHeatmap
 
@@ -164,7 +164,7 @@ class CMHMEngine:
             self,
             pick_by: str = "all-delta",
             board: Optional[Board] = None
-    ) -> Tuple[Move, float64]:
+    ) -> Pick:
         """Select a move based on various heatmap-derived criteria.
 
         The method evaluates candidate moves using multiple heuristics (such as delta, maximum,
@@ -187,8 +187,8 @@ class CMHMEngine:
 
         Returns
         -------
-        Tuple[chess.Move, numpy.float64]
-            A tuple containing the chosen move and its associated evaluation score, where the score is
+        Pick
+            A tuple-like containing the chosen move and its associated evaluation score, where the score is
             from the perspective of the player making the move (i.e., positive values indicate favorable
             outcomes for that player, and negative values indicate unfavorable outcomes).
 
@@ -196,7 +196,9 @@ class CMHMEngine:
         --------
         >>> from chmengine import CMHMEngine
         >>> engine = CMHMEngine()
-        >>> picked_move, eval_score = engine.pick_move()
+        >>> pick = picked_move, eval_score = engine.pick_move()
+        >>> pick
+        Pick(move=e2e4, score=10.0)
         >>> picked_move
         Move.from_uci('e2e4')
         >>> # A positive score indicates a move leading to a good position for the mover,
@@ -227,7 +229,7 @@ class CMHMEngine:
         heatmap: GradientHeatmap
         for move, heatmap in move_maps_items:
             if self.heatmap_data_is_zeros(heatmap):
-                return move, nan
+                return Pick(move=move, score=nan)
             # target_moves_by_max_other_king == "king-atk"
             other_king_sum: float64
             (
@@ -337,11 +339,11 @@ class CMHMEngine:
 
     @staticmethod
     def update_target_moves_by_delta(
-            target_moves_by_delta: List[Tuple[Optional[Move], Optional[float64]]],
+            target_moves_by_delta: List[Union[Tuple[None, None], Pick]],
             current_player_sum: float64,
             other_player_sum: float64,
             move: Move
-    ) -> List[Tuple[Move, float64]]:
+    ) -> List[Pick]:
         """Update the candidate moves based on the delta between current and other player's sums.
 
         The delta is computed as the difference between the current player's sum and the other player's sum.
@@ -350,7 +352,7 @@ class CMHMEngine:
 
         Parameters
         ----------
-        target_moves_by_delta : List[Tuple[Optional[chess.Move], Optional[numpy.float64]]]
+        target_moves_by_delta : List[Union[Tuple[None, None], Pick]]
             The current list of candidate moves and their delta scores.
         current_player_sum : numpy.float64
             The sum of move intensities for the current player.
@@ -361,24 +363,24 @@ class CMHMEngine:
 
         Returns
         -------
-        List[Tuple[chess.Move, numpy.float64]]
+        List[Pick]
             The updated list of candidate moves with their delta scores.
         """
         delta: float64 = float64(current_player_sum - other_player_sum)
-        current_best_delta: float64 = target_moves_by_delta[0][1]
+        current_best_delta: Optional[float64] = target_moves_by_delta[0][1]
         if current_best_delta is None or delta > current_best_delta:
-            target_moves_by_delta = [(move, delta)]
+            target_moves_by_delta = [Pick(move=move, score=delta)]
         elif delta == current_best_delta:
-            target_moves_by_delta.append((move, delta))
+            target_moves_by_delta.append(Pick(move=move, score=delta))
         return target_moves_by_delta
 
     @staticmethod
     def update_target_moves_by_min_other(
-            target_moves_by_min_other: List[Tuple[Optional[Move], Optional[float64]]],
+            target_moves_by_min_other: List[Union[Tuple[None, None], Pick]],
             transposed_map: ndarray,
             move: Move,
             other_index: int
-    ) -> Tuple[float64, List[Tuple[Move, float64]]]:
+    ) -> Tuple[float64, List[Pick]]:
         """Update the candidate moves for minimizing the opponent's sum.
 
         Calculates the opponent's total move intensity from the transposed heatmap, and updates
@@ -386,7 +388,7 @@ class CMHMEngine:
 
         Parameters
         ----------
-        target_moves_by_min_other : List[Tuple[Optional[chess.Move], Optional[numpy.float64]]]
+        target_moves_by_min_other : List[Union[Tuple[None, None], Pick]]
             The current candidate moves for minimizing the opponent's intensity.
         transposed_map : numpy.ndarray
             The transposed heatmap data array.
@@ -397,24 +399,24 @@ class CMHMEngine:
 
         Returns
         -------
-        Tuple[numpy.float64, List[Tuple[chess.Move, numpy.float64]]]
+        Tuple[float64, List[Pick]]
             A tuple containing the opponent's sum and the updated candidate list.
         """
         other_player_sum: float64 = sum(transposed_map[other_index])
-        current_best_min: float64 = target_moves_by_min_other[0][1]
+        current_best_min: Optional[float64] = target_moves_by_min_other[0][1]
         if current_best_min is None or current_best_min > other_player_sum:
-            target_moves_by_min_other = [(move, other_player_sum)]
+            target_moves_by_min_other = [Pick(move=move, score=other_player_sum)]
         elif current_best_min == other_player_sum:
-            target_moves_by_min_other.append((move, other_player_sum))
+            target_moves_by_min_other.append(Pick(move=move, score=other_player_sum))
         return other_player_sum, target_moves_by_min_other
 
     @staticmethod
     def update_target_moves_by_max_current(
-            target_moves_by_max_current: List[Tuple[Optional[Move], Optional[float64]]],
+            target_moves_by_max_current: List[Union[Tuple[None, None], Pick]],
             transposed_map: ndarray,
             move: Move,
             color_index: int
-    ) -> Tuple[float64, List[Tuple[Move, float64]]]:
+    ) -> Tuple[float64, List[Pick]]:
         """Update the candidate moves for maximizing the current player's intensity.
 
         Computes the current player's total intensity from the transposed heatmap and updates the candidate
@@ -422,7 +424,7 @@ class CMHMEngine:
 
         Parameters
         ----------
-        target_moves_by_max_current : List[Tuple[Optional[chess.Move], Optional[numpy.float64]]]
+        target_moves_by_max_current : List[Union[Tuple[None, None], Pick]]
             The current candidate moves for maximizing the current player's intensity.
         transposed_map : numpy.ndarray
             The transposed heatmap data array.
@@ -433,24 +435,24 @@ class CMHMEngine:
 
         Returns
         -------
-        Tuple[numpy.float64, List[Tuple[chess.Move, numpy.float64]]]
+        Tuple[float64, List[Pick]]
             A tuple containing the current player's sum and the updated candidate list.
         """
         current_player_sum: float64 = sum(transposed_map[color_index])
-        current_best_max: float64 = target_moves_by_max_current[0][1]
+        current_best_max: Optional[float64] = target_moves_by_max_current[0][1]
         if current_best_max is None or current_player_sum > current_best_max:
-            target_moves_by_max_current = [(move, current_player_sum)]
+            target_moves_by_max_current = [Pick(move=move, score=current_player_sum)]
         elif current_best_max == current_player_sum:
-            target_moves_by_max_current.append((move, current_player_sum))
+            target_moves_by_max_current.append(Pick(move=move, score=current_player_sum))
         return current_player_sum, target_moves_by_max_current
 
     @staticmethod
     def update_target_moves_by_king_delta(
-            target_moves_by_king_delta: List[Tuple[Optional[Move], Optional[float64]]],
+            target_moves_by_king_delta: List[Union[Tuple[None, None], Pick]],
             move: Move,
             current_king_min: float64,
             other_king_sum: float64
-    ) -> List[Tuple[Move, float64]]:
+    ) -> List[Pick]:
         """Update candidate moves based on the king's delta value.
 
         Calculates the delta between the opponent's king intensity and the current king's minimum intensity,
@@ -458,7 +460,7 @@ class CMHMEngine:
 
         Parameters
         ----------
-        target_moves_by_king_delta : List[Tuple[Optional[chess.Move], Optional[numpy.float64]]]
+        target_moves_by_king_delta : List[Union[Tuple[None, None], Pick]]
             The current candidate moves for the king delta criterion.
         move : chess.Move
             The move being evaluated.
@@ -469,25 +471,25 @@ class CMHMEngine:
 
         Returns
         -------
-        List[Tuple[chess.Move, numpy.float64]]
+        List[Pick]
             The updated list of candidate moves based on king delta.
         """
         current_king_delta: float64 = float64(other_king_sum - current_king_min)
-        current_best_king_delta: float64 = target_moves_by_king_delta[0][1]
+        current_best_king_delta: Optional[float64] = target_moves_by_king_delta[0][1]
         if current_best_king_delta is None or current_king_delta > current_best_king_delta:
-            target_moves_by_king_delta = [(move, current_king_delta)]
+            target_moves_by_king_delta = [Pick(move=move, score=current_king_delta)]
         elif current_king_delta == current_best_king_delta:
-            target_moves_by_king_delta.append((move, current_king_delta))
+            target_moves_by_king_delta.append(Pick(move=move, score=current_king_delta))
         return target_moves_by_king_delta
 
     @staticmethod
     def update_target_moves_by_min_current_king(
-            target_moves_by_min_current_king: List[Tuple[Optional[Move], Optional[float64]]],
+            target_moves_by_min_current_king: List[Union[Tuple[None, None], Pick]],
             heatmap: GradientHeatmap,
             move: Move,
             other_index: int,
             current_king_box: List[int]
-    ) -> Tuple[float64, List[Tuple[Move, float64]]]:
+    ) -> Tuple[float64, List[Pick]]:
         """Update candidate moves for minimizing the current king's intensity.
 
         Extracts the intensity values for the current king from the heatmap and updates the candidate
@@ -495,7 +497,7 @@ class CMHMEngine:
 
         Parameters
         ----------
-        target_moves_by_min_current_king : List[Tuple[Optional[chess.Move], Optional[numpy.float64]]]
+        target_moves_by_min_current_king : List[Union[Tuple[None, None], Pick]]
             The candidate moves list for minimizing current king's intensity.
         heatmap : heatmaps.GradientHeatmap
             The heatmap object containing move intensities.
@@ -508,26 +510,26 @@ class CMHMEngine:
 
         Returns
         -------
-        Tuple[numpy.float64, List[Tuple[chess.Move, numpy.float64]]]
+        Tuple[float64, List[Pick]]
             A tuple containing the current king's sum and the updated candidate list.
         """
         current_king_map = heatmap[current_king_box].transpose()[other_index]
         current_king_min = sum(current_king_map)
-        current_best_king_min = target_moves_by_min_current_king[0][1]
+        current_best_king_min: Optional[float64] = target_moves_by_min_current_king[0][1]
         if current_best_king_min is None or current_best_king_min > current_king_min:
-            target_moves_by_min_current_king = [(move, current_king_min)]
+            target_moves_by_min_current_king = [Pick(move=move, score=current_king_min)]
         elif current_king_min == current_best_king_min:
-            target_moves_by_min_current_king.append((move, current_king_min))
+            target_moves_by_min_current_king.append(Pick(move=move, score=current_king_min))
         return current_king_min, target_moves_by_min_current_king
 
     @staticmethod
     def update_target_moves_by_max_other_king(
-            target_moves_by_max_other_king: List[Tuple[Optional[Move], Optional[float64]]],
+            target_moves_by_max_other_king: List[Union[Tuple[None, None], Pick]],
             heatmap: GradientHeatmap,
             move: Move,
             color_index: int,
             other_king_box: List[int]
-    ) -> Tuple[float64, List[Tuple[Move, float64]]]:
+    ) -> Tuple[float64, List[Pick]]:
         """Update candidate moves for maximizing the opponent king's intensity.
 
         Calculates the opponent king's total intensity from the heatmap over the specified area and
@@ -535,7 +537,7 @@ class CMHMEngine:
 
         Parameters
         ----------
-        target_moves_by_max_other_king : List[Tuple[Optional[chess.Move], Optional[numpy.float64]]]
+        target_moves_by_max_other_king : List[Union[Tuple[None, None], Pick]]
             The candidate moves list for maximizing opponent king's intensity.
         heatmap : heatmaps.GradientHeatmap
             The heatmap object containing move intensities.
@@ -548,16 +550,16 @@ class CMHMEngine:
 
         Returns
         -------
-        Tuple[numpy.float64, List[Tuple[chess.Move, numpy.float64]]]
+        Tuple[float64, List[Pick]]
             A tuple containing the opponent king's sum and the updated candidate list.
         """
         other_king_map = heatmap[other_king_box].transpose()[color_index]
         other_king_sum = sum(other_king_map)
-        current_best_king_max = target_moves_by_max_other_king[0][1]
+        current_best_king_max: Optional[float64] = target_moves_by_max_other_king[0][1]
         if current_best_king_max is None or other_king_sum > current_best_king_max:
-            target_moves_by_max_other_king = [(move, other_king_sum)]
+            target_moves_by_max_other_king = [Pick(move=move, score=other_king_sum)]
         elif other_king_sum == current_best_king_max:
-            target_moves_by_max_other_king.append((move, other_king_sum))
+            target_moves_by_max_other_king.append(Pick(move=move, score=other_king_sum))
         return other_king_sum, target_moves_by_max_other_king
 
     @staticmethod

@@ -29,7 +29,8 @@ __all__ = [
     'pieces_count_from_fen',
     'pieces_count_from_board',
     'insert_choice_into_current_moves',
-    'null_target_moves'
+    'null_target_moves',
+    'is_valid_king_box_square'
 ]
 
 
