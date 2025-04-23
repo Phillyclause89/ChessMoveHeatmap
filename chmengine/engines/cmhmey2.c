@@ -5,7 +5,7 @@
     "distutils": {
         "name": "chmengine.engines.cmhmey2",
         "sources": [
-            "chmengine/engines/cmhmey2.py"
+            "chmengine\\engines\\cmhmey2.py"
         ]
     },
     "module_name": "chmengine.engines.cmhmey2"
@@ -2313,7 +2313,6 @@ static const char __pyx_k_typing[] = "typing";
 static const char __pyx_k_float64[] = "float64";
 static const char __pyx_k_pick_by[] = "pick_by";
 static const char __pyx_k_prepare[] = "__prepare__";
-static const char __pyx_k_Iterable[] = "Iterable";
 static const char __pyx_k_Optional[] = "Optional";
 static const char __pyx_k_Quartney[] = "Quartney";
 static const char __pyx_k_init_qdb[] = "_init_qdb";
@@ -2453,7 +2452,6 @@ typedef struct {
   PyObject *__pyx_kp_u_Current_Board_has_no_legal_moves;
   PyObject *__pyx_kp_u_Game_Pick_Score;
   PyObject *__pyx_kp_u_Initialize_the_CMHMEngine2_insta;
-  PyObject *__pyx_n_s_Iterable;
   PyObject *__pyx_n_s_List;
   PyObject *__pyx_kp_s_List_Optional_Pick;
   PyObject *__pyx_kp_s_List_Pick;
@@ -2642,7 +2640,6 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_u_Current_Board_has_no_legal_moves);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Game_Pick_Score);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Initialize_the_CMHMEngine2_insta);
-  Py_CLEAR(clear_module_state->__pyx_n_s_Iterable);
   Py_CLEAR(clear_module_state->__pyx_n_s_List);
   Py_CLEAR(clear_module_state->__pyx_kp_s_List_Optional_Pick);
   Py_CLEAR(clear_module_state->__pyx_kp_s_List_Pick);
@@ -2809,7 +2806,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_u_Current_Board_has_no_legal_moves);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Game_Pick_Score);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Initialize_the_CMHMEngine2_insta);
-  Py_VISIT(traverse_module_state->__pyx_n_s_Iterable);
   Py_VISIT(traverse_module_state->__pyx_n_s_List);
   Py_VISIT(traverse_module_state->__pyx_kp_s_List_Optional_Pick);
   Py_VISIT(traverse_module_state->__pyx_kp_s_List_Pick);
@@ -2986,7 +2982,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_u_Current_Board_has_no_legal_moves __pyx_mstate_global->__pyx_kp_u_Current_Board_has_no_legal_moves
 #define __pyx_kp_u_Game_Pick_Score __pyx_mstate_global->__pyx_kp_u_Game_Pick_Score
 #define __pyx_kp_u_Initialize_the_CMHMEngine2_insta __pyx_mstate_global->__pyx_kp_u_Initialize_the_CMHMEngine2_insta
-#define __pyx_n_s_Iterable __pyx_mstate_global->__pyx_n_s_Iterable
 #define __pyx_n_s_List __pyx_mstate_global->__pyx_n_s_List
 #define __pyx_kp_s_List_Optional_Pick __pyx_mstate_global->__pyx_kp_s_List_Optional_Pick
 #define __pyx_kp_s_List_Pick __pyx_mstate_global->__pyx_kp_s_List_Pick
@@ -6235,7 +6230,6 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_u_Current_Board_has_no_legal_moves, __pyx_k_Current_Board_has_no_legal_moves, sizeof(__pyx_k_Current_Board_has_no_legal_moves), 0, 1, 0, 0},
     {&__pyx_kp_u_Game_Pick_Score, __pyx_k_Game_Pick_Score, sizeof(__pyx_k_Game_Pick_Score), 0, 1, 0, 0},
     {&__pyx_kp_u_Initialize_the_CMHMEngine2_insta, __pyx_k_Initialize_the_CMHMEngine2_insta, sizeof(__pyx_k_Initialize_the_CMHMEngine2_insta), 0, 1, 0, 0},
-    {&__pyx_n_s_Iterable, __pyx_k_Iterable, sizeof(__pyx_k_Iterable), 0, 0, 1, 1},
     {&__pyx_n_s_List, __pyx_k_List, sizeof(__pyx_k_List), 0, 0, 1, 1},
     {&__pyx_kp_s_List_Optional_Pick, __pyx_k_List_Optional_Pick, sizeof(__pyx_k_List_Optional_Pick), 0, 0, 1, 0},
     {&__pyx_kp_s_List_Pick, __pyx_k_List_Pick, sizeof(__pyx_k_List_Pick), 0, 0, 1, 0},
@@ -6827,7 +6821,7 @@ if (!__Pyx_RefNanny) {
   /* "chmengine/engines/cmhmey2.py":2
  * """Cmhmey Jr."""
  * from random import choice             # <<<<<<<<<<<<<<
- * from typing import Iterable, List, Optional
+ * from typing import List, Optional
  * 
  */
   __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2, __pyx_L1_error)
@@ -6847,27 +6841,20 @@ if (!__Pyx_RefNanny) {
   /* "chmengine/engines/cmhmey2.py":3
  * """Cmhmey Jr."""
  * from random import choice
- * from typing import Iterable, List, Optional             # <<<<<<<<<<<<<<
+ * from typing import List, Optional             # <<<<<<<<<<<<<<
  * 
  * from chess import Board, Move
  */
-  __pyx_t_3 = PyList_New(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 3, __pyx_L1_error)
+  __pyx_t_3 = PyList_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_INCREF(__pyx_n_s_Iterable);
-  __Pyx_GIVEREF(__pyx_n_s_Iterable);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 0, __pyx_n_s_Iterable)) __PYX_ERR(0, 3, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_s_List);
   __Pyx_GIVEREF(__pyx_n_s_List);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 1, __pyx_n_s_List)) __PYX_ERR(0, 3, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 0, __pyx_n_s_List)) __PYX_ERR(0, 3, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_s_Optional);
   __Pyx_GIVEREF(__pyx_n_s_Optional);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 2, __pyx_n_s_Optional)) __PYX_ERR(0, 3, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 1, __pyx_n_s_Optional)) __PYX_ERR(0, 3, __pyx_L1_error);
   __pyx_t_2 = __Pyx_Import(__pyx_n_s_typing, __pyx_t_3, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_Iterable); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 3, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Iterable, __pyx_t_3) < 0) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_List); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -6880,7 +6867,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "chmengine/engines/cmhmey2.py":5
- * from typing import Iterable, List, Optional
+ * from typing import List, Optional
  * 
  * from chess import Board, Move             # <<<<<<<<<<<<<<
  * from numpy import float64
@@ -7220,7 +7207,7 @@ if (!__Pyx_RefNanny) {
   /* "chmengine/engines/cmhmey2.py":1
  * """Cmhmey Jr."""             # <<<<<<<<<<<<<<
  * from random import choice
- * from typing import Iterable, List, Optional
+ * from typing import List, Optional
  */
   __pyx_t_2 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);

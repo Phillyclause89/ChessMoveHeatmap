@@ -1,6 +1,6 @@
 """Cmhmey Jr."""
 from random import choice
-from typing import Iterable, List, Optional
+from typing import List, Optional
 
 from chess import Board, Move
 from numpy import float64
