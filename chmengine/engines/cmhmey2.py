@@ -84,16 +84,15 @@ class CMHMEngine2(CMHMEngine, Quartney):
         """
         while len(self.board.move_stack) > 0:
             last_move: Move = self.board.move_stack[-1]
-            fen: str = self.fen()
-            current_q: Optional[float64] = self.get_q_value(fen=fen, board=self.board)
+            current_q: Optional[float64] = self.get_q_value(board=self.board)
             self.board.pop()
             new_move: Move
             new_score: float64
             new_move, new_score = self.pick_move(debug=debug)  # Call pick_move to back-pop the updated
             if debug:
                 print(
-                    f"Game Pick & Score: ({last_move.uci()}, {current_q}) --> "
-                    f"New Pick & Score: ({new_move.uci()}, {new_score})\n"
+                    f"Game Pick & Score: ({last_move.uci()}, {current_q:.2f}) --> "
+                    f"New Pick & Score: ({new_move.uci()}, {new_score:.2f})\n"
                 )
 
     def pick_move(
@@ -144,8 +143,7 @@ class CMHMEngine2(CMHMEngine, Quartney):
         if len(current_moves) == 0:
             raise ValueError(f"Current Board has no legal moves: {self.fen(board=board)}")
         # moves will be current moves ordered by engine's score best to worst (from white's perspective)
-        current_move_choices_ordered: List[Tuple[Optional[Move], Optional[float64]]]
-        current_move_choices_ordered, = null_target_moves(number=1)
+        current_move_choices_ordered: List[Tuple[Optional[Move], Optional[float64]]] = [(None, None)]
         current_move: Move
         for current_move in current_moves:
             current_move_choices_ordered = self._update_current_move_choices_ordered_(
@@ -159,11 +157,11 @@ class CMHMEngine2(CMHMEngine, Quartney):
                 f"All {len(current_move_choices_ordered)} moves ranked:",
                 format_moves(moves=current_move_choices_ordered)
             )
-        pick_score: float64 = current_move_choices_ordered[0][1] if board.turn else current_move_choices_ordered[-1][1]
+        pick_score: float64 = current_move_choices_ordered[0 if board.turn else -1][1]
         chosen_move: Move
         chosen_q: float64
         chosen_move, chosen_q = choice([(m, s) for m, s in current_move_choices_ordered if s == pick_score])
-        self.set_q_value(value=float64(chosen_q), board=board)
+        self.set_q_value(value=chosen_q, board=board)
         return chosen_move, chosen_q
 
     def _update_current_move_choices_ordered_(
@@ -173,44 +171,43 @@ class CMHMEngine2(CMHMEngine, Quartney):
             board: Board
     ) -> List[Tuple[Optional[Move], Optional[float64]]]:
         new_board: Board = self.board_copy_pushed(move=current_move, board=board)
-        # new_fen represents the boards for the only q-values that we will make updates to
-        new_fen: str = new_board.fen()
-        # No longer look at q-score at this level, only back prop q's into the calculation
-        current_move_choices_ordered = self._update_current_move_choices_(
+        return self._update_current_move_choices_(
             current_move_choices_ordered=current_move_choices_ordered, new_board=new_board,
-            current_move=current_move, new_fen=new_fen
+            current_move=current_move
         )
-        return current_move_choices_ordered
 
     # pylint: disable=too-many-arguments
     def _update_current_move_choices_(
             self,
             current_move_choices_ordered: List[Tuple[Optional[Move], Optional[float64]]],
             new_board: Board,
-            current_move: Move,
-            new_fen: str
+            current_move: Move
     ) -> List[Tuple[Move, float64]]:
-        """Update the ordered list of candidate moves based on a newly calculated heatmap score.
+        """Evaluate a candidate move and update the list of best move choices.
 
-        This method calculates an initial move score using the transposed heatmap data and king box areas,
-        then retrieves response moves to further refine the score. The final score is determined as the worst
-        (response) outcome for the current player. The candidate list is updated (ordered best to worst) accordingly.
+        This method evaluates a move by pushing it to a new board, calculating the response moves
+        from the opponent, and assigning the move a score based on the worst-case opponent response.
+        If no responses are available (e.g., checkmate or stalemate), it falls back to Q-table values
+        or a static evaluation.
+
+        Scores follow the classical convention:
+        - Positive values favor White.
+        - Negative values favor Black.
 
         Parameters
         ----------
-        current_move_choices_ordered : List[Tuple[Optional[Move], Optional[numpy.float64]]]
-            The current ordered list of candidate moves and their scores.
+        current_move_choices_ordered : List[Tuple[Optional[chess.Move], Optional[numpy.float64]]]
+            The current list of move candidates and their associated evaluation scores, ordered
+            best to worst from White's perspective.
         new_board : chess.Board
-            The board state after the candidate move is applied.
+            The board state resulting from applying `current_move`.
         current_move : chess.Move
-            The candidate move being evaluated.
-        new_fen : str
-            The FEN string representing the new board state.
+            The move being evaluated.
 
         Returns
         -------
-        List[Tuple[Move, numpy.float64]]
-            The updated ordered list of candidate moves with their evaluation scores.
+        List[Tuple[chess.Move, numpy.float64]]
+            The updated move candidate list with `current_move` inserted in score order.
         """
         response_moves: List[Tuple[Optional[Move], Optional[float64]]]
         response_moves = self._get_or_calculate_responses_(
@@ -218,16 +215,17 @@ class CMHMEngine2(CMHMEngine, Quartney):
             go_deeper=True
         )
         # Once all responses to a move reviewed, final move score is the worst outcome to current player.
-        best_response_score: Optional[float64] = response_moves[0][1] if new_board.turn else response_moves[-1][1]
+        best_response_score: Optional[float64] = response_moves[0 if new_board.turn else -1][1]
         if best_response_score is None:
-            initial_q_val: Optional[float64] = self.get_q_value(fen=new_fen, board=new_board)
+            initial_q_val: Optional[float64] = self.get_q_value(board=new_board)
             if initial_q_val is None:
                 final_move_score: float64 = calculate_white_minus_black_score(board=new_board, depth=self.depth)
+                self.set_q_value(value=final_move_score, board=new_board)
             else:
                 final_move_score = initial_q_val
         else:
             final_move_score: float64 = best_response_score
-        self.set_q_value(value=final_move_score, fen=new_fen, board=new_board)
+            self.set_q_value(value=final_move_score, board=new_board)
         return insert_choice_into_current_moves(
             choices_ordered_best_to_worst=current_move_choices_ordered,
             move=current_move,
@@ -259,8 +257,7 @@ class CMHMEngine2(CMHMEngine, Quartney):
         # However, that is not our Final score,
         # the score after finding the best response to our move should be the final score.
         next_moves: List[Move] = self.current_moves_list(board=new_board)
-        response_moves: List[Tuple[Optional[Move], Optional[float64]]]
-        response_moves, = null_target_moves(number=1)
+        response_moves: List[Tuple[Optional[Move], Optional[float64]]] = [(None, None)]
         next_move: Move
         for next_move in next_moves:
             response_moves = self._get_or_calc_response_move_scores_(
@@ -278,30 +275,33 @@ class CMHMEngine2(CMHMEngine, Quartney):
             new_board: Board,
             go_deeper: bool
     ) -> List[Tuple[Move, float64]]:
-        """Calculate the evaluation score for a given opponent response move.
+        """Evaluate one opponent response move and insert it into the ordered response list.
 
-        This method computes the Q-score for the next move in the perspective of the current player.
-        If no Q-value is found in the database, it calculates a new score using the heatmap data.
-        The resulting score is then inserted into the response moves list in order.
+        This method simulates `next_move` on `new_board`, then:
+
+            1. **Deepens** one ply (only on checks or captures) if `go_deeper` is True and there are legal replies.
+            2. Otherwise, **fetches** the cached Q-value for that position if available.
+            3. Otherwise, **falls back** to a static heatmap-based evaluation.
+
+        The score is always from White-positive/Black-negative perspective.
 
         Parameters
         ----------
         next_move : chess.Move
-            The opponent's move to evaluate.
-        response_moves : List[Tuple[Optional[Move], Optional[numpy.float64]]]
-            The current list of evaluated response moves.
+            The opponent’s move to simulate and evaluate.
+        response_moves : list of (Optional[chess.Move], Optional[numpy.float64])
+            Current ordered list of response candidates (worst→best from current player’s POV).
         new_board : chess.Board
-            The board state after the candidate move is applied.
+            Position after the candidate move was applied; it’s now the opponent’s turn.
+        go_deeper : bool
+            If True, allows one extra ply of recursive scoring on checks or captures.
 
         Returns
         -------
-        List[Tuple[chess.Move, numpy.float64]]
-            The updated list of response moves with their evaluation scores.
+        list of (chess.Move, numpy.float64)
+            Updated response list with `(next_move, score)` inserted in order.
         """
-        # next_move score calculations stay in the perspective of current player
         next_board: Board = self.board_copy_pushed(move=next_move, board=new_board)
-        next_fen: str = next_board.fen()
-        next_q_val: Optional[float64] = self.get_q_value(fen=next_fen, board=next_board)
         if go_deeper and (
                 next_board.is_check() or new_board.piece_at(next_move.to_square)
         ) and next_board.legal_moves.count() > 0:
@@ -309,14 +309,19 @@ class CMHMEngine2(CMHMEngine, Quartney):
                 new_board=next_board,
                 go_deeper=False
             )
-            next_move_score: Optional[float64]
-            next_move_score = next_response_moves[-1][1] if next_board.turn else next_response_moves[0][1]
-        elif next_q_val is not None:
-            next_move_score = next_q_val
+            # `[-1 if next_board.turn else 0]` slice here is confusing
+            # since similar slices in the outer scope use: `[0 if new_board.turn else -1]`.
+            # I think the reason we need `[-1 if next_board.turn else 0]` here is that we come out of a recursive call.
+            # This part is confusing as heck, but it is the only way TestCMHMEngine2.test_false_positive_fen passes.
+            next_move_score: Optional[float64] = next_response_moves[-1 if next_board.turn else 0][1]
+            self.set_q_value(value=next_move_score, board=next_board)
         else:
-            next_move_score: float64 = calculate_white_minus_black_score(board=next_board, depth=self.depth)
-        self.set_q_value(value=next_move_score, fen=next_fen, board=next_board)
-        response_moves = insert_choice_into_current_moves(
+            next_q_val: Optional[float64] = self.get_q_value(board=next_board)
+            if next_q_val is not None:
+                next_move_score = next_q_val
+            else:
+                next_move_score: float64 = calculate_white_minus_black_score(board=next_board, depth=self.depth)
+                self.set_q_value(value=next_move_score, board=next_board)
+        return insert_choice_into_current_moves(
             choices_ordered_best_to_worst=response_moves, move=next_move, score=next_move_score
         )
-        return response_moves

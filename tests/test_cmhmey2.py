@@ -340,10 +340,10 @@ class TestCMHMEngine2(TestCase):
         """Tests internal _update_current_move_choices_ method."""
         e4_board = self.engine.board_copy_pushed(self.E4)
         # pylint: disable=protected-access
-        move_choices = self.engine._update_current_move_choices_([(None, None)], e4_board, self.E4, e4_board.fen())
+        move_choices = self.engine._update_current_move_choices_([(None, None)], e4_board, self.E4)
         testing.assert_array_equal(move_choices, [(self.E4, 0.20689655172414234)])
         e3_board = self.engine.board_copy_pushed(self.E3)
-        move_choices = self.engine._update_current_move_choices_(move_choices, e3_board, self.E3, e3_board.fen())
+        move_choices = self.engine._update_current_move_choices_(move_choices, e3_board, self.E3)
         testing.assert_array_equal(move_choices, [(self.E3, 0.23333333333333428), (self.E4, 0.20689655172414234)])
 
     def test__get_or_calculate_responses_(self) -> None:
