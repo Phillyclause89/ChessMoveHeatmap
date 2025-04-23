@@ -280,21 +280,21 @@ class GradientHeatmap(GradientHeatmapT):
         # >>> heatmap._repr_html_()  # This will generate an HTML table representation of the heatmap.
         """
         colors: NDArray[str_] = self.colors  # Get final color values
-        sep: str = "</td><td>"
+        sep: str_ = str_("</td><td>")
 
-        html: str = f"<h4>{repr(self)}</h4>"
-        html += "<table border='1' style='border-collapse: collapse; text-align: center;'>"
-        html += "<tr><th>Square</th><th>White Intensity</th><th>Black Intensity</th><th>Heat Map Color</th></tr>"
+        html: str_ = str_(f"<h4>{repr(self)}</h4>")
+        html += str_("<table border='1' style='border-collapse: collapse; text-align: center;'>")
+        html += str_("<tr><th>Square</th><th>White Intensity</th><th>Black Intensity</th><th>Heat Map Color</th></tr>")
 
         i: int
         for i in range(64):
-            bg_color: str = colors[i]  # Background color based on heatmap intensity
-            text_color: str = "#FFFFFF" if int(bg_color[1:3], 16) < 128 else "#000000"  # Ensure readable text
+            bg_color: str_ = colors[i]  # Background color based on heatmap intensity
+            text_color: str_ = str_("#FFFFFF") if int(bg_color[1:3], 16) < 128 else str_("#000000")
 
-            html += f"<tr style='background-color:{bg_color}; color:{text_color};'>"
-            html += f"<td>{i}{sep}{self.data[i, 0]:.2f}{sep}{self.data[i, 1]:.2f}{sep}{bg_color}</td></tr>"
+            html += str_(f"<tr style='background-color:{bg_color}; color:{text_color};'>")
+            html += str_(f"<td>{i}{sep}{self.data[i, 0]:.2f}{sep}{self.data[i, 1]:.2f}{sep}{bg_color}</td></tr>")
 
-        html += "</table>"
+        html += str_("</table>")
         return html
 
 

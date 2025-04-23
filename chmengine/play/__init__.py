@@ -1,14 +1,15 @@
 """Play or Train the engine(s)"""
 from datetime import datetime, timezone
 from os import makedirs, path
-from typing import Callable, List, Optional, Tuple
+from typing import Callable, List, Optional
 
 from chess import Board, COLOR_NAMES, Move, Outcome, pgn
 from chess.pgn import Game, Headers
 from numpy import float64
 
-from chmengine.engines.cmhmey1 import CMHMEngine
-from chmengine.engines.cmhmey2 import CMHMEngine2
+from chmengine.engines import CMHMEngine
+from chmengine.engines import CMHMEngine2
+from chmengine.utils import Pick
 
 __all__ = ['PlayCMHMEngine']
 
@@ -82,7 +83,7 @@ class PlayCMHMEngine:
     def fill_initial_q_values(self) -> None:
         """Fills initial q-values for board state"""
         print(f"Filling initial position values for board: {self.engine.fen()}")
-        pick: Tuple[Move, float64] = self.engine.pick_move()
+        pick: Pick = self.engine.pick_move()
         print(f"Initial pick: ({pick[0].uci()}, {pick[1]:.2f})")
         move: Move
         for move in self.engine.current_moves_list():
@@ -100,7 +101,7 @@ class PlayCMHMEngine:
         print(f"Round: {self.game_round} | Time: {str(local_time)}\n{self.engine.board}")
         other_moves: List[Move] = list(self.engine.board.legal_moves)
         print(f"All legal moves: {', '.join([m.uci() for m in other_moves])}\nCalculating move scores...")
-        my_move_choice: Tuple[Move, float64] = self.engine.pick_move(pick_by=pick_by)
+        my_move_choice: Pick = self.engine.pick_move(pick_by=pick_by)
         print(f"My recommended move has a {pick_by} score of {my_move_choice[1]:.2f}: {my_move_choice[0]}")
         while other_moves:
             move_number: int = self.engine.board.fullmove_number

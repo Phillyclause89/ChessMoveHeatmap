@@ -13,7 +13,6 @@ setup(
             "chmengine/engines/quartney.py",
             "chmengine/engines/cmhmey2.py",
             "chmengine/engines/__init__.py",
-            "chmengine/play/__init__.py",
             "chmengine/__init__.py",
 
         ),

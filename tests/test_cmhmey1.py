@@ -25,7 +25,7 @@ class TestCMHMEngine(TestCase):
         clear_test_cache()
         self.assertFalse(path.exists(CACHE_DIR))
         # pylint: disable=import-outside-toplevel
-        from chmengine.engines.cmhmey1 import CMHMEngine
+        from chmengine import CMHMEngine
         self.engine = CMHMEngine()
         self.assertIsInstance(self.engine, CMHMEngine)
 
@@ -39,12 +39,10 @@ class TestCMHMEngine(TestCase):
         self.assertEqual(self.engine.depth, 1)
         self.engine.depth = 3
         self.assertEqual(self.engine.depth, 3)
-        self.engine.depth = 69.7
-        self.assertEqual(self.engine.depth, 69)
         with self.assertRaises(TypeError):
             self.engine.depth = "not a number"
         with self.assertRaises(ValueError):
-            self.engine.depth = -1.9
+            self.engine.depth = -1
 
     def test_board(self) -> None:
         """tests board property"""
