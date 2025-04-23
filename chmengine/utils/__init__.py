@@ -283,12 +283,12 @@ def insert_ordered_worst_to_best(
 
     Parameters
     ----------
-    ordered_picks : list of Pick(chess.Move, numpy.float64)
+    ordered_picks : List[Pick]
         Existing list sorted in ascending order of score.
     pick : Pick
     """
     # response moves are inserted to form worst scores to best order (perspective of current player)
-    ordered_index: int = bisect_left([x[1] for x in ordered_picks], pick.score)
+    ordered_index: int = bisect_left([p.score for p in ordered_picks], pick.score)
     ordered_picks.insert(ordered_index, pick)
 
 
@@ -300,12 +300,12 @@ def insert_ordered_best_to_worst(
 
     Parameters
     ----------
-    ordered_picks : list of (chess.Move, numpy.float64)
+    ordered_picks : List[Pick]
         Existing list sorted in descending order of score.
     pick : Pick
     """
     # current moves are inserted into our moves list in order of best scores to worst
-    ordered_index: int = bisect_left([-x[1] for x in ordered_picks], -pick.score)
+    ordered_index: int = bisect_left([-p.score for p in ordered_picks], -pick.score)
     ordered_picks.insert(ordered_index, pick)
 
 
