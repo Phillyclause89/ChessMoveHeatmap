@@ -5,6 +5,7 @@ from unittest import TestCase, main
 from chess import Board, Move
 from numpy import float64, testing
 
+from chmengine import Pick
 from chmengine.utils import is_valid_king_box_square, null_target_moves
 from chmutils import BetterHeatmapCache, HeatmapCache
 from heatmaps import ChessMoveHeatmap, ChessMoveHeatmapT, GradientHeatmap, GradientHeatmapT
@@ -76,15 +77,15 @@ class TestCMHMEngine(TestCase):
     def test_pick_move(self) -> None:
         """tests pick_move method"""
         move_response = (move, _) = self.engine.pick_move()
-        self.assertEqual(move_response, (self.e2e4, float64(10.0)))
+        self.assertEqual(move_response, Pick(self.e2e4, float64(10.0)))
         same_move_response = self.engine.pick_move()
         self.assertEqual(move_response, same_move_response)
         self.engine.board.push(move)
         new_move_response = self.engine.pick_move()
-        self.assertEqual(new_move_response, (self.e7e5, float64(-0.20689655172414234)))
+        self.assertEqual(new_move_response, Pick(self.e7e5, float64(-0.20689655172414234)))
         self.engine.board = Board()
         move_response = (move, _) = self.engine.pick_move(pick_by='all-max')
-        self.assertEqual(move_response, (self.e2e4, float64(30.0)))
+        self.assertEqual(move_response, Pick(self.e2e4, float64(30.0)))
         self.engine.board.push(move)
         new_move_response = self.engine.pick_move(pick_by='all-min')
         self.assertEqual(new_move_response[1], float64(29.0))
@@ -136,8 +137,8 @@ class TestCMHMEngine(TestCase):
             self.e2e4
         )
         self.assertEqual(target_moves, [(None, None)])
-        self.assertEqual(target_moves_by_delta, [(self.e2e4, float64(-1.0))])
-        self.assertEqual(target_moves_by_delta2, [(self.e7e5, float64(0.0))])
+        self.assertEqual(target_moves_by_delta, [Pick(self.e2e4, float64(-1.0))])
+        self.assertEqual(target_moves_by_delta2, [Pick(self.e7e5, float64(0.0))])
         self.assertEqual(target_moves_by_delta3, target_moves_by_delta2)
 
     def test_update_target_moves_by_min_other(self) -> None:
@@ -150,7 +151,7 @@ class TestCMHMEngine(TestCase):
             self.engine.other_player_heatmap_index()
         )
         self.assertEqual(target_moves, [(None, None)])
-        self.assertEqual(target_moves_by_min, [(self.e2e4, float64(0))])
+        self.assertEqual(target_moves_by_min, [Pick(self.e2e4, float64(0))])
         self.assertEqual(score, float64(0.0))
 
     def test_update_target_moves_by_max_current(self) -> None:

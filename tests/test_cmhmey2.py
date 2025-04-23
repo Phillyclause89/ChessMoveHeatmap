@@ -340,7 +340,7 @@ class TestCMHMEngine2(TestCase):
         """Tests internal _update_current_move_choices_ method."""
         e4_board = self.engine.board_copy_pushed(self.E4)
         # pylint: disable=protected-access
-        move_choices = self.engine._update_current_move_choices_([(None, None)], e4_board, self.E4)
+        move_choices = self.engine._update_current_move_choices_([], e4_board, self.E4)
         testing.assert_array_equal(move_choices, [(self.E4, 0.20689655172414234)])
         e3_board = self.engine.board_copy_pushed(self.E3)
         move_choices = self.engine._update_current_move_choices_(move_choices, e3_board, self.E3)
@@ -361,7 +361,7 @@ class TestCMHMEngine2(TestCase):
         """Tests internal _get_or_calc_response_move_scores_ method."""
         # pylint: disable=protected-access
         next_move_scores = self.engine._get_or_calc_response_move_scores_(
-            self.E4, [(None, None)], self.engine.board, True
+            self.E4, [], self.engine.board, True
         )
         testing.assert_array_equal(next_move_scores, [(self.E4, 10.0)])
         next_move_scores = self.engine._get_or_calc_response_move_scores_(

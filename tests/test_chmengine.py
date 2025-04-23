@@ -13,8 +13,9 @@ class TestCMHEngineImports(TestCase):
     _engine1 = ['CMHMEngine']
     _engine2 = ['CMHMEngine2']
     _engine_manager = ['PlayCMHMEngine']
+    _pick = ['Pick']
     _engines = _engine1 + _engine2
-    _all = _engines + _engine_manager
+    _all = _engines + _engine_manager + _pick
 
     def setUp(self) -> None:
         """Ensure dir() is fresh each TC"""
@@ -35,19 +36,20 @@ class TestCMHEngineImports(TestCase):
     def test_from_imports(self) -> None:
         """test from chmengine imports"""
         # pylint: disable=import-outside-toplevel
-        from chmengine import CMHMEngine, CMHMEngine2, PlayCMHMEngine
+        from chmengine import CMHMEngine, CMHMEngine2, PlayCMHMEngine, Pick
         _dir_1 = dir()
-        self.assertEqual(_dir_1, self._all + self._dir)
+        self.assertEqual(sorted(_dir_1), sorted(self._all + self._dir))
         self.assertIsInstance(CMHMEngine, Callable)
         self.assertIsInstance(CMHMEngine2, Callable)
         self.assertIsInstance(PlayCMHMEngine, Callable)
+        self.assertIsInstance(Pick, Callable)
 
     def test_star_imports(self) -> None:
         """test from chmengine import *"""
         # pylint: disable=exec-used
         exec("from chmengine import *")
         _dir_1 = dir()
-        self.assertEqual(_dir_1, self._all + self._dir)
+        self.assertEqual(sorted(_dir_1), sorted(self._all + self._dir))
 
 
 if __name__ == '__main__':

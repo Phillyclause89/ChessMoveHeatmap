@@ -35,14 +35,14 @@ __all__ = [
 
 
 def format_moves(
-        moves: List[Tuple[Optional[Move], Optional[float64]]]
+        picks: List[Optional[Pick]]
 ) -> List[Optional[Tuple[str, str]]]:
     """Format a list of (move, score) tuples into UCI strings and formatted scores.
 
     Parameters
     ----------
-    moves : list of tuple of (chess.Move or None, float64 or None)
-        The list of moves and their evaluation scores.
+    picks : list of Picks
+        The list of Picks (moves and their evaluation scores.)
 
     Returns
     -------
@@ -51,7 +51,7 @@ def format_moves(
         and the score rounded to two decimal places.
         Entries with `None` moves are excluded.
     """
-    return [(m.uci(), f"{s:.2f}") for m, s in moves if m is not None]
+    return [(m.uci(), f"{s:.2f}") for m, s in picks if len(picks)]
 
 
 def calculate_score(
@@ -276,45 +276,37 @@ def get_white_and_black_king_boxes(board: Board) -> Tuple[List[int], List[int]]:
 
 
 def insert_ordered_worst_to_best(
-        ordered_moves: List[Tuple[Move, float64]],
-        move: Move,
-        score: float64
+        ordered_picks: List[Pick],
+        pick: Pick
 ) -> None:
     """Insert a move into a list of moves sorted from worst to best.
 
     Parameters
     ----------
-    ordered_moves : list of (chess.Move, numpy.float64)
+    ordered_picks : list of Pick(chess.Move, numpy.float64)
         Existing list sorted in ascending order of score.
-    move : chess.Move
-        The move to insert.
-    score : numpy.float64
-        Evaluation score to insert with the move.
+    pick : Pick
     """
     # response moves are inserted to form worst scores to best order (perspective of current player)
-    ordered_index: int = bisect_left([x[1] for x in ordered_moves], score)
-    ordered_moves.insert(ordered_index, (move, score))
+    ordered_index: int = bisect_left([x[1] for x in ordered_picks], pick.score)
+    ordered_picks.insert(ordered_index, pick)
 
 
 def insert_ordered_best_to_worst(
-        ordered_moves: List[Tuple[Move, float64]],
-        move: Move,
-        score: float64
+        ordered_picks: List[Pick],
+        pick: Pick
 ) -> None:
     """Insert a move into a list of moves sorted from best to worst.
 
     Parameters
     ----------
-    ordered_moves : list of (chess.Move, numpy.float64)
+    ordered_picks : list of (chess.Move, numpy.float64)
         Existing list sorted in descending order of score.
-    move : chess.Move
-        The move to insert.
-    score : numpy.float64
-        Evaluation score to insert with the move.
+    pick : Pick
     """
     # current moves are inserted into our moves list in order of best scores to worst
-    ordered_index: int = bisect_left([-x[1] for x in ordered_moves], -score)
-    ordered_moves.insert(ordered_index, (move, score))
+    ordered_index: int = bisect_left([-x[1] for x in ordered_picks], -pick.score)
+    ordered_picks.insert(ordered_index, pick)
 
 
 def pieces_count_from_fen(fen: str) -> int:
@@ -381,62 +373,52 @@ def pieces_count_from_board(board: Board) -> int:
 
 
 def insert_choice_into_current_moves(
-        choices_ordered_best_to_worst: List[Tuple[Optional[Move], Optional[float64]]],
-        move: Move,
-        score: float64
-) -> List[Tuple[Move, float64]]:
+        choices_ordered_best_to_worst: List[Optional[Pick]],
+        pick: Pick
+) -> List[Pick]:
     """Insert a new candidate move into the current player's move list (best to worst).
 
     Parameters
     ----------
     choices_ordered_best_to_worst : list of (Optional[chess.Move], Optional[float64])
         Current ordered list of move choices.
-    move : chess.Move
-        Move to insert.
-    score : float64
-        Evaluation score.
+    pick : Pick
 
     Returns
     -------
-    list of (chess.Move, float64)
+    list of Pick(chess.Move, float64)
         Updated list with the move inserted.
     """
-    if choices_ordered_best_to_worst[0][0] is None:
-        choices_ordered_best_to_worst = [(move, score)]
-    else:
-        insert_ordered_best_to_worst(
-            ordered_moves=choices_ordered_best_to_worst, move=move, score=score
-        )
+    if len(choices_ordered_best_to_worst) == 0:
+        return [pick]
+    insert_ordered_best_to_worst(
+        ordered_picks=choices_ordered_best_to_worst, pick=pick
+    )
     return choices_ordered_best_to_worst
 
 
 def insert_choice_into_response_moves(
-        choices_ordered_worst_to_best: List[Tuple[Optional[Move], Optional[float64]]],
-        move: Move,
-        score: float64
-) -> List[Tuple[Move, float64]]:
+        choices_ordered_worst_to_best: List[Optional[Pick]],
+        pick: Pick
+) -> List[Pick]:
     """Insert a new candidate move into the opponent's response list (worst to best).
 
     Parameters
     ----------
     choices_ordered_worst_to_best : list of (Optional[chess.Move], Optional[float64])
         Opponent's candidate responses, sorted from the lowest score to highest.
-    move : chess.Move
-        Move to insert.
-    score : float64
-        Evaluation score.
+    pick : Pick
 
     Returns
     -------
-    list of (chess.Move, float64)
+    list of Pick(chess.Move, float64)
         Updated response list.
     """
-    if choices_ordered_worst_to_best[0][0] is None:
-        choices_ordered_worst_to_best = [(move, score)]
-    else:
-        insert_ordered_worst_to_best(
-            ordered_moves=choices_ordered_worst_to_best, move=move, score=score
-        )
+    if len(choices_ordered_worst_to_best) == 0:
+        return [pick]
+    insert_ordered_worst_to_best(
+        ordered_picks=choices_ordered_worst_to_best, pick=pick
+    )
     return choices_ordered_worst_to_best
 
 

@@ -4,10 +4,10 @@ from os import makedirs, path
 from sqlite3 import Connection, Cursor, connect
 from typing import Optional, Tuple, Union
 
-from chess import Board, Move
+from chess import Board
 from numpy import float64
 
-from chmengine.utils import pieces_count_from_board
+from chmengine.utils import pieces_count_from_board, Pick
 from chmutils import CACHE_DIR
 
 
@@ -320,7 +320,7 @@ class Quartney(metaclass=ABCMeta):
             pick_by: str = "",
             board: Optional[Board] = None,
             debug: bool = False
-    ) -> Tuple[Move, float64]:
+    ) -> Pick:
         """Select a move based on heatmap scores and update its Q‑value.
 
         This method evaluates all legal moves on `board` (or on

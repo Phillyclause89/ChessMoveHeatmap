@@ -1,6 +1,6 @@
 """Cmhmey Jr."""
 from random import choice
-from typing import List, Optional, Tuple
+from typing import Iterable, List, Optional
 
 from chess import Board, Move
 from numpy import float64
@@ -10,7 +10,8 @@ from chmengine.engines.quartney import Quartney
 from chmengine.utils import (
     calculate_white_minus_black_score,
     format_moves,
-    insert_choice_into_current_moves
+    insert_choice_into_current_moves,
+    Pick
 )
 
 
@@ -99,7 +100,7 @@ class CMHMEngine2(CMHMEngine, Quartney):
             pick_by: str = "",
             board: Optional[Board] = None,
             debug: bool = False
-    ) -> Tuple[Move, float64]:
+    ) -> Pick:
         """Select a move based on heatmap evaluations and Q-table integration.
 
         This overridden method combines heatmap evaluations with Q-value updates. It evaluates all
@@ -120,8 +121,8 @@ class CMHMEngine2(CMHMEngine, Quartney):
 
         Returns
         -------
-        Tuple[chess.Move, numpy.float64]
-            A tuple containing the chosen move and its associated evaluation score. The evaluation score is
+        Pick
+            A tuple-like containing the chosen move and its associated evaluation score. The evaluation score is
             expressed from the perspective of the player making the move—positive values indicate favorable
             outcomes and negative values indicate unfavorable outcomes.
 
@@ -142,7 +143,7 @@ class CMHMEngine2(CMHMEngine, Quartney):
         if len(current_moves) == 0:
             raise ValueError(f"Current Board has no legal moves: {self.fen(board=board)}")
         # moves will be current moves ordered by engine's score best to worst (from white's perspective)
-        current_move_choices_ordered: List[Tuple[Optional[Move], Optional[float64]]] = [(None, None)]
+        current_move_choices_ordered: List[Optional[Pick]] = []
         current_move: Move
         for current_move in current_moves:
             current_move_choices_ordered = self._update_current_move_choices_ordered_(
@@ -154,21 +155,20 @@ class CMHMEngine2(CMHMEngine, Quartney):
         if debug:
             print(
                 f"All {len(current_move_choices_ordered)} moves ranked:",
-                format_moves(moves=current_move_choices_ordered)
+                format_moves(picks=current_move_choices_ordered)
             )
-        pick_score: float64 = current_move_choices_ordered[0 if board.turn else -1][1]
-        chosen_move: Move
-        chosen_q: float64
-        chosen_move, chosen_q = choice([(m, s) for m, s in current_move_choices_ordered if s == pick_score])
-        self.set_q_value(value=chosen_q, board=board)
-        return chosen_move, chosen_q
+        pick_best: Pick = current_move_choices_ordered[0 if board.turn else -1]
+        chosen_pick: Pick
+        chosen_pick = choice([p for p in current_move_choices_ordered if p == pick_best])
+        self.set_q_value(value=chosen_pick.score, board=board)
+        return chosen_pick
 
     def _update_current_move_choices_ordered_(
             self,
-            current_move_choices_ordered: List[Tuple[Optional[Move], Optional[float64]]],
+            current_move_choices_ordered: List[Optional[Pick]],
             current_move: Move,
             board: Board
-    ) -> List[Tuple[Optional[Move], Optional[float64]]]:
+    ) -> List[Pick]:
         new_board: Board = self.board_copy_pushed(move=current_move, board=board)
         return self._update_current_move_choices_(
             current_move_choices_ordered=current_move_choices_ordered, new_board=new_board,
@@ -178,10 +178,10 @@ class CMHMEngine2(CMHMEngine, Quartney):
     # pylint: disable=too-many-arguments
     def _update_current_move_choices_(
             self,
-            current_move_choices_ordered: List[Tuple[Optional[Move], Optional[float64]]],
+            current_move_choices_ordered: List[Optional[Pick]],
             new_board: Board,
             current_move: Move
-    ) -> List[Tuple[Move, float64]]:
+    ) -> List[Pick]:
         """Evaluate a candidate move and update the list of best move choices.
 
         This method evaluates a move by pushing it to a new board, calculating the response moves
@@ -195,7 +195,7 @@ class CMHMEngine2(CMHMEngine, Quartney):
 
         Parameters
         ----------
-        current_move_choices_ordered : List[Tuple[Optional[chess.Move], Optional[numpy.float64]]]
+        current_move_choices_ordered : List[Optional[Pick]]
             The current list of move candidates and their associated evaluation scores, ordered
             best to worst from White's perspective.
         new_board : chess.Board
@@ -205,17 +205,15 @@ class CMHMEngine2(CMHMEngine, Quartney):
 
         Returns
         -------
-        List[Tuple[chess.Move, numpy.float64]]
+        List[Pick]
             The updated move candidate list with `current_move` inserted in score order.
         """
-        response_moves: List[Tuple[Optional[Move], Optional[float64]]]
+        response_moves: List[Optional[Pick]]
         response_moves = self._get_or_calculate_responses_(
             new_board=new_board,
             go_deeper=True
         )
-        # Once all responses to a move reviewed, final move score is the worst outcome to current player.
-        best_response_score: Optional[float64] = response_moves[0 if new_board.turn else -1][1]
-        if best_response_score is None:
+        if len(response_moves) == 0:
             initial_q_val: Optional[float64] = self.get_q_value(board=new_board)
             if initial_q_val is None:
                 final_move_score: float64 = calculate_white_minus_black_score(board=new_board, depth=self.depth)
@@ -223,19 +221,18 @@ class CMHMEngine2(CMHMEngine, Quartney):
             else:
                 final_move_score = initial_q_val
         else:
-            final_move_score: float64 = best_response_score
+            final_move_score: float64 = response_moves[0 if new_board.turn else -1].score
             self.set_q_value(value=final_move_score, board=new_board)
         return insert_choice_into_current_moves(
             choices_ordered_best_to_worst=current_move_choices_ordered,
-            move=current_move,
-            score=final_move_score
+            pick=Pick(move=current_move, score=final_move_score)
         )
 
     def _get_or_calculate_responses_(
             self,
             new_board: Board,
             go_deeper: bool
-    ) -> List[Tuple[Optional[Move], Optional[float64]]]:
+    ) -> List[Optional[Pick]]:
         """Retrieve the opponent's response moves and evaluate them.
 
         This method computes heatmap-based evaluation scores for each legal response move from the new board
@@ -250,13 +247,13 @@ class CMHMEngine2(CMHMEngine, Quartney):
 
         Returns
         -------
-        List[Tuple[Optional[Move], Optional[numpy.float64]]]
+        List[Union[Pick, None]]
             A list of response moves and their evaluation scores.
         """
         # However, that is not our Final score,
         # the score after finding the best response to our move should be the final score.
         next_moves: List[Move] = self.current_moves_list(board=new_board)
-        response_moves: List[Tuple[Optional[Move], Optional[float64]]] = [(None, None)]
+        response_moves: List[Optional[Pick]] = []
         next_move: Move
         for next_move in next_moves:
             response_moves = self._get_or_calc_response_move_scores_(
@@ -270,10 +267,10 @@ class CMHMEngine2(CMHMEngine, Quartney):
     def _get_or_calc_response_move_scores_(
             self,
             next_move: Move,
-            response_moves: List[Tuple[Optional[Move], Optional[float64]]],
+            response_moves: List[Optional[Pick]],
             new_board: Board,
             go_deeper: bool
-    ) -> List[Tuple[Move, float64]]:
+    ) -> List[Pick]:
         """Evaluate one opponent response move and insert it into the ordered response list.
 
         This method simulates `next_move` on `new_board`, then:
@@ -288,7 +285,7 @@ class CMHMEngine2(CMHMEngine, Quartney):
         ----------
         next_move : chess.Move
             The opponent’s move to simulate and evaluate.
-        response_moves : list of (Optional[chess.Move], Optional[numpy.float64])
+        response_moves : List[Optional[Pick]]
             Current ordered list of response candidates (worst→best from current player’s POV).
         new_board : chess.Board
             Position after the candidate move was applied; it’s now the opponent’s turn.
@@ -297,14 +294,14 @@ class CMHMEngine2(CMHMEngine, Quartney):
 
         Returns
         -------
-        list of (chess.Move, numpy.float64)
+        List[Pick]
             Updated response list with `(next_move, score)` inserted in order.
         """
         next_board: Board = self.board_copy_pushed(move=next_move, board=new_board)
         if go_deeper and (
                 next_board.is_check() or new_board.piece_at(next_move.to_square)
         ) and next_board.legal_moves.count() > 0:
-            next_response_moves = self._get_or_calculate_responses_(
+            next_response_moves: List[Pick] = self._get_or_calculate_responses_(
                 new_board=next_board,
                 go_deeper=False
             )
@@ -312,15 +309,15 @@ class CMHMEngine2(CMHMEngine, Quartney):
             # similar slices in the outer scope use: `[0 if new_board.turn else -1]`.
             # I think the reason we need `[-1 if next_board.turn else 0]` here is that we come out of a recursive call.
             # This part is confusing as heck, but it is the only way TestCMHMEngine2.test_false_positive_fen passes.
-            next_move_score: Optional[float64] = next_response_moves[-1 if next_board.turn else 0][1]
+            next_move_score: float64 = next_response_moves[-1 if next_board.turn else 0].score
             self.set_q_value(value=next_move_score, board=next_board)
         else:
             next_q_val: Optional[float64] = self.get_q_value(board=next_board)
             if next_q_val is not None:
                 next_move_score = next_q_val
             else:
-                next_move_score: float64 = calculate_white_minus_black_score(board=next_board, depth=self.depth)
+                next_move_score = calculate_white_minus_black_score(board=next_board, depth=self.depth)
                 self.set_q_value(value=next_move_score, board=next_board)
         return insert_choice_into_current_moves(
-            choices_ordered_best_to_worst=response_moves, move=next_move, score=next_move_score
+            choices_ordered_best_to_worst=response_moves, pick=Pick(move=next_move, score=next_move_score)
         )

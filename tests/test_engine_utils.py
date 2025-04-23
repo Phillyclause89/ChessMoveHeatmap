@@ -10,7 +10,8 @@ from chmengine.utils import (
     format_moves,
     insert_ordered_best_to_worst,
     insert_ordered_worst_to_best,
-    pieces_count_from_fen
+    pieces_count_from_fen,
+    Pick
 )
 from chmutils import BetterHeatmapCache, HeatmapCache, calculate_chess_move_heatmap_with_better_discount
 from heatmaps import ChessMoveHeatmap
@@ -51,9 +52,9 @@ class TestEngineUtils(TestCase):
     def test_format_moves(self):
         """Tests internal format method"""
         # pylint: disable=protected-access
-        null_formatted_moves = format_moves([(None, None)])
+        null_formatted_moves = format_moves([])
         testing.assert_array_equal(null_formatted_moves, [])
-        formatted_moves = format_moves([(self.E4, float64(10.0))])
+        formatted_moves = format_moves([Pick(self.E4, float64(10.0))])
         testing.assert_array_equal(formatted_moves, [('e2e4', '10.00')])
 
     def test_calculate_score(self):
@@ -98,29 +99,29 @@ class TestEngineUtils(TestCase):
     def test_insert_ordered_worst_to_best(self):
         """Tests internal insert_ordered_worst_to_best method"""
         all_moves = [
-            (Move.from_uci('a2a4'), float64(-100)),
-            (Move.from_uci('d2d4'), float64(80)),
-            (self.E4, float64(100))
+            Pick(Move.from_uci('a2a4'), float64(-100)),
+            Pick(Move.from_uci('d2d4'), float64(80)),
+            Pick(self.E4, float64(100))
         ]
         # pylint: disable=protected-access
         moves = [all_moves[0]]
-        insert_ordered_worst_to_best(moves, *all_moves[2])
+        insert_ordered_worst_to_best(moves, all_moves[2])
         testing.assert_array_equal(moves, [all_moves[0]] + [all_moves[2]])
-        insert_ordered_worst_to_best(moves, *all_moves[1])
+        insert_ordered_worst_to_best(moves, all_moves[1])
         testing.assert_array_equal(moves, all_moves)
 
     def test_insert_ordered_best_to_worst(self):
         """Tests internal insert_ordered_best_to_worst method"""
         all_moves = [
-            (self.E4, float64(100)),
-            (Move.from_uci('d2d4'), float64(80)),
-            (Move.from_uci('a2a4'), float64(-100))
+            Pick(self.E4, float64(100)),
+            Pick(Move.from_uci('d2d4'), float64(80)),
+            Pick(Move.from_uci('a2a4'), float64(-100))
         ]
         # pylint: disable=protected-access
         moves = [all_moves[0]]
-        insert_ordered_best_to_worst(moves, *all_moves[2])
+        insert_ordered_best_to_worst(moves, all_moves[2])
         testing.assert_array_equal(moves, [all_moves[0]] + [all_moves[2]])
-        insert_ordered_best_to_worst(moves, *all_moves[1])
+        insert_ordered_best_to_worst(moves, all_moves[1])
         testing.assert_array_equal(moves, all_moves)
 
     def test_pieces_count_from_fen(self):
