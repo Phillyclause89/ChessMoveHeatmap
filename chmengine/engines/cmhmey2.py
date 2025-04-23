@@ -10,8 +10,7 @@ from chmengine.engines.quartney import Quartney
 from chmengine.utils import (
     calculate_white_minus_black_score,
     format_moves,
-    insert_choice_into_current_moves,
-    null_target_moves
+    insert_choice_into_current_moves
 )
 
 
