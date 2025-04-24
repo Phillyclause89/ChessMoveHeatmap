@@ -6,6 +6,8 @@ from typing import Tuple, Union
 from chess import Move
 from numpy import float64
 
+__all__ = ['Pick']
+
 
 @dataclass(order=True)
 class Pick:
