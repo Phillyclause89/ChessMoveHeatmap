@@ -1,40 +1,109 @@
 """setup"""
+from argparse import ArgumentParser, Namespace
 from os import path
+from typing import Any, Dict, Optional, Tuple
 
 import chess
 from Cython.Build import cythonize
 from setuptools import setup
 
-CHESS_PACKAGE = path.dirname(chess.__file__)
-chess_scripts = path.join(CHESS_PACKAGE, "*.py")
-module_list = (
-    path.join("heatmaps", "__init__.py"),
-    path.join("chmutils", "__init__.py"),
-    path.join("chmengine", "utils", "pick.py"),
-    path.join("chmengine", "utils", "__init__.py"),
-    path.join("chmengine", "engines", "cmhmey1.py"),
-    path.join("chmengine", "engines", "quartney.py"),
-    path.join("chmengine", "engines", "cmhmey2.py"),
-    path.join("chmengine", "engines", "__init__.py"),
-    path.join("chmengine", "__init__.py"),
-)
-exclude = path.join(CHESS_PACKAGE, "_interactive.py")
-compiler_directives = {'language_level': "3"}
-ext_modules_main = cythonize(
-    module_list=module_list,
-    compiler_directives=compiler_directives
-)
-setup(
-    ext_modules=ext_modules_main,
-    script_args=['build_ext', '--inplace']
-)
+BUILD_EXT: str = 'build_ext'
+INIT_PY: str = '__init__.py'
+CHMENGINE: str = 'chmengine'
+UTILS: str = 'utils'
+ENGINES: str = 'engines'
+CHESS_PACKAGE: Optional[str] = path.dirname(chess.__file__)
+CHESS_SCRIPTS: str = path.join(CHESS_PACKAGE, '*.py')
 
-ext_modules_chess = cythonize(
-    module_list=chess_scripts,
-    exclude=exclude,
-    compiler_directives=compiler_directives
+MAIN_MODULES: Tuple[str, str, str, str, str, str, str, str, str] = (
+    path.join('heatmaps', INIT_PY),
+    path.join('chmutils', INIT_PY),
+    path.join(CHMENGINE, UTILS, 'pick.py'),
+    path.join(CHMENGINE, UTILS, INIT_PY),
+    path.join(CHMENGINE, ENGINES, 'cmhmey1.py'),
+    path.join(CHMENGINE, ENGINES, 'quartney.py'),
+    path.join(CHMENGINE, ENGINES, 'cmhmey2.py'),
+    path.join(CHMENGINE, ENGINES, INIT_PY),
+    path.join(CHMENGINE, INIT_PY),
 )
-setup(
-    ext_modules=ext_modules_chess,
-    script_args=["build_ext", "--build-lib", path.join(CHESS_PACKAGE, "..")]
-)
+EXCLUDE: str = path.join(CHESS_PACKAGE, '_interactive.py')
+
+
+def main(compiler_directives: Dict[str, str]) -> None:
+    """Setup function for ChessMoveHeatmap Cython support.
+
+    Parameters
+    ----------
+    compiler_directives : Dict[str,str]
+    """
+    args: Namespace = get_script_args()
+    both: bool = args.all or (args.chess and args.main)
+    if not args.chess or both:
+        setup_main(compiler_directives)
+    if not args.main or both:
+        setup_chess(compiler_directives)
+
+
+def setup_chess(compiler_directives: Dict[str, str]) -> None:
+    """Compiles the chess lib (excluding _interactive.py)
+
+    Parameters
+    ----------
+    compiler_directives : Dict[str,str]
+    """
+    ext_modules_chess: Any = cythonize(
+        module_list=CHESS_SCRIPTS,
+        exclude=EXCLUDE,
+        compiler_directives=compiler_directives
+    )
+    setup(
+        ext_modules=ext_modules_chess,
+        script_args=[BUILD_EXT, '--build-lib', path.join(CHESS_PACKAGE, '..')]
+    )
+
+
+def setup_main(compiler_directives: Dict[str, str]) -> None:
+    """Compiles the ChessMoveHeatmap lib
+
+    Parameters
+    ----------
+    compiler_directives : Dict[str,str]
+    """
+    ext_modules_main: Any = cythonize(
+        module_list=MAIN_MODULES,
+        compiler_directives=compiler_directives
+    )
+    setup(
+        ext_modules=ext_modules_main,
+        script_args=[BUILD_EXT, '--inplace']
+    )
+
+
+def get_script_args() -> Namespace:
+    """Gets script arguments.
+
+    Returns
+    -------
+    Namespace
+    """
+    parser: ArgumentParser = ArgumentParser(description="Setup script for ChessMoveHeatmap Cython support.")
+    parser.add_argument(
+        '--main',
+        action='store_true',
+        help="Run the setup for the main modules."
+    )
+    parser.add_argument(
+        '--chess',
+        action='store_true',
+        help="Run the setup for the chess modules."
+    )
+    parser.add_argument(
+        '--all',
+        action='store_true',
+        help="Run the setup for both main and chess modules."
+    )
+    return parser.parse_args()
+
+
+if __name__ == '__main__':
+    main(compiler_directives={'language_level': "3"})
