@@ -7,8 +7,7 @@ from chess import Board, COLOR_NAMES, Move, Outcome, pgn
 from chess.pgn import Game, Headers
 from numpy import float64
 
-from chmengine.engines import CMHMEngine
-from chmengine.engines import CMHMEngine2
+from chmengine.engines import CMHMEngine, CMHMEngine2
 from chmengine.utils import Pick
 
 __all__ = ['PlayCMHMEngine']

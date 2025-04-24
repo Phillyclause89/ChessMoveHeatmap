@@ -4,12 +4,14 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from warnings import warn
 
 from chess import Board, Move
-from numpy import nan, float64, ndarray
+from numpy import float64, nan, ndarray
 from numpy.typing import NDArray
 
-from chmengine.utils import is_valid_king_box_square, null_target_moves, Pick
+from chmengine.utils import Pick, is_valid_king_box_square, null_target_moves
 from chmutils import get_or_compute_heatmap_with_better_discounts
 from heatmaps import GradientHeatmap
+
+__all__ = ['CMHMEngine']
 
 
 class CMHMEngine:
@@ -160,6 +162,7 @@ class CMHMEngine:
         board_copy.push(move)
         return board_copy
 
+    # pylint: disable=too-many-locals
     def pick_move(
             self,
             pick_by: str = "all-delta",

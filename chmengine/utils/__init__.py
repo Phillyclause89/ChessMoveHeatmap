@@ -1,6 +1,6 @@
 """Utilities for engine evaluation and scoring logic."""
-from typing import Callable, List, Optional, Tuple
 from _bisect import bisect_left
+from typing import Callable, List, Optional, Tuple
 
 from chess import Board, Move, Outcome, square_distance
 from numpy import float64

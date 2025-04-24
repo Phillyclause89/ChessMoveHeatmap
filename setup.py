@@ -1,10 +1,9 @@
 """setup"""
 from os import path
 
-from setuptools import setup
-from Cython.Build import cythonize
-
 import chess
+from Cython.Build import cythonize
+from setuptools import setup
 
 CHESS_PACKAGE = path.dirname(chess.__file__)
 chess_scripts = path.join(CHESS_PACKAGE, "*.py")

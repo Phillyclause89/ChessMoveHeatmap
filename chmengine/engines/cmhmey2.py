@@ -7,12 +7,9 @@ from numpy import float64
 
 from chmengine.engines.cmhmey1 import CMHMEngine
 from chmengine.engines.quartney import Quartney
-from chmengine.utils import (
-    calculate_white_minus_black_score,
-    format_moves,
-    insert_choice_into_current_moves,
-    Pick
-)
+from chmengine.utils import (Pick, calculate_white_minus_black_score, format_moves, insert_choice_into_current_moves)
+
+__all__ = ['CMHMEngine2']
 
 
 class CMHMEngine2(CMHMEngine, Quartney):
@@ -95,6 +92,7 @@ class CMHMEngine2(CMHMEngine, Quartney):
                     f"New Pick & Score: ({new_move.uci()}, {new_score:.2f})\n"
                 )
 
+    # pylint: disable=unused-argument
     def pick_move(
             self,
             pick_by: str = "",

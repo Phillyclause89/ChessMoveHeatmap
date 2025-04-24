@@ -7,8 +7,10 @@ from typing import Optional, Tuple, Union
 from chess import Board
 from numpy import float64
 
-from chmengine.utils import pieces_count_from_board, Pick
+from chmengine.utils import Pick, pieces_count_from_board
 from chmutils import CACHE_DIR
+
+__all__ = ['Quartney']
 
 
 class Quartney(metaclass=ABCMeta):

@@ -5,7 +5,7 @@
     "distutils": {
         "name": "chmengine.engines.quartney",
         "sources": [
-            "chmengine/engines/quartney.py"
+            "chmengine\\engines\\quartney.py"
         ]
     },
     "module_name": "chmengine.engines.quartney"
@@ -1495,7 +1495,7 @@ static const char *__pyx_f[] = {
 struct __pyx_ctuple_double;
 typedef struct __pyx_ctuple_double __pyx_ctuple_double;
 
-/* "chmengine/engines/quartney.py":171
+/* "chmengine/engines/quartney.py":173
  *                 (fen,)
  *             )
  *             row: Optional[Tuple[float]] = q_cursor.fetchone()             # <<<<<<<<<<<<<<
@@ -2221,6 +2221,7 @@ static const char __pyx_k_db[] = ".db";
 static const char __pyx_k_os[] = "os";
 static const char __pyx_k__30[] = "?";
 static const char __pyx_k_abc[] = "abc";
+static const char __pyx_k_all[] = "__all__";
 static const char __pyx_k_doc[] = "__doc__";
 static const char __pyx_k_fen[] = "fen";
 static const char __pyx_k_int[] = "int";
@@ -2315,18 +2316,18 @@ static const char __pyx_k_Quartney_set_q_value[] = "Quartney.set_q_value";
 static const char __pyx_k_Quartney_pieces_count[] = "Quartney.pieces_count";
 static const char __pyx_k_resolve_board_and_fen[] = "_resolve_board_and_fen_";
 static const char __pyx_k_Optional_Union_int_str[] = "Optional[Union[int, str]]";
-static const char __pyx_k_Quartney_depth_line_357[] = "Quartney.depth (line 357)";
-static const char __pyx_k_Quartney_depth_line_375[] = "Quartney.depth (line 375)";
+static const char __pyx_k_Quartney_depth_line_359[] = "Quartney.depth (line 359)";
+static const char __pyx_k_Quartney_depth_line_377[] = "Quartney.depth (line 377)";
 static const char __pyx_k_pieces_count_from_board[] = "pieces_count_from_board";
 static const char __pyx_k_Cmhmey_Jr_s_Mom_Quartney[] = "Cmhmey Jr's Mom, Quartney";
 static const char __pyx_k_Quartney_qtable_filename[] = "Quartney.qtable_filename";
 static const char __pyx_k_Quartney_update_q_values[] = "Quartney.update_q_values";
-static const char __pyx_k_Quartney_qdb_path_line_77[] = "Quartney.qdb_path (line 77)";
+static const char __pyx_k_Quartney_qdb_path_line_79[] = "Quartney.qdb_path (line 79)";
 static const char __pyx_k_chmengine_engines_quartney[] = "chmengine.engines.quartney";
-static const char __pyx_k_Quartney_pick_move_line_317[] = "Quartney.pick_move (line 317)";
-static const char __pyx_k_Quartney_get_q_value_line_135[] = "Quartney.get_q_value (line 135)";
-static const char __pyx_k_Quartney_pieces_count_line_53[] = "Quartney.pieces_count (line 53)";
-static const char __pyx_k_Quartney_set_q_value_line_227[] = "Quartney.set_q_value (line 227)";
+static const char __pyx_k_Quartney_pick_move_line_319[] = "Quartney.pick_move (line 319)";
+static const char __pyx_k_Quartney_get_q_value_line_137[] = "Quartney.get_q_value (line 137)";
+static const char __pyx_k_Quartney_pieces_count_line_55[] = "Quartney.pieces_count (line 55)";
+static const char __pyx_k_Quartney_set_q_value_line_229[] = "Quartney.set_q_value (line 229)";
 static const char __pyx_k_chmengine_engines_quartney_py[] = "chmengine\\engines\\quartney.py";
 static const char __pyx_k_Build_the_Qtable_filename_based[] = "Build the Q\342\200\221table filename based on depth and piece count.\n\n        Parameters\n        ----------\n        board : chess.Board, optional\n            Board object to derive FEN (and piece count) if `fen` is not given.\n        pieces_count : int or str, optional\n            Explicit piece count to use. If provided, skips recomputing from board/FEN.\n\n        Returns\n        -------\n        str\n            File name of the form\n            `\"qtable_depth_{depth}_piece_count_{pieces_count}.db\"`.\n\n        Examples\n        --------\n        >>> import os\n        >>> from chmengine.engines.cmhmey2 import CMHMEngine2\n        >>> engine = CMHMEngine2()\n        >>> engine.qtable_filename() in os.listdir(path=engine.cache_dir)\n        True\n        ";
 static const char __pyx_k_CREATE_TABLE_IF_NOT_EXISTS_q_ta[] = "\n                    CREATE TABLE IF NOT EXISTS q_table (\n                        fen TEXT,\n                        q_value REAL,\n                        PRIMARY KEY (fen)\n                    )\n                    ";
@@ -2339,14 +2340,14 @@ static const char __pyx_k_Ensure_both_board_and_fen_are_no[] = "Ensure both `boa
 static const char __pyx_k_INSERT_OR_REPLACE_INTO_q_table_f[] = "INSERT OR REPLACE INTO q_table (fen, q_value) VALUES (?, ?)";
 static const char __pyx_k_Invalid_depth_value_must_be_grea[] = "Invalid depth, value must be greater than or equal to 0, got ";
 static const char __pyx_k_Mother_class_of_Cmhmey_Jr_managi[] = "Mother class of Cmhmey Jr., managing Q\342\200\221table persistence and move selection.";
-static const char __pyx_k_Quartney_qtable_filename_line_20[] = "Quartney.qtable_filename (line 20)";
-static const char __pyx_k_Quartney_update_q_values_line_27[] = "Quartney.update_q_values (line 276)";
+static const char __pyx_k_Quartney_qtable_filename_line_22[] = "Quartney.qtable_filename (line 22)";
+static const char __pyx_k_Quartney_update_q_values_line_27[] = "Quartney.update_q_values (line 278)";
 static const char __pyx_k_Retrieve_a_cached_Qvalue_for_a_p[] = "Retrieve a cached Q\342\200\221value for a position, or None if uncached.\n\n        Parameters\n        ----------\n        fen : str, optional\n            FEN of the position (deprecated; use `board`).\n        board : chess.Board, optional\n            Board object for filename lookup.\n        pieces_count : int, optional\n            Override piece count for selecting DB file.\n\n        Returns\n        -------\n        float64 or None\n            Stored Q\342\200\221value, or `None` if no entry exists.\n\n        Examples\n        --------\n        >>> from chmengine import CMHMEngine2\n        >>> engine = CMHMEngine2()\n        >>> q = engine.get_q_value()\n        ";
 static const char __pyx_k_Return_the_number_of_pieces_on_t[] = "Return the number of pieces on the board in O(1) time.\n\n        This uses `Board.occupied.bit_count()` when given a `board`.\n\n        Parameters\n        ----------\n        board : chess.Board, optional\n            Board whose pieces to count. Preferred parameter.\n\n        Returns\n        -------\n        int\n            Total number of pieces on the board.\n\n        Examples\n        --------\n        >>> from chmengine.engines.cmhmey2 import CMHMEngine2\n        >>> engine = CMHMEngine2()\n        >>> engine.pieces_count()\n        32\n        ";
 static const char __pyx_k_SELECT_q_value_FROM_q_table_WHER[] = "SELECT q_value FROM q_table WHERE fen = ?";
 static const char __pyx_k_Select_a_move_based_on_heatmap_s[] = "Select a move based on heatmap scores and update its Q\342\200\221value.\n\n        This method evaluates all legal moves on `board` (or on\n        the engine\342\200\231s current board if `board` is None), picks one of\n        the top\342\200\221scoring moves at random, writes the new Q\342\200\221value to\n        the database, and returns `(move, score)`.\n\n        Parameters\n        ----------\n        pick_by : str, default=\"\"\n            Legacy parameter (ignored).\n        board : chess.Board, optional\n            Board to pick from; defaults to `self.board`.\n        debug : bool, default=False\n            If `True`, print the full move\342\200\221score table.\n\n        Returns\n        -------\n        (chess.Move, numpy.float64)\n            The chosen move and its score.\n\n        Raises\n        ------\n        ValueError\n            If there are no legal moves.\n\n        Examples\n        --------\n        >>> from chmengine.engines.cmhmey2 import CMHMEngine2\n        >>> engine = CMHMEngine2()\n        >>> move, score = engine.pick_move()\n        ";
 static const char __pyx_k_Set_the_recursion_depth_and_rein[] = "Set the recursion depth and reinitialize Q\342\200\221tables.\n\n        Parameters\n        ----------\n        new_depth : int\n            New depth value (must be >=0)\n\n        Raises\n        ------\n        ValueError\n            If `new_depth < 0`.\n\n        Side Effects\n        ------------\n        Updates `self._depth` and recreates the Q\342\200\221table databases\n        under `self.cache_dir`.\n\n        Examples\n        --------\n        >>> from chmengine import CMHMEngine2\n        >>> engine = CMHMEngine2()\n        >>> engine.depth = 3\n        >>> engine.depth\n        3\n        ";
-static const char __pyx_k_Quartney__resolve_board_and_fen_2[] = "Quartney._resolve_board_and_fen_ (line 174)";
+static const char __pyx_k_Quartney__resolve_board_and_fen_2[] = "Quartney._resolve_board_and_fen_ (line 176)";
 /* #### Code section: decls ### */
 static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_qtable_filename(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_board, PyObject *__pyx_v_pieces_count); /* proto */
 static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_2pieces_count(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_board); /* proto */
@@ -2414,25 +2415,26 @@ typedef struct {
   PyObject *__pyx_n_s_Pick;
   PyObject *__pyx_n_u_QTables;
   PyObject *__pyx_n_s_Quartney;
+  PyObject *__pyx_n_u_Quartney;
   PyObject *__pyx_n_s_Quartney__init_qdb;
   PyObject *__pyx_n_s_Quartney__resolve_board_and_fen;
   PyObject *__pyx_kp_u_Quartney__resolve_board_and_fen_2;
   PyObject *__pyx_n_s_Quartney_depth;
-  PyObject *__pyx_kp_u_Quartney_depth_line_357;
-  PyObject *__pyx_kp_u_Quartney_depth_line_375;
+  PyObject *__pyx_kp_u_Quartney_depth_line_359;
+  PyObject *__pyx_kp_u_Quartney_depth_line_377;
   PyObject *__pyx_n_s_Quartney_fen;
   PyObject *__pyx_n_s_Quartney_get_q_value;
-  PyObject *__pyx_kp_u_Quartney_get_q_value_line_135;
+  PyObject *__pyx_kp_u_Quartney_get_q_value_line_137;
   PyObject *__pyx_n_s_Quartney_pick_move;
-  PyObject *__pyx_kp_u_Quartney_pick_move_line_317;
+  PyObject *__pyx_kp_u_Quartney_pick_move_line_319;
   PyObject *__pyx_n_s_Quartney_pieces_count;
-  PyObject *__pyx_kp_u_Quartney_pieces_count_line_53;
+  PyObject *__pyx_kp_u_Quartney_pieces_count_line_55;
   PyObject *__pyx_n_s_Quartney_qdb_path;
-  PyObject *__pyx_kp_u_Quartney_qdb_path_line_77;
+  PyObject *__pyx_kp_u_Quartney_qdb_path_line_79;
   PyObject *__pyx_n_s_Quartney_qtable_filename;
-  PyObject *__pyx_kp_u_Quartney_qtable_filename_line_20;
+  PyObject *__pyx_kp_u_Quartney_qtable_filename_line_22;
   PyObject *__pyx_n_s_Quartney_set_q_value;
-  PyObject *__pyx_kp_u_Quartney_set_q_value_line_227;
+  PyObject *__pyx_kp_u_Quartney_set_q_value_line_229;
   PyObject *__pyx_n_s_Quartney_update_q_values;
   PyObject *__pyx_kp_u_Quartney_update_q_values_line_27;
   PyObject *__pyx_kp_u_Retrieve_a_cached_Qvalue_for_a_p;
@@ -2449,6 +2451,7 @@ typedef struct {
   PyObject *__pyx_n_s__30;
   PyObject *__pyx_n_s_abc;
   PyObject *__pyx_n_s_abstractmethod;
+  PyObject *__pyx_n_s_all;
   PyObject *__pyx_n_s_annotations;
   PyObject *__pyx_n_s_asyncio_coroutines;
   PyObject *__pyx_n_s_board;
@@ -2615,25 +2618,26 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_Pick);
   Py_CLEAR(clear_module_state->__pyx_n_u_QTables);
   Py_CLEAR(clear_module_state->__pyx_n_s_Quartney);
+  Py_CLEAR(clear_module_state->__pyx_n_u_Quartney);
   Py_CLEAR(clear_module_state->__pyx_n_s_Quartney__init_qdb);
   Py_CLEAR(clear_module_state->__pyx_n_s_Quartney__resolve_board_and_fen);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Quartney__resolve_board_and_fen_2);
   Py_CLEAR(clear_module_state->__pyx_n_s_Quartney_depth);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_Quartney_depth_line_357);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_Quartney_depth_line_375);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_Quartney_depth_line_359);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_Quartney_depth_line_377);
   Py_CLEAR(clear_module_state->__pyx_n_s_Quartney_fen);
   Py_CLEAR(clear_module_state->__pyx_n_s_Quartney_get_q_value);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_Quartney_get_q_value_line_135);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_Quartney_get_q_value_line_137);
   Py_CLEAR(clear_module_state->__pyx_n_s_Quartney_pick_move);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_Quartney_pick_move_line_317);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_Quartney_pick_move_line_319);
   Py_CLEAR(clear_module_state->__pyx_n_s_Quartney_pieces_count);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_Quartney_pieces_count_line_53);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_Quartney_pieces_count_line_55);
   Py_CLEAR(clear_module_state->__pyx_n_s_Quartney_qdb_path);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_Quartney_qdb_path_line_77);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_Quartney_qdb_path_line_79);
   Py_CLEAR(clear_module_state->__pyx_n_s_Quartney_qtable_filename);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_Quartney_qtable_filename_line_20);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_Quartney_qtable_filename_line_22);
   Py_CLEAR(clear_module_state->__pyx_n_s_Quartney_set_q_value);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_Quartney_set_q_value_line_227);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_Quartney_set_q_value_line_229);
   Py_CLEAR(clear_module_state->__pyx_n_s_Quartney_update_q_values);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Quartney_update_q_values_line_27);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Retrieve_a_cached_Qvalue_for_a_p);
@@ -2650,6 +2654,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s__30);
   Py_CLEAR(clear_module_state->__pyx_n_s_abc);
   Py_CLEAR(clear_module_state->__pyx_n_s_abstractmethod);
+  Py_CLEAR(clear_module_state->__pyx_n_s_all);
   Py_CLEAR(clear_module_state->__pyx_n_s_annotations);
   Py_CLEAR(clear_module_state->__pyx_n_s_asyncio_coroutines);
   Py_CLEAR(clear_module_state->__pyx_n_s_board);
@@ -2794,25 +2799,26 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_Pick);
   Py_VISIT(traverse_module_state->__pyx_n_u_QTables);
   Py_VISIT(traverse_module_state->__pyx_n_s_Quartney);
+  Py_VISIT(traverse_module_state->__pyx_n_u_Quartney);
   Py_VISIT(traverse_module_state->__pyx_n_s_Quartney__init_qdb);
   Py_VISIT(traverse_module_state->__pyx_n_s_Quartney__resolve_board_and_fen);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Quartney__resolve_board_and_fen_2);
   Py_VISIT(traverse_module_state->__pyx_n_s_Quartney_depth);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_Quartney_depth_line_357);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_Quartney_depth_line_375);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_Quartney_depth_line_359);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_Quartney_depth_line_377);
   Py_VISIT(traverse_module_state->__pyx_n_s_Quartney_fen);
   Py_VISIT(traverse_module_state->__pyx_n_s_Quartney_get_q_value);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_Quartney_get_q_value_line_135);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_Quartney_get_q_value_line_137);
   Py_VISIT(traverse_module_state->__pyx_n_s_Quartney_pick_move);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_Quartney_pick_move_line_317);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_Quartney_pick_move_line_319);
   Py_VISIT(traverse_module_state->__pyx_n_s_Quartney_pieces_count);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_Quartney_pieces_count_line_53);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_Quartney_pieces_count_line_55);
   Py_VISIT(traverse_module_state->__pyx_n_s_Quartney_qdb_path);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_Quartney_qdb_path_line_77);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_Quartney_qdb_path_line_79);
   Py_VISIT(traverse_module_state->__pyx_n_s_Quartney_qtable_filename);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_Quartney_qtable_filename_line_20);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_Quartney_qtable_filename_line_22);
   Py_VISIT(traverse_module_state->__pyx_n_s_Quartney_set_q_value);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_Quartney_set_q_value_line_227);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_Quartney_set_q_value_line_229);
   Py_VISIT(traverse_module_state->__pyx_n_s_Quartney_update_q_values);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Quartney_update_q_values_line_27);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Retrieve_a_cached_Qvalue_for_a_p);
@@ -2829,6 +2835,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s__30);
   Py_VISIT(traverse_module_state->__pyx_n_s_abc);
   Py_VISIT(traverse_module_state->__pyx_n_s_abstractmethod);
+  Py_VISIT(traverse_module_state->__pyx_n_s_all);
   Py_VISIT(traverse_module_state->__pyx_n_s_annotations);
   Py_VISIT(traverse_module_state->__pyx_n_s_asyncio_coroutines);
   Py_VISIT(traverse_module_state->__pyx_n_s_board);
@@ -2983,25 +2990,26 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_Pick __pyx_mstate_global->__pyx_n_s_Pick
 #define __pyx_n_u_QTables __pyx_mstate_global->__pyx_n_u_QTables
 #define __pyx_n_s_Quartney __pyx_mstate_global->__pyx_n_s_Quartney
+#define __pyx_n_u_Quartney __pyx_mstate_global->__pyx_n_u_Quartney
 #define __pyx_n_s_Quartney__init_qdb __pyx_mstate_global->__pyx_n_s_Quartney__init_qdb
 #define __pyx_n_s_Quartney__resolve_board_and_fen __pyx_mstate_global->__pyx_n_s_Quartney__resolve_board_and_fen
 #define __pyx_kp_u_Quartney__resolve_board_and_fen_2 __pyx_mstate_global->__pyx_kp_u_Quartney__resolve_board_and_fen_2
 #define __pyx_n_s_Quartney_depth __pyx_mstate_global->__pyx_n_s_Quartney_depth
-#define __pyx_kp_u_Quartney_depth_line_357 __pyx_mstate_global->__pyx_kp_u_Quartney_depth_line_357
-#define __pyx_kp_u_Quartney_depth_line_375 __pyx_mstate_global->__pyx_kp_u_Quartney_depth_line_375
+#define __pyx_kp_u_Quartney_depth_line_359 __pyx_mstate_global->__pyx_kp_u_Quartney_depth_line_359
+#define __pyx_kp_u_Quartney_depth_line_377 __pyx_mstate_global->__pyx_kp_u_Quartney_depth_line_377
 #define __pyx_n_s_Quartney_fen __pyx_mstate_global->__pyx_n_s_Quartney_fen
 #define __pyx_n_s_Quartney_get_q_value __pyx_mstate_global->__pyx_n_s_Quartney_get_q_value
-#define __pyx_kp_u_Quartney_get_q_value_line_135 __pyx_mstate_global->__pyx_kp_u_Quartney_get_q_value_line_135
+#define __pyx_kp_u_Quartney_get_q_value_line_137 __pyx_mstate_global->__pyx_kp_u_Quartney_get_q_value_line_137
 #define __pyx_n_s_Quartney_pick_move __pyx_mstate_global->__pyx_n_s_Quartney_pick_move
-#define __pyx_kp_u_Quartney_pick_move_line_317 __pyx_mstate_global->__pyx_kp_u_Quartney_pick_move_line_317
+#define __pyx_kp_u_Quartney_pick_move_line_319 __pyx_mstate_global->__pyx_kp_u_Quartney_pick_move_line_319
 #define __pyx_n_s_Quartney_pieces_count __pyx_mstate_global->__pyx_n_s_Quartney_pieces_count
-#define __pyx_kp_u_Quartney_pieces_count_line_53 __pyx_mstate_global->__pyx_kp_u_Quartney_pieces_count_line_53
+#define __pyx_kp_u_Quartney_pieces_count_line_55 __pyx_mstate_global->__pyx_kp_u_Quartney_pieces_count_line_55
 #define __pyx_n_s_Quartney_qdb_path __pyx_mstate_global->__pyx_n_s_Quartney_qdb_path
-#define __pyx_kp_u_Quartney_qdb_path_line_77 __pyx_mstate_global->__pyx_kp_u_Quartney_qdb_path_line_77
+#define __pyx_kp_u_Quartney_qdb_path_line_79 __pyx_mstate_global->__pyx_kp_u_Quartney_qdb_path_line_79
 #define __pyx_n_s_Quartney_qtable_filename __pyx_mstate_global->__pyx_n_s_Quartney_qtable_filename
-#define __pyx_kp_u_Quartney_qtable_filename_line_20 __pyx_mstate_global->__pyx_kp_u_Quartney_qtable_filename_line_20
+#define __pyx_kp_u_Quartney_qtable_filename_line_22 __pyx_mstate_global->__pyx_kp_u_Quartney_qtable_filename_line_22
 #define __pyx_n_s_Quartney_set_q_value __pyx_mstate_global->__pyx_n_s_Quartney_set_q_value
-#define __pyx_kp_u_Quartney_set_q_value_line_227 __pyx_mstate_global->__pyx_kp_u_Quartney_set_q_value_line_227
+#define __pyx_kp_u_Quartney_set_q_value_line_229 __pyx_mstate_global->__pyx_kp_u_Quartney_set_q_value_line_229
 #define __pyx_n_s_Quartney_update_q_values __pyx_mstate_global->__pyx_n_s_Quartney_update_q_values
 #define __pyx_kp_u_Quartney_update_q_values_line_27 __pyx_mstate_global->__pyx_kp_u_Quartney_update_q_values_line_27
 #define __pyx_kp_u_Retrieve_a_cached_Qvalue_for_a_p __pyx_mstate_global->__pyx_kp_u_Retrieve_a_cached_Qvalue_for_a_p
@@ -3018,6 +3026,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s__30 __pyx_mstate_global->__pyx_n_s__30
 #define __pyx_n_s_abc __pyx_mstate_global->__pyx_n_s_abc
 #define __pyx_n_s_abstractmethod __pyx_mstate_global->__pyx_n_s_abstractmethod
+#define __pyx_n_s_all __pyx_mstate_global->__pyx_n_s_all
 #define __pyx_n_s_annotations __pyx_mstate_global->__pyx_n_s_annotations
 #define __pyx_n_s_asyncio_coroutines __pyx_mstate_global->__pyx_n_s_asyncio_coroutines
 #define __pyx_n_s_board __pyx_mstate_global->__pyx_n_s_board
@@ -3119,7 +3128,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_codeobj__29 __pyx_mstate_global->__pyx_codeobj__29
 /* #### Code section: module_code ### */
 
-/* "chmengine/engines/quartney.py":20
+/* "chmengine/engines/quartney.py":22
  *     cache_dir: str = path.join(".", CACHE_DIR, "QTables")
  * 
  *     def qtable_filename(             # <<<<<<<<<<<<<<
@@ -3169,7 +3178,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_board,&__pyx_n_s_pieces_count,0};
 
-    /* "chmengine/engines/quartney.py":22
+    /* "chmengine/engines/quartney.py":24
  *     def qtable_filename(
  *             self,
  *             board: Optional[Board] = None,             # <<<<<<<<<<<<<<
@@ -3178,7 +3187,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
  */
     values[1] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
 
-    /* "chmengine/engines/quartney.py":23
+    /* "chmengine/engines/quartney.py":25
  *             self,
  *             board: Optional[Board] = None,
  *             pieces_count: Optional[Union[int, str]] = None             # <<<<<<<<<<<<<<
@@ -3205,26 +3214,26 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 20, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 22, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_board);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 20, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 22, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_pieces_count);
           if (value) { values[2] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 20, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 22, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "qtable_filename") < 0)) __PYX_ERR(0, 20, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "qtable_filename") < 0)) __PYX_ERR(0, 22, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -3243,7 +3252,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("qtable_filename", 0, 1, 3, __pyx_nargs); __PYX_ERR(0, 20, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("qtable_filename", 0, 1, 3, __pyx_nargs); __PYX_ERR(0, 22, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3259,7 +3268,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_L4_argument_unpacking_done:;
   __pyx_r = __pyx_pf_9chmengine_7engines_8quartney_8Quartney_qtable_filename(__pyx_self, __pyx_v_self, __pyx_v_board, __pyx_v_pieces_count);
 
-  /* "chmengine/engines/quartney.py":20
+  /* "chmengine/engines/quartney.py":22
  *     cache_dir: str = path.join(".", CACHE_DIR, "QTables")
  * 
  *     def qtable_filename(             # <<<<<<<<<<<<<<
@@ -3294,7 +3303,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_qtable_filenam
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("qtable_filename", 1);
 
-  /* "chmengine/engines/quartney.py":48
+  /* "chmengine/engines/quartney.py":50
  *         True
  *         """
  *         return (             # <<<<<<<<<<<<<<
@@ -3303,14 +3312,14 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_qtable_filenam
  */
   __Pyx_XDECREF(__pyx_r);
 
-  /* "chmengine/engines/quartney.py":49
+  /* "chmengine/engines/quartney.py":51
  *         """
  *         return (
  *             f"qtable_depth_{self.depth}_"             # <<<<<<<<<<<<<<
  *             f"piece_count_{self.pieces_count(board=board) if pieces_count is None else pieces_count}.db"
  *         )
  */
-  __pyx_t_1 = PyTuple_New(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = 0;
   __pyx_t_3 = 127;
@@ -3318,9 +3327,9 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_qtable_filenam
   __pyx_t_2 += 13;
   __Pyx_GIVEREF(__pyx_n_u_qtable_depth);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_n_u_qtable_depth);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_depth); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_depth); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_FormatSimple(__pyx_t_4, __pyx_empty_unicode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_FormatSimple(__pyx_t_4, __pyx_empty_unicode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_3 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) > __pyx_t_3) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) : __pyx_t_3;
@@ -3333,7 +3342,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_qtable_filenam
   __Pyx_GIVEREF(__pyx_n_u_piece_count);
   PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_n_u_piece_count);
 
-  /* "chmengine/engines/quartney.py":50
+  /* "chmengine/engines/quartney.py":52
  *         return (
  *             f"qtable_depth_{self.depth}_"
  *             f"piece_count_{self.pieces_count(board=board) if pieces_count is None else pieces_count}.db"             # <<<<<<<<<<<<<<
@@ -3342,12 +3351,12 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_qtable_filenam
  */
   __pyx_t_6 = (__pyx_v_pieces_count == Py_None);
   if (__pyx_t_6) {
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_pieces_count); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 50, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_pieces_count); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 52, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_7 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 50, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 52, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 50, __pyx_L1_error)
-    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 50, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 52, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -3357,7 +3366,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_qtable_filenam
     __Pyx_INCREF(__pyx_v_pieces_count);
     __pyx_t_5 = __pyx_v_pieces_count;
   }
-  __pyx_t_8 = __Pyx_PyObject_FormatSimple(__pyx_t_5, __pyx_empty_unicode); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_FormatSimple(__pyx_t_5, __pyx_empty_unicode); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_3 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_8) > __pyx_t_3) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_8) : __pyx_t_3;
@@ -3370,21 +3379,21 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_qtable_filenam
   __Pyx_GIVEREF(__pyx_kp_u_db);
   PyTuple_SET_ITEM(__pyx_t_1, 4, __pyx_kp_u_db);
 
-  /* "chmengine/engines/quartney.py":49
+  /* "chmengine/engines/quartney.py":51
  *         """
  *         return (
  *             f"qtable_depth_{self.depth}_"             # <<<<<<<<<<<<<<
  *             f"piece_count_{self.pieces_count(board=board) if pieces_count is None else pieces_count}.db"
  *         )
  */
-  __pyx_t_8 = __Pyx_PyUnicode_Join(__pyx_t_1, 5, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyUnicode_Join(__pyx_t_1, 5, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = ((PyObject*)__pyx_t_8);
   __pyx_t_8 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/engines/quartney.py":20
+  /* "chmengine/engines/quartney.py":22
  *     cache_dir: str = path.join(".", CACHE_DIR, "QTables")
  * 
  *     def qtable_filename(             # <<<<<<<<<<<<<<
@@ -3407,7 +3416,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_qtable_filenam
   return __pyx_r;
 }
 
-/* "chmengine/engines/quartney.py":53
+/* "chmengine/engines/quartney.py":55
  *         )
  * 
  *     def pieces_count(self, board: Optional[Board] = None) -> int:             # <<<<<<<<<<<<<<
@@ -3473,19 +3482,19 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 53, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 55, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_board);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 53, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 55, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "pieces_count") < 0)) __PYX_ERR(0, 53, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "pieces_count") < 0)) __PYX_ERR(0, 55, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -3501,7 +3510,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("pieces_count", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 53, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("pieces_count", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 55, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3541,7 +3550,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_2pieces_count(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("pieces_count", 1);
 
-  /* "chmengine/engines/quartney.py":75
+  /* "chmengine/engines/quartney.py":77
  *         32
  *         """
  *         return pieces_count_from_board(board=self.board) if board is None else pieces_count_from_board(board=board)             # <<<<<<<<<<<<<<
@@ -3551,32 +3560,32 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_2pieces_count(
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2 = (__pyx_v_board == Py_None);
   if (__pyx_t_2) {
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_pieces_count_from_board); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 75, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_pieces_count_from_board); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 77, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 75, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 77, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_board); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 75, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_board); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 77, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_board, __pyx_t_5) < 0) __PYX_ERR(0, 75, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_board, __pyx_t_5) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 75, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 77, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_5))||((__pyx_t_5) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_5))) __PYX_ERR(0, 75, __pyx_L1_error)
+    if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_5))||((__pyx_t_5) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_5))) __PYX_ERR(0, 77, __pyx_L1_error)
     __pyx_t_1 = __pyx_t_5;
     __pyx_t_5 = 0;
   } else {
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_pieces_count_from_board); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 75, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_pieces_count_from_board); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 77, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 75, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 77, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 75, __pyx_L1_error)
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 75, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 77, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_3))) __PYX_ERR(0, 75, __pyx_L1_error)
+    if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_3))) __PYX_ERR(0, 77, __pyx_L1_error)
     __pyx_t_1 = __pyx_t_3;
     __pyx_t_3 = 0;
   }
@@ -3584,7 +3593,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_2pieces_count(
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/engines/quartney.py":53
+  /* "chmengine/engines/quartney.py":55
  *         )
  * 
  *     def pieces_count(self, board: Optional[Board] = None) -> int:             # <<<<<<<<<<<<<<
@@ -3606,7 +3615,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_2pieces_count(
   return __pyx_r;
 }
 
-/* "chmengine/engines/quartney.py":77
+/* "chmengine/engines/quartney.py":79
  *         return pieces_count_from_board(board=self.board) if board is None else pieces_count_from_board(board=board)
  * 
  *     def qdb_path(             # <<<<<<<<<<<<<<
@@ -3656,7 +3665,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_board,&__pyx_n_s_pieces_count,0};
 
-    /* "chmengine/engines/quartney.py":79
+    /* "chmengine/engines/quartney.py":81
  *     def qdb_path(
  *             self,
  *             board: Optional[Board] = None,             # <<<<<<<<<<<<<<
@@ -3665,7 +3674,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
  */
     values[1] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
 
-    /* "chmengine/engines/quartney.py":80
+    /* "chmengine/engines/quartney.py":82
  *             self,
  *             board: Optional[Board] = None,
  *             pieces_count: Optional[Union[int, str]] = None,             # <<<<<<<<<<<<<<
@@ -3692,26 +3701,26 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 77, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 79, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_board);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 77, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 79, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_pieces_count);
           if (value) { values[2] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 77, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 79, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "qdb_path") < 0)) __PYX_ERR(0, 77, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "qdb_path") < 0)) __PYX_ERR(0, 79, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -3730,7 +3739,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("qdb_path", 0, 1, 3, __pyx_nargs); __PYX_ERR(0, 77, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("qdb_path", 0, 1, 3, __pyx_nargs); __PYX_ERR(0, 79, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3746,7 +3755,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_L4_argument_unpacking_done:;
   __pyx_r = __pyx_pf_9chmengine_7engines_8quartney_8Quartney_4qdb_path(__pyx_self, __pyx_v_self, __pyx_v_board, __pyx_v_pieces_count);
 
-  /* "chmengine/engines/quartney.py":77
+  /* "chmengine/engines/quartney.py":79
  *         return pieces_count_from_board(board=self.board) if board is None else pieces_count_from_board(board=board)
  * 
  *     def qdb_path(             # <<<<<<<<<<<<<<
@@ -3780,7 +3789,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_4qdb_path(CYTH
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("qdb_path", 1);
 
-  /* "chmengine/engines/quartney.py":104
+  /* "chmengine/engines/quartney.py":106
  *         True
  *         """
  *         return path.join(self.cache_dir, self.qtable_filename(board=board, pieces_count=pieces_count))             # <<<<<<<<<<<<<<
@@ -3788,20 +3797,20 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_4qdb_path(CYTH
  *     def _init_qdb(self) -> None:
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_path); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_path); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_join); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_join); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_cache_dir); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_cache_dir); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_qtable_filename); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_qtable_filename); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 104, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_pieces_count, __pyx_v_pieces_count) < 0) __PYX_ERR(0, 104, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 104, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 106, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_pieces_count, __pyx_v_pieces_count) < 0) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -3825,16 +3834,16 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_4qdb_path(CYTH
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 104, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 106, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
-  if (!(likely(PyUnicode_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("unicode", __pyx_t_1))) __PYX_ERR(0, 104, __pyx_L1_error)
+  if (!(likely(PyUnicode_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("unicode", __pyx_t_1))) __PYX_ERR(0, 106, __pyx_L1_error)
   __pyx_r = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/engines/quartney.py":77
+  /* "chmengine/engines/quartney.py":79
  *         return pieces_count_from_board(board=self.board) if board is None else pieces_count_from_board(board=board)
  * 
  *     def qdb_path(             # <<<<<<<<<<<<<<
@@ -3858,7 +3867,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_4qdb_path(CYTH
   return __pyx_r;
 }
 
-/* "chmengine/engines/quartney.py":106
+/* "chmengine/engines/quartney.py":108
  *         return path.join(self.cache_dir, self.qtable_filename(board=board, pieces_count=pieces_count))
  * 
  *     def _init_qdb(self) -> None:             # <<<<<<<<<<<<<<
@@ -3920,12 +3929,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 106, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 108, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_init_qdb") < 0)) __PYX_ERR(0, 106, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_init_qdb") < 0)) __PYX_ERR(0, 108, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -3936,7 +3945,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_init_qdb", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 106, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_init_qdb", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 108, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3988,19 +3997,19 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_6_init_qdb(CYT
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_init_qdb", 1);
 
-  /* "chmengine/engines/quartney.py":117
+  /* "chmengine/engines/quartney.py":119
  *         - Creates or updates SQLite files under that directory.
  *         """
  *         if not path.isdir(self.cache_dir):             # <<<<<<<<<<<<<<
  *             makedirs(self.cache_dir)
  *         pieces_count: int
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_path); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_path); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 119, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_isdir); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_isdir); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 119, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_cache_dir); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_cache_dir); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 119, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   __pyx_t_5 = 0;
@@ -4021,25 +4030,25 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_6_init_qdb(CYT
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 117, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 119, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
-  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 119, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_7 = (!__pyx_t_6);
   if (__pyx_t_7) {
 
-    /* "chmengine/engines/quartney.py":118
+    /* "chmengine/engines/quartney.py":120
  *         """
  *         if not path.isdir(self.cache_dir):
  *             makedirs(self.cache_dir)             # <<<<<<<<<<<<<<
  *         pieces_count: int
  *         for pieces_count in range(2, 33):  # We are using dbs for 2-32 pieces
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_makedirs); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 118, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_makedirs); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 120, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_cache_dir); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 118, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_cache_dir); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 120, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_4 = NULL;
     __pyx_t_5 = 0;
@@ -4060,13 +4069,13 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_6_init_qdb(CYT
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 118, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 120, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "chmengine/engines/quartney.py":117
+    /* "chmengine/engines/quartney.py":119
  *         - Creates or updates SQLite files under that directory.
  *         """
  *         if not path.isdir(self.cache_dir):             # <<<<<<<<<<<<<<
@@ -4075,7 +4084,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_6_init_qdb(CYT
  */
   }
 
-  /* "chmengine/engines/quartney.py":120
+  /* "chmengine/engines/quartney.py":122
  *             makedirs(self.cache_dir)
  *         pieces_count: int
  *         for pieces_count in range(2, 33):  # We are using dbs for 2-32 pieces             # <<<<<<<<<<<<<<
@@ -4083,32 +4092,32 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_6_init_qdb(CYT
  *             q_conn: Connection
  */
   for (__pyx_t_8 = 2; __pyx_t_8 < 33; __pyx_t_8+=1) {
-    __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 120, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 122, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_XDECREF_SET(__pyx_v_pieces_count, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "chmengine/engines/quartney.py":121
+    /* "chmengine/engines/quartney.py":123
  *         pieces_count: int
  *         for pieces_count in range(2, 33):  # We are using dbs for 2-32 pieces
  *             qdb_path: str = self.qdb_path(pieces_count=pieces_count)             # <<<<<<<<<<<<<<
  *             q_conn: Connection
  *             with connect(qdb_path) as q_conn:
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_qdb_path); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 121, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_qdb_path); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 123, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 121, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 123, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_pieces_count, __pyx_v_pieces_count) < 0) __PYX_ERR(0, 121, __pyx_L1_error)
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 121, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_pieces_count, __pyx_v_pieces_count) < 0) __PYX_ERR(0, 123, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 123, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (!(likely(PyUnicode_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("unicode", __pyx_t_2))) __PYX_ERR(0, 121, __pyx_L1_error)
+    if (!(likely(PyUnicode_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("unicode", __pyx_t_2))) __PYX_ERR(0, 123, __pyx_L1_error)
     __Pyx_XDECREF_SET(__pyx_v_qdb_path, ((PyObject*)__pyx_t_2));
     __pyx_t_2 = 0;
 
-    /* "chmengine/engines/quartney.py":123
+    /* "chmengine/engines/quartney.py":125
  *             qdb_path: str = self.qdb_path(pieces_count=pieces_count)
  *             q_conn: Connection
  *             with connect(qdb_path) as q_conn:             # <<<<<<<<<<<<<<
@@ -4116,7 +4125,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_6_init_qdb(CYT
  *                 q_cursor.execute(
  */
     /*with:*/ {
-      __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_connect); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 123, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_connect); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 125, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_t_1 = NULL;
       __pyx_t_5 = 0;
@@ -4136,13 +4145,13 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_6_init_qdb(CYT
         PyObject *__pyx_callargs[2] = {__pyx_t_1, __pyx_v_qdb_path};
         __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
         __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 123, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 125, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       }
-      __pyx_t_9 = __Pyx_PyObject_LookupSpecial(__pyx_t_2, __pyx_n_s_exit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 123, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyObject_LookupSpecial(__pyx_t_2, __pyx_n_s_exit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 125, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_1 = __Pyx_PyObject_LookupSpecial(__pyx_t_2, __pyx_n_s_enter); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 123, __pyx_L6_error)
+      __pyx_t_1 = __Pyx_PyObject_LookupSpecial(__pyx_t_2, __pyx_n_s_enter); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L6_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_t_4 = NULL;
       __pyx_t_5 = 0;
@@ -4162,7 +4171,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_6_init_qdb(CYT
         PyObject *__pyx_callargs[2] = {__pyx_t_4, NULL};
         __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_5, 0+__pyx_t_5);
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 123, __pyx_L6_error)
+        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 125, __pyx_L6_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       }
@@ -4181,14 +4190,14 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_6_init_qdb(CYT
             __Pyx_XDECREF_SET(__pyx_v_q_conn, __pyx_t_1);
             __pyx_t_1 = 0;
 
-            /* "chmengine/engines/quartney.py":124
+            /* "chmengine/engines/quartney.py":126
  *             q_conn: Connection
  *             with connect(qdb_path) as q_conn:
  *                 q_cursor: Cursor = q_conn.cursor()             # <<<<<<<<<<<<<<
  *                 q_cursor.execute(
  *                     """
  */
-            __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_q_conn, __pyx_n_s_cursor); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 124, __pyx_L12_error)
+            __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_q_conn, __pyx_n_s_cursor); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 126, __pyx_L12_error)
             __Pyx_GOTREF(__pyx_t_2);
             __pyx_t_3 = NULL;
             __pyx_t_5 = 0;
@@ -4208,21 +4217,21 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_6_init_qdb(CYT
               PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
               __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_5, 0+__pyx_t_5);
               __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-              if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L12_error)
+              if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L12_error)
               __Pyx_GOTREF(__pyx_t_1);
               __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             }
             __Pyx_XDECREF_SET(__pyx_v_q_cursor, __pyx_t_1);
             __pyx_t_1 = 0;
 
-            /* "chmengine/engines/quartney.py":125
+            /* "chmengine/engines/quartney.py":127
  *             with connect(qdb_path) as q_conn:
  *                 q_cursor: Cursor = q_conn.cursor()
  *                 q_cursor.execute(             # <<<<<<<<<<<<<<
  *                     """
  *                     CREATE TABLE IF NOT EXISTS q_table (
  */
-            __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_q_cursor, __pyx_n_s_execute); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 125, __pyx_L12_error)
+            __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_q_cursor, __pyx_n_s_execute); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L12_error)
             __Pyx_GOTREF(__pyx_t_2);
             __pyx_t_3 = NULL;
             __pyx_t_5 = 0;
@@ -4242,13 +4251,13 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_6_init_qdb(CYT
               PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_kp_u_CREATE_TABLE_IF_NOT_EXISTS_q_ta};
               __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
               __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-              if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L12_error)
+              if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L12_error)
               __Pyx_GOTREF(__pyx_t_1);
               __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             }
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-            /* "chmengine/engines/quartney.py":123
+            /* "chmengine/engines/quartney.py":125
  *             qdb_path: str = self.qdb_path(pieces_count=pieces_count)
  *             q_conn: Connection
  *             with connect(qdb_path) as q_conn:             # <<<<<<<<<<<<<<
@@ -4267,20 +4276,20 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_6_init_qdb(CYT
           __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
           /*except:*/ {
             __Pyx_AddTraceback("chmengine.engines.quartney.Quartney._init_qdb", __pyx_clineno, __pyx_lineno, __pyx_filename);
-            if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_2, &__pyx_t_3) < 0) __PYX_ERR(0, 123, __pyx_L14_except_error)
+            if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_2, &__pyx_t_3) < 0) __PYX_ERR(0, 125, __pyx_L14_except_error)
             __Pyx_XGOTREF(__pyx_t_1);
             __Pyx_XGOTREF(__pyx_t_2);
             __Pyx_XGOTREF(__pyx_t_3);
-            __pyx_t_4 = PyTuple_Pack(3, __pyx_t_1, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 123, __pyx_L14_except_error)
+            __pyx_t_4 = PyTuple_Pack(3, __pyx_t_1, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 125, __pyx_L14_except_error)
             __Pyx_GOTREF(__pyx_t_4);
             __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_4, NULL);
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
             __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-            if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 123, __pyx_L14_except_error)
+            if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 125, __pyx_L14_except_error)
             __Pyx_GOTREF(__pyx_t_13);
             __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_13);
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-            if (__pyx_t_7 < 0) __PYX_ERR(0, 123, __pyx_L14_except_error)
+            if (__pyx_t_7 < 0) __PYX_ERR(0, 125, __pyx_L14_except_error)
             __pyx_t_6 = (!__pyx_t_7);
             if (unlikely(__pyx_t_6)) {
               __Pyx_GIVEREF(__pyx_t_1);
@@ -4288,7 +4297,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_6_init_qdb(CYT
               __Pyx_XGIVEREF(__pyx_t_3);
               __Pyx_ErrRestoreWithState(__pyx_t_1, __pyx_t_2, __pyx_t_3);
               __pyx_t_1 = 0; __pyx_t_2 = 0; __pyx_t_3 = 0; 
-              __PYX_ERR(0, 123, __pyx_L14_except_error)
+              __PYX_ERR(0, 125, __pyx_L14_except_error)
             }
             __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
             __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -4314,7 +4323,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_6_init_qdb(CYT
           if (__pyx_t_9) {
             __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple_, NULL);
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-            if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 123, __pyx_L1_error)
+            if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 125, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_12);
             __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
           }
@@ -4330,7 +4339,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_6_init_qdb(CYT
     }
   }
 
-  /* "chmengine/engines/quartney.py":106
+  /* "chmengine/engines/quartney.py":108
  *         return path.join(self.cache_dir, self.qtable_filename(board=board, pieces_count=pieces_count))
  * 
  *     def _init_qdb(self) -> None:             # <<<<<<<<<<<<<<
@@ -4358,7 +4367,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_6_init_qdb(CYT
   return __pyx_r;
 }
 
-/* "chmengine/engines/quartney.py":135
+/* "chmengine/engines/quartney.py":137
  *                 )
  * 
  *     def get_q_value(             # <<<<<<<<<<<<<<
@@ -4409,7 +4418,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_fen,&__pyx_n_s_board,&__pyx_n_s_pieces_count,0};
 
-    /* "chmengine/engines/quartney.py":137
+    /* "chmengine/engines/quartney.py":139
  *     def get_q_value(
  *             self,
  *             fen: Optional[str] = None,             # <<<<<<<<<<<<<<
@@ -4418,7 +4427,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
  */
     values[1] = __Pyx_Arg_NewRef_FASTCALL(((PyObject*)Py_None));
 
-    /* "chmengine/engines/quartney.py":138
+    /* "chmengine/engines/quartney.py":140
  *             self,
  *             fen: Optional[str] = None,
  *             board: Optional[Board] = None,             # <<<<<<<<<<<<<<
@@ -4427,7 +4436,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
  */
     values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
 
-    /* "chmengine/engines/quartney.py":139
+    /* "chmengine/engines/quartney.py":141
  *             fen: Optional[str] = None,
  *             board: Optional[Board] = None,
  *             pieces_count: Optional[int] = None             # <<<<<<<<<<<<<<
@@ -4456,33 +4465,33 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 137, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_fen);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 137, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_board);
           if (value) { values[2] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 137, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_pieces_count);
           if (value) { values[3] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 137, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "get_q_value") < 0)) __PYX_ERR(0, 135, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "get_q_value") < 0)) __PYX_ERR(0, 137, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -4504,7 +4513,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_q_value", 0, 1, 4, __pyx_nargs); __PYX_ERR(0, 135, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("get_q_value", 0, 1, 4, __pyx_nargs); __PYX_ERR(0, 137, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4518,11 +4527,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_fen), (&PyUnicode_Type), 1, "fen", 1))) __PYX_ERR(0, 137, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pieces_count), (&PyInt_Type), 1, "pieces_count", 1))) __PYX_ERR(0, 139, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_fen), (&PyUnicode_Type), 1, "fen", 1))) __PYX_ERR(0, 139, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pieces_count), (&PyInt_Type), 1, "pieces_count", 1))) __PYX_ERR(0, 141, __pyx_L1_error)
   __pyx_r = __pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(__pyx_self, __pyx_v_self, __pyx_v_fen, __pyx_v_board, __pyx_v_pieces_count);
 
-  /* "chmengine/engines/quartney.py":135
+  /* "chmengine/engines/quartney.py":137
  *                 )
  * 
  *     def get_q_value(             # <<<<<<<<<<<<<<
@@ -4572,14 +4581,14 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(C
   __Pyx_INCREF(__pyx_v_fen);
   __Pyx_INCREF(__pyx_v_board);
 
-  /* "chmengine/engines/quartney.py":163
+  /* "chmengine/engines/quartney.py":165
  *         >>> q = engine.get_q_value()
  *         """
  *         board, fen = self._resolve_board_and_fen_(board, fen)             # <<<<<<<<<<<<<<
  *         q_conn: Connection
  *         with connect(self.qdb_path(board=board, pieces_count=pieces_count)) as q_conn:
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_resolve_board_and_fen); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_resolve_board_and_fen); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 165, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -4599,7 +4608,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(C
     PyObject *__pyx_callargs[3] = {__pyx_t_3, __pyx_v_board, __pyx_v_fen};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 2+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 165, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
@@ -4609,7 +4618,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(C
     if (unlikely(size != 2)) {
       if (size > 2) __Pyx_RaiseTooManyValuesError(2);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      __PYX_ERR(0, 163, __pyx_L1_error)
+      __PYX_ERR(0, 165, __pyx_L1_error)
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
     if (likely(PyTuple_CheckExact(sequence))) {
@@ -4622,15 +4631,15 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(C
     __Pyx_INCREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_t_3);
     #else
-    __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 165, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_3 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     #endif
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   } else {
     Py_ssize_t index = -1;
-    __pyx_t_5 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_5 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 165, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_6 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_5);
@@ -4638,7 +4647,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(C
     __Pyx_GOTREF(__pyx_t_2);
     index = 1; __pyx_t_3 = __pyx_t_6(__pyx_t_5); if (unlikely(!__pyx_t_3)) goto __pyx_L3_unpacking_failed;
     __Pyx_GOTREF(__pyx_t_3);
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_6(__pyx_t_5), 2) < 0) __PYX_ERR(0, 163, __pyx_L1_error)
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_6(__pyx_t_5), 2) < 0) __PYX_ERR(0, 165, __pyx_L1_error)
     __pyx_t_6 = NULL;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     goto __pyx_L4_unpacking_done;
@@ -4646,16 +4655,16 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(C
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_6 = NULL;
     if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    __PYX_ERR(0, 163, __pyx_L1_error)
+    __PYX_ERR(0, 165, __pyx_L1_error)
     __pyx_L4_unpacking_done:;
   }
-  if (!(likely(PyUnicode_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("unicode", __pyx_t_3))) __PYX_ERR(0, 163, __pyx_L1_error)
+  if (!(likely(PyUnicode_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("unicode", __pyx_t_3))) __PYX_ERR(0, 165, __pyx_L1_error)
   __Pyx_DECREF_SET(__pyx_v_board, __pyx_t_2);
   __pyx_t_2 = 0;
   __Pyx_DECREF_SET(__pyx_v_fen, ((PyObject*)__pyx_t_3));
   __pyx_t_3 = 0;
 
-  /* "chmengine/engines/quartney.py":165
+  /* "chmengine/engines/quartney.py":167
  *         board, fen = self._resolve_board_and_fen_(board, fen)
  *         q_conn: Connection
  *         with connect(self.qdb_path(board=board, pieces_count=pieces_count)) as q_conn:             # <<<<<<<<<<<<<<
@@ -4663,15 +4672,15 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(C
  *             q_cursor.execute(
  */
   /*with:*/ {
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_connect); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_connect); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 167, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_qdb_path); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 165, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_qdb_path); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 167, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 165, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 167, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 165, __pyx_L1_error)
-    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_pieces_count, __pyx_v_pieces_count) < 0) __PYX_ERR(0, 165, __pyx_L1_error)
-    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 165, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 167, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_pieces_count, __pyx_v_pieces_count) < 0) __PYX_ERR(0, 167, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 167, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -4694,13 +4703,13 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(C
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 165, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 167, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
-    __pyx_t_8 = __Pyx_PyObject_LookupSpecial(__pyx_t_1, __pyx_n_s_exit); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 165, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_LookupSpecial(__pyx_t_1, __pyx_n_s_exit); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 167, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_7 = __Pyx_PyObject_LookupSpecial(__pyx_t_1, __pyx_n_s_enter); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 165, __pyx_L5_error)
+    __pyx_t_7 = __Pyx_PyObject_LookupSpecial(__pyx_t_1, __pyx_n_s_enter); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 167, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_7);
     __pyx_t_5 = NULL;
     __pyx_t_4 = 0;
@@ -4720,7 +4729,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(C
       PyObject *__pyx_callargs[2] = {__pyx_t_5, NULL};
       __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_7, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L5_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 167, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     }
@@ -4739,14 +4748,14 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(C
           __pyx_v_q_conn = __pyx_t_7;
           __pyx_t_7 = 0;
 
-          /* "chmengine/engines/quartney.py":166
+          /* "chmengine/engines/quartney.py":168
  *         q_conn: Connection
  *         with connect(self.qdb_path(board=board, pieces_count=pieces_count)) as q_conn:
  *             q_cursor: Cursor = q_conn.cursor()             # <<<<<<<<<<<<<<
  *             q_cursor.execute(
  *                 "SELECT q_value FROM q_table WHERE fen = ?",
  */
-          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_q_conn, __pyx_n_s_cursor); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 166, __pyx_L9_error)
+          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_q_conn, __pyx_n_s_cursor); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 168, __pyx_L9_error)
           __Pyx_GOTREF(__pyx_t_1);
           __pyx_t_3 = NULL;
           __pyx_t_4 = 0;
@@ -4766,35 +4775,35 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(C
             PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
             __pyx_t_7 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
             __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-            if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 166, __pyx_L9_error)
+            if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 168, __pyx_L9_error)
             __Pyx_GOTREF(__pyx_t_7);
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           }
           __pyx_v_q_cursor = __pyx_t_7;
           __pyx_t_7 = 0;
 
-          /* "chmengine/engines/quartney.py":167
+          /* "chmengine/engines/quartney.py":169
  *         with connect(self.qdb_path(board=board, pieces_count=pieces_count)) as q_conn:
  *             q_cursor: Cursor = q_conn.cursor()
  *             q_cursor.execute(             # <<<<<<<<<<<<<<
  *                 "SELECT q_value FROM q_table WHERE fen = ?",
  *                 (fen,)
  */
-          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_q_cursor, __pyx_n_s_execute); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 167, __pyx_L9_error)
+          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_q_cursor, __pyx_n_s_execute); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 169, __pyx_L9_error)
           __Pyx_GOTREF(__pyx_t_1);
 
-          /* "chmengine/engines/quartney.py":169
+          /* "chmengine/engines/quartney.py":171
  *             q_cursor.execute(
  *                 "SELECT q_value FROM q_table WHERE fen = ?",
  *                 (fen,)             # <<<<<<<<<<<<<<
  *             )
  *             row: Optional[Tuple[float]] = q_cursor.fetchone()
  */
-          __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 169, __pyx_L9_error)
+          __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 171, __pyx_L9_error)
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_INCREF(__pyx_v_fen);
           __Pyx_GIVEREF(__pyx_v_fen);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_v_fen)) __PYX_ERR(0, 169, __pyx_L9_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_v_fen)) __PYX_ERR(0, 171, __pyx_L9_error);
           __pyx_t_5 = NULL;
           __pyx_t_4 = 0;
           #if CYTHON_UNPACK_METHODS
@@ -4814,20 +4823,20 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(C
             __pyx_t_7 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_4, 2+__pyx_t_4);
             __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-            if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 167, __pyx_L9_error)
+            if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 169, __pyx_L9_error)
             __Pyx_GOTREF(__pyx_t_7);
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           }
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-          /* "chmengine/engines/quartney.py":171
+          /* "chmengine/engines/quartney.py":173
  *                 (fen,)
  *             )
  *             row: Optional[Tuple[float]] = q_cursor.fetchone()             # <<<<<<<<<<<<<<
  *             return float64(row[0]) if row is not None else None
  * 
  */
-          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_q_cursor, __pyx_n_s_fetchone); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 171, __pyx_L9_error)
+          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_q_cursor, __pyx_n_s_fetchone); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 173, __pyx_L9_error)
           __Pyx_GOTREF(__pyx_t_1);
           __pyx_t_3 = NULL;
           __pyx_t_4 = 0;
@@ -4847,15 +4856,15 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(C
             PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
             __pyx_t_7 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
             __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-            if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 171, __pyx_L9_error)
+            if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 173, __pyx_L9_error)
             __Pyx_GOTREF(__pyx_t_7);
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           }
-          if (!(likely(PyTuple_CheckExact(__pyx_t_7))||((__pyx_t_7) == Py_None) || __Pyx_RaiseUnexpectedTypeError("tuple", __pyx_t_7))) __PYX_ERR(0, 171, __pyx_L9_error)
+          if (!(likely(PyTuple_CheckExact(__pyx_t_7))||((__pyx_t_7) == Py_None) || __Pyx_RaiseUnexpectedTypeError("tuple", __pyx_t_7))) __PYX_ERR(0, 173, __pyx_L9_error)
           __pyx_v_row = ((PyObject*)__pyx_t_7);
           __pyx_t_7 = 0;
 
-          /* "chmengine/engines/quartney.py":172
+          /* "chmengine/engines/quartney.py":174
  *             )
  *             row: Optional[Tuple[float]] = q_cursor.fetchone()
  *             return float64(row[0]) if row is not None else None             # <<<<<<<<<<<<<<
@@ -4865,13 +4874,13 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(C
           __Pyx_XDECREF(__pyx_r);
           __pyx_t_12 = (__pyx_v_row != ((PyObject*)Py_None));
           if (__pyx_t_12) {
-            __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_float64); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 172, __pyx_L9_error)
+            __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_float64); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 174, __pyx_L9_error)
             __Pyx_GOTREF(__pyx_t_3);
             if (unlikely(__pyx_v_row == Py_None)) {
               PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-              __PYX_ERR(0, 172, __pyx_L9_error)
+              __PYX_ERR(0, 174, __pyx_L9_error)
             }
-            __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_row, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 172, __pyx_L9_error)
+            __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_row, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 174, __pyx_L9_error)
             __Pyx_GOTREF(__pyx_t_5);
             __pyx_t_2 = NULL;
             __pyx_t_4 = 0;
@@ -4892,7 +4901,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(C
               __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
               __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
               __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-              if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L9_error)
+              if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 174, __pyx_L9_error)
               __Pyx_GOTREF(__pyx_t_1);
               __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             }
@@ -4906,7 +4915,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(C
           __pyx_t_7 = 0;
           goto __pyx_L13_try_return;
 
-          /* "chmengine/engines/quartney.py":165
+          /* "chmengine/engines/quartney.py":167
  *         board, fen = self._resolve_board_and_fen_(board, fen)
  *         q_conn: Connection
  *         with connect(self.qdb_path(board=board, pieces_count=pieces_count)) as q_conn:             # <<<<<<<<<<<<<<
@@ -4922,20 +4931,20 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(C
         __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
         /*except:*/ {
           __Pyx_AddTraceback("chmengine.engines.quartney.Quartney.get_q_value", __pyx_clineno, __pyx_lineno, __pyx_filename);
-          if (__Pyx_GetException(&__pyx_t_7, &__pyx_t_1, &__pyx_t_3) < 0) __PYX_ERR(0, 165, __pyx_L11_except_error)
+          if (__Pyx_GetException(&__pyx_t_7, &__pyx_t_1, &__pyx_t_3) < 0) __PYX_ERR(0, 167, __pyx_L11_except_error)
           __Pyx_XGOTREF(__pyx_t_7);
           __Pyx_XGOTREF(__pyx_t_1);
           __Pyx_XGOTREF(__pyx_t_3);
-          __pyx_t_5 = PyTuple_Pack(3, __pyx_t_7, __pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 165, __pyx_L11_except_error)
+          __pyx_t_5 = PyTuple_Pack(3, __pyx_t_7, __pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 167, __pyx_L11_except_error)
           __Pyx_GOTREF(__pyx_t_5);
           __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_5, NULL);
           __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-          if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 165, __pyx_L11_except_error)
+          if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 167, __pyx_L11_except_error)
           __Pyx_GOTREF(__pyx_t_13);
           __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_13);
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-          if (__pyx_t_12 < 0) __PYX_ERR(0, 165, __pyx_L11_except_error)
+          if (__pyx_t_12 < 0) __PYX_ERR(0, 167, __pyx_L11_except_error)
           __pyx_t_14 = (!__pyx_t_12);
           if (unlikely(__pyx_t_14)) {
             __Pyx_GIVEREF(__pyx_t_7);
@@ -4943,7 +4952,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(C
             __Pyx_XGIVEREF(__pyx_t_3);
             __Pyx_ErrRestoreWithState(__pyx_t_7, __pyx_t_1, __pyx_t_3);
             __pyx_t_7 = 0; __pyx_t_1 = 0; __pyx_t_3 = 0; 
-            __PYX_ERR(0, 165, __pyx_L11_except_error)
+            __PYX_ERR(0, 167, __pyx_L11_except_error)
           }
           __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
           __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -4974,7 +4983,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(C
         if (__pyx_t_8) {
           __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple_, NULL);
           __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-          if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 165, __pyx_L1_error)
+          if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 167, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_11);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         }
@@ -4986,7 +4995,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(C
         if (__pyx_t_8) {
           __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple_, NULL);
           __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-          if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 165, __pyx_L1_error)
+          if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 167, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_10);
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         }
@@ -5003,7 +5012,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(C
     __pyx_L18:;
   }
 
-  /* "chmengine/engines/quartney.py":135
+  /* "chmengine/engines/quartney.py":137
  *                 )
  * 
  *     def get_q_value(             # <<<<<<<<<<<<<<
@@ -5033,7 +5042,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_8get_q_value(C
   return __pyx_r;
 }
 
-/* "chmengine/engines/quartney.py":174
+/* "chmengine/engines/quartney.py":176
  *             return float64(row[0]) if row is not None else None
  * 
  *     def _resolve_board_and_fen_(self, board: Optional[Board], fen: Optional[str]) -> Tuple[Board, str]:             # <<<<<<<<<<<<<<
@@ -5101,7 +5110,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 174, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 176, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -5109,9 +5118,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 174, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 176, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("_resolve_board_and_fen_", 1, 3, 3, 1); __PYX_ERR(0, 174, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_resolve_board_and_fen_", 1, 3, 3, 1); __PYX_ERR(0, 176, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -5119,14 +5128,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[2]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 174, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 176, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("_resolve_board_and_fen_", 1, 3, 3, 2); __PYX_ERR(0, 174, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_resolve_board_and_fen_", 1, 3, 3, 2); __PYX_ERR(0, 176, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_resolve_board_and_fen_") < 0)) __PYX_ERR(0, 174, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_resolve_board_and_fen_") < 0)) __PYX_ERR(0, 176, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 3)) {
       goto __pyx_L5_argtuple_error;
@@ -5141,7 +5150,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_resolve_board_and_fen_", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 174, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_resolve_board_and_fen_", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 176, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -5155,7 +5164,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_fen), (&PyUnicode_Type), 1, "fen", 1))) __PYX_ERR(0, 174, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_fen), (&PyUnicode_Type), 1, "fen", 1))) __PYX_ERR(0, 176, __pyx_L1_error)
   __pyx_r = __pyx_pf_9chmengine_7engines_8quartney_8Quartney_10_resolve_board_and_fen_(__pyx_self, __pyx_v_self, __pyx_v_board, __pyx_v_fen);
 
   /* function exit code */
@@ -5188,7 +5197,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_10_resolve_boa
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_resolve_board_and_fen_", 1);
 
-  /* "chmengine/engines/quartney.py":222
+  /* "chmengine/engines/quartney.py":224
  *         'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
  *         """
  *         return (             # <<<<<<<<<<<<<<
@@ -5197,7 +5206,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_10_resolve_boa
  */
   __Pyx_XDECREF(__pyx_r);
 
-  /* "chmengine/engines/quartney.py":223
+  /* "chmengine/engines/quartney.py":225
  *         """
  *         return (
  *             Board(fen=fen) if fen is not None else self.board if board is None else board,             # <<<<<<<<<<<<<<
@@ -5206,12 +5215,12 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_10_resolve_boa
  */
   __pyx_t_2 = (__pyx_v_fen != ((PyObject*)Py_None));
   if (__pyx_t_2) {
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Board); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 223, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Board); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 225, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 223, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 225, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_fen, __pyx_v_fen) < 0) __PYX_ERR(0, 223, __pyx_L1_error)
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 223, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_fen, __pyx_v_fen) < 0) __PYX_ERR(0, 225, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 225, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -5220,7 +5229,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_10_resolve_boa
   } else {
     __pyx_t_6 = (__pyx_v_board == Py_None);
     if (__pyx_t_6) {
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_board); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 223, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_board); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 225, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __pyx_t_5 = __pyx_t_4;
       __pyx_t_4 = 0;
@@ -5232,7 +5241,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_10_resolve_boa
     __pyx_t_5 = 0;
   }
 
-  /* "chmengine/engines/quartney.py":224
+  /* "chmengine/engines/quartney.py":226
  *         return (
  *             Board(fen=fen) if fen is not None else self.board if board is None else board,
  *             self.fen(board=board) if fen is None else fen             # <<<<<<<<<<<<<<
@@ -5241,12 +5250,12 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_10_resolve_boa
  */
   __pyx_t_2 = (__pyx_v_fen == ((PyObject*)Py_None));
   if (__pyx_t_2) {
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fen); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 224, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fen); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 226, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 224, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 226, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 224, __pyx_L1_error)
-    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 224, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 226, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 226, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -5257,26 +5266,26 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_10_resolve_boa
     __pyx_t_5 = __pyx_v_fen;
   }
 
-  /* "chmengine/engines/quartney.py":223
+  /* "chmengine/engines/quartney.py":225
  *         """
  *         return (
  *             Board(fen=fen) if fen is not None else self.board if board is None else board,             # <<<<<<<<<<<<<<
  *             self.fen(board=board) if fen is None else fen
  *         )
  */
-  __pyx_t_7 = PyTuple_New(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 223, __pyx_L1_error)
+  __pyx_t_7 = PyTuple_New(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 225, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_1)) __PYX_ERR(0, 223, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_1)) __PYX_ERR(0, 225, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_5);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_5)) __PYX_ERR(0, 223, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_5)) __PYX_ERR(0, 225, __pyx_L1_error);
   __pyx_t_1 = 0;
   __pyx_t_5 = 0;
   __pyx_r = ((PyObject*)__pyx_t_7);
   __pyx_t_7 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/engines/quartney.py":174
+  /* "chmengine/engines/quartney.py":176
  *             return float64(row[0]) if row is not None else None
  * 
  *     def _resolve_board_and_fen_(self, board: Optional[Board], fen: Optional[str]) -> Tuple[Board, str]:             # <<<<<<<<<<<<<<
@@ -5299,7 +5308,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_10_resolve_boa
   return __pyx_r;
 }
 
-/* "chmengine/engines/quartney.py":227
+/* "chmengine/engines/quartney.py":229
  *         )
  * 
  *     def set_q_value(             # <<<<<<<<<<<<<<
@@ -5351,7 +5360,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_value,&__pyx_n_s_fen,&__pyx_n_s_board,&__pyx_n_s_pieces_count,0};
 
-    /* "chmengine/engines/quartney.py":230
+    /* "chmengine/engines/quartney.py":232
  *             self,
  *             value: float,
  *             fen: Optional[str] = None,             # <<<<<<<<<<<<<<
@@ -5360,7 +5369,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
  */
     values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject*)Py_None));
 
-    /* "chmengine/engines/quartney.py":231
+    /* "chmengine/engines/quartney.py":233
  *             value: float,
  *             fen: Optional[str] = None,
  *             board: Optional[Board] = None,             # <<<<<<<<<<<<<<
@@ -5369,7 +5378,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
  */
     values[3] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
 
-    /* "chmengine/engines/quartney.py":232
+    /* "chmengine/engines/quartney.py":234
  *             fen: Optional[str] = None,
  *             board: Optional[Board] = None,
  *             pieces_count: Optional[int] = None             # <<<<<<<<<<<<<<
@@ -5400,7 +5409,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 227, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 229, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -5408,35 +5417,35 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 227, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 229, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("set_q_value", 0, 2, 5, 1); __PYX_ERR(0, 227, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("set_q_value", 0, 2, 5, 1); __PYX_ERR(0, 229, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_fen);
           if (value) { values[2] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 227, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 229, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_board);
           if (value) { values[3] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 227, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 229, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_pieces_count);
           if (value) { values[4] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 227, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 229, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "set_q_value") < 0)) __PYX_ERR(0, 227, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "set_q_value") < 0)) __PYX_ERR(0, 229, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -5453,14 +5462,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       }
     }
     __pyx_v_self = values[0];
-    __pyx_v_value = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_value == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 229, __pyx_L3_error)
+    __pyx_v_value = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_value == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 231, __pyx_L3_error)
     __pyx_v_fen = ((PyObject*)values[2]);
     __pyx_v_board = values[3];
     __pyx_v_pieces_count = ((PyObject*)values[4]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("set_q_value", 0, 2, 5, __pyx_nargs); __PYX_ERR(0, 227, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("set_q_value", 0, 2, 5, __pyx_nargs); __PYX_ERR(0, 229, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -5474,11 +5483,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_fen), (&PyUnicode_Type), 1, "fen", 1))) __PYX_ERR(0, 230, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pieces_count), (&PyInt_Type), 1, "pieces_count", 1))) __PYX_ERR(0, 232, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_fen), (&PyUnicode_Type), 1, "fen", 1))) __PYX_ERR(0, 232, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pieces_count), (&PyInt_Type), 1, "pieces_count", 1))) __PYX_ERR(0, 234, __pyx_L1_error)
   __pyx_r = __pyx_pf_9chmengine_7engines_8quartney_8Quartney_12set_q_value(__pyx_self, __pyx_v_self, __pyx_v_value, __pyx_v_fen, __pyx_v_board, __pyx_v_pieces_count);
 
-  /* "chmengine/engines/quartney.py":227
+  /* "chmengine/engines/quartney.py":229
  *         )
  * 
  *     def set_q_value(             # <<<<<<<<<<<<<<
@@ -5527,14 +5536,14 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_12set_q_value(
   __Pyx_INCREF(__pyx_v_fen);
   __Pyx_INCREF(__pyx_v_board);
 
-  /* "chmengine/engines/quartney.py":253
+  /* "chmengine/engines/quartney.py":255
  *         >>> engine.set_q_value(0.0, '1k6/8/8/8/8/3K4/8/8 w - - 0 1')
  *         """
  *         board, fen = self._resolve_board_and_fen_(board, fen)             # <<<<<<<<<<<<<<
  *         with connect(self.qdb_path(board=board, pieces_count=pieces_count)) as q_conn:
  *             q_cursor = q_conn.cursor()
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_resolve_board_and_fen); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 253, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_resolve_board_and_fen); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 255, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -5554,7 +5563,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_12set_q_value(
     PyObject *__pyx_callargs[3] = {__pyx_t_3, __pyx_v_board, __pyx_v_fen};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 2+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 253, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 255, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
@@ -5564,7 +5573,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_12set_q_value(
     if (unlikely(size != 2)) {
       if (size > 2) __Pyx_RaiseTooManyValuesError(2);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      __PYX_ERR(0, 253, __pyx_L1_error)
+      __PYX_ERR(0, 255, __pyx_L1_error)
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
     if (likely(PyTuple_CheckExact(sequence))) {
@@ -5577,15 +5586,15 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_12set_q_value(
     __Pyx_INCREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_t_3);
     #else
-    __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 253, __pyx_L1_error)
+    __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 255, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 253, __pyx_L1_error)
+    __pyx_t_3 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 255, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     #endif
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   } else {
     Py_ssize_t index = -1;
-    __pyx_t_5 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 253, __pyx_L1_error)
+    __pyx_t_5 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 255, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_6 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_5);
@@ -5593,7 +5602,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_12set_q_value(
     __Pyx_GOTREF(__pyx_t_2);
     index = 1; __pyx_t_3 = __pyx_t_6(__pyx_t_5); if (unlikely(!__pyx_t_3)) goto __pyx_L3_unpacking_failed;
     __Pyx_GOTREF(__pyx_t_3);
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_6(__pyx_t_5), 2) < 0) __PYX_ERR(0, 253, __pyx_L1_error)
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_6(__pyx_t_5), 2) < 0) __PYX_ERR(0, 255, __pyx_L1_error)
     __pyx_t_6 = NULL;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     goto __pyx_L4_unpacking_done;
@@ -5601,16 +5610,16 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_12set_q_value(
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_6 = NULL;
     if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    __PYX_ERR(0, 253, __pyx_L1_error)
+    __PYX_ERR(0, 255, __pyx_L1_error)
     __pyx_L4_unpacking_done:;
   }
-  if (!(likely(PyUnicode_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("unicode", __pyx_t_3))) __PYX_ERR(0, 253, __pyx_L1_error)
+  if (!(likely(PyUnicode_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("unicode", __pyx_t_3))) __PYX_ERR(0, 255, __pyx_L1_error)
   __Pyx_DECREF_SET(__pyx_v_board, __pyx_t_2);
   __pyx_t_2 = 0;
   __Pyx_DECREF_SET(__pyx_v_fen, ((PyObject*)__pyx_t_3));
   __pyx_t_3 = 0;
 
-  /* "chmengine/engines/quartney.py":254
+  /* "chmengine/engines/quartney.py":256
  *         """
  *         board, fen = self._resolve_board_and_fen_(board, fen)
  *         with connect(self.qdb_path(board=board, pieces_count=pieces_count)) as q_conn:             # <<<<<<<<<<<<<<
@@ -5618,15 +5627,15 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_12set_q_value(
  *             q_cursor.execute(
  */
   /*with:*/ {
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_connect); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 254, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_connect); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 256, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_qdb_path); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 254, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_qdb_path); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 256, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 254, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 256, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 254, __pyx_L1_error)
-    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_pieces_count, __pyx_v_pieces_count) < 0) __PYX_ERR(0, 254, __pyx_L1_error)
-    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 254, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 256, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_pieces_count, __pyx_v_pieces_count) < 0) __PYX_ERR(0, 256, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 256, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -5649,13 +5658,13 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_12set_q_value(
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 254, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 256, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
-    __pyx_t_8 = __Pyx_PyObject_LookupSpecial(__pyx_t_1, __pyx_n_s_exit); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 254, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_LookupSpecial(__pyx_t_1, __pyx_n_s_exit); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 256, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_7 = __Pyx_PyObject_LookupSpecial(__pyx_t_1, __pyx_n_s_enter); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 254, __pyx_L5_error)
+    __pyx_t_7 = __Pyx_PyObject_LookupSpecial(__pyx_t_1, __pyx_n_s_enter); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 256, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_7);
     __pyx_t_5 = NULL;
     __pyx_t_4 = 0;
@@ -5675,7 +5684,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_12set_q_value(
       PyObject *__pyx_callargs[2] = {__pyx_t_5, NULL};
       __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_7, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 254, __pyx_L5_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 256, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     }
@@ -5694,14 +5703,14 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_12set_q_value(
           __pyx_v_q_conn = __pyx_t_7;
           __pyx_t_7 = 0;
 
-          /* "chmengine/engines/quartney.py":255
+          /* "chmengine/engines/quartney.py":257
  *         board, fen = self._resolve_board_and_fen_(board, fen)
  *         with connect(self.qdb_path(board=board, pieces_count=pieces_count)) as q_conn:
  *             q_cursor = q_conn.cursor()             # <<<<<<<<<<<<<<
  *             q_cursor.execute(
  *                 "INSERT OR REPLACE INTO q_table (fen, q_value) VALUES (?, ?)",
  */
-          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_q_conn, __pyx_n_s_cursor); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 255, __pyx_L9_error)
+          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_q_conn, __pyx_n_s_cursor); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 257, __pyx_L9_error)
           __Pyx_GOTREF(__pyx_t_1);
           __pyx_t_3 = NULL;
           __pyx_t_4 = 0;
@@ -5721,39 +5730,39 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_12set_q_value(
             PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
             __pyx_t_7 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
             __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-            if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 255, __pyx_L9_error)
+            if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 257, __pyx_L9_error)
             __Pyx_GOTREF(__pyx_t_7);
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           }
           __pyx_v_q_cursor = __pyx_t_7;
           __pyx_t_7 = 0;
 
-          /* "chmengine/engines/quartney.py":256
+          /* "chmengine/engines/quartney.py":258
  *         with connect(self.qdb_path(board=board, pieces_count=pieces_count)) as q_conn:
  *             q_cursor = q_conn.cursor()
  *             q_cursor.execute(             # <<<<<<<<<<<<<<
  *                 "INSERT OR REPLACE INTO q_table (fen, q_value) VALUES (?, ?)",
  *                 (fen, value)
  */
-          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_q_cursor, __pyx_n_s_execute); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 256, __pyx_L9_error)
+          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_q_cursor, __pyx_n_s_execute); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 258, __pyx_L9_error)
           __Pyx_GOTREF(__pyx_t_1);
 
-          /* "chmengine/engines/quartney.py":258
+          /* "chmengine/engines/quartney.py":260
  *             q_cursor.execute(
  *                 "INSERT OR REPLACE INTO q_table (fen, q_value) VALUES (?, ?)",
  *                 (fen, value)             # <<<<<<<<<<<<<<
  *             )
  * 
  */
-          __pyx_t_3 = PyFloat_FromDouble(__pyx_v_value); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 258, __pyx_L9_error)
+          __pyx_t_3 = PyFloat_FromDouble(__pyx_v_value); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 260, __pyx_L9_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 258, __pyx_L9_error)
+          __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 260, __pyx_L9_error)
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_INCREF(__pyx_v_fen);
           __Pyx_GIVEREF(__pyx_v_fen);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_v_fen)) __PYX_ERR(0, 258, __pyx_L9_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_v_fen)) __PYX_ERR(0, 260, __pyx_L9_error);
           __Pyx_GIVEREF(__pyx_t_3);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_3)) __PYX_ERR(0, 258, __pyx_L9_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_3)) __PYX_ERR(0, 260, __pyx_L9_error);
           __pyx_t_3 = 0;
           __pyx_t_3 = NULL;
           __pyx_t_4 = 0;
@@ -5774,13 +5783,13 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_12set_q_value(
             __pyx_t_7 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_4, 2+__pyx_t_4);
             __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-            if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 256, __pyx_L9_error)
+            if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 258, __pyx_L9_error)
             __Pyx_GOTREF(__pyx_t_7);
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           }
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-          /* "chmengine/engines/quartney.py":254
+          /* "chmengine/engines/quartney.py":256
  *         """
  *         board, fen = self._resolve_board_and_fen_(board, fen)
  *         with connect(self.qdb_path(board=board, pieces_count=pieces_count)) as q_conn:             # <<<<<<<<<<<<<<
@@ -5800,20 +5809,20 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_12set_q_value(
         __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
         /*except:*/ {
           __Pyx_AddTraceback("chmengine.engines.quartney.Quartney.set_q_value", __pyx_clineno, __pyx_lineno, __pyx_filename);
-          if (__Pyx_GetException(&__pyx_t_7, &__pyx_t_1, &__pyx_t_5) < 0) __PYX_ERR(0, 254, __pyx_L11_except_error)
+          if (__Pyx_GetException(&__pyx_t_7, &__pyx_t_1, &__pyx_t_5) < 0) __PYX_ERR(0, 256, __pyx_L11_except_error)
           __Pyx_XGOTREF(__pyx_t_7);
           __Pyx_XGOTREF(__pyx_t_1);
           __Pyx_XGOTREF(__pyx_t_5);
-          __pyx_t_3 = PyTuple_Pack(3, __pyx_t_7, __pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 254, __pyx_L11_except_error)
+          __pyx_t_3 = PyTuple_Pack(3, __pyx_t_7, __pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 256, __pyx_L11_except_error)
           __Pyx_GOTREF(__pyx_t_3);
           __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_3, NULL);
           __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-          if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 254, __pyx_L11_except_error)
+          if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 256, __pyx_L11_except_error)
           __Pyx_GOTREF(__pyx_t_12);
           __pyx_t_13 = __Pyx_PyObject_IsTrue(__pyx_t_12);
           __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-          if (__pyx_t_13 < 0) __PYX_ERR(0, 254, __pyx_L11_except_error)
+          if (__pyx_t_13 < 0) __PYX_ERR(0, 256, __pyx_L11_except_error)
           __pyx_t_14 = (!__pyx_t_13);
           if (unlikely(__pyx_t_14)) {
             __Pyx_GIVEREF(__pyx_t_7);
@@ -5821,7 +5830,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_12set_q_value(
             __Pyx_XGIVEREF(__pyx_t_5);
             __Pyx_ErrRestoreWithState(__pyx_t_7, __pyx_t_1, __pyx_t_5);
             __pyx_t_7 = 0; __pyx_t_1 = 0; __pyx_t_5 = 0; 
-            __PYX_ERR(0, 254, __pyx_L11_except_error)
+            __PYX_ERR(0, 256, __pyx_L11_except_error)
           }
           __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
           __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -5847,7 +5856,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_12set_q_value(
         if (__pyx_t_8) {
           __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple_, NULL);
           __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-          if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 254, __pyx_L1_error)
+          if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 256, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_11);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         }
@@ -5862,7 +5871,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_12set_q_value(
     __pyx_L18:;
   }
 
-  /* "chmengine/engines/quartney.py":227
+  /* "chmengine/engines/quartney.py":229
  *         )
  * 
  *     def set_q_value(             # <<<<<<<<<<<<<<
@@ -5891,7 +5900,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_12set_q_value(
   return __pyx_r;
 }
 
-/* "chmengine/engines/quartney.py":261
+/* "chmengine/engines/quartney.py":263
  *             )
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
@@ -5940,7 +5949,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_board,0};
 
-    /* "chmengine/engines/quartney.py":262
+    /* "chmengine/engines/quartney.py":264
  * 
  *     @abstractmethod
  *     def fen(self, board: Optional[Board] = None) -> str:             # <<<<<<<<<<<<<<
@@ -5965,19 +5974,19 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 261, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 263, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_board);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 261, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 263, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "fen") < 0)) __PYX_ERR(0, 261, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "fen") < 0)) __PYX_ERR(0, 263, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -5993,7 +6002,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("fen", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 261, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("fen", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 263, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -6009,7 +6018,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_L4_argument_unpacking_done:;
   __pyx_r = __pyx_pf_9chmengine_7engines_8quartney_8Quartney_14fen(__pyx_self, __pyx_v_self, __pyx_v_board);
 
-  /* "chmengine/engines/quartney.py":261
+  /* "chmengine/engines/quartney.py":263
  *             )
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
@@ -6040,7 +6049,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_14fen(CYTHON_U
   return __pyx_r;
 }
 
-/* "chmengine/engines/quartney.py":276
+/* "chmengine/engines/quartney.py":278
  *         """
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
@@ -6089,7 +6098,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_debug,0};
 
-    /* "chmengine/engines/quartney.py":277
+    /* "chmengine/engines/quartney.py":279
  * 
  *     @abstractmethod
  *     def update_q_values(self, debug: bool = False) -> None:             # <<<<<<<<<<<<<<
@@ -6114,19 +6123,19 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 276, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 278, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_debug);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 276, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 278, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "update_q_values") < 0)) __PYX_ERR(0, 276, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "update_q_values") < 0)) __PYX_ERR(0, 278, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -6142,7 +6151,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("update_q_values", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 276, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("update_q_values", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 278, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -6158,7 +6167,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_L4_argument_unpacking_done:;
   __pyx_r = __pyx_pf_9chmengine_7engines_8quartney_8Quartney_16update_q_values(__pyx_self, __pyx_v_self, __pyx_v_debug);
 
-  /* "chmengine/engines/quartney.py":276
+  /* "chmengine/engines/quartney.py":278
  *         """
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
@@ -6189,7 +6198,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_16update_q_val
   return __pyx_r;
 }
 
-/* "chmengine/engines/quartney.py":317
+/* "chmengine/engines/quartney.py":319
  *         """
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
@@ -6241,7 +6250,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_pick_by,&__pyx_n_s_board,&__pyx_n_s_debug,0};
     values[1] = __Pyx_Arg_NewRef_FASTCALL(((PyObject*)((PyObject*)__pyx_kp_u__2)));
 
-    /* "chmengine/engines/quartney.py":321
+    /* "chmengine/engines/quartney.py":323
  *             self,
  *             pick_by: str = "",
  *             board: Optional[Board] = None,             # <<<<<<<<<<<<<<
@@ -6250,7 +6259,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
  */
     values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
 
-    /* "chmengine/engines/quartney.py":322
+    /* "chmengine/engines/quartney.py":324
  *             pick_by: str = "",
  *             board: Optional[Board] = None,
  *             debug: bool = False             # <<<<<<<<<<<<<<
@@ -6279,33 +6288,33 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 317, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 319, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_pick_by);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 317, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 319, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_board);
           if (value) { values[2] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 317, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 319, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_debug);
           if (value) { values[3] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 317, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 319, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "pick_move") < 0)) __PYX_ERR(0, 317, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "pick_move") < 0)) __PYX_ERR(0, 319, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -6327,7 +6336,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("pick_move", 0, 1, 4, __pyx_nargs); __PYX_ERR(0, 317, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("pick_move", 0, 1, 4, __pyx_nargs); __PYX_ERR(0, 319, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -6341,10 +6350,10 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pick_by), (&PyUnicode_Type), 0, "pick_by", 1))) __PYX_ERR(0, 320, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pick_by), (&PyUnicode_Type), 0, "pick_by", 1))) __PYX_ERR(0, 322, __pyx_L1_error)
   __pyx_r = __pyx_pf_9chmengine_7engines_8quartney_8Quartney_18pick_move(__pyx_self, __pyx_v_self, __pyx_v_pick_by, __pyx_v_board, __pyx_v_debug);
 
-  /* "chmengine/engines/quartney.py":317
+  /* "chmengine/engines/quartney.py":319
  *         """
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
@@ -6379,7 +6388,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_18pick_move(CY
   return __pyx_r;
 }
 
-/* "chmengine/engines/quartney.py":357
+/* "chmengine/engines/quartney.py":359
  *         """
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -6441,12 +6450,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 357, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 359, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "depth") < 0)) __PYX_ERR(0, 357, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "depth") < 0)) __PYX_ERR(0, 359, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -6457,7 +6466,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("depth", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 357, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("depth", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 359, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -6493,7 +6502,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_20depth(CYTHON
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("depth", 1);
 
-  /* "chmengine/engines/quartney.py":373
+  /* "chmengine/engines/quartney.py":375
  *         1
  *         """
  *         return self._depth             # <<<<<<<<<<<<<<
@@ -6501,14 +6510,14 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_20depth(CYTHON
  *     @depth.setter
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_depth_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 373, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_depth_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 375, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_1))) __PYX_ERR(0, 373, __pyx_L1_error)
+  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_1))) __PYX_ERR(0, 375, __pyx_L1_error)
   __pyx_r = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/engines/quartney.py":357
+  /* "chmengine/engines/quartney.py":359
  *         """
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -6527,7 +6536,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_20depth(CYTHON
   return __pyx_r;
 }
 
-/* "chmengine/engines/quartney.py":375
+/* "chmengine/engines/quartney.py":377
  *         return self._depth
  * 
  *     @depth.setter             # <<<<<<<<<<<<<<
@@ -6592,7 +6601,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 375, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 377, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -6600,14 +6609,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 375, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 377, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("depth", 1, 2, 2, 1); __PYX_ERR(0, 375, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("depth", 1, 2, 2, 1); __PYX_ERR(0, 377, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "depth") < 0)) __PYX_ERR(0, 375, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "depth") < 0)) __PYX_ERR(0, 377, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -6620,7 +6629,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("depth", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 375, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("depth", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 377, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -6634,7 +6643,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_new_depth), (&PyInt_Type), 0, "new_depth", 1))) __PYX_ERR(0, 376, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_new_depth), (&PyInt_Type), 0, "new_depth", 1))) __PYX_ERR(0, 378, __pyx_L1_error)
   __pyx_r = __pyx_pf_9chmengine_7engines_8quartney_8Quartney_22depth(__pyx_self, __pyx_v_self, __pyx_v_new_depth);
 
   /* function exit code */
@@ -6665,38 +6674,38 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_22depth(CYTHON
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("depth", 1);
 
-  /* "chmengine/engines/quartney.py":402
+  /* "chmengine/engines/quartney.py":404
  *         3
  *         """
  *         if new_depth < 0:             # <<<<<<<<<<<<<<
  *             raise ValueError(f"Invalid depth, value must be greater than or equal to 0, got {new_depth}")
  *         self._depth = int(new_depth)
  */
-  __pyx_t_1 = PyObject_RichCompare(__pyx_v_new_depth, __pyx_int_0, Py_LT); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 402, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 402, __pyx_L1_error)
+  __pyx_t_1 = PyObject_RichCompare(__pyx_v_new_depth, __pyx_int_0, Py_LT); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 404, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 404, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (unlikely(__pyx_t_2)) {
 
-    /* "chmengine/engines/quartney.py":403
+    /* "chmengine/engines/quartney.py":405
  *         """
  *         if new_depth < 0:
  *             raise ValueError(f"Invalid depth, value must be greater than or equal to 0, got {new_depth}")             # <<<<<<<<<<<<<<
  *         self._depth = int(new_depth)
  *         self._init_qdb()
  */
-    __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_v_new_depth, __pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 403, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_v_new_depth, __pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 405, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyUnicode_Concat(__pyx_kp_u_Invalid_depth_value_must_be_grea, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 403, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyUnicode_Concat(__pyx_kp_u_Invalid_depth_value_must_be_grea, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 405, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_ValueError, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 403, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_ValueError, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 405, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 403, __pyx_L1_error)
+    __PYX_ERR(0, 405, __pyx_L1_error)
 
-    /* "chmengine/engines/quartney.py":402
+    /* "chmengine/engines/quartney.py":404
  *         3
  *         """
  *         if new_depth < 0:             # <<<<<<<<<<<<<<
@@ -6705,23 +6714,23 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_22depth(CYTHON
  */
   }
 
-  /* "chmengine/engines/quartney.py":404
+  /* "chmengine/engines/quartney.py":406
  *         if new_depth < 0:
  *             raise ValueError(f"Invalid depth, value must be greater than or equal to 0, got {new_depth}")
  *         self._depth = int(new_depth)             # <<<<<<<<<<<<<<
  *         self._init_qdb()
  */
-  __pyx_t_1 = __Pyx_PyNumber_Int(__pyx_v_new_depth); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 404, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyNumber_Int(__pyx_v_new_depth); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 406, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_depth_2, __pyx_t_1) < 0) __PYX_ERR(0, 404, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_depth_2, __pyx_t_1) < 0) __PYX_ERR(0, 406, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "chmengine/engines/quartney.py":405
+  /* "chmengine/engines/quartney.py":407
  *             raise ValueError(f"Invalid depth, value must be greater than or equal to 0, got {new_depth}")
  *         self._depth = int(new_depth)
  *         self._init_qdb()             # <<<<<<<<<<<<<<
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_init_qdb); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 405, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_init_qdb); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 407, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   __pyx_t_5 = 0;
@@ -6741,13 +6750,13 @@ static PyObject *__pyx_pf_9chmengine_7engines_8quartney_8Quartney_22depth(CYTHON
     PyObject *__pyx_callargs[2] = {__pyx_t_4, NULL};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 0+__pyx_t_5);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 405, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 407, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "chmengine/engines/quartney.py":375
+  /* "chmengine/engines/quartney.py":377
  *         return self._depth
  * 
  *     @depth.setter             # <<<<<<<<<<<<<<
@@ -6811,25 +6820,26 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_Pick, __pyx_k_Pick, sizeof(__pyx_k_Pick), 0, 0, 1, 1},
     {&__pyx_n_u_QTables, __pyx_k_QTables, sizeof(__pyx_k_QTables), 0, 1, 0, 1},
     {&__pyx_n_s_Quartney, __pyx_k_Quartney, sizeof(__pyx_k_Quartney), 0, 0, 1, 1},
+    {&__pyx_n_u_Quartney, __pyx_k_Quartney, sizeof(__pyx_k_Quartney), 0, 1, 0, 1},
     {&__pyx_n_s_Quartney__init_qdb, __pyx_k_Quartney__init_qdb, sizeof(__pyx_k_Quartney__init_qdb), 0, 0, 1, 1},
     {&__pyx_n_s_Quartney__resolve_board_and_fen, __pyx_k_Quartney__resolve_board_and_fen, sizeof(__pyx_k_Quartney__resolve_board_and_fen), 0, 0, 1, 1},
     {&__pyx_kp_u_Quartney__resolve_board_and_fen_2, __pyx_k_Quartney__resolve_board_and_fen_2, sizeof(__pyx_k_Quartney__resolve_board_and_fen_2), 0, 1, 0, 0},
     {&__pyx_n_s_Quartney_depth, __pyx_k_Quartney_depth, sizeof(__pyx_k_Quartney_depth), 0, 0, 1, 1},
-    {&__pyx_kp_u_Quartney_depth_line_357, __pyx_k_Quartney_depth_line_357, sizeof(__pyx_k_Quartney_depth_line_357), 0, 1, 0, 0},
-    {&__pyx_kp_u_Quartney_depth_line_375, __pyx_k_Quartney_depth_line_375, sizeof(__pyx_k_Quartney_depth_line_375), 0, 1, 0, 0},
+    {&__pyx_kp_u_Quartney_depth_line_359, __pyx_k_Quartney_depth_line_359, sizeof(__pyx_k_Quartney_depth_line_359), 0, 1, 0, 0},
+    {&__pyx_kp_u_Quartney_depth_line_377, __pyx_k_Quartney_depth_line_377, sizeof(__pyx_k_Quartney_depth_line_377), 0, 1, 0, 0},
     {&__pyx_n_s_Quartney_fen, __pyx_k_Quartney_fen, sizeof(__pyx_k_Quartney_fen), 0, 0, 1, 1},
     {&__pyx_n_s_Quartney_get_q_value, __pyx_k_Quartney_get_q_value, sizeof(__pyx_k_Quartney_get_q_value), 0, 0, 1, 1},
-    {&__pyx_kp_u_Quartney_get_q_value_line_135, __pyx_k_Quartney_get_q_value_line_135, sizeof(__pyx_k_Quartney_get_q_value_line_135), 0, 1, 0, 0},
+    {&__pyx_kp_u_Quartney_get_q_value_line_137, __pyx_k_Quartney_get_q_value_line_137, sizeof(__pyx_k_Quartney_get_q_value_line_137), 0, 1, 0, 0},
     {&__pyx_n_s_Quartney_pick_move, __pyx_k_Quartney_pick_move, sizeof(__pyx_k_Quartney_pick_move), 0, 0, 1, 1},
-    {&__pyx_kp_u_Quartney_pick_move_line_317, __pyx_k_Quartney_pick_move_line_317, sizeof(__pyx_k_Quartney_pick_move_line_317), 0, 1, 0, 0},
+    {&__pyx_kp_u_Quartney_pick_move_line_319, __pyx_k_Quartney_pick_move_line_319, sizeof(__pyx_k_Quartney_pick_move_line_319), 0, 1, 0, 0},
     {&__pyx_n_s_Quartney_pieces_count, __pyx_k_Quartney_pieces_count, sizeof(__pyx_k_Quartney_pieces_count), 0, 0, 1, 1},
-    {&__pyx_kp_u_Quartney_pieces_count_line_53, __pyx_k_Quartney_pieces_count_line_53, sizeof(__pyx_k_Quartney_pieces_count_line_53), 0, 1, 0, 0},
+    {&__pyx_kp_u_Quartney_pieces_count_line_55, __pyx_k_Quartney_pieces_count_line_55, sizeof(__pyx_k_Quartney_pieces_count_line_55), 0, 1, 0, 0},
     {&__pyx_n_s_Quartney_qdb_path, __pyx_k_Quartney_qdb_path, sizeof(__pyx_k_Quartney_qdb_path), 0, 0, 1, 1},
-    {&__pyx_kp_u_Quartney_qdb_path_line_77, __pyx_k_Quartney_qdb_path_line_77, sizeof(__pyx_k_Quartney_qdb_path_line_77), 0, 1, 0, 0},
+    {&__pyx_kp_u_Quartney_qdb_path_line_79, __pyx_k_Quartney_qdb_path_line_79, sizeof(__pyx_k_Quartney_qdb_path_line_79), 0, 1, 0, 0},
     {&__pyx_n_s_Quartney_qtable_filename, __pyx_k_Quartney_qtable_filename, sizeof(__pyx_k_Quartney_qtable_filename), 0, 0, 1, 1},
-    {&__pyx_kp_u_Quartney_qtable_filename_line_20, __pyx_k_Quartney_qtable_filename_line_20, sizeof(__pyx_k_Quartney_qtable_filename_line_20), 0, 1, 0, 0},
+    {&__pyx_kp_u_Quartney_qtable_filename_line_22, __pyx_k_Quartney_qtable_filename_line_22, sizeof(__pyx_k_Quartney_qtable_filename_line_22), 0, 1, 0, 0},
     {&__pyx_n_s_Quartney_set_q_value, __pyx_k_Quartney_set_q_value, sizeof(__pyx_k_Quartney_set_q_value), 0, 0, 1, 1},
-    {&__pyx_kp_u_Quartney_set_q_value_line_227, __pyx_k_Quartney_set_q_value_line_227, sizeof(__pyx_k_Quartney_set_q_value_line_227), 0, 1, 0, 0},
+    {&__pyx_kp_u_Quartney_set_q_value_line_229, __pyx_k_Quartney_set_q_value_line_229, sizeof(__pyx_k_Quartney_set_q_value_line_229), 0, 1, 0, 0},
     {&__pyx_n_s_Quartney_update_q_values, __pyx_k_Quartney_update_q_values, sizeof(__pyx_k_Quartney_update_q_values), 0, 0, 1, 1},
     {&__pyx_kp_u_Quartney_update_q_values_line_27, __pyx_k_Quartney_update_q_values_line_27, sizeof(__pyx_k_Quartney_update_q_values_line_27), 0, 1, 0, 0},
     {&__pyx_kp_u_Retrieve_a_cached_Qvalue_for_a_p, __pyx_k_Retrieve_a_cached_Qvalue_for_a_p, sizeof(__pyx_k_Retrieve_a_cached_Qvalue_for_a_p), 0, 1, 0, 0},
@@ -6846,6 +6856,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s__30, __pyx_k__30, sizeof(__pyx_k__30), 0, 0, 1, 1},
     {&__pyx_n_s_abc, __pyx_k_abc, sizeof(__pyx_k_abc), 0, 0, 1, 1},
     {&__pyx_n_s_abstractmethod, __pyx_k_abstractmethod, sizeof(__pyx_k_abstractmethod), 0, 0, 1, 1},
+    {&__pyx_n_s_all, __pyx_k_all, sizeof(__pyx_k_all), 0, 0, 1, 1},
     {&__pyx_n_s_annotations, __pyx_k_annotations, sizeof(__pyx_k_annotations), 0, 0, 1, 1},
     {&__pyx_n_s_asyncio_coroutines, __pyx_k_asyncio_coroutines, sizeof(__pyx_k_asyncio_coroutines), 0, 0, 1, 1},
     {&__pyx_n_s_board, __pyx_k_board, sizeof(__pyx_k_board), 0, 0, 1, 1},
@@ -6923,9 +6934,9 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
 }
 /* #### Code section: cached_builtins ### */
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_property = __Pyx_GetBuiltinName(__pyx_n_s_property); if (!__pyx_builtin_property) __PYX_ERR(0, 357, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 120, __pyx_L1_error)
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 403, __pyx_L1_error)
+  __pyx_builtin_property = __Pyx_GetBuiltinName(__pyx_n_s_property); if (!__pyx_builtin_property) __PYX_ERR(0, 359, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 122, __pyx_L1_error)
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 405, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -6936,166 +6947,166 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "chmengine/engines/quartney.py":123
+  /* "chmengine/engines/quartney.py":125
  *             qdb_path: str = self.qdb_path(pieces_count=pieces_count)
  *             q_conn: Connection
  *             with connect(qdb_path) as q_conn:             # <<<<<<<<<<<<<<
  *                 q_cursor: Cursor = q_conn.cursor()
  *                 q_cursor.execute(
  */
-  __pyx_tuple_ = PyTuple_Pack(3, Py_None, Py_None, Py_None); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 123, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(3, Py_None, Py_None, Py_None); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "chmengine/engines/quartney.py":20
+  /* "chmengine/engines/quartney.py":22
  *     cache_dir: str = path.join(".", CACHE_DIR, "QTables")
  * 
  *     def qtable_filename(             # <<<<<<<<<<<<<<
  *             self,
  *             board: Optional[Board] = None,
  */
-  __pyx_tuple__4 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_board, __pyx_n_s_pieces_count); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_board, __pyx_n_s_pieces_count); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
-  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_qtable_filename, 20, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 20, __pyx_L1_error)
-  __pyx_tuple__6 = PyTuple_Pack(2, Py_None, Py_None); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_qtable_filename, 22, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(2, Py_None, Py_None); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "chmengine/engines/quartney.py":53
+  /* "chmengine/engines/quartney.py":55
  *         )
  * 
  *     def pieces_count(self, board: Optional[Board] = None) -> int:             # <<<<<<<<<<<<<<
  *         """Return the number of pieces on the board in O(1) time.
  * 
  */
-  __pyx_tuple__7 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_board); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_board); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
-  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_pieces_count, 53, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 53, __pyx_L1_error)
-  __pyx_tuple__9 = PyTuple_Pack(1, Py_None); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_pieces_count, 55, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(1, Py_None); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
 
-  /* "chmengine/engines/quartney.py":77
+  /* "chmengine/engines/quartney.py":79
  *         return pieces_count_from_board(board=self.board) if board is None else pieces_count_from_board(board=board)
  * 
  *     def qdb_path(             # <<<<<<<<<<<<<<
  *             self,
  *             board: Optional[Board] = None,
  */
-  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_qdb_path, 77, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_qdb_path, 79, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 79, __pyx_L1_error)
 
-  /* "chmengine/engines/quartney.py":106
+  /* "chmengine/engines/quartney.py":108
  *         return path.join(self.cache_dir, self.qtable_filename(board=board, pieces_count=pieces_count))
  * 
  *     def _init_qdb(self) -> None:             # <<<<<<<<<<<<<<
  *         """Ensure the cache directory exists and initialize all Qtable DBs.
  * 
  */
-  __pyx_tuple__11 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_pieces_count, __pyx_n_s_qdb_path, __pyx_n_s_q_conn, __pyx_n_s_q_cursor); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_tuple__11 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_pieces_count, __pyx_n_s_qdb_path, __pyx_n_s_q_conn, __pyx_n_s_q_cursor); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
-  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_init_qdb, 106, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_init_qdb, 108, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 108, __pyx_L1_error)
 
-  /* "chmengine/engines/quartney.py":135
+  /* "chmengine/engines/quartney.py":137
  *                 )
  * 
  *     def get_q_value(             # <<<<<<<<<<<<<<
  *             self,
  *             fen: Optional[str] = None,
  */
-  __pyx_tuple__13 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_fen, __pyx_n_s_board, __pyx_n_s_pieces_count, __pyx_n_s_q_conn, __pyx_n_s_q_cursor, __pyx_n_s_row); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_tuple__13 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_fen, __pyx_n_s_board, __pyx_n_s_pieces_count, __pyx_n_s_q_conn, __pyx_n_s_q_cursor, __pyx_n_s_row); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__13);
   __Pyx_GIVEREF(__pyx_tuple__13);
-  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_get_q_value, 135, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_get_q_value, 137, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 137, __pyx_L1_error)
 
-  /* "chmengine/engines/quartney.py":174
+  /* "chmengine/engines/quartney.py":176
  *             return float64(row[0]) if row is not None else None
  * 
  *     def _resolve_board_and_fen_(self, board: Optional[Board], fen: Optional[str]) -> Tuple[Board, str]:             # <<<<<<<<<<<<<<
  *         """Ensure both `board` and `fen` are non-None, resolving missing values using fallback logic.
  * 
  */
-  __pyx_tuple__15 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_board, __pyx_n_s_fen); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __pyx_tuple__15 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_board, __pyx_n_s_fen); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 176, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__15);
   __Pyx_GIVEREF(__pyx_tuple__15);
-  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_resolve_board_and_fen, 174, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_resolve_board_and_fen, 176, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 176, __pyx_L1_error)
 
-  /* "chmengine/engines/quartney.py":227
+  /* "chmengine/engines/quartney.py":229
  *         )
  * 
  *     def set_q_value(             # <<<<<<<<<<<<<<
  *             self,
  *             value: float,
  */
-  __pyx_tuple__17 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_value, __pyx_n_s_fen, __pyx_n_s_board, __pyx_n_s_pieces_count, __pyx_n_s_q_conn, __pyx_n_s_q_cursor); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_tuple__17 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_value, __pyx_n_s_fen, __pyx_n_s_board, __pyx_n_s_pieces_count, __pyx_n_s_q_conn, __pyx_n_s_q_cursor); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__17);
   __Pyx_GIVEREF(__pyx_tuple__17);
-  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(5, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__17, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_set_q_value, 227, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(5, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__17, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_set_q_value, 229, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(0, 229, __pyx_L1_error)
 
-  /* "chmengine/engines/quartney.py":261
+  /* "chmengine/engines/quartney.py":263
  *             )
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
  *     def fen(self, board: Optional[Board] = None) -> str:
  *         """Return the FEN string representing `board`.
  */
-  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_fen, 261, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_fen, 263, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 263, __pyx_L1_error)
 
-  /* "chmengine/engines/quartney.py":276
+  /* "chmengine/engines/quartney.py":278
  *         """
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
  *     def update_q_values(self, debug: bool = False) -> None:
  *         """Backpropagate game outcome through the Qtable.
  */
-  __pyx_tuple__20 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_debug); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(0, 276, __pyx_L1_error)
+  __pyx_tuple__20 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_debug); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(0, 278, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__20);
   __Pyx_GIVEREF(__pyx_tuple__20);
-  __pyx_codeobj__21 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__20, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_update_q_values, 276, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__21)) __PYX_ERR(0, 276, __pyx_L1_error)
-  __pyx_tuple__22 = PyTuple_Pack(1, ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 276, __pyx_L1_error)
+  __pyx_codeobj__21 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__20, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_update_q_values, 278, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__21)) __PYX_ERR(0, 278, __pyx_L1_error)
+  __pyx_tuple__22 = PyTuple_Pack(1, ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 278, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__22);
   __Pyx_GIVEREF(__pyx_tuple__22);
 
-  /* "chmengine/engines/quartney.py":317
+  /* "chmengine/engines/quartney.py":319
  *         """
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
  *     def pick_move(
  *             self,
  */
-  __pyx_tuple__23 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_pick_by, __pyx_n_s_board, __pyx_n_s_debug); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 317, __pyx_L1_error)
+  __pyx_tuple__23 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_pick_by, __pyx_n_s_board, __pyx_n_s_debug); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 319, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__23);
   __Pyx_GIVEREF(__pyx_tuple__23);
-  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_pick_move, 317, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 317, __pyx_L1_error)
-  __pyx_tuple__25 = PyTuple_Pack(3, ((PyObject*)__pyx_kp_u__2), Py_None, ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 317, __pyx_L1_error)
+  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_pick_move, 319, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 319, __pyx_L1_error)
+  __pyx_tuple__25 = PyTuple_Pack(3, ((PyObject*)__pyx_kp_u__2), Py_None, ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 319, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__25);
   __Pyx_GIVEREF(__pyx_tuple__25);
 
-  /* "chmengine/engines/quartney.py":357
+  /* "chmengine/engines/quartney.py":359
  *         """
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def depth(self) -> int:
  *         """Current search depth used for heatmap and Qtable lookups.
  */
-  __pyx_tuple__26 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 357, __pyx_L1_error)
+  __pyx_tuple__26 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 359, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__26);
   __Pyx_GIVEREF(__pyx_tuple__26);
-  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_depth, 357, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(0, 357, __pyx_L1_error)
+  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_depth, 359, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(0, 359, __pyx_L1_error)
 
-  /* "chmengine/engines/quartney.py":375
+  /* "chmengine/engines/quartney.py":377
  *         return self._depth
  * 
  *     @depth.setter             # <<<<<<<<<<<<<<
  *     def depth(self, new_depth: int):
  *         """Set the recursion depth and reinitialize Qtables.
  */
-  __pyx_tuple__28 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_new_depth); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 375, __pyx_L1_error)
+  __pyx_tuple__28 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_new_depth); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 377, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__28);
   __Pyx_GIVEREF(__pyx_tuple__28);
-  __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__28, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_depth, 375, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) __PYX_ERR(0, 375, __pyx_L1_error)
+  __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__28, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_quartney_py, __pyx_n_s_depth, 377, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) __PYX_ERR(0, 377, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -7618,7 +7629,7 @@ if (!__Pyx_RefNanny) {
  * from chess import Board
  * from numpy import float64             # <<<<<<<<<<<<<<
  * 
- * from chmengine.utils import pieces_count_from_board, Pick
+ * from chmengine.utils import Pick, pieces_count_from_board
  */
   __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -7637,37 +7648,37 @@ if (!__Pyx_RefNanny) {
   /* "chmengine/engines/quartney.py":10
  * from numpy import float64
  * 
- * from chmengine.utils import pieces_count_from_board, Pick             # <<<<<<<<<<<<<<
+ * from chmengine.utils import Pick, pieces_count_from_board             # <<<<<<<<<<<<<<
  * from chmutils import CACHE_DIR
  * 
  */
   __pyx_t_2 = PyList_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_INCREF(__pyx_n_s_pieces_count_from_board);
-  __Pyx_GIVEREF(__pyx_n_s_pieces_count_from_board);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_pieces_count_from_board)) __PYX_ERR(0, 10, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_s_Pick);
   __Pyx_GIVEREF(__pyx_n_s_Pick);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_s_Pick)) __PYX_ERR(0, 10, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_Pick)) __PYX_ERR(0, 10, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_pieces_count_from_board);
+  __Pyx_GIVEREF(__pyx_n_s_pieces_count_from_board);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_s_pieces_count_from_board)) __PYX_ERR(0, 10, __pyx_L1_error);
   __pyx_t_3 = __Pyx_Import(__pyx_n_s_chmengine_utils, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_pieces_count_from_board); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pieces_count_from_board, __pyx_t_2) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_Pick); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_Pick, __pyx_t_2) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_pieces_count_from_board); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pieces_count_from_board, __pyx_t_2) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "chmengine/engines/quartney.py":11
  * 
- * from chmengine.utils import pieces_count_from_board, Pick
+ * from chmengine.utils import Pick, pieces_count_from_board
  * from chmutils import CACHE_DIR             # <<<<<<<<<<<<<<
  * 
- * 
+ * __all__ = ['Quartney']
  */
   __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -7683,40 +7694,55 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "chmengine/engines/quartney.py":14
+  /* "chmengine/engines/quartney.py":13
+ * from chmutils import CACHE_DIR
+ * 
+ * __all__ = ['Quartney']             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_INCREF(__pyx_n_u_Quartney);
+  __Pyx_GIVEREF(__pyx_n_u_Quartney);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_u_Quartney)) __PYX_ERR(0, 13, __pyx_L1_error);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_all, __pyx_t_2) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "chmengine/engines/quartney.py":16
  * 
  * 
  * class Quartney(metaclass=ABCMeta):             # <<<<<<<<<<<<<<
  *     """Mother class of Cmhmey Jr., managing Qtable persistence and move selection."""
  *     _depth: int
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_ABCMeta); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_ABCMeta); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_Py3MetaclassPrepare(__pyx_t_3, __pyx_empty_tuple, __pyx_n_s_Quartney, __pyx_n_s_Quartney, __pyx_t_2, __pyx_n_s_chmengine_engines_quartney, __pyx_kp_s_Mother_class_of_Cmhmey_Jr_managi); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_Py3MetaclassPrepare(__pyx_t_3, __pyx_empty_tuple, __pyx_n_s_Quartney, __pyx_n_s_Quartney, __pyx_t_2, __pyx_n_s_chmengine_engines_quartney, __pyx_kp_s_Mother_class_of_Cmhmey_Jr_managi); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_depth_2, __pyx_n_s_int) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_cache_dir, __pyx_n_s_str) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_annotations, __pyx_t_5) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_depth_2, __pyx_n_s_int) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_cache_dir, __pyx_n_s_str) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_annotations, __pyx_t_5) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "chmengine/engines/quartney.py":18
+  /* "chmengine/engines/quartney.py":20
  *     _depth: int
  *     board: Optional[Board]
  *     cache_dir: str = path.join(".", CACHE_DIR, "QTables")             # <<<<<<<<<<<<<<
  * 
  *     def qtable_filename(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_path); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 18, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_path); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_join); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 18, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_join); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_CACHE_DIR); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 18, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_CACHE_DIR); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_8 = NULL;
   __pyx_t_9 = 0;
@@ -7737,181 +7763,181 @@ if (!__Pyx_RefNanny) {
     __pyx_t_5 = __Pyx_PyObject_FastCall(__pyx_t_7, __pyx_callargs+1-__pyx_t_9, 3+__pyx_t_9);
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 18, __pyx_L1_error)
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 20, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_cache_dir, __pyx_t_5) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_cache_dir, __pyx_t_5) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "chmengine/engines/quartney.py":20
+  /* "chmengine/engines/quartney.py":22
  *     cache_dir: str = path.join(".", CACHE_DIR, "QTables")
  * 
  *     def qtable_filename(             # <<<<<<<<<<<<<<
  *             self,
  *             board: Optional[Board] = None,
  */
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_pieces_count, __pyx_kp_s_Optional_Union_int_str) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_str) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_1qtable_filename, 0, __pyx_n_s_Quartney_qtable_filename, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_pieces_count, __pyx_kp_s_Optional_Union_int_str) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_str) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_1qtable_filename, 0, __pyx_n_s_Quartney_qtable_filename, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_7, __pyx_tuple__6);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_5);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_qtable_filename, __pyx_t_7) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_qtable_filename, __pyx_t_7) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/engines/quartney.py":53
+  /* "chmengine/engines/quartney.py":55
  *         )
  * 
  *     def pieces_count(self, board: Optional[Board] = None) -> int:             # <<<<<<<<<<<<<<
  *         """Return the number of pieces on the board in O(1) time.
  * 
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_int) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_3pieces_count, 0, __pyx_n_s_Quartney_pieces_count, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__8)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 53, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 55, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_int) < 0) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_3pieces_count, 0, __pyx_n_s_Quartney_pieces_count, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__8)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__9);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_7);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_pieces_count, __pyx_t_5) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_pieces_count, __pyx_t_5) < 0) __PYX_ERR(0, 55, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "chmengine/engines/quartney.py":77
+  /* "chmengine/engines/quartney.py":79
  *         return pieces_count_from_board(board=self.board) if board is None else pieces_count_from_board(board=board)
  * 
  *     def qdb_path(             # <<<<<<<<<<<<<<
  *             self,
  *             board: Optional[Board] = None,
  */
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 79, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_pieces_count, __pyx_kp_s_Optional_Union_int_str) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_str) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_5qdb_path, 0, __pyx_n_s_Quartney_qdb_path, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__10)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 77, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 79, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_pieces_count, __pyx_kp_s_Optional_Union_int_str) < 0) __PYX_ERR(0, 79, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_str) < 0) __PYX_ERR(0, 79, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_5qdb_path, 0, __pyx_n_s_Quartney_qdb_path, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__10)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 79, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_7, __pyx_tuple__6);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_5);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_qdb_path, __pyx_t_7) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_qdb_path, __pyx_t_7) < 0) __PYX_ERR(0, 79, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/engines/quartney.py":106
+  /* "chmengine/engines/quartney.py":108
  *         return path.join(self.cache_dir, self.qtable_filename(board=board, pieces_count=pieces_count))
  * 
  *     def _init_qdb(self) -> None:             # <<<<<<<<<<<<<<
  *         """Ensure the cache directory exists and initialize all Qtable DBs.
  * 
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 106, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_7_init_qdb, 0, __pyx_n_s_Quartney__init_qdb, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__12)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 106, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_7_init_qdb, 0, __pyx_n_s_Quartney__init_qdb, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__12)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_7);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_init_qdb, __pyx_t_5) < 0) __PYX_ERR(0, 106, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_init_qdb, __pyx_t_5) < 0) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "chmengine/engines/quartney.py":135
+  /* "chmengine/engines/quartney.py":137
  *                 )
  * 
  *     def get_q_value(             # <<<<<<<<<<<<<<
  *             self,
  *             fen: Optional[str] = None,
  */
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_fen, __pyx_kp_s_Optional_str) < 0) __PYX_ERR(0, 135, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 135, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_pieces_count, __pyx_kp_s_Optional_int) < 0) __PYX_ERR(0, 135, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_kp_s_Optional_float64) < 0) __PYX_ERR(0, 135, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_9get_q_value, 0, __pyx_n_s_Quartney_get_q_value, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__14)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 135, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_fen, __pyx_kp_s_Optional_str) < 0) __PYX_ERR(0, 137, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 137, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_pieces_count, __pyx_kp_s_Optional_int) < 0) __PYX_ERR(0, 137, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_kp_s_Optional_float64) < 0) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_9get_q_value, 0, __pyx_n_s_Quartney_get_q_value, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__14)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_7, __pyx_tuple_);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_5);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_get_q_value, __pyx_t_7) < 0) __PYX_ERR(0, 135, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_get_q_value, __pyx_t_7) < 0) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/engines/quartney.py":174
+  /* "chmengine/engines/quartney.py":176
  *             return float64(row[0]) if row is not None else None
  * 
  *     def _resolve_board_and_fen_(self, board: Optional[Board], fen: Optional[str]) -> Tuple[Board, str]:             # <<<<<<<<<<<<<<
  *         """Ensure both `board` and `fen` are non-None, resolving missing values using fallback logic.
  * 
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 176, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 174, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_fen, __pyx_kp_s_Optional_str) < 0) __PYX_ERR(0, 174, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_kp_s_Tuple_Board_str) < 0) __PYX_ERR(0, 174, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_11_resolve_board_and_fen_, 0, __pyx_n_s_Quartney__resolve_board_and_fen, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__16)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 174, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 176, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_fen, __pyx_kp_s_Optional_str) < 0) __PYX_ERR(0, 176, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_kp_s_Tuple_Board_str) < 0) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_11_resolve_board_and_fen_, 0, __pyx_n_s_Quartney__resolve_board_and_fen, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__16)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 176, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_7);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_resolve_board_and_fen, __pyx_t_5) < 0) __PYX_ERR(0, 174, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_resolve_board_and_fen, __pyx_t_5) < 0) __PYX_ERR(0, 176, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "chmengine/engines/quartney.py":227
+  /* "chmengine/engines/quartney.py":229
  *         )
  * 
  *     def set_q_value(             # <<<<<<<<<<<<<<
  *             self,
  *             value: float,
  */
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_value, __pyx_n_s_float) < 0) __PYX_ERR(0, 227, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_fen, __pyx_kp_s_Optional_str) < 0) __PYX_ERR(0, 227, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 227, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_pieces_count, __pyx_kp_s_Optional_int) < 0) __PYX_ERR(0, 227, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 227, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_13set_q_value, 0, __pyx_n_s_Quartney_set_q_value, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__18)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 227, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_value, __pyx_n_s_float) < 0) __PYX_ERR(0, 229, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_fen, __pyx_kp_s_Optional_str) < 0) __PYX_ERR(0, 229, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 229, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_pieces_count, __pyx_kp_s_Optional_int) < 0) __PYX_ERR(0, 229, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 229, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_13set_q_value, 0, __pyx_n_s_Quartney_set_q_value, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__18)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_7, __pyx_tuple_);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_5);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_set_q_value, __pyx_t_7) < 0) __PYX_ERR(0, 227, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_set_q_value, __pyx_t_7) < 0) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/engines/quartney.py":261
+  /* "chmengine/engines/quartney.py":263
  *             )
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
  *     def fen(self, board: Optional[Board] = None) -> str:
  *         """Return the FEN string representing `board`.
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_abstractmethod); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_abstractmethod); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
 
-  /* "chmengine/engines/quartney.py":262
+  /* "chmengine/engines/quartney.py":264
  * 
  *     @abstractmethod
  *     def fen(self, board: Optional[Board] = None) -> str:             # <<<<<<<<<<<<<<
  *         """Return the FEN string representing `board`.
  * 
  */
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 261, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_return, __pyx_n_s_str) < 0) __PYX_ERR(0, 261, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 263, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_return, __pyx_n_s_str) < 0) __PYX_ERR(0, 263, __pyx_L1_error)
 
-  /* "chmengine/engines/quartney.py":261
+  /* "chmengine/engines/quartney.py":263
  *             )
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
  *     def fen(self, board: Optional[Board] = None) -> str:
  *         """Return the FEN string representing `board`.
  */
-  __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_15fen, 0, __pyx_n_s_Quartney_fen, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__19)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_15fen, 0, __pyx_n_s_Quartney_fen, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__19)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_8, __pyx_tuple__9);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_8, __pyx_t_6);
@@ -7935,27 +7961,27 @@ if (!__Pyx_RefNanny) {
     __pyx_t_7 = __Pyx_PyObject_FastCall(__pyx_t_5, __pyx_callargs+1-__pyx_t_9, 1+__pyx_t_9);
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 261, __pyx_L1_error)
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 263, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_fen, __pyx_t_7) < 0) __PYX_ERR(0, 261, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_fen, __pyx_t_7) < 0) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/engines/quartney.py":276
+  /* "chmengine/engines/quartney.py":278
  *         """
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
  *     def update_q_values(self, debug: bool = False) -> None:
  *         """Backpropagate game outcome through the Qtable.
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_abstractmethod); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 276, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_abstractmethod); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 278, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_8 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 276, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 278, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_debug, __pyx_n_s_bool) < 0) __PYX_ERR(0, 276, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 276, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_17update_q_values, 0, __pyx_n_s_Quartney_update_q_values, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__21)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 276, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_debug, __pyx_n_s_bool) < 0) __PYX_ERR(0, 278, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 278, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_17update_q_values, 0, __pyx_n_s_Quartney_update_q_values, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__21)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 278, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_6, __pyx_tuple__22);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_8);
@@ -7979,45 +8005,45 @@ if (!__Pyx_RefNanny) {
     __pyx_t_7 = __Pyx_PyObject_FastCall(__pyx_t_5, __pyx_callargs+1-__pyx_t_9, 1+__pyx_t_9);
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 276, __pyx_L1_error)
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 278, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_update_q_values, __pyx_t_7) < 0) __PYX_ERR(0, 276, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_update_q_values, __pyx_t_7) < 0) __PYX_ERR(0, 278, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/engines/quartney.py":317
+  /* "chmengine/engines/quartney.py":319
  *         """
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
  *     def pick_move(
  *             self,
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_abstractmethod); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 317, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_abstractmethod); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 319, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
 
-  /* "chmengine/engines/quartney.py":321
+  /* "chmengine/engines/quartney.py":323
  *             self,
  *             pick_by: str = "",
  *             board: Optional[Board] = None,             # <<<<<<<<<<<<<<
  *             debug: bool = False
  *     ) -> Pick:
  */
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 317, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 319, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_pick_by, __pyx_n_s_str) < 0) __PYX_ERR(0, 317, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 317, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_debug, __pyx_n_s_bool) < 0) __PYX_ERR(0, 317, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_return, __pyx_n_s_Pick) < 0) __PYX_ERR(0, 317, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_pick_by, __pyx_n_s_str) < 0) __PYX_ERR(0, 319, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 319, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_debug, __pyx_n_s_bool) < 0) __PYX_ERR(0, 319, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_return, __pyx_n_s_Pick) < 0) __PYX_ERR(0, 319, __pyx_L1_error)
 
-  /* "chmengine/engines/quartney.py":317
+  /* "chmengine/engines/quartney.py":319
  *         """
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
  *     def pick_move(
  *             self,
  */
-  __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_19pick_move, 0, __pyx_n_s_Quartney_pick_move, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__24)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 317, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_19pick_move, 0, __pyx_n_s_Quartney_pick_move, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__24)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 319, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_8, __pyx_tuple__25);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_8, __pyx_t_6);
@@ -8041,34 +8067,34 @@ if (!__Pyx_RefNanny) {
     __pyx_t_7 = __Pyx_PyObject_FastCall(__pyx_t_5, __pyx_callargs+1-__pyx_t_9, 1+__pyx_t_9);
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 317, __pyx_L1_error)
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 319, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_pick_move, __pyx_t_7) < 0) __PYX_ERR(0, 317, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_pick_move, __pyx_t_7) < 0) __PYX_ERR(0, 319, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/engines/quartney.py":357
+  /* "chmengine/engines/quartney.py":359
  *         """
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def depth(self) -> int:
  *         """Current search depth used for heatmap and Qtable lookups.
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 357, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 359, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_int) < 0) __PYX_ERR(0, 357, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_21depth, 0, __pyx_n_s_Quartney_depth, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__27)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 357, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_int) < 0) __PYX_ERR(0, 359, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_21depth, 0, __pyx_n_s_Quartney_depth, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__27)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 359, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_7);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = __Pyx_PyObject_CallOneArg(__pyx_builtin_property, __pyx_t_5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 357, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_CallOneArg(__pyx_builtin_property, __pyx_t_5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 359, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_depth, __pyx_t_7) < 0) __PYX_ERR(0, 357, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_depth, __pyx_t_7) < 0) __PYX_ERR(0, 359, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/engines/quartney.py":375
+  /* "chmengine/engines/quartney.py":377
  *         return self._depth
  * 
  *     @depth.setter             # <<<<<<<<<<<<<<
@@ -8080,15 +8106,15 @@ if (!__Pyx_RefNanny) {
     PyErr_Clear();
     __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_depth);
   }
-  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 375, __pyx_L1_error)
+  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 377, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_setter); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 375, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_setter); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 377, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 375, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 377, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_new_depth, __pyx_n_s_int) < 0) __PYX_ERR(0, 375, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_23depth, 0, __pyx_n_s_Quartney_depth, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__29)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 375, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_new_depth, __pyx_n_s_int) < 0) __PYX_ERR(0, 377, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_8quartney_8Quartney_23depth, 0, __pyx_n_s_Quartney_depth, NULL, __pyx_n_s_chmengine_engines_quartney, __pyx_d, ((PyObject *)__pyx_codeobj__29)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 377, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_5);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -8111,23 +8137,23 @@ if (!__Pyx_RefNanny) {
     __pyx_t_7 = __Pyx_PyObject_FastCall(__pyx_t_8, __pyx_callargs+1-__pyx_t_9, 1+__pyx_t_9);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 375, __pyx_L1_error)
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 377, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   }
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_depth, __pyx_t_7) < 0) __PYX_ERR(0, 375, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_depth, __pyx_t_7) < 0) __PYX_ERR(0, 377, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/engines/quartney.py":14
+  /* "chmengine/engines/quartney.py":16
  * 
  * 
  * class Quartney(metaclass=ABCMeta):             # <<<<<<<<<<<<<<
  *     """Mother class of Cmhmey Jr., managing Qtable persistence and move selection."""
  *     _depth: int
  */
-  __pyx_t_7 = __Pyx_Py3ClassCreate(__pyx_t_3, __pyx_n_s_Quartney, __pyx_empty_tuple, __pyx_t_4, __pyx_t_2, 1, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_Py3ClassCreate(__pyx_t_3, __pyx_n_s_Quartney, __pyx_empty_tuple, __pyx_t_4, __pyx_t_2, 1, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Quartney, __pyx_t_7) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Quartney, __pyx_t_7) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -8140,16 +8166,16 @@ if (!__Pyx_RefNanny) {
  */
   __pyx_t_2 = __Pyx_PyDict_NewPresized(10); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_Quartney_qtable_filename_line_20, __pyx_kp_u_Build_the_Qtable_filename_based) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_Quartney_pieces_count_line_53, __pyx_kp_u_Return_the_number_of_pieces_on_t) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_Quartney_qdb_path_line_77, __pyx_kp_u_Get_the_full_path_to_the_Qtable) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_Quartney_get_q_value_line_135, __pyx_kp_u_Retrieve_a_cached_Qvalue_for_a_p) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_Quartney_qtable_filename_line_22, __pyx_kp_u_Build_the_Qtable_filename_based) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_Quartney_pieces_count_line_55, __pyx_kp_u_Return_the_number_of_pieces_on_t) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_Quartney_qdb_path_line_79, __pyx_kp_u_Get_the_full_path_to_the_Qtable) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_Quartney_get_q_value_line_137, __pyx_kp_u_Retrieve_a_cached_Qvalue_for_a_p) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_Quartney__resolve_board_and_fen_2, __pyx_kp_u_Ensure_both_board_and_fen_are_no) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_Quartney_set_q_value_line_227, __pyx_kp_u_Insert_or_update_the_Qvalue_for) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_Quartney_set_q_value_line_229, __pyx_kp_u_Insert_or_update_the_Qvalue_for) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_Quartney_update_q_values_line_27, __pyx_kp_u_Backpropagate_game_outcome_throu) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_Quartney_pick_move_line_317, __pyx_kp_u_Select_a_move_based_on_heatmap_s) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_Quartney_depth_line_357, __pyx_kp_u_Current_search_depth_used_for_he) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_Quartney_depth_line_375, __pyx_kp_u_Set_the_recursion_depth_and_rein) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_Quartney_pick_move_line_319, __pyx_kp_u_Select_a_move_based_on_heatmap_s) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_Quartney_depth_line_359, __pyx_kp_u_Current_search_depth_used_for_he) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_Quartney_depth_line_377, __pyx_kp_u_Set_the_recursion_depth_and_rein) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
