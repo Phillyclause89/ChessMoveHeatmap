@@ -183,7 +183,7 @@ class TestChessMoveHeatmapT(TestCase):
         self.heatmap.piece_counts[5] = {piece: float64(1) for piece in PIECES}
         other_heatmap[5] = [2.0, -3]
         other_heatmap.piece_counts[5] = {piece: float64(2) for piece in PIECES}
-        # ChessMoveHeatmapT additon
+        # ChessMoveHeatmapT addition
         result1: ChessMoveHeatmap = self.heatmap + other_heatmap
         self.assertIsInstance(result1, ChessMoveHeatmap)  # Validate type
         np_testing.assert_array_equal(result1[5], other_heatmap[5] + self.heatmap[5])
