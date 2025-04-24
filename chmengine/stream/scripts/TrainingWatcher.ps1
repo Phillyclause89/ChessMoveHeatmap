@@ -42,6 +42,7 @@ function Watch-TrainingGames {
 
     $lastSize = 0
     $lastCount = -1
+    $color = 'White'
 
     while ((Get-ChildItem -Path $TrainingDirectory -File).Count -le $MaxGames) {
         $trainings = Get-ChildItem -Path $TrainingDirectory -File
@@ -97,7 +98,7 @@ function Watch-TrainingGames {
 
         if ($sizeMB -gt $lastSize) {
             $lastSize = $sizeMB
-            Write-Host "`rQ Table Size: $sizeMB MB " -NoNewline
+            Write-Host "`rQ Table Size: $sizeMB MB   " -NoNewline
         }
 
         Start-Sleep -Seconds $PollIntervalSeconds
