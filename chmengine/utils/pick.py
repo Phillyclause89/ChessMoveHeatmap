@@ -9,7 +9,7 @@ from numpy import float64
 __all__ = ['Pick']
 
 
-@dataclass(order=True, slots=True)
+@dataclass(order=True)
 class PickT:
     """
     Base class for Pick containing a (move, score) pair.
@@ -71,8 +71,8 @@ class Pick(PickT):
 
     Supports tuple-like access, type casting, and formatting. This class is the public-facing API.
     """
-    move_getter_keys: Tuple[int, str, int, ...] = (0, 'move', -2)
-    score_getter_keys: Tuple[int, str, int, ...] = (1, 'score', -1)
+    move_getter_keys: Tuple[int, str, int] = (0, 'move', -2)
+    score_getter_keys: Tuple[int, str, int] = (1, 'score', -1)
 
     def __init__(self, move: Move, score: Number) -> None:
         """Initializes a Pick instance.
