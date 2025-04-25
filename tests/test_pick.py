@@ -108,7 +108,7 @@ class TestPick(TestCase):
         self.pick_e4.score = 0
         self.assertFalse(self.pick_e4)
         self.assertGreater(self.pick_e4, self.pick_f3)
-        # noinspection PyTypeChecker,
+        # noinspection PyTypeChecker,PydanticTypeChecker
         self.assertListEqual(
             sorted([self.pick_f3, self.pick_e4], reverse=True),
             [self.pick_e4, self.pick_f3]
