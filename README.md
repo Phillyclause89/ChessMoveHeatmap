@@ -103,7 +103,6 @@ ChessMoveHeatmap/
 ## **Future Plans**
 - 🎨 **Integrate Color Legend** – Adapt `standalone_color_legend.py` into the main UI.
 - 🚀 **Optimize Performance** – Explore better recursion and caching strategies.
-- 🏗️ **Database Integration** – Store precomputed heatmaps for faster access.
 - 📈 **Enhanced Visualizations** – Provide more customization for scaling heatmap intensities.
 - 👾 **AI Improvements** – Refine logic for `CMHMEngine2` based on game outcomes.
 
