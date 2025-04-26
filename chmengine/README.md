@@ -52,7 +52,7 @@ game_manager.train_cmhmey_jr(training_games=1)  # 1 training game is expected to
 
 Click the image below to watch Cmhmey Jr. Train On YouTube!
 <p align="center">
-  <a href="https://www.youtube.com/live/Fh1I9DALeEc?si=B9GV5rvNisaH5TOJ" target="_blank">
+  <a href="https://www.youtube.com/live/_-JySFYZhjU?si=fsapzEKLV8CTVYrt" target="_blank">
     <img src="../docs/images/CMHEngine.png" alt="Watch Cmhmey Jr. Train On YouTube!" width="1000">
   </a>
 </p>
