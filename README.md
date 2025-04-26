@@ -2,7 +2,7 @@
 
 # **ChessMoveHeatmap**
 
-A **visual heatmap generator for chess PGN games**, built with Python, `tkinter`, `numpy`, and `python-chess`. This application analyzes possible move activity throughout a chess game and generates visual heatmaps for better understanding of the game's dynamics.
+A **visual heatmap generator for chess PGN games**, built with Python, `tkinter`, `numpy`, and `python-chess`. This application analyzes possible move activity throughout a chess game and generates a dynamic heatmap visualization.
 
 <p align="center">
   <a href="https://youtu.be/hRwwK6vnPzs?si=hTRCUvtmDCgvCDna" target="_blank">
@@ -20,11 +20,12 @@ The idea for this project got into my head over 2 years ago. And I even got as f
 - ✅ **Parallelized Heatmap Calculation** – Uses `ProcessPoolExecutor` for efficient computation.
 - ✅ **Customizable Board Colors & Fonts** – Adjust square colors and piece fonts directly in the UI.
 - ✅ **Real-time Heatmap Updates** – Background processing ensures smooth rendering.  
+- ✅ **Real-time Heatmap Updates** – Background processing ensures smooth rendering.
 
 ## **Installation**
 
 ### **Prerequisites**
-Ensure you have Python **3.7 - 3.10** installed. Python **3.11+** is not supported at this stage and will require significant refactoring to imports for compatibility.
+Ensure you have Python **3.7 - 3.10** installed. Python **3.11+** is not supported at this stage and will require significant refactoring to imports for compatibility. See [issue #16](https://github.com/Phillyclause89/ChessMoveHeatmap/issues/16) for details.
 
 ### **Steps to Set Up the Project**
 
@@ -85,7 +86,7 @@ This will compile all relevant components automatically, improving the speed of 
 - **Change Depth:** `Options > Change Depth`
 
 ### **Standalone Color Legend**
-The standalone `standalone_color_legend.py` script can be used to understand what the heatmap colors represent. Integration of a color legend into the main application is planned for a future release.
+The standalone `standalone_color_legend.py` script can be used to understand what the heatmap colors represent. Integration of a color legend into the main application is planned for a future release. See [issue #17](https://github.com/Phillyclause89/ChessMoveHeatmap/issues/17) for details.
 
 ```bash
 python standalone_color_legend.py
@@ -117,13 +118,13 @@ ChessMoveHeatmap/
 - **Parallel Processing:** The app utilizes parallel processing for efficiency, but large depth values can still be computationally intensive.
 
 ## **Future Plans**
-- 🎨 **Integrate Color Legend** – Adapt `standalone_color_legend.py` into the main UI.
+- 🎨 **Integrate Color Legend** – Adapt `standalone_color_legend.py` into the main UI. See [issue #17](https://github.com/Phillyclause89/ChessMoveHeatmap/issues/17).
 - 🚀 **Optimize Performance** – Explore better recursion and caching strategies.
 - 📈 **Enhanced Visualizations** – Provide more customization for scaling heatmap intensities.
 - 👾 **AI Improvements** – Refine logic for `CMHMEngine2` based on game outcomes.
 
 ## **ChessMoveHeatmap Engines (`chmengine`)**
-The `chmengine` module is an experimental chess engine component that leverages heatmaps to inform move decisions. While still in development and not yet integrated into the main application, it provides functionality for:
+The `chmengine` module is an experimental chess engine component that leverages heatmaps to inform move decisions. While still in development and not yet integrated into the main application, it provides features such as:
 - Playing games against the engine.
 - Training the engine using reinforcement learning.
 
