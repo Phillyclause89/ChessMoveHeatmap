@@ -5,7 +5,7 @@
     "distutils": {
         "name": "chmutils.__init__",
         "sources": [
-            "chmutils/__init__.py"
+            "chmutils\\__init__.py"
         ]
     },
     "module_name": "chmutils.__init__"

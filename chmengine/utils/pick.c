@@ -5,7 +5,7 @@
     "distutils": {
         "name": "chmengine.utils.pick",
         "sources": [
-            "chmengine/utils/pick.py"
+            "chmengine\\utils\\pick.py"
         ]
     },
     "module_name": "chmengine.utils.pick"
@@ -1494,12 +1494,12 @@ static const char *__pyx_f[] = {
 /*--- Type declarations ---*/
 struct __pyx_obj_9chmengine_5utils_4pick___pyx_scope_struct____iter__;
 
-/* "chmengine/utils/pick.py":44
- *             raise IndexError("Index out of range. Only 1 for 'score' can be set.")
+/* "chmengine/utils/pick.py":136
+ *             raise IndexError("Index out of range. Only 1 (or -1) for 'score' can be set.")
  * 
- *     def __iter__(self) -> Union[Move, float64]:             # <<<<<<<<<<<<<<
- *         """Allows unpacking like a tuple."""
- *         yield self._move
+ *     def __iter__(self) -> Iterator[Union[Move, float64]]:             # <<<<<<<<<<<<<<
+ *         """Allows unpacking like a tuple.
+ * 
  */
 struct __pyx_obj_9chmengine_5utils_4pick___pyx_scope_struct____iter__ {
   PyObject_HEAD
@@ -1716,10 +1716,6 @@ static CYTHON_INLINE int __Pyx_PyUnicode_Equals(PyObject* s1, PyObject* s2, int 
 #define __Pyx_ArgsSlice_FASTCALL(args, start, stop) PyTuple_GetSlice(args, start, stop)
 #endif
 
-/* RaiseArgTupleInvalid.proto */
-static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
-    Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
-
 /* RaiseDoubleKeywords.proto */
 static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
 
@@ -1728,6 +1724,10 @@ static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject *const *kwvalues
     PyObject **argnames[],
     PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,
     const char* function_name);
+
+/* RaiseArgTupleInvalid.proto */
+static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
+    Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
 
 /* PyDictVersioning.proto */
 #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_TYPE_SLOTS
@@ -1774,28 +1774,6 @@ static PyObject *__Pyx__GetModuleGlobalName(PyObject *name, PY_UINT64_T *dict_ve
 #define __Pyx_GetModuleGlobalName(var, name)  (var) = __Pyx__GetModuleGlobalName(name)
 #define __Pyx_GetModuleGlobalNameUncached(var, name)  (var) = __Pyx__GetModuleGlobalName(name)
 static CYTHON_INLINE PyObject *__Pyx__GetModuleGlobalName(PyObject *name);
-#endif
-
-/* PyObjectFormatSimple.proto */
-#if CYTHON_COMPILING_IN_PYPY
-    #define __Pyx_PyObject_FormatSimple(s, f) (\
-        likely(PyUnicode_CheckExact(s)) ? (Py_INCREF(s), s) :\
-        PyObject_Format(s, f))
-#elif PY_MAJOR_VERSION < 3
-    #define __Pyx_PyObject_FormatSimple(s, f) (\
-        likely(PyUnicode_CheckExact(s)) ? (Py_INCREF(s), s) :\
-        likely(PyString_CheckExact(s)) ? PyUnicode_FromEncodedObject(s, NULL, "strict") :\
-        PyObject_Format(s, f))
-#elif CYTHON_USE_TYPE_SLOTS
-    #define __Pyx_PyObject_FormatSimple(s, f) (\
-        likely(PyUnicode_CheckExact(s)) ? (Py_INCREF(s), s) :\
-        likely(PyLong_CheckExact(s)) ? PyLong_Type.tp_repr(s) :\
-        likely(PyFloat_CheckExact(s)) ? PyFloat_Type.tp_repr(s) :\
-        PyObject_Format(s, f))
-#else
-    #define __Pyx_PyObject_FormatSimple(s, f) (\
-        likely(PyUnicode_CheckExact(s)) ? (Py_INCREF(s), s) :\
-        PyObject_Format(s, f))
 #endif
 
 /* PyFunctionFastCall.proto */
@@ -1849,12 +1827,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject
 #define __Pyx_PyObject_FastCall(func, args, nargs)  __Pyx_PyObject_FastCallDict(func, args, (size_t)(nargs), NULL)
 static CYTHON_INLINE PyObject* __Pyx_PyObject_FastCallDict(PyObject *func, PyObject **args, size_t nargs, PyObject *kwargs);
 
-/* PyObjectCallOneArg.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg);
-
-/* RaiseException.proto */
-static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause);
-
 /* PyObjectSetAttrStr.proto */
 #if CYTHON_USE_TYPE_SLOTS
 #define __Pyx_PyObject_DelAttrStr(o,n) __Pyx_PyObject_SetAttrStr(o, n, NULL)
@@ -1864,8 +1836,39 @@ static CYTHON_INLINE int __Pyx_PyObject_SetAttrStr(PyObject* obj, PyObject* attr
 #define __Pyx_PyObject_SetAttrStr(o,n,v) PyObject_SetAttr(o,n,v)
 #endif
 
-/* PyIntCompare.proto */
-static CYTHON_INLINE int __Pyx_PyInt_BoolEqObjC(PyObject *op1, PyObject *op2, long intval, long inplace);
+/* PyObjectFormatSimple.proto */
+#if CYTHON_COMPILING_IN_PYPY
+    #define __Pyx_PyObject_FormatSimple(s, f) (\
+        likely(PyUnicode_CheckExact(s)) ? (Py_INCREF(s), s) :\
+        PyObject_Format(s, f))
+#elif PY_MAJOR_VERSION < 3
+    #define __Pyx_PyObject_FormatSimple(s, f) (\
+        likely(PyUnicode_CheckExact(s)) ? (Py_INCREF(s), s) :\
+        likely(PyString_CheckExact(s)) ? PyUnicode_FromEncodedObject(s, NULL, "strict") :\
+        PyObject_Format(s, f))
+#elif CYTHON_USE_TYPE_SLOTS
+    #define __Pyx_PyObject_FormatSimple(s, f) (\
+        likely(PyUnicode_CheckExact(s)) ? (Py_INCREF(s), s) :\
+        likely(PyLong_CheckExact(s)) ? PyLong_Type.tp_repr(s) :\
+        likely(PyFloat_CheckExact(s)) ? PyFloat_Type.tp_repr(s) :\
+        PyObject_Format(s, f))
+#else
+    #define __Pyx_PyObject_FormatSimple(s, f) (\
+        likely(PyUnicode_CheckExact(s)) ? (Py_INCREF(s), s) :\
+        PyObject_Format(s, f))
+#endif
+
+/* PyObjectCallOneArg.proto */
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg);
+
+/* RaiseException.proto */
+static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause);
+
+/* PySequenceContains.proto */
+static CYTHON_INLINE int __Pyx_PySequence_ContainsTF(PyObject* item, PyObject* seq, int eq) {
+    int result = PySequence_Contains(seq, item);
+    return unlikely(result < 0) ? result : (result == (eq == Py_EQ));
+}
 
 /* GetException.proto */
 #if CYTHON_FAST_THREAD_STATE
@@ -2096,6 +2099,9 @@ static PyObject *__Pyx_Py3MetaclassPrepare(PyObject *metaclass, PyObject *bases,
 static PyObject *__Pyx_Py3ClassCreate(PyObject *metaclass, PyObject *name, PyObject *bases, PyObject *dict,
                                       PyObject *mkw, int calculate_metaclass, int allow_py2_metaclass);
 
+/* Py3UpdateBases.proto */
+static PyObject* __Pyx_PEP560_update_bases(PyObject *bases);
+
 /* CLineInTraceback.proto */
 #ifdef CYTHON_CLINE_IN_TRACEBACK
 #define __Pyx_CLineForTraceback(tstate, c_line)  (((CYTHON_CLINE_IN_TRACEBACK)) ? c_line : 0)
@@ -2292,11 +2298,13 @@ int __pyx_module_is_main_chmengine__utils__pick = 0;
 static PyObject *__pyx_builtin_property;
 static PyObject *__pyx_builtin_TypeError;
 static PyObject *__pyx_builtin_IndexError;
+static PyObject *__pyx_builtin_format;
 /* #### Code section: string_decls ### */
 static const char __pyx_k__4[] = ")";
 static const char __pyx_k__5[] = ".";
 static const char __pyx_k_gc[] = "gc";
-static const char __pyx_k__22[] = "?";
+static const char __pyx_k__27[] = "?";
+static const char __pyx_k_all[] = "__all__";
 static const char __pyx_k_doc[] = "__doc__";
 static const char __pyx_k_int[] = "int";
 static const char __pyx_k_key[] = "key";
@@ -2312,77 +2320,98 @@ static const char __pyx_k_dict[] = "__dict__";
 static const char __pyx_k_init[] = "__init__";
 static const char __pyx_k_iter[] = "__iter__";
 static const char __pyx_k_main[] = "__main__";
-static const char __pyx_k_move[] = "move";
+static const char __pyx_k_move[] = "_move";
 static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_repr[] = "__repr__";
 static const char __pyx_k_self[] = "self";
 static const char __pyx_k_send[] = "send";
 static const char __pyx_k_test[] = "__test__";
+static const char __pyx_k_PickT[] = "PickT";
 static const char __pyx_k_Tuple[] = "Tuple";
 static const char __pyx_k_Union[] = "Union";
 static const char __pyx_k_chess[] = "chess";
 static const char __pyx_k_close[] = "close";
+static const char __pyx_k_field[] = "field";
+static const char __pyx_k_float[] = "__float__";
 static const char __pyx_k_index[] = "index";
+static const char __pyx_k_int_2[] = "__int__";
 static const char __pyx_k_numpy[] = "numpy";
 static const char __pyx_k_order[] = "order";
-static const char __pyx_k_score[] = "score";
-static const char __pyx_k_slots[] = "__slots__";
+static const char __pyx_k_score[] = "_score";
 static const char __pyx_k_super[] = "super";
 static const char __pyx_k_throw[] = "throw";
 static const char __pyx_k_value[] = "value";
 static const char __pyx_k_Number[] = "Number";
 static const char __pyx_k_bool_2[] = "bool";
 static const char __pyx_k_enable[] = "enable";
+static const char __pyx_k_format[] = "format";
 static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_module[] = "__module__";
-static const char __pyx_k_move_2[] = "_move";
+static const char __pyx_k_move_2[] = "move";
 static const char __pyx_k_return[] = "return";
 static const char __pyx_k_setter[] = "setter";
 static const char __pyx_k_typing[] = "typing";
+static const char __pyx_k_compare[] = "compare";
 static const char __pyx_k_disable[] = "disable";
 static const char __pyx_k_float64[] = "float64";
 static const char __pyx_k_getitem[] = "__getitem__";
 static const char __pyx_k_numbers[] = "numbers";
 static const char __pyx_k_prepare[] = "__prepare__";
-static const char __pyx_k_score_2[] = "_score";
+static const char __pyx_k_score_2[] = "score";
 static const char __pyx_k_score_3[] = ", score=";
 static const char __pyx_k_setitem[] = "__setitem__";
+static const char __pyx_k_Iterator[] = "Iterator";
+static const char __pyx_k_format_2[] = "__format__";
 static const char __pyx_k_property[] = "property";
 static const char __pyx_k_qualname[] = "__qualname__";
 static const char __pyx_k_set_name[] = "__set_name__";
-static const char __pyx_k_Pick_data[] = "Pick.data";
 static const char __pyx_k_Pick_move[] = "Pick(move=";
 static const char __pyx_k_TypeError[] = "TypeError";
 static const char __pyx_k_dataclass[] = "dataclass";
 static const char __pyx_k_isenabled[] = "isenabled";
 static const char __pyx_k_metaclass[] = "__metaclass__";
 static const char __pyx_k_IndexError[] = "IndexError";
+static const char __pyx_k_PickT_data[] = "PickT.data";
+static const char __pyx_k_PickT_move[] = "PickT.move";
+static const char __pyx_k_Pick___int[] = "Pick.__int__";
 static const char __pyx_k_Pick___len[] = "Pick.__len__";
-static const char __pyx_k_Pick_score[] = "Pick.score";
+static const char __pyx_k_PickT_score[] = "PickT.score";
 static const char __pyx_k_Pick___bool[] = "Pick.__bool__";
 static const char __pyx_k_Pick___init[] = "Pick.__init__";
 static const char __pyx_k_Pick___iter[] = "Pick.__iter__";
 static const char __pyx_k_Pick___repr[] = "Pick.__repr__";
-static const char __pyx_k_Pick_move_2[] = "Pick.move";
-static const char __pyx_k_Pick_object[] = "Pick object";
 static const char __pyx_k_annotations[] = "__annotations__";
 static const char __pyx_k_dataclasses[] = "dataclasses";
+static const char __pyx_k_format_spec[] = "format_spec";
+static const char __pyx_k_mro_entries[] = "__mro_entries__";
+static const char __pyx_k_Pick___float[] = "Pick.__float__";
 static const char __pyx_k_is_coroutine[] = "_is_coroutine";
+static const char __pyx_k_Pick___format[] = "Pick.__format__";
 static const char __pyx_k_Union_str_int[] = "Union[str, int]";
 static const char __pyx_k_init_subclass[] = "__init_subclass__";
 static const char __pyx_k_Pick___getitem[] = "Pick.__getitem__";
 static const char __pyx_k_Pick___setitem[] = "Pick.__setitem__";
+static const char __pyx_k_move_getter_keys[] = "move_getter_keys";
+static const char __pyx_k_Tuple_int_str_int[] = "Tuple[int, str, int]";
+static const char __pyx_k_score_getter_keys[] = "score_getter_keys";
 static const char __pyx_k_Tuple_Move_float64[] = "Tuple[Move, float64]";
 static const char __pyx_k_Union_Move_float64[] = "Union[Move, float64]";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_chmengine_utils_pick[] = "chmengine.utils.pick";
 static const char __pyx_k_chmengine_utils_pick_py[] = "chmengine\\utils\\pick.py";
-static const char __pyx_k_Container_for_a_move_score_pair[] = "Container for a (move, score) pair where move is immutable and score is mutable.";
-static const char __pyx_k_Index_out_of_range_Only_1_for_sc[] = "Index out of range. Only 1 for 'score' can be set.";
-static const char __pyx_k_Index_out_of_range_Use_0_for_mov[] = "Index out of range. Use 0 for 'move', 1 for 'score'.";
+static const char __pyx_k_Iterator_Union_Move_float64[] = "Iterator[Union[Move, float64]]";
+static const char __pyx_k_Base_class_for_Pick_containing[] = "\n    Base class for Pick containing a (move, score) pair.\n\n    This class defines the storage and ordering behavior. Comparison is based solely on `score`,\n    while `move` is excluded from comparison.\n    ";
+static const char __pyx_k_Pick_object_representing_a_move[] = "Pick object representing a (move, score) evaluation pair.";
+static const char __pyx_k_Fully_featured_container_for_a_m[] = "Fully featured container for a (move, score) pair where the move is immutable and\n    the score is mutable and used for comparisons.\n\n    Supports tuple-like access, type casting, and formatting. This class is the public-facing API.\n    ";
+static const char __pyx_k_Index_out_of_range_Only_1_or_1_f[] = "Index out of range. Only 1 (or -1) for 'score' can be set.";
+static const char __pyx_k_Index_out_of_range_Use_0_or_2_fo[] = "Index out of range. Use 0 (or -2) for 'move', 1 (or -1) for 'score'.";
 static const char __pyx_k_the_argument_for_move_must_be_ty[] = "the argument for move must be type 'chess.Move', got: ";
 /* #### Code section: decls ### */
+static PyObject *__pyx_pf_9chmengine_5utils_4pick_5PickT_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_4pick_5PickT_2score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_score); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_4pick_5PickT_4move(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_4pick_5PickT_6data(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_move, PyObject *__pyx_v_score); /* proto */
 static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_2__getitem__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_index); /* proto */
 static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_4__setitem__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_key, PyObject *__pyx_v_value); /* proto */
@@ -2390,10 +2419,9 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_6__iter__(CYTHON_UNUSED 
 static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_9__len__(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_11__repr__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_13__bool__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_15score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_17score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_score); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_19move(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_21data(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_15__int__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_17__float__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_19__format__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_format_spec); /* proto */
 static PyObject *__pyx_tp_new_9chmengine_5utils_4pick___pyx_scope_struct____iter__(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 /* #### Code section: late_includes ### */
 /* #### Code section: module_state ### */
@@ -2426,34 +2454,44 @@ typedef struct {
   PyObject *__pyx_type_9chmengine_5utils_4pick___pyx_scope_struct____iter__;
   #endif
   PyTypeObject *__pyx_ptype_9chmengine_5utils_4pick___pyx_scope_struct____iter__;
-  PyObject *__pyx_kp_s_Container_for_a_move_score_pair;
+  PyObject *__pyx_kp_s_Base_class_for_Pick_containing;
+  PyObject *__pyx_kp_s_Fully_featured_container_for_a_m;
   PyObject *__pyx_n_s_IndexError;
-  PyObject *__pyx_kp_u_Index_out_of_range_Only_1_for_sc;
-  PyObject *__pyx_kp_u_Index_out_of_range_Use_0_for_mov;
+  PyObject *__pyx_kp_u_Index_out_of_range_Only_1_or_1_f;
+  PyObject *__pyx_kp_u_Index_out_of_range_Use_0_or_2_fo;
+  PyObject *__pyx_n_s_Iterator;
+  PyObject *__pyx_kp_s_Iterator_Union_Move_float64;
   PyObject *__pyx_n_s_Move;
   PyObject *__pyx_n_s_None;
   PyObject *__pyx_n_s_Number;
   PyObject *__pyx_n_s_Pick;
+  PyObject *__pyx_n_u_Pick;
+  PyObject *__pyx_n_s_PickT;
+  PyObject *__pyx_n_s_PickT_data;
+  PyObject *__pyx_n_s_PickT_move;
+  PyObject *__pyx_n_s_PickT_score;
   PyObject *__pyx_n_s_Pick___bool;
+  PyObject *__pyx_n_s_Pick___float;
+  PyObject *__pyx_n_s_Pick___format;
   PyObject *__pyx_n_s_Pick___getitem;
   PyObject *__pyx_n_s_Pick___init;
+  PyObject *__pyx_n_s_Pick___int;
   PyObject *__pyx_n_s_Pick___iter;
   PyObject *__pyx_n_s_Pick___len;
   PyObject *__pyx_n_s_Pick___repr;
   PyObject *__pyx_n_s_Pick___setitem;
-  PyObject *__pyx_n_s_Pick_data;
   PyObject *__pyx_kp_u_Pick_move;
-  PyObject *__pyx_n_s_Pick_move_2;
-  PyObject *__pyx_n_s_Pick_score;
   PyObject *__pyx_n_s_Tuple;
   PyObject *__pyx_kp_s_Tuple_Move_float64;
+  PyObject *__pyx_kp_s_Tuple_int_str_int;
   PyObject *__pyx_n_s_TypeError;
   PyObject *__pyx_n_s_Union;
   PyObject *__pyx_kp_s_Union_Move_float64;
   PyObject *__pyx_kp_s_Union_str_int;
-  PyObject *__pyx_n_s__22;
+  PyObject *__pyx_n_s__27;
   PyObject *__pyx_kp_u__4;
   PyObject *__pyx_kp_u__5;
+  PyObject *__pyx_n_s_all;
   PyObject *__pyx_n_s_annotations;
   PyObject *__pyx_n_s_args;
   PyObject *__pyx_n_s_asyncio_coroutines;
@@ -2464,6 +2502,7 @@ typedef struct {
   PyObject *__pyx_kp_s_chmengine_utils_pick_py;
   PyObject *__pyx_n_s_cline_in_traceback;
   PyObject *__pyx_n_s_close;
+  PyObject *__pyx_n_s_compare;
   PyObject *__pyx_n_s_data;
   PyObject *__pyx_n_s_dataclass;
   PyObject *__pyx_n_s_dataclasses;
@@ -2471,7 +2510,12 @@ typedef struct {
   PyObject *__pyx_kp_u_disable;
   PyObject *__pyx_n_s_doc;
   PyObject *__pyx_kp_u_enable;
+  PyObject *__pyx_n_s_field;
+  PyObject *__pyx_n_s_float;
   PyObject *__pyx_n_s_float64;
+  PyObject *__pyx_n_s_format;
+  PyObject *__pyx_n_s_format_2;
+  PyObject *__pyx_n_s_format_spec;
   PyObject *__pyx_kp_u_gc;
   PyObject *__pyx_n_s_getitem;
   PyObject *__pyx_n_s_import;
@@ -2479,6 +2523,7 @@ typedef struct {
   PyObject *__pyx_n_s_init;
   PyObject *__pyx_n_s_init_subclass;
   PyObject *__pyx_n_s_int;
+  PyObject *__pyx_n_s_int_2;
   PyObject *__pyx_n_s_is_coroutine;
   PyObject *__pyx_kp_u_isenabled;
   PyObject *__pyx_n_s_iter;
@@ -2488,9 +2533,10 @@ typedef struct {
   PyObject *__pyx_n_s_metaclass;
   PyObject *__pyx_n_s_module;
   PyObject *__pyx_n_s_move;
-  PyObject *__pyx_n_u_move;
   PyObject *__pyx_n_s_move_2;
   PyObject *__pyx_n_u_move_2;
+  PyObject *__pyx_n_s_move_getter_keys;
+  PyObject *__pyx_n_s_mro_entries;
   PyObject *__pyx_n_s_name;
   PyObject *__pyx_n_s_numbers;
   PyObject *__pyx_n_s_numpy;
@@ -2501,16 +2547,15 @@ typedef struct {
   PyObject *__pyx_n_s_repr;
   PyObject *__pyx_n_s_return;
   PyObject *__pyx_n_s_score;
-  PyObject *__pyx_n_u_score;
   PyObject *__pyx_n_s_score_2;
   PyObject *__pyx_n_u_score_2;
   PyObject *__pyx_kp_u_score_3;
+  PyObject *__pyx_n_s_score_getter_keys;
   PyObject *__pyx_n_s_self;
   PyObject *__pyx_n_s_send;
   PyObject *__pyx_n_s_set_name;
   PyObject *__pyx_n_s_setitem;
   PyObject *__pyx_n_s_setter;
-  PyObject *__pyx_n_s_slots;
   PyObject *__pyx_n_s_str;
   PyObject *__pyx_n_s_super;
   PyObject *__pyx_n_s_test;
@@ -2521,25 +2566,32 @@ typedef struct {
   PyObject *__pyx_int_0;
   PyObject *__pyx_int_1;
   PyObject *__pyx_int_2;
+  PyObject *__pyx_int_neg_1;
+  PyObject *__pyx_int_neg_2;
   PyObject *__pyx_tuple_;
   PyObject *__pyx_tuple__2;
   PyObject *__pyx_tuple__6;
-  PyObject *__pyx_tuple__7;
-  PyObject *__pyx_tuple__9;
-  PyObject *__pyx_tuple__11;
+  PyObject *__pyx_tuple__8;
+  PyObject *__pyx_tuple__12;
   PyObject *__pyx_tuple__13;
+  PyObject *__pyx_tuple__14;
+  PyObject *__pyx_tuple__16;
   PyObject *__pyx_tuple__18;
+  PyObject *__pyx_tuple__25;
   PyObject *__pyx_codeobj__3;
-  PyObject *__pyx_codeobj__8;
+  PyObject *__pyx_codeobj__7;
+  PyObject *__pyx_codeobj__9;
   PyObject *__pyx_codeobj__10;
-  PyObject *__pyx_codeobj__12;
-  PyObject *__pyx_codeobj__14;
+  PyObject *__pyx_codeobj__11;
   PyObject *__pyx_codeobj__15;
-  PyObject *__pyx_codeobj__16;
   PyObject *__pyx_codeobj__17;
   PyObject *__pyx_codeobj__19;
   PyObject *__pyx_codeobj__20;
   PyObject *__pyx_codeobj__21;
+  PyObject *__pyx_codeobj__22;
+  PyObject *__pyx_codeobj__23;
+  PyObject *__pyx_codeobj__24;
+  PyObject *__pyx_codeobj__26;
 } __pyx_mstate;
 
 #if CYTHON_USE_MODULE_STATE
@@ -2584,34 +2636,44 @@ static int __pyx_m_clear(PyObject *m) {
   #endif
   Py_CLEAR(clear_module_state->__pyx_ptype_9chmengine_5utils_4pick___pyx_scope_struct____iter__);
   Py_CLEAR(clear_module_state->__pyx_type_9chmengine_5utils_4pick___pyx_scope_struct____iter__);
-  Py_CLEAR(clear_module_state->__pyx_kp_s_Container_for_a_move_score_pair);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_Base_class_for_Pick_containing);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_Fully_featured_container_for_a_m);
   Py_CLEAR(clear_module_state->__pyx_n_s_IndexError);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_Index_out_of_range_Only_1_for_sc);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_Index_out_of_range_Use_0_for_mov);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_Index_out_of_range_Only_1_or_1_f);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_Index_out_of_range_Use_0_or_2_fo);
+  Py_CLEAR(clear_module_state->__pyx_n_s_Iterator);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_Iterator_Union_Move_float64);
   Py_CLEAR(clear_module_state->__pyx_n_s_Move);
   Py_CLEAR(clear_module_state->__pyx_n_s_None);
   Py_CLEAR(clear_module_state->__pyx_n_s_Number);
   Py_CLEAR(clear_module_state->__pyx_n_s_Pick);
+  Py_CLEAR(clear_module_state->__pyx_n_u_Pick);
+  Py_CLEAR(clear_module_state->__pyx_n_s_PickT);
+  Py_CLEAR(clear_module_state->__pyx_n_s_PickT_data);
+  Py_CLEAR(clear_module_state->__pyx_n_s_PickT_move);
+  Py_CLEAR(clear_module_state->__pyx_n_s_PickT_score);
   Py_CLEAR(clear_module_state->__pyx_n_s_Pick___bool);
+  Py_CLEAR(clear_module_state->__pyx_n_s_Pick___float);
+  Py_CLEAR(clear_module_state->__pyx_n_s_Pick___format);
   Py_CLEAR(clear_module_state->__pyx_n_s_Pick___getitem);
   Py_CLEAR(clear_module_state->__pyx_n_s_Pick___init);
+  Py_CLEAR(clear_module_state->__pyx_n_s_Pick___int);
   Py_CLEAR(clear_module_state->__pyx_n_s_Pick___iter);
   Py_CLEAR(clear_module_state->__pyx_n_s_Pick___len);
   Py_CLEAR(clear_module_state->__pyx_n_s_Pick___repr);
   Py_CLEAR(clear_module_state->__pyx_n_s_Pick___setitem);
-  Py_CLEAR(clear_module_state->__pyx_n_s_Pick_data);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Pick_move);
-  Py_CLEAR(clear_module_state->__pyx_n_s_Pick_move_2);
-  Py_CLEAR(clear_module_state->__pyx_n_s_Pick_score);
   Py_CLEAR(clear_module_state->__pyx_n_s_Tuple);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Tuple_Move_float64);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_Tuple_int_str_int);
   Py_CLEAR(clear_module_state->__pyx_n_s_TypeError);
   Py_CLEAR(clear_module_state->__pyx_n_s_Union);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Union_Move_float64);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Union_str_int);
-  Py_CLEAR(clear_module_state->__pyx_n_s__22);
+  Py_CLEAR(clear_module_state->__pyx_n_s__27);
   Py_CLEAR(clear_module_state->__pyx_kp_u__4);
   Py_CLEAR(clear_module_state->__pyx_kp_u__5);
+  Py_CLEAR(clear_module_state->__pyx_n_s_all);
   Py_CLEAR(clear_module_state->__pyx_n_s_annotations);
   Py_CLEAR(clear_module_state->__pyx_n_s_args);
   Py_CLEAR(clear_module_state->__pyx_n_s_asyncio_coroutines);
@@ -2622,6 +2684,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_s_chmengine_utils_pick_py);
   Py_CLEAR(clear_module_state->__pyx_n_s_cline_in_traceback);
   Py_CLEAR(clear_module_state->__pyx_n_s_close);
+  Py_CLEAR(clear_module_state->__pyx_n_s_compare);
   Py_CLEAR(clear_module_state->__pyx_n_s_data);
   Py_CLEAR(clear_module_state->__pyx_n_s_dataclass);
   Py_CLEAR(clear_module_state->__pyx_n_s_dataclasses);
@@ -2629,7 +2692,12 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_u_disable);
   Py_CLEAR(clear_module_state->__pyx_n_s_doc);
   Py_CLEAR(clear_module_state->__pyx_kp_u_enable);
+  Py_CLEAR(clear_module_state->__pyx_n_s_field);
+  Py_CLEAR(clear_module_state->__pyx_n_s_float);
   Py_CLEAR(clear_module_state->__pyx_n_s_float64);
+  Py_CLEAR(clear_module_state->__pyx_n_s_format);
+  Py_CLEAR(clear_module_state->__pyx_n_s_format_2);
+  Py_CLEAR(clear_module_state->__pyx_n_s_format_spec);
   Py_CLEAR(clear_module_state->__pyx_kp_u_gc);
   Py_CLEAR(clear_module_state->__pyx_n_s_getitem);
   Py_CLEAR(clear_module_state->__pyx_n_s_import);
@@ -2637,6 +2705,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_init);
   Py_CLEAR(clear_module_state->__pyx_n_s_init_subclass);
   Py_CLEAR(clear_module_state->__pyx_n_s_int);
+  Py_CLEAR(clear_module_state->__pyx_n_s_int_2);
   Py_CLEAR(clear_module_state->__pyx_n_s_is_coroutine);
   Py_CLEAR(clear_module_state->__pyx_kp_u_isenabled);
   Py_CLEAR(clear_module_state->__pyx_n_s_iter);
@@ -2646,9 +2715,10 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_metaclass);
   Py_CLEAR(clear_module_state->__pyx_n_s_module);
   Py_CLEAR(clear_module_state->__pyx_n_s_move);
-  Py_CLEAR(clear_module_state->__pyx_n_u_move);
   Py_CLEAR(clear_module_state->__pyx_n_s_move_2);
   Py_CLEAR(clear_module_state->__pyx_n_u_move_2);
+  Py_CLEAR(clear_module_state->__pyx_n_s_move_getter_keys);
+  Py_CLEAR(clear_module_state->__pyx_n_s_mro_entries);
   Py_CLEAR(clear_module_state->__pyx_n_s_name);
   Py_CLEAR(clear_module_state->__pyx_n_s_numbers);
   Py_CLEAR(clear_module_state->__pyx_n_s_numpy);
@@ -2659,16 +2729,15 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_repr);
   Py_CLEAR(clear_module_state->__pyx_n_s_return);
   Py_CLEAR(clear_module_state->__pyx_n_s_score);
-  Py_CLEAR(clear_module_state->__pyx_n_u_score);
   Py_CLEAR(clear_module_state->__pyx_n_s_score_2);
   Py_CLEAR(clear_module_state->__pyx_n_u_score_2);
   Py_CLEAR(clear_module_state->__pyx_kp_u_score_3);
+  Py_CLEAR(clear_module_state->__pyx_n_s_score_getter_keys);
   Py_CLEAR(clear_module_state->__pyx_n_s_self);
   Py_CLEAR(clear_module_state->__pyx_n_s_send);
   Py_CLEAR(clear_module_state->__pyx_n_s_set_name);
   Py_CLEAR(clear_module_state->__pyx_n_s_setitem);
   Py_CLEAR(clear_module_state->__pyx_n_s_setter);
-  Py_CLEAR(clear_module_state->__pyx_n_s_slots);
   Py_CLEAR(clear_module_state->__pyx_n_s_str);
   Py_CLEAR(clear_module_state->__pyx_n_s_super);
   Py_CLEAR(clear_module_state->__pyx_n_s_test);
@@ -2679,25 +2748,32 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_int_0);
   Py_CLEAR(clear_module_state->__pyx_int_1);
   Py_CLEAR(clear_module_state->__pyx_int_2);
+  Py_CLEAR(clear_module_state->__pyx_int_neg_1);
+  Py_CLEAR(clear_module_state->__pyx_int_neg_2);
   Py_CLEAR(clear_module_state->__pyx_tuple_);
   Py_CLEAR(clear_module_state->__pyx_tuple__2);
   Py_CLEAR(clear_module_state->__pyx_tuple__6);
-  Py_CLEAR(clear_module_state->__pyx_tuple__7);
-  Py_CLEAR(clear_module_state->__pyx_tuple__9);
-  Py_CLEAR(clear_module_state->__pyx_tuple__11);
+  Py_CLEAR(clear_module_state->__pyx_tuple__8);
+  Py_CLEAR(clear_module_state->__pyx_tuple__12);
   Py_CLEAR(clear_module_state->__pyx_tuple__13);
+  Py_CLEAR(clear_module_state->__pyx_tuple__14);
+  Py_CLEAR(clear_module_state->__pyx_tuple__16);
   Py_CLEAR(clear_module_state->__pyx_tuple__18);
+  Py_CLEAR(clear_module_state->__pyx_tuple__25);
   Py_CLEAR(clear_module_state->__pyx_codeobj__3);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__8);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__7);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__9);
   Py_CLEAR(clear_module_state->__pyx_codeobj__10);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__12);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__14);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__11);
   Py_CLEAR(clear_module_state->__pyx_codeobj__15);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__16);
   Py_CLEAR(clear_module_state->__pyx_codeobj__17);
   Py_CLEAR(clear_module_state->__pyx_codeobj__19);
   Py_CLEAR(clear_module_state->__pyx_codeobj__20);
   Py_CLEAR(clear_module_state->__pyx_codeobj__21);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__22);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__23);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__24);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__26);
   return 0;
 }
 #endif
@@ -2720,34 +2796,44 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   #endif
   Py_VISIT(traverse_module_state->__pyx_ptype_9chmengine_5utils_4pick___pyx_scope_struct____iter__);
   Py_VISIT(traverse_module_state->__pyx_type_9chmengine_5utils_4pick___pyx_scope_struct____iter__);
-  Py_VISIT(traverse_module_state->__pyx_kp_s_Container_for_a_move_score_pair);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_Base_class_for_Pick_containing);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_Fully_featured_container_for_a_m);
   Py_VISIT(traverse_module_state->__pyx_n_s_IndexError);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_Index_out_of_range_Only_1_for_sc);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_Index_out_of_range_Use_0_for_mov);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_Index_out_of_range_Only_1_or_1_f);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_Index_out_of_range_Use_0_or_2_fo);
+  Py_VISIT(traverse_module_state->__pyx_n_s_Iterator);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_Iterator_Union_Move_float64);
   Py_VISIT(traverse_module_state->__pyx_n_s_Move);
   Py_VISIT(traverse_module_state->__pyx_n_s_None);
   Py_VISIT(traverse_module_state->__pyx_n_s_Number);
   Py_VISIT(traverse_module_state->__pyx_n_s_Pick);
+  Py_VISIT(traverse_module_state->__pyx_n_u_Pick);
+  Py_VISIT(traverse_module_state->__pyx_n_s_PickT);
+  Py_VISIT(traverse_module_state->__pyx_n_s_PickT_data);
+  Py_VISIT(traverse_module_state->__pyx_n_s_PickT_move);
+  Py_VISIT(traverse_module_state->__pyx_n_s_PickT_score);
   Py_VISIT(traverse_module_state->__pyx_n_s_Pick___bool);
+  Py_VISIT(traverse_module_state->__pyx_n_s_Pick___float);
+  Py_VISIT(traverse_module_state->__pyx_n_s_Pick___format);
   Py_VISIT(traverse_module_state->__pyx_n_s_Pick___getitem);
   Py_VISIT(traverse_module_state->__pyx_n_s_Pick___init);
+  Py_VISIT(traverse_module_state->__pyx_n_s_Pick___int);
   Py_VISIT(traverse_module_state->__pyx_n_s_Pick___iter);
   Py_VISIT(traverse_module_state->__pyx_n_s_Pick___len);
   Py_VISIT(traverse_module_state->__pyx_n_s_Pick___repr);
   Py_VISIT(traverse_module_state->__pyx_n_s_Pick___setitem);
-  Py_VISIT(traverse_module_state->__pyx_n_s_Pick_data);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Pick_move);
-  Py_VISIT(traverse_module_state->__pyx_n_s_Pick_move_2);
-  Py_VISIT(traverse_module_state->__pyx_n_s_Pick_score);
   Py_VISIT(traverse_module_state->__pyx_n_s_Tuple);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Tuple_Move_float64);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_Tuple_int_str_int);
   Py_VISIT(traverse_module_state->__pyx_n_s_TypeError);
   Py_VISIT(traverse_module_state->__pyx_n_s_Union);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Union_Move_float64);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Union_str_int);
-  Py_VISIT(traverse_module_state->__pyx_n_s__22);
+  Py_VISIT(traverse_module_state->__pyx_n_s__27);
   Py_VISIT(traverse_module_state->__pyx_kp_u__4);
   Py_VISIT(traverse_module_state->__pyx_kp_u__5);
+  Py_VISIT(traverse_module_state->__pyx_n_s_all);
   Py_VISIT(traverse_module_state->__pyx_n_s_annotations);
   Py_VISIT(traverse_module_state->__pyx_n_s_args);
   Py_VISIT(traverse_module_state->__pyx_n_s_asyncio_coroutines);
@@ -2758,6 +2844,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_s_chmengine_utils_pick_py);
   Py_VISIT(traverse_module_state->__pyx_n_s_cline_in_traceback);
   Py_VISIT(traverse_module_state->__pyx_n_s_close);
+  Py_VISIT(traverse_module_state->__pyx_n_s_compare);
   Py_VISIT(traverse_module_state->__pyx_n_s_data);
   Py_VISIT(traverse_module_state->__pyx_n_s_dataclass);
   Py_VISIT(traverse_module_state->__pyx_n_s_dataclasses);
@@ -2765,7 +2852,12 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_u_disable);
   Py_VISIT(traverse_module_state->__pyx_n_s_doc);
   Py_VISIT(traverse_module_state->__pyx_kp_u_enable);
+  Py_VISIT(traverse_module_state->__pyx_n_s_field);
+  Py_VISIT(traverse_module_state->__pyx_n_s_float);
   Py_VISIT(traverse_module_state->__pyx_n_s_float64);
+  Py_VISIT(traverse_module_state->__pyx_n_s_format);
+  Py_VISIT(traverse_module_state->__pyx_n_s_format_2);
+  Py_VISIT(traverse_module_state->__pyx_n_s_format_spec);
   Py_VISIT(traverse_module_state->__pyx_kp_u_gc);
   Py_VISIT(traverse_module_state->__pyx_n_s_getitem);
   Py_VISIT(traverse_module_state->__pyx_n_s_import);
@@ -2773,6 +2865,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_init);
   Py_VISIT(traverse_module_state->__pyx_n_s_init_subclass);
   Py_VISIT(traverse_module_state->__pyx_n_s_int);
+  Py_VISIT(traverse_module_state->__pyx_n_s_int_2);
   Py_VISIT(traverse_module_state->__pyx_n_s_is_coroutine);
   Py_VISIT(traverse_module_state->__pyx_kp_u_isenabled);
   Py_VISIT(traverse_module_state->__pyx_n_s_iter);
@@ -2782,9 +2875,10 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_metaclass);
   Py_VISIT(traverse_module_state->__pyx_n_s_module);
   Py_VISIT(traverse_module_state->__pyx_n_s_move);
-  Py_VISIT(traverse_module_state->__pyx_n_u_move);
   Py_VISIT(traverse_module_state->__pyx_n_s_move_2);
   Py_VISIT(traverse_module_state->__pyx_n_u_move_2);
+  Py_VISIT(traverse_module_state->__pyx_n_s_move_getter_keys);
+  Py_VISIT(traverse_module_state->__pyx_n_s_mro_entries);
   Py_VISIT(traverse_module_state->__pyx_n_s_name);
   Py_VISIT(traverse_module_state->__pyx_n_s_numbers);
   Py_VISIT(traverse_module_state->__pyx_n_s_numpy);
@@ -2795,16 +2889,15 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_repr);
   Py_VISIT(traverse_module_state->__pyx_n_s_return);
   Py_VISIT(traverse_module_state->__pyx_n_s_score);
-  Py_VISIT(traverse_module_state->__pyx_n_u_score);
   Py_VISIT(traverse_module_state->__pyx_n_s_score_2);
   Py_VISIT(traverse_module_state->__pyx_n_u_score_2);
   Py_VISIT(traverse_module_state->__pyx_kp_u_score_3);
+  Py_VISIT(traverse_module_state->__pyx_n_s_score_getter_keys);
   Py_VISIT(traverse_module_state->__pyx_n_s_self);
   Py_VISIT(traverse_module_state->__pyx_n_s_send);
   Py_VISIT(traverse_module_state->__pyx_n_s_set_name);
   Py_VISIT(traverse_module_state->__pyx_n_s_setitem);
   Py_VISIT(traverse_module_state->__pyx_n_s_setter);
-  Py_VISIT(traverse_module_state->__pyx_n_s_slots);
   Py_VISIT(traverse_module_state->__pyx_n_s_str);
   Py_VISIT(traverse_module_state->__pyx_n_s_super);
   Py_VISIT(traverse_module_state->__pyx_n_s_test);
@@ -2815,25 +2908,32 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_int_0);
   Py_VISIT(traverse_module_state->__pyx_int_1);
   Py_VISIT(traverse_module_state->__pyx_int_2);
+  Py_VISIT(traverse_module_state->__pyx_int_neg_1);
+  Py_VISIT(traverse_module_state->__pyx_int_neg_2);
   Py_VISIT(traverse_module_state->__pyx_tuple_);
   Py_VISIT(traverse_module_state->__pyx_tuple__2);
   Py_VISIT(traverse_module_state->__pyx_tuple__6);
-  Py_VISIT(traverse_module_state->__pyx_tuple__7);
-  Py_VISIT(traverse_module_state->__pyx_tuple__9);
-  Py_VISIT(traverse_module_state->__pyx_tuple__11);
+  Py_VISIT(traverse_module_state->__pyx_tuple__8);
+  Py_VISIT(traverse_module_state->__pyx_tuple__12);
   Py_VISIT(traverse_module_state->__pyx_tuple__13);
+  Py_VISIT(traverse_module_state->__pyx_tuple__14);
+  Py_VISIT(traverse_module_state->__pyx_tuple__16);
   Py_VISIT(traverse_module_state->__pyx_tuple__18);
+  Py_VISIT(traverse_module_state->__pyx_tuple__25);
   Py_VISIT(traverse_module_state->__pyx_codeobj__3);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__8);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__7);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__9);
   Py_VISIT(traverse_module_state->__pyx_codeobj__10);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__12);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__14);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__11);
   Py_VISIT(traverse_module_state->__pyx_codeobj__15);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__16);
   Py_VISIT(traverse_module_state->__pyx_codeobj__17);
   Py_VISIT(traverse_module_state->__pyx_codeobj__19);
   Py_VISIT(traverse_module_state->__pyx_codeobj__20);
   Py_VISIT(traverse_module_state->__pyx_codeobj__21);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__22);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__23);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__24);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__26);
   return 0;
 }
 #endif
@@ -2866,34 +2966,44 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_type_9chmengine_5utils_4pick___pyx_scope_struct____iter__ __pyx_mstate_global->__pyx_type_9chmengine_5utils_4pick___pyx_scope_struct____iter__
 #endif
 #define __pyx_ptype_9chmengine_5utils_4pick___pyx_scope_struct____iter__ __pyx_mstate_global->__pyx_ptype_9chmengine_5utils_4pick___pyx_scope_struct____iter__
-#define __pyx_kp_s_Container_for_a_move_score_pair __pyx_mstate_global->__pyx_kp_s_Container_for_a_move_score_pair
+#define __pyx_kp_s_Base_class_for_Pick_containing __pyx_mstate_global->__pyx_kp_s_Base_class_for_Pick_containing
+#define __pyx_kp_s_Fully_featured_container_for_a_m __pyx_mstate_global->__pyx_kp_s_Fully_featured_container_for_a_m
 #define __pyx_n_s_IndexError __pyx_mstate_global->__pyx_n_s_IndexError
-#define __pyx_kp_u_Index_out_of_range_Only_1_for_sc __pyx_mstate_global->__pyx_kp_u_Index_out_of_range_Only_1_for_sc
-#define __pyx_kp_u_Index_out_of_range_Use_0_for_mov __pyx_mstate_global->__pyx_kp_u_Index_out_of_range_Use_0_for_mov
+#define __pyx_kp_u_Index_out_of_range_Only_1_or_1_f __pyx_mstate_global->__pyx_kp_u_Index_out_of_range_Only_1_or_1_f
+#define __pyx_kp_u_Index_out_of_range_Use_0_or_2_fo __pyx_mstate_global->__pyx_kp_u_Index_out_of_range_Use_0_or_2_fo
+#define __pyx_n_s_Iterator __pyx_mstate_global->__pyx_n_s_Iterator
+#define __pyx_kp_s_Iterator_Union_Move_float64 __pyx_mstate_global->__pyx_kp_s_Iterator_Union_Move_float64
 #define __pyx_n_s_Move __pyx_mstate_global->__pyx_n_s_Move
 #define __pyx_n_s_None __pyx_mstate_global->__pyx_n_s_None
 #define __pyx_n_s_Number __pyx_mstate_global->__pyx_n_s_Number
 #define __pyx_n_s_Pick __pyx_mstate_global->__pyx_n_s_Pick
+#define __pyx_n_u_Pick __pyx_mstate_global->__pyx_n_u_Pick
+#define __pyx_n_s_PickT __pyx_mstate_global->__pyx_n_s_PickT
+#define __pyx_n_s_PickT_data __pyx_mstate_global->__pyx_n_s_PickT_data
+#define __pyx_n_s_PickT_move __pyx_mstate_global->__pyx_n_s_PickT_move
+#define __pyx_n_s_PickT_score __pyx_mstate_global->__pyx_n_s_PickT_score
 #define __pyx_n_s_Pick___bool __pyx_mstate_global->__pyx_n_s_Pick___bool
+#define __pyx_n_s_Pick___float __pyx_mstate_global->__pyx_n_s_Pick___float
+#define __pyx_n_s_Pick___format __pyx_mstate_global->__pyx_n_s_Pick___format
 #define __pyx_n_s_Pick___getitem __pyx_mstate_global->__pyx_n_s_Pick___getitem
 #define __pyx_n_s_Pick___init __pyx_mstate_global->__pyx_n_s_Pick___init
+#define __pyx_n_s_Pick___int __pyx_mstate_global->__pyx_n_s_Pick___int
 #define __pyx_n_s_Pick___iter __pyx_mstate_global->__pyx_n_s_Pick___iter
 #define __pyx_n_s_Pick___len __pyx_mstate_global->__pyx_n_s_Pick___len
 #define __pyx_n_s_Pick___repr __pyx_mstate_global->__pyx_n_s_Pick___repr
 #define __pyx_n_s_Pick___setitem __pyx_mstate_global->__pyx_n_s_Pick___setitem
-#define __pyx_n_s_Pick_data __pyx_mstate_global->__pyx_n_s_Pick_data
 #define __pyx_kp_u_Pick_move __pyx_mstate_global->__pyx_kp_u_Pick_move
-#define __pyx_n_s_Pick_move_2 __pyx_mstate_global->__pyx_n_s_Pick_move_2
-#define __pyx_n_s_Pick_score __pyx_mstate_global->__pyx_n_s_Pick_score
 #define __pyx_n_s_Tuple __pyx_mstate_global->__pyx_n_s_Tuple
 #define __pyx_kp_s_Tuple_Move_float64 __pyx_mstate_global->__pyx_kp_s_Tuple_Move_float64
+#define __pyx_kp_s_Tuple_int_str_int __pyx_mstate_global->__pyx_kp_s_Tuple_int_str_int
 #define __pyx_n_s_TypeError __pyx_mstate_global->__pyx_n_s_TypeError
 #define __pyx_n_s_Union __pyx_mstate_global->__pyx_n_s_Union
 #define __pyx_kp_s_Union_Move_float64 __pyx_mstate_global->__pyx_kp_s_Union_Move_float64
 #define __pyx_kp_s_Union_str_int __pyx_mstate_global->__pyx_kp_s_Union_str_int
-#define __pyx_n_s__22 __pyx_mstate_global->__pyx_n_s__22
+#define __pyx_n_s__27 __pyx_mstate_global->__pyx_n_s__27
 #define __pyx_kp_u__4 __pyx_mstate_global->__pyx_kp_u__4
 #define __pyx_kp_u__5 __pyx_mstate_global->__pyx_kp_u__5
+#define __pyx_n_s_all __pyx_mstate_global->__pyx_n_s_all
 #define __pyx_n_s_annotations __pyx_mstate_global->__pyx_n_s_annotations
 #define __pyx_n_s_args __pyx_mstate_global->__pyx_n_s_args
 #define __pyx_n_s_asyncio_coroutines __pyx_mstate_global->__pyx_n_s_asyncio_coroutines
@@ -2904,6 +3014,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_s_chmengine_utils_pick_py __pyx_mstate_global->__pyx_kp_s_chmengine_utils_pick_py
 #define __pyx_n_s_cline_in_traceback __pyx_mstate_global->__pyx_n_s_cline_in_traceback
 #define __pyx_n_s_close __pyx_mstate_global->__pyx_n_s_close
+#define __pyx_n_s_compare __pyx_mstate_global->__pyx_n_s_compare
 #define __pyx_n_s_data __pyx_mstate_global->__pyx_n_s_data
 #define __pyx_n_s_dataclass __pyx_mstate_global->__pyx_n_s_dataclass
 #define __pyx_n_s_dataclasses __pyx_mstate_global->__pyx_n_s_dataclasses
@@ -2911,7 +3022,12 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_u_disable __pyx_mstate_global->__pyx_kp_u_disable
 #define __pyx_n_s_doc __pyx_mstate_global->__pyx_n_s_doc
 #define __pyx_kp_u_enable __pyx_mstate_global->__pyx_kp_u_enable
+#define __pyx_n_s_field __pyx_mstate_global->__pyx_n_s_field
+#define __pyx_n_s_float __pyx_mstate_global->__pyx_n_s_float
 #define __pyx_n_s_float64 __pyx_mstate_global->__pyx_n_s_float64
+#define __pyx_n_s_format __pyx_mstate_global->__pyx_n_s_format
+#define __pyx_n_s_format_2 __pyx_mstate_global->__pyx_n_s_format_2
+#define __pyx_n_s_format_spec __pyx_mstate_global->__pyx_n_s_format_spec
 #define __pyx_kp_u_gc __pyx_mstate_global->__pyx_kp_u_gc
 #define __pyx_n_s_getitem __pyx_mstate_global->__pyx_n_s_getitem
 #define __pyx_n_s_import __pyx_mstate_global->__pyx_n_s_import
@@ -2919,6 +3035,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_init __pyx_mstate_global->__pyx_n_s_init
 #define __pyx_n_s_init_subclass __pyx_mstate_global->__pyx_n_s_init_subclass
 #define __pyx_n_s_int __pyx_mstate_global->__pyx_n_s_int
+#define __pyx_n_s_int_2 __pyx_mstate_global->__pyx_n_s_int_2
 #define __pyx_n_s_is_coroutine __pyx_mstate_global->__pyx_n_s_is_coroutine
 #define __pyx_kp_u_isenabled __pyx_mstate_global->__pyx_kp_u_isenabled
 #define __pyx_n_s_iter __pyx_mstate_global->__pyx_n_s_iter
@@ -2928,9 +3045,10 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_metaclass __pyx_mstate_global->__pyx_n_s_metaclass
 #define __pyx_n_s_module __pyx_mstate_global->__pyx_n_s_module
 #define __pyx_n_s_move __pyx_mstate_global->__pyx_n_s_move
-#define __pyx_n_u_move __pyx_mstate_global->__pyx_n_u_move
 #define __pyx_n_s_move_2 __pyx_mstate_global->__pyx_n_s_move_2
 #define __pyx_n_u_move_2 __pyx_mstate_global->__pyx_n_u_move_2
+#define __pyx_n_s_move_getter_keys __pyx_mstate_global->__pyx_n_s_move_getter_keys
+#define __pyx_n_s_mro_entries __pyx_mstate_global->__pyx_n_s_mro_entries
 #define __pyx_n_s_name __pyx_mstate_global->__pyx_n_s_name
 #define __pyx_n_s_numbers __pyx_mstate_global->__pyx_n_s_numbers
 #define __pyx_n_s_numpy __pyx_mstate_global->__pyx_n_s_numpy
@@ -2941,16 +3059,15 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_repr __pyx_mstate_global->__pyx_n_s_repr
 #define __pyx_n_s_return __pyx_mstate_global->__pyx_n_s_return
 #define __pyx_n_s_score __pyx_mstate_global->__pyx_n_s_score
-#define __pyx_n_u_score __pyx_mstate_global->__pyx_n_u_score
 #define __pyx_n_s_score_2 __pyx_mstate_global->__pyx_n_s_score_2
 #define __pyx_n_u_score_2 __pyx_mstate_global->__pyx_n_u_score_2
 #define __pyx_kp_u_score_3 __pyx_mstate_global->__pyx_kp_u_score_3
+#define __pyx_n_s_score_getter_keys __pyx_mstate_global->__pyx_n_s_score_getter_keys
 #define __pyx_n_s_self __pyx_mstate_global->__pyx_n_s_self
 #define __pyx_n_s_send __pyx_mstate_global->__pyx_n_s_send
 #define __pyx_n_s_set_name __pyx_mstate_global->__pyx_n_s_set_name
 #define __pyx_n_s_setitem __pyx_mstate_global->__pyx_n_s_setitem
 #define __pyx_n_s_setter __pyx_mstate_global->__pyx_n_s_setter
-#define __pyx_n_s_slots __pyx_mstate_global->__pyx_n_s_slots
 #define __pyx_n_s_str __pyx_mstate_global->__pyx_n_s_str
 #define __pyx_n_s_super __pyx_mstate_global->__pyx_n_s_super
 #define __pyx_n_s_test __pyx_mstate_global->__pyx_n_s_test
@@ -2961,32 +3078,683 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_int_0 __pyx_mstate_global->__pyx_int_0
 #define __pyx_int_1 __pyx_mstate_global->__pyx_int_1
 #define __pyx_int_2 __pyx_mstate_global->__pyx_int_2
+#define __pyx_int_neg_1 __pyx_mstate_global->__pyx_int_neg_1
+#define __pyx_int_neg_2 __pyx_mstate_global->__pyx_int_neg_2
 #define __pyx_tuple_ __pyx_mstate_global->__pyx_tuple_
 #define __pyx_tuple__2 __pyx_mstate_global->__pyx_tuple__2
 #define __pyx_tuple__6 __pyx_mstate_global->__pyx_tuple__6
-#define __pyx_tuple__7 __pyx_mstate_global->__pyx_tuple__7
-#define __pyx_tuple__9 __pyx_mstate_global->__pyx_tuple__9
-#define __pyx_tuple__11 __pyx_mstate_global->__pyx_tuple__11
+#define __pyx_tuple__8 __pyx_mstate_global->__pyx_tuple__8
+#define __pyx_tuple__12 __pyx_mstate_global->__pyx_tuple__12
 #define __pyx_tuple__13 __pyx_mstate_global->__pyx_tuple__13
+#define __pyx_tuple__14 __pyx_mstate_global->__pyx_tuple__14
+#define __pyx_tuple__16 __pyx_mstate_global->__pyx_tuple__16
 #define __pyx_tuple__18 __pyx_mstate_global->__pyx_tuple__18
+#define __pyx_tuple__25 __pyx_mstate_global->__pyx_tuple__25
 #define __pyx_codeobj__3 __pyx_mstate_global->__pyx_codeobj__3
-#define __pyx_codeobj__8 __pyx_mstate_global->__pyx_codeobj__8
+#define __pyx_codeobj__7 __pyx_mstate_global->__pyx_codeobj__7
+#define __pyx_codeobj__9 __pyx_mstate_global->__pyx_codeobj__9
 #define __pyx_codeobj__10 __pyx_mstate_global->__pyx_codeobj__10
-#define __pyx_codeobj__12 __pyx_mstate_global->__pyx_codeobj__12
-#define __pyx_codeobj__14 __pyx_mstate_global->__pyx_codeobj__14
+#define __pyx_codeobj__11 __pyx_mstate_global->__pyx_codeobj__11
 #define __pyx_codeobj__15 __pyx_mstate_global->__pyx_codeobj__15
-#define __pyx_codeobj__16 __pyx_mstate_global->__pyx_codeobj__16
 #define __pyx_codeobj__17 __pyx_mstate_global->__pyx_codeobj__17
 #define __pyx_codeobj__19 __pyx_mstate_global->__pyx_codeobj__19
 #define __pyx_codeobj__20 __pyx_mstate_global->__pyx_codeobj__20
 #define __pyx_codeobj__21 __pyx_mstate_global->__pyx_codeobj__21
+#define __pyx_codeobj__22 __pyx_mstate_global->__pyx_codeobj__22
+#define __pyx_codeobj__23 __pyx_mstate_global->__pyx_codeobj__23
+#define __pyx_codeobj__24 __pyx_mstate_global->__pyx_codeobj__24
+#define __pyx_codeobj__26 __pyx_mstate_global->__pyx_codeobj__26
 /* #### Code section: module_code ### */
 
-/* "chmengine/utils/pick.py":18
- *     __slots__ = ('_score', '_move')
+/* "chmengine/utils/pick.py":23
+ *     _move: Move = field(compare=False)
+ * 
+ *     @property             # <<<<<<<<<<<<<<
+ *     def score(self) -> float64:
+ *         """Read access to the score.
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_9chmengine_5utils_4pick_5PickT_1score(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4pick_5PickT_score, "Read access to the score.\n\n        Returns\n        -------\n        float64\n            The numeric evaluation of the move.\n        ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_4pick_5PickT_1score = {"score", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_4pick_5PickT_1score, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_4pick_5PickT_score};
+static PyObject *__pyx_pw_9chmengine_5utils_4pick_5PickT_1score(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  PyObject *__pyx_v_self = 0;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[1] = {0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("score (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_MACROS
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,0};
+    if (__pyx_kwds) {
+      Py_ssize_t kw_args;
+      switch (__pyx_nargs) {
+        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = __Pyx_NumKwargs_FASTCALL(__pyx_kwds);
+      switch (__pyx_nargs) {
+        case  0:
+        if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_self)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 23, __pyx_L3_error)
+        else goto __pyx_L5_argtuple_error;
+      }
+      if (unlikely(kw_args > 0)) {
+        const Py_ssize_t kwd_pos_args = __pyx_nargs;
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "score") < 0)) __PYX_ERR(0, 23, __pyx_L3_error)
+      }
+    } else if (unlikely(__pyx_nargs != 1)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+    }
+    __pyx_v_self = values[0];
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("score", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 23, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_AddTraceback("chmengine.utils.pick.PickT.score", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_9chmengine_5utils_4pick_5PickT_score(__pyx_self, __pyx_v_self);
+
+  /* function exit code */
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_9chmengine_5utils_4pick_5PickT_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("score", 1);
+
+  /* "chmengine/utils/pick.py":32
+ *             The numeric evaluation of the move.
+ *         """
+ *         return self._score             # <<<<<<<<<<<<<<
+ * 
+ *     @score.setter
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_score); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 32, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "chmengine/utils/pick.py":23
+ *     _move: Move = field(compare=False)
+ * 
+ *     @property             # <<<<<<<<<<<<<<
+ *     def score(self) -> float64:
+ *         """Read access to the score.
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("chmengine.utils.pick.PickT.score", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "chmengine/utils/pick.py":34
+ *         return self._score
+ * 
+ *     @score.setter             # <<<<<<<<<<<<<<
+ *     def score(self, score: Number) -> None:
+ *         """Write access to the score. Converts the value to float64.
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_9chmengine_5utils_4pick_5PickT_3score(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4pick_5PickT_2score, "Write access to the score. Converts the value to float64.\n\n        Parameters\n        ----------\n        score : Number\n            A numeric value representing the evaluation to set.\n        ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_4pick_5PickT_3score = {"score", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_4pick_5PickT_3score, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_4pick_5PickT_2score};
+static PyObject *__pyx_pw_9chmengine_5utils_4pick_5PickT_3score(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  PyObject *__pyx_v_self = 0;
+  PyObject *__pyx_v_score = 0;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[2] = {0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("score (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_MACROS
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_score_2,0};
+    if (__pyx_kwds) {
+      Py_ssize_t kw_args;
+      switch (__pyx_nargs) {
+        case  2: values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = __Pyx_NumKwargs_FASTCALL(__pyx_kwds);
+      switch (__pyx_nargs) {
+        case  0:
+        if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_self)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 34, __pyx_L3_error)
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_score_2)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 34, __pyx_L3_error)
+        else {
+          __Pyx_RaiseArgtupleInvalid("score", 1, 2, 2, 1); __PYX_ERR(0, 34, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        const Py_ssize_t kwd_pos_args = __pyx_nargs;
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "score") < 0)) __PYX_ERR(0, 34, __pyx_L3_error)
+      }
+    } else if (unlikely(__pyx_nargs != 2)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+      values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
+    }
+    __pyx_v_self = values[0];
+    __pyx_v_score = values[1];
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("score", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 34, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_AddTraceback("chmengine.utils.pick.PickT.score", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_9chmengine_5utils_4pick_5PickT_2score(__pyx_self, __pyx_v_self, __pyx_v_score);
+
+  /* function exit code */
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_9chmengine_5utils_4pick_5PickT_2score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_score) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  unsigned int __pyx_t_4;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("score", 1);
+
+  /* "chmengine/utils/pick.py":43
+ *             A numeric value representing the evaluation to set.
+ *         """
+ *         self._score = float64(score)             # <<<<<<<<<<<<<<
+ * 
+ *     @property
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = NULL;
+  __pyx_t_4 = 0;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+      __pyx_t_4 = 1;
+    }
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_v_score};
+    __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
+    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  }
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_score, __pyx_t_1) < 0) __PYX_ERR(0, 43, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "chmengine/utils/pick.py":34
+ *         return self._score
+ * 
+ *     @score.setter             # <<<<<<<<<<<<<<
+ *     def score(self, score: Number) -> None:
+ *         """Write access to the score. Converts the value to float64.
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_AddTraceback("chmengine.utils.pick.PickT.score", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "chmengine/utils/pick.py":45
+ *         self._score = float64(score)
+ * 
+ *     @property             # <<<<<<<<<<<<<<
+ *     def move(self) -> Move:
+ *         """Read-only access to the move.
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_9chmengine_5utils_4pick_5PickT_5move(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4pick_5PickT_4move, "Read-only access to the move.\n\n        Returns\n        -------\n        Move\n            The chess move associated with this Pick.\n        ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_4pick_5PickT_5move = {"move", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_4pick_5PickT_5move, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_4pick_5PickT_4move};
+static PyObject *__pyx_pw_9chmengine_5utils_4pick_5PickT_5move(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  PyObject *__pyx_v_self = 0;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[1] = {0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("move (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_MACROS
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,0};
+    if (__pyx_kwds) {
+      Py_ssize_t kw_args;
+      switch (__pyx_nargs) {
+        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = __Pyx_NumKwargs_FASTCALL(__pyx_kwds);
+      switch (__pyx_nargs) {
+        case  0:
+        if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_self)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 45, __pyx_L3_error)
+        else goto __pyx_L5_argtuple_error;
+      }
+      if (unlikely(kw_args > 0)) {
+        const Py_ssize_t kwd_pos_args = __pyx_nargs;
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "move") < 0)) __PYX_ERR(0, 45, __pyx_L3_error)
+      }
+    } else if (unlikely(__pyx_nargs != 1)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+    }
+    __pyx_v_self = values[0];
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("move", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 45, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_AddTraceback("chmengine.utils.pick.PickT.move", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_9chmengine_5utils_4pick_5PickT_4move(__pyx_self, __pyx_v_self);
+
+  /* function exit code */
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_9chmengine_5utils_4pick_5PickT_4move(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("move", 1);
+
+  /* "chmengine/utils/pick.py":54
+ *             The chess move associated with this Pick.
+ *         """
+ *         return self._move             # <<<<<<<<<<<<<<
+ * 
+ *     @property
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_move); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "chmengine/utils/pick.py":45
+ *         self._score = float64(score)
+ * 
+ *     @property             # <<<<<<<<<<<<<<
+ *     def move(self) -> Move:
+ *         """Read-only access to the move.
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("chmengine.utils.pick.PickT.move", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "chmengine/utils/pick.py":56
+ *         return self._move
+ * 
+ *     @property             # <<<<<<<<<<<<<<
+ *     def data(self) -> Tuple[Move, float64]:
+ *         """Read-only access to the pick data as a tuple.
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_9chmengine_5utils_4pick_5PickT_7data(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4pick_5PickT_6data, "Read-only access to the pick data as a tuple.\n\n        Returns\n        -------\n        Tuple[Move, float64]\n            The (move, score) pair represented by this object.\n        ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_4pick_5PickT_7data = {"data", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_4pick_5PickT_7data, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_4pick_5PickT_6data};
+static PyObject *__pyx_pw_9chmengine_5utils_4pick_5PickT_7data(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  PyObject *__pyx_v_self = 0;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[1] = {0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("data (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_MACROS
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,0};
+    if (__pyx_kwds) {
+      Py_ssize_t kw_args;
+      switch (__pyx_nargs) {
+        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = __Pyx_NumKwargs_FASTCALL(__pyx_kwds);
+      switch (__pyx_nargs) {
+        case  0:
+        if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_self)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 56, __pyx_L3_error)
+        else goto __pyx_L5_argtuple_error;
+      }
+      if (unlikely(kw_args > 0)) {
+        const Py_ssize_t kwd_pos_args = __pyx_nargs;
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "data") < 0)) __PYX_ERR(0, 56, __pyx_L3_error)
+      }
+    } else if (unlikely(__pyx_nargs != 1)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+    }
+    __pyx_v_self = values[0];
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("data", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 56, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_AddTraceback("chmengine.utils.pick.PickT.data", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_9chmengine_5utils_4pick_5PickT_6data(__pyx_self, __pyx_v_self);
+
+  /* function exit code */
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_9chmengine_5utils_4pick_5PickT_6data(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("data", 1);
+
+  /* "chmengine/utils/pick.py":65
+ *             The (move, score) pair represented by this object.
+ *         """
+ *         return self._move, self._score             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_move); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_score); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_1);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1)) __PYX_ERR(0, 65, __pyx_L1_error);
+  __Pyx_GIVEREF(__pyx_t_2);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2)) __PYX_ERR(0, 65, __pyx_L1_error);
+  __pyx_t_1 = 0;
+  __pyx_t_2 = 0;
+  __pyx_r = ((PyObject*)__pyx_t_3);
+  __pyx_t_3 = 0;
+  goto __pyx_L0;
+
+  /* "chmengine/utils/pick.py":56
+ *         return self._move
+ * 
+ *     @property             # <<<<<<<<<<<<<<
+ *     def data(self) -> Tuple[Move, float64]:
+ *         """Read-only access to the pick data as a tuple.
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_AddTraceback("chmengine.utils.pick.PickT.data", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "chmengine/utils/pick.py":77
+ *     score_getter_keys: Tuple[int, str, int] = (1, 'score', -1)
  * 
  *     def __init__(self, move: Move, score: Number) -> None:             # <<<<<<<<<<<<<<
- *         """Initializes a Pick instance
+ *         """Initializes a Pick instance.
  * 
  */
 
@@ -2998,7 +3766,7 @@ PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4pick_4Pick___init__, "Initializes a Pick instance\n\n        Parameters\n        ----------\n        move : chess.Move\n        score : Number\n        ");
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4pick_4Pick___init__, "Initializes a Pick instance.\n\n        Parameters\n        ----------\n        move : chess.Move\n            The chess move to associate with this pick.\n        score : Number\n            The numeric evaluation of the move.\n        ");
 static PyMethodDef __pyx_mdef_9chmengine_5utils_4pick_4Pick_1__init__ = {"__init__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_4pick_4Pick_1__init__, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_4pick_4Pick___init__};
 static PyObject *__pyx_pw_9chmengine_5utils_4pick_4Pick_1__init__(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
@@ -3030,7 +3798,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   #endif
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
-    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_move,&__pyx_n_s_score,0};
+    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_move_2,&__pyx_n_s_score_2,0};
     if (__pyx_kwds) {
       Py_ssize_t kw_args;
       switch (__pyx_nargs) {
@@ -3050,32 +3818,32 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 18, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 77, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
-        if (likely((values[1] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_move)) != 0)) {
+        if (likely((values[1] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_move_2)) != 0)) {
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 18, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 77, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 1); __PYX_ERR(0, 18, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 1); __PYX_ERR(0, 77, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
-        if (likely((values[2] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_score)) != 0)) {
+        if (likely((values[2] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_score_2)) != 0)) {
           (void)__Pyx_Arg_NewRef_FASTCALL(values[2]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 18, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 77, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 2); __PYX_ERR(0, 18, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 2); __PYX_ERR(0, 77, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__init__") < 0)) __PYX_ERR(0, 18, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__init__") < 0)) __PYX_ERR(0, 77, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 3)) {
       goto __pyx_L5_argtuple_error;
@@ -3090,7 +3858,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 18, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 77, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3132,41 +3900,41 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick___init__(CYTHON_UNUSED P
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 1);
 
-  /* "chmengine/utils/pick.py":26
- *         score : Number
+  /* "chmengine/utils/pick.py":87
+ *             The numeric evaluation of the move.
  *         """
  *         if not isinstance(move, Move):             # <<<<<<<<<<<<<<
  *             raise TypeError(f"the argument for move must be type 'chess.Move', got: {type(move)}")
  *         self._move, self.score = move, float64(score)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Move); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Move); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_IsInstance(__pyx_v_move, __pyx_t_1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_t_2 = PyObject_IsInstance(__pyx_v_move, __pyx_t_1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 87, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = (!__pyx_t_2);
   if (unlikely(__pyx_t_3)) {
 
-    /* "chmengine/utils/pick.py":27
+    /* "chmengine/utils/pick.py":88
  *         """
  *         if not isinstance(move, Move):
  *             raise TypeError(f"the argument for move must be type 'chess.Move', got: {type(move)}")             # <<<<<<<<<<<<<<
  *         self._move, self.score = move, float64(score)
  * 
  */
-    __pyx_t_1 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_move)), __pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 27, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_move)), __pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = __Pyx_PyUnicode_Concat(__pyx_kp_u_the_argument_for_move_must_be_ty, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 27, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyUnicode_Concat(__pyx_kp_u_the_argument_for_move_must_be_ty, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_TypeError, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 27, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_TypeError, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 27, __pyx_L1_error)
+    __PYX_ERR(0, 88, __pyx_L1_error)
 
-    /* "chmengine/utils/pick.py":26
- *         score : Number
+    /* "chmengine/utils/pick.py":87
+ *             The numeric evaluation of the move.
  *         """
  *         if not isinstance(move, Move):             # <<<<<<<<<<<<<<
  *             raise TypeError(f"the argument for move must be type 'chess.Move', got: {type(move)}")
@@ -3174,7 +3942,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick___init__(CYTHON_UNUSED P
  */
   }
 
-  /* "chmengine/utils/pick.py":28
+  /* "chmengine/utils/pick.py":89
  *         if not isinstance(move, Move):
  *             raise TypeError(f"the argument for move must be type 'chess.Move', got: {type(move)}")
  *         self._move, self.score = move, float64(score)             # <<<<<<<<<<<<<<
@@ -3183,7 +3951,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick___init__(CYTHON_UNUSED P
  */
   __pyx_t_1 = __pyx_v_move;
   __Pyx_INCREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_float64); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 28, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_float64); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = NULL;
   __pyx_t_7 = 0;
@@ -3203,20 +3971,20 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick___init__(CYTHON_UNUSED P
     PyObject *__pyx_callargs[2] = {__pyx_t_6, __pyx_v_score};
     __pyx_t_4 = __Pyx_PyObject_FastCall(__pyx_t_5, __pyx_callargs+1-__pyx_t_7, 1+__pyx_t_7);
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 28, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 89, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_move_2, __pyx_t_1) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_move, __pyx_t_1) < 0) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_score, __pyx_t_4) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_score_2, __pyx_t_4) < 0) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "chmengine/utils/pick.py":18
- *     __slots__ = ('_score', '_move')
+  /* "chmengine/utils/pick.py":77
+ *     score_getter_keys: Tuple[int, str, int] = (1, 'score', -1)
  * 
  *     def __init__(self, move: Move, score: Number) -> None:             # <<<<<<<<<<<<<<
- *         """Initializes a Pick instance
+ *         """Initializes a Pick instance.
  * 
  */
 
@@ -3236,12 +4004,12 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick___init__(CYTHON_UNUSED P
   return __pyx_r;
 }
 
-/* "chmengine/utils/pick.py":30
+/* "chmengine/utils/pick.py":91
  *         self._move, self.score = move, float64(score)
  * 
  *     def __getitem__(self, index: Union[str, int]) -> Union[Move, float64]:             # <<<<<<<<<<<<<<
- *         """Allows tuple-like access with indexing."""
- *         if index in (0, 'move'):
+ *         """Allows tuple-like access to the move and score using string or integer keys.
+ * 
  */
 
 /* Python wrapper */
@@ -3252,7 +4020,7 @@ PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4pick_4Pick_2__getitem__, "Allows tuple-like access with indexing.");
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4pick_4Pick_2__getitem__, "Allows tuple-like access to the move and score using string or integer keys.\n\n        Parameters\n        ----------\n        index : Union[str, int]\n            Key to access ('move', 0, -2) or ('score', 1, -1).\n\n        Returns\n        -------\n        Union[Move, float64]\n            The requested component of the Pick.\n\n        Raises\n        ------\n        IndexError\n            If the key is not recognized.\n        ");
 static PyMethodDef __pyx_mdef_9chmengine_5utils_4pick_4Pick_3__getitem__ = {"__getitem__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_4pick_4Pick_3__getitem__, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_4pick_4Pick_2__getitem__};
 static PyObject *__pyx_pw_9chmengine_5utils_4pick_4Pick_3__getitem__(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
@@ -3301,7 +4069,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 30, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 91, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -3309,14 +4077,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 30, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 91, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("__getitem__", 1, 2, 2, 1); __PYX_ERR(0, 30, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__getitem__", 1, 2, 2, 1); __PYX_ERR(0, 91, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__getitem__") < 0)) __PYX_ERR(0, 30, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__getitem__") < 0)) __PYX_ERR(0, 91, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -3329,7 +4097,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__getitem__", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 30, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__getitem__", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 91, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3361,121 +4129,102 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_2__getitem__(CYTHON_UNUS
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_t_2;
-  int __pyx_t_3;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__getitem__", 1);
 
-  /* "chmengine/utils/pick.py":32
- *     def __getitem__(self, index: Union[str, int]) -> Union[Move, float64]:
- *         """Allows tuple-like access with indexing."""
- *         if index in (0, 'move'):             # <<<<<<<<<<<<<<
+  /* "chmengine/utils/pick.py":109
+ *             If the key is not recognized.
+ *         """
+ *         if index in self.move_getter_keys:             # <<<<<<<<<<<<<<
  *             return self._move
- *         if index in (1, 'score'):
+ *         if index in self.score_getter_keys:
  */
-  __Pyx_INCREF(__pyx_v_index);
-  __pyx_t_1 = __pyx_v_index;
-  __pyx_t_3 = (__Pyx_PyInt_BoolEqObjC(__pyx_t_1, __pyx_int_0, 0, 0)); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 32, __pyx_L1_error)
-  if (!__pyx_t_3) {
-  } else {
-    __pyx_t_2 = __pyx_t_3;
-    goto __pyx_L4_bool_binop_done;
-  }
-  __pyx_t_3 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_move, Py_EQ)); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 32, __pyx_L1_error)
-  __pyx_t_2 = __pyx_t_3;
-  __pyx_L4_bool_binop_done:;
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_move_getter_keys); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_v_index, __pyx_t_1, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __pyx_t_2;
-  if (__pyx_t_3) {
+  if (__pyx_t_2) {
 
-    /* "chmengine/utils/pick.py":33
- *         """Allows tuple-like access with indexing."""
- *         if index in (0, 'move'):
+    /* "chmengine/utils/pick.py":110
+ *         """
+ *         if index in self.move_getter_keys:
  *             return self._move             # <<<<<<<<<<<<<<
- *         if index in (1, 'score'):
+ *         if index in self.score_getter_keys:
  *             return self._score
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_move_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_move); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 110, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "chmengine/utils/pick.py":32
- *     def __getitem__(self, index: Union[str, int]) -> Union[Move, float64]:
- *         """Allows tuple-like access with indexing."""
- *         if index in (0, 'move'):             # <<<<<<<<<<<<<<
+    /* "chmengine/utils/pick.py":109
+ *             If the key is not recognized.
+ *         """
+ *         if index in self.move_getter_keys:             # <<<<<<<<<<<<<<
  *             return self._move
- *         if index in (1, 'score'):
+ *         if index in self.score_getter_keys:
  */
   }
 
-  /* "chmengine/utils/pick.py":34
- *         if index in (0, 'move'):
+  /* "chmengine/utils/pick.py":111
+ *         if index in self.move_getter_keys:
  *             return self._move
- *         if index in (1, 'score'):             # <<<<<<<<<<<<<<
+ *         if index in self.score_getter_keys:             # <<<<<<<<<<<<<<
  *             return self._score
- *         raise IndexError("Index out of range. Use 0 for 'move', 1 for 'score'.")
+ *         raise IndexError("Index out of range. Use 0 (or -2) for 'move', 1 (or -1) for 'score'.")
  */
-  __Pyx_INCREF(__pyx_v_index);
-  __pyx_t_1 = __pyx_v_index;
-  __pyx_t_2 = (__Pyx_PyInt_BoolEqObjC(__pyx_t_1, __pyx_int_1, 1, 0)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 34, __pyx_L1_error)
-  if (!__pyx_t_2) {
-  } else {
-    __pyx_t_3 = __pyx_t_2;
-    goto __pyx_L7_bool_binop_done;
-  }
-  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_score, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 34, __pyx_L1_error)
-  __pyx_t_3 = __pyx_t_2;
-  __pyx_L7_bool_binop_done:;
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_score_getter_keys); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 111, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_v_index, __pyx_t_1, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 111, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_2 = __pyx_t_3;
   if (__pyx_t_2) {
 
-    /* "chmengine/utils/pick.py":35
+    /* "chmengine/utils/pick.py":112
  *             return self._move
- *         if index in (1, 'score'):
+ *         if index in self.score_getter_keys:
  *             return self._score             # <<<<<<<<<<<<<<
- *         raise IndexError("Index out of range. Use 0 for 'move', 1 for 'score'.")
+ *         raise IndexError("Index out of range. Use 0 (or -2) for 'move', 1 (or -1) for 'score'.")
  * 
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_score_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_score); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "chmengine/utils/pick.py":34
- *         if index in (0, 'move'):
+    /* "chmengine/utils/pick.py":111
+ *         if index in self.move_getter_keys:
  *             return self._move
- *         if index in (1, 'score'):             # <<<<<<<<<<<<<<
+ *         if index in self.score_getter_keys:             # <<<<<<<<<<<<<<
  *             return self._score
- *         raise IndexError("Index out of range. Use 0 for 'move', 1 for 'score'.")
+ *         raise IndexError("Index out of range. Use 0 (or -2) for 'move', 1 (or -1) for 'score'.")
  */
   }
 
-  /* "chmengine/utils/pick.py":36
- *         if index in (1, 'score'):
+  /* "chmengine/utils/pick.py":113
+ *         if index in self.score_getter_keys:
  *             return self._score
- *         raise IndexError("Index out of range. Use 0 for 'move', 1 for 'score'.")             # <<<<<<<<<<<<<<
+ *         raise IndexError("Index out of range. Use 0 (or -2) for 'move', 1 (or -1) for 'score'.")             # <<<<<<<<<<<<<<
  * 
  *     def __setitem__(self, key: Union[str, int], value: Number) -> None:
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 113, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(0, 36, __pyx_L1_error)
+  __PYX_ERR(0, 113, __pyx_L1_error)
 
-  /* "chmengine/utils/pick.py":30
+  /* "chmengine/utils/pick.py":91
  *         self._move, self.score = move, float64(score)
  * 
  *     def __getitem__(self, index: Union[str, int]) -> Union[Move, float64]:             # <<<<<<<<<<<<<<
- *         """Allows tuple-like access with indexing."""
- *         if index in (0, 'move'):
+ *         """Allows tuple-like access to the move and score using string or integer keys.
+ * 
  */
 
   /* function exit code */
@@ -3489,12 +4238,12 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_2__getitem__(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "chmengine/utils/pick.py":38
- *         raise IndexError("Index out of range. Use 0 for 'move', 1 for 'score'.")
+/* "chmengine/utils/pick.py":115
+ *         raise IndexError("Index out of range. Use 0 (or -2) for 'move', 1 (or -1) for 'score'.")
  * 
  *     def __setitem__(self, key: Union[str, int], value: Number) -> None:             # <<<<<<<<<<<<<<
- *         if key in (1, 'score'):
- *             self.score = float64(value)
+ *         """Allows updating of score via tuple-style access.
+ * 
  */
 
 /* Python wrapper */
@@ -3505,7 +4254,8 @@ PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_9chmengine_5utils_4pick_4Pick_5__setitem__ = {"__setitem__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_4pick_4Pick_5__setitem__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4pick_4Pick_4__setitem__, "Allows updating of score via tuple-style access.\n\n        Parameters\n        ----------\n        key : Union[str, int]\n            Key that matches score_getter_keys.\n        value : Number\n            The new score value to assign.\n\n        Raises\n        ------\n        IndexError\n            If trying to assign to a read-only component (i.e., move).\n        ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_4pick_4Pick_5__setitem__ = {"__setitem__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_4pick_4Pick_5__setitem__, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_4pick_4Pick_4__setitem__};
 static PyObject *__pyx_pw_9chmengine_5utils_4pick_4Pick_5__setitem__(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
@@ -3556,7 +4306,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 38, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 115, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -3564,9 +4314,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 38, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 115, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("__setitem__", 1, 3, 3, 1); __PYX_ERR(0, 38, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__setitem__", 1, 3, 3, 1); __PYX_ERR(0, 115, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -3574,14 +4324,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[2]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 38, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 115, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("__setitem__", 1, 3, 3, 2); __PYX_ERR(0, 38, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__setitem__", 1, 3, 3, 2); __PYX_ERR(0, 115, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__setitem__") < 0)) __PYX_ERR(0, 38, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__setitem__") < 0)) __PYX_ERR(0, 115, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 3)) {
       goto __pyx_L5_argtuple_error;
@@ -3596,7 +4346,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__setitem__", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 38, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__setitem__", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 115, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3628,103 +4378,65 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_4__setitem__(CYTHON_UNUS
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_t_2;
-  int __pyx_t_3;
-  PyObject *__pyx_t_4 = NULL;
-  PyObject *__pyx_t_5 = NULL;
-  unsigned int __pyx_t_6;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__setitem__", 1);
 
-  /* "chmengine/utils/pick.py":39
- * 
- *     def __setitem__(self, key: Union[str, int], value: Number) -> None:
- *         if key in (1, 'score'):             # <<<<<<<<<<<<<<
- *             self.score = float64(value)
- *         else:
+  /* "chmengine/utils/pick.py":130
+ *             If trying to assign to a read-only component (i.e., move).
+ *         """
+ *         if key in self.score_getter_keys:             # <<<<<<<<<<<<<<
+ *             # Go through the prop setter here to convert to float64
+ *             self.score = value
  */
-  __Pyx_INCREF(__pyx_v_key);
-  __pyx_t_1 = __pyx_v_key;
-  __pyx_t_3 = (__Pyx_PyInt_BoolEqObjC(__pyx_t_1, __pyx_int_1, 1, 0)); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 39, __pyx_L1_error)
-  if (!__pyx_t_3) {
-  } else {
-    __pyx_t_2 = __pyx_t_3;
-    goto __pyx_L4_bool_binop_done;
-  }
-  __pyx_t_3 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_score, Py_EQ)); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 39, __pyx_L1_error)
-  __pyx_t_2 = __pyx_t_3;
-  __pyx_L4_bool_binop_done:;
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_score_getter_keys); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 130, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_v_key, __pyx_t_1, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 130, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __pyx_t_2;
-  if (likely(__pyx_t_3)) {
+  if (likely(__pyx_t_2)) {
 
-    /* "chmengine/utils/pick.py":40
- *     def __setitem__(self, key: Union[str, int], value: Number) -> None:
- *         if key in (1, 'score'):
- *             self.score = float64(value)             # <<<<<<<<<<<<<<
+    /* "chmengine/utils/pick.py":132
+ *         if key in self.score_getter_keys:
+ *             # Go through the prop setter here to convert to float64
+ *             self.score = value             # <<<<<<<<<<<<<<
  *         else:
- *             raise IndexError("Index out of range. Only 1 for 'score' can be set.")
+ *             raise IndexError("Index out of range. Only 1 (or -1) for 'score' can be set.")
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_float64); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 40, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = NULL;
-    __pyx_t_6 = 0;
-    #if CYTHON_UNPACK_METHODS
-    if (unlikely(PyMethod_Check(__pyx_t_4))) {
-      __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
-      if (likely(__pyx_t_5)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-        __Pyx_INCREF(__pyx_t_5);
-        __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_4, function);
-        __pyx_t_6 = 1;
-      }
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[2] = {__pyx_t_5, __pyx_v_value};
-      __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
-      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    }
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_score, __pyx_t_1) < 0) __PYX_ERR(0, 40, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_score_2, __pyx_v_value) < 0) __PYX_ERR(0, 132, __pyx_L1_error)
 
-    /* "chmengine/utils/pick.py":39
- * 
- *     def __setitem__(self, key: Union[str, int], value: Number) -> None:
- *         if key in (1, 'score'):             # <<<<<<<<<<<<<<
- *             self.score = float64(value)
- *         else:
+    /* "chmengine/utils/pick.py":130
+ *             If trying to assign to a read-only component (i.e., move).
+ *         """
+ *         if key in self.score_getter_keys:             # <<<<<<<<<<<<<<
+ *             # Go through the prop setter here to convert to float64
+ *             self.score = value
  */
     goto __pyx_L3;
   }
 
-  /* "chmengine/utils/pick.py":42
- *             self.score = float64(value)
+  /* "chmengine/utils/pick.py":134
+ *             self.score = value
  *         else:
- *             raise IndexError("Index out of range. Only 1 for 'score' can be set.")             # <<<<<<<<<<<<<<
+ *             raise IndexError("Index out of range. Only 1 (or -1) for 'score' can be set.")             # <<<<<<<<<<<<<<
  * 
- *     def __iter__(self) -> Union[Move, float64]:
+ *     def __iter__(self) -> Iterator[Union[Move, float64]]:
  */
   /*else*/ {
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 134, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 42, __pyx_L1_error)
+    __PYX_ERR(0, 134, __pyx_L1_error)
   }
   __pyx_L3:;
 
-  /* "chmengine/utils/pick.py":38
- *         raise IndexError("Index out of range. Use 0 for 'move', 1 for 'score'.")
+  /* "chmengine/utils/pick.py":115
+ *         raise IndexError("Index out of range. Use 0 (or -2) for 'move', 1 (or -1) for 'score'.")
  * 
  *     def __setitem__(self, key: Union[str, int], value: Number) -> None:             # <<<<<<<<<<<<<<
- *         if key in (1, 'score'):
- *             self.score = float64(value)
+ *         """Allows updating of score via tuple-style access.
+ * 
  */
 
   /* function exit code */
@@ -3732,8 +4444,6 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_4__setitem__(CYTHON_UNUS
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_XDECREF(__pyx_t_5);
   __Pyx_AddTraceback("chmengine.utils.pick.Pick.__setitem__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -3743,12 +4453,12 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_4__setitem__(CYTHON_UNUS
 }
 static PyObject *__pyx_gb_9chmengine_5utils_4pick_4Pick_8generator(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "chmengine/utils/pick.py":44
- *             raise IndexError("Index out of range. Only 1 for 'score' can be set.")
+/* "chmengine/utils/pick.py":136
+ *             raise IndexError("Index out of range. Only 1 (or -1) for 'score' can be set.")
  * 
- *     def __iter__(self) -> Union[Move, float64]:             # <<<<<<<<<<<<<<
- *         """Allows unpacking like a tuple."""
- *         yield self._move
+ *     def __iter__(self) -> Iterator[Union[Move, float64]]:             # <<<<<<<<<<<<<<
+ *         """Allows unpacking like a tuple.
+ * 
  */
 
 /* Python wrapper */
@@ -3759,7 +4469,7 @@ PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4pick_4Pick_6__iter__, "Allows unpacking like a tuple.");
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4pick_4Pick_6__iter__, "Allows unpacking like a tuple.\n\n        Returns\n        -------\n        Iterator[Union[Move, float64]]\n            An iterator over (move, score).\n        ");
 static PyMethodDef __pyx_mdef_9chmengine_5utils_4pick_4Pick_7__iter__ = {"__iter__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_4pick_4Pick_7__iter__, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_4pick_4Pick_6__iter__};
 static PyObject *__pyx_pw_9chmengine_5utils_4pick_4Pick_7__iter__(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
@@ -3805,12 +4515,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 44, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 136, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__iter__") < 0)) __PYX_ERR(0, 44, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__iter__") < 0)) __PYX_ERR(0, 136, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -3821,7 +4531,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__iter__", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 44, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__iter__", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 136, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3860,7 +4570,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_6__iter__(CYTHON_UNUSED 
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_9chmengine_5utils_4pick___pyx_scope_struct____iter__ *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 44, __pyx_L1_error)
+    __PYX_ERR(0, 136, __pyx_L1_error)
   } else {
     __Pyx_GOTREF((PyObject *)__pyx_cur_scope);
   }
@@ -3868,7 +4578,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_6__iter__(CYTHON_UNUSED 
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_self);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_9chmengine_5utils_4pick_4Pick_8generator, __pyx_codeobj__3, (PyObject *) __pyx_cur_scope, __pyx_n_s_iter, __pyx_n_s_Pick___iter, __pyx_n_s_chmengine_utils_pick); if (unlikely(!gen)) __PYX_ERR(0, 44, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_9chmengine_5utils_4pick_4Pick_8generator, __pyx_codeobj__3, (PyObject *) __pyx_cur_scope, __pyx_n_s_iter, __pyx_n_s_Pick___iter, __pyx_n_s_chmengine_utils_pick); if (unlikely(!gen)) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -3903,16 +4613,16 @@ static PyObject *__pyx_gb_9chmengine_5utils_4pick_4Pick_8generator(__pyx_Corouti
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 44, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 136, __pyx_L1_error)
 
-  /* "chmengine/utils/pick.py":46
- *     def __iter__(self) -> Union[Move, float64]:
- *         """Allows unpacking like a tuple."""
+  /* "chmengine/utils/pick.py":144
+ *             An iterator over (move, score).
+ *         """
  *         yield self._move             # <<<<<<<<<<<<<<
  *         yield self._score
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_move_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_move); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 144, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3923,16 +4633,16 @@ static PyObject *__pyx_gb_9chmengine_5utils_4pick_4Pick_8generator(__pyx_Corouti
   __pyx_generator->resume_label = 1;
   return __pyx_r;
   __pyx_L4_resume_from_yield:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 46, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 144, __pyx_L1_error)
 
-  /* "chmengine/utils/pick.py":47
- *         """Allows unpacking like a tuple."""
+  /* "chmengine/utils/pick.py":145
+ *         """
  *         yield self._move
  *         yield self._score             # <<<<<<<<<<<<<<
  * 
  *     def __len__(self) -> int:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_score_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_score); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 145, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3943,15 +4653,15 @@ static PyObject *__pyx_gb_9chmengine_5utils_4pick_4Pick_8generator(__pyx_Corouti
   __pyx_generator->resume_label = 2;
   return __pyx_r;
   __pyx_L5_resume_from_yield:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 47, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 145, __pyx_L1_error)
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "chmengine/utils/pick.py":44
- *             raise IndexError("Index out of range. Only 1 for 'score' can be set.")
+  /* "chmengine/utils/pick.py":136
+ *             raise IndexError("Index out of range. Only 1 (or -1) for 'score' can be set.")
  * 
- *     def __iter__(self) -> Union[Move, float64]:             # <<<<<<<<<<<<<<
- *         """Allows unpacking like a tuple."""
- *         yield self._move
+ *     def __iter__(self) -> Iterator[Union[Move, float64]]:             # <<<<<<<<<<<<<<
+ *         """Allows unpacking like a tuple.
+ * 
  */
 
   /* function exit code */
@@ -3972,12 +4682,12 @@ static PyObject *__pyx_gb_9chmengine_5utils_4pick_4Pick_8generator(__pyx_Corouti
   return __pyx_r;
 }
 
-/* "chmengine/utils/pick.py":49
+/* "chmengine/utils/pick.py":147
  *         yield self._score
  * 
  *     def __len__(self) -> int:             # <<<<<<<<<<<<<<
- *         """Length is always 2: (move, score)."""
- *         return 2
+ *         """Length of the object, always 2: (move, score).
+ * 
  */
 
 /* Python wrapper */
@@ -3988,7 +4698,7 @@ PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4pick_4Pick_9__len__, "Length is always 2: (move, score).");
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4pick_4Pick_9__len__, "Length of the object, always 2: (move, score).\n\n        Returns\n        -------\n        int\n        ");
 static PyMethodDef __pyx_mdef_9chmengine_5utils_4pick_4Pick_10__len__ = {"__len__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_4pick_4Pick_10__len__, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_4pick_4Pick_9__len__};
 static PyObject *__pyx_pw_9chmengine_5utils_4pick_4Pick_10__len__(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
@@ -4034,12 +4744,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 49, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 147, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__len__") < 0)) __PYX_ERR(0, 49, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__len__") < 0)) __PYX_ERR(0, 147, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -4050,7 +4760,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__len__", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 49, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__len__", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 147, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4085,25 +4795,25 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_9__len__(CYTHON_UNUSED P
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__len__", 1);
 
-  /* "chmengine/utils/pick.py":51
- *     def __len__(self) -> int:
- *         """Length is always 2: (move, score)."""
+  /* "chmengine/utils/pick.py":154
+ *         int
+ *         """
  *         return 2             # <<<<<<<<<<<<<<
  * 
  *     def __repr__(self) -> str:
  */
   __Pyx_XDECREF(__pyx_r);
-  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_int_2)) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_int_2))) __PYX_ERR(0, 51, __pyx_L1_error)
+  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_int_2)) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_int_2))) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_INCREF(__pyx_int_2);
   __pyx_r = ((PyObject*)__pyx_int_2);
   goto __pyx_L0;
 
-  /* "chmengine/utils/pick.py":49
+  /* "chmengine/utils/pick.py":147
  *         yield self._score
  * 
  *     def __len__(self) -> int:             # <<<<<<<<<<<<<<
- *         """Length is always 2: (move, score)."""
- *         return 2
+ *         """Length of the object, always 2: (move, score).
+ * 
  */
 
   /* function exit code */
@@ -4116,11 +4826,11 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_9__len__(CYTHON_UNUSED P
   return __pyx_r;
 }
 
-/* "chmengine/utils/pick.py":53
+/* "chmengine/utils/pick.py":156
  *         return 2
  * 
  *     def __repr__(self) -> str:             # <<<<<<<<<<<<<<
- *         return f"Pick(move={self._move.__repr__()}, score={self._score})"
+ *         """Developer-friendly string representation.
  * 
  */
 
@@ -4132,7 +4842,8 @@ PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_9chmengine_5utils_4pick_4Pick_12__repr__ = {"__repr__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_4pick_4Pick_12__repr__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4pick_4Pick_11__repr__, "Developer-friendly string representation.\n\n        Returns\n        -------\n        str\n        ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_4pick_4Pick_12__repr__ = {"__repr__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_4pick_4Pick_12__repr__, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_4pick_4Pick_11__repr__};
 static PyObject *__pyx_pw_9chmengine_5utils_4pick_4Pick_12__repr__(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
@@ -4177,12 +4888,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 53, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 156, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__repr__") < 0)) __PYX_ERR(0, 53, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__repr__") < 0)) __PYX_ERR(0, 156, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -4193,7 +4904,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__repr__", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 53, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__repr__", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 156, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4235,15 +4946,15 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_11__repr__(CYTHON_UNUSED
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__repr__", 1);
 
-  /* "chmengine/utils/pick.py":54
- * 
- *     def __repr__(self) -> str:
+  /* "chmengine/utils/pick.py":163
+ *         str
+ *         """
  *         return f"Pick(move={self._move.__repr__()}, score={self._score})"             # <<<<<<<<<<<<<<
  * 
  *     def __bool__(self) -> bool:
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = 0;
   __pyx_t_3 = 127;
@@ -4251,9 +4962,9 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_11__repr__(CYTHON_UNUSED
   __pyx_t_2 += 10;
   __Pyx_GIVEREF(__pyx_kp_u_Pick_move);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_kp_u_Pick_move);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_move_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_move); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_repr); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_repr); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_5 = NULL;
@@ -4274,11 +4985,11 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_11__repr__(CYTHON_UNUSED
     PyObject *__pyx_callargs[2] = {__pyx_t_5, NULL};
     __pyx_t_4 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_7, 0+__pyx_t_7);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 54, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 163, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
-  __pyx_t_6 = __Pyx_PyObject_FormatSimple(__pyx_t_4, __pyx_empty_unicode); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_FormatSimple(__pyx_t_4, __pyx_empty_unicode); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_3 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_6) > __pyx_t_3) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_6) : __pyx_t_3;
@@ -4290,9 +5001,9 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_11__repr__(CYTHON_UNUSED
   __pyx_t_2 += 8;
   __Pyx_GIVEREF(__pyx_kp_u_score_3);
   PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_kp_u_score_3);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_score_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_score); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_4 = __Pyx_PyObject_FormatSimple(__pyx_t_6, __pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_FormatSimple(__pyx_t_6, __pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_t_3 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) > __pyx_t_3) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) : __pyx_t_3;
@@ -4304,18 +5015,18 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_11__repr__(CYTHON_UNUSED
   __pyx_t_2 += 1;
   __Pyx_GIVEREF(__pyx_kp_u__4);
   PyTuple_SET_ITEM(__pyx_t_1, 4, __pyx_kp_u__4);
-  __pyx_t_4 = __Pyx_PyUnicode_Join(__pyx_t_1, 5, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyUnicode_Join(__pyx_t_1, 5, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = ((PyObject*)__pyx_t_4);
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/utils/pick.py":53
+  /* "chmengine/utils/pick.py":156
  *         return 2
  * 
  *     def __repr__(self) -> str:             # <<<<<<<<<<<<<<
- *         return f"Pick(move={self._move.__repr__()}, score={self._score})"
+ *         """Developer-friendly string representation.
  * 
  */
 
@@ -4333,11 +5044,11 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_11__repr__(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "chmengine/utils/pick.py":56
+/* "chmengine/utils/pick.py":165
  *         return f"Pick(move={self._move.__repr__()}, score={self._score})"
  * 
  *     def __bool__(self) -> bool:             # <<<<<<<<<<<<<<
- *         return bool(self._score)
+ *         """Truthiness of the Pick is based on score.
  * 
  */
 
@@ -4349,7 +5060,8 @@ PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_9chmengine_5utils_4pick_4Pick_14__bool__ = {"__bool__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_4pick_4Pick_14__bool__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4pick_4Pick_13__bool__, "Truthiness of the Pick is based on score.\n\n        Returns\n        -------\n        bool\n        ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_4pick_4Pick_14__bool__ = {"__bool__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_4pick_4Pick_14__bool__, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_4pick_4Pick_13__bool__};
 static PyObject *__pyx_pw_9chmengine_5utils_4pick_4Pick_14__bool__(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
@@ -4394,12 +5106,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 56, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 165, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__bool__") < 0)) __PYX_ERR(0, 56, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__bool__") < 0)) __PYX_ERR(0, 165, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -4410,7 +5122,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__bool__", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 56, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__bool__", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 165, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4447,29 +5159,29 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_13__bool__(CYTHON_UNUSED
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__bool__", 1);
 
-  /* "chmengine/utils/pick.py":57
- * 
- *     def __bool__(self) -> bool:
+  /* "chmengine/utils/pick.py":172
+ *         bool
+ *         """
  *         return bool(self._score)             # <<<<<<<<<<<<<<
  * 
- *     @property
+ *     def __int__(self) -> int:
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_score_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_score); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 172, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyBool_FromLong((!(!__pyx_t_2))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong((!(!__pyx_t_2))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/utils/pick.py":56
+  /* "chmengine/utils/pick.py":165
  *         return f"Pick(move={self._move.__repr__()}, score={self._score})"
  * 
  *     def __bool__(self) -> bool:             # <<<<<<<<<<<<<<
- *         return bool(self._score)
+ *         """Truthiness of the Pick is based on score.
  * 
  */
 
@@ -4484,25 +5196,25 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_13__bool__(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "chmengine/utils/pick.py":59
+/* "chmengine/utils/pick.py":174
  *         return bool(self._score)
  * 
- *     @property             # <<<<<<<<<<<<<<
- *     def score(self) -> float64:
- *         """Read access to the score."""
+ *     def __int__(self) -> int:             # <<<<<<<<<<<<<<
+ *         """Integer conversion of the score.
+ * 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_4pick_4Pick_16score(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_5utils_4pick_4Pick_16__int__(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4pick_4Pick_15score, "Read access to the score.");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_4pick_4Pick_16score = {"score", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_4pick_4Pick_16score, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_4pick_4Pick_15score};
-static PyObject *__pyx_pw_9chmengine_5utils_4pick_4Pick_16score(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4pick_4Pick_15__int__, "Integer conversion of the score.\n\n        Returns\n        -------\n        int\n        ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_4pick_4Pick_16__int__ = {"__int__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_4pick_4Pick_16__int__, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_4pick_4Pick_15__int__};
+static PyObject *__pyx_pw_9chmengine_5utils_4pick_4Pick_16__int__(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -4520,7 +5232,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("score (wrapper)", 0);
+  __Pyx_RefNannySetupContext("__int__ (wrapper)", 0);
   #if !CYTHON_METH_FASTCALL
   #if CYTHON_ASSUME_SAFE_MACROS
   __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
@@ -4546,12 +5258,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 59, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 174, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "score") < 0)) __PYX_ERR(0, 59, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__int__") < 0)) __PYX_ERR(0, 174, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -4562,7 +5274,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("score", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 59, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__int__", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 174, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4572,11 +5284,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("chmengine.utils.pick.Pick.score", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmengine.utils.pick.Pick.__int__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_9chmengine_5utils_4pick_4Pick_15score(__pyx_self, __pyx_v_self);
+  __pyx_r = __pyx_pf_9chmengine_5utils_4pick_4Pick_15__int__(__pyx_self, __pyx_v_self);
 
   /* function exit code */
   {
@@ -4589,41 +5301,47 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_15score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_15__int__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("score", 1);
+  __Pyx_RefNannySetupContext("__int__", 1);
 
-  /* "chmengine/utils/pick.py":62
- *     def score(self) -> float64:
- *         """Read access to the score."""
- *         return self._score             # <<<<<<<<<<<<<<
+  /* "chmengine/utils/pick.py":181
+ *         int
+ *         """
+ *         return int(self._score)             # <<<<<<<<<<<<<<
  * 
- *     @score.setter
+ *     def __float__(self) -> float64:
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_score_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_score); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 181, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_r = __pyx_t_1;
-  __pyx_t_1 = 0;
+  __pyx_t_2 = __Pyx_PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 181, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_2)) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_2))) __PYX_ERR(0, 181, __pyx_L1_error)
+  __pyx_r = ((PyObject*)__pyx_t_2);
+  __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/utils/pick.py":59
+  /* "chmengine/utils/pick.py":174
  *         return bool(self._score)
  * 
- *     @property             # <<<<<<<<<<<<<<
- *     def score(self) -> float64:
- *         """Read access to the score."""
+ *     def __int__(self) -> int:             # <<<<<<<<<<<<<<
+ *         """Integer conversion of the score.
+ * 
  */
 
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("chmengine.utils.pick.Pick.score", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_AddTraceback("chmengine.utils.pick.Pick.__int__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -4631,25 +5349,25 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_15score(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "chmengine/utils/pick.py":64
- *         return self._score
+/* "chmengine/utils/pick.py":183
+ *         return int(self._score)
  * 
- *     @score.setter             # <<<<<<<<<<<<<<
- *     def score(self, score: Number) -> None:
- *         """Write access to the score."""
+ *     def __float__(self) -> float64:             # <<<<<<<<<<<<<<
+ *         """Float conversion of the score.
+ * 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_4pick_4Pick_18score(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_5utils_4pick_4Pick_18__float__(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4pick_4Pick_17score, "Write access to the score.");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_4pick_4Pick_18score = {"score", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_4pick_4Pick_18score, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_4pick_4Pick_17score};
-static PyObject *__pyx_pw_9chmengine_5utils_4pick_4Pick_18score(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4pick_4Pick_17__float__, "Float conversion of the score.\n\n        Returns\n        -------\n        float64\n        ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_4pick_4Pick_18__float__ = {"__float__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_4pick_4Pick_18__float__, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_4pick_4Pick_17__float__};
+static PyObject *__pyx_pw_9chmengine_5utils_4pick_4Pick_18__float__(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -4657,7 +5375,154 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ) {
   PyObject *__pyx_v_self = 0;
-  PyObject *__pyx_v_score = 0;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[1] = {0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__float__ (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_MACROS
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,0};
+    if (__pyx_kwds) {
+      Py_ssize_t kw_args;
+      switch (__pyx_nargs) {
+        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = __Pyx_NumKwargs_FASTCALL(__pyx_kwds);
+      switch (__pyx_nargs) {
+        case  0:
+        if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_self)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 183, __pyx_L3_error)
+        else goto __pyx_L5_argtuple_error;
+      }
+      if (unlikely(kw_args > 0)) {
+        const Py_ssize_t kwd_pos_args = __pyx_nargs;
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__float__") < 0)) __PYX_ERR(0, 183, __pyx_L3_error)
+      }
+    } else if (unlikely(__pyx_nargs != 1)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+    }
+    __pyx_v_self = values[0];
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("__float__", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 183, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_AddTraceback("chmengine.utils.pick.Pick.__float__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_9chmengine_5utils_4pick_4Pick_17__float__(__pyx_self, __pyx_v_self);
+
+  /* function exit code */
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_17__float__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__float__", 1);
+
+  /* "chmengine/utils/pick.py":190
+ *         float64
+ *         """
+ *         return self._score             # <<<<<<<<<<<<<<
+ * 
+ *     def __format__(self, format_spec) -> str:
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_score); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "chmengine/utils/pick.py":183
+ *         return int(self._score)
+ * 
+ *     def __float__(self) -> float64:             # <<<<<<<<<<<<<<
+ *         """Float conversion of the score.
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("chmengine.utils.pick.Pick.__float__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "chmengine/utils/pick.py":192
+ *         return self._score
+ * 
+ *     def __format__(self, format_spec) -> str:             # <<<<<<<<<<<<<<
+ *         """Formatted string output using the score's format spec.
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_9chmengine_5utils_4pick_4Pick_20__format__(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4pick_4Pick_19__format__, "Formatted string output using the score's format spec.\n\n        Parameters\n        ----------\n        format_spec : Any\n            Format specifier passed to the float64 formatter.\n\n        Returns\n        -------\n        str\n        ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_4pick_4Pick_20__format__ = {"__format__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_4pick_4Pick_20__format__, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_4pick_4Pick_19__format__};
+static PyObject *__pyx_pw_9chmengine_5utils_4pick_4Pick_20__format__(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  PyObject *__pyx_v_self = 0;
+  PyObject *__pyx_v_format_spec = 0;
   #if !CYTHON_METH_FASTCALL
   CYTHON_UNUSED Py_ssize_t __pyx_nargs;
   #endif
@@ -4668,7 +5533,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("score (wrapper)", 0);
+  __Pyx_RefNannySetupContext("__format__ (wrapper)", 0);
   #if !CYTHON_METH_FASTCALL
   #if CYTHON_ASSUME_SAFE_MACROS
   __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
@@ -4678,7 +5543,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   #endif
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
-    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_score,0};
+    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_format_spec,0};
     if (__pyx_kwds) {
       Py_ssize_t kw_args;
       switch (__pyx_nargs) {
@@ -4696,22 +5561,22 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 64, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 192, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
-        if (likely((values[1] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_score)) != 0)) {
+        if (likely((values[1] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_format_spec)) != 0)) {
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 64, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 192, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("score", 1, 2, 2, 1); __PYX_ERR(0, 64, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__format__", 1, 2, 2, 1); __PYX_ERR(0, 192, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "score") < 0)) __PYX_ERR(0, 64, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__format__") < 0)) __PYX_ERR(0, 192, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -4720,11 +5585,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
     }
     __pyx_v_self = values[0];
-    __pyx_v_score = values[1];
+    __pyx_v_format_spec = values[1];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("score", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 64, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__format__", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 192, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4734,11 +5599,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("chmengine.utils.pick.Pick.score", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmengine.utils.pick.Pick.__format__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_9chmengine_5utils_4pick_4Pick_17score(__pyx_self, __pyx_v_self, __pyx_v_score);
+  __pyx_r = __pyx_pf_9chmengine_5utils_4pick_4Pick_19__format__(__pyx_self, __pyx_v_self, __pyx_v_format_spec);
 
   /* function exit code */
   {
@@ -4751,374 +5616,121 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_17score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_score) {
+static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_19__format__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_format_spec) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
-  PyObject *__pyx_t_3 = NULL;
-  unsigned int __pyx_t_4;
+  Py_ssize_t __pyx_t_2;
+  Py_UCS4 __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  unsigned int __pyx_t_7;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("score", 1);
+  __Pyx_RefNannySetupContext("__format__", 1);
 
-  /* "chmengine/utils/pick.py":67
- *     def score(self, score: Number) -> None:
- *         """Write access to the score."""
- *         self._score = float64(score)             # <<<<<<<<<<<<<<
- * 
- *     @property
+  /* "chmengine/utils/pick.py":204
+ *         str
+ *         """
+ *         return f"Pick(move={self._move.__repr__()}, score={format(self._score, format_spec)})"             # <<<<<<<<<<<<<<
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 67, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = NULL;
-  __pyx_t_4 = 0;
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = PyTuple_New(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = 0;
+  __pyx_t_3 = 127;
+  __Pyx_INCREF(__pyx_kp_u_Pick_move);
+  __pyx_t_2 += 10;
+  __Pyx_GIVEREF(__pyx_kp_u_Pick_move);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_kp_u_Pick_move);
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_move); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_repr); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = NULL;
+  __pyx_t_7 = 0;
   #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_3)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_3);
+  if (likely(PyMethod_Check(__pyx_t_6))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_6);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
+      __Pyx_INCREF(__pyx_t_5);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
-      __pyx_t_4 = 1;
+      __Pyx_DECREF_SET(__pyx_t_6, function);
+      __pyx_t_7 = 1;
     }
   }
   #endif
   {
-    PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_v_score};
-    __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
-    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    PyObject *__pyx_callargs[2] = {__pyx_t_5, NULL};
+    __pyx_t_4 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_7, 0+__pyx_t_7);
+    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 204, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_score_2, __pyx_t_1) < 0) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_FormatSimple(__pyx_t_4, __pyx_empty_unicode); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_3 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_6) > __pyx_t_3) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_6) : __pyx_t_3;
+  __pyx_t_2 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_6);
+  __Pyx_GIVEREF(__pyx_t_6);
+  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_6);
+  __pyx_t_6 = 0;
+  __Pyx_INCREF(__pyx_kp_u_score_3);
+  __pyx_t_2 += 8;
+  __Pyx_GIVEREF(__pyx_kp_u_score_3);
+  PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_kp_u_score_3);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_score); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_GIVEREF(__pyx_t_6);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_6)) __PYX_ERR(0, 204, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_v_format_spec);
+  __Pyx_GIVEREF(__pyx_v_format_spec);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_v_format_spec)) __PYX_ERR(0, 204, __pyx_L1_error);
+  __pyx_t_6 = 0;
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_format, __pyx_t_4, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = __Pyx_PyObject_FormatSimple(__pyx_t_6, __pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_3 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) > __pyx_t_3) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) : __pyx_t_3;
+  __pyx_t_2 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_4);
+  __Pyx_GIVEREF(__pyx_t_4);
+  PyTuple_SET_ITEM(__pyx_t_1, 3, __pyx_t_4);
+  __pyx_t_4 = 0;
+  __Pyx_INCREF(__pyx_kp_u__4);
+  __pyx_t_2 += 1;
+  __Pyx_GIVEREF(__pyx_kp_u__4);
+  PyTuple_SET_ITEM(__pyx_t_1, 4, __pyx_kp_u__4);
+  __pyx_t_4 = __Pyx_PyUnicode_Join(__pyx_t_1, 5, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_r = ((PyObject*)__pyx_t_4);
+  __pyx_t_4 = 0;
+  goto __pyx_L0;
 
-  /* "chmengine/utils/pick.py":64
+  /* "chmengine/utils/pick.py":192
  *         return self._score
  * 
- *     @score.setter             # <<<<<<<<<<<<<<
- *     def score(self, score: Number) -> None:
- *         """Write access to the score."""
- */
-
-  /* function exit code */
-  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("chmengine.utils.pick.Pick.score", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = NULL;
-  __pyx_L0:;
-  __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "chmengine/utils/pick.py":69
- *         self._score = float64(score)
+ *     def __format__(self, format_spec) -> str:             # <<<<<<<<<<<<<<
+ *         """Formatted string output using the score's format spec.
  * 
- *     @property             # <<<<<<<<<<<<<<
- *     def move(self) -> Move:
- *         """Read-only access to the move."""
- */
-
-/* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_4pick_4Pick_20move(PyObject *__pyx_self, 
-#if CYTHON_METH_FASTCALL
-PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
-#else
-PyObject *__pyx_args, PyObject *__pyx_kwds
-#endif
-); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4pick_4Pick_19move, "Read-only access to the move.");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_4pick_4Pick_20move = {"move", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_4pick_4Pick_20move, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_4pick_4Pick_19move};
-static PyObject *__pyx_pw_9chmengine_5utils_4pick_4Pick_20move(PyObject *__pyx_self, 
-#if CYTHON_METH_FASTCALL
-PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
-#else
-PyObject *__pyx_args, PyObject *__pyx_kwds
-#endif
-) {
-  PyObject *__pyx_v_self = 0;
-  #if !CYTHON_METH_FASTCALL
-  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
-  #endif
-  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
-  PyObject* values[1] = {0};
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  PyObject *__pyx_r = 0;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("move (wrapper)", 0);
-  #if !CYTHON_METH_FASTCALL
-  #if CYTHON_ASSUME_SAFE_MACROS
-  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
-  #else
-  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
-  #endif
-  #endif
-  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
-  {
-    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,0};
-    if (__pyx_kwds) {
-      Py_ssize_t kw_args;
-      switch (__pyx_nargs) {
-        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
-        CYTHON_FALLTHROUGH;
-        case  0: break;
-        default: goto __pyx_L5_argtuple_error;
-      }
-      kw_args = __Pyx_NumKwargs_FASTCALL(__pyx_kwds);
-      switch (__pyx_nargs) {
-        case  0:
-        if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_self)) != 0)) {
-          (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
-          kw_args--;
-        }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 69, __pyx_L3_error)
-        else goto __pyx_L5_argtuple_error;
-      }
-      if (unlikely(kw_args > 0)) {
-        const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "move") < 0)) __PYX_ERR(0, 69, __pyx_L3_error)
-      }
-    } else if (unlikely(__pyx_nargs != 1)) {
-      goto __pyx_L5_argtuple_error;
-    } else {
-      values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
-    }
-    __pyx_v_self = values[0];
-  }
-  goto __pyx_L6_skip;
-  __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("move", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 69, __pyx_L3_error)
-  __pyx_L6_skip:;
-  goto __pyx_L4_argument_unpacking_done;
-  __pyx_L3_error:;
-  {
-    Py_ssize_t __pyx_temp;
-    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
-      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
-    }
-  }
-  __Pyx_AddTraceback("chmengine.utils.pick.Pick.move", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __Pyx_RefNannyFinishContext();
-  return NULL;
-  __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_9chmengine_5utils_4pick_4Pick_19move(__pyx_self, __pyx_v_self);
-
-  /* function exit code */
-  {
-    Py_ssize_t __pyx_temp;
-    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
-      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
-    }
-  }
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_19move(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("move", 1);
-
-  /* "chmengine/utils/pick.py":72
- *     def move(self) -> Move:
- *         """Read-only access to the move."""
- *         return self._move             # <<<<<<<<<<<<<<
- * 
- *     @property
- */
-  __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_move_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_r = __pyx_t_1;
-  __pyx_t_1 = 0;
-  goto __pyx_L0;
-
-  /* "chmengine/utils/pick.py":69
- *         self._score = float64(score)
- * 
- *     @property             # <<<<<<<<<<<<<<
- *     def move(self) -> Move:
- *         """Read-only access to the move."""
  */
 
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("chmengine.utils.pick.Pick.move", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = NULL;
-  __pyx_L0:;
-  __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "chmengine/utils/pick.py":74
- *         return self._move
- * 
- *     @property             # <<<<<<<<<<<<<<
- *     def data(self) -> Tuple[Move, float64]:
- *         """Read-only access to the pick data."""
- */
-
-/* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_4pick_4Pick_22data(PyObject *__pyx_self, 
-#if CYTHON_METH_FASTCALL
-PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
-#else
-PyObject *__pyx_args, PyObject *__pyx_kwds
-#endif
-); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4pick_4Pick_21data, "Read-only access to the pick data.");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_4pick_4Pick_22data = {"data", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_4pick_4Pick_22data, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_4pick_4Pick_21data};
-static PyObject *__pyx_pw_9chmengine_5utils_4pick_4Pick_22data(PyObject *__pyx_self, 
-#if CYTHON_METH_FASTCALL
-PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
-#else
-PyObject *__pyx_args, PyObject *__pyx_kwds
-#endif
-) {
-  PyObject *__pyx_v_self = 0;
-  #if !CYTHON_METH_FASTCALL
-  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
-  #endif
-  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
-  PyObject* values[1] = {0};
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  PyObject *__pyx_r = 0;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("data (wrapper)", 0);
-  #if !CYTHON_METH_FASTCALL
-  #if CYTHON_ASSUME_SAFE_MACROS
-  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
-  #else
-  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
-  #endif
-  #endif
-  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
-  {
-    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,0};
-    if (__pyx_kwds) {
-      Py_ssize_t kw_args;
-      switch (__pyx_nargs) {
-        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
-        CYTHON_FALLTHROUGH;
-        case  0: break;
-        default: goto __pyx_L5_argtuple_error;
-      }
-      kw_args = __Pyx_NumKwargs_FASTCALL(__pyx_kwds);
-      switch (__pyx_nargs) {
-        case  0:
-        if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_self)) != 0)) {
-          (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
-          kw_args--;
-        }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 74, __pyx_L3_error)
-        else goto __pyx_L5_argtuple_error;
-      }
-      if (unlikely(kw_args > 0)) {
-        const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "data") < 0)) __PYX_ERR(0, 74, __pyx_L3_error)
-      }
-    } else if (unlikely(__pyx_nargs != 1)) {
-      goto __pyx_L5_argtuple_error;
-    } else {
-      values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
-    }
-    __pyx_v_self = values[0];
-  }
-  goto __pyx_L6_skip;
-  __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("data", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 74, __pyx_L3_error)
-  __pyx_L6_skip:;
-  goto __pyx_L4_argument_unpacking_done;
-  __pyx_L3_error:;
-  {
-    Py_ssize_t __pyx_temp;
-    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
-      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
-    }
-  }
-  __Pyx_AddTraceback("chmengine.utils.pick.Pick.data", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __Pyx_RefNannyFinishContext();
-  return NULL;
-  __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_9chmengine_5utils_4pick_4Pick_21data(__pyx_self, __pyx_v_self);
-
-  /* function exit code */
-  {
-    Py_ssize_t __pyx_temp;
-    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
-      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
-    }
-  }
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_21data(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
-  PyObject *__pyx_t_3 = NULL;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("data", 1);
-
-  /* "chmengine/utils/pick.py":77
- *     def data(self) -> Tuple[Move, float64]:
- *         """Read-only access to the pick data."""
- *         return self._move, self._score             # <<<<<<<<<<<<<<
- */
-  __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_move_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_score_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 77, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error);
-  __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error);
-  __pyx_t_1 = 0;
-  __pyx_t_2 = 0;
-  __pyx_r = ((PyObject*)__pyx_t_3);
-  __pyx_t_3 = 0;
-  goto __pyx_L0;
-
-  /* "chmengine/utils/pick.py":74
- *         return self._move
- * 
- *     @property             # <<<<<<<<<<<<<<
- *     def data(self) -> Tuple[Move, float64]:
- *         """Read-only access to the pick data."""
- */
-
-  /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("chmengine.utils.pick.Pick.data", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_AddTraceback("chmengine.utils.pick.Pick.__format__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -5306,34 +5918,44 @@ static PyMethodDef __pyx_methods[] = {
 
 static int __Pyx_CreateStringTabAndInitStrings(void) {
   __Pyx_StringTabEntry __pyx_string_tab[] = {
-    {&__pyx_kp_s_Container_for_a_move_score_pair, __pyx_k_Container_for_a_move_score_pair, sizeof(__pyx_k_Container_for_a_move_score_pair), 0, 0, 1, 0},
+    {&__pyx_kp_s_Base_class_for_Pick_containing, __pyx_k_Base_class_for_Pick_containing, sizeof(__pyx_k_Base_class_for_Pick_containing), 0, 0, 1, 0},
+    {&__pyx_kp_s_Fully_featured_container_for_a_m, __pyx_k_Fully_featured_container_for_a_m, sizeof(__pyx_k_Fully_featured_container_for_a_m), 0, 0, 1, 0},
     {&__pyx_n_s_IndexError, __pyx_k_IndexError, sizeof(__pyx_k_IndexError), 0, 0, 1, 1},
-    {&__pyx_kp_u_Index_out_of_range_Only_1_for_sc, __pyx_k_Index_out_of_range_Only_1_for_sc, sizeof(__pyx_k_Index_out_of_range_Only_1_for_sc), 0, 1, 0, 0},
-    {&__pyx_kp_u_Index_out_of_range_Use_0_for_mov, __pyx_k_Index_out_of_range_Use_0_for_mov, sizeof(__pyx_k_Index_out_of_range_Use_0_for_mov), 0, 1, 0, 0},
+    {&__pyx_kp_u_Index_out_of_range_Only_1_or_1_f, __pyx_k_Index_out_of_range_Only_1_or_1_f, sizeof(__pyx_k_Index_out_of_range_Only_1_or_1_f), 0, 1, 0, 0},
+    {&__pyx_kp_u_Index_out_of_range_Use_0_or_2_fo, __pyx_k_Index_out_of_range_Use_0_or_2_fo, sizeof(__pyx_k_Index_out_of_range_Use_0_or_2_fo), 0, 1, 0, 0},
+    {&__pyx_n_s_Iterator, __pyx_k_Iterator, sizeof(__pyx_k_Iterator), 0, 0, 1, 1},
+    {&__pyx_kp_s_Iterator_Union_Move_float64, __pyx_k_Iterator_Union_Move_float64, sizeof(__pyx_k_Iterator_Union_Move_float64), 0, 0, 1, 0},
     {&__pyx_n_s_Move, __pyx_k_Move, sizeof(__pyx_k_Move), 0, 0, 1, 1},
     {&__pyx_n_s_None, __pyx_k_None, sizeof(__pyx_k_None), 0, 0, 1, 1},
     {&__pyx_n_s_Number, __pyx_k_Number, sizeof(__pyx_k_Number), 0, 0, 1, 1},
     {&__pyx_n_s_Pick, __pyx_k_Pick, sizeof(__pyx_k_Pick), 0, 0, 1, 1},
+    {&__pyx_n_u_Pick, __pyx_k_Pick, sizeof(__pyx_k_Pick), 0, 1, 0, 1},
+    {&__pyx_n_s_PickT, __pyx_k_PickT, sizeof(__pyx_k_PickT), 0, 0, 1, 1},
+    {&__pyx_n_s_PickT_data, __pyx_k_PickT_data, sizeof(__pyx_k_PickT_data), 0, 0, 1, 1},
+    {&__pyx_n_s_PickT_move, __pyx_k_PickT_move, sizeof(__pyx_k_PickT_move), 0, 0, 1, 1},
+    {&__pyx_n_s_PickT_score, __pyx_k_PickT_score, sizeof(__pyx_k_PickT_score), 0, 0, 1, 1},
     {&__pyx_n_s_Pick___bool, __pyx_k_Pick___bool, sizeof(__pyx_k_Pick___bool), 0, 0, 1, 1},
+    {&__pyx_n_s_Pick___float, __pyx_k_Pick___float, sizeof(__pyx_k_Pick___float), 0, 0, 1, 1},
+    {&__pyx_n_s_Pick___format, __pyx_k_Pick___format, sizeof(__pyx_k_Pick___format), 0, 0, 1, 1},
     {&__pyx_n_s_Pick___getitem, __pyx_k_Pick___getitem, sizeof(__pyx_k_Pick___getitem), 0, 0, 1, 1},
     {&__pyx_n_s_Pick___init, __pyx_k_Pick___init, sizeof(__pyx_k_Pick___init), 0, 0, 1, 1},
+    {&__pyx_n_s_Pick___int, __pyx_k_Pick___int, sizeof(__pyx_k_Pick___int), 0, 0, 1, 1},
     {&__pyx_n_s_Pick___iter, __pyx_k_Pick___iter, sizeof(__pyx_k_Pick___iter), 0, 0, 1, 1},
     {&__pyx_n_s_Pick___len, __pyx_k_Pick___len, sizeof(__pyx_k_Pick___len), 0, 0, 1, 1},
     {&__pyx_n_s_Pick___repr, __pyx_k_Pick___repr, sizeof(__pyx_k_Pick___repr), 0, 0, 1, 1},
     {&__pyx_n_s_Pick___setitem, __pyx_k_Pick___setitem, sizeof(__pyx_k_Pick___setitem), 0, 0, 1, 1},
-    {&__pyx_n_s_Pick_data, __pyx_k_Pick_data, sizeof(__pyx_k_Pick_data), 0, 0, 1, 1},
     {&__pyx_kp_u_Pick_move, __pyx_k_Pick_move, sizeof(__pyx_k_Pick_move), 0, 1, 0, 0},
-    {&__pyx_n_s_Pick_move_2, __pyx_k_Pick_move_2, sizeof(__pyx_k_Pick_move_2), 0, 0, 1, 1},
-    {&__pyx_n_s_Pick_score, __pyx_k_Pick_score, sizeof(__pyx_k_Pick_score), 0, 0, 1, 1},
     {&__pyx_n_s_Tuple, __pyx_k_Tuple, sizeof(__pyx_k_Tuple), 0, 0, 1, 1},
     {&__pyx_kp_s_Tuple_Move_float64, __pyx_k_Tuple_Move_float64, sizeof(__pyx_k_Tuple_Move_float64), 0, 0, 1, 0},
+    {&__pyx_kp_s_Tuple_int_str_int, __pyx_k_Tuple_int_str_int, sizeof(__pyx_k_Tuple_int_str_int), 0, 0, 1, 0},
     {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
     {&__pyx_n_s_Union, __pyx_k_Union, sizeof(__pyx_k_Union), 0, 0, 1, 1},
     {&__pyx_kp_s_Union_Move_float64, __pyx_k_Union_Move_float64, sizeof(__pyx_k_Union_Move_float64), 0, 0, 1, 0},
     {&__pyx_kp_s_Union_str_int, __pyx_k_Union_str_int, sizeof(__pyx_k_Union_str_int), 0, 0, 1, 0},
-    {&__pyx_n_s__22, __pyx_k__22, sizeof(__pyx_k__22), 0, 0, 1, 1},
+    {&__pyx_n_s__27, __pyx_k__27, sizeof(__pyx_k__27), 0, 0, 1, 1},
     {&__pyx_kp_u__4, __pyx_k__4, sizeof(__pyx_k__4), 0, 1, 0, 0},
     {&__pyx_kp_u__5, __pyx_k__5, sizeof(__pyx_k__5), 0, 1, 0, 0},
+    {&__pyx_n_s_all, __pyx_k_all, sizeof(__pyx_k_all), 0, 0, 1, 1},
     {&__pyx_n_s_annotations, __pyx_k_annotations, sizeof(__pyx_k_annotations), 0, 0, 1, 1},
     {&__pyx_n_s_args, __pyx_k_args, sizeof(__pyx_k_args), 0, 0, 1, 1},
     {&__pyx_n_s_asyncio_coroutines, __pyx_k_asyncio_coroutines, sizeof(__pyx_k_asyncio_coroutines), 0, 0, 1, 1},
@@ -5344,6 +5966,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_s_chmengine_utils_pick_py, __pyx_k_chmengine_utils_pick_py, sizeof(__pyx_k_chmengine_utils_pick_py), 0, 0, 1, 0},
     {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
     {&__pyx_n_s_close, __pyx_k_close, sizeof(__pyx_k_close), 0, 0, 1, 1},
+    {&__pyx_n_s_compare, __pyx_k_compare, sizeof(__pyx_k_compare), 0, 0, 1, 1},
     {&__pyx_n_s_data, __pyx_k_data, sizeof(__pyx_k_data), 0, 0, 1, 1},
     {&__pyx_n_s_dataclass, __pyx_k_dataclass, sizeof(__pyx_k_dataclass), 0, 0, 1, 1},
     {&__pyx_n_s_dataclasses, __pyx_k_dataclasses, sizeof(__pyx_k_dataclasses), 0, 0, 1, 1},
@@ -5351,7 +5974,12 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_u_disable, __pyx_k_disable, sizeof(__pyx_k_disable), 0, 1, 0, 0},
     {&__pyx_n_s_doc, __pyx_k_doc, sizeof(__pyx_k_doc), 0, 0, 1, 1},
     {&__pyx_kp_u_enable, __pyx_k_enable, sizeof(__pyx_k_enable), 0, 1, 0, 0},
+    {&__pyx_n_s_field, __pyx_k_field, sizeof(__pyx_k_field), 0, 0, 1, 1},
+    {&__pyx_n_s_float, __pyx_k_float, sizeof(__pyx_k_float), 0, 0, 1, 1},
     {&__pyx_n_s_float64, __pyx_k_float64, sizeof(__pyx_k_float64), 0, 0, 1, 1},
+    {&__pyx_n_s_format, __pyx_k_format, sizeof(__pyx_k_format), 0, 0, 1, 1},
+    {&__pyx_n_s_format_2, __pyx_k_format_2, sizeof(__pyx_k_format_2), 0, 0, 1, 1},
+    {&__pyx_n_s_format_spec, __pyx_k_format_spec, sizeof(__pyx_k_format_spec), 0, 0, 1, 1},
     {&__pyx_kp_u_gc, __pyx_k_gc, sizeof(__pyx_k_gc), 0, 1, 0, 0},
     {&__pyx_n_s_getitem, __pyx_k_getitem, sizeof(__pyx_k_getitem), 0, 0, 1, 1},
     {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
@@ -5359,6 +5987,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_init, __pyx_k_init, sizeof(__pyx_k_init), 0, 0, 1, 1},
     {&__pyx_n_s_init_subclass, __pyx_k_init_subclass, sizeof(__pyx_k_init_subclass), 0, 0, 1, 1},
     {&__pyx_n_s_int, __pyx_k_int, sizeof(__pyx_k_int), 0, 0, 1, 1},
+    {&__pyx_n_s_int_2, __pyx_k_int_2, sizeof(__pyx_k_int_2), 0, 0, 1, 1},
     {&__pyx_n_s_is_coroutine, __pyx_k_is_coroutine, sizeof(__pyx_k_is_coroutine), 0, 0, 1, 1},
     {&__pyx_kp_u_isenabled, __pyx_k_isenabled, sizeof(__pyx_k_isenabled), 0, 1, 0, 0},
     {&__pyx_n_s_iter, __pyx_k_iter, sizeof(__pyx_k_iter), 0, 0, 1, 1},
@@ -5368,9 +5997,10 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_metaclass, __pyx_k_metaclass, sizeof(__pyx_k_metaclass), 0, 0, 1, 1},
     {&__pyx_n_s_module, __pyx_k_module, sizeof(__pyx_k_module), 0, 0, 1, 1},
     {&__pyx_n_s_move, __pyx_k_move, sizeof(__pyx_k_move), 0, 0, 1, 1},
-    {&__pyx_n_u_move, __pyx_k_move, sizeof(__pyx_k_move), 0, 1, 0, 1},
     {&__pyx_n_s_move_2, __pyx_k_move_2, sizeof(__pyx_k_move_2), 0, 0, 1, 1},
     {&__pyx_n_u_move_2, __pyx_k_move_2, sizeof(__pyx_k_move_2), 0, 1, 0, 1},
+    {&__pyx_n_s_move_getter_keys, __pyx_k_move_getter_keys, sizeof(__pyx_k_move_getter_keys), 0, 0, 1, 1},
+    {&__pyx_n_s_mro_entries, __pyx_k_mro_entries, sizeof(__pyx_k_mro_entries), 0, 0, 1, 1},
     {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
     {&__pyx_n_s_numbers, __pyx_k_numbers, sizeof(__pyx_k_numbers), 0, 0, 1, 1},
     {&__pyx_n_s_numpy, __pyx_k_numpy, sizeof(__pyx_k_numpy), 0, 0, 1, 1},
@@ -5381,16 +6011,15 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_repr, __pyx_k_repr, sizeof(__pyx_k_repr), 0, 0, 1, 1},
     {&__pyx_n_s_return, __pyx_k_return, sizeof(__pyx_k_return), 0, 0, 1, 1},
     {&__pyx_n_s_score, __pyx_k_score, sizeof(__pyx_k_score), 0, 0, 1, 1},
-    {&__pyx_n_u_score, __pyx_k_score, sizeof(__pyx_k_score), 0, 1, 0, 1},
     {&__pyx_n_s_score_2, __pyx_k_score_2, sizeof(__pyx_k_score_2), 0, 0, 1, 1},
     {&__pyx_n_u_score_2, __pyx_k_score_2, sizeof(__pyx_k_score_2), 0, 1, 0, 1},
     {&__pyx_kp_u_score_3, __pyx_k_score_3, sizeof(__pyx_k_score_3), 0, 1, 0, 0},
+    {&__pyx_n_s_score_getter_keys, __pyx_k_score_getter_keys, sizeof(__pyx_k_score_getter_keys), 0, 0, 1, 1},
     {&__pyx_n_s_self, __pyx_k_self, sizeof(__pyx_k_self), 0, 0, 1, 1},
     {&__pyx_n_s_send, __pyx_k_send, sizeof(__pyx_k_send), 0, 0, 1, 1},
     {&__pyx_n_s_set_name, __pyx_k_set_name, sizeof(__pyx_k_set_name), 0, 0, 1, 1},
     {&__pyx_n_s_setitem, __pyx_k_setitem, sizeof(__pyx_k_setitem), 0, 0, 1, 1},
     {&__pyx_n_s_setter, __pyx_k_setter, sizeof(__pyx_k_setter), 0, 0, 1, 1},
-    {&__pyx_n_s_slots, __pyx_k_slots, sizeof(__pyx_k_slots), 0, 0, 1, 1},
     {&__pyx_n_s_str, __pyx_k_str, sizeof(__pyx_k_str), 0, 0, 1, 1},
     {&__pyx_n_s_super, __pyx_k_super, sizeof(__pyx_k_super), 0, 0, 1, 1},
     {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
@@ -5404,9 +6033,10 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
 }
 /* #### Code section: cached_builtins ### */
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_property = __Pyx_GetBuiltinName(__pyx_n_s_property); if (!__pyx_builtin_property) __PYX_ERR(0, 59, __pyx_L1_error)
-  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 27, __pyx_L1_error)
-  __pyx_builtin_IndexError = __Pyx_GetBuiltinName(__pyx_n_s_IndexError); if (!__pyx_builtin_IndexError) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_builtin_property = __Pyx_GetBuiltinName(__pyx_n_s_property); if (!__pyx_builtin_property) __PYX_ERR(0, 23, __pyx_L1_error)
+  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_builtin_IndexError = __Pyx_GetBuiltinName(__pyx_n_s_IndexError); if (!__pyx_builtin_IndexError) __PYX_ERR(0, 113, __pyx_L1_error)
+  __pyx_builtin_format = __Pyx_GetBuiltinName(__pyx_n_s_format); if (!__pyx_builtin_format) __PYX_ERR(0, 204, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -5417,152 +6047,193 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "chmengine/utils/pick.py":36
- *         if index in (1, 'score'):
+  /* "chmengine/utils/pick.py":113
+ *         if index in self.score_getter_keys:
  *             return self._score
- *         raise IndexError("Index out of range. Use 0 for 'move', 1 for 'score'.")             # <<<<<<<<<<<<<<
+ *         raise IndexError("Index out of range. Use 0 (or -2) for 'move', 1 (or -1) for 'score'.")             # <<<<<<<<<<<<<<
  * 
  *     def __setitem__(self, key: Union[str, int], value: Number) -> None:
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_u_Index_out_of_range_Use_0_for_mov); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_u_Index_out_of_range_Use_0_or_2_fo); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 113, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "chmengine/utils/pick.py":42
- *             self.score = float64(value)
+  /* "chmengine/utils/pick.py":134
+ *             self.score = value
  *         else:
- *             raise IndexError("Index out of range. Only 1 for 'score' can be set.")             # <<<<<<<<<<<<<<
+ *             raise IndexError("Index out of range. Only 1 (or -1) for 'score' can be set.")             # <<<<<<<<<<<<<<
  * 
- *     def __iter__(self) -> Union[Move, float64]:
+ *     def __iter__(self) -> Iterator[Union[Move, float64]]:
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_Index_out_of_range_Only_1_for_sc); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_Index_out_of_range_Only_1_or_1_f); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 134, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "chmengine/utils/pick.py":16
- *     _move: Move
- * 
- *     __slots__ = ('_score', '_move')             # <<<<<<<<<<<<<<
- * 
- *     def __init__(self, move: Move, score: Number) -> None:
- */
-  __pyx_tuple__6 = PyTuple_Pack(2, __pyx_n_u_score_2, __pyx_n_u_move_2); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 16, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__6);
-  __Pyx_GIVEREF(__pyx_tuple__6);
-
-  /* "chmengine/utils/pick.py":18
- *     __slots__ = ('_score', '_move')
- * 
- *     def __init__(self, move: Move, score: Number) -> None:             # <<<<<<<<<<<<<<
- *         """Initializes a Pick instance
- * 
- */
-  __pyx_tuple__7 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_move, __pyx_n_s_score); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 18, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__7);
-  __Pyx_GIVEREF(__pyx_tuple__7);
-  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_init, 18, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 18, __pyx_L1_error)
-
-  /* "chmengine/utils/pick.py":30
- *         self._move, self.score = move, float64(score)
- * 
- *     def __getitem__(self, index: Union[str, int]) -> Union[Move, float64]:             # <<<<<<<<<<<<<<
- *         """Allows tuple-like access with indexing."""
- *         if index in (0, 'move'):
- */
-  __pyx_tuple__9 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_index); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 30, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__9);
-  __Pyx_GIVEREF(__pyx_tuple__9);
-  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_getitem, 30, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 30, __pyx_L1_error)
-
-  /* "chmengine/utils/pick.py":38
- *         raise IndexError("Index out of range. Use 0 for 'move', 1 for 'score'.")
- * 
- *     def __setitem__(self, key: Union[str, int], value: Number) -> None:             # <<<<<<<<<<<<<<
- *         if key in (1, 'score'):
- *             self.score = float64(value)
- */
-  __pyx_tuple__11 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_key, __pyx_n_s_value); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 38, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__11);
-  __Pyx_GIVEREF(__pyx_tuple__11);
-  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_setitem, 38, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 38, __pyx_L1_error)
-
-  /* "chmengine/utils/pick.py":44
- *             raise IndexError("Index out of range. Only 1 for 'score' can be set.")
- * 
- *     def __iter__(self) -> Union[Move, float64]:             # <<<<<<<<<<<<<<
- *         """Allows unpacking like a tuple."""
- *         yield self._move
- */
-  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 44, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__13);
-  __Pyx_GIVEREF(__pyx_tuple__13);
-  __pyx_codeobj__3 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_GENERATOR, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_iter, 44, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__3)) __PYX_ERR(0, 44, __pyx_L1_error)
-
-  /* "chmengine/utils/pick.py":49
- *         yield self._score
- * 
- *     def __len__(self) -> int:             # <<<<<<<<<<<<<<
- *         """Length is always 2: (move, score)."""
- *         return 2
- */
-  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_len, 49, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 49, __pyx_L1_error)
-
-  /* "chmengine/utils/pick.py":53
- *         return 2
- * 
- *     def __repr__(self) -> str:             # <<<<<<<<<<<<<<
- *         return f"Pick(move={self._move.__repr__()}, score={self._score})"
- * 
- */
-  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_repr, 53, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 53, __pyx_L1_error)
-
-  /* "chmengine/utils/pick.py":56
- *         return f"Pick(move={self._move.__repr__()}, score={self._score})"
- * 
- *     def __bool__(self) -> bool:             # <<<<<<<<<<<<<<
- *         return bool(self._score)
- * 
- */
-  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_bool, 56, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 56, __pyx_L1_error)
-
-  /* "chmengine/utils/pick.py":59
- *         return bool(self._score)
+  /* "chmengine/utils/pick.py":23
+ *     _move: Move = field(compare=False)
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def score(self) -> float64:
- *         """Read access to the score."""
+ *         """Read access to the score.
  */
-  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_score, 59, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__6);
+  __Pyx_GIVEREF(__pyx_tuple__6);
+  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_score_2, 23, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 23, __pyx_L1_error)
 
-  /* "chmengine/utils/pick.py":64
+  /* "chmengine/utils/pick.py":34
  *         return self._score
  * 
  *     @score.setter             # <<<<<<<<<<<<<<
  *     def score(self, score: Number) -> None:
- *         """Write access to the score."""
+ *         """Write access to the score. Converts the value to float64.
  */
-  __pyx_tuple__18 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_score); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__18);
-  __Pyx_GIVEREF(__pyx_tuple__18);
-  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_score, 64, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 64, __pyx_L1_error)
+  __pyx_tuple__8 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_score_2); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__8);
+  __Pyx_GIVEREF(__pyx_tuple__8);
+  __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_score_2, 34, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) __PYX_ERR(0, 34, __pyx_L1_error)
 
-  /* "chmengine/utils/pick.py":69
+  /* "chmengine/utils/pick.py":45
  *         self._score = float64(score)
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def move(self) -> Move:
- *         """Read-only access to the move."""
+ *         """Read-only access to the move.
  */
-  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_move, 69, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_move_2, 45, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 45, __pyx_L1_error)
 
-  /* "chmengine/utils/pick.py":74
+  /* "chmengine/utils/pick.py":56
  *         return self._move
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def data(self) -> Tuple[Move, float64]:
- *         """Read-only access to the pick data."""
+ *         """Read-only access to the pick data as a tuple.
  */
-  __pyx_codeobj__21 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_data, 74, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__21)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_data, 56, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(0, 56, __pyx_L1_error)
+
+  /* "chmengine/utils/pick.py":74
+ *     Supports tuple-like access, type casting, and formatting. This class is the public-facing API.
+ *     """
+ *     move_getter_keys: Tuple[int, str, int] = (0, 'move', -2)             # <<<<<<<<<<<<<<
+ *     score_getter_keys: Tuple[int, str, int] = (1, 'score', -1)
+ * 
+ */
+  __pyx_tuple__12 = PyTuple_Pack(3, __pyx_int_0, __pyx_n_u_move_2, __pyx_int_neg_2); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__12);
+  __Pyx_GIVEREF(__pyx_tuple__12);
+
+  /* "chmengine/utils/pick.py":75
+ *     """
+ *     move_getter_keys: Tuple[int, str, int] = (0, 'move', -2)
+ *     score_getter_keys: Tuple[int, str, int] = (1, 'score', -1)             # <<<<<<<<<<<<<<
+ * 
+ *     def __init__(self, move: Move, score: Number) -> None:
+ */
+  __pyx_tuple__13 = PyTuple_Pack(3, __pyx_int_1, __pyx_n_u_score_2, __pyx_int_neg_1); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__13);
+  __Pyx_GIVEREF(__pyx_tuple__13);
+
+  /* "chmengine/utils/pick.py":77
+ *     score_getter_keys: Tuple[int, str, int] = (1, 'score', -1)
+ * 
+ *     def __init__(self, move: Move, score: Number) -> None:             # <<<<<<<<<<<<<<
+ *         """Initializes a Pick instance.
+ * 
+ */
+  __pyx_tuple__14 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_move_2, __pyx_n_s_score_2); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__14);
+  __Pyx_GIVEREF(__pyx_tuple__14);
+  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_init, 77, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 77, __pyx_L1_error)
+
+  /* "chmengine/utils/pick.py":91
+ *         self._move, self.score = move, float64(score)
+ * 
+ *     def __getitem__(self, index: Union[str, int]) -> Union[Move, float64]:             # <<<<<<<<<<<<<<
+ *         """Allows tuple-like access to the move and score using string or integer keys.
+ * 
+ */
+  __pyx_tuple__16 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_index); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__16);
+  __Pyx_GIVEREF(__pyx_tuple__16);
+  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_getitem, 91, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 91, __pyx_L1_error)
+
+  /* "chmengine/utils/pick.py":115
+ *         raise IndexError("Index out of range. Use 0 (or -2) for 'move', 1 (or -1) for 'score'.")
+ * 
+ *     def __setitem__(self, key: Union[str, int], value: Number) -> None:             # <<<<<<<<<<<<<<
+ *         """Allows updating of score via tuple-style access.
+ * 
+ */
+  __pyx_tuple__18 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_key, __pyx_n_s_value); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__18);
+  __Pyx_GIVEREF(__pyx_tuple__18);
+  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_setitem, 115, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 115, __pyx_L1_error)
+
+  /* "chmengine/utils/pick.py":136
+ *             raise IndexError("Index out of range. Only 1 (or -1) for 'score' can be set.")
+ * 
+ *     def __iter__(self) -> Iterator[Union[Move, float64]]:             # <<<<<<<<<<<<<<
+ *         """Allows unpacking like a tuple.
+ * 
+ */
+  __pyx_codeobj__3 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_GENERATOR, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_iter, 136, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__3)) __PYX_ERR(0, 136, __pyx_L1_error)
+
+  /* "chmengine/utils/pick.py":147
+ *         yield self._score
+ * 
+ *     def __len__(self) -> int:             # <<<<<<<<<<<<<<
+ *         """Length of the object, always 2: (move, score).
+ * 
+ */
+  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_len, 147, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 147, __pyx_L1_error)
+
+  /* "chmengine/utils/pick.py":156
+ *         return 2
+ * 
+ *     def __repr__(self) -> str:             # <<<<<<<<<<<<<<
+ *         """Developer-friendly string representation.
+ * 
+ */
+  __pyx_codeobj__21 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_repr, 156, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__21)) __PYX_ERR(0, 156, __pyx_L1_error)
+
+  /* "chmengine/utils/pick.py":165
+ *         return f"Pick(move={self._move.__repr__()}, score={self._score})"
+ * 
+ *     def __bool__(self) -> bool:             # <<<<<<<<<<<<<<
+ *         """Truthiness of the Pick is based on score.
+ * 
+ */
+  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_bool, 165, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 165, __pyx_L1_error)
+
+  /* "chmengine/utils/pick.py":174
+ *         return bool(self._score)
+ * 
+ *     def __int__(self) -> int:             # <<<<<<<<<<<<<<
+ *         """Integer conversion of the score.
+ * 
+ */
+  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_int_2, 174, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) __PYX_ERR(0, 174, __pyx_L1_error)
+
+  /* "chmengine/utils/pick.py":183
+ *         return int(self._score)
+ * 
+ *     def __float__(self) -> float64:             # <<<<<<<<<<<<<<
+ *         """Float conversion of the score.
+ * 
+ */
+  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_float, 183, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 183, __pyx_L1_error)
+
+  /* "chmengine/utils/pick.py":192
+ *         return self._score
+ * 
+ *     def __format__(self, format_spec) -> str:             # <<<<<<<<<<<<<<
+ *         """Formatted string output using the score's format spec.
+ * 
+ */
+  __pyx_tuple__25 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_format_spec); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 192, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__25);
+  __Pyx_GIVEREF(__pyx_tuple__25);
+  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils_pick_py, __pyx_n_s_format_2, 192, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 192, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -5576,6 +6247,8 @@ static CYTHON_SMALL_CODE int __Pyx_InitConstants(void) {
   __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_1 = PyInt_FromLong(1); if (unlikely(!__pyx_int_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_2 = PyInt_FromLong(2); if (unlikely(!__pyx_int_2)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_neg_1 = PyInt_FromLong(-1); if (unlikely(!__pyx_int_neg_1)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_neg_2 = PyInt_FromLong(-2); if (unlikely(!__pyx_int_neg_2)) __PYX_ERR(0, 1, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -5627,15 +6300,15 @@ static int __Pyx_modinit_type_init_code(void) {
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
   #if CYTHON_USE_TYPE_SPECS
-  __pyx_ptype_9chmengine_5utils_4pick___pyx_scope_struct____iter__ = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_9chmengine_5utils_4pick___pyx_scope_struct____iter___spec, NULL); if (unlikely(!__pyx_ptype_9chmengine_5utils_4pick___pyx_scope_struct____iter__)) __PYX_ERR(0, 44, __pyx_L1_error)
-  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_9chmengine_5utils_4pick___pyx_scope_struct____iter___spec, __pyx_ptype_9chmengine_5utils_4pick___pyx_scope_struct____iter__) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_ptype_9chmengine_5utils_4pick___pyx_scope_struct____iter__ = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_9chmengine_5utils_4pick___pyx_scope_struct____iter___spec, NULL); if (unlikely(!__pyx_ptype_9chmengine_5utils_4pick___pyx_scope_struct____iter__)) __PYX_ERR(0, 136, __pyx_L1_error)
+  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_9chmengine_5utils_4pick___pyx_scope_struct____iter___spec, __pyx_ptype_9chmengine_5utils_4pick___pyx_scope_struct____iter__) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
   #else
   __pyx_ptype_9chmengine_5utils_4pick___pyx_scope_struct____iter__ = &__pyx_type_9chmengine_5utils_4pick___pyx_scope_struct____iter__;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
   #endif
   #if !CYTHON_USE_TYPE_SPECS
-  if (__Pyx_PyType_Ready(__pyx_ptype_9chmengine_5utils_4pick___pyx_scope_struct____iter__) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
+  if (__Pyx_PyType_Ready(__pyx_ptype_9chmengine_5utils_4pick___pyx_scope_struct____iter__) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
   #endif
   #if PY_MAJOR_VERSION < 3
   __pyx_ptype_9chmengine_5utils_4pick___pyx_scope_struct____iter__->tp_print = 0;
@@ -5697,7 +6370,7 @@ namespace {
   {
       PyModuleDef_HEAD_INIT,
       "pick",
-      __pyx_k_Pick_object, /* m_doc */
+      __pyx_k_Pick_object_representing_a_move, /* m_doc */
     #if CYTHON_PEP489_MULTI_PHASE_INIT
       0, /* m_size */
     #elif CYTHON_USE_MODULE_STATE
@@ -5842,8 +6515,8 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_pick(PyObject *__pyx_pyinit_module
   PyObject *__pyx_t_3 = NULL;
   PyObject *__pyx_t_4 = NULL;
   PyObject *__pyx_t_5 = NULL;
-  PyObject *__pyx_t_6 = NULL;
-  unsigned int __pyx_t_7;
+  unsigned int __pyx_t_6;
+  PyObject *__pyx_t_7 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -5863,7 +6536,7 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_pick(PyObject *__pyx_pyinit_module
   Py_INCREF(__pyx_m);
   #else
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("pick", __pyx_methods, __pyx_k_Pick_object, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("pick", __pyx_methods, __pyx_k_Pick_object_representing_a_move, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   if (unlikely(!__pyx_m)) __PYX_ERR(0, 1, __pyx_L1_error)
   #elif CYTHON_USE_MODULE_STATE
   __pyx_t_1 = PyModule_Create(&__pyx_moduledef); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
@@ -5960,16 +6633,19 @@ if (!__Pyx_RefNanny) {
   #endif
 
   /* "chmengine/utils/pick.py":2
- * """Pick object"""
- * from dataclasses import dataclass             # <<<<<<<<<<<<<<
+ * """Pick object representing a (move, score) evaluation pair."""
+ * from dataclasses import dataclass, field             # <<<<<<<<<<<<<<
  * from numbers import Number
- * from typing import Tuple, Union
+ * from typing import Iterator, Tuple, Union
  */
-  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_t_2 = PyList_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_n_s_dataclass);
   __Pyx_GIVEREF(__pyx_n_s_dataclass);
   if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_dataclass)) __PYX_ERR(0, 2, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_field);
+  __Pyx_GIVEREF(__pyx_n_s_field);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_s_field)) __PYX_ERR(0, 2, __pyx_L1_error);
   __pyx_t_3 = __Pyx_Import(__pyx_n_s_dataclasses, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -5977,13 +6653,17 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_dataclass, __pyx_t_2) < 0) __PYX_ERR(0, 2, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_field); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_field, __pyx_t_2) < 0) __PYX_ERR(0, 2, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "chmengine/utils/pick.py":3
- * """Pick object"""
- * from dataclasses import dataclass
+ * """Pick object representing a (move, score) evaluation pair."""
+ * from dataclasses import dataclass, field
  * from numbers import Number             # <<<<<<<<<<<<<<
- * from typing import Tuple, Union
+ * from typing import Iterator, Tuple, Union
  * 
  */
   __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 3, __pyx_L1_error)
@@ -6001,22 +6681,29 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "chmengine/utils/pick.py":4
- * from dataclasses import dataclass
+ * from dataclasses import dataclass, field
  * from numbers import Number
- * from typing import Tuple, Union             # <<<<<<<<<<<<<<
+ * from typing import Iterator, Tuple, Union             # <<<<<<<<<<<<<<
  * 
  * from chess import Move
  */
-  __pyx_t_2 = PyList_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_t_2 = PyList_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_INCREF(__pyx_n_s_Iterator);
+  __Pyx_GIVEREF(__pyx_n_s_Iterator);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_Iterator)) __PYX_ERR(0, 4, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_s_Tuple);
   __Pyx_GIVEREF(__pyx_n_s_Tuple);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_Tuple)) __PYX_ERR(0, 4, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_s_Tuple)) __PYX_ERR(0, 4, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_s_Union);
   __Pyx_GIVEREF(__pyx_n_s_Union);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_s_Union)) __PYX_ERR(0, 4, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 2, __pyx_n_s_Union)) __PYX_ERR(0, 4, __pyx_L1_error);
   __pyx_t_3 = __Pyx_Import(__pyx_n_s_typing, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_Iterator); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Iterator, __pyx_t_2) < 0) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_Tuple); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -6029,7 +6716,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "chmengine/utils/pick.py":6
- * from typing import Tuple, Union
+ * from typing import Iterator, Tuple, Union
  * 
  * from chess import Move             # <<<<<<<<<<<<<<
  * from numpy import float64
@@ -6054,7 +6741,7 @@ if (!__Pyx_RefNanny) {
  * from chess import Move
  * from numpy import float64             # <<<<<<<<<<<<<<
  * 
- * 
+ * __all__ = ['Pick']
  */
   __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -6070,322 +6757,496 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/utils/pick.py":11
+  /* "chmengine/utils/pick.py":9
+ * from numpy import float64
+ * 
+ * __all__ = ['Pick']             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_INCREF(__pyx_n_u_Pick);
+  __Pyx_GIVEREF(__pyx_n_u_Pick);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 0, __pyx_n_u_Pick)) __PYX_ERR(0, 9, __pyx_L1_error);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_all, __pyx_t_3) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "chmengine/utils/pick.py":13
  * 
  * @dataclass(order=True)
- * class Pick:             # <<<<<<<<<<<<<<
- *     """Container for a (move, score) pair where move is immutable and score is mutable."""
- *     _score: float64
+ * class PickT:             # <<<<<<<<<<<<<<
+ *     """
+ *     Base class for Pick containing a (move, score) pair.
  */
-  __pyx_t_3 = __Pyx_Py3MetaclassPrepare((PyObject *) NULL, __pyx_empty_tuple, __pyx_n_s_Pick, __pyx_n_s_Pick, (PyObject *) NULL, __pyx_n_s_chmengine_utils_pick, __pyx_kp_s_Container_for_a_move_score_pair); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_Py3MetaclassPrepare((PyObject *) NULL, __pyx_empty_tuple, __pyx_n_s_PickT, __pyx_n_s_PickT, (PyObject *) NULL, __pyx_n_s_chmengine_utils_pick, __pyx_kp_s_Base_class_for_Pick_containing); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_score_2, __pyx_n_s_float64) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_move_2, __pyx_n_s_Move) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_annotations, __pyx_t_2) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_score, __pyx_n_s_float64) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_move, __pyx_n_s_Move) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_annotations, __pyx_t_2) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "chmengine/utils/pick.py":16
- *     _move: Move
- * 
- *     __slots__ = ('_score', '_move')             # <<<<<<<<<<<<<<
- * 
- *     def __init__(self, move: Move, score: Number) -> None:
- */
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_slots, __pyx_tuple__6) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
-
-  /* "chmengine/utils/pick.py":18
- *     __slots__ = ('_score', '_move')
- * 
- *     def __init__(self, move: Move, score: Number) -> None:             # <<<<<<<<<<<<<<
- *         """Initializes a Pick instance
+  /* "chmengine/utils/pick.py":20
+ *     while `move` is excluded from comparison.
+ *     """
+ *     _score: float64 = field()             # <<<<<<<<<<<<<<
+ *     _move: Move = field(compare=False)
  * 
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 18, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_move, __pyx_n_s_Move) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_score, __pyx_n_s_Number) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_4Pick_1__init__, 0, __pyx_n_s_Pick___init, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__8)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 18, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_field); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_4, __pyx_t_2);
+  __pyx_t_5 = NULL;
+  __pyx_t_6 = 0;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_4, function);
+      __pyx_t_6 = 1;
+    }
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_5, NULL};
+    __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 0+__pyx_t_6);
+    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 20, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  }
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_score, __pyx_t_2) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_init, __pyx_t_4) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "chmengine/utils/pick.py":30
- *         self._move, self.score = move, float64(score)
+  /* "chmengine/utils/pick.py":21
+ *     """
+ *     _score: float64 = field()
+ *     _move: Move = field(compare=False)             # <<<<<<<<<<<<<<
  * 
- *     def __getitem__(self, index: Union[str, int]) -> Union[Move, float64]:             # <<<<<<<<<<<<<<
- *         """Allows tuple-like access with indexing."""
- *         if index in (0, 'move'):
+ *     @property
  */
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 30, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_index, __pyx_kp_s_Union_str_int) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_return, __pyx_kp_s_Union_Move_float64) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_4Pick_3__getitem__, 0, __pyx_n_s_Pick___getitem, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__10)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_field); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_4);
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_getitem, __pyx_t_2) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "chmengine/utils/pick.py":38
- *         raise IndexError("Index out of range. Use 0 for 'move', 1 for 'score'.")
- * 
- *     def __setitem__(self, key: Union[str, int], value: Number) -> None:             # <<<<<<<<<<<<<<
- *         if key in (1, 'score'):
- *             self.score = float64(value)
- */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_key, __pyx_kp_s_Union_str_int) < 0) __PYX_ERR(0, 38, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_value, __pyx_n_s_Number) < 0) __PYX_ERR(0, 38, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 38, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_4Pick_5__setitem__, 0, __pyx_n_s_Pick___setitem, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__12)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_4, __pyx_t_2);
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_compare, Py_False) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_setitem, __pyx_t_4) < 0) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_move, __pyx_t_5) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "chmengine/utils/pick.py":44
- *             raise IndexError("Index out of range. Only 1 for 'score' can be set.")
- * 
- *     def __iter__(self) -> Union[Move, float64]:             # <<<<<<<<<<<<<<
- *         """Allows unpacking like a tuple."""
- *         yield self._move
- */
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 44, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_return, __pyx_kp_s_Union_Move_float64) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_4Pick_7__iter__, 0, __pyx_n_s_Pick___iter, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__3)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_4);
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_iter, __pyx_t_2) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "chmengine/utils/pick.py":49
- *         yield self._score
- * 
- *     def __len__(self) -> int:             # <<<<<<<<<<<<<<
- *         """Length is always 2: (move, score)."""
- *         return 2
- */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_n_s_int) < 0) __PYX_ERR(0, 49, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_4Pick_10__len__, 0, __pyx_n_s_Pick___len, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__14)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 49, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_4, __pyx_t_2);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_len, __pyx_t_4) < 0) __PYX_ERR(0, 49, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-
-  /* "chmengine/utils/pick.py":53
- *         return 2
- * 
- *     def __repr__(self) -> str:             # <<<<<<<<<<<<<<
- *         return f"Pick(move={self._move.__repr__()}, score={self._score})"
- * 
- */
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 53, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_return, __pyx_n_s_str) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_4Pick_12__repr__, 0, __pyx_n_s_Pick___repr, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 53, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_4);
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_repr, __pyx_t_2) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "chmengine/utils/pick.py":56
- *         return f"Pick(move={self._move.__repr__()}, score={self._score})"
- * 
- *     def __bool__(self) -> bool:             # <<<<<<<<<<<<<<
- *         return bool(self._score)
- * 
- */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_n_s_bool_2) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_4Pick_14__bool__, 0, __pyx_n_s_Pick___bool, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__16)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 56, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_4, __pyx_t_2);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_bool, __pyx_t_4) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-
-  /* "chmengine/utils/pick.py":59
- *         return bool(self._score)
+  /* "chmengine/utils/pick.py":23
+ *     _move: Move = field(compare=False)
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def score(self) -> float64:
- *         """Read access to the score."""
+ *         """Read access to the score.
  */
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_float64) < 0) __PYX_ERR(0, 23, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_5PickT_1score, 0, __pyx_n_s_PickT_score, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_return, __pyx_n_s_float64) < 0) __PYX_ERR(0, 59, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_4Pick_16score, 0, __pyx_n_s_Pick_score, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 59, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_4);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_4, __pyx_t_5);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_property, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_property, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 59, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_score, __pyx_t_4) < 0) __PYX_ERR(0, 59, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_score_2, __pyx_t_5) < 0) __PYX_ERR(0, 23, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "chmengine/utils/pick.py":64
+  /* "chmengine/utils/pick.py":34
  *         return self._score
  * 
  *     @score.setter             # <<<<<<<<<<<<<<
  *     def score(self, score: Number) -> None:
- *         """Write access to the score."""
+ *         """Write access to the score. Converts the value to float64.
  */
-  __pyx_t_2 = PyObject_GetItem(__pyx_t_3, __pyx_n_s_score);
-  if (unlikely(!__pyx_t_2)) {
+  __pyx_t_4 = PyObject_GetItem(__pyx_t_3, __pyx_n_s_score_2);
+  if (unlikely(!__pyx_t_4)) {
     PyErr_Clear();
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_score);
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_score_2);
   }
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 64, __pyx_L1_error)
+  if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_setter); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_setter); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_score, __pyx_n_s_Number) < 0) __PYX_ERR(0, 64, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 64, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_4Pick_18score, 0, __pyx_n_s_Pick_score, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__19)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_2);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = NULL;
-  __pyx_t_7 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_score_2, __pyx_n_s_Number) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_5PickT_3score, 0, __pyx_n_s_PickT_score, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__9)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_4);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = NULL;
+  __pyx_t_6 = 0;
   #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_5))) {
-    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_5);
-    if (likely(__pyx_t_2)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
-      __Pyx_INCREF(__pyx_t_2);
+  if (unlikely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_4)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_4);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_5, function);
-      __pyx_t_7 = 1;
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+      __pyx_t_6 = 1;
     }
   }
   #endif
   {
-    PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_t_6};
-    __pyx_t_4 = __Pyx_PyObject_FastCall(__pyx_t_5, __pyx_callargs+1-__pyx_t_7, 1+__pyx_t_7);
-    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 64, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_t_7};
+    __pyx_t_5 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
+    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 34, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_score, __pyx_t_4) < 0) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_score_2, __pyx_t_5) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "chmengine/utils/pick.py":69
+  /* "chmengine/utils/pick.py":45
  *         self._score = float64(score)
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def move(self) -> Move:
- *         """Read-only access to the move."""
+ *         """Read-only access to the move.
  */
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 69, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_return, __pyx_n_s_Move) < 0) __PYX_ERR(0, 69, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_4Pick_20move, 0, __pyx_n_s_Pick_move_2, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__20)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_4);
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_property, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 69, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_Move) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_5PickT_5move, 0, __pyx_n_s_PickT_move, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__10)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_5);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_move, __pyx_t_4) < 0) __PYX_ERR(0, 69, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_property, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_move_2, __pyx_t_5) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "chmengine/utils/pick.py":74
+  /* "chmengine/utils/pick.py":56
  *         return self._move
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def data(self) -> Tuple[Move, float64]:
- *         """Read-only access to the pick data."""
+ *         """Read-only access to the pick data as a tuple.
  */
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 74, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_return, __pyx_kp_s_Tuple_Move_float64) < 0) __PYX_ERR(0, 74, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_4Pick_22data, 0, __pyx_n_s_Pick_data, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__21)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_4);
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_property, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 74, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_kp_s_Tuple_Move_float64) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_5PickT_7data, 0, __pyx_n_s_PickT_data, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__11)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_5);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_data, __pyx_t_4) < 0) __PYX_ERR(0, 74, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_property, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_data, __pyx_t_5) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "chmengine/utils/pick.py":10
+  /* "chmengine/utils/pick.py":12
  * 
  * 
  * @dataclass(order=True)             # <<<<<<<<<<<<<<
- * class Pick:
- *     """Container for a (move, score) pair where move is immutable and score is mutable."""
+ * class PickT:
+ *     """
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_dataclass); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 10, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 10, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_order, Py_True) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_dataclass); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_7 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_order, Py_True) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/utils/pick.py":11
+  /* "chmengine/utils/pick.py":13
  * 
  * @dataclass(order=True)
- * class Pick:             # <<<<<<<<<<<<<<
- *     """Container for a (move, score) pair where move is immutable and score is mutable."""
- *     _score: float64
+ * class PickT:             # <<<<<<<<<<<<<<
+ *     """
+ *     Base class for Pick containing a (move, score) pair.
  */
-  __pyx_t_6 = __Pyx_Py3ClassCreate(((PyObject*)&PyType_Type), __pyx_n_s_Pick, __pyx_empty_tuple, __pyx_t_3, NULL, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 11, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_5 = NULL;
-  __pyx_t_7 = 0;
+  __pyx_t_7 = __Pyx_Py3ClassCreate(((PyObject*)&PyType_Type), __pyx_n_s_PickT, __pyx_empty_tuple, __pyx_t_3, NULL, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_2 = NULL;
+  __pyx_t_6 = 0;
   #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_5)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_5);
+  if (unlikely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
+    if (likely(__pyx_t_2)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      __Pyx_INCREF(__pyx_t_2);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
-      __pyx_t_7 = 1;
+      __Pyx_DECREF_SET(__pyx_t_4, function);
+      __pyx_t_6 = 1;
     }
   }
   #endif
   {
-    PyObject *__pyx_callargs[2] = {__pyx_t_5, __pyx_t_6};
-    __pyx_t_4 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_7, 1+__pyx_t_7);
-    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 10, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_t_7};
+    __pyx_t_5 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 12, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Pick, __pyx_t_4) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_PickT, __pyx_t_5) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "chmengine/utils/pick.py":68
+ * 
+ * 
+ * class Pick(PickT):             # <<<<<<<<<<<<<<
+ *     """Fully featured container for a (move, score) pair where the move is immutable and
+ *     the score is mutable and used for comparisons.
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_PickT); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_GIVEREF(__pyx_t_3);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3)) __PYX_ERR(0, 68, __pyx_L1_error);
+  __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PEP560_update_bases(__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_CalculateMetaclass(NULL, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_7 = __Pyx_Py3MetaclassPrepare(__pyx_t_4, __pyx_t_3, __pyx_n_s_Pick, __pyx_n_s_Pick, (PyObject *) NULL, __pyx_n_s_chmengine_utils_pick, __pyx_kp_s_Fully_featured_container_for_a_m); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  if (__pyx_t_3 != __pyx_t_5) {
+    if (unlikely((PyDict_SetItemString(__pyx_t_7, "__orig_bases__", __pyx_t_5) < 0))) __PYX_ERR(0, 68, __pyx_L1_error)
+  }
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_move_getter_keys, __pyx_kp_s_Tuple_int_str_int) < 0) __PYX_ERR(0, 68, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_score_getter_keys, __pyx_kp_s_Tuple_int_str_int) < 0) __PYX_ERR(0, 68, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_7, __pyx_n_s_annotations, __pyx_t_5) < 0) __PYX_ERR(0, 68, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+
+  /* "chmengine/utils/pick.py":74
+ *     Supports tuple-like access, type casting, and formatting. This class is the public-facing API.
+ *     """
+ *     move_getter_keys: Tuple[int, str, int] = (0, 'move', -2)             # <<<<<<<<<<<<<<
+ *     score_getter_keys: Tuple[int, str, int] = (1, 'score', -1)
+ * 
+ */
+  if (__Pyx_SetNameInClass(__pyx_t_7, __pyx_n_s_move_getter_keys, __pyx_tuple__12) < 0) __PYX_ERR(0, 74, __pyx_L1_error)
+
+  /* "chmengine/utils/pick.py":75
+ *     """
+ *     move_getter_keys: Tuple[int, str, int] = (0, 'move', -2)
+ *     score_getter_keys: Tuple[int, str, int] = (1, 'score', -1)             # <<<<<<<<<<<<<<
+ * 
+ *     def __init__(self, move: Move, score: Number) -> None:
+ */
+  if (__Pyx_SetNameInClass(__pyx_t_7, __pyx_n_s_score_getter_keys, __pyx_tuple__13) < 0) __PYX_ERR(0, 75, __pyx_L1_error)
+
+  /* "chmengine/utils/pick.py":77
+ *     score_getter_keys: Tuple[int, str, int] = (1, 'score', -1)
+ * 
+ *     def __init__(self, move: Move, score: Number) -> None:             # <<<<<<<<<<<<<<
+ *         """Initializes a Pick instance.
+ * 
+ */
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_move_2, __pyx_n_s_Move) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_score_2, __pyx_n_s_Number) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_4Pick_1__init__, 0, __pyx_n_s_Pick___init, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_5);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_7, __pyx_n_s_init, __pyx_t_2) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "chmengine/utils/pick.py":91
+ *         self._move, self.score = move, float64(score)
+ * 
+ *     def __getitem__(self, index: Union[str, int]) -> Union[Move, float64]:             # <<<<<<<<<<<<<<
+ *         """Allows tuple-like access to the move and score using string or integer keys.
+ * 
+ */
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_index, __pyx_kp_s_Union_str_int) < 0) __PYX_ERR(0, 91, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_kp_s_Union_Move_float64) < 0) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_4Pick_3__getitem__, 0, __pyx_n_s_Pick___getitem, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_2);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_7, __pyx_n_s_getitem, __pyx_t_5) < 0) __PYX_ERR(0, 91, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+
+  /* "chmengine/utils/pick.py":115
+ *         raise IndexError("Index out of range. Use 0 (or -2) for 'move', 1 (or -1) for 'score'.")
+ * 
+ *     def __setitem__(self, key: Union[str, int], value: Number) -> None:             # <<<<<<<<<<<<<<
+ *         """Allows updating of score via tuple-style access.
+ * 
+ */
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_key, __pyx_kp_s_Union_str_int) < 0) __PYX_ERR(0, 115, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_value, __pyx_n_s_Number) < 0) __PYX_ERR(0, 115, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 115, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_4Pick_5__setitem__, 0, __pyx_n_s_Pick___setitem, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__19)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_5);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_7, __pyx_n_s_setitem, __pyx_t_2) < 0) __PYX_ERR(0, 115, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "chmengine/utils/pick.py":136
+ *             raise IndexError("Index out of range. Only 1 (or -1) for 'score' can be set.")
+ * 
+ *     def __iter__(self) -> Iterator[Union[Move, float64]]:             # <<<<<<<<<<<<<<
+ *         """Allows unpacking like a tuple.
+ * 
+ */
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_kp_s_Iterator_Union_Move_float64) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_4Pick_7__iter__, 0, __pyx_n_s_Pick___iter, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__3)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_2);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_7, __pyx_n_s_iter, __pyx_t_5) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+
+  /* "chmengine/utils/pick.py":147
+ *         yield self._score
+ * 
+ *     def __len__(self) -> int:             # <<<<<<<<<<<<<<
+ *         """Length of the object, always 2: (move, score).
+ * 
+ */
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_int) < 0) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_4Pick_10__len__, 0, __pyx_n_s_Pick___len, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__20)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_5);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_7, __pyx_n_s_len, __pyx_t_2) < 0) __PYX_ERR(0, 147, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "chmengine/utils/pick.py":156
+ *         return 2
+ * 
+ *     def __repr__(self) -> str:             # <<<<<<<<<<<<<<
+ *         """Developer-friendly string representation.
+ * 
+ */
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 156, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_n_s_str) < 0) __PYX_ERR(0, 156, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_4Pick_12__repr__, 0, __pyx_n_s_Pick___repr, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__21)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 156, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_2);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_7, __pyx_n_s_repr, __pyx_t_5) < 0) __PYX_ERR(0, 156, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+
+  /* "chmengine/utils/pick.py":165
+ *         return f"Pick(move={self._move.__repr__()}, score={self._score})"
+ * 
+ *     def __bool__(self) -> bool:             # <<<<<<<<<<<<<<
+ *         """Truthiness of the Pick is based on score.
+ * 
+ */
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 165, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_bool_2) < 0) __PYX_ERR(0, 165, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_4Pick_14__bool__, 0, __pyx_n_s_Pick___bool, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 165, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_5);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_7, __pyx_n_s_bool, __pyx_t_2) < 0) __PYX_ERR(0, 165, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "chmengine/utils/pick.py":174
+ *         return bool(self._score)
+ * 
+ *     def __int__(self) -> int:             # <<<<<<<<<<<<<<
+ *         """Integer conversion of the score.
+ * 
+ */
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_n_s_int) < 0) __PYX_ERR(0, 174, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_4Pick_16__int__, 0, __pyx_n_s_Pick___int, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__23)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_2);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_7, __pyx_n_s_int_2, __pyx_t_5) < 0) __PYX_ERR(0, 174, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+
+  /* "chmengine/utils/pick.py":183
+ *         return int(self._score)
+ * 
+ *     def __float__(self) -> float64:             # <<<<<<<<<<<<<<
+ *         """Float conversion of the score.
+ * 
+ */
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 183, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_float64) < 0) __PYX_ERR(0, 183, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_4Pick_18__float__, 0, __pyx_n_s_Pick___float, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__24)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 183, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_5);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_7, __pyx_n_s_float, __pyx_t_2) < 0) __PYX_ERR(0, 183, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "chmengine/utils/pick.py":192
+ *         return self._score
+ * 
+ *     def __format__(self, format_spec) -> str:             # <<<<<<<<<<<<<<
+ *         """Formatted string output using the score's format spec.
+ * 
+ */
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 192, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_n_s_str) < 0) __PYX_ERR(0, 192, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_4pick_4Pick_20__format__, 0, __pyx_n_s_Pick___format, NULL, __pyx_n_s_chmengine_utils_pick, __pyx_d, ((PyObject *)__pyx_codeobj__26)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 192, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_2);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_7, __pyx_n_s_format_2, __pyx_t_5) < 0) __PYX_ERR(0, 192, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+
+  /* "chmengine/utils/pick.py":68
+ * 
+ * 
+ * class Pick(PickT):             # <<<<<<<<<<<<<<
+ *     """Fully featured container for a (move, score) pair where the move is immutable and
+ *     the score is mutable and used for comparisons.
+ */
+  __pyx_t_5 = __Pyx_Py3ClassCreate(__pyx_t_4, __pyx_n_s_Pick, __pyx_t_3, __pyx_t_7, NULL, 0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Pick, __pyx_t_5) < 0) __PYX_ERR(0, 68, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "chmengine/utils/pick.py":1
- * """Pick object"""             # <<<<<<<<<<<<<<
- * from dataclasses import dataclass
+ * """Pick object representing a (move, score) evaluation pair."""             # <<<<<<<<<<<<<<
+ * from dataclasses import dataclass, field
  * from numbers import Number
  */
   __pyx_t_3 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1, __pyx_L1_error)
@@ -6401,7 +7262,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_7);
   if (__pyx_m) {
     if (__pyx_d && stringtab_initialized) {
       __Pyx_AddTraceback("init chmengine.utils.pick", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -6849,32 +7710,6 @@ bad:
 #endif
 #endif
 
-/* RaiseArgTupleInvalid */
-static void __Pyx_RaiseArgtupleInvalid(
-    const char* func_name,
-    int exact,
-    Py_ssize_t num_min,
-    Py_ssize_t num_max,
-    Py_ssize_t num_found)
-{
-    Py_ssize_t num_expected;
-    const char *more_or_less;
-    if (num_found < num_min) {
-        num_expected = num_min;
-        more_or_less = "at least";
-    } else {
-        num_expected = num_max;
-        more_or_less = "at most";
-    }
-    if (exact) {
-        more_or_less = "exactly";
-    }
-    PyErr_Format(PyExc_TypeError,
-                 "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
-                 func_name, more_or_less, num_expected,
-                 (num_expected == 1) ? "" : "s", num_found);
-}
-
 /* RaiseDoubleKeywords */
 static void __Pyx_RaiseDoubleKeywordsError(
     const char* func_name,
@@ -7043,6 +7878,32 @@ bad:
     Py_XDECREF(key);
     Py_XDECREF(value);
     return -1;
+}
+
+/* RaiseArgTupleInvalid */
+static void __Pyx_RaiseArgtupleInvalid(
+    const char* func_name,
+    int exact,
+    Py_ssize_t num_min,
+    Py_ssize_t num_max,
+    Py_ssize_t num_found)
+{
+    Py_ssize_t num_expected;
+    const char *more_or_less;
+    if (num_found < num_min) {
+        num_expected = num_min;
+        more_or_less = "at least";
+    } else {
+        num_expected = num_max;
+        more_or_less = "at most";
+    }
+    if (exact) {
+        more_or_less = "exactly";
+    }
+    PyErr_Format(PyExc_TypeError,
+                 "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
+                 func_name, more_or_less, num_expected,
+                 (num_expected == 1) ? "" : "s", num_found);
 }
 
 /* PyDictVersioning */
@@ -7365,6 +8226,20 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_FastCallDict(PyObject *func, PyObj
     #endif
 }
 
+/* PyObjectSetAttrStr */
+#if CYTHON_USE_TYPE_SLOTS
+static CYTHON_INLINE int __Pyx_PyObject_SetAttrStr(PyObject* obj, PyObject* attr_name, PyObject* value) {
+    PyTypeObject* tp = Py_TYPE(obj);
+    if (likely(tp->tp_setattro))
+        return tp->tp_setattro(obj, attr_name, value);
+#if PY_MAJOR_VERSION < 3
+    if (likely(tp->tp_setattr))
+        return tp->tp_setattr(obj, PyString_AS_STRING(attr_name), value);
+#endif
+    return PyObject_SetAttr(obj, attr_name, value);
+}
+#endif
+
 /* PyObjectCallOneArg */
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg) {
     PyObject *args[2] = {NULL, arg};
@@ -7531,92 +8406,6 @@ bad:
     return;
 }
 #endif
-
-/* PyObjectSetAttrStr */
-#if CYTHON_USE_TYPE_SLOTS
-static CYTHON_INLINE int __Pyx_PyObject_SetAttrStr(PyObject* obj, PyObject* attr_name, PyObject* value) {
-    PyTypeObject* tp = Py_TYPE(obj);
-    if (likely(tp->tp_setattro))
-        return tp->tp_setattro(obj, attr_name, value);
-#if PY_MAJOR_VERSION < 3
-    if (likely(tp->tp_setattr))
-        return tp->tp_setattr(obj, PyString_AS_STRING(attr_name), value);
-#endif
-    return PyObject_SetAttr(obj, attr_name, value);
-}
-#endif
-
-/* PyIntCompare */
-static CYTHON_INLINE int __Pyx_PyInt_BoolEqObjC(PyObject *op1, PyObject *op2, long intval, long inplace) {
-    CYTHON_MAYBE_UNUSED_VAR(intval);
-    CYTHON_UNUSED_VAR(inplace);
-    if (op1 == op2) {
-        return 1;
-    }
-    #if PY_MAJOR_VERSION < 3
-    if (likely(PyInt_CheckExact(op1))) {
-        const long b = intval;
-        long a = PyInt_AS_LONG(op1);
-        return (a == b);
-    }
-    #endif
-    #if CYTHON_USE_PYLONG_INTERNALS
-    if (likely(PyLong_CheckExact(op1))) {
-        int unequal;
-        unsigned long uintval;
-        Py_ssize_t size = __Pyx_PyLong_DigitCount(op1);
-        const digit* digits = __Pyx_PyLong_Digits(op1);
-        if (intval == 0) {
-            return (__Pyx_PyLong_IsZero(op1) == 1);
-        } else if (intval < 0) {
-            if (__Pyx_PyLong_IsNonNeg(op1))
-                return 0;
-            intval = -intval;
-        } else {
-            if (__Pyx_PyLong_IsNeg(op1))
-                return 0;
-        }
-        uintval = (unsigned long) intval;
-#if PyLong_SHIFT * 4 < SIZEOF_LONG*8
-        if (uintval >> (PyLong_SHIFT * 4)) {
-            unequal = (size != 5) || (digits[0] != (uintval & (unsigned long) PyLong_MASK))
-                 | (digits[1] != ((uintval >> (1 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK)) | (digits[2] != ((uintval >> (2 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK)) | (digits[3] != ((uintval >> (3 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK)) | (digits[4] != ((uintval >> (4 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK));
-        } else
-#endif
-#if PyLong_SHIFT * 3 < SIZEOF_LONG*8
-        if (uintval >> (PyLong_SHIFT * 3)) {
-            unequal = (size != 4) || (digits[0] != (uintval & (unsigned long) PyLong_MASK))
-                 | (digits[1] != ((uintval >> (1 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK)) | (digits[2] != ((uintval >> (2 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK)) | (digits[3] != ((uintval >> (3 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK));
-        } else
-#endif
-#if PyLong_SHIFT * 2 < SIZEOF_LONG*8
-        if (uintval >> (PyLong_SHIFT * 2)) {
-            unequal = (size != 3) || (digits[0] != (uintval & (unsigned long) PyLong_MASK))
-                 | (digits[1] != ((uintval >> (1 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK)) | (digits[2] != ((uintval >> (2 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK));
-        } else
-#endif
-#if PyLong_SHIFT * 1 < SIZEOF_LONG*8
-        if (uintval >> (PyLong_SHIFT * 1)) {
-            unequal = (size != 2) || (digits[0] != (uintval & (unsigned long) PyLong_MASK))
-                 | (digits[1] != ((uintval >> (1 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK));
-        } else
-#endif
-            unequal = (size != 1) || (((unsigned long) digits[0]) != (uintval & (unsigned long) PyLong_MASK));
-        return (unequal == 0);
-    }
-    #endif
-    if (PyFloat_CheckExact(op1)) {
-        const long b = intval;
-#if CYTHON_COMPILING_IN_LIMITED_API
-        double a = __pyx_PyFloat_AsDouble(op1);
-#else
-        double a = PyFloat_AS_DOUBLE(op1);
-#endif
-        return ((double)a == (double)b);
-    }
-    return __Pyx_PyObject_IsTrueAndDecref(
-        PyObject_RichCompare(op1, op2, Py_EQ));
-}
 
 /* GetException */
 #if CYTHON_FAST_THREAD_STATE
@@ -9796,6 +10585,74 @@ static PyObject *__Pyx_Py3ClassCreate(PyObject *metaclass, PyObject *name, PyObj
     return result;
 }
 
+/* Py3UpdateBases */
+static PyObject*
+__Pyx_PEP560_update_bases(PyObject *bases)
+{
+    Py_ssize_t i, j, size_bases;
+    PyObject *base, *meth, *new_base, *result, *new_bases = NULL;
+    size_bases = PyTuple_GET_SIZE(bases);
+    for (i = 0; i < size_bases; i++) {
+        base  = PyTuple_GET_ITEM(bases, i);
+        if (PyType_Check(base)) {
+            if (new_bases) {
+                if (PyList_Append(new_bases, base) < 0) {
+                    goto error;
+                }
+            }
+            continue;
+        }
+        meth = __Pyx_PyObject_GetAttrStrNoError(base, __pyx_n_s_mro_entries);
+        if (!meth && PyErr_Occurred()) {
+            goto error;
+        }
+        if (!meth) {
+            if (new_bases) {
+                if (PyList_Append(new_bases, base) < 0) {
+                    goto error;
+                }
+            }
+            continue;
+        }
+        new_base = __Pyx_PyObject_CallOneArg(meth, bases);
+        Py_DECREF(meth);
+        if (!new_base) {
+            goto error;
+        }
+        if (!PyTuple_Check(new_base)) {
+            PyErr_SetString(PyExc_TypeError,
+                            "__mro_entries__ must return a tuple");
+            Py_DECREF(new_base);
+            goto error;
+        }
+        if (!new_bases) {
+            if (!(new_bases = PyList_New(i))) {
+                goto error;
+            }
+            for (j = 0; j < i; j++) {
+                base = PyTuple_GET_ITEM(bases, j);
+                PyList_SET_ITEM(new_bases, j, base);
+                Py_INCREF(base);
+            }
+        }
+        j = PyList_GET_SIZE(new_bases);
+        if (PyList_SetSlice(new_bases, j, j, new_base) < 0) {
+            goto error;
+        }
+        Py_DECREF(new_base);
+    }
+    if (!new_bases) {
+        Py_INCREF(bases);
+        return bases;
+    }
+    result = PyList_AsTuple(new_bases);
+    Py_DECREF(new_bases);
+    return result;
+error:
+    Py_XDECREF(new_bases);
+    return NULL;
+}
+
 /* CLineInTraceback */
 #ifndef CYTHON_CLINE_IN_TRACEBACK
 static int __Pyx_CLineForTraceback(PyThreadState *tstate, int c_line) {
@@ -10123,7 +10980,7 @@ __Pyx_PyType_GetName(PyTypeObject* tp)
     if (unlikely(name == NULL) || unlikely(!PyUnicode_Check(name))) {
         PyErr_Clear();
         Py_XDECREF(name);
-        name = __Pyx_NewRef(__pyx_n_s__22);
+        name = __Pyx_NewRef(__pyx_n_s__27);
     }
     return name;
 }

@@ -5,7 +5,7 @@
     "distutils": {
         "name": "heatmaps.__init__",
         "sources": [
-            "heatmaps/__init__.py"
+            "heatmaps\\__init__.py"
         ]
     },
     "module_name": "heatmaps.__init__"

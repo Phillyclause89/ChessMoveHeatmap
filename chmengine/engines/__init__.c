@@ -5,7 +5,7 @@
     "distutils": {
         "name": "chmengine.engines.__init__",
         "sources": [
-            "chmengine/engines/__init__.py"
+            "chmengine\\engines\\__init__.py"
         ]
     },
     "module_name": "chmengine.engines.__init__"
