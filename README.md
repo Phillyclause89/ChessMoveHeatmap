@@ -157,3 +157,7 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 - **Phillyclause89** – Project Creator & Lead Developer
 - **ChatGPT (OpenAI)** – Development Assistance, Documentation, Debugging, and README Updates
 - **GitHub Copilot (OpenAI)** – Code Suggestions, Inline Completions, and Documentation Drafting
+
+## **Contributing**
+
+This project is my own personal learning exercise, and I am not inclined to accept any contributions at this time. I have no interest in setting up the necessary project frameworks required for successful collaborative development. See [issue #15](https://github.com/Phillyclause89/ChessMoveHeatmap/issues/15) for more details.
