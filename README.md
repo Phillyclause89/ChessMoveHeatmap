@@ -2,7 +2,7 @@
 
 # **ChessMoveHeatmap**
 
-A **visual heatmap generator for chess PGN games**, built with Python, `tkinter`, `numpy`, and `python-chess`. This application analyzes possible move activity throughout a chess game and generates **gradient-based heatmaps** that highlight move intensity for each square at every position.
+A **visual heatmap generator for chess PGN games**, built with Python, `tkinter`, `numpy`, and `python-chess`. This application analyzes possible move activity throughout a chess game and generates visual heatmaps for better understanding of the game's dynamics.
 
 <p align="center">
   <a href="https://youtu.be/hRwwK6vnPzs?si=hTRCUvtmDCgvCDna" target="_blank">
@@ -12,13 +12,7 @@ A **visual heatmap generator for chess PGN games**, built with Python, `tkinter`
 
 ## **An Introduction by Phillyclause89 (Not ChatGPT or GitHub Copilot)**
 
-The idea for this project got into my head over 2 years ago. And I even got as far
-as [a version that ran ok upto depth 1](https://youtu.be/tV9pxEQnRHU?si=SSc_HT5Mu8XeKaOa).
-But sadly, I never put that project on GitHub and only have that video to remember it by.
-Anyway, someone on [r/learnpython](https://www.reddit.com/r/learnpython/) made a post asking for project ideas and I
-mentioned this one as a fun one that I remember doing once upon a time. I felt bad that I had lost the code to show for
-it though, thus I have decided to restart the project from scratch. Though I admit to using chatgpt for doc generation
-and rubberduck debugging this go around as there is no way I'm typing the rest of this ReadMe out on my own...
+The idea for this project got into my head over 2 years ago. And I even got as far as [a version that ran ok upto depth 1](https://youtu.be/tV9pxEQnRHU?si=SSc_HT5Mu8XeKaOa). But sadly, I never put that project on GitHub and only have that video to remember it by. Anyway, someone on [r/learnpython](https://www.reddit.com/r/learnpython/) made a post asking for project ideas and I mentioned this one as a fun one that I remember doing once upon a time. I felt bad that I had lost the code to show for it though, thus I have decided to restart the project from scratch. Though I admit to using chatgpt for doc generation and rubberduck debugging this go around as there is no way I'm typing the rest of this ReadMe out on my own...
 
 ## **Features**
 - ✅ **PGN File Support** – Load chess games from PGN files for analysis.
@@ -30,11 +24,33 @@ and rubberduck debugging this go around as there is no way I'm typing the rest o
 ## **Installation**
 
 ### **Prerequisites**
-Ensure you have Python **3.7 - 3.10** installed. Python **3.11+** is not supported at this stage and will require significant refactoring to imports for compatibility. Then, install the required dependencies:
+Ensure you have Python **3.7 - 3.10** installed. Python **3.11+** is not supported at this stage and will require significant refactoring to imports for compatibility.
 
-```bash
-pip install -r requirements.txt
-```
+### **Steps to Set Up the Project**
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/Phillyclause89/ChessMoveHeatmap.git
+   cd ChessMoveHeatmap
+   ```
+
+2. **Set Up a Virtual Environment**:
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows use `.venv\Scripts\activate`
+   ```
+
+3. **Install Dependencies**:
+   - **Preferred Method** (Using `requirements.txt`):
+     ```bash
+     pip install -r requirements.txt
+     ```
+
+   - **Alternative (Untested) Method** (Using `.toml`):
+     Use this method if you prefer `.toml` files. However, note that this approach is not officially supported and may not work as expected:
+     ```bash
+     pip install .[all]
+     ```
 
 ### **Run the Application**
 ```bash
@@ -107,7 +123,7 @@ ChessMoveHeatmap/
 - 👾 **AI Improvements** – Refine logic for `CMHMEngine2` based on game outcomes.
 
 ## **ChessMoveHeatmap Engines (`chmengine`)**
-The `chmengine` module is an experimental chess engine component that leverages heatmaps to inform move decisions. While still in development and not yet integrated into the main application, it provides tools for:
+The `chmengine` module is an experimental chess engine component that leverages heatmaps to inform move decisions. While still in development and not yet integrated into the main application, it provides functionality for:
 - Playing games against the engine.
 - Training the engine using reinforcement learning.
 
