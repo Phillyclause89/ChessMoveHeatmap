@@ -106,15 +106,16 @@ class Quartney(metaclass=ABCMeta):
         return path.join(self.cache_dir, self.qtable_filename(board=board, pieces_count=pieces_count))
 
     def _init_qdb(self) -> None:
-        """Ensure the cache directory exists and initialize all Q‑table DBs.
+        """Initialize Q-table databases and ensure cache directory exists.
 
-        For each possible piece count from 2 up to 32, this creates a SQLite file
-        (if missing) containing a single table `q_table(fen, q_value)`.
+        This method iterates over piece counts from 2 to 32, creating
+        a SQLite file (if missing) containing a single table
+        `q_table(fen, q_value)` for each piece count.
 
-        Side Effects
-        ------------
-        - Creates `self.cache_dir` if not already present.
-        - Creates or updates SQLite files under that directory.
+        Notes
+        -----
+        - Creates `self.cache_dir` if it does not exist.
+        - Creates or updates SQLite files under `self.cache_dir`.
         """
         if not path.isdir(self.cache_dir):
             makedirs(self.cache_dir)
@@ -176,16 +177,19 @@ class Quartney(metaclass=ABCMeta):
     def _resolve_board_and_fen_(self, board: Optional[Board], fen: Optional[str]) -> Tuple[Board, str]:
         """Ensure both `board` and `fen` are non-None, resolving missing values using fallback logic.
 
-        This method resolves a complete (board, fen) pair, even if one or both values are not passed
-        explicitly. If `fen` is missing, it is generated using `self.fen(board)`. If `board` is missing,
-        it is reconstructed from the provided `fen`, or falls back to `self.board`.
+        This method resolves a complete (board, fen) pair, even if one or both values
+        are not passed explicitly. If `fen` is missing, it is generated using `self.fen(board)`.
+        If `board` is missing, it is reconstructed from the provided `fen`, or falls back
+        to `self.board`.
 
-        The ternary logic may appear dense, but it guarantees correct handling of all input permutations.
+        The ternary logic may appear dense, but it guarantees correct handling of all input
+        permutations.
 
         Parameters
         ----------
         board : Optional[chess.Board]
-            A board object to evaluate, or `None` if it should be derived from `fen` or fallback context.
+            A board object to evaluate, or `None` if it should be derived from `fen` or
+            fallback context.
         fen : Optional[str]
             A FEN string to evaluate, or `None` if it should be derived from `board`.
 
@@ -196,20 +200,18 @@ class Quartney(metaclass=ABCMeta):
 
         Notes
         -----
-        If both arguments are `None`, the method falls back to `self.board` and generates the FEN from it
-        using the `.fen()` method, which is expected to be implemented by child classes.
+        If both arguments are `None`, the method falls back to `self.board` and generates
+        the FEN from it using the `.fen()` method, which is expected to be implemented
+        by child classes.
 
         Truth Table for Logic Flow:
-        ---------------------------
-        || `board is None` | `fen is None` | 📥 `board` is resolved from  | 📥 `fen` is resolved from   ||
 
-        ||✅ `True`        | ✅ `True`    | `self.board`                  | `self.board.fen()`          ||
-
-        ||✅ `True`        | ❌ `False`   | `Board(fen)`                  | `fen (direct pass-through)` ||
-
-        ||❌ `False`       | ✅ `True`    | `board` (direct pass-through) | `board.fen()`               ||
-
-        ||❌ `False`       | ❌ `False`   | `board` (direct pass-through) | `fen` (direct pass-through) ||
+        board is None  | fen is None  | board resolved from          | fen resolved from
+        ---------------+--------------+------------------------------+-----------------------------
+        True           | True         | self.board                   | self.board.fen()
+        True           | False        | Board(fen)                   | fen (direct pass-through)
+        False          | True         | board (direct pass-through)  | board.fen()
+        False          | False        | board (direct pass-through)  | fen (direct pass-through)
 
         Examples
         --------
@@ -277,20 +279,20 @@ class Quartney(metaclass=ABCMeta):
 
     @abstractmethod
     def update_q_values(self, debug: bool = False) -> None:
-        """Back‑propagate game outcome through the Q‑table.
+        """Back-propagate game outcome through the Q-table.
 
         Pops all moves from the current board history and adjusts each
-        stored Q‑value in the database based on the final result
+        stored Q-value in the database based on the final result
         (win/lose/draw).
 
         Parameters
         ----------
         debug : bool, default=False
-            If `True`, print diagnostics for each back‑step.
+            If True, print diagnostics for each back-step.
 
-        Side Effects
-        ------------
-        Updates the SQLite Q‑table entries for every move in the game.
+        Notes
+        -----
+        Updates the SQLite Q-table entries for every move in the game.
 
         Examples
         --------
@@ -376,22 +378,22 @@ class Quartney(metaclass=ABCMeta):
 
     @depth.setter
     def depth(self, new_depth: int):
-        """Set the recursion depth and reinitialize Q‑tables.
+        """Set the recursion depth and reinitialize Q-tables.
 
         Parameters
         ----------
         new_depth : int
-            New depth value (must be >=0)
+            New depth value (must be >= 0).
 
         Raises
         ------
         ValueError
-            If `new_depth < 0`.
+            If `new_depth` is less than 0.
 
-        Side Effects
-        ------------
-        Updates `self._depth` and recreates the Q‑table databases
-        under `self.cache_dir`.
+        Notes
+        -----
+        - Updates `self._depth`.
+        - Recreates the Q-table databases under `self.cache_dir`.
 
         Examples
         --------

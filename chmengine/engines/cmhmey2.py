@@ -42,19 +42,20 @@ class CMHMEngine2(CMHMEngine, Quartney):
         self._init_qdb()  # List to store moves made during the game as (fen, move_uci) pairs.
 
     def update_q_values(self, debug: bool = False) -> None:
-        """Update the Q-table values after game termination.
+        """Back-propagate game outcome through the Q-table.
 
-        This method back-propagates the outcome of the game by iteratively popping moves off the
-        board stack and adjusting their Q-values based on the game outcome. For draws, scores are
-        converged toward zero; for wins/losses, scores are bumped or penalized accordingly.
+        Pops all moves from the current board history and adjusts each
+        stored Q-value in the database based on the final result
+        (win/lose/draw).
 
         Parameters
         ----------
-        debug : bool
+        debug : bool, default=False
+            If True, print diagnostics for each back-step.
 
-        Side Effects
-        ------------
-        Updates the Q-values in the Q-table database for each board fen in the move history.
+        Notes
+        -----
+        Updates the SQLite Q-table entries for every move in the game.
 
         Examples
         --------

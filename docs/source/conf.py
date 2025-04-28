@@ -36,6 +36,13 @@ autodoc_default_options = {
 }
 
 autosummary_generate = True
+
+# Overwrite existing stubs each run (so changes to signatures/docstrings propagate)
+autosummary_generate_overwrite = True
+
+# (Optional) if you still see stub-related noise, suppress autosummary warnings
+suppress_warnings = ['autosummary']
+
 templates_path = ['_templates']
 exclude_patterns = []
 
