@@ -1,0 +1,687 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>chmutils &#8212; ChessMoveHeatmap 000.069.420 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="chmutils.system_info" href="chmutils.system_info.html" />
+    <link rel="prev" title="chmengine.utils.pick" href="chmengine.utils.pick.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-chmutils">
+<span id="chmutils"></span><h1>chmutils<a class="headerlink" href="#module-chmutils" title="Permalink to this heading">¶</a></h1>
+<p>CHMUtils</p>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chmutils.calculate_chess_move_heatmap" title="chmutils.calculate_chess_move_heatmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_chess_move_heatmap</span></code></a>(board[, depth, ...])</p></td>
+<td><p>Recursively computes a chess move heatmap that tracks both move intensities and piece counts.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chmutils.calculate_chess_move_heatmap_with_better_discount" title="chmutils.calculate_chess_move_heatmap_with_better_discount"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_chess_move_heatmap_with_better_discount</span></code></a>(board)</p></td>
+<td><p>Recursively computes a chess move heatmap for a given board state while applying a discount to moves based on the branching factor at each level of recursion.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chmutils.calculate_heatmap" title="chmutils.calculate_heatmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_heatmap</span></code></a>(board[, depth, heatmap, ...])</p></td>
+<td><p>Recursively computes a gradient heatmap for a given chess board position.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chmutils.fill_depth_map_with_counts" title="chmutils.fill_depth_map_with_counts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fill_depth_map_with_counts</span></code></a>(board, depth, ...)</p></td>
+<td><p>Recursively populates the depth_map accumulator with move counts and heatmap data for each depth level.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chmutils.flatten_heatmap" title="chmutils.flatten_heatmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flatten_heatmap</span></code></a>(heatmap)</p></td>
+<td><p>Flatten a ChessMoveHeatmap into a dictionary of primitive values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chmutils.get_or_compute_heatmap" title="chmutils.get_or_compute_heatmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_or_compute_heatmap</span></code></a>(board, depth)</p></td>
+<td><p>Retrieve a ChessMoveHeatmap from the cache, or compute and cache it if not available.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chmutils.get_or_compute_heatmap_with_better_discounts" title="chmutils.get_or_compute_heatmap_with_better_discounts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_or_compute_heatmap_with_better_discounts</span></code></a>(...)</p></td>
+<td><p>Retrieve a ChessMoveHeatmap from the Better cache, or compute and cache Better if not available.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chmutils.inflate_heatmap" title="chmutils.inflate_heatmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inflate_heatmap</span></code></a>(data)</p></td>
+<td><p>Inflate a flat dictionary of primitive values back into a ChessMoveHeatmap.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chmutils.BetterHeatmapCache" title="chmutils.BetterHeatmapCache"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BetterHeatmapCache</span></code></a>(board, depth)</p></td>
+<td><p>Overides cache_dir</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chmutils.HeatmapCache" title="chmutils.HeatmapCache"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HeatmapCache</span></code></a>(board, depth)</p></td>
+<td><p>A caching mechanism for ChessMoveHeatmap objects using SQLite.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="chmutils.BetterHeatmapCache">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chmutils.</span></span><span class="sig-name descname"><span class="pre">BetterHeatmapCache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chmutils.BetterHeatmapCache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chmutils.HeatmapCache" title="chmutils.HeatmapCache"><code class="xref py py-class docutils literal notranslate"><span class="pre">HeatmapCache</span></code></a></p>
+<p>Overides cache_dir</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chmutils.BetterHeatmapCache.board">
+<span class="sig-name descname"><span class="pre">board</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Board</span></em><a class="headerlink" href="#chmutils.BetterHeatmapCache.board" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chmutils.BetterHeatmapCache.cache_dir">
+<span class="sig-name descname"><span class="pre">cache_dir</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'.\\SQLite3Caches\\Better'</span></em><a class="headerlink" href="#chmutils.BetterHeatmapCache.cache_dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chmutils.BetterHeatmapCache.db_path">
+<span class="sig-name descname"><span class="pre">db_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#chmutils.BetterHeatmapCache.db_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chmutils.BetterHeatmapCache.depth">
+<span class="sig-name descname"><span class="pre">depth</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#chmutils.BetterHeatmapCache.depth" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.BetterHeatmapCache.get_cached_heatmap">
+<span class="sig-name descname"><span class="pre">get_cached_heatmap</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="heatmaps.html#heatmaps.ChessMoveHeatmap" title="heatmaps.ChessMoveHeatmap"><span class="pre">ChessMoveHeatmap</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmutils.BetterHeatmapCache.get_cached_heatmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a cached ChessMoveHeatmap for the given board and depth, if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>Union[heatmaps.ChessMoveHeatmap, None]</dt><dd><p>The cached ChessMoveHeatmap if found; otherwise, None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.BetterHeatmapCache.store_heatmap">
+<span class="sig-name descname"><span class="pre">store_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmhm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="heatmaps.html#heatmaps.ChessMoveHeatmap" title="heatmaps.ChessMoveHeatmap"><span class="pre">ChessMoveHeatmap</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.BetterHeatmapCache.store_heatmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store a ChessMoveHeatmap in the cache.</p>
+<p>The given heatmap is flattened into a dictionary of primitive values and inserted
+into the SQLite database. If an entry with the same cache key already exists, it is replaced.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>cmhm</strong><span class="classifier">heatmaps.ChessMoveHeatmap</span></dt><dd><p>The ChessMoveHeatmap object to be stored.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chmutils.HeatmapCache">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chmutils.</span></span><span class="sig-name descname"><span class="pre">HeatmapCache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chmutils.HeatmapCache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A caching mechanism for ChessMoveHeatmap objects using SQLite.</p>
+<p>This class stores flattened heatmap data in a SQLite database, indexed by a unique
+key derived from the board’s FEN string. If a cached heatmap exists for a given board
+configuration and recursion depth, it is returned. Otherwise, the heatmap is computed,
+stored in the database, and then returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>depth</strong><span class="classifier">int</span></dt><dd><p>The recursion depth associated with the heatmap calculations.</p>
+</dd>
+<dt><strong>board</strong><span class="classifier">chess.Board</span></dt><dd><p>The chess board whose heatmap is being cached.</p>
+</dd>
+<dt><strong>db_path</strong><span class="classifier">str</span></dt><dd><p>The relative file path to the SQLite database used for caching.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chmutils.HeatmapCache.board">
+<span class="sig-name descname"><span class="pre">board</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Board</span></em><a class="headerlink" href="#chmutils.HeatmapCache.board" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chmutils.HeatmapCache.cache_dir">
+<span class="sig-name descname"><span class="pre">cache_dir</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'.\\SQLite3Caches\\Faster'</span></em><a class="headerlink" href="#chmutils.HeatmapCache.cache_dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chmutils.HeatmapCache.db_path">
+<span class="sig-name descname"><span class="pre">db_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#chmutils.HeatmapCache.db_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chmutils.HeatmapCache.depth">
+<span class="sig-name descname"><span class="pre">depth</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#chmutils.HeatmapCache.depth" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.HeatmapCache.get_cached_heatmap">
+<span class="sig-name descname"><span class="pre">get_cached_heatmap</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="heatmaps.html#heatmaps.ChessMoveHeatmap" title="heatmaps.ChessMoveHeatmap"><span class="pre">ChessMoveHeatmap</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmutils.HeatmapCache.get_cached_heatmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a cached ChessMoveHeatmap for the given board and depth, if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>Union[heatmaps.ChessMoveHeatmap, None]</dt><dd><p>The cached ChessMoveHeatmap if found; otherwise, None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.HeatmapCache.store_heatmap">
+<span class="sig-name descname"><span class="pre">store_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmhm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="heatmaps.html#heatmaps.ChessMoveHeatmap" title="heatmaps.ChessMoveHeatmap"><span class="pre">ChessMoveHeatmap</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.HeatmapCache.store_heatmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store a ChessMoveHeatmap in the cache.</p>
+<p>The given heatmap is flattened into a dictionary of primitive values and inserted
+into the SQLite database. If an entry with the same cache key already exists, it is replaced.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>cmhm</strong><span class="classifier">heatmaps.ChessMoveHeatmap</span></dt><dd><p>The ChessMoveHeatmap object to be stored.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmutils.calculate_chess_move_heatmap">
+<span class="sig-prename descclassname"><span class="pre">chmutils.</span></span><span class="sig-name descname"><span class="pre">calculate_chess_move_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heatmap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="heatmaps.html#heatmaps.ChessMoveHeatmap" title="heatmaps.ChessMoveHeatmap"><span class="pre">ChessMoveHeatmap</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="heatmaps.html#heatmaps.ChessMoveHeatmap" title="heatmaps.ChessMoveHeatmap"><span class="pre">ChessMoveHeatmap</span></a></span></span><a class="headerlink" href="#chmutils.calculate_chess_move_heatmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively computes a chess move heatmap that tracks both move intensities and piece counts.</p>
+<p>This function extends the standard gradient heatmap calculation by additionally updating,
+for each move, a per-square dictionary of chess piece counts. For each legal move, the target
+square’s intensity is incremented (as in calculate_heatmap), and the count corresponding to
+the moving piece is also incremented.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">chess.Board</span></dt><dd><p>The chess board position for which to calculate the move heatmap.</p>
+</dd>
+<dt><strong>depth</strong><span class="classifier">int, optional</span></dt><dd><p>The recursion depth to explore legal moves. Higher depth yields more comprehensive data,
+but at the cost of exponentially increased computation time.</p>
+</dd>
+<dt><strong>heatmap</strong><span class="classifier">Optional[heatmaps.ChessMoveHeatmap], optional</span></dt><dd><p>An existing ChessMoveHeatmap instance to which both move intensities and piece counts
+will be added. For initial calls, this should be left as None.</p>
+</dd>
+<dt><strong>discount</strong><span class="classifier">int, optional</span></dt><dd><p>A multiplier used to discount contributions of moves as the recursion deepens.
+It is updated recursively to moderate the exponential growth in contributions.
+Default is 1.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>heatmaps.ChessMoveHeatmap</dt><dd><dl class="simple">
+<dt>The computed ChessMoveHeatmap containing:</dt><dd><ul class="simple">
+<li><p>A gradient heatmap of move intensities per square.</p></li>
+<li><p>A corresponding array of piece count dictionaries per square.</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>The function updates both the standard heatmap data (for move intensity) and, in addition,</dt><dd><p>the <cite>piece_counts</cite> attribute.</p>
+</dd>
+</dl>
+</li>
+<li><p>As with <cite>calculate_heatmap</cite>, the parameters <cite>heatmap</cite> and <cite>discount</cite> are intended for internal use.</p></li>
+<li><dl class="simple">
+<dt>The recursion depth controls the number of future move layers considered. Only odd depths tend to provide</dt><dd><p>balanced data between both players.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>The time complexity is approximately O(b^d),</dt><dd><p>where b ≈ 35 (the average branching factor in chess) and d is the depth.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chess</span> <span class="kn">import</span> <span class="n">Board</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmutils</span> <span class="kn">import</span> <span class="n">calculate_chess_move_heatmap</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">brd</span> <span class="o">=</span> <span class="n">Board</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">depth1_cmhm</span> <span class="o">=</span> <span class="n">calculate_chess_move_heatmap</span><span class="p">(</span><span class="n">brd</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">unicode_symbol</span><span class="p">()</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">cnt</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">cnt</span> <span class="ow">in</span> <span class="n">depth1_cmhm</span><span class="o">.</span><span class="n">piece_counts</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">cnt</span><span class="p">]))</span>
+<span class="go">♙: 1.0, ♘: 1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">depth2_cmhm</span> <span class="o">=</span> <span class="n">calculate_chess_move_heatmap</span><span class="p">(</span><span class="n">brd</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">unicode_symbol</span><span class="p">()</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">cnt</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">cnt</span> <span class="ow">in</span> <span class="n">depth2_cmhm</span><span class="o">.</span><span class="n">piece_counts</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">cnt</span><span class="p">]))</span>
+<span class="go">♙: 1.849999999999993, ♘: 1.849999999999984, ♗: 0.10000000000000005, ♖: 0.05000000000000001, ♝: 0.09067002690459958</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmutils.calculate_chess_move_heatmap_with_better_discount">
+<span class="sig-prename descclassname"><span class="pre">chmutils.</span></span><span class="sig-name descname"><span class="pre">calculate_chess_move_heatmap_with_better_discount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="heatmaps.html#heatmaps.ChessMoveHeatmap" title="heatmaps.ChessMoveHeatmap"><span class="pre">ChessMoveHeatmap</span></a></span></span><a class="headerlink" href="#chmutils.calculate_chess_move_heatmap_with_better_discount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively computes a chess move heatmap for a given board state while applying a discount
+to moves based on the branching factor at each level of recursion. This discounting approach
+reduces the weight of moves that occur in positions with many legal alternatives, thereby
+emphasizing moves from branches with fewer alternatives.</p>
+<dl class="simple">
+<dt>The function first constructs a depth-specific accumulator (<code class="docutils literal notranslate"><span class="pre">depth_map</span></code>) that holds, for each depth level:</dt><dd><ul class="simple">
+<li><p>An integer count of the total number of legal moves (branches) encountered.</p></li>
+<li><dl class="simple">
+<dt>A <code class="docutils literal notranslate"><span class="pre">ChessMoveHeatmap</span></code> instance that aggregates move data:</dt><dd><ul>
+<li><p>Increments the target square’s value (indexed by the opponent’s color) for each move.</p></li>
+<li><p>Tracks piece counts for moves arriving at each square.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<p>The accumulator is populated by the helper function <code class="docutils literal notranslate"><span class="pre">fill_depth_map_with_counts</span></code>. Once all moves are
+processed up to the specified depth, the function aggregates the heatmaps from each depth level.
+Although the code iterates over <code class="docutils literal notranslate"><span class="pre">depth_map[::-1]</span></code>, due to how recursion updates the accumulator via
+<code class="docutils literal notranslate"><span class="pre">depth_map[depth]</span></code>, this reversed order corresponds to ‘processing from the shallowest (initial board state)
+to the deepest level.’ At each level, the heatmap values (both move counts and piece counts) are divided by a
+discount factor determined by the branch count, ensuring that moves from positions with many alternatives
+contribute proportionally less to the final heatmap.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">chess.Board</span></dt><dd><p>The current chess board state from which legal moves are generated.</p>
+</dd>
+<dt><strong>depth</strong><span class="classifier">int, optional</span></dt><dd><p>The depth (or ply) to which moves are recursively explored. A depth of 1 considers only immediate legal
+moves, while higher depths recursively analyze subsequent moves. Default is 1.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>heatmaps.ChessMoveHeatmap</dt><dd><p>A composite chess move heatmap where each square’s value reflects the discounted cumulative influence
+of moves leading to that square. The heatmap also maintains aggregated piece movement counts.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chess</span> <span class="kn">import</span> <span class="n">Board</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmutils</span> <span class="kn">import</span> <span class="n">calculate_chess_move_heatmap_with_better_discount</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">brd</span> <span class="o">=</span> <span class="n">Board</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">depth1_cmhm</span> <span class="o">=</span> <span class="n">calculate_chess_move_heatmap_with_better_discount</span><span class="p">(</span><span class="n">brd</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">unicode_symbol</span><span class="p">()</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">cnt</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">cnt</span> <span class="ow">in</span> <span class="n">depth1_cmhm</span><span class="o">.</span><span class="n">piece_counts</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">cnt</span><span class="p">]))</span>
+<span class="go">♙: 1.0, ♘: 1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">depth2_cmhm</span> <span class="o">=</span> <span class="n">calculate_chess_move_heatmap_with_better_discount</span><span class="p">(</span><span class="n">brd</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">unicode_symbol</span><span class="p">()</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">cnt</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">cnt</span> <span class="ow">in</span> <span class="n">depth2_cmhm</span><span class="o">.</span><span class="n">piece_counts</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">cnt</span><span class="p">]))</span>
+<span class="go">♙: 1.85, ♘: 1.85, ♗: 0.1, ♖: 0.05, ♝: 0.09110312289373175</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmutils.calculate_heatmap">
+<span class="sig-prename descclassname"><span class="pre">chmutils.</span></span><span class="sig-name descname"><span class="pre">calculate_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heatmap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="heatmaps.html#heatmaps.GradientHeatmap" title="heatmaps.GradientHeatmap"><span class="pre">GradientHeatmap</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="heatmaps.html#heatmaps.GradientHeatmap" title="heatmaps.GradientHeatmap"><span class="pre">GradientHeatmap</span></a></span></span><a class="headerlink" href="#chmutils.calculate_heatmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively computes a gradient heatmap for a given chess board position.</p>
+<p>This function traverses the legal moves of the board recursively to build
+a heatmap that represents the “intensity” of move activity for each square.
+The intensity is accumulated with a discount factor to account for the branching
+factor at each move level. If no heatmap is provided, a new one is initialized.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">chess.Board</span></dt><dd><p>The chess board position for which to calculate the heatmap.
+Please refer to the <cite>Notes</cite> section for performance warnings related to high depth values.</p>
+</dd>
+<dt><strong>depth</strong><span class="classifier">int, optional</span></dt><dd><p>The recursion depth to explore legal moves. A higher depth results in a more
+comprehensive heatmap, but increases computation time. The default is 1.
+Please refer to the <cite>Notes</cite> section for performance warnings related to high depth values.</p>
+</dd>
+<dt><strong>heatmap</strong><span class="classifier">Optional[GradientHeatmap], optional</span></dt><dd><p>An existing <cite>GradientHeatmap</cite> instance to which the move intensities will be added.
+This parameter is primarily used internally during recursive calls and should
+be left as its default value (None) when initially calling the function.</p>
+</dd>
+<dt><strong>discount</strong><span class="classifier">int, optional</span></dt><dd><p>A multiplier used to discount the contribution of moves as the recursion deepens.
+This parameter is intended for internal use and should typically not be set by the user.
+The default is 1.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>GradientHeatmap</dt><dd><p>The computed <cite>GradientHeatmap</cite> containing accumulated move intensities for each square
+on the board, considering the specified recursion depth and discounting.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>The <cite>heatmap</cite> and <cite>discount</cite> parameters are reserved for internal recursive processing.</dt><dd><p>Users should not provide values for these parameters unless they need to override default behavior.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>The time complexity of this function is <strong>O(b^d)</strong>, where <strong>b ≈ 35</strong> is the branching factor of chess,</dt><dd><p>and <strong>d</strong> is the recursion depth. Please see performance warnings below regarding high depths.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Warning:</strong> This function does not implement safeguards to limit excessive recursion depth.</dt><dd><p>Very high <cite>depth</cite> values can lead to significant performance degradation and may hit Python’s
+recursion depth limitations. It is recommended to avoid setting depth too high, especially
+with complex board positions, as the time complexity grows exponentially.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>The <cite>depth</cite> parameter controls how many layers of future moves are explored:</dt><dd><ul>
+<li><p><strong>depth 0</strong> calculates results from the current player’s current moves only.</p></li>
+<li><dl class="simple">
+<dt><strong>depth 1</strong> calculates both the current player’s current moves</dt><dd><p>and the opponent’s possible future moves in their upcoming turn.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>depth 2</strong> continues this pattern into the current player’s future moves</dt><dd><p>but stops short of the opponent’s future moves in their turn thereafter.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>In theory, <strong>only odd depths</strong> will give an equalized representation of both players,</dt><dd><p>while <strong>even depths</strong> will be biased toward the current player.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">chess</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">heatmaps</span> <span class="kn">import</span> <span class="n">GradientHeatmap</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmutils</span> <span class="kn">import</span> <span class="n">calculate_heatmap</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">brd</span> <span class="o">=</span> <span class="n">chess</span><span class="o">.</span><span class="n">Board</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Calculate a heatmap with a recursion depth of 1.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">depth1_hmap</span> <span class="o">=</span> <span class="n">calculate_heatmap</span><span class="p">(</span><span class="n">brd</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">depth1_hmap</span><span class="o">.</span><span class="n">colors</span><span class="p">[</span><span class="mi">16</span><span class="p">])</span>
+<span class="go">#affefe</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Calculate a heatmap with a recursion depth of 2.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">depth2_hmap</span> <span class="o">=</span> <span class="n">calculate_heatmap</span><span class="p">(</span><span class="n">brd</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">depth2_hmap</span><span class="o">.</span><span class="n">colors</span><span class="p">[</span><span class="mi">16</span><span class="p">])</span>
+<span class="go">#afffff</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmutils.fill_depth_map_with_counts">
+<span class="sig-prename descclassname"><span class="pre">chmutils.</span></span><span class="sig-name descname"><span class="pre">fill_depth_map_with_counts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="heatmaps.html#heatmaps.ChessMoveHeatmap" title="heatmaps.ChessMoveHeatmap"><span class="pre">ChessMoveHeatmap</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="heatmaps.html#heatmaps.ChessMoveHeatmap" title="heatmaps.ChessMoveHeatmap"><span class="pre">ChessMoveHeatmap</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmutils.fill_depth_map_with_counts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively populates the depth_map accumulator with move counts and heatmap data for each depth level.</p>
+<p>This function explores all legal moves from the given board state and updates the accumulator at the
+specified depth. For each legal move, it performs the following:</p>
+<ul class="simple">
+<li><p>Increments the branch count at the current depth level by the number of legal moves.</p></li>
+<li><dl class="simple">
+<dt>Updates the current depth’s <code class="docutils literal notranslate"><span class="pre">ChessMoveHeatmap</span></code>:</dt><dd><ul>
+<li><p>Increases the count for the target square (indexed by the opponent’s color) by 1.0.</p></li>
+<li><p>Increments the piece count for the target square based on the piece moving from the source square.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>If the current depth is greater than zero, the function recursively processes the move by creating a copy
+of the board, applying the move, and invoking itself with a decremented depth. The accumulator (<code class="docutils literal notranslate"><span class="pre">depth_map</span></code>)
+is updated in place, ensuring that each depth level tracks the cumulative counts and heatmap data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">chess.Board</span></dt><dd><p>The current chess board state from which legal moves are generated.</p>
+</dd>
+<dt><strong>depth</strong><span class="classifier">int</span></dt><dd><p>The remaining depth (or ply) to which moves are recursively explored.</p>
+</dd>
+<dt><strong>depth_map</strong><span class="classifier">Tuple[List[Union[int, heatmaps.ChessMoveHeatmap]], …]</span></dt><dd><p>An accumulator that tracks, for each depth level, both the branch count and the aggregated move data.
+Each element is a list where the first item is an integer representing the number of legal move branches,
+and the second item is a <code class="docutils literal notranslate"><span class="pre">ChessMoveHeatmap</span></code> that aggregates move and piece count data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Tuple[List[Union[int, heatmaps.ChessMoveHeatmap]], …]</dt><dd><p>The updated depth_map accumulator, populated with move counts and heatmap data for all levels processed
+during recursion.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>This function is intended for internal use by <code class="docutils literal notranslate"><span class="pre">calculate_chess_move_heatmap_with_better_discount</span></code>.</p></li>
+<li><dl class="simple">
+<dt>The branch counts accumulated at each depth level are later used to compute discount factors during the</dt><dd><p>heatmap aggregation phase.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmutils.flatten_heatmap">
+<span class="sig-prename descclassname"><span class="pre">chmutils.</span></span><span class="sig-name descname"><span class="pre">flatten_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">heatmap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="heatmaps.html#heatmaps.ChessMoveHeatmap" title="heatmaps.ChessMoveHeatmap"><span class="pre">ChessMoveHeatmap</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmutils.flatten_heatmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flatten a ChessMoveHeatmap into a dictionary of primitive values.</p>
+<p>This function converts a ChessMoveHeatmap into a flat dictionary where each key
+represents a specific attribute for a given square. The keys are constructed in the
+following format:</p>
+<ul class="simple">
+<li><p>“sq{square}_white”: Move intensity for White on that square.</p></li>
+<li><p>“sq{square}_black”: Move intensity for Black on that square.</p></li>
+<li><dl class="simple">
+<dt>“sq{square}_piece_{symbol}”: The count (or intensity) for a specific piece (identified by its Unicode symbol)</dt><dd><p>on that square.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>heatmap</strong><span class="classifier">heatmaps.ChessMoveHeatmap</span></dt><dd><p>The ChessMoveHeatmap object to be flattened.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Dict[str, numpy.float64]</dt><dd><p>A dictionary with keys for each square’s move intensities and piece counts.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmutils.get_or_compute_heatmap">
+<span class="sig-prename descclassname"><span class="pre">chmutils.</span></span><span class="sig-name descname"><span class="pre">get_or_compute_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="heatmaps.html#heatmaps.ChessMoveHeatmap" title="heatmaps.ChessMoveHeatmap"><span class="pre">ChessMoveHeatmap</span></a></span></span><a class="headerlink" href="#chmutils.get_or_compute_heatmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a ChessMoveHeatmap from the cache, or compute and cache it if not available.</p>
+<p>This function first attempts to retrieve a cached heatmap based on the board’s FEN and the
+specified recursion depth. If the cached heatmap is not found, it computes the heatmap,
+stores it in the cache, and returns the newly computed object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">chess.Board</span></dt><dd><p>The chess board position for which the heatmap is computed.</p>
+</dd>
+<dt><strong>depth</strong><span class="classifier">int</span></dt><dd><p>The recursion depth used for calculating the heatmap.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>heatmaps.ChessMoveHeatmap</dt><dd><p>The ChessMoveHeatmap corresponding to the board and depth.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmutils.get_or_compute_heatmap_with_better_discounts">
+<span class="sig-prename descclassname"><span class="pre">chmutils.</span></span><span class="sig-name descname"><span class="pre">get_or_compute_heatmap_with_better_discounts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="heatmaps.html#heatmaps.ChessMoveHeatmap" title="heatmaps.ChessMoveHeatmap"><span class="pre">ChessMoveHeatmap</span></a></span></span><a class="headerlink" href="#chmutils.get_or_compute_heatmap_with_better_discounts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a ChessMoveHeatmap from the Better cache, or compute and cache Better if not available.</p>
+<p>This function first attempts to retrieve a cached heatmap based on the board’s FEN and the
+specified recursion depth. If the cached heatmap is not found, it computes the heatmap,
+stores it in the cache, and returns the newly computed object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">chess.Board</span></dt><dd><p>The chess board position for which the heatmap is computed.</p>
+</dd>
+<dt><strong>depth</strong><span class="classifier">int</span></dt><dd><p>The recursion depth used for calculating the heatmap.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>heatmaps.ChessMoveHeatmap</dt><dd><p>The ChessMoveHeatmap corresponding to the board and depth.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmutils.inflate_heatmap">
+<span class="sig-prename descclassname"><span class="pre">chmutils.</span></span><span class="sig-name descname"><span class="pre">inflate_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="heatmaps.html#heatmaps.ChessMoveHeatmap" title="heatmaps.ChessMoveHeatmap"><span class="pre">ChessMoveHeatmap</span></a></span></span><a class="headerlink" href="#chmutils.inflate_heatmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inflate a flat dictionary of primitive values back into a ChessMoveHeatmap.</p>
+<p>This function reconstructs a ChessMoveHeatmap from a dictionary that was
+produced by <cite>flatten_heatmap()</cite>. It assumes that the dictionary contains keys in
+the format “sq{square}_white”, “sq{square}_black”, and “sq{square}_piece_{symbol}” for
+each square (0-63).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">Dict[str, float]</span></dt><dd><p>A flat dictionary of primitive values representing a ChessMoveHeatmap.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>heatmaps.ChessMoveHeatmap</dt><dd><p>The reconstituted ChessMoveHeatmap object.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Modules</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="chmutils.system_info.html#module-chmutils.system_info" title="chmutils.system_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chmutils.system_info</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">ChessMoveHeatmap</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api_reference.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="setup.html">setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main</a></li>
+<li class="toctree-l2"><a class="reference internal" href="standalone_color_legend.html">standalone_color_legend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chmengine.html">chmengine</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">chmutils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heatmaps.html">heatmaps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tooltips.html">tooltips</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../api_reference.html">API Reference</a><ul>
+      <li>Previous: <a href="chmengine.utils.pick.html" title="previous chapter">chmengine.utils.pick</a></li>
+      <li>Next: <a href="chmutils.system_info.html" title="next chapter">chmutils.system_info</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2025, Phillyclause89.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/_autosummary/chmutils.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,357 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>heatmaps &#8212; ChessMoveHeatmap 000.069.420 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tooltips" href="tooltips.html" />
+    <link rel="prev" title="chmutils.system_info" href="chmutils.system_info.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-heatmaps">
+<span id="heatmaps"></span><h1>heatmaps<a class="headerlink" href="#module-heatmaps" title="Permalink to this heading">¶</a></h1>
+<p>Heatmaps</p>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#heatmaps.ChessMoveHeatmap" title="heatmaps.ChessMoveHeatmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ChessMoveHeatmap</span></code></a>([piece_counts])</p></td>
+<td><p>A concrete extension of <cite>ChessMoveHeatmapT</cite> for tracking move-related piece counts.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#heatmaps.ChessMoveHeatmapT" title="heatmaps.ChessMoveHeatmapT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ChessMoveHeatmapT</span></code></a>(**kwargs)</p></td>
+<td><p>A gradient heatmap that additionally tracks chess piece counts per square.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#heatmaps.GradientHeatmap" title="heatmaps.GradientHeatmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GradientHeatmap</span></code></a>([data])</p></td>
+<td><p>A subclass of <cite>GradientHeatmapT</cite> that supports additional operations like normalization and color conversion.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#heatmaps.GradientHeatmapT" title="heatmaps.GradientHeatmapT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GradientHeatmapT</span></code></a>()</p></td>
+<td><p>A base class representing a gradient heatmap for a chessboard position.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="heatmaps.ChessMoveHeatmap">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">heatmaps.</span></span><span class="sig-name descname"><span class="pre">ChessMoveHeatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">piece_counts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Piece</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#heatmaps.ChessMoveHeatmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#heatmaps.ChessMoveHeatmapT" title="heatmaps.ChessMoveHeatmapT"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChessMoveHeatmapT</span></code></a></p>
+<p>A concrete extension of <cite>ChessMoveHeatmapT</cite> for tracking move-related piece counts.</p>
+<p>This class refines <cite>ChessMoveHeatmapT</cite> by optionally initializing the piece counts from an external
+source. If neither <cite>piece_counts</cite> nor an existing heatmap data object is provided, the default
+initialization from <cite>ChessMoveHeatmapT</cite> is used.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="heatmaps.ChessMoveHeatmap.add_piece_counts">
+<span class="sig-name descname"><span class="pre">add_piece_counts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other_piece_counts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Piece</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Piece</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#heatmaps.ChessMoveHeatmap.add_piece_counts" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>other_piece_counts</strong><span class="classifier">NDArray[Dict[Piece, float64]]</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>NDArray[Dict[Piece, float64]]</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="heatmaps.ChessMoveHeatmap.colors">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">colors</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">str_</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#heatmaps.ChessMoveHeatmap.colors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate an array of color strings for each square.</p>
+<p>Each square’s color is determined by converting its normalized red and blue
+intensity values (extracted from the normalized data array) using the
+intensity_to_color function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>numpy.ndarray</dt><dd><p>NumPy array of hexadecimal color codes.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="heatmaps.ChessMoveHeatmap.data">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#heatmaps.ChessMoveHeatmap.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the heatmap data.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="heatmaps.ChessMoveHeatmap.piece_counts">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">piece_counts</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Piece</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#heatmaps.ChessMoveHeatmap.piece_counts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the piece count array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>NDArray[Dict[Piece, np.float64]]</dt><dd><p>A NumPy array of length 64 where each element is a dictionary mapping chess pieces
+to their associated count or intensity.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="heatmaps.ChessMoveHeatmap.shape">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shape</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#heatmaps.ChessMoveHeatmap.shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the shape of the heatmap.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="heatmaps.ChessMoveHeatmapT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">heatmaps.</span></span><span class="sig-name descname"><span class="pre">ChessMoveHeatmapT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#heatmaps.ChessMoveHeatmapT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#heatmaps.GradientHeatmap" title="heatmaps.GradientHeatmap"><code class="xref py py-class docutils literal notranslate"><span class="pre">GradientHeatmap</span></code></a></p>
+<p>A gradient heatmap that additionally tracks chess piece counts per square.</p>
+<p>This class extends <cite>GradientHeatmap</cite> by maintaining, for each square, a dictionary
+mapping each chess piece to a floating point value. This value can represent an intensity
+or count of moves involving that piece on the square.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference internal" href="#heatmaps.ChessMoveHeatmapT.piece_counts" title="heatmaps.ChessMoveHeatmapT.piece_counts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">piece_counts</span></code></a><span class="classifier">numpy.ndarray of dict</span></dt><dd><p>Get the piece count array.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="heatmaps.ChessMoveHeatmapT.add_piece_counts">
+<span class="sig-name descname"><span class="pre">add_piece_counts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other_piece_counts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Piece</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Piece</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#heatmaps.ChessMoveHeatmapT.add_piece_counts" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>other_piece_counts</strong><span class="classifier">NDArray[Dict[Piece, float64]]</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>NDArray[Dict[Piece, float64]]</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="heatmaps.ChessMoveHeatmapT.colors">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">colors</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">str_</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#heatmaps.ChessMoveHeatmapT.colors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate an array of color strings for each square.</p>
+<p>Each square’s color is determined by converting its normalized red and blue
+intensity values (extracted from the normalized data array) using the
+intensity_to_color function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>numpy.ndarray</dt><dd><p>NumPy array of hexadecimal color codes.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="heatmaps.ChessMoveHeatmapT.data">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#heatmaps.ChessMoveHeatmapT.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the heatmap data.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="heatmaps.ChessMoveHeatmapT.piece_counts">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">piece_counts</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Piece</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#heatmaps.ChessMoveHeatmapT.piece_counts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the piece count array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>NDArray[Dict[Piece, np.float64]]</dt><dd><p>A NumPy array of length 64 where each element is a dictionary mapping chess pieces
+to their associated count or intensity.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="heatmaps.ChessMoveHeatmapT.shape">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shape</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#heatmaps.ChessMoveHeatmapT.shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the shape of the heatmap.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="heatmaps.GradientHeatmap">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">heatmaps.</span></span><span class="sig-name descname"><span class="pre">GradientHeatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#heatmaps.GradientHeatmapT" title="heatmaps.GradientHeatmapT"><span class="pre">GradientHeatmapT</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ArrayLike</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#heatmaps.GradientHeatmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#heatmaps.GradientHeatmapT" title="heatmaps.GradientHeatmapT"><code class="xref py py-class docutils literal notranslate"><span class="pre">GradientHeatmapT</span></code></a></p>
+<p>A subclass of <cite>GradientHeatmapT</cite> that supports additional operations like normalization and color conversion.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="heatmaps.GradientHeatmap.colors">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">colors</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">str_</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#heatmaps.GradientHeatmap.colors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate an array of color strings for each square.</p>
+<p>Each square’s color is determined by converting its normalized red and blue
+intensity values (extracted from the normalized data array) using the
+intensity_to_color function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>numpy.ndarray</dt><dd><p>NumPy array of hexadecimal color codes.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="heatmaps.GradientHeatmap.data">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#heatmaps.GradientHeatmap.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the heatmap data.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="heatmaps.GradientHeatmap.shape">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shape</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#heatmaps.GradientHeatmap.shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the shape of the heatmap.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="heatmaps.GradientHeatmapT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">heatmaps.</span></span><span class="sig-name descname"><span class="pre">GradientHeatmapT</span></span><a class="headerlink" href="#heatmaps.GradientHeatmapT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A base class representing a gradient heatmap for a chessboard position.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference internal" href="#heatmaps.GradientHeatmapT.shape" title="heatmaps.GradientHeatmapT.shape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shape</span></code></a><span class="classifier">Tuple[int, int]</span></dt><dd><p>Return the shape of the heatmap.</p>
+</dd>
+<dt><a class="reference internal" href="#heatmaps.GradientHeatmapT.data" title="heatmaps.GradientHeatmapT.data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">data</span></code></a><span class="classifier">numpy.ndarray</span></dt><dd><p>Return the heatmap data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="heatmaps.GradientHeatmapT.data">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#heatmaps.GradientHeatmapT.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the heatmap data.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="heatmaps.GradientHeatmapT.shape">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shape</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#heatmaps.GradientHeatmapT.shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the shape of the heatmap.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">ChessMoveHeatmap</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api_reference.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="setup.html">setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main</a></li>
+<li class="toctree-l2"><a class="reference internal" href="standalone_color_legend.html">standalone_color_legend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chmengine.html">chmengine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chmutils.html">chmutils</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">heatmaps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tooltips.html">tooltips</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../api_reference.html">API Reference</a><ul>
+      <li>Previous: <a href="chmutils.system_info.html" title="previous chapter">chmutils.system_info</a></li>
+      <li>Next: <a href="tooltips.html" title="next chapter">tooltips</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2025, Phillyclause89.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/_autosummary/heatmaps.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
