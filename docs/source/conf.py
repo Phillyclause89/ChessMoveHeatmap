@@ -26,6 +26,9 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary'
 ]
+
+numpydoc_show_class_members = False
+
 autodoc_default_options = {
     'members': True,
     'undoc-members': True,

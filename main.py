@@ -1,4 +1,8 @@
-"""Chess Heat Map App"""
+"""Chess Heat Map App main module.
+
+Defines the ChessHeatMapApp GUI class and related helpers for rendering
+chess move heatmaps in a Tkinter application.
+"""
 from concurrent.futures import Future, ProcessPoolExecutor
 # noinspection PyProtectedMember
 from multiprocessing.context import Process
@@ -35,12 +39,12 @@ class PPExecutor(ProcessPoolExecutor):
 
     @property
     def processes(self) -> Tuple[Optional[Process], ...]:
-        """Exposes _processes from ProcessPoolExecutor
+        """Expose the private `_processes` from ProcessPoolExecutor.
 
         Returns
         -------
         Tuple[Optional[Process], ...]
-
+            A tuple of Process objects currently managed by the executor.
         """
         return tuple(self._processes.values())
 
@@ -49,54 +53,41 @@ class PPExecutor(ProcessPoolExecutor):
 class ChessHeatMapApp(Tk):
     """Main application window for the Chess Heat Map app.
 
-    This class is responsible for rendering the chessboard, handling user inputs,
-    and managing heatmap calculations for each move in the loaded PGN game.
-    It extends the `tk.Tk` class to create a GUI with various interactive features.
+    This class is responsible for rendering the chessboard, handling
+    user input, and managing heatmap calculations for each move in
+    the loaded PGN game. It extends `tk.Tk` to provide a GUI with
+    interactive features.
 
     Attributes
     ----------
     depth : int
-        The depth of recursion for calculating the heatmap.
+        Recursion depth for heatmap calculations.
     heatmap_futures : Dict[Optional[int], Optional[Future]]
-        A list of `Future` objects tracking the status of background heatmap calculations.
+        Mapping from move index to background heatmap‐calculation futures.
     heatmaps : Dict[Optional[int], Optional[NDArray[str]]]
-        A dictionary mapping move indices to corresponding heatmap color arrays.
-    executor : Optional[ProcessPoolExecutor]
-        A process pool executor used to run heatmap calculations in parallel.
+        Mapping from move index to completed heatmap color arrays.
+    executor : Optional[PPExecutor]
+        ProcessPoolExecutor used for parallel heatmap computations.
     highlight_squares : Set[Optional[int]]
-        A set of square indices to highlight (e.g., the squares involved in the current move).
+        Board squares to highlight for the current move.
     current_move_index : int
-        The index of the current move in the loaded PGN game.
+        Index of the current move in the PGN game.
     moves : Optional[List[Optional[Move]]]
-        A list of moves from the loaded game.
+        List of moves parsed from the PGN file.
     game : Optional[Game]
-        The current chess game being played, parsed from the PGN file.
+        The current PGN game object.
     canvas : Canvas
-        The tkinter canvas widget used to render the chessboard and heatmap.
+        Tkinter Canvas for drawing the board and heatmaps.
     font : str
-        The font used for displaying chess pieces on the board.
+        Font family used for piece symbols.
     colors : List[str]
-        A list of colors for the light and dark squares on the board.
+        Colors for the light and dark squares.
     square_size : int
-        The size of each square on the chessboard.
+        Size (in pixels) of each chessboard square.
     board : Board
-        The current state of the chessboard.
+        The current chessboard state.
     updating : bool
-        A flag indicating whether the board is being updated (e.g., during a move change).
-
-    Methods
-    -------
-    __init__ : Initializes the main application window and prompts the user to load a PGN file.
-    on_resize : Handles window resizing events and updates the board display accordingly.
-    create_menu : Constructs the application menu with options for loading a PGN, changing board colors, etc.
-    change_font : Changes the font used for displaying chess pieces.
-    change_board_colors : Prompts the user to change the light and dark square colors.
-    choose_square_color : Opens a color picker dialog to allow the user to select a square color.
-    open_pgn : Prompts the user to load and parse a PGN file and starts heatmap calculations for the game.
-    check_heatmap_futures : Periodically checks for completed heatmap calculations and updates the board.
-    next_move : Updates the board to show the next move in the loaded game.
-    prev_move : Updates the board to show the previous move in the loaded game.
-    update_board : Updates the chessboard display based on the current board state and heatmap.
+        Flag indicating whether the board is in an update/redraw cycle.
     """
     tooltips: List[Optional[CanvasTooltip]]
     pieces_maps: Dict[Optional[int], Optional[NDArray[Dict[Piece, float64]]]]
@@ -118,9 +109,9 @@ class ChessHeatMapApp(Tk):
     def __init__(self) -> None:
         """Initialize the ChessHeatMapApp application.
 
-        This method sets up the window size, board dimensions, and various attributes like colors,
-        font, and heatmap futures. It also prompts the user to load a PGN file and begins the process
-        of calculating heatmaps for the game.
+        Sets up window size, board dimensions, colors, fonts, and
+        heatmap futures. Prompts the user to load a PGN file and
+        begins background heatmap computation.
         """
         self.updating = True
         super().__init__()
