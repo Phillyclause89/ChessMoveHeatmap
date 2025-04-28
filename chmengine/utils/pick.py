@@ -11,11 +11,19 @@ __all__ = ['Pick']
 
 @dataclass(order=True)
 class PickT:
-    """
-    Base class for Pick containing a (move, score) pair.
+    # noinspection PyUnresolvedReferences
+    """Base class for Pick containing a (move, score) pair.
 
-    This class defines the storage and ordering behavior. Comparison is based solely on `score`,
-    while `move` is excluded from comparison.
+    Attributes
+    ----------
+    _score : float64
+        The numeric evaluation score associated with the move.
+    _move : chess.Move
+        The move object from python-chess.
+
+    Notes
+    -----
+    Comparison is based solely on `score`, while `move` is excluded from comparison.
     """
     _score: float64 = field()
     _move: Move = field(compare=False)
@@ -66,10 +74,18 @@ class PickT:
 
 
 class Pick(PickT):
-    """Fully featured container for a (move, score) pair where the move is immutable and
-    the score is mutable and used for comparisons.
+    # noinspection PyUnresolvedReferences
+    """Fully featured container for a (move, score) pair.
 
-    Supports tuple-like access, type casting, and formatting. This class is the public-facing API.
+    This class provides tuple-like access, type casting, and rich formatting.
+    It extends `PickT` and is the public-facing API for move-score pairs.
+
+    Attributes
+    ----------
+    move_getter_keys : Tuple[int, str, int]
+        Allowed keys to access the move.
+    score_getter_keys : Tuple[int, str, int]
+        Allowed keys to access the score.
     """
     move_getter_keys: Tuple[int, str, int] = (0, 'move', -2)
     score_getter_keys: Tuple[int, str, int] = (1, 'score', -1)

@@ -15,20 +15,23 @@ __all__ = ['CMHMEngine']
 
 
 class CMHMEngine:
-    """A silly chess engine that picks moves using heatmaps"""
+    """A silly chess engine that picks moves using heatmaps.
+
+    This class manages a chess board and evaluates moves by using recursion-based heatmaps.
+    """
+
     _board: Board
     _depth: int
 
     def __init__(self, board: Optional[Board] = None, depth: int = 1) -> None:
-        """Initialize the CMHMEngine (Cmhmey Sr.) instance.
+        """Initialize the CMHMEngine instance.
 
         Parameters
         ----------
-        board : Optional[chess.Board]
+        board : Optional[chess.Board], optional
             The initial chess board state. If None, a standard starting board is used.
-        depth : int, default: 1
-            The recursion depth used for heatmap calculations. This value controls how many layers
-            of future moves are considered when evaluating positions.
+        depth : int, optional
+            The recursion depth used for heatmap calculations. Defaults to 1.
 
         Examples
         --------
@@ -67,7 +70,7 @@ class CMHMEngine:
         return self._depth
 
     @depth.setter
-    def depth(self, new_depth: int):
+    def depth(self, new_depth: int) -> None:
         """Set the current recursion depth setting.
 
         Parameters
@@ -111,7 +114,7 @@ class CMHMEngine:
         return self._board
 
     @board.setter
-    def board(self, board: Board):
+    def board(self, board: Board) -> None:
         """Set the chess board state.
 
         Parameters
@@ -141,7 +144,7 @@ class CMHMEngine:
         ----------
         move : chess.Move
             The move to push onto the board.
-        board : Optional[chess.Board], default: None
+        board : Optional[chess.Board], optional
             The board to copy; if None, uses the engine's current board.
 
         Returns

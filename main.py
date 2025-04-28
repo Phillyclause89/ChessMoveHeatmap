@@ -27,10 +27,10 @@ DEFAULT_FONT: str = "Arial"
 
 
 class GBuilder(GameBuilder):
-    """Overrides GameBuilder.handle_error to raise exception."""
+    r"""Overrides `GameBuilder.handle_error` to raise exception."""
 
     def handle_error(self, error: Exception) -> None:
-        """Override of GameBuilder.handle_error method to raise errors."""
+        r"""Override of GameBuilder.handle_error method to raise errors."""
         raise error
 
 
@@ -39,7 +39,7 @@ class PPExecutor(ProcessPoolExecutor):
 
     @property
     def processes(self) -> Tuple[Optional[Process], ...]:
-        """Expose the private `_processes` from ProcessPoolExecutor.
+        r"""Expose the private `_processes` from ProcessPoolExecutor.
 
         Returns
         -------
@@ -57,37 +57,6 @@ class ChessHeatMapApp(Tk):
     user input, and managing heatmap calculations for each move in
     the loaded PGN game. It extends `tk.Tk` to provide a GUI with
     interactive features.
-
-    Attributes
-    ----------
-    depth : int
-        Recursion depth for heatmap calculations.
-    heatmap_futures : Dict[Optional[int], Optional[Future]]
-        Mapping from move index to background heatmap‐calculation futures.
-    heatmaps : Dict[Optional[int], Optional[NDArray[str]]]
-        Mapping from move index to completed heatmap color arrays.
-    executor : Optional[PPExecutor]
-        ProcessPoolExecutor used for parallel heatmap computations.
-    highlight_squares : Set[Optional[int]]
-        Board squares to highlight for the current move.
-    current_move_index : int
-        Index of the current move in the PGN game.
-    moves : Optional[List[Optional[Move]]]
-        List of moves parsed from the PGN file.
-    game : Optional[Game]
-        The current PGN game object.
-    canvas : Canvas
-        Tkinter Canvas for drawing the board and heatmaps.
-    font : str
-        Font family used for piece symbols.
-    colors : List[str]
-        Colors for the light and dark squares.
-    square_size : int
-        Size (in pixels) of each chessboard square.
-    board : Board
-        The current chessboard state.
-    updating : bool
-        Flag indicating whether the board is in an update/redraw cycle.
     """
     tooltips: List[Optional[CanvasTooltip]]
     pieces_maps: Dict[Optional[int], Optional[NDArray[Dict[Piece, float64]]]]
@@ -812,7 +781,7 @@ class ChessHeatMapApp(Tk):
 
     @staticmethod
     def get_xys(col: int, flipped_row: int, square_size: int) -> Tuple[int, int, int, int]:
-        """Get x_0, x_1, y_0, y_1 of a square.
+        r"""Get x_0, x_1, y_0, y_1 of a square.
 
         Parameters
         ----------
