@@ -261,15 +261,15 @@ def fill_depth_map_with_counts(
         depth: int,
         depth_map: Tuple[List[Union[int, ChessMoveHeatmap]], ...]
 ) -> Tuple[List[Union[int, ChessMoveHeatmap]], ...]:
-    """
-    Recursively populates the depth_map accumulator with move counts and heatmap data for each depth level.
+    """Recursively populates the depth_map accumulator with move counts and heatmap data for each depth level.
 
     This function explores all legal moves from the given board state and updates the accumulator at the
     specified depth. For each legal move, it performs the following:
-        - Increments the branch count at the current depth level by the number of legal moves.
-        - Updates the current depth’s ``ChessMoveHeatmap``:
-            - Increases the count for the target square (indexed by the opponent’s color) by 1.0.
-            - Increments the piece count for the target square based on the piece moving from the source square.
+
+    - Increments the branch count at the current depth level by the number of legal moves.
+    - Updates the current depth’s ``ChessMoveHeatmap``:
+        - Increases the count for the target square (indexed by the opponent’s color) by 1.0.
+        - Increments the piece count for the target square based on the piece moving from the source square.
 
     If the current depth is greater than zero, the function recursively processes the move by creating a copy
     of the board, applying the move, and invoking itself with a decremented depth. The accumulator (``depth_map``)

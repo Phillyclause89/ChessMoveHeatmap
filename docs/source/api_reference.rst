@@ -5,7 +5,6 @@ This section contains the API documentation for the ChessMoveHeatmap project, au
 
 .. autosummary::
     :toctree: _autosummary
-    :recursive:
 
     setup
     main

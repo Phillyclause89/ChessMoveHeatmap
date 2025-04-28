@@ -316,8 +316,8 @@ def pieces_count_from_fen(fen: str) -> int:
     bitboard to count occupied squares in O(1) time. On Python ≥ 3.8, it calls `int.bit_count()`;
     on Python 3.7, it falls back to `bin(...).count('1')` for compatibility.
 
-    Note
-    ----
+    Notes
+    -----
     For most use cases, especially when you already have a `Board` object,
     prefer using `pieces_count_from_board(board)` instead. This avoids the overhead
     of FEN parsing and achieves the same result more efficiently.

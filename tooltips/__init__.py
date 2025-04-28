@@ -12,7 +12,7 @@ class ChessHeatMapApp(Tk):
 # pylint: disable=too-many-instance-attributes
 class CanvasTooltip:
     """
-    It creates a tooltip for a given canvas tag or id_ as the mouse is
+    It creates a tooltip for a given canvas tag or id as the mouse is
     above it.
 
     This class has been derived from the original Tooltip class I updated
@@ -22,6 +22,10 @@ class CanvasTooltip:
 
     Alberto Vassena on 2016.12.10.
     """
+    bg_color: str
+    pad: Tuple[int, int, int, int]
+    tw_: Optional[Toplevel]
+    id_: Optional[str]
     text: str
     canvas: Canvas
     root: ChessHeatMapApp

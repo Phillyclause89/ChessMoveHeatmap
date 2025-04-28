@@ -20,12 +20,21 @@ release = '000.069.420'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
-
+autodoc_mock_imports = ['chmengine.stream']
 extensions = [
     'numpydoc',
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary'
 ]
+autodoc_default_options = {
+    'members': True,
+    'undoc-members': True,
+    'private-members': True,
+    'special-members': '*',
+    'inherited-members': True,
+    'show-inheritance': True,
+}
+
 autosummary_generate = True
 templates_path = ['_templates']
 exclude_patterns = []
