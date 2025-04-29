@@ -4,7 +4,7 @@ from typing import Dict, List, Optional
 from unittest import TestCase, main
 
 from chess import Piece
-from numpy import array, float64, ndarray, random as np_random, testing as np_testing, zeros
+from numpy import array, float64, isnan, ndarray, random as np_random, testing as np_testing, zeros
 from numpy.typing import NDArray
 
 from heatmaps import ChessMoveHeatmap, ChessMoveHeatmapT, GradientHeatmap, GradientHeatmapT
@@ -257,6 +257,55 @@ class TestChessMoveHeatmapT(TestCase):
         with self.assertRaises(ValueError):
             _ = self.heatmap + (self.heatmap.data, array([{0: 0}], dtype=dict))
         validate_data_types((self.heatmap,), self, True)
+
+    def test_division(self) -> None:
+        """Test division of ChessMoveHeatmapT"""
+        """Test division of ChessMoveHeatmapT."""
+        # Golden path: valid divisor
+        divisor = 2
+        result = self.heatmap / divisor
+        validate_data_types((self.heatmap, result,), self, True)
+        np_testing.assert_array_equal(result.data, self.heatmap.data / divisor)
+        for square in range(64):
+            for piece, count in self.heatmap.piece_counts[square].items():
+                self.assertAlmostEqual(
+                    result.piece_counts[square][piece],
+                    count / divisor,
+                    msg=f"Failed for square {square}, piece {piece}"
+                )
+
+        # Edge case: floating-point divisor
+        divisor = 2.5
+        result = self.heatmap / divisor
+        validate_data_types((self.heatmap, result,), self, True)
+        np_testing.assert_array_equal(result.data, self.heatmap.data / divisor)
+        for square in range(64):
+            for piece, count in self.heatmap.piece_counts[square].items():
+                self.assertAlmostEqual(
+                    result.piece_counts[square][piece],
+                    count / divisor,
+                    msg=f"Failed for square {square}, piece {piece}"
+                )
+
+        # Non-golden path: ZeroDivisionError
+        with self.assertRaises(ZeroDivisionError):
+            _ = self.heatmap / 0
+
+        # Allow NaN to propagate without raising an error
+        divisor = float('nan')
+        result = self.heatmap / divisor
+        validate_data_types((self.heatmap, result,), self, True)
+        # Check that all resulting data values are NaN
+        self.assertTrue(isnan(result.data).all(), "Data values should be NaN when dividing by NaN.")
+        for square in range(64):
+            for piece, count in self.heatmap.piece_counts[square].items():
+                self.assertTrue(
+                    isnan(result.piece_counts[square][piece]),
+                    f"Piece counts should be NaN for square {square}, piece {piece}."
+                )
+
+        # Validate data integrity post-failure
+        validate_data_types((self.heatmap, result,), self, True)
 
 
 class TestChessMoveHeatmap(TestCase):

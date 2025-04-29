@@ -4,7 +4,7 @@ from numbers import Real
 from typing import Dict, Iterable, Optional, Tuple, Union
 
 from chess import COLORS, PIECE_TYPES, Piece
-from numpy import abs as np_abs, array, asarray, float64, ndarray, seterr, str_, zeros
+from numpy import abs as np_abs, array, asarray, float64, isnan, ndarray, seterr, str_, zeros
 from numpy.typing import ArrayLike, NDArray
 
 PIECES: Tuple[Piece, ...] = tuple(Piece(p, c) for c in COLORS for p in PIECE_TYPES)
@@ -327,8 +327,7 @@ class ChessMoveHeatmapT(GradientHeatmap):
         )
 
     def __truediv__(self, divisor: Real) -> "ChessMoveHeatmap":
-        """
-        Returns a new ChessMoveHeatmap where each value is divided by the given divisor.
+        """Returns a new ChessMoveHeatmap where each value is divided by the given divisor.
 
         Parameters
         ----------
@@ -356,9 +355,21 @@ class ChessMoveHeatmapT(GradientHeatmap):
                     dtype=dict
                 )
             )
-        # TODO: Make error handling more inline with rest of class.
+        except ZeroDivisionError as error:
+            # Handle division by zero
+            raise ZeroDivisionError("Division by zero is not allowed.") from error
+        except FloatingPointError as error:
+            # Check for division by zero
+            if divisor == 0:
+                raise ZeroDivisionError("Division by zero is not allowed.") from error
+            # Fallback for other floating-point errors
+            raise ArithmeticError("A floating-point error occurred during division.") from error
+        except TypeError as error:
+            # Handle non-numeric or unsupported divisor types
+            raise TypeError(f"Unsupported type for divisor: {type(divisor)}. Expected a real number.") from error
         except Exception as error:
-            raise ArithmeticError(f"{type(divisor)}{divisor}") from error
+            # Catch any other unexpected errors
+            raise ArithmeticError(f"An unexpected error occurred during division: {type(error).__name__}") from error
 
     def __add__(
             self,
