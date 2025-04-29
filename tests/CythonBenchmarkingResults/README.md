@@ -37,6 +37,17 @@ The benchmarking was conducted under the following four scenarios, each involvin
 
 ## Benchmarking Results
 
+### Runs
+- [TestResults: Cython Both Fresh Setup Final](https://phillyclause89.github.io/ChessMoveHeatmap/tests/CythonBenchmarking/TestResultsCythonBothFreshFinal.html)
+- [TestResults: Cython Both Fresh Setup](https://phillyclause89.github.io/ChessMoveHeatmap/tests/CythonBenchmarking/TestResultsCythonBothFreshSetup.html)
+- [TestResults: Cython Both](https://phillyclause89.github.io/ChessMoveHeatmap/tests/CythonBenchmarking/TestResultsCythonBoth.html)
+- [TestResults: Cython Main Only Fresh Setup](https://phillyclause89.github.io/ChessMoveHeatmap/tests/CythonBenchmarking/TestResultsCythonMainOnlyFreshSetup.html)
+- [TestResults: Cython Main Only](https://phillyclause89.github.io/ChessMoveHeatmap/tests/CythonBenchmarking/TestResultsCythonMainOnly.html)
+- [TestResults: Cython PyChess Only Fresh Setup](https://phillyclause89.github.io/ChessMoveHeatmap/tests/CythonBenchmarking/TestResultsCythonPyChessOnlyFreshSetup.html)
+- [TestResults: Cython PyChess Only](https://phillyclause89.github.io/ChessMoveHeatmap/tests/CythonBenchmarking/TestResultsCythonPyChessOnly.html)
+- [TestResults: No Cython Fresh No Setup](https://phillyclause89.github.io/ChessMoveHeatmap/tests/CythonBenchmarking/TestResultsNoCythonFreshNoSetup.html)
+- [TestResults: No Cython](https://phillyclause89.github.io/ChessMoveHeatmap/tests/CythonBenchmarking/TestResultsNoCython.html)
+
 ### Key Metrics
 - **Setup Time**: Total time taken to compile the specified `.py` files in the given scenario.
 - **Full Test Suite Runtime**: Total execution time for all 91 unit tests in the `tests` directory.
