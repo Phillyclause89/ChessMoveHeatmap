@@ -1,7 +1,7 @@
 """setup"""
 from argparse import ArgumentParser, Namespace
 from os import path
-from typing import Any, Dict, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import chess
 from Cython.Build import cythonize
@@ -38,18 +38,20 @@ def main(compiler_directives: Dict[str, str]) -> None:
     """
     args: Namespace = get_script_args()
     both: bool = args.all or (args.chess and args.main)
+    force_flag: List[Optional[str]] = ['--force'] if args.force else []
     if not args.chess or both:
-        setup_main(compiler_directives)
+        setup_main(compiler_directives, force_flag)
     if not args.main or both:
-        setup_chess(compiler_directives)
+        setup_chess(compiler_directives, force_flag)
 
 
-def setup_chess(compiler_directives: Dict[str, str]) -> None:
+def setup_chess(compiler_directives: Dict[str, str], force_flag: List[Optional[str]]) -> None:
     """Compiles the chess lib (excluding _interactive.py)
 
     Parameters
     ----------
     compiler_directives : Dict[str,str]
+    force_flag : List[Optional[str]]
     """
     ext_modules_chess: Any = cythonize(
         module_list=CHESS_SCRIPTS,
@@ -58,16 +60,17 @@ def setup_chess(compiler_directives: Dict[str, str]) -> None:
     )
     setup(
         ext_modules=ext_modules_chess,
-        script_args=[BUILD_EXT, '--build-lib', path.join(CHESS_PACKAGE, '..')]
+        script_args=[BUILD_EXT, '--build-lib', path.join(CHESS_PACKAGE, '..')] + force_flag
     )
 
 
-def setup_main(compiler_directives: Dict[str, str]) -> None:
+def setup_main(compiler_directives: Dict[str, str], force_flag: List[Optional[str]]) -> None:
     """Compiles the ChessMoveHeatmap lib
 
     Parameters
     ----------
     compiler_directives : Dict[str,str]
+    force_flag : List[Optional[str]]
     """
     ext_modules_main: Any = cythonize(
         module_list=MAIN_MODULES,
@@ -75,7 +78,7 @@ def setup_main(compiler_directives: Dict[str, str]) -> None:
     )
     setup(
         ext_modules=ext_modules_main,
-        script_args=[BUILD_EXT, '--inplace']
+        script_args=[BUILD_EXT, '--inplace'] + force_flag
     )
 
 
@@ -101,6 +104,11 @@ def get_script_args() -> Namespace:
         '--all',
         action='store_true',
         help="Run the setup for both main and chess modules."
+    )
+    parser.add_argument(
+        '--force',
+        action='store_true',
+        help="Force a rebuild of all modules, even if no changes are detected."
     )
     return parser.parse_args()
 
