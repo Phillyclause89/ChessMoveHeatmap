@@ -127,6 +127,14 @@ ChessMoveHeatmap/
 │   └── Faster/                    # Cached Heatmaps with the deprecated, faster discounting algorithm (rarely used)
 ```
 
+## **Documentation**
+
+Explore the full API documentation for **ChessMoveHeatmap**, including usage guides, advanced topics, and troubleshooting tips, on the GitHub Pages site:
+
+👉 [ChessMoveHeatmap API Documentation](https://phillyclause89.github.io/ChessMoveHeatmap/)
+
+This site includes links to additional resources, such as benchmarking results and tutorials, to help you make the most of the project.
+
 ## **Performance Considerations**
 
 - **Recursive Depth & Complexity:** Heatmap calculations have an estimated **O(35^d)** complexity (where `d` is the recursion depth). Higher `depth` values may lead to performance degradation.
