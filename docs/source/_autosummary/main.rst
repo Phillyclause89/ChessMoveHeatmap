@@ -18,8 +18,6 @@
    .. autosummary::
    
       ChessHeatMapApp
-      GBuilder
-      PPExecutor
    
    
 

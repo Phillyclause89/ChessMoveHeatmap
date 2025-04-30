@@ -47,5 +47,7 @@
    :toctree:
    :recursive:
 
+   chmutils.concurrent
+   chmutils.game_builder
    chmutils.system_info
 

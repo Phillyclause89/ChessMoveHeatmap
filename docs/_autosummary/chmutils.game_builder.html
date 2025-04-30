@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>chmutils.game_builder &#8212; ChessMoveHeatmap 000.069.420 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="chmutils.system_info" href="chmutils.system_info.html" />
+    <link rel="prev" title="chmutils.concurrent" href="chmutils.concurrent.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-chmutils.game_builder">
+<span id="chmutils-game-builder"></span><h1>chmutils.game_builder<a class="headerlink" href="#module-chmutils.game_builder" title="Permalink to this heading">¶</a></h1>
+<p>GBuilder class that overrides <cite>GameBuilder.handle_error</cite> to raise exception.</p>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chmutils.game_builder.GBuilder" title="chmutils.game_builder.GBuilder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GBuilder</span></code></a>(*args, **kwds)</p></td>
+<td><p>Overrides <cite>GameBuilder.handle_error</cite> to raise exception.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="chmutils.game_builder.GBuilder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chmutils.game_builder.</span></span><span class="sig-name descname"><span class="pre">GBuilder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chmutils.game_builder.GBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">GameBuilder</span></code></p>
+<p>Overrides <cite>GameBuilder.handle_error</cite> to raise exception.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.game_builder.GBuilder.begin_game">
+<span class="sig-name descname"><span class="pre">begin_game</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.game_builder.GBuilder.begin_game" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called at the start of a game.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.game_builder.GBuilder.begin_headers">
+<span class="sig-name descname"><span class="pre">begin_headers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Headers</span></span></span><a class="headerlink" href="#chmutils.game_builder.GBuilder.begin_headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called before visiting game headers.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.game_builder.GBuilder.begin_parse_san">
+<span class="sig-name descname"><span class="pre">begin_parse_san</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">san</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">SkipType</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmutils.game_builder.GBuilder.begin_parse_san" title="Permalink to this definition">¶</a></dt>
+<dd><p>When the visitor is used by a parser, this is called at the start of
+each standard algebraic notation detailing a move.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.game_builder.GBuilder.begin_variation">
+<span class="sig-name descname"><span class="pre">begin_variation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.game_builder.GBuilder.begin_variation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called at the start of a new variation. It is not called for the
+mainline of the game.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.game_builder.GBuilder.end_game">
+<span class="sig-name descname"><span class="pre">end_game</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.game_builder.GBuilder.end_game" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called at the end of a game.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.game_builder.GBuilder.end_headers">
+<span class="sig-name descname"><span class="pre">end_headers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">SkipType</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmutils.game_builder.GBuilder.end_headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called after visiting game headers.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.game_builder.GBuilder.end_variation">
+<span class="sig-name descname"><span class="pre">end_variation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.game_builder.GBuilder.end_variation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Concludes a variation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.game_builder.GBuilder.handle_error">
+<span class="sig-name descname"><span class="pre">handle_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Exception</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.game_builder.GBuilder.handle_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override of GameBuilder.handle_error method to raise errors.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.game_builder.GBuilder.parse_san">
+<span class="sig-name descname"><span class="pre">parse_san</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">san</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Move</span></span></span><a class="headerlink" href="#chmutils.game_builder.GBuilder.parse_san" title="Permalink to this definition">¶</a></dt>
+<dd><p>When the visitor is used by a parser, this is called to parse a move
+in standard algebraic notation.</p>
+<p>You can override the default implementation to work around specific
+quirks of your input format.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 1.1: </span>This method is very limited, because it is only called on moves
+that the parser recognizes in the first place. Instead of adding
+workarounds here, please report common quirks so that
+they can be handled for everyone.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.game_builder.GBuilder.result">
+<span class="sig-name descname"><span class="pre">result</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">GameT</span></span></span><a class="headerlink" href="#chmutils.game_builder.GBuilder.result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the visited <code class="xref py py-class docutils literal notranslate"><span class="pre">Game()</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.game_builder.GBuilder.visit_board">
+<span class="sig-name descname"><span class="pre">visit_board</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.game_builder.GBuilder.visit_board" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called for the starting position of the game and after each move.</p>
+<p>The board state must be restored before the traversal continues.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.game_builder.GBuilder.visit_comment">
+<span class="sig-name descname"><span class="pre">visit_comment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.game_builder.GBuilder.visit_comment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called for each comment.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.game_builder.GBuilder.visit_header">
+<span class="sig-name descname"><span class="pre">visit_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tagname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tagvalue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.game_builder.GBuilder.visit_header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called for each game header.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.game_builder.GBuilder.visit_move">
+<span class="sig-name descname"><span class="pre">visit_move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">move</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Move</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.game_builder.GBuilder.visit_move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called for each move.</p>
+<p><em>board</em> is the board state before the move. The board state must be
+restored before the traversal continues.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.game_builder.GBuilder.visit_nag">
+<span class="sig-name descname"><span class="pre">visit_nag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.game_builder.GBuilder.visit_nag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called for each NAG.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.game_builder.GBuilder.visit_result">
+<span class="sig-name descname"><span class="pre">visit_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.game_builder.GBuilder.visit_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called at the end of a game with the value from the <code class="docutils literal notranslate"><span class="pre">Result</span></code> header.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">ChessMoveHeatmap</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api_reference.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="setup.html">setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main</a></li>
+<li class="toctree-l2"><a class="reference internal" href="standalone_color_legend.html">standalone_color_legend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chmengine.html">chmengine</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="chmutils.html">chmutils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heatmaps.html">heatmaps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tooltips.html">tooltips</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../api_reference.html">API Reference</a><ul>
+  <li><a href="chmutils.html">chmutils</a><ul>
+      <li>Previous: <a href="chmutils.concurrent.html" title="previous chapter">chmutils.concurrent</a></li>
+      <li>Next: <a href="chmutils.system_info.html" title="next chapter">chmutils.system_info</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2025, Phillyclause89.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/_autosummary/chmutils.game_builder.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

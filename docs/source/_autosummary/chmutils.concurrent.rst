@@ -1,7 +1,7 @@
-﻿main
-====
+chmutils.concurrent
+===================
 
-.. automodule:: main
+.. automodule:: chmutils.concurrent
 
    
    
@@ -17,7 +17,7 @@
 
    .. autosummary::
    
-      ChessHeatMapApp
+      PPExecutor
    
    
 

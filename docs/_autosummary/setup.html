@@ -47,10 +47,10 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#setup.main" title="setup.main"><code class="xref py py-obj docutils literal notranslate"><span class="pre">main</span></code></a>(compiler_directives)</p></td>
 <td><p>Setup function for ChessMoveHeatmap Cython support.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#setup.setup_chess" title="setup.setup_chess"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setup_chess</span></code></a>(compiler_directives)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#setup.setup_chess" title="setup.setup_chess"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setup_chess</span></code></a>(compiler_directives, force_flag)</p></td>
 <td><p>Compiles the chess lib (excluding _interactive.py)</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#setup.setup_main" title="setup.setup_main"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setup_main</span></code></a>(compiler_directives)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#setup.setup_main" title="setup.setup_main"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setup_main</span></code></a>(compiler_directives, force_flag)</p></td>
 <td><p>Compiles the ChessMoveHeatmap lib</p></td>
 </tr>
 </tbody>
@@ -83,12 +83,13 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="setup.setup_chess">
-<span class="sig-prename descclassname"><span class="pre">setup.</span></span><span class="sig-name descname"><span class="pre">setup_chess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compiler_directives</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#setup.setup_chess" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">setup.</span></span><span class="sig-name descname"><span class="pre">setup_chess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compiler_directives</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_flag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#setup.setup_chess" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compiles the chess lib (excluding _interactive.py)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>compiler_directives</strong><span class="classifier">Dict[str,str]</span></dt><dd></dd>
+<dt><strong>force_flag</strong><span class="classifier">List[Optional[str]]</span></dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -96,12 +97,13 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="setup.setup_main">
-<span class="sig-prename descclassname"><span class="pre">setup.</span></span><span class="sig-name descname"><span class="pre">setup_main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compiler_directives</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#setup.setup_main" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">setup.</span></span><span class="sig-name descname"><span class="pre">setup_main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compiler_directives</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_flag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#setup.setup_main" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compiles the ChessMoveHeatmap lib</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>compiler_directives</strong><span class="classifier">Dict[str,str]</span></dt><dd></dd>
+<dt><strong>force_flag</strong><span class="classifier">List[Optional[str]]</span></dt><dd></dd>
 </dl>
 </dd>
 </dl>

@@ -1,7 +1,7 @@
-﻿main
-====
+chmutils.game\_builder
+======================
 
-.. automodule:: main
+.. automodule:: chmutils.game_builder
 
    
    
@@ -17,7 +17,7 @@
 
    .. autosummary::
    
-      ChessHeatMapApp
+      GBuilder
    
    
 

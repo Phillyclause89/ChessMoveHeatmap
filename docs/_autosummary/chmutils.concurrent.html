@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>chmutils.concurrent &#8212; ChessMoveHeatmap 000.069.420 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="chmutils.game_builder" href="chmutils.game_builder.html" />
+    <link rel="prev" title="chmutils" href="chmutils.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-chmutils.concurrent">
+<span id="chmutils-concurrent"></span><h1>chmutils.concurrent<a class="headerlink" href="#module-chmutils.concurrent" title="Permalink to this heading">¶</a></h1>
+<p>PPExecutor class that implements processes property for ProcessPoolExecutor</p>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chmutils.concurrent.PPExecutor" title="chmutils.concurrent.PPExecutor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PPExecutor</span></code></a>([max_workers, mp_context, ...])</p></td>
+<td><p>Implements processes property for ProcessPoolExecutor</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="chmutils.concurrent.PPExecutor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chmutils.concurrent.</span></span><span class="sig-name descname"><span class="pre">PPExecutor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mp_context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initializer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chmutils.concurrent.PPExecutor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ProcessPoolExecutor</span></code></p>
+<p>Implements processes property for ProcessPoolExecutor</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.concurrent.PPExecutor.map">
+<span class="sig-name descname"><span class="pre">map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">iterables</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunksize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chmutils.concurrent.PPExecutor.map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an iterator equivalent to map(fn, iter).</p>
+<dl>
+<dt>Args:</dt><dd><dl class="simple">
+<dt>fn: A callable that will take as many arguments as there are</dt><dd><p>passed iterables.</p>
+</dd>
+<dt>timeout: The maximum number of seconds to wait. If None, then there</dt><dd><p>is no limit on the wait time.</p>
+</dd>
+<dt>chunksize: If greater than one, the iterables will be chopped into</dt><dd><p>chunks of size chunksize and submitted to the process pool.
+If set to one, the items in the list will be sent one at a time.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>An iterator equivalent to: map(func, <a href="#id1"><span class="problematic" id="id2">*</span></a>iterables) but the calls may
+be evaluated out-of-order.</p>
+</dd>
+<dt>Raises:</dt><dd><dl class="simple">
+<dt>TimeoutError: If the entire result iterator could not be generated</dt><dd><p>before the given timeout.</p>
+</dd>
+</dl>
+<p>Exception: If fn(<a href="#id3"><span class="problematic" id="id4">*</span></a>args) raises for any values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="chmutils.concurrent.PPExecutor.processes">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">processes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Process</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#chmutils.concurrent.PPExecutor.processes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Expose the private <cite>_processes</cite> from ProcessPoolExecutor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>Tuple[Optional[Process], …]</dt><dd><p>A tuple of Process objects currently managed by the executor.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.concurrent.PPExecutor.shutdown">
+<span class="sig-name descname"><span class="pre">shutdown</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chmutils.concurrent.PPExecutor.shutdown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clean-up the resources associated with the Executor.</p>
+<p>It is safe to call this method several times. Otherwise, no other
+methods can be called after this one.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>wait: If True then shutdown will not return until all running</dt><dd><p>futures have finished executing and the resources used by the
+executor have been reclaimed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmutils.concurrent.PPExecutor.submit">
+<span class="sig-name descname"><span class="pre">submit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chmutils.concurrent.PPExecutor.submit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submits a callable to be executed with the given arguments.</p>
+<p>Schedules the callable to be executed as fn(<a href="#id5"><span class="problematic" id="id6">*</span></a>args, <a href="#id7"><span class="problematic" id="id8">**</span></a>kwargs) and returns
+a Future instance representing the execution of the callable.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>A Future representing the given call.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">ChessMoveHeatmap</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api_reference.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="setup.html">setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main</a></li>
+<li class="toctree-l2"><a class="reference internal" href="standalone_color_legend.html">standalone_color_legend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chmengine.html">chmengine</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="chmutils.html">chmutils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heatmaps.html">heatmaps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tooltips.html">tooltips</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../api_reference.html">API Reference</a><ul>
+  <li><a href="chmutils.html">chmutils</a><ul>
+      <li>Previous: <a href="chmutils.html" title="previous chapter">chmutils</a></li>
+      <li>Next: <a href="chmutils.game_builder.html" title="next chapter">chmutils.game_builder</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2025, Phillyclause89.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/_autosummary/chmutils.concurrent.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
