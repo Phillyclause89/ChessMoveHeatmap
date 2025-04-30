@@ -26,7 +26,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         super().__init__()
         self.engine = engine_type(depth=depth)
         self.depth = self.engine.depth
-        self.title(f"Play Against {self.engine.__class__.__name__} | Depth = {depth}")
+        self.set_title()
         screen_height: int = self.winfo_screenheight()
         screen_width: int = int(screen_height * 0.75)
         self.geometry(f"{screen_width}x{screen_height}")
@@ -83,16 +83,19 @@ class PlayChessApp(Tk, BaseChessTkApp):
 
     def set_title(self) -> None:
         """Set the app window title."""
-        self.title(f"Play Against {self.engine.__class__.__name__} | Depth = {self.engine.depth}")
+        mode: str = 'Playing Against' if not self.training else 'Training'
+        self.title(f"{mode} {self.engine.__class__.__name__} | Depth = {self.engine.depth}")
 
     def new_game(self) -> None:
         """Start a new game."""
-        if not self.updating:
+        if not self.updating and not self.training:
             self.updating = True
             if messagebox.askyesno("New Game", "Are you sure you want to start a new game?"):
                 self.engine.board = Board()
                 self.update_board()
             self.updating = False
+        elif self.training:
+            messagebox.showerror("Error", "Starting a new game is not permitted while the engine is training.")
         else:
             self.after(100, self.new_game)
 
@@ -103,12 +106,14 @@ class PlayChessApp(Tk, BaseChessTkApp):
         ----------
         move : chess.Move
         """
+        # TODO: fix (or remove) this garbage play_move method.
         if move in self.engine.board.legal_moves:
             self.engine.board.push(move)
             self.update_board()
             outcome: Optional[Outcome] = self.engine.board.outcome(claim_draw=True)
             if outcome is None:
                 engine_move: Move
+                # engine.play_move calls should be disassociated from a pick_move method.
                 engine_move, _ = self.engine.pick_move()
                 self.engine.board.push(engine_move)
                 self.update_board()
