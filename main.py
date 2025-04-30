@@ -115,6 +115,18 @@ class ChessHeatMapApp(Tk, BaseChessApp):
         file_menu: Menu = Menu(menu_bar, tearoff=0)
         file_menu.add_command(label="Open PGN", command=self.open_pgn)
         menu_bar.add_cascade(label="File", menu=file_menu)
+        self.add_options(menu_bar)
+        menu_bar.add_command(label="Prev Move", command=self.prev_move)
+        menu_bar.add_command(label="Next Move", command=self.next_move)
+        self.config(menu=menu_bar)
+
+    def add_options(self, menu_bar: Menu):
+        """Adds options menu to menu bar.
+
+        Parameters
+        ----------
+        menu_bar : tkinter.Menu
+        """
         fonts_menu: Menu = Menu(menu_bar, tearoff=0)
         font: str
         for font in tk_font.families():
@@ -130,9 +142,6 @@ class ChessHeatMapApp(Tk, BaseChessApp):
             command=lambda: self.choose_square_color(title=DARK_SQUARE_COLOR_PROMPT, index=1))
         options_menu.add_command(label="Set Depth", command=self.set_depth)
         menu_bar.add_cascade(label="Options", menu=options_menu)
-        menu_bar.add_command(label="Prev Move", command=self.prev_move)
-        menu_bar.add_command(label="Next Move", command=self.next_move)
-        self.config(menu=menu_bar)
 
     def set_depth(self) -> None:
         """Prompt the user to set a new recursion depth for heatmap calculations.
