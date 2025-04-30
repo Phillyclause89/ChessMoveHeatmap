@@ -11,6 +11,7 @@ from chmutils import BaseChessTkApp, DEFAULT_COLORS, DEFAULT_FONT
 class PlayChessApp(Tk, BaseChessTkApp):
     """Play against the CMHMEngine in a GUI."""
     engine: CMHMEngine
+    training: bool
 
     def __init__(self, engine_type: Callable = CMHMEngine, depth: int = 1) -> None:
         """Initialize the PlayChessApp.
@@ -21,6 +22,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         depth : int
         """
         self.updating = True
+        self.training = False
         super().__init__()
         self.engine = engine_type(depth=depth)
         self.depth = self.engine.depth
@@ -47,6 +49,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         if not self.updating:
             self.updating = True
             if messagebox.askyesno("Quit", "Are you sure you want to quit?"):
+                # TODO Add save game method call here.
                 self.destroy()
             self.updating = False
         else:
@@ -54,7 +57,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
 
     def set_depth(self) -> None:
         """Prompt the user to set a new recursion depth for the engine."""
-        if not self.updating:
+        if not self.updating and not self.training:
             self.updating = True
             new_depth: Optional[int] = self.ask_depth()
             if new_depth is not None and new_depth != self.depth:
@@ -62,6 +65,8 @@ class PlayChessApp(Tk, BaseChessTkApp):
                 self.depth = self.engine.depth
                 self.set_title()
             self.updating = False
+        elif self.training:
+            messagebox.showerror("Error", "Changing depth is not permitted while the engine is training.")
         else:
             self.after(100, self.set_depth)
 
@@ -70,6 +75,8 @@ class PlayChessApp(Tk, BaseChessTkApp):
         menu_bar: Menu = Menu(self)
         file_menu: Menu = Menu(menu_bar, tearoff=0)
         file_menu.add_command(label="New Game", command=self.new_game)
+        # TODO: Replace `command=labmda:...` w/ hook to training function.
+        file_menu.add_command(label="New Training Session", command=lambda: print('training!'))
         menu_bar.add_cascade(label="File", menu=file_menu)
         self.add_options(menu_bar)
         self.config(menu=menu_bar)
@@ -147,9 +154,9 @@ class PlayChessApp(Tk, BaseChessTkApp):
             self.canvas.create_rectangle(x0, y0, x1, y1, fill=color, outline="black")
             piece: Optional[Piece] = self.engine.board.piece_at(square)
             if piece is not None:
-                # TODO: Refacort this into a PieceTk (or CanvasPiece) class that can support drag and drop
+                # TODO: Refactor this into a `PieceTk` (or `CanvasPiece`) class that can support drag and drop
                 # CanvasPiece aligns with CanvasTooltip better...
-                # 
+                # TODO: Consider adapting such a `CanvasPiece` in `main.ChessHeatMapApp.create_piece`.
                 piece_x = x0 + half_square_size
                 piece_y = y0 + half_square_size
                 self.canvas.create_text(
