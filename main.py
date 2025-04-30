@@ -8,7 +8,7 @@ from concurrent.futures import Future
 from multiprocessing.context import Process
 from os import cpu_count, kill
 from signal import SIGTERM
-from tkinter import Canvas, Menu, Tk, filedialog, font as tk_font, messagebox
+from tkinter import Canvas, Menu, Tk, filedialog, messagebox
 from typing import Dict, List, Optional, TextIO, Tuple
 
 from chess import Board, Move, Piece, SQUARES, pgn, square_name
@@ -21,10 +21,8 @@ from chmutils import (
     get_or_compute_heatmap_with_better_discounts,
     GBuilder,
     BaseChessApp,
-    DARK_SQUARE_COLOR_PROMPT,
     DEFAULT_COLORS,
-    DEFAULT_FONT,
-    LIGHT_SQUARE_COLOR_PROMPT
+    DEFAULT_FONT
 )
 from heatmaps import ChessMoveHeatmap
 from tooltips import CanvasTooltip
@@ -119,29 +117,6 @@ class ChessHeatMapApp(Tk, BaseChessApp):
         menu_bar.add_command(label="Prev Move", command=self.prev_move)
         menu_bar.add_command(label="Next Move", command=self.next_move)
         self.config(menu=menu_bar)
-
-    def add_options(self, menu_bar: Menu):
-        """Adds options menu to menu bar.
-
-        Parameters
-        ----------
-        menu_bar : tkinter.Menu
-        """
-        fonts_menu: Menu = Menu(menu_bar, tearoff=0)
-        font: str
-        for font in tk_font.families():
-            fonts_menu.add_command(label=font.title(), command=lambda f=font: self.change_font(new_font=f))
-        options_menu: Menu = Menu(menu_bar, tearoff=0)
-        options_menu.add_cascade(label="Font", menu=fonts_menu)
-        options_menu.add_command(label="Change Board Colors", command=self.change_board_colors)
-        options_menu.add_command(
-            label=LIGHT_SQUARE_COLOR_PROMPT,
-            command=lambda: self.choose_square_color(title=LIGHT_SQUARE_COLOR_PROMPT, index=0))
-        options_menu.add_command(
-            label=DARK_SQUARE_COLOR_PROMPT,
-            command=lambda: self.choose_square_color(title=DARK_SQUARE_COLOR_PROMPT, index=1))
-        options_menu.add_command(label="Set Depth", command=self.set_depth)
-        menu_bar.add_cascade(label="Options", menu=options_menu)
 
     def set_depth(self) -> None:
         """Prompt the user to set a new recursion depth for heatmap calculations.

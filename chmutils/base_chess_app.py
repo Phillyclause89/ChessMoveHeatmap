@@ -1,6 +1,6 @@
 """BaseChessApp"""
 from abc import ABCMeta, abstractmethod
-from tkinter import Canvas, Event, Tk, colorchooser, simpledialog
+from tkinter import Canvas, Event, Menu, Tk, colorchooser, font as tk_font, simpledialog
 from typing import Callable, List, Optional, Set, Tuple
 
 DARK_SQUARE_COLOR_PROMPT: str = "Pick Dark Square Color"
@@ -184,3 +184,26 @@ class BaseChessApp(metaclass=ABCMeta):
         """
         # noinspection PyTypeChecker,PydanticTypeChecker
         Tk.after(self, ms, function, *args)
+
+    def add_options(self, menu_bar: Menu) -> None:
+        """Adds options menu to menu bar.
+
+        Parameters
+        ----------
+        menu_bar : tkinter.Menu
+        """
+        fonts_menu: Menu = Menu(menu_bar, tearoff=0)
+        font: str
+        for font in tk_font.families():
+            fonts_menu.add_command(label=font.title(), command=lambda f=font: self.change_font(new_font=f))
+        options_menu: Menu = Menu(menu_bar, tearoff=0)
+        options_menu.add_cascade(label="Font", menu=fonts_menu)
+        options_menu.add_command(label="Change Board Colors", command=self.change_board_colors)
+        options_menu.add_command(
+            label=LIGHT_SQUARE_COLOR_PROMPT,
+            command=lambda: self.choose_square_color(title=LIGHT_SQUARE_COLOR_PROMPT, index=0))
+        options_menu.add_command(
+            label=DARK_SQUARE_COLOR_PROMPT,
+            command=lambda: self.choose_square_color(title=DARK_SQUARE_COLOR_PROMPT, index=1))
+        options_menu.add_command(label="Set Depth", command=self.set_depth)
+        menu_bar.add_cascade(label="Options", menu=options_menu)
