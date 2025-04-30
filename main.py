@@ -3,7 +3,7 @@
 Defines the ChessHeatMapApp GUI class and related helpers for rendering
 chess move heatmaps in a Tkinter application.
 """
-from concurrent.futures import Future, ProcessPoolExecutor
+from concurrent.futures import Future
 # noinspection PyProtectedMember
 from multiprocessing.context import Process
 from os import cpu_count, kill
@@ -12,11 +12,11 @@ from tkinter import Canvas, Event, Menu, Tk, colorchooser, filedialog, font as t
 from typing import Dict, List, Optional, Set, TextIO, Tuple
 
 from chess import Board, Move, Piece, SQUARES, pgn, square_name
-from chess.pgn import Game, GameBuilder, Headers
+from chess.pgn import Game, Headers
 from numpy import float64
 from numpy.typing import NDArray
 
-from chmutils import get_or_compute_heatmap_with_better_discounts
+from chmutils import PPExecutor, get_or_compute_heatmap_with_better_discounts, GBuilder
 from heatmaps import ChessMoveHeatmap
 from tooltips import CanvasTooltip
 
@@ -24,29 +24,6 @@ DARK_SQUARE_COLOR_PROMPT: str = "Pick Dark Square Color"
 LIGHT_SQUARE_COLOR_PROMPT: str = "Pick Light Square Color"
 DEFAULT_COLORS: Tuple[str, str] = ("#ffffff", "#c0c0c0")
 DEFAULT_FONT: str = "Arial"
-
-
-class GBuilder(GameBuilder):
-    r"""Overrides `GameBuilder.handle_error` to raise exception."""
-
-    def handle_error(self, error: Exception) -> None:
-        r"""Override of GameBuilder.handle_error method to raise errors."""
-        raise error
-
-
-class PPExecutor(ProcessPoolExecutor):
-    """Implements processes property for ProcessPoolExecutor"""
-
-    @property
-    def processes(self) -> Tuple[Optional[Process], ...]:
-        r"""Expose the private `_processes` from ProcessPoolExecutor.
-
-        Returns
-        -------
-        Tuple[Optional[Process], ...]
-            A tuple of Process objects currently managed by the executor.
-        """
-        return tuple(self._processes.values())
 
 
 # pylint: disable=too-many-instance-attributes,too-many-public-methods

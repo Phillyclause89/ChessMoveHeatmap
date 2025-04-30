@@ -1,7 +1,7 @@
 """setup"""
 from argparse import ArgumentParser, Namespace
 from os import path
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple
 
 import chess
 from Cython.Build import cythonize
@@ -10,14 +10,17 @@ from setuptools import setup
 BUILD_EXT: str = 'build_ext'
 INIT_PY: str = '__init__.py'
 CHMENGINE: str = 'chmengine'
+CHMUTILS = 'chmutils'
 UTILS: str = 'utils'
 ENGINES: str = 'engines'
 CHESS_PACKAGE: Optional[str] = path.dirname(chess.__file__)
 CHESS_SCRIPTS: str = path.join(CHESS_PACKAGE, '*.py')
 
-MAIN_MODULES: Tuple[str, str, str, str, str, str, str, str, str] = (
+MAIN_MODULES: Tuple[str, str, str, str, str, str, str, str, str, str, str] = (
     path.join('heatmaps', INIT_PY),
-    path.join('chmutils', INIT_PY),
+    path.join(CHMUTILS, INIT_PY),
+    path.join(CHMUTILS, 'concurrent.py'),
+    path.join(CHMUTILS, 'game_builder.py'),
     path.join(CHMENGINE, UTILS, 'pick.py'),
     path.join(CHMENGINE, UTILS, INIT_PY),
     path.join(CHMENGINE, ENGINES, 'cmhmey1.py'),

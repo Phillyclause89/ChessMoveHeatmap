@@ -6,7 +6,26 @@ from typing import Dict, List, Optional, Tuple, Union
 from chess import Board, Move, Piece
 from numpy import float64, float_
 
+from chmutils.concurrent import PPExecutor
+from chmutils.game_builder import GBuilder
 from heatmaps import ChessMoveHeatmap, GradientHeatmap, PIECES
+
+__all__ = [
+    'PPExecutor',
+    'GBuilder',
+    'calculate_heatmap',
+    'calculate_chess_move_heatmap',
+    'calculate_chess_move_heatmap_with_better_discount',
+    'fill_depth_map_with_counts',
+    'flatten_heatmap',
+    'inflate_heatmap',
+    'HeatmapCache',
+    'get_or_compute_heatmap',
+    'BetterHeatmapCache',
+    'get_or_compute_heatmap_with_better_discounts',
+    'PIECE_KEYS',
+    'CACHE_DIR'
+]
 
 
 def calculate_heatmap(
