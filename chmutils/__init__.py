@@ -8,6 +8,13 @@ from numpy import float64, float_
 
 from chmutils.concurrent import PPExecutor
 from chmutils.game_builder import GBuilder
+from chmutils.base_chess_app import (
+    BaseChessApp,
+    DARK_SQUARE_COLOR_PROMPT,
+    LIGHT_SQUARE_COLOR_PROMPT,
+    DEFAULT_COLORS,
+    DEFAULT_FONT
+)
 from heatmaps import ChessMoveHeatmap, GradientHeatmap, PIECES
 
 __all__ = [
@@ -24,7 +31,12 @@ __all__ = [
     'BetterHeatmapCache',
     'get_or_compute_heatmap_with_better_discounts',
     'PIECE_KEYS',
-    'CACHE_DIR'
+    'CACHE_DIR',
+    'BaseChessApp',
+    'DARK_SQUARE_COLOR_PROMPT',
+    'LIGHT_SQUARE_COLOR_PROMPT',
+    'DEFAULT_COLORS',
+    'DEFAULT_FONT'
 ]
 
 
