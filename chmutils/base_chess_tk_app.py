@@ -1,4 +1,4 @@
-"""BaseChessApp"""
+"""BaseChessTkApp"""
 from abc import ABCMeta, abstractmethod
 from tkinter import Canvas, Event, Menu, Tk, colorchooser, font as tk_font, simpledialog
 from typing import Callable, List, Optional, Set, Tuple
@@ -9,7 +9,7 @@ DEFAULT_COLORS: Tuple[str, str] = ("#ffffff", "#c0c0c0")
 DEFAULT_FONT: str = "Arial"
 
 
-class BaseChessApp(metaclass=ABCMeta):
+class BaseChessTkApp(metaclass=ABCMeta):
     """Base class for a chess app"""
     updating: bool
     canvas: Canvas
@@ -175,9 +175,9 @@ class BaseChessApp(metaclass=ABCMeta):
 
         Notes
         -----
-        Tk should be listed before BaseChessApp to default to the `Tk.after()` method:
+        Tk should be listed before BaseChessTkApp to default to the `Tk.after()` method:
             ```
-            class ChessHeatMapApp(Tk, BaseChessApp):
+            class ChessHeatMapApp(Tk, BaseChessTkApp):
                 ...
             ```
 

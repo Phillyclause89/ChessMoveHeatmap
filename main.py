@@ -20,7 +20,7 @@ from chmutils import (
     PPExecutor,
     get_or_compute_heatmap_with_better_discounts,
     GBuilder,
-    BaseChessApp,
+    BaseChessTkApp,
     DEFAULT_COLORS,
     DEFAULT_FONT
 )
@@ -31,7 +31,7 @@ from tooltips import CanvasTooltip
 # pylint: disable=too-many-instance-attributes,too-many-public-methods
 
 
-class ChessHeatMapApp(Tk, BaseChessApp):
+class ChessHeatMapApp(Tk, BaseChessTkApp):
     """Main application window for the Chess Heat Map app.
 
     This class is responsible for rendering the chessboard, handling

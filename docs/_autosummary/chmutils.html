@@ -17,7 +17,7 @@
     <script src="../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="chmutils.base_chess_app" href="chmutils.base_chess_app.html" />
+    <link rel="next" title="chmutils.base_chess_tk_app" href="chmutils.base_chess_tk_app.html" />
     <link rel="prev" title="chmengine.utils.pick" href="chmengine.utils.pick.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -79,13 +79,13 @@
 </tbody>
 </table>
 <dl class="py class">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chmutils.</span></span><span class="sig-name descname"><span class="pre">BaseChessApp</span></span><a class="headerlink" href="#chmutils.BaseChessApp" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chmutils.</span></span><span class="sig-name descname"><span class="pre">BaseChessTkApp</span></span><a class="headerlink" href="#chmutils.BaseChessTkApp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Base class for a chess app</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp.add_options">
-<span class="sig-name descname"><span class="pre">add_options</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">menu_bar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Menu</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.BaseChessApp.add_options" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp.add_options">
+<span class="sig-name descname"><span class="pre">add_options</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">menu_bar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Menu</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.BaseChessTkApp.add_options" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds options menu to menu bar.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -97,13 +97,13 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp.after">
-<span class="sig-name descname"><span class="pre">after</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.BaseChessApp.after" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp.after">
+<span class="sig-name descname"><span class="pre">after</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.BaseChessTkApp.after" title="Permalink to this definition">¶</a></dt>
 <dd><p>Placeholder for <cite>Tk.after(self, ms, function=None, *args)</cite> method.</p>
 <p class="rubric">Notes</p>
 <dl>
-<dt>Tk should be listed before BaseChessApp to default to the <cite>Tk.after()</cite> method:</dt><dd><p><a href="#id1"><span class="problematic" id="id2">``</span></a>`
-class ChessHeatMapApp(Tk, BaseChessApp):</p>
+<dt>Tk should be listed before BaseChessTkApp to default to the <cite>Tk.after()</cite> method:</dt><dd><p><a href="#id1"><span class="problematic" id="id2">``</span></a>`
+class ChessHeatMapApp(Tk, BaseChessTkApp):</p>
 <blockquote>
 <div><p>…</p>
 </div></blockquote>
@@ -113,8 +113,8 @@ class ChessHeatMapApp(Tk, BaseChessApp):</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp.ask_depth">
-<span class="sig-name descname"><span class="pre">ask_depth</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmutils.BaseChessApp.ask_depth" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp.ask_depth">
+<span class="sig-name descname"><span class="pre">ask_depth</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmutils.BaseChessTkApp.ask_depth" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prompt the user to set a new recursion depth for heatmap calculations.</p>
 <p>This method displays a dialog box warning the user about the exponential
 complexity of increasing depth values. It recommends using odd values for
@@ -130,29 +130,29 @@ unbiased heatmaps, as even depths favor the current player.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp.canvas">
-<span class="sig-name descname"><span class="pre">canvas</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Canvas</span></em><a class="headerlink" href="#chmutils.BaseChessApp.canvas" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp.canvas">
+<span class="sig-name descname"><span class="pre">canvas</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Canvas</span></em><a class="headerlink" href="#chmutils.BaseChessTkApp.canvas" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp.change_board_colors">
-<span class="sig-name descname"><span class="pre">change_board_colors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.BaseChessApp.change_board_colors" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp.change_board_colors">
+<span class="sig-name descname"><span class="pre">change_board_colors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.BaseChessTkApp.change_board_colors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Invoke both light and dark square color option prompts.</p>
 <p>This method opens color pickers for both the light and dark squares, allowing the user
 to select custom colors for the chessboard squares.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp.change_font">
-<span class="sig-name descname"><span class="pre">change_font</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_font</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.BaseChessApp.change_font" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp.change_font">
+<span class="sig-name descname"><span class="pre">change_font</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_font</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.BaseChessTkApp.change_font" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle font option updates.</p>
 <p>This method updates the font used for displaying chess pieces on the board.
 After updating, the board is re-rendered with the new font.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp.choose_square_color">
-<span class="sig-name descname"><span class="pre">choose_square_color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.BaseChessApp.choose_square_color" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp.choose_square_color">
+<span class="sig-name descname"><span class="pre">choose_square_color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.BaseChessTkApp.choose_square_color" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allow the user to change a specific square color.</p>
 <p>This method opens a tkinter color chooser dialog, allowing the user to select a new color
 for either the light or dark squares on the chessboard.</p>
@@ -169,42 +169,42 @@ for either the light or dark squares on the chessboard.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp.clear_board">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">clear_board</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chmutils.BaseChessApp.clear_board" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp.clear_board">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">clear_board</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chmutils.BaseChessTkApp.clear_board" title="Permalink to this definition">¶</a></dt>
 <dd><p>Clears the canvas of any drawn board objects</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp.colors">
-<span class="sig-name descname"><span class="pre">colors</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#chmutils.BaseChessApp.colors" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp.colors">
+<span class="sig-name descname"><span class="pre">colors</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#chmutils.BaseChessTkApp.colors" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp.create_menu">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chmutils.BaseChessApp.create_menu" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp.create_menu">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chmutils.BaseChessTkApp.create_menu" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs the app menu during initialization.</p>
 <p>This method creates a menu bar with options to load a PGN file, change the board colors,
 and modify the font. It also allows navigation through the moves in the game (next/previous move).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp.current_move_index">
-<span class="sig-name descname"><span class="pre">current_move_index</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#chmutils.BaseChessApp.current_move_index" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp.current_move_index">
+<span class="sig-name descname"><span class="pre">current_move_index</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#chmutils.BaseChessTkApp.current_move_index" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp.depth">
-<span class="sig-name descname"><span class="pre">depth</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#chmutils.BaseChessApp.depth" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp.depth">
+<span class="sig-name descname"><span class="pre">depth</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#chmutils.BaseChessTkApp.depth" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp.font">
-<span class="sig-name descname"><span class="pre">font</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#chmutils.BaseChessApp.font" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp.font">
+<span class="sig-name descname"><span class="pre">font</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#chmutils.BaseChessTkApp.font" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp.get_xys">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_xys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flipped_row</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">square_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmutils.BaseChessApp.get_xys" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp.get_xys">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_xys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flipped_row</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">square_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmutils.BaseChessTkApp.get_xys" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get x_0, x_1, y_0, y_1 of a square.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -223,46 +223,46 @@ and modify the font. It also allows navigation through the moves in the game (ne
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp.highlight_squares">
-<span class="sig-name descname"><span class="pre">highlight_squares</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#chmutils.BaseChessApp.highlight_squares" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp.highlight_squares">
+<span class="sig-name descname"><span class="pre">highlight_squares</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#chmutils.BaseChessTkApp.highlight_squares" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp.on_closing">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_closing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chmutils.BaseChessApp.on_closing" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp.on_closing">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_closing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chmutils.BaseChessTkApp.on_closing" title="Permalink to this definition">¶</a></dt>
 <dd><p>Clean up resources before closing the application.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp.on_resize">
-<span class="sig-name descname"><span class="pre">on_resize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Event</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.BaseChessApp.on_resize" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp.on_resize">
+<span class="sig-name descname"><span class="pre">on_resize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Event</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmutils.BaseChessTkApp.on_resize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle window resize events.</p>
 <p>This method is called whenever the user resizes the window, adjusting the canvas and square size
 to fit the new dimensions of the window. It triggers a board update after resizing.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp.set_depth">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_depth</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chmutils.BaseChessApp.set_depth" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp.set_depth">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_depth</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chmutils.BaseChessTkApp.set_depth" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prompt the user to set a new recursion depth for heatmap calculations.</p>
 <p>The user is asked to input an integer value. If a valid value is provided,
 the depth is updated and the window title is refreshed to reflect the change.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp.set_title">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_title</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chmutils.BaseChessApp.set_title" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp.set_title">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_title</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chmutils.BaseChessTkApp.set_title" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the App window title</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp.square_size">
-<span class="sig-name descname"><span class="pre">square_size</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#chmutils.BaseChessApp.square_size" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp.square_size">
+<span class="sig-name descname"><span class="pre">square_size</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#chmutils.BaseChessTkApp.square_size" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp.update_board">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_board</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chmutils.BaseChessApp.update_board" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp.update_board">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_board</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chmutils.BaseChessTkApp.update_board" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the chessboard display based on the current position.</p>
 <p>This method redraws the entire chessboard based on the current state of the <cite>Board</cite> object,
 including updating the colors of the squares and displaying the chess pieces. It uses the
@@ -270,8 +270,8 @@ precomputed heatmap colors if available, or calculates them if necessary.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="chmutils.BaseChessApp.updating">
-<span class="sig-name descname"><span class="pre">updating</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#chmutils.BaseChessApp.updating" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="chmutils.BaseChessTkApp.updating">
+<span class="sig-name descname"><span class="pre">updating</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#chmutils.BaseChessTkApp.updating" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -986,8 +986,8 @@ each square (0-63).</p>
 <p class="rubric">Modules</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="chmutils.base_chess_app.html#module-chmutils.base_chess_app" title="chmutils.base_chess_app"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chmutils.base_chess_app</span></code></a></p></td>
-<td><p>BaseChessApp</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="chmutils.base_chess_tk_app.html#module-chmutils.base_chess_tk_app" title="chmutils.base_chess_tk_app"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chmutils.base_chess_tk_app</span></code></a></p></td>
+<td><p>BaseChessTkApp</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="chmutils.concurrent.html#module-chmutils.concurrent" title="chmutils.concurrent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chmutils.concurrent</span></code></a></p></td>
 <td><p>PPExecutor class that implements processes property for ProcessPoolExecutor</p></td>
@@ -1041,7 +1041,7 @@ each square (0-63).</p>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="../api_reference.html">API Reference</a><ul>
       <li>Previous: <a href="chmengine.utils.pick.html" title="previous chapter">chmengine.utils.pick</a></li>
-      <li>Next: <a href="chmutils.base_chess_app.html" title="next chapter">chmutils.base_chess_app</a></li>
+      <li>Next: <a href="chmutils.base_chess_tk_app.html" title="next chapter">chmutils.base_chess_tk_app</a></li>
   </ul></li>
   </ul></li>
 </ul>

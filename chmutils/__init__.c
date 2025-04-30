@@ -2633,7 +2633,6 @@ static const char __pyx_k_description[] = "description";
 static const char __pyx_k_from_square[] = "from_square";
 static const char __pyx_k_legal_moves[] = "legal_moves";
 static const char __pyx_k_mro_entries[] = "__mro_entries__";
-static const char __pyx_k_BaseChessApp[] = "BaseChessApp";
 static const char __pyx_k_DEFAULT_FONT[] = "DEFAULT_FONT";
 static const char __pyx_k_HeatmapCache[] = "HeatmapCache";
 static const char __pyx_k_is_coroutine[] = "_is_coroutine";
@@ -2645,6 +2644,7 @@ static const char __pyx_k_init_subclass[] = "__init_subclass__";
 static const char __pyx_k_initialize_db[] = "_initialize_db";
 static const char __pyx_k_store_heatmap[] = "store_heatmap";
 static const char __pyx_k_target_square[] = "target_square";
+static const char __pyx_k_BaseChessTkApp[] = "BaseChessTkApp";
 static const char __pyx_k_DEFAULT_COLORS[] = "DEFAULT_COLORS";
 static const char __pyx_k_Dict_str_float[] = "Dict[str, float]";
 static const char __pyx_k_unicode_symbol[] = "unicode_symbol";
@@ -2669,13 +2669,13 @@ static const char __pyx_k_chmutils_game_builder[] = "chmutils.game_builder";
 static const char __pyx_k_get_or_compute_heatmap[] = "get_or_compute_heatmap";
 static const char __pyx_k_HeatmapCache__cache_key[] = "HeatmapCache._cache_key";
 static const char __pyx_k_PRAGMA_journal_mode_WAL[] = "PRAGMA journal_mode=WAL;";
-static const char __pyx_k_chmutils_base_chess_app[] = "chmutils.base_chess_app";
 static const char __pyx_k_DARK_SQUARE_COLOR_PROMPT[] = "DARK_SQUARE_COLOR_PROMPT";
 static const char __pyx_k_Optional_GradientHeatmap[] = "Optional[GradientHeatmap]";
 static const char __pyx_k_LIGHT_SQUARE_COLOR_PROMPT[] = "LIGHT_SQUARE_COLOR_PROMPT";
 static const char __pyx_k_Optional_ChessMoveHeatmap[] = "Optional[ChessMoveHeatmap]";
 static const char __pyx_k_calculate_heatmap_line_43[] = "calculate_heatmap (line 43)";
 static const char __pyx_k_HeatmapCache_store_heatmap[] = "HeatmapCache.store_heatmap";
+static const char __pyx_k_chmutils_base_chess_tk_app[] = "chmutils.base_chess_tk_app";
 static const char __pyx_k_fill_depth_map_with_counts[] = "fill_depth_map_with_counts";
 static const char __pyx_k_HeatmapCache__initialize_db[] = "HeatmapCache._initialize_db";
 static const char __pyx_k_calculate_chess_move_heatmap[] = "calculate_chess_move_heatmap";
@@ -2751,8 +2751,8 @@ typedef struct {
   PyTypeObject *__pyx_ptype_8chmutils___pyx_scope_struct__calculate_chess_move_heatmap_with_better_discount;
   PyTypeObject *__pyx_ptype_8chmutils___pyx_scope_struct_1_genexpr;
   PyObject *__pyx_kp_s_A_caching_mechanism_for_ChessMov;
-  PyObject *__pyx_n_s_BaseChessApp;
-  PyObject *__pyx_n_u_BaseChessApp;
+  PyObject *__pyx_n_s_BaseChessTkApp;
+  PyObject *__pyx_n_u_BaseChessTkApp;
   PyObject *__pyx_n_u_Better;
   PyObject *__pyx_n_s_BetterHeatmapCache;
   PyObject *__pyx_n_u_BetterHeatmapCache;
@@ -2844,7 +2844,7 @@ typedef struct {
   PyObject *__pyx_n_s_chmutils;
   PyObject *__pyx_kp_u_chmutils___init;
   PyObject *__pyx_kp_s_chmutils___init___py;
-  PyObject *__pyx_n_s_chmutils_base_chess_app;
+  PyObject *__pyx_n_s_chmutils_base_chess_tk_app;
   PyObject *__pyx_n_s_chmutils_concurrent;
   PyObject *__pyx_n_s_chmutils_game_builder;
   PyObject *__pyx_n_s_class_getitem;
@@ -3036,8 +3036,8 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_ptype_8chmutils___pyx_scope_struct_1_genexpr);
   Py_CLEAR(clear_module_state->__pyx_type_8chmutils___pyx_scope_struct_1_genexpr);
   Py_CLEAR(clear_module_state->__pyx_kp_s_A_caching_mechanism_for_ChessMov);
-  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessApp);
-  Py_CLEAR(clear_module_state->__pyx_n_u_BaseChessApp);
+  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessTkApp);
+  Py_CLEAR(clear_module_state->__pyx_n_u_BaseChessTkApp);
   Py_CLEAR(clear_module_state->__pyx_n_u_Better);
   Py_CLEAR(clear_module_state->__pyx_n_s_BetterHeatmapCache);
   Py_CLEAR(clear_module_state->__pyx_n_u_BetterHeatmapCache);
@@ -3129,7 +3129,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_chmutils);
   Py_CLEAR(clear_module_state->__pyx_kp_u_chmutils___init);
   Py_CLEAR(clear_module_state->__pyx_kp_s_chmutils___init___py);
-  Py_CLEAR(clear_module_state->__pyx_n_s_chmutils_base_chess_app);
+  Py_CLEAR(clear_module_state->__pyx_n_s_chmutils_base_chess_tk_app);
   Py_CLEAR(clear_module_state->__pyx_n_s_chmutils_concurrent);
   Py_CLEAR(clear_module_state->__pyx_n_s_chmutils_game_builder);
   Py_CLEAR(clear_module_state->__pyx_n_s_class_getitem);
@@ -3299,8 +3299,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_ptype_8chmutils___pyx_scope_struct_1_genexpr);
   Py_VISIT(traverse_module_state->__pyx_type_8chmutils___pyx_scope_struct_1_genexpr);
   Py_VISIT(traverse_module_state->__pyx_kp_s_A_caching_mechanism_for_ChessMov);
-  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessApp);
-  Py_VISIT(traverse_module_state->__pyx_n_u_BaseChessApp);
+  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessTkApp);
+  Py_VISIT(traverse_module_state->__pyx_n_u_BaseChessTkApp);
   Py_VISIT(traverse_module_state->__pyx_n_u_Better);
   Py_VISIT(traverse_module_state->__pyx_n_s_BetterHeatmapCache);
   Py_VISIT(traverse_module_state->__pyx_n_u_BetterHeatmapCache);
@@ -3392,7 +3392,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_chmutils);
   Py_VISIT(traverse_module_state->__pyx_kp_u_chmutils___init);
   Py_VISIT(traverse_module_state->__pyx_kp_s_chmutils___init___py);
-  Py_VISIT(traverse_module_state->__pyx_n_s_chmutils_base_chess_app);
+  Py_VISIT(traverse_module_state->__pyx_n_s_chmutils_base_chess_tk_app);
   Py_VISIT(traverse_module_state->__pyx_n_s_chmutils_concurrent);
   Py_VISIT(traverse_module_state->__pyx_n_s_chmutils_game_builder);
   Py_VISIT(traverse_module_state->__pyx_n_s_class_getitem);
@@ -3572,8 +3572,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_ptype_8chmutils___pyx_scope_struct__calculate_chess_move_heatmap_with_better_discount __pyx_mstate_global->__pyx_ptype_8chmutils___pyx_scope_struct__calculate_chess_move_heatmap_with_better_discount
 #define __pyx_ptype_8chmutils___pyx_scope_struct_1_genexpr __pyx_mstate_global->__pyx_ptype_8chmutils___pyx_scope_struct_1_genexpr
 #define __pyx_kp_s_A_caching_mechanism_for_ChessMov __pyx_mstate_global->__pyx_kp_s_A_caching_mechanism_for_ChessMov
-#define __pyx_n_s_BaseChessApp __pyx_mstate_global->__pyx_n_s_BaseChessApp
-#define __pyx_n_u_BaseChessApp __pyx_mstate_global->__pyx_n_u_BaseChessApp
+#define __pyx_n_s_BaseChessTkApp __pyx_mstate_global->__pyx_n_s_BaseChessTkApp
+#define __pyx_n_u_BaseChessTkApp __pyx_mstate_global->__pyx_n_u_BaseChessTkApp
 #define __pyx_n_u_Better __pyx_mstate_global->__pyx_n_u_Better
 #define __pyx_n_s_BetterHeatmapCache __pyx_mstate_global->__pyx_n_s_BetterHeatmapCache
 #define __pyx_n_u_BetterHeatmapCache __pyx_mstate_global->__pyx_n_u_BetterHeatmapCache
@@ -3665,7 +3665,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_chmutils __pyx_mstate_global->__pyx_n_s_chmutils
 #define __pyx_kp_u_chmutils___init __pyx_mstate_global->__pyx_kp_u_chmutils___init
 #define __pyx_kp_s_chmutils___init___py __pyx_mstate_global->__pyx_kp_s_chmutils___init___py
-#define __pyx_n_s_chmutils_base_chess_app __pyx_mstate_global->__pyx_n_s_chmutils_base_chess_app
+#define __pyx_n_s_chmutils_base_chess_tk_app __pyx_mstate_global->__pyx_n_s_chmutils_base_chess_tk_app
 #define __pyx_n_s_chmutils_concurrent __pyx_mstate_global->__pyx_n_s_chmutils_concurrent
 #define __pyx_n_s_chmutils_game_builder __pyx_mstate_global->__pyx_n_s_chmutils_game_builder
 #define __pyx_n_s_class_getitem __pyx_mstate_global->__pyx_n_s_class_getitem
@@ -10996,8 +10996,8 @@ static PyMethodDef __pyx_methods[] = {
 static int __Pyx_CreateStringTabAndInitStrings(void) {
   __Pyx_StringTabEntry __pyx_string_tab[] = {
     {&__pyx_kp_s_A_caching_mechanism_for_ChessMov, __pyx_k_A_caching_mechanism_for_ChessMov, sizeof(__pyx_k_A_caching_mechanism_for_ChessMov), 0, 0, 1, 0},
-    {&__pyx_n_s_BaseChessApp, __pyx_k_BaseChessApp, sizeof(__pyx_k_BaseChessApp), 0, 0, 1, 1},
-    {&__pyx_n_u_BaseChessApp, __pyx_k_BaseChessApp, sizeof(__pyx_k_BaseChessApp), 0, 1, 0, 1},
+    {&__pyx_n_s_BaseChessTkApp, __pyx_k_BaseChessTkApp, sizeof(__pyx_k_BaseChessTkApp), 0, 0, 1, 1},
+    {&__pyx_n_u_BaseChessTkApp, __pyx_k_BaseChessTkApp, sizeof(__pyx_k_BaseChessTkApp), 0, 1, 0, 1},
     {&__pyx_n_u_Better, __pyx_k_Better, sizeof(__pyx_k_Better), 0, 1, 0, 1},
     {&__pyx_n_s_BetterHeatmapCache, __pyx_k_BetterHeatmapCache, sizeof(__pyx_k_BetterHeatmapCache), 0, 0, 1, 1},
     {&__pyx_n_u_BetterHeatmapCache, __pyx_k_BetterHeatmapCache, sizeof(__pyx_k_BetterHeatmapCache), 0, 1, 0, 1},
@@ -11089,7 +11089,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_chmutils, __pyx_k_chmutils, sizeof(__pyx_k_chmutils), 0, 0, 1, 1},
     {&__pyx_kp_u_chmutils___init, __pyx_k_chmutils___init, sizeof(__pyx_k_chmutils___init), 0, 1, 0, 0},
     {&__pyx_kp_s_chmutils___init___py, __pyx_k_chmutils___init___py, sizeof(__pyx_k_chmutils___init___py), 0, 0, 1, 0},
-    {&__pyx_n_s_chmutils_base_chess_app, __pyx_k_chmutils_base_chess_app, sizeof(__pyx_k_chmutils_base_chess_app), 0, 0, 1, 1},
+    {&__pyx_n_s_chmutils_base_chess_tk_app, __pyx_k_chmutils_base_chess_tk_app, sizeof(__pyx_k_chmutils_base_chess_tk_app), 0, 0, 1, 1},
     {&__pyx_n_s_chmutils_concurrent, __pyx_k_chmutils_concurrent, sizeof(__pyx_k_chmutils_concurrent), 0, 0, 1, 1},
     {&__pyx_n_s_chmutils_game_builder, __pyx_k_chmutils_game_builder, sizeof(__pyx_k_chmutils_game_builder), 0, 0, 1, 1},
     {&__pyx_n_s_class_getitem, __pyx_k_class_getitem, sizeof(__pyx_k_class_getitem), 0, 0, 1, 1},
@@ -12008,7 +12008,7 @@ if (!__Pyx_RefNanny) {
  * 
  * from chmutils.concurrent import PPExecutor             # <<<<<<<<<<<<<<
  * from chmutils.game_builder import GBuilder
- * from chmutils.base_chess_app import (
+ * from chmutils.base_chess_tk_app import (
  */
   __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -12028,8 +12028,8 @@ if (!__Pyx_RefNanny) {
  * 
  * from chmutils.concurrent import PPExecutor
  * from chmutils.game_builder import GBuilder             # <<<<<<<<<<<<<<
- * from chmutils.base_chess_app import (
- *     BaseChessApp,
+ * from chmutils.base_chess_tk_app import (
+ *     BaseChessTkApp,
  */
   __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -12047,16 +12047,16 @@ if (!__Pyx_RefNanny) {
 
   /* "chmutils/__init__.py":12
  * from chmutils.game_builder import GBuilder
- * from chmutils.base_chess_app import (
- *     BaseChessApp,             # <<<<<<<<<<<<<<
+ * from chmutils.base_chess_tk_app import (
+ *     BaseChessTkApp,             # <<<<<<<<<<<<<<
  *     DARK_SQUARE_COLOR_PROMPT,
  *     LIGHT_SQUARE_COLOR_PROMPT,
  */
   __pyx_t_3 = PyList_New(5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_INCREF(__pyx_n_s_BaseChessApp);
-  __Pyx_GIVEREF(__pyx_n_s_BaseChessApp);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 0, __pyx_n_s_BaseChessApp)) __PYX_ERR(0, 12, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_BaseChessTkApp);
+  __Pyx_GIVEREF(__pyx_n_s_BaseChessTkApp);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 0, __pyx_n_s_BaseChessTkApp)) __PYX_ERR(0, 12, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_s_DARK_SQUARE_COLOR_PROMPT);
   __Pyx_GIVEREF(__pyx_n_s_DARK_SQUARE_COLOR_PROMPT);
   if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 1, __pyx_n_s_DARK_SQUARE_COLOR_PROMPT)) __PYX_ERR(0, 12, __pyx_L1_error);
@@ -12073,16 +12073,16 @@ if (!__Pyx_RefNanny) {
   /* "chmutils/__init__.py":11
  * from chmutils.concurrent import PPExecutor
  * from chmutils.game_builder import GBuilder
- * from chmutils.base_chess_app import (             # <<<<<<<<<<<<<<
- *     BaseChessApp,
+ * from chmutils.base_chess_tk_app import (             # <<<<<<<<<<<<<<
+ *     BaseChessTkApp,
  *     DARK_SQUARE_COLOR_PROMPT,
  */
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_chmutils_base_chess_app, __pyx_t_3, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_chmutils_base_chess_tk_app, __pyx_t_3, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_BaseChessApp); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_BaseChessTkApp); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_BaseChessApp, __pyx_t_3) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_BaseChessTkApp, __pyx_t_3) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_DARK_SQUARE_COLOR_PROMPT); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -12188,9 +12188,9 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(__pyx_n_u_CACHE_DIR);
   __Pyx_GIVEREF(__pyx_n_u_CACHE_DIR);
   if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 13, __pyx_n_u_CACHE_DIR)) __PYX_ERR(0, 20, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_u_BaseChessApp);
-  __Pyx_GIVEREF(__pyx_n_u_BaseChessApp);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 14, __pyx_n_u_BaseChessApp)) __PYX_ERR(0, 20, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_u_BaseChessTkApp);
+  __Pyx_GIVEREF(__pyx_n_u_BaseChessTkApp);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 14, __pyx_n_u_BaseChessTkApp)) __PYX_ERR(0, 20, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_DARK_SQUARE_COLOR_PROMPT);
   __Pyx_GIVEREF(__pyx_n_u_DARK_SQUARE_COLOR_PROMPT);
   if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 15, __pyx_n_u_DARK_SQUARE_COLOR_PROMPT)) __PYX_ERR(0, 20, __pyx_L1_error);

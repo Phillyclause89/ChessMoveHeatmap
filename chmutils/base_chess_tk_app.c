@@ -3,12 +3,12 @@
 /* BEGIN: Cython Metadata
 {
     "distutils": {
-        "name": "chmutils.base_chess_app",
+        "name": "chmutils.base_chess_tk_app",
         "sources": [
-            "chmutils\\base_chess_app.py"
+            "chmutils\\base_chess_tk_app.py"
         ]
     },
-    "module_name": "chmutils.base_chess_app"
+    "module_name": "chmutils.base_chess_tk_app"
 }
 END: Cython Metadata */
 
@@ -1228,8 +1228,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE__chmutils__base_chess_app
-#define __PYX_HAVE_API__chmutils__base_chess_app
+#define __PYX_HAVE__chmutils__base_chess_tk_app
+#define __PYX_HAVE_API__chmutils__base_chess_tk_app
 /* Early includes */
 #ifdef _OPENMP
 #include <omp.h>
@@ -1479,7 +1479,7 @@ static const char *__pyx_filename;
 /* #### Code section: filename_table ### */
 
 static const char *__pyx_f[] = {
-  "chmutils\\\\base_chess_app.py",
+  "chmutils\\\\base_chess_tk_app.py",
 };
 /* #### Code section: utility_code_proto_before_types ### */
 /* ForceInitThreads.proto */
@@ -1492,37 +1492,37 @@ static const char *__pyx_f[] = {
 /* #### Code section: type_declarations ### */
 
 /*--- Type declarations ---*/
-struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct__change_font;
-struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color;
-struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options;
+struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font;
+struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color;
+struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options;
 struct __pyx_defaults;
 typedef struct __pyx_defaults __pyx_defaults;
 struct __pyx_defaults {
   PyObject *__pyx_arg_f;
 };
 
-/* "chmutils/base_chess_app.py":91
+/* "chmutils/base_chess_tk_app.py":91
  *         )  # Adjust maxvalue as needed.
  * 
  *     def change_font(self, new_font: str) -> None:             # <<<<<<<<<<<<<<
  *         """Handle font option updates.
  * 
  */
-struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct__change_font {
+struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font {
   PyObject_HEAD
   PyObject *__pyx_v_new_font;
   PyObject *__pyx_v_self;
 };
 
 
-/* "chmutils/base_chess_app.py":105
+/* "chmutils/base_chess_tk_app.py":105
  *             self.after(100, lambda: self.change_font(new_font))
  * 
  *     def choose_square_color(self, title: str, index: int) -> None:             # <<<<<<<<<<<<<<
  *         """Allow the user to change a specific square color.
  * 
  */
-struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color {
+struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color {
   PyObject_HEAD
   PyObject *__pyx_v_index;
   PyObject *__pyx_v_self;
@@ -1530,14 +1530,14 @@ struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_c
 };
 
 
-/* "chmutils/base_chess_app.py":188
+/* "chmutils/base_chess_tk_app.py":188
  *         Tk.after(self, ms, function, *args)
  * 
  *     def add_options(self, menu_bar: Menu) -> None:             # <<<<<<<<<<<<<<
  *         """Adds options menu to menu bar.
  * 
  */
-struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options {
+struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options {
   PyObject_HEAD
   PyObject *__pyx_v_self;
 };
@@ -2292,14 +2292,14 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 /* #### Code section: module_declarations ### */
 
-/* Module declarations from "chmutils.base_chess_app" */
+/* Module declarations from "chmutils.base_chess_tk_app" */
 /* #### Code section: typeinfo ### */
 /* #### Code section: before_global_var ### */
-#define __Pyx_MODULE_NAME "chmutils.base_chess_app"
-extern int __pyx_module_is_main_chmutils__base_chess_app;
-int __pyx_module_is_main_chmutils__base_chess_app = 0;
+#define __Pyx_MODULE_NAME "chmutils.base_chess_tk_app"
+extern int __pyx_module_is_main_chmutils__base_chess_tk_app;
+int __pyx_module_is_main_chmutils__base_chess_tk_app = 0;
 
-/* Implementation of "chmutils.base_chess_app" */
+/* Implementation of "chmutils.base_chess_tk_app" */
 /* #### Code section: global_var ### */
 static PyObject *__pyx_builtin_staticmethod;
 /* #### Code section: string_decls ### */
@@ -2398,7 +2398,6 @@ static const char __pyx_k_clear_board[] = "clear_board";
 static const char __pyx_k_create_menu[] = "create_menu";
 static const char __pyx_k_flipped_row[] = "flipped_row";
 static const char __pyx_k_square_size[] = "square_size";
-static const char __pyx_k_BaseChessApp[] = "BaseChessApp";
 static const char __pyx_k_DEFAULT_FONT[] = "DEFAULT_FONT";
 static const char __pyx_k_Optional_int[] = "Optional[int]";
 static const char __pyx_k_colorchooser[] = "colorchooser";
@@ -2410,70 +2409,71 @@ static const char __pyx_k_staticmethod[] = "staticmethod";
 static const char __pyx_k_update_board[] = "update_board";
 static const char __pyx_k_depth_warning[] = "depth_warning";
 static const char __pyx_k_init_subclass[] = "__init_subclass__";
+static const char __pyx_k_BaseChessTkApp[] = "BaseChessTkApp";
 static const char __pyx_k_DEFAULT_COLORS[] = "DEFAULT_COLORS";
 static const char __pyx_k_abstractmethod[] = "abstractmethod";
 static const char __pyx_k_Set_Optional_int[] = "Set[Optional[int]]";
 static const char __pyx_k_Optional_Callable[] = "Optional[Callable]";
 static const char __pyx_k_highlight_squares[] = "highlight_squares";
-static const char __pyx_k_BaseChessApp_after[] = "BaseChessApp.after";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_current_move_index[] = "current_move_index";
 static const char __pyx_k_Change_Board_Colors[] = "Change Board Colors";
 static const char __pyx_k_change_board_colors[] = "change_board_colors";
 static const char __pyx_k_choose_square_color[] = "choose_square_color";
-static const char __pyx_k_BaseChessApp_get_xys[] = "BaseChessApp.get_xys";
+static const char __pyx_k_BaseChessTkApp_after[] = "BaseChessTkApp.after";
 static const char __pyx_k_Tuple_int_int_int_int[] = "Tuple[int, int, int, int]";
-static const char __pyx_k_BaseChessApp_ask_depth[] = "BaseChessApp.ask_depth";
-static const char __pyx_k_BaseChessApp_on_resize[] = "BaseChessApp.on_resize";
-static const char __pyx_k_BaseChessApp_set_depth[] = "BaseChessApp.set_depth";
-static const char __pyx_k_BaseChessApp_set_title[] = "BaseChessApp.set_title";
+static const char __pyx_k_BaseChessTkApp_get_xys[] = "BaseChessTkApp.get_xys";
 static const char __pyx_k_Pick_Dark_Square_Color[] = "Pick Dark Square Color";
-static const char __pyx_k_BaseChessApp_on_closing[] = "BaseChessApp.on_closing";
 static const char __pyx_k_Pick_Light_Square_Color[] = "Pick Light Square Color";
-static const char __pyx_k_chmutils_base_chess_app[] = "chmutils.base_chess_app";
-static const char __pyx_k_BaseChessApp_add_options[] = "BaseChessApp.add_options";
-static const char __pyx_k_BaseChessApp_change_font[] = "BaseChessApp.change_font";
-static const char __pyx_k_BaseChessApp_clear_board[] = "BaseChessApp.clear_board";
-static const char __pyx_k_BaseChessApp_create_menu[] = "BaseChessApp.create_menu";
+static const char __pyx_k_BaseChessTkApp_ask_depth[] = "BaseChessTkApp.ask_depth";
+static const char __pyx_k_BaseChessTkApp_on_resize[] = "BaseChessTkApp.on_resize";
+static const char __pyx_k_BaseChessTkApp_set_depth[] = "BaseChessTkApp.set_depth";
+static const char __pyx_k_BaseChessTkApp_set_title[] = "BaseChessTkApp.set_title";
 static const char __pyx_k_DARK_SQUARE_COLOR_PROMPT[] = "DARK_SQUARE_COLOR_PROMPT";
-static const char __pyx_k_BaseChessApp_update_board[] = "BaseChessApp.update_board";
+static const char __pyx_k_BaseChessTkApp_on_closing[] = "BaseChessTkApp.on_closing";
 static const char __pyx_k_Enter_new_recursion_depth[] = "\n\nEnter new recursion depth:";
 static const char __pyx_k_LIGHT_SQUARE_COLOR_PROMPT[] = "LIGHT_SQUARE_COLOR_PROMPT";
+static const char __pyx_k_BaseChessTkApp_add_options[] = "BaseChessTkApp.add_options";
+static const char __pyx_k_BaseChessTkApp_change_font[] = "BaseChessTkApp.change_font";
+static const char __pyx_k_BaseChessTkApp_clear_board[] = "BaseChessTkApp.clear_board";
+static const char __pyx_k_BaseChessTkApp_create_menu[] = "BaseChessTkApp.create_menu";
 static const char __pyx_k_Base_class_for_a_chess_app[] = "Base class for a chess app";
-static const char __pyx_k_chmutils_base_chess_app_py[] = "chmutils\\base_chess_app.py";
-static const char __pyx_k_BaseChessApp_add_options_locals[] = "BaseChessApp.add_options.<locals>.<lambda>";
-static const char __pyx_k_BaseChessApp_change_font_locals[] = "BaseChessApp.change_font.<locals>.<lambda>";
+static const char __pyx_k_chmutils_base_chess_tk_app[] = "chmutils.base_chess_tk_app";
+static const char __pyx_k_BaseChessTkApp_update_board[] = "BaseChessTkApp.update_board";
+static const char __pyx_k_chmutils_base_chess_tk_app_py[] = "chmutils\\base_chess_tk_app.py";
 static const char __pyx_k_Note_Odd_values_are_recommended[] = "Note: Odd values are recommended for least biased heatmaps\nas each depth starting from 0 ";
-static const char __pyx_k_BaseChessApp_change_board_colors[] = "BaseChessApp.change_board_colors";
-static const char __pyx_k_BaseChessApp_choose_square_color[] = "BaseChessApp.choose_square_color.<locals>.<lambda>";
+static const char __pyx_k_BaseChessTkApp_add_options_local[] = "BaseChessTkApp.add_options.<locals>.<lambda>";
+static const char __pyx_k_BaseChessTkApp_change_board_colo[] = "BaseChessTkApp.change_board_colors";
+static const char __pyx_k_BaseChessTkApp_change_font_local[] = "BaseChessTkApp.change_font.<locals>.<lambda>";
+static const char __pyx_k_BaseChessTkApp_choose_square_col[] = "BaseChessTkApp.choose_square_color.<locals>.<lambda>";
 static const char __pyx_k_Every_increment_to_this_value_in[] = "Every increment to this value increases calculation times exponentially!\n\n";
 static const char __pyx_k_only_counts_one_half_turn_of_pos[] = "only counts one half turn of possible moves.";
-static const char __pyx_k_BaseChessApp_choose_square_color_2[] = "BaseChessApp.choose_square_color";
+static const char __pyx_k_BaseChessTkApp_choose_square_col_2[] = "BaseChessTkApp.choose_square_color";
 /* #### Code section: decls ### */
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_on_closing(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_2on_resize(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_event); /* proto */
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_4set_depth(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_6create_menu(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_8set_title(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_10ask_depth(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_on_closing(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_2on_resize(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_event); /* proto */
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_4set_depth(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_6create_menu(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_8set_title(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_10ask_depth(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
 static PyObject *__pyx_lambda_funcdef_lambda(PyObject *__pyx_self); /* proto */
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_12change_font(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_new_font); /* proto */
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_12change_font(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_new_font); /* proto */
 static PyObject *__pyx_lambda_funcdef_lambda1(PyObject *__pyx_self); /* proto */
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_14choose_square_color(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_title, PyObject *__pyx_v_index); /* proto */
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_16change_board_colors(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_18update_board(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_20clear_board(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_22get_xys(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_col, PyObject *__pyx_v_flipped_row, PyObject *__pyx_v_square_size); /* proto */
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_24after(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_ms, PyObject *__pyx_v_function, PyObject *__pyx_v_args); /* proto */
-static PyObject *__pyx_pf_8chmutils_14base_chess_app___defaults__(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_14choose_square_color(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_title, PyObject *__pyx_v_index); /* proto */
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_16change_board_colors(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_18update_board(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_20clear_board(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_22get_xys(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_col, PyObject *__pyx_v_flipped_row, PyObject *__pyx_v_square_size); /* proto */
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_24after(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_ms, PyObject *__pyx_v_function, PyObject *__pyx_v_args); /* proto */
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app___defaults__(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
 static PyObject *__pyx_lambda_funcdef_lambda2(PyObject *__pyx_self, PyObject *__pyx_v_f); /* proto */
 static PyObject *__pyx_lambda_funcdef_lambda3(PyObject *__pyx_self); /* proto */
 static PyObject *__pyx_lambda_funcdef_lambda4(PyObject *__pyx_self); /* proto */
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_options(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_menu_bar); /* proto */
-static PyObject *__pyx_tp_new_8chmutils_14base_chess_app___pyx_scope_struct__change_font(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
-static PyObject *__pyx_tp_new_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
-static PyObject *__pyx_tp_new_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_26add_options(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_menu_bar); /* proto */
+static PyObject *__pyx_tp_new_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static __Pyx_CachedCFunction __pyx_umethod_PyUnicode_Type_title = {0, 0, 0, 0, 0};
 /* #### Code section: late_includes ### */
 /* #### Code section: module_state ### */
@@ -2503,34 +2503,34 @@ typedef struct {
   PyTypeObject *__pyx_CoroutineType;
   #endif
   #if CYTHON_USE_MODULE_STATE
-  PyObject *__pyx_type_8chmutils_14base_chess_app___pyx_scope_struct__change_font;
-  PyObject *__pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color;
-  PyObject *__pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options;
+  PyObject *__pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font;
+  PyObject *__pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color;
+  PyObject *__pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options;
   #endif
-  PyTypeObject *__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct__change_font;
-  PyTypeObject *__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color;
-  PyTypeObject *__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options;
+  PyTypeObject *__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font;
+  PyTypeObject *__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color;
+  PyTypeObject *__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options;
   PyObject *__pyx_kp_u_;
   PyObject *__pyx_n_s_ABCMeta;
   PyObject *__pyx_n_u_Arial;
-  PyObject *__pyx_n_s_BaseChessApp;
-  PyObject *__pyx_n_s_BaseChessApp_add_options;
-  PyObject *__pyx_n_s_BaseChessApp_add_options_locals;
-  PyObject *__pyx_n_s_BaseChessApp_after;
-  PyObject *__pyx_n_s_BaseChessApp_ask_depth;
-  PyObject *__pyx_n_s_BaseChessApp_change_board_colors;
-  PyObject *__pyx_n_s_BaseChessApp_change_font;
-  PyObject *__pyx_n_s_BaseChessApp_change_font_locals;
-  PyObject *__pyx_n_s_BaseChessApp_choose_square_color;
-  PyObject *__pyx_n_s_BaseChessApp_choose_square_color_2;
-  PyObject *__pyx_n_s_BaseChessApp_clear_board;
-  PyObject *__pyx_n_s_BaseChessApp_create_menu;
-  PyObject *__pyx_n_s_BaseChessApp_get_xys;
-  PyObject *__pyx_n_s_BaseChessApp_on_closing;
-  PyObject *__pyx_n_s_BaseChessApp_on_resize;
-  PyObject *__pyx_n_s_BaseChessApp_set_depth;
-  PyObject *__pyx_n_s_BaseChessApp_set_title;
-  PyObject *__pyx_n_s_BaseChessApp_update_board;
+  PyObject *__pyx_n_s_BaseChessTkApp;
+  PyObject *__pyx_n_s_BaseChessTkApp_add_options;
+  PyObject *__pyx_n_s_BaseChessTkApp_add_options_local;
+  PyObject *__pyx_n_s_BaseChessTkApp_after;
+  PyObject *__pyx_n_s_BaseChessTkApp_ask_depth;
+  PyObject *__pyx_n_s_BaseChessTkApp_change_board_colo;
+  PyObject *__pyx_n_s_BaseChessTkApp_change_font;
+  PyObject *__pyx_n_s_BaseChessTkApp_change_font_local;
+  PyObject *__pyx_n_s_BaseChessTkApp_choose_square_col;
+  PyObject *__pyx_n_s_BaseChessTkApp_choose_square_col_2;
+  PyObject *__pyx_n_s_BaseChessTkApp_clear_board;
+  PyObject *__pyx_n_s_BaseChessTkApp_create_menu;
+  PyObject *__pyx_n_s_BaseChessTkApp_get_xys;
+  PyObject *__pyx_n_s_BaseChessTkApp_on_closing;
+  PyObject *__pyx_n_s_BaseChessTkApp_on_resize;
+  PyObject *__pyx_n_s_BaseChessTkApp_set_depth;
+  PyObject *__pyx_n_s_BaseChessTkApp_set_title;
+  PyObject *__pyx_n_s_BaseChessTkApp_update_board;
   PyObject *__pyx_kp_s_Base_class_for_a_chess_app;
   PyObject *__pyx_n_s_Callable;
   PyObject *__pyx_n_s_Canvas;
@@ -2579,8 +2579,8 @@ typedef struct {
   PyObject *__pyx_n_s_canvas;
   PyObject *__pyx_n_s_change_board_colors;
   PyObject *__pyx_n_s_change_font;
-  PyObject *__pyx_n_s_chmutils_base_chess_app;
-  PyObject *__pyx_kp_s_chmutils_base_chess_app_py;
+  PyObject *__pyx_n_s_chmutils_base_chess_tk_app;
+  PyObject *__pyx_kp_s_chmutils_base_chess_tk_app_py;
   PyObject *__pyx_n_s_choose_square_color;
   PyObject *__pyx_n_s_clear_board;
   PyObject *__pyx_n_s_cline_in_traceback;
@@ -2727,33 +2727,33 @@ static int __pyx_m_clear(PyObject *m) {
   #ifdef __Pyx_FusedFunction_USED
   Py_CLEAR(clear_module_state->__pyx_FusedFunctionType);
   #endif
-  Py_CLEAR(clear_module_state->__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct__change_font);
-  Py_CLEAR(clear_module_state->__pyx_type_8chmutils_14base_chess_app___pyx_scope_struct__change_font);
-  Py_CLEAR(clear_module_state->__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color);
-  Py_CLEAR(clear_module_state->__pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color);
-  Py_CLEAR(clear_module_state->__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options);
-  Py_CLEAR(clear_module_state->__pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options);
+  Py_CLEAR(clear_module_state->__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font);
+  Py_CLEAR(clear_module_state->__pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font);
+  Py_CLEAR(clear_module_state->__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color);
+  Py_CLEAR(clear_module_state->__pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color);
+  Py_CLEAR(clear_module_state->__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options);
+  Py_CLEAR(clear_module_state->__pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options);
   Py_CLEAR(clear_module_state->__pyx_kp_u_);
   Py_CLEAR(clear_module_state->__pyx_n_s_ABCMeta);
   Py_CLEAR(clear_module_state->__pyx_n_u_Arial);
-  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessApp);
-  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessApp_add_options);
-  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessApp_add_options_locals);
-  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessApp_after);
-  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessApp_ask_depth);
-  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessApp_change_board_colors);
-  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessApp_change_font);
-  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessApp_change_font_locals);
-  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessApp_choose_square_color);
-  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessApp_choose_square_color_2);
-  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessApp_clear_board);
-  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessApp_create_menu);
-  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessApp_get_xys);
-  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessApp_on_closing);
-  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessApp_on_resize);
-  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessApp_set_depth);
-  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessApp_set_title);
-  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessApp_update_board);
+  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessTkApp);
+  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessTkApp_add_options);
+  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessTkApp_add_options_local);
+  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessTkApp_after);
+  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessTkApp_ask_depth);
+  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessTkApp_change_board_colo);
+  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessTkApp_change_font);
+  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessTkApp_change_font_local);
+  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessTkApp_choose_square_col);
+  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessTkApp_choose_square_col_2);
+  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessTkApp_clear_board);
+  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessTkApp_create_menu);
+  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessTkApp_get_xys);
+  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessTkApp_on_closing);
+  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessTkApp_on_resize);
+  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessTkApp_set_depth);
+  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessTkApp_set_title);
+  Py_CLEAR(clear_module_state->__pyx_n_s_BaseChessTkApp_update_board);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Base_class_for_a_chess_app);
   Py_CLEAR(clear_module_state->__pyx_n_s_Callable);
   Py_CLEAR(clear_module_state->__pyx_n_s_Canvas);
@@ -2802,8 +2802,8 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_canvas);
   Py_CLEAR(clear_module_state->__pyx_n_s_change_board_colors);
   Py_CLEAR(clear_module_state->__pyx_n_s_change_font);
-  Py_CLEAR(clear_module_state->__pyx_n_s_chmutils_base_chess_app);
-  Py_CLEAR(clear_module_state->__pyx_kp_s_chmutils_base_chess_app_py);
+  Py_CLEAR(clear_module_state->__pyx_n_s_chmutils_base_chess_tk_app);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_chmutils_base_chess_tk_app_py);
   Py_CLEAR(clear_module_state->__pyx_n_s_choose_square_color);
   Py_CLEAR(clear_module_state->__pyx_n_s_clear_board);
   Py_CLEAR(clear_module_state->__pyx_n_s_cline_in_traceback);
@@ -2928,33 +2928,33 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   #ifdef __Pyx_FusedFunction_USED
   Py_VISIT(traverse_module_state->__pyx_FusedFunctionType);
   #endif
-  Py_VISIT(traverse_module_state->__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct__change_font);
-  Py_VISIT(traverse_module_state->__pyx_type_8chmutils_14base_chess_app___pyx_scope_struct__change_font);
-  Py_VISIT(traverse_module_state->__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color);
-  Py_VISIT(traverse_module_state->__pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color);
-  Py_VISIT(traverse_module_state->__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options);
-  Py_VISIT(traverse_module_state->__pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options);
+  Py_VISIT(traverse_module_state->__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font);
+  Py_VISIT(traverse_module_state->__pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font);
+  Py_VISIT(traverse_module_state->__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color);
+  Py_VISIT(traverse_module_state->__pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color);
+  Py_VISIT(traverse_module_state->__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options);
+  Py_VISIT(traverse_module_state->__pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options);
   Py_VISIT(traverse_module_state->__pyx_kp_u_);
   Py_VISIT(traverse_module_state->__pyx_n_s_ABCMeta);
   Py_VISIT(traverse_module_state->__pyx_n_u_Arial);
-  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessApp);
-  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessApp_add_options);
-  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessApp_add_options_locals);
-  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessApp_after);
-  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessApp_ask_depth);
-  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessApp_change_board_colors);
-  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessApp_change_font);
-  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessApp_change_font_locals);
-  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessApp_choose_square_color);
-  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessApp_choose_square_color_2);
-  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessApp_clear_board);
-  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessApp_create_menu);
-  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessApp_get_xys);
-  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessApp_on_closing);
-  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessApp_on_resize);
-  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessApp_set_depth);
-  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessApp_set_title);
-  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessApp_update_board);
+  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessTkApp);
+  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessTkApp_add_options);
+  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessTkApp_add_options_local);
+  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessTkApp_after);
+  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessTkApp_ask_depth);
+  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessTkApp_change_board_colo);
+  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessTkApp_change_font);
+  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessTkApp_change_font_local);
+  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessTkApp_choose_square_col);
+  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessTkApp_choose_square_col_2);
+  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessTkApp_clear_board);
+  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessTkApp_create_menu);
+  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessTkApp_get_xys);
+  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessTkApp_on_closing);
+  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessTkApp_on_resize);
+  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessTkApp_set_depth);
+  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessTkApp_set_title);
+  Py_VISIT(traverse_module_state->__pyx_n_s_BaseChessTkApp_update_board);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Base_class_for_a_chess_app);
   Py_VISIT(traverse_module_state->__pyx_n_s_Callable);
   Py_VISIT(traverse_module_state->__pyx_n_s_Canvas);
@@ -3003,8 +3003,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_canvas);
   Py_VISIT(traverse_module_state->__pyx_n_s_change_board_colors);
   Py_VISIT(traverse_module_state->__pyx_n_s_change_font);
-  Py_VISIT(traverse_module_state->__pyx_n_s_chmutils_base_chess_app);
-  Py_VISIT(traverse_module_state->__pyx_kp_s_chmutils_base_chess_app_py);
+  Py_VISIT(traverse_module_state->__pyx_n_s_chmutils_base_chess_tk_app);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_chmutils_base_chess_tk_app_py);
   Py_VISIT(traverse_module_state->__pyx_n_s_choose_square_color);
   Py_VISIT(traverse_module_state->__pyx_n_s_clear_board);
   Py_VISIT(traverse_module_state->__pyx_n_s_cline_in_traceback);
@@ -3138,34 +3138,34 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_CoroutineType __pyx_mstate_global->__pyx_CoroutineType
 #endif
 #if CYTHON_USE_MODULE_STATE
-#define __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct__change_font __pyx_mstate_global->__pyx_type_8chmutils_14base_chess_app___pyx_scope_struct__change_font
-#define __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color __pyx_mstate_global->__pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color
-#define __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options __pyx_mstate_global->__pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options
+#define __pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font __pyx_mstate_global->__pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font
+#define __pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color __pyx_mstate_global->__pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color
+#define __pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options __pyx_mstate_global->__pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options
 #endif
-#define __pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct__change_font __pyx_mstate_global->__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct__change_font
-#define __pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color __pyx_mstate_global->__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color
-#define __pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options __pyx_mstate_global->__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options
+#define __pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font __pyx_mstate_global->__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font
+#define __pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color __pyx_mstate_global->__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color
+#define __pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options __pyx_mstate_global->__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options
 #define __pyx_kp_u_ __pyx_mstate_global->__pyx_kp_u_
 #define __pyx_n_s_ABCMeta __pyx_mstate_global->__pyx_n_s_ABCMeta
 #define __pyx_n_u_Arial __pyx_mstate_global->__pyx_n_u_Arial
-#define __pyx_n_s_BaseChessApp __pyx_mstate_global->__pyx_n_s_BaseChessApp
-#define __pyx_n_s_BaseChessApp_add_options __pyx_mstate_global->__pyx_n_s_BaseChessApp_add_options
-#define __pyx_n_s_BaseChessApp_add_options_locals __pyx_mstate_global->__pyx_n_s_BaseChessApp_add_options_locals
-#define __pyx_n_s_BaseChessApp_after __pyx_mstate_global->__pyx_n_s_BaseChessApp_after
-#define __pyx_n_s_BaseChessApp_ask_depth __pyx_mstate_global->__pyx_n_s_BaseChessApp_ask_depth
-#define __pyx_n_s_BaseChessApp_change_board_colors __pyx_mstate_global->__pyx_n_s_BaseChessApp_change_board_colors
-#define __pyx_n_s_BaseChessApp_change_font __pyx_mstate_global->__pyx_n_s_BaseChessApp_change_font
-#define __pyx_n_s_BaseChessApp_change_font_locals __pyx_mstate_global->__pyx_n_s_BaseChessApp_change_font_locals
-#define __pyx_n_s_BaseChessApp_choose_square_color __pyx_mstate_global->__pyx_n_s_BaseChessApp_choose_square_color
-#define __pyx_n_s_BaseChessApp_choose_square_color_2 __pyx_mstate_global->__pyx_n_s_BaseChessApp_choose_square_color_2
-#define __pyx_n_s_BaseChessApp_clear_board __pyx_mstate_global->__pyx_n_s_BaseChessApp_clear_board
-#define __pyx_n_s_BaseChessApp_create_menu __pyx_mstate_global->__pyx_n_s_BaseChessApp_create_menu
-#define __pyx_n_s_BaseChessApp_get_xys __pyx_mstate_global->__pyx_n_s_BaseChessApp_get_xys
-#define __pyx_n_s_BaseChessApp_on_closing __pyx_mstate_global->__pyx_n_s_BaseChessApp_on_closing
-#define __pyx_n_s_BaseChessApp_on_resize __pyx_mstate_global->__pyx_n_s_BaseChessApp_on_resize
-#define __pyx_n_s_BaseChessApp_set_depth __pyx_mstate_global->__pyx_n_s_BaseChessApp_set_depth
-#define __pyx_n_s_BaseChessApp_set_title __pyx_mstate_global->__pyx_n_s_BaseChessApp_set_title
-#define __pyx_n_s_BaseChessApp_update_board __pyx_mstate_global->__pyx_n_s_BaseChessApp_update_board
+#define __pyx_n_s_BaseChessTkApp __pyx_mstate_global->__pyx_n_s_BaseChessTkApp
+#define __pyx_n_s_BaseChessTkApp_add_options __pyx_mstate_global->__pyx_n_s_BaseChessTkApp_add_options
+#define __pyx_n_s_BaseChessTkApp_add_options_local __pyx_mstate_global->__pyx_n_s_BaseChessTkApp_add_options_local
+#define __pyx_n_s_BaseChessTkApp_after __pyx_mstate_global->__pyx_n_s_BaseChessTkApp_after
+#define __pyx_n_s_BaseChessTkApp_ask_depth __pyx_mstate_global->__pyx_n_s_BaseChessTkApp_ask_depth
+#define __pyx_n_s_BaseChessTkApp_change_board_colo __pyx_mstate_global->__pyx_n_s_BaseChessTkApp_change_board_colo
+#define __pyx_n_s_BaseChessTkApp_change_font __pyx_mstate_global->__pyx_n_s_BaseChessTkApp_change_font
+#define __pyx_n_s_BaseChessTkApp_change_font_local __pyx_mstate_global->__pyx_n_s_BaseChessTkApp_change_font_local
+#define __pyx_n_s_BaseChessTkApp_choose_square_col __pyx_mstate_global->__pyx_n_s_BaseChessTkApp_choose_square_col
+#define __pyx_n_s_BaseChessTkApp_choose_square_col_2 __pyx_mstate_global->__pyx_n_s_BaseChessTkApp_choose_square_col_2
+#define __pyx_n_s_BaseChessTkApp_clear_board __pyx_mstate_global->__pyx_n_s_BaseChessTkApp_clear_board
+#define __pyx_n_s_BaseChessTkApp_create_menu __pyx_mstate_global->__pyx_n_s_BaseChessTkApp_create_menu
+#define __pyx_n_s_BaseChessTkApp_get_xys __pyx_mstate_global->__pyx_n_s_BaseChessTkApp_get_xys
+#define __pyx_n_s_BaseChessTkApp_on_closing __pyx_mstate_global->__pyx_n_s_BaseChessTkApp_on_closing
+#define __pyx_n_s_BaseChessTkApp_on_resize __pyx_mstate_global->__pyx_n_s_BaseChessTkApp_on_resize
+#define __pyx_n_s_BaseChessTkApp_set_depth __pyx_mstate_global->__pyx_n_s_BaseChessTkApp_set_depth
+#define __pyx_n_s_BaseChessTkApp_set_title __pyx_mstate_global->__pyx_n_s_BaseChessTkApp_set_title
+#define __pyx_n_s_BaseChessTkApp_update_board __pyx_mstate_global->__pyx_n_s_BaseChessTkApp_update_board
 #define __pyx_kp_s_Base_class_for_a_chess_app __pyx_mstate_global->__pyx_kp_s_Base_class_for_a_chess_app
 #define __pyx_n_s_Callable __pyx_mstate_global->__pyx_n_s_Callable
 #define __pyx_n_s_Canvas __pyx_mstate_global->__pyx_n_s_Canvas
@@ -3214,8 +3214,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_canvas __pyx_mstate_global->__pyx_n_s_canvas
 #define __pyx_n_s_change_board_colors __pyx_mstate_global->__pyx_n_s_change_board_colors
 #define __pyx_n_s_change_font __pyx_mstate_global->__pyx_n_s_change_font
-#define __pyx_n_s_chmutils_base_chess_app __pyx_mstate_global->__pyx_n_s_chmutils_base_chess_app
-#define __pyx_kp_s_chmutils_base_chess_app_py __pyx_mstate_global->__pyx_kp_s_chmutils_base_chess_app_py
+#define __pyx_n_s_chmutils_base_chess_tk_app __pyx_mstate_global->__pyx_n_s_chmutils_base_chess_tk_app
+#define __pyx_kp_s_chmutils_base_chess_tk_app_py __pyx_mstate_global->__pyx_kp_s_chmutils_base_chess_tk_app_py
 #define __pyx_n_s_choose_square_color __pyx_mstate_global->__pyx_n_s_choose_square_color
 #define __pyx_n_s_clear_board __pyx_mstate_global->__pyx_n_s_clear_board
 #define __pyx_n_s_cline_in_traceback __pyx_mstate_global->__pyx_n_s_cline_in_traceback
@@ -3322,7 +3322,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_codeobj__25 __pyx_mstate_global->__pyx_codeobj__25
 /* #### Code section: module_code ### */
 
-/* "chmutils/base_chess_app.py":23
+/* "chmutils/base_chess_tk_app.py":23
  *     current_move_index: int
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
@@ -3331,16 +3331,16 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_1on_closing(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_1on_closing(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_on_closing, "Clean up resources before closing the application.");
-static PyMethodDef __pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_1on_closing = {"on_closing", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_1on_closing, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_on_closing};
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_1on_closing(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_on_closing, "Clean up resources before closing the application.");
+static PyMethodDef __pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_1on_closing = {"on_closing", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_1on_closing, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_on_closing};
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_1on_closing(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -3410,11 +3410,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.on_closing", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.on_closing", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_on_closing(__pyx_self, __pyx_v_self);
+  __pyx_r = __pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_on_closing(__pyx_self, __pyx_v_self);
 
   /* function exit code */
   {
@@ -3427,7 +3427,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_on_closing(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_on_closing(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("on_closing", 1);
@@ -3439,7 +3439,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_on_closing(C
   return __pyx_r;
 }
 
-/* "chmutils/base_chess_app.py":28
+/* "chmutils/base_chess_tk_app.py":28
  *         pass
  * 
  *     def on_resize(self, event: Event) -> None:             # <<<<<<<<<<<<<<
@@ -3448,16 +3448,16 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_on_closing(C
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_3on_resize(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_3on_resize(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_2on_resize, "Handle window resize events.\n\n        This method is called whenever the user resizes the window, adjusting the canvas and square size\n        to fit the new dimensions of the window. It triggers a board update after resizing.\n        ");
-static PyMethodDef __pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_3on_resize = {"on_resize", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_3on_resize, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_2on_resize};
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_3on_resize(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_2on_resize, "Handle window resize events.\n\n        This method is called whenever the user resizes the window, adjusting the canvas and square size\n        to fit the new dimensions of the window. It triggers a board update after resizing.\n        ");
+static PyMethodDef __pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_3on_resize = {"on_resize", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_3on_resize, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_2on_resize};
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_3on_resize(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -3542,11 +3542,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.on_resize", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.on_resize", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_2on_resize(__pyx_self, __pyx_v_self, __pyx_v_event);
+  __pyx_r = __pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_2on_resize(__pyx_self, __pyx_v_self, __pyx_v_event);
 
   /* function exit code */
   {
@@ -3559,7 +3559,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_2on_resize(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_event) {
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_2on_resize(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_event) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3582,7 +3582,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_2on_resize(C
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("on_resize", 1);
 
-  /* "chmutils/base_chess_app.py":34
+  /* "chmutils/base_chess_tk_app.py":34
  *         to fit the new dimensions of the window. It triggers a board update after resizing.
  *         """
  *         if self.updating:             # <<<<<<<<<<<<<<
@@ -3595,7 +3595,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_2on_resize(C
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "chmutils/base_chess_app.py":35
+    /* "chmutils/base_chess_tk_app.py":35
  *         """
  *         if self.updating:
  *             return             # <<<<<<<<<<<<<<
@@ -3606,7 +3606,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_2on_resize(C
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "chmutils/base_chess_app.py":34
+    /* "chmutils/base_chess_tk_app.py":34
  *         to fit the new dimensions of the window. It triggers a board update after resizing.
  *         """
  *         if self.updating:             # <<<<<<<<<<<<<<
@@ -3615,7 +3615,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_2on_resize(C
  */
   }
 
-  /* "chmutils/base_chess_app.py":36
+  /* "chmutils/base_chess_tk_app.py":36
  *         if self.updating:
  *             return
  *         self.updating = True             # <<<<<<<<<<<<<<
@@ -3624,7 +3624,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_2on_resize(C
  */
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_updating, Py_True) < 0) __PYX_ERR(0, 36, __pyx_L1_error)
 
-  /* "chmutils/base_chess_app.py":37
+  /* "chmutils/base_chess_tk_app.py":37
  *             return
  *         self.updating = True
  *         try:             # <<<<<<<<<<<<<<
@@ -3633,7 +3633,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_2on_resize(C
  */
   /*try:*/ {
 
-    /* "chmutils/base_chess_app.py":38
+    /* "chmutils/base_chess_tk_app.py":38
  *         self.updating = True
  *         try:
  *             self.canvas.config(width=event.width, height=event.height)             # <<<<<<<<<<<<<<
@@ -3661,7 +3661,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_2on_resize(C
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "chmutils/base_chess_app.py":39
+    /* "chmutils/base_chess_tk_app.py":39
  *         try:
  *             self.canvas.config(width=event.width, height=event.height)
  *             self.square_size = min(event.width, event.height) // 8             # <<<<<<<<<<<<<<
@@ -3690,7 +3690,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_2on_resize(C
     if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_square_size, __pyx_t_4) < 0) __PYX_ERR(0, 39, __pyx_L5_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "chmutils/base_chess_app.py":40
+    /* "chmutils/base_chess_tk_app.py":40
  *             self.canvas.config(width=event.width, height=event.height)
  *             self.square_size = min(event.width, event.height) // 8
  *             self.update_board()             # <<<<<<<<<<<<<<
@@ -3724,7 +3724,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_2on_resize(C
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
 
-  /* "chmutils/base_chess_app.py":42
+  /* "chmutils/base_chess_tk_app.py":42
  *             self.update_board()
  *         finally:
  *             self.updating = False             # <<<<<<<<<<<<<<
@@ -3786,7 +3786,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_2on_resize(C
     __pyx_L6:;
   }
 
-  /* "chmutils/base_chess_app.py":28
+  /* "chmutils/base_chess_tk_app.py":28
  *         pass
  * 
  *     def on_resize(self, event: Event) -> None:             # <<<<<<<<<<<<<<
@@ -3802,7 +3802,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_2on_resize(C
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.on_resize", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.on_resize", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -3810,7 +3810,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_2on_resize(C
   return __pyx_r;
 }
 
-/* "chmutils/base_chess_app.py":44
+/* "chmutils/base_chess_tk_app.py":44
  *             self.updating = False
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
@@ -3819,16 +3819,16 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_2on_resize(C
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_5set_depth(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_5set_depth(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_4set_depth, "Prompt the user to set a new recursion depth for heatmap calculations.\n\n        The user is asked to input an integer value. If a valid value is provided,\n        the depth is updated and the window title is refreshed to reflect the change.\n        ");
-static PyMethodDef __pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_5set_depth = {"set_depth", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_5set_depth, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_4set_depth};
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_5set_depth(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_4set_depth, "Prompt the user to set a new recursion depth for heatmap calculations.\n\n        The user is asked to input an integer value. If a valid value is provided,\n        the depth is updated and the window title is refreshed to reflect the change.\n        ");
+static PyMethodDef __pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_5set_depth = {"set_depth", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_5set_depth, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_4set_depth};
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_5set_depth(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -3898,11 +3898,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.set_depth", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.set_depth", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_4set_depth(__pyx_self, __pyx_v_self);
+  __pyx_r = __pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_4set_depth(__pyx_self, __pyx_v_self);
 
   /* function exit code */
   {
@@ -3915,7 +3915,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_4set_depth(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_4set_depth(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_depth", 1);
@@ -3927,7 +3927,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_4set_depth(C
   return __pyx_r;
 }
 
-/* "chmutils/base_chess_app.py":53
+/* "chmutils/base_chess_tk_app.py":53
  *         pass
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
@@ -3936,16 +3936,16 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_4set_depth(C
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_7create_menu(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_7create_menu(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_6create_menu, "Constructs the app menu during initialization.\n\n        This method creates a menu bar with options to load a PGN file, change the board colors,\n        and modify the font. It also allows navigation through the moves in the game (next/previous move).\n        ");
-static PyMethodDef __pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_7create_menu = {"create_menu", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_7create_menu, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_6create_menu};
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_7create_menu(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_6create_menu, "Constructs the app menu during initialization.\n\n        This method creates a menu bar with options to load a PGN file, change the board colors,\n        and modify the font. It also allows navigation through the moves in the game (next/previous move).\n        ");
+static PyMethodDef __pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_7create_menu = {"create_menu", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_7create_menu, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_6create_menu};
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_7create_menu(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -4015,11 +4015,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.create_menu", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.create_menu", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_6create_menu(__pyx_self, __pyx_v_self);
+  __pyx_r = __pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_6create_menu(__pyx_self, __pyx_v_self);
 
   /* function exit code */
   {
@@ -4032,7 +4032,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_6create_menu(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_6create_menu(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("create_menu", 1);
@@ -4044,7 +4044,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_6create_menu
   return __pyx_r;
 }
 
-/* "chmutils/base_chess_app.py":62
+/* "chmutils/base_chess_tk_app.py":62
  *         pass
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
@@ -4053,16 +4053,16 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_6create_menu
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_9set_title(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_9set_title(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_8set_title, "Sets the App window title");
-static PyMethodDef __pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_9set_title = {"set_title", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_9set_title, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_8set_title};
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_9set_title(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_8set_title, "Sets the App window title");
+static PyMethodDef __pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_9set_title = {"set_title", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_9set_title, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_8set_title};
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_9set_title(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -4132,11 +4132,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.set_title", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.set_title", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_8set_title(__pyx_self, __pyx_v_self);
+  __pyx_r = __pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_8set_title(__pyx_self, __pyx_v_self);
 
   /* function exit code */
   {
@@ -4149,7 +4149,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_8set_title(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_8set_title(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_title", 1);
@@ -4161,7 +4161,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_8set_title(C
   return __pyx_r;
 }
 
-/* "chmutils/base_chess_app.py":67
+/* "chmutils/base_chess_tk_app.py":67
  *         pass
  * 
  *     def ask_depth(self) -> Optional[int]:             # <<<<<<<<<<<<<<
@@ -4170,16 +4170,16 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_8set_title(C
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_11ask_depth(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11ask_depth(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_10ask_depth, "\n        Prompt the user to set a new recursion depth for heatmap calculations.\n\n        This method displays a dialog box warning the user about the exponential\n        complexity of increasing depth values. It recommends using odd values for\n        unbiased heatmaps, as even depths favor the current player.\n\n        Returns\n        -------\n        Union[int, None]\n            The user-provided depth value if valid, otherwise None.\n        ");
-static PyMethodDef __pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_11ask_depth = {"ask_depth", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_11ask_depth, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_10ask_depth};
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_11ask_depth(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_10ask_depth, "\n        Prompt the user to set a new recursion depth for heatmap calculations.\n\n        This method displays a dialog box warning the user about the exponential\n        complexity of increasing depth values. It recommends using odd values for\n        unbiased heatmaps, as even depths favor the current player.\n\n        Returns\n        -------\n        Union[int, None]\n            The user-provided depth value if valid, otherwise None.\n        ");
+static PyMethodDef __pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11ask_depth = {"ask_depth", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11ask_depth, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_10ask_depth};
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11ask_depth(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -4249,11 +4249,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.ask_depth", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.ask_depth", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_10ask_depth(__pyx_self, __pyx_v_self);
+  __pyx_r = __pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_10ask_depth(__pyx_self, __pyx_v_self);
 
   /* function exit code */
   {
@@ -4266,7 +4266,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_10ask_depth(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_10ask_depth(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_v_depth_warning = 0;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -4281,7 +4281,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_10ask_depth(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("ask_depth", 1);
 
-  /* "chmutils/base_chess_app.py":80
+  /* "chmutils/base_chess_tk_app.py":80
  *             The user-provided depth value if valid, otherwise None.
  *         """
  *         depth_warning: str = "Every increment to this value increases calculation times exponentially!\n\n"             # <<<<<<<<<<<<<<
@@ -4291,7 +4291,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_10ask_depth(
   __Pyx_INCREF(__pyx_kp_u_Every_increment_to_this_value_in);
   __pyx_v_depth_warning = __pyx_kp_u_Every_increment_to_this_value_in;
 
-  /* "chmutils/base_chess_app.py":81
+  /* "chmutils/base_chess_tk_app.py":81
  *         """
  *         depth_warning: str = "Every increment to this value increases calculation times exponentially!\n\n"
  *         depth_warning += "Note: Odd values are recommended for least biased heatmaps\nas each depth starting from 0 "             # <<<<<<<<<<<<<<
@@ -4303,7 +4303,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_10ask_depth(
   __Pyx_DECREF_SET(__pyx_v_depth_warning, ((PyObject*)__pyx_t_1));
   __pyx_t_1 = 0;
 
-  /* "chmutils/base_chess_app.py":82
+  /* "chmutils/base_chess_tk_app.py":82
  *         depth_warning: str = "Every increment to this value increases calculation times exponentially!\n\n"
  *         depth_warning += "Note: Odd values are recommended for least biased heatmaps\nas each depth starting from 0 "
  *         depth_warning += "only counts one half turn of possible moves."             # <<<<<<<<<<<<<<
@@ -4315,7 +4315,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_10ask_depth(
   __Pyx_DECREF_SET(__pyx_v_depth_warning, ((PyObject*)__pyx_t_1));
   __pyx_t_1 = 0;
 
-  /* "chmutils/base_chess_app.py":83
+  /* "chmutils/base_chess_tk_app.py":83
  *         depth_warning += "Note: Odd values are recommended for least biased heatmaps\nas each depth starting from 0 "
  *         depth_warning += "only counts one half turn of possible moves."
  *         return simpledialog.askinteger(             # <<<<<<<<<<<<<<
@@ -4329,7 +4329,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_10ask_depth(
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "chmutils/base_chess_app.py":85
+  /* "chmutils/base_chess_tk_app.py":85
  *         return simpledialog.askinteger(
  *             "Set Depth",
  *             f"\nWARNING: {depth_warning}\n\nEnter new recursion depth:",             # <<<<<<<<<<<<<<
@@ -4357,7 +4357,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_10ask_depth(
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "chmutils/base_chess_app.py":83
+  /* "chmutils/base_chess_tk_app.py":83
  *         depth_warning += "Note: Odd values are recommended for least biased heatmaps\nas each depth starting from 0 "
  *         depth_warning += "only counts one half turn of possible moves."
  *         return simpledialog.askinteger(             # <<<<<<<<<<<<<<
@@ -4373,7 +4373,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_10ask_depth(
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_5)) __PYX_ERR(0, 83, __pyx_L1_error);
   __pyx_t_5 = 0;
 
-  /* "chmutils/base_chess_app.py":86
+  /* "chmutils/base_chess_tk_app.py":86
  *             "Set Depth",
  *             f"\nWARNING: {depth_warning}\n\nEnter new recursion depth:",
  *             initialvalue=self.depth,             # <<<<<<<<<<<<<<
@@ -4389,7 +4389,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_10ask_depth(
   if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_minvalue, __pyx_int_0) < 0) __PYX_ERR(0, 86, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_maxvalue, __pyx_int_100) < 0) __PYX_ERR(0, 86, __pyx_L1_error)
 
-  /* "chmutils/base_chess_app.py":83
+  /* "chmutils/base_chess_tk_app.py":83
  *         depth_warning += "Note: Odd values are recommended for least biased heatmaps\nas each depth starting from 0 "
  *         depth_warning += "only counts one half turn of possible moves."
  *         return simpledialog.askinteger(             # <<<<<<<<<<<<<<
@@ -4406,7 +4406,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_10ask_depth(
   __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "chmutils/base_chess_app.py":67
+  /* "chmutils/base_chess_tk_app.py":67
  *         pass
  * 
  *     def ask_depth(self) -> Optional[int]:             # <<<<<<<<<<<<<<
@@ -4420,7 +4420,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_10ask_depth(
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.ask_depth", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.ask_depth", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_depth_warning);
@@ -4429,7 +4429,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_10ask_depth(
   return __pyx_r;
 }
 
-/* "chmutils/base_chess_app.py":91
+/* "chmutils/base_chess_tk_app.py":91
  *         )  # Adjust maxvalue as needed.
  * 
  *     def change_font(self, new_font: str) -> None:             # <<<<<<<<<<<<<<
@@ -4438,16 +4438,16 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_10ask_depth(
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_13change_font(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_13change_font(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_12change_font, "Handle font option updates.\n\n        This method updates the font used for displaying chess pieces on the board.\n        After updating, the board is re-rendered with the new font.\n        ");
-static PyMethodDef __pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_13change_font = {"change_font", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_13change_font, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_12change_font};
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_13change_font(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_12change_font, "Handle font option updates.\n\n        This method updates the font used for displaying chess pieces on the board.\n        After updating, the board is re-rendered with the new font.\n        ");
+static PyMethodDef __pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_13change_font = {"change_font", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_13change_font, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_12change_font};
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_13change_font(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -4532,12 +4532,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.change_font", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.change_font", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_new_font), (&PyUnicode_Type), 0, "new_font", 1))) __PYX_ERR(0, 91, __pyx_L1_error)
-  __pyx_r = __pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_12change_font(__pyx_self, __pyx_v_self, __pyx_v_new_font);
+  __pyx_r = __pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_12change_font(__pyx_self, __pyx_v_self, __pyx_v_new_font);
 
   /* function exit code */
   goto __pyx_L0;
@@ -4554,7 +4554,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-/* "chmutils/base_chess_app.py":103
+/* "chmutils/base_chess_tk_app.py":103
  *             self.updating = False
  *         else:
  *             self.after(100, lambda: self.change_font(new_font))             # <<<<<<<<<<<<<<
@@ -4563,9 +4563,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_11change_font_lambda(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyMethodDef __pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_11change_font_lambda = {"lambda", (PyCFunction)__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_11change_font_lambda, METH_NOARGS, 0};
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_11change_font_lambda(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11change_font_lambda(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyMethodDef __pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11change_font_lambda = {"lambda", (PyCFunction)__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11change_font_lambda, METH_NOARGS, 0};
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11change_font_lambda(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused) {
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -4579,8 +4579,8 @@ static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_11change_fon
 }
 
 static PyObject *__pyx_lambda_funcdef_lambda(PyObject *__pyx_self) {
-  struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct__change_font *__pyx_cur_scope;
-  struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct__change_font *__pyx_outer_scope;
+  struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font *__pyx_cur_scope;
+  struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font *__pyx_outer_scope;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4591,7 +4591,7 @@ static PyObject *__pyx_lambda_funcdef_lambda(PyObject *__pyx_self) {
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("lambda", 1);
-  __pyx_outer_scope = (struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct__change_font *) __Pyx_CyFunction_GetClosure(__pyx_self);
+  __pyx_outer_scope = (struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font *) __Pyx_CyFunction_GetClosure(__pyx_self);
   __pyx_cur_scope = __pyx_outer_scope;
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(!__pyx_cur_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 103, __pyx_L1_error) }
@@ -4629,7 +4629,7 @@ static PyObject *__pyx_lambda_funcdef_lambda(PyObject *__pyx_self) {
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.change_font.lambda", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.change_font.lambda", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -4637,7 +4637,7 @@ static PyObject *__pyx_lambda_funcdef_lambda(PyObject *__pyx_self) {
   return __pyx_r;
 }
 
-/* "chmutils/base_chess_app.py":91
+/* "chmutils/base_chess_tk_app.py":91
  *         )  # Adjust maxvalue as needed.
  * 
  *     def change_font(self, new_font: str) -> None:             # <<<<<<<<<<<<<<
@@ -4645,8 +4645,8 @@ static PyObject *__pyx_lambda_funcdef_lambda(PyObject *__pyx_self) {
  * 
  */
 
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_12change_font(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_new_font) {
-  struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct__change_font *__pyx_cur_scope;
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_12change_font(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_new_font) {
+  struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font *__pyx_cur_scope;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4660,9 +4660,9 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_12change_fon
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("change_font", 0);
-  __pyx_cur_scope = (struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct__change_font *)__pyx_tp_new_8chmutils_14base_chess_app___pyx_scope_struct__change_font(__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct__change_font, __pyx_empty_tuple, NULL);
+  __pyx_cur_scope = (struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font *)__pyx_tp_new_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font(__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font, __pyx_empty_tuple, NULL);
   if (unlikely(!__pyx_cur_scope)) {
-    __pyx_cur_scope = ((struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct__change_font *)Py_None);
+    __pyx_cur_scope = ((struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font *)Py_None);
     __Pyx_INCREF(Py_None);
     __PYX_ERR(0, 91, __pyx_L1_error)
   } else {
@@ -4675,7 +4675,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_12change_fon
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_new_font);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_new_font);
 
-  /* "chmutils/base_chess_app.py":97
+  /* "chmutils/base_chess_tk_app.py":97
  *         After updating, the board is re-rendered with the new font.
  *         """
  *         if not self.updating:             # <<<<<<<<<<<<<<
@@ -4689,7 +4689,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_12change_fon
   __pyx_t_3 = (!__pyx_t_2);
   if (__pyx_t_3) {
 
-    /* "chmutils/base_chess_app.py":98
+    /* "chmutils/base_chess_tk_app.py":98
  *         """
  *         if not self.updating:
  *             self.updating = True             # <<<<<<<<<<<<<<
@@ -4698,7 +4698,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_12change_fon
  */
     if (__Pyx_PyObject_SetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_updating, Py_True) < 0) __PYX_ERR(0, 98, __pyx_L1_error)
 
-    /* "chmutils/base_chess_app.py":99
+    /* "chmutils/base_chess_tk_app.py":99
  *         if not self.updating:
  *             self.updating = True
  *             self.font = new_font             # <<<<<<<<<<<<<<
@@ -4707,7 +4707,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_12change_fon
  */
     if (__Pyx_PyObject_SetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_font, __pyx_cur_scope->__pyx_v_new_font) < 0) __PYX_ERR(0, 99, __pyx_L1_error)
 
-    /* "chmutils/base_chess_app.py":100
+    /* "chmutils/base_chess_tk_app.py":100
  *             self.updating = True
  *             self.font = new_font
  *             self.update_board()             # <<<<<<<<<<<<<<
@@ -4740,7 +4740,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_12change_fon
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "chmutils/base_chess_app.py":101
+    /* "chmutils/base_chess_tk_app.py":101
  *             self.font = new_font
  *             self.update_board()
  *             self.updating = False             # <<<<<<<<<<<<<<
@@ -4749,7 +4749,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_12change_fon
  */
     if (__Pyx_PyObject_SetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_updating, Py_False) < 0) __PYX_ERR(0, 101, __pyx_L1_error)
 
-    /* "chmutils/base_chess_app.py":97
+    /* "chmutils/base_chess_tk_app.py":97
  *         After updating, the board is re-rendered with the new font.
  *         """
  *         if not self.updating:             # <<<<<<<<<<<<<<
@@ -4759,7 +4759,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_12change_fon
     goto __pyx_L3;
   }
 
-  /* "chmutils/base_chess_app.py":103
+  /* "chmutils/base_chess_tk_app.py":103
  *             self.updating = False
  *         else:
  *             self.after(100, lambda: self.change_font(new_font))             # <<<<<<<<<<<<<<
@@ -4769,7 +4769,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_12change_fon
   /*else*/ {
     __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_after); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 103, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_11change_font_lambda, 0, __pyx_n_s_BaseChessApp_change_font_locals, ((PyObject*)__pyx_cur_scope), __pyx_n_s_chmutils_base_chess_app, __pyx_d, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 103, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11change_font_lambda, 0, __pyx_n_s_BaseChessTkApp_change_font_local, ((PyObject*)__pyx_cur_scope), __pyx_n_s_chmutils_base_chess_tk_app, __pyx_d, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 103, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_7 = NULL;
     __pyx_t_6 = 0;
@@ -4798,7 +4798,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_12change_fon
   }
   __pyx_L3:;
 
-  /* "chmutils/base_chess_app.py":91
+  /* "chmutils/base_chess_tk_app.py":91
  *         )  # Adjust maxvalue as needed.
  * 
  *     def change_font(self, new_font: str) -> None:             # <<<<<<<<<<<<<<
@@ -4814,7 +4814,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_12change_fon
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.change_font", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.change_font", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_DECREF((PyObject *)__pyx_cur_scope);
@@ -4823,7 +4823,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_12change_fon
   return __pyx_r;
 }
 
-/* "chmutils/base_chess_app.py":105
+/* "chmutils/base_chess_tk_app.py":105
  *             self.after(100, lambda: self.change_font(new_font))
  * 
  *     def choose_square_color(self, title: str, index: int) -> None:             # <<<<<<<<<<<<<<
@@ -4832,16 +4832,16 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_12change_fon
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_15choose_square_color(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_15choose_square_color(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_14choose_square_color, "Allow the user to change a specific square color.\n\n        This method opens a tkinter color chooser dialog, allowing the user to select a new color\n        for either the light or dark squares on the chessboard.\n\n        Parameters\n        ----------\n        title : str\n            The title of the color picker dialog (e.g., \"Pick Light Square Color\").\n        index : int\n            The index (0 for light squares, 1 for dark squares) of the square color to be changed.\n        ");
-static PyMethodDef __pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_15choose_square_color = {"choose_square_color", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_15choose_square_color, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_14choose_square_color};
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_15choose_square_color(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_14choose_square_color, "Allow the user to change a specific square color.\n\n        This method opens a tkinter color chooser dialog, allowing the user to select a new color\n        for either the light or dark squares on the chessboard.\n\n        Parameters\n        ----------\n        title : str\n            The title of the color picker dialog (e.g., \"Pick Light Square Color\").\n        index : int\n            The index (0 for light squares, 1 for dark squares) of the square color to be changed.\n        ");
+static PyMethodDef __pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_15choose_square_color = {"choose_square_color", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_15choose_square_color, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_14choose_square_color};
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_15choose_square_color(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -4941,13 +4941,13 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.choose_square_color", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.choose_square_color", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_title), (&PyUnicode_Type), 0, "title", 1))) __PYX_ERR(0, 105, __pyx_L1_error)
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_index), (&PyInt_Type), 0, "index", 1))) __PYX_ERR(0, 105, __pyx_L1_error)
-  __pyx_r = __pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_14choose_square_color(__pyx_self, __pyx_v_self, __pyx_v_title, __pyx_v_index);
+  __pyx_r = __pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_14choose_square_color(__pyx_self, __pyx_v_self, __pyx_v_title, __pyx_v_index);
 
   /* function exit code */
   goto __pyx_L0;
@@ -4964,7 +4964,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-/* "chmutils/base_chess_app.py":126
+/* "chmutils/base_chess_tk_app.py":126
  *             self.updating = False
  *         else:
  *             self.after(100, lambda: self.choose_square_color(title, index))             # <<<<<<<<<<<<<<
@@ -4973,9 +4973,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_19choose_square_color_lambda1(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyMethodDef __pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_19choose_square_color_lambda1 = {"lambda1", (PyCFunction)__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_19choose_square_color_lambda1, METH_NOARGS, 0};
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_19choose_square_color_lambda1(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_19choose_square_color_lambda1(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyMethodDef __pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_19choose_square_color_lambda1 = {"lambda1", (PyCFunction)__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_19choose_square_color_lambda1, METH_NOARGS, 0};
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_19choose_square_color_lambda1(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused) {
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -4989,8 +4989,8 @@ static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_19choose_squ
 }
 
 static PyObject *__pyx_lambda_funcdef_lambda1(PyObject *__pyx_self) {
-  struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color *__pyx_cur_scope;
-  struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color *__pyx_outer_scope;
+  struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color *__pyx_cur_scope;
+  struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color *__pyx_outer_scope;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -5001,7 +5001,7 @@ static PyObject *__pyx_lambda_funcdef_lambda1(PyObject *__pyx_self) {
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("lambda1", 1);
-  __pyx_outer_scope = (struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color *) __Pyx_CyFunction_GetClosure(__pyx_self);
+  __pyx_outer_scope = (struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color *) __Pyx_CyFunction_GetClosure(__pyx_self);
   __pyx_cur_scope = __pyx_outer_scope;
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(!__pyx_cur_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 126, __pyx_L1_error) }
@@ -5040,7 +5040,7 @@ static PyObject *__pyx_lambda_funcdef_lambda1(PyObject *__pyx_self) {
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.choose_square_color.lambda1", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.choose_square_color.lambda1", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -5048,7 +5048,7 @@ static PyObject *__pyx_lambda_funcdef_lambda1(PyObject *__pyx_self) {
   return __pyx_r;
 }
 
-/* "chmutils/base_chess_app.py":105
+/* "chmutils/base_chess_tk_app.py":105
  *             self.after(100, lambda: self.change_font(new_font))
  * 
  *     def choose_square_color(self, title: str, index: int) -> None:             # <<<<<<<<<<<<<<
@@ -5056,8 +5056,8 @@ static PyObject *__pyx_lambda_funcdef_lambda1(PyObject *__pyx_self) {
  * 
  */
 
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_14choose_square_color(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_title, PyObject *__pyx_v_index) {
-  struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color *__pyx_cur_scope;
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_14choose_square_color(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_title, PyObject *__pyx_v_index) {
+  struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color *__pyx_cur_scope;
   PyObject *__pyx_v_color = 0;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -5072,9 +5072,9 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_14choose_squ
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("choose_square_color", 0);
-  __pyx_cur_scope = (struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color *)__pyx_tp_new_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color(__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color, __pyx_empty_tuple, NULL);
+  __pyx_cur_scope = (struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color *)__pyx_tp_new_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color(__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color, __pyx_empty_tuple, NULL);
   if (unlikely(!__pyx_cur_scope)) {
-    __pyx_cur_scope = ((struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color *)Py_None);
+    __pyx_cur_scope = ((struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color *)Py_None);
     __Pyx_INCREF(Py_None);
     __PYX_ERR(0, 105, __pyx_L1_error)
   } else {
@@ -5090,7 +5090,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_14choose_squ
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_index);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_index);
 
-  /* "chmutils/base_chess_app.py":118
+  /* "chmutils/base_chess_tk_app.py":118
  *             The index (0 for light squares, 1 for dark squares) of the square color to be changed.
  *         """
  *         if not self.updating:             # <<<<<<<<<<<<<<
@@ -5104,7 +5104,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_14choose_squ
   __pyx_t_3 = (!__pyx_t_2);
   if (__pyx_t_3) {
 
-    /* "chmutils/base_chess_app.py":119
+    /* "chmutils/base_chess_tk_app.py":119
  *         """
  *         if not self.updating:
  *             self.updating = True             # <<<<<<<<<<<<<<
@@ -5113,7 +5113,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_14choose_squ
  */
     if (__Pyx_PyObject_SetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_updating, Py_True) < 0) __PYX_ERR(0, 119, __pyx_L1_error)
 
-    /* "chmutils/base_chess_app.py":120
+    /* "chmutils/base_chess_tk_app.py":120
  *         if not self.updating:
  *             self.updating = True
  *             color: Optional[str] = colorchooser.askcolor(title=title)[1]             # <<<<<<<<<<<<<<
@@ -5139,7 +5139,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_14choose_squ
     __pyx_v_color = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "chmutils/base_chess_app.py":121
+    /* "chmutils/base_chess_tk_app.py":121
  *             self.updating = True
  *             color: Optional[str] = colorchooser.askcolor(title=title)[1]
  *             if isinstance(color, str):             # <<<<<<<<<<<<<<
@@ -5149,7 +5149,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_14choose_squ
     __pyx_t_3 = PyUnicode_Check(__pyx_v_color); 
     if (__pyx_t_3) {
 
-      /* "chmutils/base_chess_app.py":122
+      /* "chmutils/base_chess_tk_app.py":122
  *             color: Optional[str] = colorchooser.askcolor(title=title)[1]
  *             if isinstance(color, str):
  *                 self.colors[index] = color             # <<<<<<<<<<<<<<
@@ -5161,7 +5161,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_14choose_squ
       if (unlikely((PyObject_SetItem(__pyx_t_1, __pyx_cur_scope->__pyx_v_index, __pyx_v_color) < 0))) __PYX_ERR(0, 122, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "chmutils/base_chess_app.py":123
+      /* "chmutils/base_chess_tk_app.py":123
  *             if isinstance(color, str):
  *                 self.colors[index] = color
  *                 self.update_board()             # <<<<<<<<<<<<<<
@@ -5194,7 +5194,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_14choose_squ
       }
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "chmutils/base_chess_app.py":121
+      /* "chmutils/base_chess_tk_app.py":121
  *             self.updating = True
  *             color: Optional[str] = colorchooser.askcolor(title=title)[1]
  *             if isinstance(color, str):             # <<<<<<<<<<<<<<
@@ -5203,7 +5203,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_14choose_squ
  */
     }
 
-    /* "chmutils/base_chess_app.py":124
+    /* "chmutils/base_chess_tk_app.py":124
  *                 self.colors[index] = color
  *                 self.update_board()
  *             self.updating = False             # <<<<<<<<<<<<<<
@@ -5212,7 +5212,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_14choose_squ
  */
     if (__Pyx_PyObject_SetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_updating, Py_False) < 0) __PYX_ERR(0, 124, __pyx_L1_error)
 
-    /* "chmutils/base_chess_app.py":118
+    /* "chmutils/base_chess_tk_app.py":118
  *             The index (0 for light squares, 1 for dark squares) of the square color to be changed.
  *         """
  *         if not self.updating:             # <<<<<<<<<<<<<<
@@ -5222,7 +5222,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_14choose_squ
     goto __pyx_L3;
   }
 
-  /* "chmutils/base_chess_app.py":126
+  /* "chmutils/base_chess_tk_app.py":126
  *             self.updating = False
  *         else:
  *             self.after(100, lambda: self.choose_square_color(title, index))             # <<<<<<<<<<<<<<
@@ -5232,7 +5232,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_14choose_squ
   /*else*/ {
     __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_after); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_19choose_square_color_lambda1, 0, __pyx_n_s_BaseChessApp_choose_square_color, ((PyObject*)__pyx_cur_scope), __pyx_n_s_chmutils_base_chess_app, __pyx_d, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_19choose_square_color_lambda1, 0, __pyx_n_s_BaseChessTkApp_choose_square_col, ((PyObject*)__pyx_cur_scope), __pyx_n_s_chmutils_base_chess_tk_app, __pyx_d, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_7 = NULL;
     __pyx_t_6 = 0;
@@ -5261,7 +5261,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_14choose_squ
   }
   __pyx_L3:;
 
-  /* "chmutils/base_chess_app.py":105
+  /* "chmutils/base_chess_tk_app.py":105
  *             self.after(100, lambda: self.change_font(new_font))
  * 
  *     def choose_square_color(self, title: str, index: int) -> None:             # <<<<<<<<<<<<<<
@@ -5277,7 +5277,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_14choose_squ
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.choose_square_color", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.choose_square_color", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_color);
@@ -5287,7 +5287,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_14choose_squ
   return __pyx_r;
 }
 
-/* "chmutils/base_chess_app.py":128
+/* "chmutils/base_chess_tk_app.py":128
  *             self.after(100, lambda: self.choose_square_color(title, index))
  * 
  *     def change_board_colors(self) -> None:             # <<<<<<<<<<<<<<
@@ -5296,16 +5296,16 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_14choose_squ
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_17change_board_colors(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_17change_board_colors(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_16change_board_colors, "Invoke both light and dark square color option prompts.\n\n        This method opens color pickers for both the light and dark squares, allowing the user\n        to select custom colors for the chessboard squares.\n        ");
-static PyMethodDef __pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_17change_board_colors = {"change_board_colors", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_17change_board_colors, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_16change_board_colors};
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_17change_board_colors(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_16change_board_colors, "Invoke both light and dark square color option prompts.\n\n        This method opens color pickers for both the light and dark squares, allowing the user\n        to select custom colors for the chessboard squares.\n        ");
+static PyMethodDef __pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_17change_board_colors = {"change_board_colors", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_17change_board_colors, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_16change_board_colors};
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_17change_board_colors(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -5375,11 +5375,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.change_board_colors", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.change_board_colors", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_16change_board_colors(__pyx_self, __pyx_v_self);
+  __pyx_r = __pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_16change_board_colors(__pyx_self, __pyx_v_self);
 
   /* function exit code */
   {
@@ -5392,7 +5392,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_16change_board_colors(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_16change_board_colors(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -5403,7 +5403,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_16change_boa
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("change_board_colors", 1);
 
-  /* "chmutils/base_chess_app.py":134
+  /* "chmutils/base_chess_tk_app.py":134
  *         to select custom colors for the chessboard squares.
  *         """
  *         self.choose_square_color(title=LIGHT_SQUARE_COLOR_PROMPT, index=0)             # <<<<<<<<<<<<<<
@@ -5425,7 +5425,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_16change_boa
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmutils/base_chess_app.py":135
+  /* "chmutils/base_chess_tk_app.py":135
  *         """
  *         self.choose_square_color(title=LIGHT_SQUARE_COLOR_PROMPT, index=0)
  *         self.choose_square_color(title=DARK_SQUARE_COLOR_PROMPT, index=1)             # <<<<<<<<<<<<<<
@@ -5447,7 +5447,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_16change_boa
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "chmutils/base_chess_app.py":128
+  /* "chmutils/base_chess_tk_app.py":128
  *             self.after(100, lambda: self.choose_square_color(title, index))
  * 
  *     def change_board_colors(self) -> None:             # <<<<<<<<<<<<<<
@@ -5462,7 +5462,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_16change_boa
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.change_board_colors", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.change_board_colors", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -5470,7 +5470,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_16change_boa
   return __pyx_r;
 }
 
-/* "chmutils/base_chess_app.py":137
+/* "chmutils/base_chess_tk_app.py":137
  *         self.choose_square_color(title=DARK_SQUARE_COLOR_PROMPT, index=1)
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
@@ -5479,16 +5479,16 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_16change_boa
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_19update_board(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_19update_board(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_18update_board, "Update the chessboard display based on the current position.\n\n        This method redraws the entire chessboard based on the current state of the `Board` object,\n        including updating the colors of the squares and displaying the chess pieces. It uses the\n        precomputed heatmap colors if available, or calculates them if necessary.\n        ");
-static PyMethodDef __pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_19update_board = {"update_board", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_19update_board, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_18update_board};
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_19update_board(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_18update_board, "Update the chessboard display based on the current position.\n\n        This method redraws the entire chessboard based on the current state of the `Board` object,\n        including updating the colors of the squares and displaying the chess pieces. It uses the\n        precomputed heatmap colors if available, or calculates them if necessary.\n        ");
+static PyMethodDef __pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_19update_board = {"update_board", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_19update_board, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_18update_board};
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_19update_board(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -5558,11 +5558,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.update_board", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.update_board", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_18update_board(__pyx_self, __pyx_v_self);
+  __pyx_r = __pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_18update_board(__pyx_self, __pyx_v_self);
 
   /* function exit code */
   {
@@ -5575,7 +5575,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_18update_board(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_18update_board(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("update_board", 1);
@@ -5587,7 +5587,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_18update_boa
   return __pyx_r;
 }
 
-/* "chmutils/base_chess_app.py":147
+/* "chmutils/base_chess_tk_app.py":147
  *         pass
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
@@ -5596,16 +5596,16 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_18update_boa
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_21clear_board(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_21clear_board(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_20clear_board, "Clears the canvas of any drawn board objects");
-static PyMethodDef __pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_21clear_board = {"clear_board", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_21clear_board, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_20clear_board};
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_21clear_board(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_20clear_board, "Clears the canvas of any drawn board objects");
+static PyMethodDef __pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_21clear_board = {"clear_board", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_21clear_board, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_20clear_board};
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_21clear_board(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -5675,11 +5675,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.clear_board", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.clear_board", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_20clear_board(__pyx_self, __pyx_v_self);
+  __pyx_r = __pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_20clear_board(__pyx_self, __pyx_v_self);
 
   /* function exit code */
   {
@@ -5692,7 +5692,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_20clear_board(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_20clear_board(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("clear_board", 1);
@@ -5704,7 +5704,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_20clear_boar
   return __pyx_r;
 }
 
-/* "chmutils/base_chess_app.py":152
+/* "chmutils/base_chess_tk_app.py":152
  *         pass
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
@@ -5713,16 +5713,16 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_20clear_boar
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_23get_xys(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_23get_xys(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_22get_xys, "Get x_0, x_1, y_0, y_1 of a square.\n\n        Parameters\n        ----------\n        col : int\n        flipped_row : int\n        square_size : int\n\n        Returns\n        -------\n        Tuple[int, int, int, int]\n\n        ");
-static PyMethodDef __pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_23get_xys = {"get_xys", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_23get_xys, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_22get_xys};
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_23get_xys(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_22get_xys, "Get x_0, x_1, y_0, y_1 of a square.\n\n        Parameters\n        ----------\n        col : int\n        flipped_row : int\n        square_size : int\n\n        Returns\n        -------\n        Tuple[int, int, int, int]\n\n        ");
+static PyMethodDef __pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_23get_xys = {"get_xys", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_23get_xys, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_22get_xys};
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_23get_xys(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -5822,14 +5822,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.get_xys", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.get_xys", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_col), (&PyInt_Type), 0, "col", 1))) __PYX_ERR(0, 153, __pyx_L1_error)
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_flipped_row), (&PyInt_Type), 0, "flipped_row", 1))) __PYX_ERR(0, 153, __pyx_L1_error)
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_square_size), (&PyInt_Type), 0, "square_size", 1))) __PYX_ERR(0, 153, __pyx_L1_error)
-  __pyx_r = __pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_22get_xys(__pyx_self, __pyx_v_col, __pyx_v_flipped_row, __pyx_v_square_size);
+  __pyx_r = __pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_22get_xys(__pyx_self, __pyx_v_col, __pyx_v_flipped_row, __pyx_v_square_size);
 
   /* function exit code */
   goto __pyx_L0;
@@ -5846,7 +5846,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_22get_xys(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_col, PyObject *__pyx_v_flipped_row, PyObject *__pyx_v_square_size) {
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_22get_xys(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_col, PyObject *__pyx_v_flipped_row, PyObject *__pyx_v_square_size) {
   PyObject *__pyx_v_x_0 = 0;
   PyObject *__pyx_v_y_0 = 0;
   PyObject *__pyx_v_x_1 = 0;
@@ -5859,7 +5859,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_22get_xys(CY
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_xys", 1);
 
-  /* "chmutils/base_chess_app.py":167
+  /* "chmutils/base_chess_tk_app.py":167
  * 
  *         """
  *         x_0: int = col * square_size             # <<<<<<<<<<<<<<
@@ -5871,7 +5871,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_22get_xys(CY
   __pyx_v_x_0 = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "chmutils/base_chess_app.py":168
+  /* "chmutils/base_chess_tk_app.py":168
  *         """
  *         x_0: int = col * square_size
  *         y_0: int = flipped_row * square_size             # <<<<<<<<<<<<<<
@@ -5883,7 +5883,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_22get_xys(CY
   __pyx_v_y_0 = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "chmutils/base_chess_app.py":169
+  /* "chmutils/base_chess_tk_app.py":169
  *         x_0: int = col * square_size
  *         y_0: int = flipped_row * square_size
  *         x_1: int = x_0 + square_size             # <<<<<<<<<<<<<<
@@ -5895,7 +5895,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_22get_xys(CY
   __pyx_v_x_1 = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "chmutils/base_chess_app.py":170
+  /* "chmutils/base_chess_tk_app.py":170
  *         y_0: int = flipped_row * square_size
  *         x_1: int = x_0 + square_size
  *         y_1: int = y_0 + square_size             # <<<<<<<<<<<<<<
@@ -5907,7 +5907,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_22get_xys(CY
   __pyx_v_y_1 = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "chmutils/base_chess_app.py":171
+  /* "chmutils/base_chess_tk_app.py":171
  *         x_1: int = x_0 + square_size
  *         y_1: int = y_0 + square_size
  *         return x_0, x_1, y_0, y_1             # <<<<<<<<<<<<<<
@@ -5933,7 +5933,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_22get_xys(CY
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "chmutils/base_chess_app.py":152
+  /* "chmutils/base_chess_tk_app.py":152
  *         pass
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
@@ -5944,7 +5944,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_22get_xys(CY
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.get_xys", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.get_xys", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_x_0);
@@ -5956,7 +5956,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_22get_xys(CY
   return __pyx_r;
 }
 
-/* "chmutils/base_chess_app.py":173
+/* "chmutils/base_chess_tk_app.py":173
  *         return x_0, x_1, y_0, y_1
  * 
  *     def after(self, ms: int, function: Optional[Callable] = None, *args) -> None:             # <<<<<<<<<<<<<<
@@ -5965,16 +5965,16 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_22get_xys(CY
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_25after(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_25after(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_24after, "Placeholder for `Tk.after(self, ms, function=None, *args)` method.\n\n        Notes\n        -----\n        Tk should be listed before BaseChessApp to default to the `Tk.after()` method:\n            ```\n            class ChessHeatMapApp(Tk, BaseChessApp):\n                ...\n            ```\n\n        ");
-static PyMethodDef __pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_25after = {"after", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_25after, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_24after};
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_25after(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_24after, "Placeholder for `Tk.after(self, ms, function=None, *args)` method.\n\n        Notes\n        -----\n        Tk should be listed before BaseChessTkApp to default to the `Tk.after()` method:\n            ```\n            class ChessHeatMapApp(Tk, BaseChessTkApp):\n                ...\n            ```\n\n        ");
+static PyMethodDef __pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_25after = {"after", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_25after, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_24after};
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_25after(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -6087,12 +6087,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     }
   }
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.after", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.after", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_ms), (&PyInt_Type), 0, "ms", 1))) __PYX_ERR(0, 173, __pyx_L1_error)
-  __pyx_r = __pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_24after(__pyx_self, __pyx_v_self, __pyx_v_ms, __pyx_v_function, __pyx_v_args);
+  __pyx_r = __pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_24after(__pyx_self, __pyx_v_self, __pyx_v_ms, __pyx_v_function, __pyx_v_args);
 
   /* function exit code */
   goto __pyx_L0;
@@ -6110,7 +6110,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_24after(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_ms, PyObject *__pyx_v_function, PyObject *__pyx_v_args) {
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_24after(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_ms, PyObject *__pyx_v_function, PyObject *__pyx_v_args) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -6121,7 +6121,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_24after(CYTH
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("after", 1);
 
-  /* "chmutils/base_chess_app.py":186
+  /* "chmutils/base_chess_tk_app.py":186
  *         """
  *         # noinspection PyTypeChecker,PydanticTypeChecker
  *         Tk.after(self, ms, function, *args)             # <<<<<<<<<<<<<<
@@ -6153,7 +6153,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_24after(CYTH
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "chmutils/base_chess_app.py":173
+  /* "chmutils/base_chess_tk_app.py":173
  *         return x_0, x_1, y_0, y_1
  * 
  *     def after(self, ms: int, function: Optional[Callable] = None, *args) -> None:             # <<<<<<<<<<<<<<
@@ -6168,7 +6168,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_24after(CYTH
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.after", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.after", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -6176,7 +6176,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_24after(CYTH
   return __pyx_r;
 }
 
-/* "chmutils/base_chess_app.py":188
+/* "chmutils/base_chess_tk_app.py":188
  *         Tk.after(self, ms, function, *args)
  * 
  *     def add_options(self, menu_bar: Menu) -> None:             # <<<<<<<<<<<<<<
@@ -6185,16 +6185,16 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_24after(CYTH
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_27add_options(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_27add_options(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_26add_options, "Adds options menu to menu bar.\n\n        Parameters\n        ----------\n        menu_bar : tkinter.Menu\n        ");
-static PyMethodDef __pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_27add_options = {"add_options", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_27add_options, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_14base_chess_app_12BaseChessApp_26add_options};
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_27add_options(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_26add_options, "Adds options menu to menu bar.\n\n        Parameters\n        ----------\n        menu_bar : tkinter.Menu\n        ");
+static PyMethodDef __pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_27add_options = {"add_options", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_27add_options, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_17base_chess_tk_app_14BaseChessTkApp_26add_options};
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_27add_options(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -6279,11 +6279,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.add_options", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.add_options", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_options(__pyx_self, __pyx_v_self, __pyx_v_menu_bar);
+  __pyx_r = __pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_26add_options(__pyx_self, __pyx_v_self, __pyx_v_menu_bar);
 
   /* function exit code */
   {
@@ -6296,7 +6296,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-/* "chmutils/base_chess_app.py":198
+/* "chmutils/base_chess_tk_app.py":198
  *         font: str
  *         for font in tk_font.families():
  *             fonts_menu.add_command(label=font.title(), command=lambda f=font: self.change_font(new_font=f))             # <<<<<<<<<<<<<<
@@ -6304,7 +6304,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
  *         options_menu.add_cascade(label="Font", menu=fonts_menu)
  */
 
-static PyObject *__pyx_pf_8chmutils_14base_chess_app___defaults__(CYTHON_UNUSED PyObject *__pyx_self) {
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app___defaults__(CYTHON_UNUSED PyObject *__pyx_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -6335,7 +6335,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app___defaults__(CYTHON_UNUSED 
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_AddTraceback("chmutils.base_chess_app.__defaults__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.__defaults__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -6344,15 +6344,15 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app___defaults__(CYTHON_UNUSED 
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_11add_options_lambda2(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11add_options_lambda2(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_11add_options_lambda2 = {"lambda2", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_11add_options_lambda2, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_11add_options_lambda2(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11add_options_lambda2 = {"lambda2", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11add_options_lambda2, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11add_options_lambda2(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -6426,7 +6426,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.add_options.lambda2", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.add_options.lambda2", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
@@ -6444,8 +6444,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
 }
 
 static PyObject *__pyx_lambda_funcdef_lambda2(PyObject *__pyx_self, PyObject *__pyx_v_f) {
-  struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options *__pyx_cur_scope;
-  struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options *__pyx_outer_scope;
+  struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options *__pyx_cur_scope;
+  struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options *__pyx_outer_scope;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -6455,7 +6455,7 @@ static PyObject *__pyx_lambda_funcdef_lambda2(PyObject *__pyx_self, PyObject *__
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("lambda2", 1);
-  __pyx_outer_scope = (struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options *) __Pyx_CyFunction_GetClosure(__pyx_self);
+  __pyx_outer_scope = (struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options *) __Pyx_CyFunction_GetClosure(__pyx_self);
   __pyx_cur_scope = __pyx_outer_scope;
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(!__pyx_cur_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 198, __pyx_L1_error) }
@@ -6477,7 +6477,7 @@ static PyObject *__pyx_lambda_funcdef_lambda2(PyObject *__pyx_self, PyObject *__
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.add_options.lambda2", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.add_options.lambda2", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -6485,7 +6485,7 @@ static PyObject *__pyx_lambda_funcdef_lambda2(PyObject *__pyx_self, PyObject *__
   return __pyx_r;
 }
 
-/* "chmutils/base_chess_app.py":204
+/* "chmutils/base_chess_tk_app.py":204
  *         options_menu.add_command(
  *             label=LIGHT_SQUARE_COLOR_PROMPT,
  *             command=lambda: self.choose_square_color(title=LIGHT_SQUARE_COLOR_PROMPT, index=0))             # <<<<<<<<<<<<<<
@@ -6494,9 +6494,9 @@ static PyObject *__pyx_lambda_funcdef_lambda2(PyObject *__pyx_self, PyObject *__
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_11add_options_1lambda3(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyMethodDef __pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_11add_options_1lambda3 = {"lambda3", (PyCFunction)__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_11add_options_1lambda3, METH_NOARGS, 0};
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_11add_options_1lambda3(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11add_options_1lambda3(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyMethodDef __pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11add_options_1lambda3 = {"lambda3", (PyCFunction)__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11add_options_1lambda3, METH_NOARGS, 0};
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11add_options_1lambda3(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused) {
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -6510,8 +6510,8 @@ static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_11add_option
 }
 
 static PyObject *__pyx_lambda_funcdef_lambda3(PyObject *__pyx_self) {
-  struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options *__pyx_cur_scope;
-  struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options *__pyx_outer_scope;
+  struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options *__pyx_cur_scope;
+  struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options *__pyx_outer_scope;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -6521,7 +6521,7 @@ static PyObject *__pyx_lambda_funcdef_lambda3(PyObject *__pyx_self) {
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("lambda3", 1);
-  __pyx_outer_scope = (struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options *) __Pyx_CyFunction_GetClosure(__pyx_self);
+  __pyx_outer_scope = (struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options *) __Pyx_CyFunction_GetClosure(__pyx_self);
   __pyx_cur_scope = __pyx_outer_scope;
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(!__pyx_cur_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 204, __pyx_L1_error) }
@@ -6547,7 +6547,7 @@ static PyObject *__pyx_lambda_funcdef_lambda3(PyObject *__pyx_self) {
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.add_options.lambda3", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.add_options.lambda3", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -6555,7 +6555,7 @@ static PyObject *__pyx_lambda_funcdef_lambda3(PyObject *__pyx_self) {
   return __pyx_r;
 }
 
-/* "chmutils/base_chess_app.py":207
+/* "chmutils/base_chess_tk_app.py":207
  *         options_menu.add_command(
  *             label=DARK_SQUARE_COLOR_PROMPT,
  *             command=lambda: self.choose_square_color(title=DARK_SQUARE_COLOR_PROMPT, index=1))             # <<<<<<<<<<<<<<
@@ -6564,9 +6564,9 @@ static PyObject *__pyx_lambda_funcdef_lambda3(PyObject *__pyx_self) {
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_11add_options_2lambda4(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyMethodDef __pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_11add_options_2lambda4 = {"lambda4", (PyCFunction)__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_11add_options_2lambda4, METH_NOARGS, 0};
-static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_11add_options_2lambda4(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11add_options_2lambda4(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyMethodDef __pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11add_options_2lambda4 = {"lambda4", (PyCFunction)__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11add_options_2lambda4, METH_NOARGS, 0};
+static PyObject *__pyx_pw_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11add_options_2lambda4(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused) {
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -6580,8 +6580,8 @@ static PyObject *__pyx_pw_8chmutils_14base_chess_app_12BaseChessApp_11add_option
 }
 
 static PyObject *__pyx_lambda_funcdef_lambda4(PyObject *__pyx_self) {
-  struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options *__pyx_cur_scope;
-  struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options *__pyx_outer_scope;
+  struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options *__pyx_cur_scope;
+  struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options *__pyx_outer_scope;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -6591,7 +6591,7 @@ static PyObject *__pyx_lambda_funcdef_lambda4(PyObject *__pyx_self) {
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("lambda4", 1);
-  __pyx_outer_scope = (struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options *) __Pyx_CyFunction_GetClosure(__pyx_self);
+  __pyx_outer_scope = (struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options *) __Pyx_CyFunction_GetClosure(__pyx_self);
   __pyx_cur_scope = __pyx_outer_scope;
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(!__pyx_cur_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 207, __pyx_L1_error) }
@@ -6617,7 +6617,7 @@ static PyObject *__pyx_lambda_funcdef_lambda4(PyObject *__pyx_self) {
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.add_options.lambda4", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.add_options.lambda4", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -6625,7 +6625,7 @@ static PyObject *__pyx_lambda_funcdef_lambda4(PyObject *__pyx_self) {
   return __pyx_r;
 }
 
-/* "chmutils/base_chess_app.py":188
+/* "chmutils/base_chess_tk_app.py":188
  *         Tk.after(self, ms, function, *args)
  * 
  *     def add_options(self, menu_bar: Menu) -> None:             # <<<<<<<<<<<<<<
@@ -6633,8 +6633,8 @@ static PyObject *__pyx_lambda_funcdef_lambda4(PyObject *__pyx_self) {
  * 
  */
 
-static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_options(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_menu_bar) {
-  struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options *__pyx_cur_scope;
+static PyObject *__pyx_pf_8chmutils_17base_chess_tk_app_14BaseChessTkApp_26add_options(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_menu_bar) {
+  struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options *__pyx_cur_scope;
   PyObject *__pyx_v_fonts_menu = NULL;
   PyObject *__pyx_v_font = 0;
   PyObject *__pyx_v_options_menu = NULL;
@@ -6651,9 +6651,9 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_option
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("add_options", 0);
-  __pyx_cur_scope = (struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options *)__pyx_tp_new_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options(__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options, __pyx_empty_tuple, NULL);
+  __pyx_cur_scope = (struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options *)__pyx_tp_new_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options(__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options, __pyx_empty_tuple, NULL);
   if (unlikely(!__pyx_cur_scope)) {
-    __pyx_cur_scope = ((struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options *)Py_None);
+    __pyx_cur_scope = ((struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options *)Py_None);
     __Pyx_INCREF(Py_None);
     __PYX_ERR(0, 188, __pyx_L1_error)
   } else {
@@ -6663,7 +6663,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_option
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_self);
 
-  /* "chmutils/base_chess_app.py":195
+  /* "chmutils/base_chess_tk_app.py":195
  *         menu_bar : tkinter.Menu
  *         """
  *         fonts_menu: Menu = Menu(menu_bar, tearoff=0)             # <<<<<<<<<<<<<<
@@ -6688,7 +6688,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_option
   __pyx_v_fonts_menu = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "chmutils/base_chess_app.py":197
+  /* "chmutils/base_chess_tk_app.py":197
  *         fonts_menu: Menu = Menu(menu_bar, tearoff=0)
  *         font: str
  *         for font in tk_font.families():             # <<<<<<<<<<<<<<
@@ -6779,7 +6779,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_option
     __Pyx_XDECREF_SET(__pyx_v_font, ((PyObject*)__pyx_t_4));
     __pyx_t_4 = 0;
 
-    /* "chmutils/base_chess_app.py":198
+    /* "chmutils/base_chess_tk_app.py":198
  *         font: str
  *         for font in tk_font.families():
  *             fonts_menu.add_command(label=font.title(), command=lambda f=font: self.change_font(new_font=f))             # <<<<<<<<<<<<<<
@@ -6794,13 +6794,13 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_option
     __Pyx_GOTREF(__pyx_t_1);
     if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_label, __pyx_t_1) < 0) __PYX_ERR(0, 198, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_11add_options_lambda2, 0, __pyx_n_s_BaseChessApp_add_options_locals, ((PyObject*)__pyx_cur_scope), __pyx_n_s_chmutils_base_chess_app, __pyx_d, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 198, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11add_options_lambda2, 0, __pyx_n_s_BaseChessTkApp_add_options_local, ((PyObject*)__pyx_cur_scope), __pyx_n_s_chmutils_base_chess_tk_app, __pyx_d, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 198, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     if (!__Pyx_CyFunction_InitDefaults(__pyx_t_1, sizeof(__pyx_defaults), 1)) __PYX_ERR(0, 198, __pyx_L1_error)
     __Pyx_INCREF(__pyx_v_font);
     __Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_t_1)->__pyx_arg_f = __pyx_v_font;
     __Pyx_GIVEREF(__pyx_v_font);
-    __Pyx_CyFunction_SetDefaultsGetter(__pyx_t_1, __pyx_pf_8chmutils_14base_chess_app___defaults__);
+    __Pyx_CyFunction_SetDefaultsGetter(__pyx_t_1, __pyx_pf_8chmutils_17base_chess_tk_app___defaults__);
     if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_command, __pyx_t_1) < 0) __PYX_ERR(0, 198, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 198, __pyx_L1_error)
@@ -6809,7 +6809,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_option
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "chmutils/base_chess_app.py":197
+    /* "chmutils/base_chess_tk_app.py":197
  *         fonts_menu: Menu = Menu(menu_bar, tearoff=0)
  *         font: str
  *         for font in tk_font.families():             # <<<<<<<<<<<<<<
@@ -6819,7 +6819,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_option
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "chmutils/base_chess_app.py":199
+  /* "chmutils/base_chess_tk_app.py":199
  *         for font in tk_font.families():
  *             fonts_menu.add_command(label=font.title(), command=lambda f=font: self.change_font(new_font=f))
  *         options_menu: Menu = Menu(menu_bar, tearoff=0)             # <<<<<<<<<<<<<<
@@ -6844,7 +6844,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_option
   __pyx_v_options_menu = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "chmutils/base_chess_app.py":200
+  /* "chmutils/base_chess_tk_app.py":200
  *             fonts_menu.add_command(label=font.title(), command=lambda f=font: self.change_font(new_font=f))
  *         options_menu: Menu = Menu(menu_bar, tearoff=0)
  *         options_menu.add_cascade(label="Font", menu=fonts_menu)             # <<<<<<<<<<<<<<
@@ -6863,7 +6863,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_option
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "chmutils/base_chess_app.py":201
+  /* "chmutils/base_chess_tk_app.py":201
  *         options_menu: Menu = Menu(menu_bar, tearoff=0)
  *         options_menu.add_cascade(label="Font", menu=fonts_menu)
  *         options_menu.add_command(label="Change Board Colors", command=self.change_board_colors)             # <<<<<<<<<<<<<<
@@ -6885,7 +6885,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_option
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "chmutils/base_chess_app.py":202
+  /* "chmutils/base_chess_tk_app.py":202
  *         options_menu.add_cascade(label="Font", menu=fonts_menu)
  *         options_menu.add_command(label="Change Board Colors", command=self.change_board_colors)
  *         options_menu.add_command(             # <<<<<<<<<<<<<<
@@ -6895,7 +6895,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_option
   __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_options_menu, __pyx_n_s_add_command); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 202, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "chmutils/base_chess_app.py":203
+  /* "chmutils/base_chess_tk_app.py":203
  *         options_menu.add_command(label="Change Board Colors", command=self.change_board_colors)
  *         options_menu.add_command(
  *             label=LIGHT_SQUARE_COLOR_PROMPT,             # <<<<<<<<<<<<<<
@@ -6909,19 +6909,19 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_option
   if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_label, __pyx_t_1) < 0) __PYX_ERR(0, 203, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "chmutils/base_chess_app.py":204
+  /* "chmutils/base_chess_tk_app.py":204
  *         options_menu.add_command(
  *             label=LIGHT_SQUARE_COLOR_PROMPT,
  *             command=lambda: self.choose_square_color(title=LIGHT_SQUARE_COLOR_PROMPT, index=0))             # <<<<<<<<<<<<<<
  *         options_menu.add_command(
  *             label=DARK_SQUARE_COLOR_PROMPT,
  */
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_11add_options_1lambda3, 0, __pyx_n_s_BaseChessApp_add_options_locals, ((PyObject*)__pyx_cur_scope), __pyx_n_s_chmutils_base_chess_app, __pyx_d, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11add_options_1lambda3, 0, __pyx_n_s_BaseChessTkApp_add_options_local, ((PyObject*)__pyx_cur_scope), __pyx_n_s_chmutils_base_chess_tk_app, __pyx_d, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 204, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_command, __pyx_t_1) < 0) __PYX_ERR(0, 203, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "chmutils/base_chess_app.py":202
+  /* "chmutils/base_chess_tk_app.py":202
  *         options_menu.add_cascade(label="Font", menu=fonts_menu)
  *         options_menu.add_command(label="Change Board Colors", command=self.change_board_colors)
  *         options_menu.add_command(             # <<<<<<<<<<<<<<
@@ -6934,7 +6934,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_option
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "chmutils/base_chess_app.py":205
+  /* "chmutils/base_chess_tk_app.py":205
  *             label=LIGHT_SQUARE_COLOR_PROMPT,
  *             command=lambda: self.choose_square_color(title=LIGHT_SQUARE_COLOR_PROMPT, index=0))
  *         options_menu.add_command(             # <<<<<<<<<<<<<<
@@ -6944,7 +6944,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_option
   __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_options_menu, __pyx_n_s_add_command); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 205, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "chmutils/base_chess_app.py":206
+  /* "chmutils/base_chess_tk_app.py":206
  *             command=lambda: self.choose_square_color(title=LIGHT_SQUARE_COLOR_PROMPT, index=0))
  *         options_menu.add_command(
  *             label=DARK_SQUARE_COLOR_PROMPT,             # <<<<<<<<<<<<<<
@@ -6958,19 +6958,19 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_option
   if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_label, __pyx_t_4) < 0) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "chmutils/base_chess_app.py":207
+  /* "chmutils/base_chess_tk_app.py":207
  *         options_menu.add_command(
  *             label=DARK_SQUARE_COLOR_PROMPT,
  *             command=lambda: self.choose_square_color(title=DARK_SQUARE_COLOR_PROMPT, index=1))             # <<<<<<<<<<<<<<
  *         options_menu.add_command(label="Set Depth", command=self.set_depth)
  *         menu_bar.add_cascade(label="Options", menu=options_menu)
  */
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_11add_options_2lambda4, 0, __pyx_n_s_BaseChessApp_add_options_locals, ((PyObject*)__pyx_cur_scope), __pyx_n_s_chmutils_base_chess_app, __pyx_d, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11add_options_2lambda4, 0, __pyx_n_s_BaseChessTkApp_add_options_local, ((PyObject*)__pyx_cur_scope), __pyx_n_s_chmutils_base_chess_tk_app, __pyx_d, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_command, __pyx_t_4) < 0) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "chmutils/base_chess_app.py":205
+  /* "chmutils/base_chess_tk_app.py":205
  *             label=LIGHT_SQUARE_COLOR_PROMPT,
  *             command=lambda: self.choose_square_color(title=LIGHT_SQUARE_COLOR_PROMPT, index=0))
  *         options_menu.add_command(             # <<<<<<<<<<<<<<
@@ -6983,7 +6983,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_option
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "chmutils/base_chess_app.py":208
+  /* "chmutils/base_chess_tk_app.py":208
  *             label=DARK_SQUARE_COLOR_PROMPT,
  *             command=lambda: self.choose_square_color(title=DARK_SQUARE_COLOR_PROMPT, index=1))
  *         options_menu.add_command(label="Set Depth", command=self.set_depth)             # <<<<<<<<<<<<<<
@@ -7004,7 +7004,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_option
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "chmutils/base_chess_app.py":209
+  /* "chmutils/base_chess_tk_app.py":209
  *             command=lambda: self.choose_square_color(title=DARK_SQUARE_COLOR_PROMPT, index=1))
  *         options_menu.add_command(label="Set Depth", command=self.set_depth)
  *         menu_bar.add_cascade(label="Options", menu=options_menu)             # <<<<<<<<<<<<<<
@@ -7021,7 +7021,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_option
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "chmutils/base_chess_app.py":188
+  /* "chmutils/base_chess_tk_app.py":188
  *         Tk.after(self, ms, function, *args)
  * 
  *     def add_options(self, menu_bar: Menu) -> None:             # <<<<<<<<<<<<<<
@@ -7037,7 +7037,7 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_option
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_AddTraceback("chmutils.base_chess_app.BaseChessApp.add_options", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("chmutils.base_chess_tk_app.BaseChessTkApp.add_options", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_fonts_menu);
@@ -7050,20 +7050,20 @@ static PyObject *__pyx_pf_8chmutils_14base_chess_app_12BaseChessApp_26add_option
 }
 
 #if CYTHON_USE_FREELISTS
-static struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct__change_font *__pyx_freelist_8chmutils_14base_chess_app___pyx_scope_struct__change_font[8];
-static int __pyx_freecount_8chmutils_14base_chess_app___pyx_scope_struct__change_font = 0;
+static struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font *__pyx_freelist_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font[8];
+static int __pyx_freecount_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font = 0;
 #endif
 
-static PyObject *__pyx_tp_new_8chmutils_14base_chess_app___pyx_scope_struct__change_font(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+static PyObject *__pyx_tp_new_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
   PyObject *o;
   #if CYTHON_COMPILING_IN_LIMITED_API
   allocfunc alloc_func = (allocfunc)PyType_GetSlot(t, Py_tp_alloc);
   o = alloc_func(t, 0);
   #else
   #if CYTHON_USE_FREELISTS
-  if (likely((int)(__pyx_freecount_8chmutils_14base_chess_app___pyx_scope_struct__change_font > 0) & (int)(t->tp_basicsize == sizeof(struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct__change_font)))) {
-    o = (PyObject*)__pyx_freelist_8chmutils_14base_chess_app___pyx_scope_struct__change_font[--__pyx_freecount_8chmutils_14base_chess_app___pyx_scope_struct__change_font];
-    memset(o, 0, sizeof(struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct__change_font));
+  if (likely((int)(__pyx_freecount_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font > 0) & (int)(t->tp_basicsize == sizeof(struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font)))) {
+    o = (PyObject*)__pyx_freelist_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font[--__pyx_freecount_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font];
+    memset(o, 0, sizeof(struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font));
     (void) PyObject_INIT(o, t);
     PyObject_GC_Track(o);
   } else
@@ -7076,11 +7076,11 @@ static PyObject *__pyx_tp_new_8chmutils_14base_chess_app___pyx_scope_struct__cha
   return o;
 }
 
-static void __pyx_tp_dealloc_8chmutils_14base_chess_app___pyx_scope_struct__change_font(PyObject *o) {
-  struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct__change_font *p = (struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct__change_font *)o;
+static void __pyx_tp_dealloc_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font(PyObject *o) {
+  struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font *p = (struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font *)o;
   #if CYTHON_USE_TP_FINALIZE
   if (unlikely((PY_VERSION_HEX >= 0x03080000 || __Pyx_PyType_HasFeature(Py_TYPE(o), Py_TPFLAGS_HAVE_FINALIZE)) && __Pyx_PyObject_GetSlot(o, tp_finalize, destructor)) && !__Pyx_PyObject_GC_IsFinalized(o)) {
-    if (__Pyx_PyObject_GetSlot(o, tp_dealloc, destructor) == __pyx_tp_dealloc_8chmutils_14base_chess_app___pyx_scope_struct__change_font) {
+    if (__Pyx_PyObject_GetSlot(o, tp_dealloc, destructor) == __pyx_tp_dealloc_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font) {
       if (PyObject_CallFinalizerFromDealloc(o)) return;
     }
   }
@@ -7089,8 +7089,8 @@ static void __pyx_tp_dealloc_8chmutils_14base_chess_app___pyx_scope_struct__chan
   Py_CLEAR(p->__pyx_v_new_font);
   Py_CLEAR(p->__pyx_v_self);
   #if CYTHON_USE_FREELISTS
-  if (((int)(__pyx_freecount_8chmutils_14base_chess_app___pyx_scope_struct__change_font < 8) & (int)(Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct__change_font)))) {
-    __pyx_freelist_8chmutils_14base_chess_app___pyx_scope_struct__change_font[__pyx_freecount_8chmutils_14base_chess_app___pyx_scope_struct__change_font++] = ((struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct__change_font *)o);
+  if (((int)(__pyx_freecount_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font < 8) & (int)(Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font)))) {
+    __pyx_freelist_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font[__pyx_freecount_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font++] = ((struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font *)o);
   } else
   #endif
   {
@@ -7105,46 +7105,46 @@ static void __pyx_tp_dealloc_8chmutils_14base_chess_app___pyx_scope_struct__chan
   }
 }
 
-static int __pyx_tp_traverse_8chmutils_14base_chess_app___pyx_scope_struct__change_font(PyObject *o, visitproc v, void *a) {
+static int __pyx_tp_traverse_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font(PyObject *o, visitproc v, void *a) {
   int e;
-  struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct__change_font *p = (struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct__change_font *)o;
+  struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font *p = (struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font *)o;
   if (p->__pyx_v_self) {
     e = (*v)(p->__pyx_v_self, a); if (e) return e;
   }
   return 0;
 }
 
-static int __pyx_tp_clear_8chmutils_14base_chess_app___pyx_scope_struct__change_font(PyObject *o) {
+static int __pyx_tp_clear_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font(PyObject *o) {
   PyObject* tmp;
-  struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct__change_font *p = (struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct__change_font *)o;
+  struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font *p = (struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font *)o;
   tmp = ((PyObject*)p->__pyx_v_self);
   p->__pyx_v_self = Py_None; Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   return 0;
 }
 #if CYTHON_USE_TYPE_SPECS
-static PyType_Slot __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct__change_font_slots[] = {
-  {Py_tp_dealloc, (void *)__pyx_tp_dealloc_8chmutils_14base_chess_app___pyx_scope_struct__change_font},
-  {Py_tp_traverse, (void *)__pyx_tp_traverse_8chmutils_14base_chess_app___pyx_scope_struct__change_font},
-  {Py_tp_clear, (void *)__pyx_tp_clear_8chmutils_14base_chess_app___pyx_scope_struct__change_font},
-  {Py_tp_new, (void *)__pyx_tp_new_8chmutils_14base_chess_app___pyx_scope_struct__change_font},
+static PyType_Slot __pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font_slots[] = {
+  {Py_tp_dealloc, (void *)__pyx_tp_dealloc_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font},
+  {Py_tp_traverse, (void *)__pyx_tp_traverse_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font},
+  {Py_tp_clear, (void *)__pyx_tp_clear_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font},
+  {Py_tp_new, (void *)__pyx_tp_new_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font},
   {0, 0},
 };
-static PyType_Spec __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct__change_font_spec = {
-  "chmutils.base_chess_app.__pyx_scope_struct__change_font",
-  sizeof(struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct__change_font),
+static PyType_Spec __pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font_spec = {
+  "chmutils.base_chess_tk_app.__pyx_scope_struct__change_font",
+  sizeof(struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_HAVE_FINALIZE,
-  __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct__change_font_slots,
+  __pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font_slots,
 };
 #else
 
-static PyTypeObject __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct__change_font = {
+static PyTypeObject __pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font = {
   PyVarObject_HEAD_INIT(0, 0)
-  "chmutils.base_chess_app.""__pyx_scope_struct__change_font", /*tp_name*/
-  sizeof(struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct__change_font), /*tp_basicsize*/
+  "chmutils.base_chess_tk_app.""__pyx_scope_struct__change_font", /*tp_name*/
+  sizeof(struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_8chmutils_14base_chess_app___pyx_scope_struct__change_font, /*tp_dealloc*/
+  __pyx_tp_dealloc_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font, /*tp_dealloc*/
   #if PY_VERSION_HEX < 0x030800b4
   0, /*tp_print*/
   #endif
@@ -7171,8 +7171,8 @@ static PyTypeObject __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct__ch
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_HAVE_FINALIZE, /*tp_flags*/
   0, /*tp_doc*/
-  __pyx_tp_traverse_8chmutils_14base_chess_app___pyx_scope_struct__change_font, /*tp_traverse*/
-  __pyx_tp_clear_8chmutils_14base_chess_app___pyx_scope_struct__change_font, /*tp_clear*/
+  __pyx_tp_traverse_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font, /*tp_traverse*/
+  __pyx_tp_clear_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font, /*tp_clear*/
   0, /*tp_richcompare*/
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
@@ -7189,7 +7189,7 @@ static PyTypeObject __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct__ch
   #endif
   0, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_8chmutils_14base_chess_app___pyx_scope_struct__change_font, /*tp_new*/
+  __pyx_tp_new_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -7225,20 +7225,20 @@ static PyTypeObject __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct__ch
 #endif
 
 #if CYTHON_USE_FREELISTS
-static struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color *__pyx_freelist_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color[8];
-static int __pyx_freecount_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color = 0;
+static struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color *__pyx_freelist_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color[8];
+static int __pyx_freecount_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color = 0;
 #endif
 
-static PyObject *__pyx_tp_new_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+static PyObject *__pyx_tp_new_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
   PyObject *o;
   #if CYTHON_COMPILING_IN_LIMITED_API
   allocfunc alloc_func = (allocfunc)PyType_GetSlot(t, Py_tp_alloc);
   o = alloc_func(t, 0);
   #else
   #if CYTHON_USE_FREELISTS
-  if (likely((int)(__pyx_freecount_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color > 0) & (int)(t->tp_basicsize == sizeof(struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color)))) {
-    o = (PyObject*)__pyx_freelist_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color[--__pyx_freecount_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color];
-    memset(o, 0, sizeof(struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color));
+  if (likely((int)(__pyx_freecount_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color > 0) & (int)(t->tp_basicsize == sizeof(struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color)))) {
+    o = (PyObject*)__pyx_freelist_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color[--__pyx_freecount_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color];
+    memset(o, 0, sizeof(struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color));
     (void) PyObject_INIT(o, t);
     PyObject_GC_Track(o);
   } else
@@ -7251,11 +7251,11 @@ static PyObject *__pyx_tp_new_8chmutils_14base_chess_app___pyx_scope_struct_1_ch
   return o;
 }
 
-static void __pyx_tp_dealloc_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color(PyObject *o) {
-  struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color *p = (struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color *)o;
+static void __pyx_tp_dealloc_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color(PyObject *o) {
+  struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color *p = (struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color *)o;
   #if CYTHON_USE_TP_FINALIZE
   if (unlikely((PY_VERSION_HEX >= 0x03080000 || __Pyx_PyType_HasFeature(Py_TYPE(o), Py_TPFLAGS_HAVE_FINALIZE)) && __Pyx_PyObject_GetSlot(o, tp_finalize, destructor)) && !__Pyx_PyObject_GC_IsFinalized(o)) {
-    if (__Pyx_PyObject_GetSlot(o, tp_dealloc, destructor) == __pyx_tp_dealloc_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color) {
+    if (__Pyx_PyObject_GetSlot(o, tp_dealloc, destructor) == __pyx_tp_dealloc_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color) {
       if (PyObject_CallFinalizerFromDealloc(o)) return;
     }
   }
@@ -7265,8 +7265,8 @@ static void __pyx_tp_dealloc_8chmutils_14base_chess_app___pyx_scope_struct_1_cho
   Py_CLEAR(p->__pyx_v_self);
   Py_CLEAR(p->__pyx_v_title);
   #if CYTHON_USE_FREELISTS
-  if (((int)(__pyx_freecount_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color < 8) & (int)(Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color)))) {
-    __pyx_freelist_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color[__pyx_freecount_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color++] = ((struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color *)o);
+  if (((int)(__pyx_freecount_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color < 8) & (int)(Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color)))) {
+    __pyx_freelist_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color[__pyx_freecount_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color++] = ((struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color *)o);
   } else
   #endif
   {
@@ -7281,46 +7281,46 @@ static void __pyx_tp_dealloc_8chmutils_14base_chess_app___pyx_scope_struct_1_cho
   }
 }
 
-static int __pyx_tp_traverse_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color(PyObject *o, visitproc v, void *a) {
+static int __pyx_tp_traverse_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color(PyObject *o, visitproc v, void *a) {
   int e;
-  struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color *p = (struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color *)o;
+  struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color *p = (struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color *)o;
   if (p->__pyx_v_self) {
     e = (*v)(p->__pyx_v_self, a); if (e) return e;
   }
   return 0;
 }
 
-static int __pyx_tp_clear_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color(PyObject *o) {
+static int __pyx_tp_clear_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color(PyObject *o) {
   PyObject* tmp;
-  struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color *p = (struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color *)o;
+  struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color *p = (struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color *)o;
   tmp = ((PyObject*)p->__pyx_v_self);
   p->__pyx_v_self = Py_None; Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   return 0;
 }
 #if CYTHON_USE_TYPE_SPECS
-static PyType_Slot __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color_slots[] = {
-  {Py_tp_dealloc, (void *)__pyx_tp_dealloc_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color},
-  {Py_tp_traverse, (void *)__pyx_tp_traverse_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color},
-  {Py_tp_clear, (void *)__pyx_tp_clear_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color},
-  {Py_tp_new, (void *)__pyx_tp_new_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color},
+static PyType_Slot __pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color_slots[] = {
+  {Py_tp_dealloc, (void *)__pyx_tp_dealloc_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color},
+  {Py_tp_traverse, (void *)__pyx_tp_traverse_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color},
+  {Py_tp_clear, (void *)__pyx_tp_clear_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color},
+  {Py_tp_new, (void *)__pyx_tp_new_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color},
   {0, 0},
 };
-static PyType_Spec __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color_spec = {
-  "chmutils.base_chess_app.__pyx_scope_struct_1_choose_square_color",
-  sizeof(struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color),
+static PyType_Spec __pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color_spec = {
+  "chmutils.base_chess_tk_app.__pyx_scope_struct_1_choose_square_color",
+  sizeof(struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_HAVE_FINALIZE,
-  __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color_slots,
+  __pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color_slots,
 };
 #else
 
-static PyTypeObject __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color = {
+static PyTypeObject __pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color = {
   PyVarObject_HEAD_INIT(0, 0)
-  "chmutils.base_chess_app.""__pyx_scope_struct_1_choose_square_color", /*tp_name*/
-  sizeof(struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color), /*tp_basicsize*/
+  "chmutils.base_chess_tk_app.""__pyx_scope_struct_1_choose_square_color", /*tp_name*/
+  sizeof(struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color, /*tp_dealloc*/
+  __pyx_tp_dealloc_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color, /*tp_dealloc*/
   #if PY_VERSION_HEX < 0x030800b4
   0, /*tp_print*/
   #endif
@@ -7347,8 +7347,8 @@ static PyTypeObject __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_1_c
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_HAVE_FINALIZE, /*tp_flags*/
   0, /*tp_doc*/
-  __pyx_tp_traverse_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color, /*tp_traverse*/
-  __pyx_tp_clear_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color, /*tp_clear*/
+  __pyx_tp_traverse_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color, /*tp_traverse*/
+  __pyx_tp_clear_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color, /*tp_clear*/
   0, /*tp_richcompare*/
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
@@ -7365,7 +7365,7 @@ static PyTypeObject __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_1_c
   #endif
   0, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color, /*tp_new*/
+  __pyx_tp_new_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -7401,20 +7401,20 @@ static PyTypeObject __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_1_c
 #endif
 
 #if CYTHON_USE_FREELISTS
-static struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options *__pyx_freelist_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options[8];
-static int __pyx_freecount_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options = 0;
+static struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options *__pyx_freelist_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options[8];
+static int __pyx_freecount_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options = 0;
 #endif
 
-static PyObject *__pyx_tp_new_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+static PyObject *__pyx_tp_new_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
   PyObject *o;
   #if CYTHON_COMPILING_IN_LIMITED_API
   allocfunc alloc_func = (allocfunc)PyType_GetSlot(t, Py_tp_alloc);
   o = alloc_func(t, 0);
   #else
   #if CYTHON_USE_FREELISTS
-  if (likely((int)(__pyx_freecount_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options > 0) & (int)(t->tp_basicsize == sizeof(struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options)))) {
-    o = (PyObject*)__pyx_freelist_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options[--__pyx_freecount_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options];
-    memset(o, 0, sizeof(struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options));
+  if (likely((int)(__pyx_freecount_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options > 0) & (int)(t->tp_basicsize == sizeof(struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options)))) {
+    o = (PyObject*)__pyx_freelist_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options[--__pyx_freecount_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options];
+    memset(o, 0, sizeof(struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options));
     (void) PyObject_INIT(o, t);
     PyObject_GC_Track(o);
   } else
@@ -7427,11 +7427,11 @@ static PyObject *__pyx_tp_new_8chmutils_14base_chess_app___pyx_scope_struct_2_ad
   return o;
 }
 
-static void __pyx_tp_dealloc_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options(PyObject *o) {
-  struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options *p = (struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options *)o;
+static void __pyx_tp_dealloc_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options(PyObject *o) {
+  struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options *p = (struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options *)o;
   #if CYTHON_USE_TP_FINALIZE
   if (unlikely((PY_VERSION_HEX >= 0x03080000 || __Pyx_PyType_HasFeature(Py_TYPE(o), Py_TPFLAGS_HAVE_FINALIZE)) && __Pyx_PyObject_GetSlot(o, tp_finalize, destructor)) && !__Pyx_PyObject_GC_IsFinalized(o)) {
-    if (__Pyx_PyObject_GetSlot(o, tp_dealloc, destructor) == __pyx_tp_dealloc_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options) {
+    if (__Pyx_PyObject_GetSlot(o, tp_dealloc, destructor) == __pyx_tp_dealloc_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options) {
       if (PyObject_CallFinalizerFromDealloc(o)) return;
     }
   }
@@ -7439,8 +7439,8 @@ static void __pyx_tp_dealloc_8chmutils_14base_chess_app___pyx_scope_struct_2_add
   PyObject_GC_UnTrack(o);
   Py_CLEAR(p->__pyx_v_self);
   #if CYTHON_USE_FREELISTS
-  if (((int)(__pyx_freecount_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options < 8) & (int)(Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options)))) {
-    __pyx_freelist_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options[__pyx_freecount_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options++] = ((struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options *)o);
+  if (((int)(__pyx_freecount_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options < 8) & (int)(Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options)))) {
+    __pyx_freelist_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options[__pyx_freecount_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options++] = ((struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options *)o);
   } else
   #endif
   {
@@ -7455,46 +7455,46 @@ static void __pyx_tp_dealloc_8chmutils_14base_chess_app___pyx_scope_struct_2_add
   }
 }
 
-static int __pyx_tp_traverse_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options(PyObject *o, visitproc v, void *a) {
+static int __pyx_tp_traverse_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options(PyObject *o, visitproc v, void *a) {
   int e;
-  struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options *p = (struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options *)o;
+  struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options *p = (struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options *)o;
   if (p->__pyx_v_self) {
     e = (*v)(p->__pyx_v_self, a); if (e) return e;
   }
   return 0;
 }
 
-static int __pyx_tp_clear_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options(PyObject *o) {
+static int __pyx_tp_clear_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options(PyObject *o) {
   PyObject* tmp;
-  struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options *p = (struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options *)o;
+  struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options *p = (struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options *)o;
   tmp = ((PyObject*)p->__pyx_v_self);
   p->__pyx_v_self = Py_None; Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   return 0;
 }
 #if CYTHON_USE_TYPE_SPECS
-static PyType_Slot __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options_slots[] = {
-  {Py_tp_dealloc, (void *)__pyx_tp_dealloc_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options},
-  {Py_tp_traverse, (void *)__pyx_tp_traverse_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options},
-  {Py_tp_clear, (void *)__pyx_tp_clear_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options},
-  {Py_tp_new, (void *)__pyx_tp_new_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options},
+static PyType_Slot __pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options_slots[] = {
+  {Py_tp_dealloc, (void *)__pyx_tp_dealloc_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options},
+  {Py_tp_traverse, (void *)__pyx_tp_traverse_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options},
+  {Py_tp_clear, (void *)__pyx_tp_clear_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options},
+  {Py_tp_new, (void *)__pyx_tp_new_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options},
   {0, 0},
 };
-static PyType_Spec __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options_spec = {
-  "chmutils.base_chess_app.__pyx_scope_struct_2_add_options",
-  sizeof(struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options),
+static PyType_Spec __pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options_spec = {
+  "chmutils.base_chess_tk_app.__pyx_scope_struct_2_add_options",
+  sizeof(struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_HAVE_FINALIZE,
-  __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options_slots,
+  __pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options_slots,
 };
 #else
 
-static PyTypeObject __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options = {
+static PyTypeObject __pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options = {
   PyVarObject_HEAD_INIT(0, 0)
-  "chmutils.base_chess_app.""__pyx_scope_struct_2_add_options", /*tp_name*/
-  sizeof(struct __pyx_obj_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options), /*tp_basicsize*/
+  "chmutils.base_chess_tk_app.""__pyx_scope_struct_2_add_options", /*tp_name*/
+  sizeof(struct __pyx_obj_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options, /*tp_dealloc*/
+  __pyx_tp_dealloc_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options, /*tp_dealloc*/
   #if PY_VERSION_HEX < 0x030800b4
   0, /*tp_print*/
   #endif
@@ -7521,8 +7521,8 @@ static PyTypeObject __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_2_a
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_HAVE_FINALIZE, /*tp_flags*/
   0, /*tp_doc*/
-  __pyx_tp_traverse_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options, /*tp_traverse*/
-  __pyx_tp_clear_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options, /*tp_clear*/
+  __pyx_tp_traverse_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options, /*tp_traverse*/
+  __pyx_tp_clear_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options, /*tp_clear*/
   0, /*tp_richcompare*/
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
@@ -7539,7 +7539,7 @@ static PyTypeObject __pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_2_a
   #endif
   0, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options, /*tp_new*/
+  __pyx_tp_new_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -7593,24 +7593,24 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_u_, __pyx_k_, sizeof(__pyx_k_), 0, 1, 0, 0},
     {&__pyx_n_s_ABCMeta, __pyx_k_ABCMeta, sizeof(__pyx_k_ABCMeta), 0, 0, 1, 1},
     {&__pyx_n_u_Arial, __pyx_k_Arial, sizeof(__pyx_k_Arial), 0, 1, 0, 1},
-    {&__pyx_n_s_BaseChessApp, __pyx_k_BaseChessApp, sizeof(__pyx_k_BaseChessApp), 0, 0, 1, 1},
-    {&__pyx_n_s_BaseChessApp_add_options, __pyx_k_BaseChessApp_add_options, sizeof(__pyx_k_BaseChessApp_add_options), 0, 0, 1, 1},
-    {&__pyx_n_s_BaseChessApp_add_options_locals, __pyx_k_BaseChessApp_add_options_locals, sizeof(__pyx_k_BaseChessApp_add_options_locals), 0, 0, 1, 1},
-    {&__pyx_n_s_BaseChessApp_after, __pyx_k_BaseChessApp_after, sizeof(__pyx_k_BaseChessApp_after), 0, 0, 1, 1},
-    {&__pyx_n_s_BaseChessApp_ask_depth, __pyx_k_BaseChessApp_ask_depth, sizeof(__pyx_k_BaseChessApp_ask_depth), 0, 0, 1, 1},
-    {&__pyx_n_s_BaseChessApp_change_board_colors, __pyx_k_BaseChessApp_change_board_colors, sizeof(__pyx_k_BaseChessApp_change_board_colors), 0, 0, 1, 1},
-    {&__pyx_n_s_BaseChessApp_change_font, __pyx_k_BaseChessApp_change_font, sizeof(__pyx_k_BaseChessApp_change_font), 0, 0, 1, 1},
-    {&__pyx_n_s_BaseChessApp_change_font_locals, __pyx_k_BaseChessApp_change_font_locals, sizeof(__pyx_k_BaseChessApp_change_font_locals), 0, 0, 1, 1},
-    {&__pyx_n_s_BaseChessApp_choose_square_color, __pyx_k_BaseChessApp_choose_square_color, sizeof(__pyx_k_BaseChessApp_choose_square_color), 0, 0, 1, 1},
-    {&__pyx_n_s_BaseChessApp_choose_square_color_2, __pyx_k_BaseChessApp_choose_square_color_2, sizeof(__pyx_k_BaseChessApp_choose_square_color_2), 0, 0, 1, 1},
-    {&__pyx_n_s_BaseChessApp_clear_board, __pyx_k_BaseChessApp_clear_board, sizeof(__pyx_k_BaseChessApp_clear_board), 0, 0, 1, 1},
-    {&__pyx_n_s_BaseChessApp_create_menu, __pyx_k_BaseChessApp_create_menu, sizeof(__pyx_k_BaseChessApp_create_menu), 0, 0, 1, 1},
-    {&__pyx_n_s_BaseChessApp_get_xys, __pyx_k_BaseChessApp_get_xys, sizeof(__pyx_k_BaseChessApp_get_xys), 0, 0, 1, 1},
-    {&__pyx_n_s_BaseChessApp_on_closing, __pyx_k_BaseChessApp_on_closing, sizeof(__pyx_k_BaseChessApp_on_closing), 0, 0, 1, 1},
-    {&__pyx_n_s_BaseChessApp_on_resize, __pyx_k_BaseChessApp_on_resize, sizeof(__pyx_k_BaseChessApp_on_resize), 0, 0, 1, 1},
-    {&__pyx_n_s_BaseChessApp_set_depth, __pyx_k_BaseChessApp_set_depth, sizeof(__pyx_k_BaseChessApp_set_depth), 0, 0, 1, 1},
-    {&__pyx_n_s_BaseChessApp_set_title, __pyx_k_BaseChessApp_set_title, sizeof(__pyx_k_BaseChessApp_set_title), 0, 0, 1, 1},
-    {&__pyx_n_s_BaseChessApp_update_board, __pyx_k_BaseChessApp_update_board, sizeof(__pyx_k_BaseChessApp_update_board), 0, 0, 1, 1},
+    {&__pyx_n_s_BaseChessTkApp, __pyx_k_BaseChessTkApp, sizeof(__pyx_k_BaseChessTkApp), 0, 0, 1, 1},
+    {&__pyx_n_s_BaseChessTkApp_add_options, __pyx_k_BaseChessTkApp_add_options, sizeof(__pyx_k_BaseChessTkApp_add_options), 0, 0, 1, 1},
+    {&__pyx_n_s_BaseChessTkApp_add_options_local, __pyx_k_BaseChessTkApp_add_options_local, sizeof(__pyx_k_BaseChessTkApp_add_options_local), 0, 0, 1, 1},
+    {&__pyx_n_s_BaseChessTkApp_after, __pyx_k_BaseChessTkApp_after, sizeof(__pyx_k_BaseChessTkApp_after), 0, 0, 1, 1},
+    {&__pyx_n_s_BaseChessTkApp_ask_depth, __pyx_k_BaseChessTkApp_ask_depth, sizeof(__pyx_k_BaseChessTkApp_ask_depth), 0, 0, 1, 1},
+    {&__pyx_n_s_BaseChessTkApp_change_board_colo, __pyx_k_BaseChessTkApp_change_board_colo, sizeof(__pyx_k_BaseChessTkApp_change_board_colo), 0, 0, 1, 1},
+    {&__pyx_n_s_BaseChessTkApp_change_font, __pyx_k_BaseChessTkApp_change_font, sizeof(__pyx_k_BaseChessTkApp_change_font), 0, 0, 1, 1},
+    {&__pyx_n_s_BaseChessTkApp_change_font_local, __pyx_k_BaseChessTkApp_change_font_local, sizeof(__pyx_k_BaseChessTkApp_change_font_local), 0, 0, 1, 1},
+    {&__pyx_n_s_BaseChessTkApp_choose_square_col, __pyx_k_BaseChessTkApp_choose_square_col, sizeof(__pyx_k_BaseChessTkApp_choose_square_col), 0, 0, 1, 1},
+    {&__pyx_n_s_BaseChessTkApp_choose_square_col_2, __pyx_k_BaseChessTkApp_choose_square_col_2, sizeof(__pyx_k_BaseChessTkApp_choose_square_col_2), 0, 0, 1, 1},
+    {&__pyx_n_s_BaseChessTkApp_clear_board, __pyx_k_BaseChessTkApp_clear_board, sizeof(__pyx_k_BaseChessTkApp_clear_board), 0, 0, 1, 1},
+    {&__pyx_n_s_BaseChessTkApp_create_menu, __pyx_k_BaseChessTkApp_create_menu, sizeof(__pyx_k_BaseChessTkApp_create_menu), 0, 0, 1, 1},
+    {&__pyx_n_s_BaseChessTkApp_get_xys, __pyx_k_BaseChessTkApp_get_xys, sizeof(__pyx_k_BaseChessTkApp_get_xys), 0, 0, 1, 1},
+    {&__pyx_n_s_BaseChessTkApp_on_closing, __pyx_k_BaseChessTkApp_on_closing, sizeof(__pyx_k_BaseChessTkApp_on_closing), 0, 0, 1, 1},
+    {&__pyx_n_s_BaseChessTkApp_on_resize, __pyx_k_BaseChessTkApp_on_resize, sizeof(__pyx_k_BaseChessTkApp_on_resize), 0, 0, 1, 1},
+    {&__pyx_n_s_BaseChessTkApp_set_depth, __pyx_k_BaseChessTkApp_set_depth, sizeof(__pyx_k_BaseChessTkApp_set_depth), 0, 0, 1, 1},
+    {&__pyx_n_s_BaseChessTkApp_set_title, __pyx_k_BaseChessTkApp_set_title, sizeof(__pyx_k_BaseChessTkApp_set_title), 0, 0, 1, 1},
+    {&__pyx_n_s_BaseChessTkApp_update_board, __pyx_k_BaseChessTkApp_update_board, sizeof(__pyx_k_BaseChessTkApp_update_board), 0, 0, 1, 1},
     {&__pyx_kp_s_Base_class_for_a_chess_app, __pyx_k_Base_class_for_a_chess_app, sizeof(__pyx_k_Base_class_for_a_chess_app), 0, 0, 1, 0},
     {&__pyx_n_s_Callable, __pyx_k_Callable, sizeof(__pyx_k_Callable), 0, 0, 1, 1},
     {&__pyx_n_s_Canvas, __pyx_k_Canvas, sizeof(__pyx_k_Canvas), 0, 0, 1, 1},
@@ -7659,8 +7659,8 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_canvas, __pyx_k_canvas, sizeof(__pyx_k_canvas), 0, 0, 1, 1},
     {&__pyx_n_s_change_board_colors, __pyx_k_change_board_colors, sizeof(__pyx_k_change_board_colors), 0, 0, 1, 1},
     {&__pyx_n_s_change_font, __pyx_k_change_font, sizeof(__pyx_k_change_font), 0, 0, 1, 1},
-    {&__pyx_n_s_chmutils_base_chess_app, __pyx_k_chmutils_base_chess_app, sizeof(__pyx_k_chmutils_base_chess_app), 0, 0, 1, 1},
-    {&__pyx_kp_s_chmutils_base_chess_app_py, __pyx_k_chmutils_base_chess_app_py, sizeof(__pyx_k_chmutils_base_chess_app_py), 0, 0, 1, 0},
+    {&__pyx_n_s_chmutils_base_chess_tk_app, __pyx_k_chmutils_base_chess_tk_app, sizeof(__pyx_k_chmutils_base_chess_tk_app), 0, 0, 1, 1},
+    {&__pyx_kp_s_chmutils_base_chess_tk_app_py, __pyx_k_chmutils_base_chess_tk_app_py, sizeof(__pyx_k_chmutils_base_chess_tk_app_py), 0, 0, 1, 0},
     {&__pyx_n_s_choose_square_color, __pyx_k_choose_square_color, sizeof(__pyx_k_choose_square_color), 0, 0, 1, 1},
     {&__pyx_n_s_clear_board, __pyx_k_clear_board, sizeof(__pyx_k_clear_board), 0, 0, 1, 1},
     {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
@@ -7754,7 +7754,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "chmutils/base_chess_app.py":8
+  /* "chmutils/base_chess_tk_app.py":8
  * DARK_SQUARE_COLOR_PROMPT: str = "Pick Dark Square Color"
  * LIGHT_SQUARE_COLOR_PROMPT: str = "Pick Light Square Color"
  * DEFAULT_COLORS: Tuple[str, str] = ("#ffffff", "#c0c0c0")             # <<<<<<<<<<<<<<
@@ -7765,7 +7765,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "chmutils/base_chess_app.py":23
+  /* "chmutils/base_chess_tk_app.py":23
  *     current_move_index: int
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
@@ -7775,9 +7775,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__3 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
-  __pyx_codeobj__4 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_app_py, __pyx_n_s_on_closing, 23, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__4)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __pyx_codeobj__4 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_tk_app_py, __pyx_n_s_on_closing, 23, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__4)) __PYX_ERR(0, 23, __pyx_L1_error)
 
-  /* "chmutils/base_chess_app.py":28
+  /* "chmutils/base_chess_tk_app.py":28
  *         pass
  * 
  *     def on_resize(self, event: Event) -> None:             # <<<<<<<<<<<<<<
@@ -7787,36 +7787,36 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__5 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_event); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 28, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
-  __pyx_codeobj__6 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__5, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_app_py, __pyx_n_s_on_resize, 28, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__6)) __PYX_ERR(0, 28, __pyx_L1_error)
+  __pyx_codeobj__6 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__5, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_tk_app_py, __pyx_n_s_on_resize, 28, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__6)) __PYX_ERR(0, 28, __pyx_L1_error)
 
-  /* "chmutils/base_chess_app.py":44
+  /* "chmutils/base_chess_tk_app.py":44
  *             self.updating = False
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
  *     def set_depth(self):
  *         """Prompt the user to set a new recursion depth for heatmap calculations.
  */
-  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_app_py, __pyx_n_s_set_depth, 44, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_tk_app_py, __pyx_n_s_set_depth, 44, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 44, __pyx_L1_error)
 
-  /* "chmutils/base_chess_app.py":53
+  /* "chmutils/base_chess_tk_app.py":53
  *         pass
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
  *     def create_menu(self):
  *         """Constructs the app menu during initialization.
  */
-  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_app_py, __pyx_n_s_create_menu, 53, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_tk_app_py, __pyx_n_s_create_menu, 53, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 53, __pyx_L1_error)
 
-  /* "chmutils/base_chess_app.py":62
+  /* "chmutils/base_chess_tk_app.py":62
  *         pass
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
  *     def set_title(self):
  *         """Sets the App window title"""
  */
-  __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_app_py, __pyx_n_s_set_title, 62, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_tk_app_py, __pyx_n_s_set_title, 62, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) __PYX_ERR(0, 62, __pyx_L1_error)
 
-  /* "chmutils/base_chess_app.py":67
+  /* "chmutils/base_chess_tk_app.py":67
  *         pass
  * 
  *     def ask_depth(self) -> Optional[int]:             # <<<<<<<<<<<<<<
@@ -7826,9 +7826,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__10 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_depth_warning); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
-  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_app_py, __pyx_n_s_ask_depth, 67, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_tk_app_py, __pyx_n_s_ask_depth, 67, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(0, 67, __pyx_L1_error)
 
-  /* "chmutils/base_chess_app.py":91
+  /* "chmutils/base_chess_tk_app.py":91
  *         )  # Adjust maxvalue as needed.
  * 
  *     def change_font(self, new_font: str) -> None:             # <<<<<<<<<<<<<<
@@ -7838,9 +7838,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__12 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_new_font); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 91, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__12);
   __Pyx_GIVEREF(__pyx_tuple__12);
-  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_app_py, __pyx_n_s_change_font, 91, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_tk_app_py, __pyx_n_s_change_font, 91, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) __PYX_ERR(0, 91, __pyx_L1_error)
 
-  /* "chmutils/base_chess_app.py":105
+  /* "chmutils/base_chess_tk_app.py":105
  *             self.after(100, lambda: self.change_font(new_font))
  * 
  *     def choose_square_color(self, title: str, index: int) -> None:             # <<<<<<<<<<<<<<
@@ -7850,36 +7850,36 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__14 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_title, __pyx_n_s_index, __pyx_n_s_color); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__14);
   __Pyx_GIVEREF(__pyx_tuple__14);
-  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_app_py, __pyx_n_s_choose_square_color, 105, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 105, __pyx_L1_error)
+  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_tk_app_py, __pyx_n_s_choose_square_color, 105, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 105, __pyx_L1_error)
 
-  /* "chmutils/base_chess_app.py":128
+  /* "chmutils/base_chess_tk_app.py":128
  *             self.after(100, lambda: self.choose_square_color(title, index))
  * 
  *     def change_board_colors(self) -> None:             # <<<<<<<<<<<<<<
  *         """Invoke both light and dark square color option prompts.
  * 
  */
-  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_app_py, __pyx_n_s_change_board_colors, 128, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_tk_app_py, __pyx_n_s_change_board_colors, 128, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 128, __pyx_L1_error)
 
-  /* "chmutils/base_chess_app.py":137
+  /* "chmutils/base_chess_tk_app.py":137
  *         self.choose_square_color(title=DARK_SQUARE_COLOR_PROMPT, index=1)
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
  *     def update_board(self):
  *         """Update the chessboard display based on the current position.
  */
-  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_app_py, __pyx_n_s_update_board, 137, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_tk_app_py, __pyx_n_s_update_board, 137, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 137, __pyx_L1_error)
 
-  /* "chmutils/base_chess_app.py":147
+  /* "chmutils/base_chess_tk_app.py":147
  *         pass
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
  *     def clear_board(self):
  *         """Clears the canvas of any drawn board objects"""
  */
-  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_app_py, __pyx_n_s_clear_board, 147, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_tk_app_py, __pyx_n_s_clear_board, 147, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(0, 147, __pyx_L1_error)
 
-  /* "chmutils/base_chess_app.py":152
+  /* "chmutils/base_chess_tk_app.py":152
  *         pass
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
@@ -7889,9 +7889,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__19 = PyTuple_Pack(7, __pyx_n_s_col, __pyx_n_s_flipped_row, __pyx_n_s_square_size, __pyx_n_s_x_0, __pyx_n_s_y_0, __pyx_n_s_x_1, __pyx_n_s_y_1); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 152, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__19);
   __Pyx_GIVEREF(__pyx_tuple__19);
-  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_app_py, __pyx_n_s_get_xys, 152, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_tk_app_py, __pyx_n_s_get_xys, 152, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 152, __pyx_L1_error)
 
-  /* "chmutils/base_chess_app.py":173
+  /* "chmutils/base_chess_tk_app.py":173
  *         return x_0, x_1, y_0, y_1
  * 
  *     def after(self, ms: int, function: Optional[Callable] = None, *args) -> None:             # <<<<<<<<<<<<<<
@@ -7901,12 +7901,12 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__21 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_ms, __pyx_n_s_function, __pyx_n_s_args); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 173, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__21);
   __Pyx_GIVEREF(__pyx_tuple__21);
-  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_app_py, __pyx_n_s_after, 173, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_tk_app_py, __pyx_n_s_after, 173, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 173, __pyx_L1_error)
   __pyx_tuple__23 = PyTuple_Pack(1, Py_None); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 173, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__23);
   __Pyx_GIVEREF(__pyx_tuple__23);
 
-  /* "chmutils/base_chess_app.py":188
+  /* "chmutils/base_chess_tk_app.py":188
  *         Tk.after(self, ms, function, *args)
  * 
  *     def add_options(self, menu_bar: Menu) -> None:             # <<<<<<<<<<<<<<
@@ -7916,7 +7916,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__24 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_menu_bar, __pyx_n_s_fonts_menu, __pyx_n_s_font, __pyx_n_s_options_menu); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__24);
   __Pyx_GIVEREF(__pyx_tuple__24);
-  __pyx_codeobj__25 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__24, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_app_py, __pyx_n_s_add_options, 188, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__25)) __PYX_ERR(0, 188, __pyx_L1_error)
+  __pyx_codeobj__25 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__24, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_base_chess_tk_app_py, __pyx_n_s_add_options, 188, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__25)) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -7984,60 +7984,60 @@ static int __Pyx_modinit_type_init_code(void) {
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
   #if CYTHON_USE_TYPE_SPECS
-  __pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct__change_font = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_8chmutils_14base_chess_app___pyx_scope_struct__change_font_spec, NULL); if (unlikely(!__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct__change_font)) __PYX_ERR(0, 91, __pyx_L1_error)
-  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_8chmutils_14base_chess_app___pyx_scope_struct__change_font_spec, __pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct__change_font) < 0) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font_spec, NULL); if (unlikely(!__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font)) __PYX_ERR(0, 91, __pyx_L1_error)
+  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font_spec, __pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font) < 0) __PYX_ERR(0, 91, __pyx_L1_error)
   #else
-  __pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct__change_font = &__pyx_type_8chmutils_14base_chess_app___pyx_scope_struct__change_font;
+  __pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font = &__pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
   #endif
   #if !CYTHON_USE_TYPE_SPECS
-  if (__Pyx_PyType_Ready(__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct__change_font) < 0) __PYX_ERR(0, 91, __pyx_L1_error)
+  if (__Pyx_PyType_Ready(__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font) < 0) __PYX_ERR(0, 91, __pyx_L1_error)
   #endif
   #if PY_MAJOR_VERSION < 3
-  __pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct__change_font->tp_print = 0;
+  __pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font->tp_print = 0;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
-  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct__change_font->tp_dictoffset && __pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct__change_font->tp_getattro == PyObject_GenericGetAttr)) {
-    __pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct__change_font->tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font->tp_dictoffset && __pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font->tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct__change_font->tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   #endif
   #if CYTHON_USE_TYPE_SPECS
-  __pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color_spec, NULL); if (unlikely(!__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color)) __PYX_ERR(0, 105, __pyx_L1_error)
-  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color_spec, __pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color) < 0) __PYX_ERR(0, 105, __pyx_L1_error)
+  __pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color_spec, NULL); if (unlikely(!__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color)) __PYX_ERR(0, 105, __pyx_L1_error)
+  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color_spec, __pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color) < 0) __PYX_ERR(0, 105, __pyx_L1_error)
   #else
-  __pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color = &__pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color;
+  __pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color = &__pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
   #endif
   #if !CYTHON_USE_TYPE_SPECS
-  if (__Pyx_PyType_Ready(__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color) < 0) __PYX_ERR(0, 105, __pyx_L1_error)
+  if (__Pyx_PyType_Ready(__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color) < 0) __PYX_ERR(0, 105, __pyx_L1_error)
   #endif
   #if PY_MAJOR_VERSION < 3
-  __pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color->tp_print = 0;
+  __pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color->tp_print = 0;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
-  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color->tp_dictoffset && __pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color->tp_getattro == PyObject_GenericGetAttr)) {
-    __pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_1_choose_square_color->tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color->tp_dictoffset && __pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color->tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_1_choose_square_color->tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   #endif
   #if CYTHON_USE_TYPE_SPECS
-  __pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options_spec, NULL); if (unlikely(!__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options)) __PYX_ERR(0, 188, __pyx_L1_error)
-  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options_spec, __pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options) < 0) __PYX_ERR(0, 188, __pyx_L1_error)
+  __pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options_spec, NULL); if (unlikely(!__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options)) __PYX_ERR(0, 188, __pyx_L1_error)
+  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options_spec, __pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options) < 0) __PYX_ERR(0, 188, __pyx_L1_error)
   #else
-  __pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options = &__pyx_type_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options;
+  __pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options = &__pyx_type_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
   #endif
   #if !CYTHON_USE_TYPE_SPECS
-  if (__Pyx_PyType_Ready(__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options) < 0) __PYX_ERR(0, 188, __pyx_L1_error)
+  if (__Pyx_PyType_Ready(__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options) < 0) __PYX_ERR(0, 188, __pyx_L1_error)
   #endif
   #if PY_MAJOR_VERSION < 3
-  __pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options->tp_print = 0;
+  __pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options->tp_print = 0;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
-  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options->tp_dictoffset && __pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options->tp_getattro == PyObject_GenericGetAttr)) {
-    __pyx_ptype_8chmutils_14base_chess_app___pyx_scope_struct_2_add_options->tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options->tp_dictoffset && __pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options->tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_ptype_8chmutils_17base_chess_tk_app___pyx_scope_struct_2_add_options->tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   #endif
   __Pyx_RefNannyFinishContext();
@@ -8075,10 +8075,10 @@ static int __Pyx_modinit_function_import_code(void) {
 #if PY_MAJOR_VERSION >= 3
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 static PyObject* __pyx_pymod_create(PyObject *spec, PyModuleDef *def); /*proto*/
-static int __pyx_pymod_exec_base_chess_app(PyObject* module); /*proto*/
+static int __pyx_pymod_exec_base_chess_tk_app(PyObject* module); /*proto*/
 static PyModuleDef_Slot __pyx_moduledef_slots[] = {
   {Py_mod_create, (void*)__pyx_pymod_create},
-  {Py_mod_exec, (void*)__pyx_pymod_exec_base_chess_app},
+  {Py_mod_exec, (void*)__pyx_pymod_exec_base_chess_tk_app},
   {0, NULL}
 };
 #endif
@@ -8091,8 +8091,8 @@ namespace {
   #endif
   {
       PyModuleDef_HEAD_INIT,
-      "base_chess_app",
-      __pyx_k_BaseChessApp, /* m_doc */
+      "base_chess_tk_app",
+      __pyx_k_BaseChessTkApp, /* m_doc */
     #if CYTHON_PEP489_MULTI_PHASE_INIT
       0, /* m_size */
     #elif CYTHON_USE_MODULE_STATE
@@ -8139,11 +8139,11 @@ namespace {
 
 
 #if PY_MAJOR_VERSION < 3
-__Pyx_PyMODINIT_FUNC initbase_chess_app(void) CYTHON_SMALL_CODE; /*proto*/
-__Pyx_PyMODINIT_FUNC initbase_chess_app(void)
+__Pyx_PyMODINIT_FUNC initbase_chess_tk_app(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC initbase_chess_tk_app(void)
 #else
-__Pyx_PyMODINIT_FUNC PyInit_base_chess_app(void) CYTHON_SMALL_CODE; /*proto*/
-__Pyx_PyMODINIT_FUNC PyInit_base_chess_app(void)
+__Pyx_PyMODINIT_FUNC PyInit_base_chess_tk_app(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC PyInit_base_chess_tk_app(void)
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 {
   return PyModuleDef_Init(&__pyx_moduledef);
@@ -8224,7 +8224,7 @@ bad:
 }
 
 
-static CYTHON_SMALL_CODE int __pyx_pymod_exec_base_chess_app(PyObject *__pyx_pyinit_module)
+static CYTHON_SMALL_CODE int __pyx_pymod_exec_base_chess_tk_app(PyObject *__pyx_pyinit_module)
 #endif
 #endif
 {
@@ -8248,7 +8248,7 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_base_chess_app(PyObject *__pyx_pyi
   #if CYTHON_PEP489_MULTI_PHASE_INIT
   if (__pyx_m) {
     if (__pyx_m == __pyx_pyinit_module) return 0;
-    PyErr_SetString(PyExc_RuntimeError, "Module 'base_chess_app' has already been imported. Re-initialisation is not supported.");
+    PyErr_SetString(PyExc_RuntimeError, "Module 'base_chess_tk_app' has already been imported. Re-initialisation is not supported.");
     return -1;
   }
   #elif PY_MAJOR_VERSION >= 3
@@ -8260,13 +8260,13 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_base_chess_app(PyObject *__pyx_pyi
   Py_INCREF(__pyx_m);
   #else
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("base_chess_app", __pyx_methods, __pyx_k_BaseChessApp, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("base_chess_tk_app", __pyx_methods, __pyx_k_BaseChessTkApp, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   if (unlikely(!__pyx_m)) __PYX_ERR(0, 1, __pyx_L1_error)
   #elif CYTHON_USE_MODULE_STATE
   __pyx_t_1 = PyModule_Create(&__pyx_moduledef); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   {
     int add_module_result = PyState_AddModule(__pyx_t_1, &__pyx_moduledef);
-    __pyx_t_1 = 0; /* transfer ownership from __pyx_t_1 to "base_chess_app" pseudovariable */
+    __pyx_t_1 = 0; /* transfer ownership from __pyx_t_1 to "base_chess_tk_app" pseudovariable */
     if (unlikely((add_module_result < 0))) __PYX_ERR(0, 1, __pyx_L1_error)
     pystate_addmodule_run = 1;
   }
@@ -8290,7 +8290,7 @@ if (!__Pyx_RefNanny) {
       Py_FatalError("failed to import 'refnanny' module");
 }
 #endif
-  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_base_chess_app(void)", 0);
+  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_base_chess_tk_app(void)", 0);
   if (__Pyx_check_binary_version(__PYX_LIMITED_VERSION_HEX, __Pyx_get_runtime_version(), CYTHON_COMPILING_IN_LIMITED_API) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #ifdef __Pxy_PyFrame_Initialize_Offsets
   __Pxy_PyFrame_Initialize_Offsets();
@@ -8328,14 +8328,14 @@ if (!__Pyx_RefNanny) {
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_chmutils__base_chess_app) {
+  if (__pyx_module_is_main_chmutils__base_chess_tk_app) {
     if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name, __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "chmutils.base_chess_app")) {
-      if (unlikely((PyDict_SetItemString(modules, "chmutils.base_chess_app", __pyx_m) < 0))) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "chmutils.base_chess_tk_app")) {
+      if (unlikely((PyDict_SetItemString(modules, "chmutils.base_chess_tk_app", __pyx_m) < 0))) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -8356,8 +8356,8 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "chmutils/base_chess_app.py":2
- * """BaseChessApp"""
+  /* "chmutils/base_chess_tk_app.py":2
+ * """BaseChessTkApp"""
  * from abc import ABCMeta, abstractmethod             # <<<<<<<<<<<<<<
  * from tkinter import Canvas, Event, Menu, Tk, colorchooser, font as tk_font, simpledialog
  * from typing import Callable, List, Optional, Set, Tuple
@@ -8383,8 +8383,8 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmutils/base_chess_app.py":3
- * """BaseChessApp"""
+  /* "chmutils/base_chess_tk_app.py":3
+ * """BaseChessTkApp"""
  * from abc import ABCMeta, abstractmethod
  * from tkinter import Canvas, Event, Menu, Tk, colorchooser, font as tk_font, simpledialog             # <<<<<<<<<<<<<<
  * from typing import Callable, List, Optional, Set, Tuple
@@ -8446,7 +8446,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "chmutils/base_chess_app.py":4
+  /* "chmutils/base_chess_tk_app.py":4
  * from abc import ABCMeta, abstractmethod
  * from tkinter import Canvas, Event, Menu, Tk, colorchooser, font as tk_font, simpledialog
  * from typing import Callable, List, Optional, Set, Tuple             # <<<<<<<<<<<<<<
@@ -8495,7 +8495,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmutils/base_chess_app.py":6
+  /* "chmutils/base_chess_tk_app.py":6
  * from typing import Callable, List, Optional, Set, Tuple
  * 
  * DARK_SQUARE_COLOR_PROMPT: str = "Pick Dark Square Color"             # <<<<<<<<<<<<<<
@@ -8504,7 +8504,7 @@ if (!__Pyx_RefNanny) {
  */
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_DARK_SQUARE_COLOR_PROMPT, __pyx_kp_u_Pick_Dark_Square_Color) < 0) __PYX_ERR(0, 6, __pyx_L1_error)
 
-  /* "chmutils/base_chess_app.py":7
+  /* "chmutils/base_chess_tk_app.py":7
  * 
  * DARK_SQUARE_COLOR_PROMPT: str = "Pick Dark Square Color"
  * LIGHT_SQUARE_COLOR_PROMPT: str = "Pick Light Square Color"             # <<<<<<<<<<<<<<
@@ -8513,7 +8513,7 @@ if (!__Pyx_RefNanny) {
  */
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_LIGHT_SQUARE_COLOR_PROMPT, __pyx_kp_u_Pick_Light_Square_Color) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
 
-  /* "chmutils/base_chess_app.py":8
+  /* "chmutils/base_chess_tk_app.py":8
  * DARK_SQUARE_COLOR_PROMPT: str = "Pick Dark Square Color"
  * LIGHT_SQUARE_COLOR_PROMPT: str = "Pick Light Square Color"
  * DEFAULT_COLORS: Tuple[str, str] = ("#ffffff", "#c0c0c0")             # <<<<<<<<<<<<<<
@@ -8522,7 +8522,7 @@ if (!__Pyx_RefNanny) {
  */
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_DEFAULT_COLORS, __pyx_tuple__2) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
 
-  /* "chmutils/base_chess_app.py":9
+  /* "chmutils/base_chess_tk_app.py":9
  * LIGHT_SQUARE_COLOR_PROMPT: str = "Pick Light Square Color"
  * DEFAULT_COLORS: Tuple[str, str] = ("#ffffff", "#c0c0c0")
  * DEFAULT_FONT: str = "Arial"             # <<<<<<<<<<<<<<
@@ -8531,10 +8531,10 @@ if (!__Pyx_RefNanny) {
  */
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_DEFAULT_FONT, __pyx_n_u_Arial) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
 
-  /* "chmutils/base_chess_app.py":12
+  /* "chmutils/base_chess_tk_app.py":12
  * 
  * 
- * class BaseChessApp(metaclass=ABCMeta):             # <<<<<<<<<<<<<<
+ * class BaseChessTkApp(metaclass=ABCMeta):             # <<<<<<<<<<<<<<
  *     """Base class for a chess app"""
  *     updating: bool
  */
@@ -8542,7 +8542,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_ABCMeta); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_Py3MetaclassPrepare(__pyx_t_2, __pyx_empty_tuple, __pyx_n_s_BaseChessApp, __pyx_n_s_BaseChessApp, __pyx_t_3, __pyx_n_s_chmutils_base_chess_app, __pyx_kp_s_Base_class_for_a_chess_app); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_Py3MetaclassPrepare(__pyx_t_2, __pyx_empty_tuple, __pyx_n_s_BaseChessTkApp, __pyx_n_s_BaseChessTkApp, __pyx_t_3, __pyx_n_s_chmutils_base_chess_tk_app, __pyx_kp_s_Base_class_for_a_chess_app); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = __Pyx_PyDict_NewPresized(8); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
@@ -8557,7 +8557,7 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_annotations, __pyx_t_5) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "chmutils/base_chess_app.py":23
+  /* "chmutils/base_chess_tk_app.py":23
  *     current_move_index: int
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
@@ -8566,7 +8566,7 @@ if (!__Pyx_RefNanny) {
  */
   __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_abstractmethod); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_1on_closing, 0, __pyx_n_s_BaseChessApp_on_closing, NULL, __pyx_n_s_chmutils_base_chess_app, __pyx_d, ((PyObject *)__pyx_codeobj__4)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_1on_closing, 0, __pyx_n_s_BaseChessTkApp_on_closing, NULL, __pyx_n_s_chmutils_base_chess_tk_app, __pyx_d, ((PyObject *)__pyx_codeobj__4)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_8 = NULL;
   __pyx_t_9 = 0;
@@ -8594,7 +8594,7 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_on_closing, __pyx_t_5) < 0) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "chmutils/base_chess_app.py":28
+  /* "chmutils/base_chess_tk_app.py":28
  *         pass
  * 
  *     def on_resize(self, event: Event) -> None:             # <<<<<<<<<<<<<<
@@ -8605,14 +8605,14 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_5);
   if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_event, __pyx_n_s_Event) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_3on_resize, 0, __pyx_n_s_BaseChessApp_on_resize, NULL, __pyx_n_s_chmutils_base_chess_app, __pyx_d, ((PyObject *)__pyx_codeobj__6)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 28, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_3on_resize, 0, __pyx_n_s_BaseChessTkApp_on_resize, NULL, __pyx_n_s_chmutils_base_chess_tk_app, __pyx_d, ((PyObject *)__pyx_codeobj__6)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 28, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_5);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_on_resize, __pyx_t_6) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "chmutils/base_chess_app.py":44
+  /* "chmutils/base_chess_tk_app.py":44
  *             self.updating = False
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
@@ -8621,7 +8621,7 @@ if (!__Pyx_RefNanny) {
  */
   __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_abstractmethod); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_5set_depth, 0, __pyx_n_s_BaseChessApp_set_depth, NULL, __pyx_n_s_chmutils_base_chess_app, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_5set_depth, 0, __pyx_n_s_BaseChessTkApp_set_depth, NULL, __pyx_n_s_chmutils_base_chess_tk_app, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_8 = NULL;
   __pyx_t_9 = 0;
@@ -8649,7 +8649,7 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_set_depth, __pyx_t_6) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "chmutils/base_chess_app.py":53
+  /* "chmutils/base_chess_tk_app.py":53
  *         pass
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
@@ -8658,7 +8658,7 @@ if (!__Pyx_RefNanny) {
  */
   __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_abstractmethod); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_7create_menu, 0, __pyx_n_s_BaseChessApp_create_menu, NULL, __pyx_n_s_chmutils_base_chess_app, __pyx_d, ((PyObject *)__pyx_codeobj__8)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_7create_menu, 0, __pyx_n_s_BaseChessTkApp_create_menu, NULL, __pyx_n_s_chmutils_base_chess_tk_app, __pyx_d, ((PyObject *)__pyx_codeobj__8)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_8 = NULL;
   __pyx_t_9 = 0;
@@ -8686,7 +8686,7 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_create_menu, __pyx_t_6) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "chmutils/base_chess_app.py":62
+  /* "chmutils/base_chess_tk_app.py":62
  *         pass
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
@@ -8695,7 +8695,7 @@ if (!__Pyx_RefNanny) {
  */
   __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_abstractmethod); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_9set_title, 0, __pyx_n_s_BaseChessApp_set_title, NULL, __pyx_n_s_chmutils_base_chess_app, __pyx_d, ((PyObject *)__pyx_codeobj__9)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_9set_title, 0, __pyx_n_s_BaseChessTkApp_set_title, NULL, __pyx_n_s_chmutils_base_chess_tk_app, __pyx_d, ((PyObject *)__pyx_codeobj__9)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_8 = NULL;
   __pyx_t_9 = 0;
@@ -8723,7 +8723,7 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_set_title, __pyx_t_6) < 0) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "chmutils/base_chess_app.py":67
+  /* "chmutils/base_chess_tk_app.py":67
  *         pass
  * 
  *     def ask_depth(self) -> Optional[int]:             # <<<<<<<<<<<<<<
@@ -8733,14 +8733,14 @@ if (!__Pyx_RefNanny) {
   __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_return, __pyx_kp_s_Optional_int) < 0) __PYX_ERR(0, 67, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_11ask_depth, 0, __pyx_n_s_BaseChessApp_ask_depth, NULL, __pyx_n_s_chmutils_base_chess_app, __pyx_d, ((PyObject *)__pyx_codeobj__11)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_11ask_depth, 0, __pyx_n_s_BaseChessTkApp_ask_depth, NULL, __pyx_n_s_chmutils_base_chess_tk_app, __pyx_d, ((PyObject *)__pyx_codeobj__11)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_6);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_ask_depth, __pyx_t_5) < 0) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "chmutils/base_chess_app.py":91
+  /* "chmutils/base_chess_tk_app.py":91
  *         )  # Adjust maxvalue as needed.
  * 
  *     def change_font(self, new_font: str) -> None:             # <<<<<<<<<<<<<<
@@ -8751,14 +8751,14 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_5);
   if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_new_font, __pyx_n_s_str) < 0) __PYX_ERR(0, 91, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 91, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_13change_font, 0, __pyx_n_s_BaseChessApp_change_font, NULL, __pyx_n_s_chmutils_base_chess_app, __pyx_d, ((PyObject *)__pyx_codeobj__13)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_13change_font, 0, __pyx_n_s_BaseChessTkApp_change_font, NULL, __pyx_n_s_chmutils_base_chess_tk_app, __pyx_d, ((PyObject *)__pyx_codeobj__13)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 91, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_5);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_change_font, __pyx_t_6) < 0) __PYX_ERR(0, 91, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "chmutils/base_chess_app.py":105
+  /* "chmutils/base_chess_tk_app.py":105
  *             self.after(100, lambda: self.change_font(new_font))
  * 
  *     def choose_square_color(self, title: str, index: int) -> None:             # <<<<<<<<<<<<<<
@@ -8770,14 +8770,14 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_title, __pyx_n_s_str) < 0) __PYX_ERR(0, 105, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_index, __pyx_n_s_int) < 0) __PYX_ERR(0, 105, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 105, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_15choose_square_color, 0, __pyx_n_s_BaseChessApp_choose_square_color_2, NULL, __pyx_n_s_chmutils_base_chess_app, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_15choose_square_color, 0, __pyx_n_s_BaseChessTkApp_choose_square_col_2, NULL, __pyx_n_s_chmutils_base_chess_tk_app, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_6);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_choose_square_color, __pyx_t_5) < 0) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "chmutils/base_chess_app.py":128
+  /* "chmutils/base_chess_tk_app.py":128
  *             self.after(100, lambda: self.choose_square_color(title, index))
  * 
  *     def change_board_colors(self) -> None:             # <<<<<<<<<<<<<<
@@ -8787,14 +8787,14 @@ if (!__Pyx_RefNanny) {
   __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 128, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_17change_board_colors, 0, __pyx_n_s_BaseChessApp_change_board_colors, NULL, __pyx_n_s_chmutils_base_chess_app, __pyx_d, ((PyObject *)__pyx_codeobj__16)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_17change_board_colors, 0, __pyx_n_s_BaseChessTkApp_change_board_colo, NULL, __pyx_n_s_chmutils_base_chess_tk_app, __pyx_d, ((PyObject *)__pyx_codeobj__16)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_5);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_change_board_colors, __pyx_t_6) < 0) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "chmutils/base_chess_app.py":137
+  /* "chmutils/base_chess_tk_app.py":137
  *         self.choose_square_color(title=DARK_SQUARE_COLOR_PROMPT, index=1)
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
@@ -8803,7 +8803,7 @@ if (!__Pyx_RefNanny) {
  */
   __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_abstractmethod); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_19update_board, 0, __pyx_n_s_BaseChessApp_update_board, NULL, __pyx_n_s_chmutils_base_chess_app, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_19update_board, 0, __pyx_n_s_BaseChessTkApp_update_board, NULL, __pyx_n_s_chmutils_base_chess_tk_app, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_8 = NULL;
   __pyx_t_9 = 0;
@@ -8831,7 +8831,7 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_update_board, __pyx_t_6) < 0) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "chmutils/base_chess_app.py":147
+  /* "chmutils/base_chess_tk_app.py":147
  *         pass
  * 
  *     @abstractmethod             # <<<<<<<<<<<<<<
@@ -8840,7 +8840,7 @@ if (!__Pyx_RefNanny) {
  */
   __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_abstractmethod); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 147, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_21clear_board, 0, __pyx_n_s_BaseChessApp_clear_board, NULL, __pyx_n_s_chmutils_base_chess_app, __pyx_d, ((PyObject *)__pyx_codeobj__18)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_21clear_board, 0, __pyx_n_s_BaseChessTkApp_clear_board, NULL, __pyx_n_s_chmutils_base_chess_tk_app, __pyx_d, ((PyObject *)__pyx_codeobj__18)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 147, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_8 = NULL;
   __pyx_t_9 = 0;
@@ -8868,7 +8868,7 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_clear_board, __pyx_t_6) < 0) __PYX_ERR(0, 147, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "chmutils/base_chess_app.py":152
+  /* "chmutils/base_chess_tk_app.py":152
  *         pass
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
@@ -8881,7 +8881,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_flipped_row, __pyx_n_s_int) < 0) __PYX_ERR(0, 152, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_square_size, __pyx_n_s_int) < 0) __PYX_ERR(0, 152, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_return, __pyx_kp_s_Tuple_int_int_int_int) < 0) __PYX_ERR(0, 152, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_23get_xys, __Pyx_CYFUNCTION_STATICMETHOD, __pyx_n_s_BaseChessApp_get_xys, NULL, __pyx_n_s_chmutils_base_chess_app, __pyx_d, ((PyObject *)__pyx_codeobj__20)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_23get_xys, __Pyx_CYFUNCTION_STATICMETHOD, __pyx_n_s_BaseChessTkApp_get_xys, NULL, __pyx_n_s_chmutils_base_chess_tk_app, __pyx_d, ((PyObject *)__pyx_codeobj__20)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 152, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_6);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -8891,7 +8891,7 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_get_xys, __pyx_t_6) < 0) __PYX_ERR(0, 152, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "chmutils/base_chess_app.py":173
+  /* "chmutils/base_chess_tk_app.py":173
  *         return x_0, x_1, y_0, y_1
  * 
  *     def after(self, ms: int, function: Optional[Callable] = None, *args) -> None:             # <<<<<<<<<<<<<<
@@ -8903,7 +8903,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_ms, __pyx_n_s_int) < 0) __PYX_ERR(0, 173, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_function, __pyx_kp_s_Optional_Callable) < 0) __PYX_ERR(0, 173, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 173, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_25after, 0, __pyx_n_s_BaseChessApp_after, NULL, __pyx_n_s_chmutils_base_chess_app, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_25after, 0, __pyx_n_s_BaseChessTkApp_after, NULL, __pyx_n_s_chmutils_base_chess_tk_app, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 173, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__23);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_6);
@@ -8911,7 +8911,7 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_after, __pyx_t_5) < 0) __PYX_ERR(0, 173, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "chmutils/base_chess_app.py":188
+  /* "chmutils/base_chess_tk_app.py":188
  *         Tk.after(self, ms, function, *args)
  * 
  *     def add_options(self, menu_bar: Menu) -> None:             # <<<<<<<<<<<<<<
@@ -8922,30 +8922,30 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_5);
   if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_menu_bar, __pyx_n_s_Menu) < 0) __PYX_ERR(0, 188, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 188, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_14base_chess_app_12BaseChessApp_27add_options, 0, __pyx_n_s_BaseChessApp_add_options, NULL, __pyx_n_s_chmutils_base_chess_app, __pyx_d, ((PyObject *)__pyx_codeobj__25)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 188, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_17base_chess_tk_app_14BaseChessTkApp_27add_options, 0, __pyx_n_s_BaseChessTkApp_add_options, NULL, __pyx_n_s_chmutils_base_chess_tk_app, __pyx_d, ((PyObject *)__pyx_codeobj__25)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_5);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_add_options, __pyx_t_6) < 0) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "chmutils/base_chess_app.py":12
+  /* "chmutils/base_chess_tk_app.py":12
  * 
  * 
- * class BaseChessApp(metaclass=ABCMeta):             # <<<<<<<<<<<<<<
+ * class BaseChessTkApp(metaclass=ABCMeta):             # <<<<<<<<<<<<<<
  *     """Base class for a chess app"""
  *     updating: bool
  */
-  __pyx_t_6 = __Pyx_Py3ClassCreate(__pyx_t_2, __pyx_n_s_BaseChessApp, __pyx_empty_tuple, __pyx_t_4, __pyx_t_3, 1, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_Py3ClassCreate(__pyx_t_2, __pyx_n_s_BaseChessTkApp, __pyx_empty_tuple, __pyx_t_4, __pyx_t_3, 1, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_BaseChessApp, __pyx_t_6) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_BaseChessTkApp, __pyx_t_6) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmutils/base_chess_app.py":1
- * """BaseChessApp"""             # <<<<<<<<<<<<<<
+  /* "chmutils/base_chess_tk_app.py":1
+ * """BaseChessTkApp"""             # <<<<<<<<<<<<<<
  * from abc import ABCMeta, abstractmethod
  * from tkinter import Canvas, Event, Menu, Tk, colorchooser, font as tk_font, simpledialog
  */
@@ -8967,7 +8967,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_XDECREF(__pyx_t_8);
   if (__pyx_m) {
     if (__pyx_d && stringtab_initialized) {
-      __Pyx_AddTraceback("init chmutils.base_chess_app", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init chmutils.base_chess_tk_app", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     #if !CYTHON_USE_MODULE_STATE
     Py_CLEAR(__pyx_m);
@@ -8981,7 +8981,7 @@ if (!__Pyx_RefNanny) {
     }
     #endif
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init chmutils.base_chess_app");
+    PyErr_SetString(PyExc_ImportError, "init chmutils.base_chess_tk_app");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();

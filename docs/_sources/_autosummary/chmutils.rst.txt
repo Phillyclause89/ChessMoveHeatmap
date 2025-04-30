@@ -47,7 +47,7 @@
    :toctree:
    :recursive:
 
-   chmutils.base_chess_app
+   chmutils.base_chess_tk_app
    chmutils.concurrent
    chmutils.game_builder
    chmutils.system_info

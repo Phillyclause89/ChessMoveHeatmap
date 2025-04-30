@@ -20,7 +20,7 @@ MAIN_MODULES: Tuple[str, str, str, str, str, str, str, str, str, str, str, str] 
     path.join('heatmaps', INIT_PY),
     path.join(CHMUTILS, 'concurrent.py'),
     path.join(CHMUTILS, 'game_builder.py'),
-    path.join(CHMUTILS, 'base_chess_app.py'),
+    path.join(CHMUTILS, 'base_chess_tk_app.py'),
     path.join(CHMUTILS, INIT_PY),
     path.join(CHMENGINE, UTILS, 'pick.py'),
     path.join(CHMENGINE, UTILS, INIT_PY),

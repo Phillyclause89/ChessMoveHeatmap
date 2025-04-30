@@ -8,8 +8,8 @@ from numpy import float64, float_
 
 from chmutils.concurrent import PPExecutor
 from chmutils.game_builder import GBuilder
-from chmutils.base_chess_app import (
-    BaseChessApp,
+from chmutils.base_chess_tk_app import (
+    BaseChessTkApp,
     DARK_SQUARE_COLOR_PROMPT,
     LIGHT_SQUARE_COLOR_PROMPT,
     DEFAULT_COLORS,
@@ -32,7 +32,7 @@ __all__ = [
     'get_or_compute_heatmap_with_better_discounts',
     'PIECE_KEYS',
     'CACHE_DIR',
-    'BaseChessApp',
+    'BaseChessTkApp',
     'DARK_SQUARE_COLOR_PROMPT',
     'LIGHT_SQUARE_COLOR_PROMPT',
     'DEFAULT_COLORS',
