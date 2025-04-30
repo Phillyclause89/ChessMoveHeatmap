@@ -58,7 +58,7 @@ function Watch-TrainingGames {
 
             $lastLine = ""
 
-            $trainings | Sort-Object -Property CreationTime | ForEach-Object {
+            $trainings | Sort-Object -Property LastWriteTime, CreationTime | ForEach-Object {
                 $game = Get-Content $_.FullName
                 $date = $game | Where-Object { $_ -match '\[UTCDate' }
                 $time = $game | Where-Object { $_ -match '\[UTCTime' }
