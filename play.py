@@ -34,7 +34,11 @@ class PlayChessApp(Tk, BaseChessTkApp):
         self.create_menu()
         self.canvas = Canvas(self)
         self.canvas.pack(fill="both", expand=True)
+        self.current_move_index = -1
+        self.highlight_squares = set()
+        # TODO: Prompt user to start a new (or load an incomplete) game.
         self.update_board()
+        self.bind("<Configure>", self.on_resize)
         self.focus_force()
         self.updating = False
 
@@ -126,6 +130,9 @@ class PlayChessApp(Tk, BaseChessTkApp):
     def draw_board(self) -> None:
         """Draw the chessboard and pieces."""
         square: int
+        half_square_size: int = self.square_size // 2
+        piece_bg: str = "⬤"
+        font_size = int(self.square_size * 0.6)
         for square in SQUARES:
             row: int
             col: int
@@ -140,11 +147,23 @@ class PlayChessApp(Tk, BaseChessTkApp):
             self.canvas.create_rectangle(x0, y0, x1, y1, fill=color, outline="black")
             piece: Optional[Piece] = self.engine.board.piece_at(square)
             if piece is not None:
+                # TODO: Refacort this into a PieceTk (or CanvasPiece) class that can support drag and drop
+                # CanvasPiece aligns with CanvasTooltip better...
+                # 
+                piece_x = x0 + half_square_size
+                piece_y = y0 + half_square_size
                 self.canvas.create_text(
-                    x0 + self.square_size / 2,
-                    y0 + self.square_size / 2,
+                    piece_x,
+                    piece_y,
+                    text=piece_bg,
+                    font=(self.font, font_size + 25),
+                    fill="white" if piece.color else "black"
+                )
+                self.canvas.create_text(
+                    piece_x,
+                    piece_y,
                     text=piece.unicode_symbol(),
-                    font=(self.font, int(self.square_size * 0.6)),
+                    font=(self.font, font_size),
                     fill="blue" if piece.color else "yellow"
                 )
 
