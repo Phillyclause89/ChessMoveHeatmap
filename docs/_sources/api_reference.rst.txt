@@ -9,7 +9,9 @@ This section contains the API documentation for the ChessMoveHeatmap project, au
 
     setup
     main
+    play
     standalone_color_legend
+    ......github.scripts.scripts_analyze_dependencies
     chmengine
     chmutils
     heatmaps

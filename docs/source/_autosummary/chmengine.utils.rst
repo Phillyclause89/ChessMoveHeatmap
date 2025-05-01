@@ -1,4 +1,4 @@
-﻿chmengine.utils
+chmengine.utils
 ===============
 
 .. automodule:: chmengine.utils
