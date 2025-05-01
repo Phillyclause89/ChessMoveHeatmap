@@ -99,7 +99,7 @@ class PlayCMHMEngine:
         self.game_round += 1
         local_time: datetime = get_local_time()
         print(f"Round: {self.game_round} | Time: {str(local_time)}\n{self.engine.board}")
-        other_moves: List[Move] = list(self.engine.board.legal_moves)
+        other_moves: List[Move] = self.engine.current_moves_list()
         print(f"All legal moves: {', '.join([m.uci() for m in other_moves])}\nCalculating move scores...")
         my_move_choice: Pick = self.engine.pick_move(pick_by=pick_by)
         print(f"My recommended move has a {pick_by} score of {my_move_choice[1]:.2f}: {my_move_choice[0]}")
@@ -198,7 +198,7 @@ class PlayCMHMEngine:
             local_time: datetime = get_local_time()
             print(local_time)
             last_move: str = ""
-            while self.engine.board.outcome() is None and not self.engine.board.can_claim_draw():
+            while self.engine.board.outcome(claim_draw=True) is None:
                 move_number: int = self.engine.board.fullmove_number
                 print(self.engine.board)
                 move: Move

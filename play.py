@@ -1,19 +1,56 @@
 """Play against the CMHMEngine in a GUI."""
+from datetime import datetime
+from os import makedirs, path
 from tkinter import Canvas, Menu, Tk, messagebox
-from typing import Callable, Optional
+from typing import Callable, Dict, List, Optional, Union
 
 from chess import Board, Move, Outcome, Piece, SQUARES
+from chess.pgn import Game
 
-from chmengine import CMHMEngine, CMHMEngine2
-from chmutils import BaseChessTkApp, DEFAULT_COLORS, DEFAULT_FONT
+from chmengine import CMHMEngine, CMHMEngine2, Pick, set_all_datetime_headers
+from chmutils import BaseChessTkApp, DEFAULT_COLORS, DEFAULT_FONT, get_local_time
 
 
 class PlayChessApp(Tk, BaseChessTkApp):
     """Play against the CMHMEngine in a GUI."""
-    engine: CMHMEngine
     training: bool
+    site: str
+    # TODO: Refactor these into their own Player and Engines dataclasses
+    player: Dict[str, Union[str, int]] = dict(
+        name="Unknown",
+        index=0,  # 0 is white in our mapping (inverse from python-chess lib)
+        color='white'
+    )
+    # PlayChessApp.engines indexes align with python-chess
+    engines: List[Dict[str, Union[str, int, Optional[CMHMEngine]]]] = [
+        dict(
+            engine=None,
+            name='None',
+            index=1,  # 1 is black in our mapping (inverse from python-chess lib)
+            color='black'
+        ),
+        dict(
+            engine=None,
+            name='None',
+            index=0,  # 0 is white in our mapping (inverse from python-chess lib)
+            color='white'
+        ),
+    ]
+    training_dir: str = "trainings"
+    pgn_dir: str = "pgns"
+    depth = 1
 
-    def __init__(self, engine_type: Callable = CMHMEngine, depth: int = 1) -> None:
+    def __init__(
+            self,
+            engine_type: Callable = CMHMEngine,
+            depth: int = depth,
+            player_name: str = player['name'],
+            player_color_is_black: bool = False,
+            site: Optional[str] = None,
+            engine_type_2: Optional[Callable] = None,
+            depth_2: Optional[int] = None,
+
+    ) -> None:
         """Initialize the PlayChessApp.
 
         Parameters
@@ -24,8 +61,24 @@ class PlayChessApp(Tk, BaseChessTkApp):
         self.updating = True
         self.training = False
         super().__init__()
-        self.engine = engine_type(depth=depth)
-        self.depth = self.engine.depth
+        self.player['name'] = player_name
+        self.site = f"{self.player['name']}'s place" if site is None else site
+        if player_color_is_black:
+            self.player['index'], self.player['color'] = 1, 'black'
+        self.engines[1]['engine'] = engine_type(depth=depth)
+        self.engines[0]['engine'] = self.engines[1]['engine'] if engine_type_2 is None else engine_type_2(
+            depth=depth if depth_2 is None else depth_2
+        )
+        # noinspection PyProtectedMember
+        self.engines[0]['engine']._board = self.engines[1]['engine'].board
+        (
+            self.engines[1]['name'],
+            self.engines[0]['name']
+        ) = (
+            str(self.engines[1]['engine']),
+            str(self.engines[0]['engine'])
+        )
+        self.depth = self.engines[1]['engine'].depth
         self.set_title()
         screen_height: int = self.winfo_screenheight()
         screen_width: int = int(screen_height * 0.75)
@@ -61,8 +114,9 @@ class PlayChessApp(Tk, BaseChessTkApp):
             self.updating = True
             new_depth: Optional[int] = self.ask_depth()
             if new_depth is not None and new_depth != self.depth:
-                self.engine.depth = new_depth
-                self.depth = self.engine.depth
+                for engine_dict in self.engines:
+                    engine_dict['engine'].depth = new_depth
+                self.depth = new_depth
                 self.set_title()
             self.updating = False
         elif self.training:
@@ -82,15 +136,22 @@ class PlayChessApp(Tk, BaseChessTkApp):
 
     def set_title(self) -> None:
         """Set the app window title."""
-        mode: str = 'Playing Against' if not self.training else 'Training'
-        self.title(f"{mode} {self.engine.__class__.__name__} | Depth = {self.engine.depth}")
+        self.title(f"{self.get_mode()} | Depth = {self.depth}")
+
+    def get_mode(self) -> str:
+        """Gets current play mode"""
+        if self.training:
+            return f"{self.engines[0]['name']} vs {self.engines[1]['name']}"
+        if self.player['index']:
+            return f"{self.engines[0]['name']} vs {self.player['name']}"
+        return f"{self.player['name']} vs {self.engines[1]['name']}"
 
     def new_game(self) -> None:
         """Start a new game."""
         if not self.updating and not self.training:
             self.updating = True
             if messagebox.askyesno("New Game", "Are you sure you want to start a new game?"):
-                self.engine.board = Board()
+                self.reset_engines_board()
                 self.update_board()
             self.updating = False
         elif self.training:
@@ -98,35 +159,97 @@ class PlayChessApp(Tk, BaseChessTkApp):
         else:
             self.after(100, self.new_game)
 
+    def reset_engines_board(self, new_board: Optional[Board] = None):
+        """Resets the Engines' board to a fresh board.
+
+        Ensures both engines .board property points the same object.
+
+        Parameters
+        ----------
+        new_board : Optional[Board]
+        """
+        new_board = Board() if new_board is None else new_board
+        for engine_dict in self.engines:
+            # noinspection PyProtectedMember
+            engine_dict['engine']._board = new_board
+
     def train_engine(self):
         """Start a training session for the engine"""
         if not self.updating and not self.training:
             self.training = True
-            # TODO: Remove this print call
-            print(f'training {self.engine} from {self.engine.board.__repr__()}')
             # TODO: Prompt user for training game start and end number
             start_game_index: int = 0
             end_game_index: int = 1
             game_index: int
             for game_id in range(start_game_index + 1, end_game_index + 1):
-                local_time: datetime = self.get_local_time()
-                # TODO: update set_title to show details of the current game
+                local_time: datetime = get_local_time()
                 self.set_title()
-
+                engine_white = self.engines[1]['engine']
+                engine_black = self.engines[0]['engine']
+                # We go out of our way to make sure both engines point to the same board object
+                board = engine_white.board
+                while board.outcome(claim_draw=True) is None:
+                    all_moves: List[Move] = engine_white.current_moves_list()
+                    move_number: int = board.fullmove_number
+                    if board.turn:
+                        engine_pick: Pick = engine_white.pick_move()
+                    else:
+                        engine_pick: Pick = engine_black.pick_move()
+                    board.push(engine_pick.move)
+                    self.updating = True
+                    self.update_board()
+                    self.updating = False
+                outcome: Outcome = board.outcome(claim_draw=True)
+                game: Game = Game.from_board(board)
+                game_heads = game.headers
+                game_heads["Event"] = self.get_mode()
+                game_heads["Site"] = self.site
+                game_heads["Round"] = str(game_id)
+                set_all_datetime_headers(game_heads=game_heads, local_time=local_time)
+                game_heads["White"] = self.engines[1]['name']
+                game_heads["Black"] = self.engines[0]['name']
+                game_heads["Termination"] = outcome.termination.name
+                game_heads["CMHMEngineDepth"] = str(self.depth)
+                file_name: str = path.join(
+                    self.training_dir,
+                    f"{game_heads['Date']}_{game_heads['Event'].replace(' ', '_')}_{game_heads['Round']}.pgn"
+                )
+                self.save_to_pgn(file_name=file_name, game=game)
+                for engine in {engine_white, engine_black}:
+                    if isinstance(engine, CMHMEngine2):
+                        engine.update_q_values()  # This is going to pop all the moves out of the shared board...
+                self.reset_engines_board()
+                self.updating = True
+                self.update_board()
+                self.updating = False
+                (
+                    self.engines[0]['engine'], self.engines[1]['engine'],
+                    self.engines[0]['name'], self.engines[1]['name'],
+                ) = (
+                    self.engines[1]['engine'], self.engines[0]['engine'],
+                    self.engines[1]['name'], self.engines[0]['name'],
+                )
             self.training = False
         elif self.training:
             messagebox.showerror("Error", "The engine is already training.")
         else:
             self.after(100, self.train_engine())
 
-    def play_move(self, move: Move) -> None:
-        """Play a move. (updates the engine board inplace.)
+    def save_to_pgn(self, file_name: str, game: Game) -> None:
+        """Saves a game to a pgn file.
 
         Parameters
         ----------
-        move : chess.Move
+        file_name : str
+        game : chess.pgn.Game
+
         """
-        self.engine.board.push(move)
+        if not path.isdir(self.pgn_dir):
+            makedirs(self.pgn_dir)
+        if not path.isdir(self.training_dir):
+            makedirs(self.training_dir)
+        with open(file_name, "w", encoding="utf-8") as file:
+            print(game, file=file, end="\n\n")
 
     def show_game_over(self, outcome: Optional[Outcome] = None) -> None:
         """Display the game outcome.
@@ -135,13 +258,16 @@ class PlayChessApp(Tk, BaseChessTkApp):
         ----------
         outcome : typing.Optional[chess.Outcome]
         """
-        outcome: Optional[Outcome] = self.engine.board.outcome(claim_draw=True) if outcome is None else outcome
+        outcome: Optional[Outcome] = self.engines[0]['engine'].board.outcome(
+            claim_draw=True
+        ) if outcome is None else outcome
         messagebox.showinfo("Game Over", f"Game Over: {outcome}")
 
     def update_board(self) -> None:
         """Update the chessboard display."""
         self.clear_board()
         self.draw_board()
+        self.update()
 
     def clear_board(self) -> None:
         """Clear the canvas."""
@@ -165,7 +291,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
             x0, x1, y0, y1 = self.get_xys(col=col, flipped_row=row_flipped, square_size=self.square_size)
             color: str = self.colors[(row + col) % 2]
             self.canvas.create_rectangle(x0, y0, x1, y1, fill=color, outline="black")
-            piece: Optional[Piece] = self.engine.board.piece_at(square)
+            piece: Optional[Piece] = self.engines[0]['engine'].board.piece_at(square)
             if piece is not None:
                 # TODO: Refactor this into a `PieceTk` (or `CanvasPiece`) class that can support drag and drop
                 # CanvasPiece aligns with CanvasTooltip better...
