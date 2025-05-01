@@ -83,6 +83,12 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#chmengine.utils.pieces_count_from_fen" title="chmengine.utils.pieces_count_from_fen"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pieces_count_from_fen</span></code></a>(fen)</p></td>
 <td><p>Return the number of pieces on the board represented by <cite>fen</cite>.</p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chmengine.utils.set_all_datetime_headers" title="chmengine.utils.set_all_datetime_headers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_all_datetime_headers</span></code></a>(game_heads, local_time)</p></td>
+<td><p>Sets all datetime related game headers for the pgn file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chmengine.utils.set_utc_headers" title="chmengine.utils.set_utc_headers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_utc_headers</span></code></a>(game_heads, local_time)</p></td>
+<td><p>Sets UTC header info of pgn file data from local timestamp</p></td>
+</tr>
 </tbody>
 </table>
 <dl class="py class">
@@ -516,6 +522,34 @@ of FEN parsing and achieves the same result more efficiently.</p>
 <span class="go">32</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmengine.utils.set_all_datetime_headers">
+<span class="sig-prename descclassname"><span class="pre">chmengine.utils.</span></span><span class="sig-name descname"><span class="pre">set_all_datetime_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_heads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Headers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmengine.utils.set_all_datetime_headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets all datetime related game headers for the pgn file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>game_heads</strong><span class="classifier">chess.pgn.Headers</span></dt><dd></dd>
+<dt><strong>local_time</strong><span class="classifier">datetime.datetime</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmengine.utils.set_utc_headers">
+<span class="sig-prename descclassname"><span class="pre">chmengine.utils.</span></span><span class="sig-name descname"><span class="pre">set_utc_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_heads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Headers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmengine.utils.set_utc_headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets UTC header info of pgn file data from local timestamp</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>game_heads</strong><span class="classifier">chess.pgn.Headers</span></dt><dd></dd>
+<dt><strong>local_time</strong><span class="classifier">datetime.datetime</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <p class="rubric">Modules</p>

@@ -18,6 +18,7 @@
       calculate_heatmap
       fill_depth_map_with_counts
       flatten_heatmap
+      get_local_time
       get_or_compute_heatmap
       get_or_compute_heatmap_with_better_discounts
       inflate_heatmap

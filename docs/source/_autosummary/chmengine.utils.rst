@@ -1,4 +1,4 @@
-chmengine.utils
+﻿chmengine.utils
 ===============
 
 .. automodule:: chmengine.utils
@@ -27,6 +27,8 @@ chmengine.utils
       null_target_moves
       pieces_count_from_board
       pieces_count_from_fen
+      set_all_datetime_headers
+      set_utc_headers
    
    
 

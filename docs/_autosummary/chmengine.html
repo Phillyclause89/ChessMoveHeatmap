@@ -1377,19 +1377,6 @@ It extends <cite>PickT</cite> and is the public-facing API for move-score pairs.
 <span class="sig-name descname"><span class="pre">game_round</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#chmengine.PlayCMHMEngine.game_round" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="chmengine.PlayCMHMEngine.get_local_time">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_local_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">datetime</span></span></span><a class="headerlink" href="#chmengine.PlayCMHMEngine.get_local_time" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets time in local system time</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>datetime.datetime</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py attribute">
 <dt class="sig sig-object py" id="chmengine.PlayCMHMEngine.pgn_dir">
 <span class="sig-name descname"><span class="pre">pgn_dir</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'pgns'</span></em><a class="headerlink" href="#chmengine.PlayCMHMEngine.pgn_dir" title="Permalink to this definition">¶</a></dt>
@@ -1435,34 +1422,6 @@ It extends <cite>PickT</cite> and is the public-facing API for move-score pairs.
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="chmengine.PlayCMHMEngine.set_all_datetime_headers">
-<span class="sig-name descname"><span class="pre">set_all_datetime_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_heads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Headers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmengine.PlayCMHMEngine.set_all_datetime_headers" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets all datetime related game headers for the pgn file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>game_heads</strong><span class="classifier">chess.pgn.Headers</span></dt><dd></dd>
-<dt><strong>local_time</strong><span class="classifier">datetime.datetime</span></dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="chmengine.PlayCMHMEngine.set_utc_headers">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_utc_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_heads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Headers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmengine.PlayCMHMEngine.set_utc_headers" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets UTC header info of pgn file data from local timestamp</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>game_heads</strong><span class="classifier">chess.pgn.Headers</span></dt><dd></dd>
-<dt><strong>local_time</strong><span class="classifier">datetime.datetime</span></dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py attribute">
 <dt class="sig sig-object py" id="chmengine.PlayCMHMEngine.site">
 <span class="sig-name descname"><span class="pre">site</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Unknown'</span></em><a class="headerlink" href="#chmengine.PlayCMHMEngine.site" title="Permalink to this definition">¶</a></dt>
@@ -1488,6 +1447,301 @@ It extends <cite>PickT</cite> and is the public-facing API for move-score pairs.
 <span class="sig-name descname"><span class="pre">training_dir</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'trainings'</span></em><a class="headerlink" href="#chmengine.PlayCMHMEngine.training_dir" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmengine.calculate_white_minus_black_score">
+<span class="sig-prename descclassname"><span class="pre">chmengine.</span></span><span class="sig-name descname"><span class="pre">calculate_white_minus_black_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float64</span></span></span><a class="headerlink" href="#chmengine.calculate_white_minus_black_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate the board from a White-minus-Black perspective using heatmap evaluation.</p>
+<p>This function returns a net evaluation score. Positive values favor White, negative values favor Black.
+Terminal game states return fixed scores. Otherwise, the score is derived from:
+- Heatmap intensity differences
+- Control over king box areas</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">chess.Board</span></dt><dd><p>The chess board to evaluate.</p>
+</dd>
+<dt><strong>depth</strong><span class="classifier">int</span></dt><dd><p>Depth of future move evaluation.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>numpy.float64</dt><dd><p>Net evaluation score (White - Black). Terminal states return extreme values.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine.utils</span> <span class="kn">import</span> <span class="n">is_draw</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chess</span> <span class="kn">import</span> <span class="n">Board</span><span class="p">,</span> <span class="n">Move</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">default_board</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">Board</span><span class="p">(),</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">calculate_white_minus_black_score</span><span class="p">(</span><span class="n">board</span><span class="o">=</span><span class="n">default_board</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">default_board</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">Move</span><span class="o">.</span><span class="n">from_uci</span><span class="p">(</span><span class="s1">&#39;e2e4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">calculate_white_minus_black_score</span><span class="p">(</span><span class="n">board</span><span class="o">=</span><span class="n">default_board</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+<span class="go">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">default_board</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">Move</span><span class="o">.</span><span class="n">from_uci</span><span class="p">(</span><span class="s1">&#39;e7e5&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">calculate_white_minus_black_score</span><span class="p">(</span><span class="n">board</span><span class="o">=</span><span class="n">default_board</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+<span class="go">0.20689655172414234</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">default_board</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">Move</span><span class="o">.</span><span class="n">from_uci</span><span class="p">(</span><span class="s1">&#39;g1f3&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">calculate_white_minus_black_score</span><span class="p">(</span><span class="n">board</span><span class="o">=</span><span class="n">default_board</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+<span class="go">-2.1379310344827616</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">default_board</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">Move</span><span class="o">.</span><span class="n">from_uci</span><span class="p">(</span><span class="s1">&#39;b8c6&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">calculate_white_minus_black_score</span><span class="p">(</span><span class="n">board</span><span class="o">=</span><span class="n">default_board</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+<span class="go">-3.925925925925924</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">default_board</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">Move</span><span class="o">.</span><span class="n">from_uci</span><span class="p">(</span><span class="s1">&#39;f1b5&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">calculate_white_minus_black_score</span><span class="p">(</span><span class="n">board</span><span class="o">=</span><span class="n">default_board</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+<span class="go">2.133333333333335</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mate_board</span> <span class="o">=</span> <span class="n">Board</span><span class="p">(</span><span class="s1">&#39;8/2p2p2/4p3/2k5/8/6q1/2K5/1r1q4 w - - 2 59&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">calculate_white_minus_black_score</span><span class="p">(</span><span class="n">board</span><span class="o">=</span><span class="n">mate_board</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+<span class="go">-1024.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">draw_board</span> <span class="o">=</span> <span class="n">Board</span><span class="p">(</span><span class="s1">&#39;6R1/7p/2p2p1k/p1P2Q2/P7/6K1/5P2/8 b - - 0 52&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">calculate_white_minus_black_score</span><span class="p">(</span><span class="n">board</span><span class="o">=</span><span class="n">draw_board</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmengine.checkmate_score">
+<span class="sig-prename descclassname"><span class="pre">chmengine.</span></span><span class="sig-name descname"><span class="pre">checkmate_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float64</span></span></span><a class="headerlink" href="#chmengine.checkmate_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a large signed score for checkmate results.</p>
+<p>The score is scaled by number of remaining pieces and depth.
+Negative if the current player is mated, positive if they deliver mate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">chess.Board</span></dt><dd><p>Board state assumed to be in a terminal position.</p>
+</dd>
+<dt><strong>depth</strong><span class="classifier">int</span></dt><dd><p>Search depth used, for scaling the final score.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>numpy.float64</dt><dd><p>Large positive or negative score depending on the outcome.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine.utils</span> <span class="kn">import</span> <span class="n">is_draw</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chess</span> <span class="kn">import</span> <span class="n">Board</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blk_win_board</span> <span class="o">=</span> <span class="n">Board</span><span class="p">(</span><span class="s1">&#39;8/2p2p2/4p3/2k5/8/6q1/2K5/1r1q4 w - - 2 59&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">checkmate_score</span><span class="p">(</span><span class="n">board</span><span class="o">=</span><span class="n">blk_win_board</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">-1024.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmengine.format_moves">
+<span class="sig-prename descclassname"><span class="pre">chmengine.</span></span><span class="sig-name descname"><span class="pre">format_moves</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">picks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.format_moves" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format a list of (move, score) tuples into UCI strings and formatted scores.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>picks</strong><span class="classifier">list of Picks</span></dt><dd><p>The list of Picks (moves and their evaluation scores.)</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>list of tuple of (str, str) or None</dt><dd><p>Formatted list where each tuple contains the move in UCI format
+and the score rounded to two decimal places.
+Entries with <cite>None</cite> moves are excluded.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmengine.get_white_and_black_king_boxes">
+<span class="sig-prename descclassname"><span class="pre">chmengine.</span></span><span class="sig-name descname"><span class="pre">get_white_and_black_king_boxes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.get_white_and_black_king_boxes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the list of squares surrounding each king on the board.</p>
+<p>These “king boxes” are used for evaluating positional pressure around the kings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">chess.Board</span></dt><dd><p>The board from which to extract king square surroundings.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>tuple of (list of int, list of int)</dt><dd><p>Tuple containing white king box and black king box square indices.
+(white_king_box, black_king_box)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine.utils</span> <span class="kn">import</span> <span class="n">is_draw</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chess</span> <span class="kn">import</span> <span class="n">Board</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">white_kb</span><span class="p">,</span> <span class="n">black_kb</span> <span class="o">=</span> <span class="n">get_white_and_black_king_boxes</span><span class="p">(</span><span class="n">board</span><span class="o">=</span><span class="n">Board</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">white_kb</span><span class="p">),</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">black_kb</span><span class="p">)</span>
+<span class="go">([3, 4, 5, 11, 12, 13], [51, 52, 53, 59, 60, 61])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmengine.insert_ordered_best_to_worst">
+<span class="sig-prename descclassname"><span class="pre">chmengine.</span></span><span class="sig-name descname"><span class="pre">insert_ordered_best_to_worst</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ordered_picks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pick</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmengine.insert_ordered_best_to_worst" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert a move into a list of moves sorted from best to worst.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>ordered_picks</strong><span class="classifier">List[Pick]</span></dt><dd><p>Existing list sorted in descending order of score.</p>
+</dd>
+<dt><strong>pick</strong><span class="classifier">Pick</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmengine.insert_ordered_worst_to_best">
+<span class="sig-prename descclassname"><span class="pre">chmengine.</span></span><span class="sig-name descname"><span class="pre">insert_ordered_worst_to_best</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ordered_picks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pick</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmengine.insert_ordered_worst_to_best" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert a move into a list of moves sorted from worst to best.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>ordered_picks</strong><span class="classifier">List[Pick]</span></dt><dd><p>Existing list sorted in ascending order of score.</p>
+</dd>
+<dt><strong>pick</strong><span class="classifier">Pick</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmengine.is_draw">
+<span class="sig-prename descclassname"><span class="pre">chmengine.</span></span><span class="sig-name descname"><span class="pre">is_draw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">winner</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#chmengine.is_draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if a game result is a draw based on the winner field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>winner</strong><span class="classifier">bool or None</span></dt><dd><p>Result of Board.outcome(…).winner. True for White win, False for Black win, None for draw.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>True if the game is a draw, False otherwise.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine.utils</span> <span class="kn">import</span> <span class="n">is_draw</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chess</span> <span class="kn">import</span> <span class="n">Board</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mate_board</span> <span class="o">=</span> <span class="n">Board</span><span class="p">(</span><span class="s1">&#39;8/2p2p2/4p3/2k5/8/6q1/2K5/1r1q4 w - - 2 59&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_draw</span><span class="p">(</span><span class="n">mate_board</span><span class="o">.</span><span class="n">outcome</span><span class="p">(</span><span class="n">claim_draw</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">winner</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">draw_board</span> <span class="o">=</span> <span class="n">Board</span><span class="p">(</span><span class="s1">&#39;6R1/7p/2p2p1k/p1P2Q2/P7/6K1/5P2/8 b - - 0 52&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_draw</span><span class="p">(</span><span class="n">draw_board</span><span class="o">.</span><span class="n">outcome</span><span class="p">(</span><span class="n">claim_draw</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">winner</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmengine.pieces_count_from_board">
+<span class="sig-prename descclassname"><span class="pre">chmengine.</span></span><span class="sig-name descname"><span class="pre">pieces_count_from_board</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#chmengine.pieces_count_from_board" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of pieces on the board</p>
+<p>This uses the internal bitboard to count occupied squares in O(1) time.
+On Python ≥ 3.8 it calls <cite>int.bit_count()</cite>. On Python 3.7 it falls back
+to <cite>bin(…).count(‘1’)</cite> for compatibility.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">chess.Board</span></dt><dd><p>A board object to count pieces from</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>Number of pieces on the board.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chess</span> <span class="kn">import</span> <span class="n">Board</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mate_board</span> <span class="o">=</span> <span class="n">Board</span><span class="p">(</span><span class="s1">&#39;8/2p2p2/4p3/2k5/8/6q1/2K5/1r1q4 w - - 2 59&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pieces_count_from_board</span><span class="p">(</span><span class="n">mate_board</span><span class="p">)</span>
+<span class="go">8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pieces_count_from_board</span><span class="p">(</span><span class="n">Board</span><span class="p">())</span>
+<span class="go">32</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmengine.pieces_count_from_fen">
+<span class="sig-prename descclassname"><span class="pre">chmengine.</span></span><span class="sig-name descname"><span class="pre">pieces_count_from_fen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#chmengine.pieces_count_from_fen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of pieces on the board represented by <cite>fen</cite>.</p>
+<p>This function converts the FEN string into a <cite>Board</cite> object, then uses the internal
+bitboard to count occupied squares in O(1) time. On Python ≥ 3.8, it calls <cite>int.bit_count()</cite>;
+on Python 3.7, it falls back to <cite>bin(…).count(‘1’)</cite> for compatibility.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>fen</strong><span class="classifier">str</span></dt><dd><p>A full FEN string representing a chess position.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>The count of non‑empty squares (i.e. total pieces) on the board.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>For most use cases, especially when you already have a <cite>Board</cite> object,
+prefer using <cite>pieces_count_from_board(board)</cite> instead. This avoids the overhead
+of FEN parsing and achieves the same result more efficiently.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chess</span> <span class="kn">import</span> <span class="n">Board</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pieces_count_from_fen</span><span class="p">(</span><span class="s1">&#39;8/2p2p2/4p3/2k5/8/6q1/2K5/1r1q4 w - - 2 59&#39;</span><span class="p">)</span>
+<span class="go">8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pieces_count_from_fen</span><span class="p">(</span><span class="n">Board</span><span class="p">()</span><span class="o">.</span><span class="n">fen</span><span class="p">())</span>
+<span class="go">32</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmengine.set_all_datetime_headers">
+<span class="sig-prename descclassname"><span class="pre">chmengine.</span></span><span class="sig-name descname"><span class="pre">set_all_datetime_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_heads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Headers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmengine.set_all_datetime_headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets all datetime related game headers for the pgn file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>game_heads</strong><span class="classifier">chess.pgn.Headers</span></dt><dd></dd>
+<dt><strong>local_time</strong><span class="classifier">datetime.datetime</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmengine.set_utc_headers">
+<span class="sig-prename descclassname"><span class="pre">chmengine.</span></span><span class="sig-name descname"><span class="pre">set_utc_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_heads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Headers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmengine.set_utc_headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets UTC header info of pgn file data from local timestamp</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>game_heads</strong><span class="classifier">chess.pgn.Headers</span></dt><dd></dd>
+<dt><strong>local_time</strong><span class="classifier">datetime.datetime</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <p class="rubric">Modules</p>

@@ -82,19 +82,6 @@
 <span class="sig-name descname"><span class="pre">game_round</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#chmengine.play.PlayCMHMEngine.game_round" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="chmengine.play.PlayCMHMEngine.get_local_time">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_local_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">datetime</span></span></span><a class="headerlink" href="#chmengine.play.PlayCMHMEngine.get_local_time" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets time in local system time</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>datetime.datetime</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py attribute">
 <dt class="sig sig-object py" id="chmengine.play.PlayCMHMEngine.pgn_dir">
 <span class="sig-name descname"><span class="pre">pgn_dir</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'pgns'</span></em><a class="headerlink" href="#chmengine.play.PlayCMHMEngine.pgn_dir" title="Permalink to this definition">¶</a></dt>
@@ -135,34 +122,6 @@
 <dd class="field-odd"><dl class="simple">
 <dt><strong>file_name</strong><span class="classifier">str</span></dt><dd></dd>
 <dt><strong>game</strong></dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="chmengine.play.PlayCMHMEngine.set_all_datetime_headers">
-<span class="sig-name descname"><span class="pre">set_all_datetime_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_heads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Headers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmengine.play.PlayCMHMEngine.set_all_datetime_headers" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets all datetime related game headers for the pgn file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>game_heads</strong><span class="classifier">chess.pgn.Headers</span></dt><dd></dd>
-<dt><strong>local_time</strong><span class="classifier">datetime.datetime</span></dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="chmengine.play.PlayCMHMEngine.set_utc_headers">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_utc_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_heads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Headers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmengine.play.PlayCMHMEngine.set_utc_headers" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets UTC header info of pgn file data from local timestamp</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>game_heads</strong><span class="classifier">chess.pgn.Headers</span></dt><dd></dd>
-<dt><strong>local_time</strong><span class="classifier">datetime.datetime</span></dt><dd></dd>
 </dl>
 </dd>
 </dl>

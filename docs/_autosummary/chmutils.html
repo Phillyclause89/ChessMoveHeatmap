@@ -56,13 +56,16 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#chmutils.flatten_heatmap" title="chmutils.flatten_heatmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flatten_heatmap</span></code></a>(heatmap)</p></td>
 <td><p>Flatten a ChessMoveHeatmap into a dictionary of primitive values.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#chmutils.get_or_compute_heatmap" title="chmutils.get_or_compute_heatmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_or_compute_heatmap</span></code></a>(board, depth)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#chmutils.get_local_time" title="chmutils.get_local_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_local_time</span></code></a>()</p></td>
+<td><p>Gets time in local system time</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chmutils.get_or_compute_heatmap" title="chmutils.get_or_compute_heatmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_or_compute_heatmap</span></code></a>(board, depth)</p></td>
 <td><p>Retrieve a ChessMoveHeatmap from the cache, or compute and cache it if not available.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#chmutils.get_or_compute_heatmap_with_better_discounts" title="chmutils.get_or_compute_heatmap_with_better_discounts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_or_compute_heatmap_with_better_discounts</span></code></a>(...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#chmutils.get_or_compute_heatmap_with_better_discounts" title="chmutils.get_or_compute_heatmap_with_better_discounts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_or_compute_heatmap_with_better_discounts</span></code></a>(...)</p></td>
 <td><p>Retrieve a ChessMoveHeatmap from the Better cache, or compute and cache Better if not available.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#chmutils.inflate_heatmap" title="chmutils.inflate_heatmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inflate_heatmap</span></code></a>(data)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chmutils.inflate_heatmap" title="chmutils.inflate_heatmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inflate_heatmap</span></code></a>(data)</p></td>
 <td><p>Inflate a flat dictionary of primitive values back into a ChessMoveHeatmap.</p></td>
 </tr>
 </tbody>
@@ -904,6 +907,19 @@ following format:</p>
 <dd class="field-even"><dl class="simple">
 <dt>Dict[str, numpy.float64]</dt><dd><p>A dictionary with keys for each square’s move intensities and piece counts.</p>
 </dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmutils.get_local_time">
+<span class="sig-prename descclassname"><span class="pre">chmutils.</span></span><span class="sig-name descname"><span class="pre">get_local_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">datetime</span></span></span><a class="headerlink" href="#chmutils.get_local_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets time in local system time</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>datetime.datetime</dt><dd></dd>
 </dl>
 </dd>
 </dl>
