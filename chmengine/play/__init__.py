@@ -1,5 +1,5 @@
 """Play or Train the engine(s)"""
-from datetime import datetime, timezone
+from datetime import datetime
 from os import makedirs, path
 from typing import Callable, List, Optional
 
@@ -8,7 +8,8 @@ from chess.pgn import Game, Headers
 from numpy import float64
 
 from chmengine.engines import CMHMEngine, CMHMEngine2
-from chmengine.utils import Pick
+from chmengine.utils import Pick, set_all_datetime_headers
+from chmutils import get_local_time
 
 __all__ = ['PlayCMHMEngine']
 
@@ -96,7 +97,7 @@ class PlayCMHMEngine:
     def play(self, pick_by: str = "all-delta") -> None:
         """Play a game against the engine"""
         self.game_round += 1
-        local_time: datetime = self.get_local_time()
+        local_time: datetime = get_local_time()
         print(f"Round: {self.game_round} | Time: {str(local_time)}\n{self.engine.board}")
         other_moves: List[Move] = list(self.engine.board.legal_moves)
         print(f"All legal moves: {', '.join([m.uci() for m in other_moves])}\nCalculating move scores...")
@@ -149,7 +150,7 @@ class PlayCMHMEngine:
                 ) else f"{self.cpu_name} vs {self.player_name}"
                 game_heads["Site"] = self.site
                 game_heads["Round"] = str(self.game_round)
-                self.set_all_datetime_headers(game_heads, local_time)
+                set_all_datetime_headers(game_heads, local_time)
                 game_heads["White"] = self.player_name if self.cpu_index else self.cpu_name
                 game_heads["Black"] = self.cpu_name if self.cpu_index else self.player_name
                 game_heads["Termination"] = outcome.termination.name
@@ -194,7 +195,7 @@ class PlayCMHMEngine:
         for i in range(training_games_start, training_games):
             game_n: int = i + 1
             print(f"Game {game_n}")
-            local_time: datetime = self.get_local_time()
+            local_time: datetime = get_local_time()
             print(local_time)
             last_move: str = ""
             while self.engine.board.outcome() is None and not self.engine.board.can_claim_draw():
@@ -218,7 +219,7 @@ class PlayCMHMEngine:
             game_heads["Event"] = "CMHMEngine2 vs CMHMEngine2"
             game_heads["Site"] = "Kingdom of Phil"
             game_heads["Round"] = str(game_n)
-            self.set_all_datetime_headers(game_heads, local_time)
+            set_all_datetime_headers(game_heads, local_time)
             game_heads["White"] = "CMHMEngine2"
             game_heads["Black"] = "CMHMEngine2"
             game_heads["Termination"] = outcome.termination.name
@@ -230,37 +231,3 @@ class PlayCMHMEngine:
             self.save_to_pgn(file_name, game)
             print(game)
             self.engine.board = Board()
-
-    def set_all_datetime_headers(self, game_heads: pgn.Headers, local_time: datetime) -> None:
-        """Sets all datetime related game headers for the pgn file.
-
-        Parameters
-        ----------
-        game_heads : chess.pgn.Headers
-        local_time : datetime.datetime
-        """
-        game_heads["Date"] = local_time.strftime("%Y.%m.%d")
-        game_heads["Timezone"] = str(local_time.tzinfo)
-        self.set_utc_headers(game_heads, local_time)
-
-    @staticmethod
-    def get_local_time() -> datetime:
-        """Gets time in local system time
-
-        Returns
-        -------
-        datetime.datetime
-        """
-        return datetime.now(datetime.now().astimezone().tzinfo)
-
-    @staticmethod
-    def set_utc_headers(game_heads: pgn.Headers, local_time: datetime) -> None:
-        """Sets UTC header info of pgn file data from local timestamp
-
-        Parameters
-        ----------
-        game_heads : chess.pgn.Headers
-        local_time : datetime.datetime
-        """
-        game_heads["UTCDate"] = local_time.astimezone(timezone.utc).strftime("%Y.%m.%d")
-        game_heads["UTCTime"] = local_time.astimezone(timezone.utc).strftime("%H:%M:%S")

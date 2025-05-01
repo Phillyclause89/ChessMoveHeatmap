@@ -1,5 +1,5 @@
 """Play against the CMHMEngine in a GUI."""
-from tkinter import Canvas, Event, Menu, Tk, messagebox
+from tkinter import Canvas, Menu, Tk, messagebox
 from typing import Callable, Optional
 
 from chess import Board, Move, Outcome, Piece, SQUARES
@@ -75,8 +75,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         menu_bar: Menu = Menu(self)
         file_menu: Menu = Menu(menu_bar, tearoff=0)
         file_menu.add_command(label="New Game", command=self.new_game)
-        # TODO: Replace `command=labmda:...` w/ hook to training function.
-        file_menu.add_command(label="New Training Session", command=lambda: print('training!'))
+        file_menu.add_command(label="New Training Session", command=self.train_engine)
         menu_bar.add_cascade(label="File", menu=file_menu)
         self.add_options(menu_bar)
         self.config(menu=menu_bar)
@@ -99,26 +98,35 @@ class PlayChessApp(Tk, BaseChessTkApp):
         else:
             self.after(100, self.new_game)
 
+    def train_engine(self):
+        """Start a training session for the engine"""
+        if not self.updating and not self.training:
+            self.training = True
+            # TODO: Remove this print call
+            print(f'training {self.engine} from {self.engine.board.__repr__()}')
+            # TODO: Prompt user for training game start and end number
+            start_game_index: int = 0
+            end_game_index: int = 1
+            game_index: int
+            for game_id in range(start_game_index + 1, end_game_index + 1):
+                local_time: datetime = self.get_local_time()
+                # TODO: update set_title to show details of the current game
+                self.set_title()
+
+            self.training = False
+        elif self.training:
+            messagebox.showerror("Error", "The engine is already training.")
+        else:
+            self.after(100, self.train_engine())
+
     def play_move(self, move: Move) -> None:
-        """Play a move and let the engine respond.
+        """Play a move. (updates the engine board inplace.)
 
         Parameters
         ----------
         move : chess.Move
         """
-        # TODO: fix (or remove) this garbage play_move method.
-        if move in self.engine.board.legal_moves:
-            self.engine.board.push(move)
-            self.update_board()
-            outcome: Optional[Outcome] = self.engine.board.outcome(claim_draw=True)
-            if outcome is None:
-                engine_move: Move
-                # engine.play_move calls should be disassociated from a pick_move method.
-                engine_move, _ = self.engine.pick_move()
-                self.engine.board.push(engine_move)
-                self.update_board()
-            else:
-                self.show_game_over(outcome=outcome)
+        self.engine.board.push(move)
 
     def show_game_over(self, outcome: Optional[Outcome] = None) -> None:
         """Display the game outcome.

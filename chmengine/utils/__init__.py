@@ -1,8 +1,9 @@
 """Utilities for engine evaluation and scoring logic."""
 from _bisect import bisect_left
+from datetime import datetime, timezone
 from typing import Callable, List, Optional, Tuple
 
-from chess import Board, Move, Outcome, square_distance
+from chess import Board, Move, Outcome, pgn, square_distance
 from numpy import float64
 from numpy.typing import NDArray
 
@@ -17,7 +18,9 @@ except AttributeError:
         return bin(occ).count('1')
 
 __all__ = [
+    # Classes
     'Pick',
+    # Functions
     'format_moves',
     'calculate_score',
     'is_draw',
@@ -30,7 +33,9 @@ __all__ = [
     'pieces_count_from_board',
     'insert_choice_into_current_moves',
     'null_target_moves',
-    'is_valid_king_box_square'
+    'is_valid_king_box_square',
+    'set_all_datetime_headers',
+    'set_utc_headers'
 ]
 
 
@@ -464,3 +469,28 @@ def null_target_moves(
         A tuple of lists, each initially containing one tuple (None, None).
     """
     return tuple([(None, None)] for _ in range(number))
+
+
+def set_all_datetime_headers(game_heads: pgn.Headers, local_time: datetime) -> None:
+    """Sets all datetime related game headers for the pgn file.
+
+    Parameters
+    ----------
+    game_heads : chess.pgn.Headers
+    local_time : datetime.datetime
+    """
+    game_heads["Date"] = local_time.strftime("%Y.%m.%d")
+    game_heads["Timezone"] = str(local_time.tzinfo)
+    set_utc_headers(game_heads, local_time)
+
+
+def set_utc_headers(game_heads: pgn.Headers, local_time: datetime) -> None:
+    """Sets UTC header info of pgn file data from local timestamp
+
+    Parameters
+    ----------
+    game_heads : chess.pgn.Headers
+    local_time : datetime.datetime
+    """
+    game_heads["UTCDate"] = local_time.astimezone(timezone.utc).strftime("%Y.%m.%d")
+    game_heads["UTCTime"] = local_time.astimezone(timezone.utc).strftime("%H:%M:%S")

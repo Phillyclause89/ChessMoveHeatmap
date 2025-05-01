@@ -101,7 +101,7 @@ class TestPlayCMHMEngine(TestCase):
             self.assertNotIn('UTCDate', headers)
             self.assertNotIn('UTCTime', headers)
             self.assertNotIn('Timezone', headers)
-            handler.set_all_datetime_headers(game_heads=headers, local_time=handler.get_local_time())
+            set_all_datetime_headers(game_heads=headers, local_time=get_local_time())
             self.assertIn('UTCDate', headers)
             self.assertIn('UTCTime', headers)
             self.assertIn('Timezone', headers)
@@ -110,7 +110,7 @@ class TestPlayCMHMEngine(TestCase):
     def test_get_local_time(self) -> None:
         """Tests get_local_time method."""
         for handler in self.handlers:
-            local_time = handler.get_local_time()
+            local_time = get_local_time()
             self.assertIsInstance(local_time, datetime)
 
     def test_set_utc_headers(self) -> None:
@@ -119,6 +119,6 @@ class TestPlayCMHMEngine(TestCase):
             headers = pgn.Headers()
             self.assertNotIn('UTCDate', headers)
             self.assertNotIn('UTCTime', headers)
-            handler.set_utc_headers(game_heads=headers, local_time=handler.get_local_time())
+            set_utc_headers(game_heads=headers, local_time=get_local_time())
             self.assertIn('UTCDate', headers)
             self.assertIn('UTCTime', headers)

@@ -1,4 +1,5 @@
 """CHMUtils"""
+from datetime import datetime
 from os import makedirs, path
 from sqlite3 import Connection, Cursor, connect
 from typing import Dict, List, Optional, Tuple, Union
@@ -6,33 +7,37 @@ from typing import Dict, List, Optional, Tuple, Union
 from chess import Board, Move, Piece
 from numpy import float64, float_
 
-from chmutils.concurrent import PPExecutor
-from chmutils.game_builder import GBuilder
 from chmutils.base_chess_tk_app import (
     BaseChessTkApp,
     DARK_SQUARE_COLOR_PROMPT,
-    LIGHT_SQUARE_COLOR_PROMPT,
     DEFAULT_COLORS,
-    DEFAULT_FONT
+    DEFAULT_FONT,
+    LIGHT_SQUARE_COLOR_PROMPT
 )
+from chmutils.concurrent import PPExecutor
+from chmutils.game_builder import GBuilder
 from heatmaps import ChessMoveHeatmap, GradientHeatmap, PIECES
 
 __all__ = [
+    # Classes
     'PPExecutor',
     'GBuilder',
+    'BaseChessTkApp',
+    'HeatmapCache',
+    'BetterHeatmapCache',
+    # Functions
     'calculate_heatmap',
     'calculate_chess_move_heatmap',
     'calculate_chess_move_heatmap_with_better_discount',
     'fill_depth_map_with_counts',
     'flatten_heatmap',
     'inflate_heatmap',
-    'HeatmapCache',
     'get_or_compute_heatmap',
-    'BetterHeatmapCache',
     'get_or_compute_heatmap_with_better_discounts',
+    'get_local_time',
+    # Constants
     'PIECE_KEYS',
     'CACHE_DIR',
-    'BaseChessTkApp',
     'DARK_SQUARE_COLOR_PROMPT',
     'LIGHT_SQUARE_COLOR_PROMPT',
     'DEFAULT_COLORS',
@@ -617,3 +622,13 @@ def get_or_compute_heatmap_with_better_discounts(board: Board, depth: int) -> Ch
     cmhm: ChessMoveHeatmap = calculate_chess_move_heatmap_with_better_discount(board, depth=depth)
     cache.store_heatmap(cmhm)
     return cmhm
+
+
+def get_local_time() -> datetime:
+    """Gets time in local system time
+
+    Returns
+    -------
+    datetime.datetime
+    """
+    return datetime.now(datetime.now().astimezone().tzinfo)
