@@ -7,7 +7,8 @@ from unittest import TestCase, mock
 from chess import pgn
 from numpy import testing
 
-from chmutils import BetterHeatmapCache, HeatmapCache
+from chmengine import set_all_datetime_headers, set_utc_headers
+from chmutils import BetterHeatmapCache, HeatmapCache, get_local_time
 from tests.utils import CACHE_DIR, YHVH, YHWH, clear_test_cache
 
 HeatmapCache.cache_dir = CACHE_DIR
