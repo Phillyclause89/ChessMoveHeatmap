@@ -109,7 +109,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         self.canvas.pack(fill="both", expand=True)
         self.current_move_index = -1
         self.highlight_squares = set()
-        self.game_line = [Pick(Move.from_uci('a1b8'), float64(None))] #  index0 of the game-line will hold illegal move
+        self.game_line = [Pick(Move.from_uci('a1b8'), float64(None))]  # index0 of the game-line will hold illegal move
         # TODO: Prompt user to start a new (or load an incomplete) game.
         self.update_board()
         self._move_executor = ThreadPoolExecutor(max_workers=1)
@@ -323,7 +323,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         elif self.training:
             messagebox.showerror("Error", "The engine is already training.")
         else:
-            self.after(100, self.train_engine())
+            self.after(100, self.train_engine)
 
     def get_training_game_indexes(self) -> Tuple[Optional[int], Optional[int]]:
         """Gets the training game start and end index (game id is +1 from game index)
