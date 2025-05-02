@@ -275,7 +275,8 @@ for either the light or dark squares on the chessboard.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="play.PlayChessApp.clear_board">
 <span class="sig-name descname"><span class="pre">clear_board</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#play.PlayChessApp.clear_board" title="Permalink to this definition">¶</a></dt>
-<dd><p>Clear the canvas.</p>
+<dd><p>Clear all drawings from the canvas.</p>
+<p>Deletes every item so the board can be fully redrawn.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -367,7 +368,11 @@ the allowed keyword arguments call the method keys.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="play.PlayChessApp.create_menu">
 <span class="sig-name descname"><span class="pre">create_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#play.PlayChessApp.create_menu" title="Permalink to this definition">¶</a></dt>
-<dd><p>Construct the app menu.</p>
+<dd><p>Construct and attach the main menu bar.</p>
+<ul class="simple">
+<li><p>Adds a “File” menu with “New Game” and “New Training Session”.</p></li>
+<li><p>Invokes <cite>add_options()</cite> from BaseChessTkApp for additional entries.</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py attribute">
@@ -404,7 +409,14 @@ end the application of this Tcl interpreter.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="play.PlayChessApp.draw_board">
 <span class="sig-name descname"><span class="pre">draw_board</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#play.PlayChessApp.draw_board" title="Permalink to this definition">¶</a></dt>
-<dd><p>Draw the chessboard and pieces.</p>
+<dd><p>Draw the 8×8 chessboard grid and overlay piece symbols.</p>
+<p>Iterates over all <cite>chess.SQUARES</cite>, draws each square’s background color,
+and if a piece is present, centers its unicode symbol with a background marker.</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Uses <cite>self.square_size</cite>, <cite>self.colors</cite>, and <cite>self.font</cite> for layout.</p></li>
+<li><p>Flips rank ordering so that white’s back rank appears at the bottom.</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py attribute">
@@ -531,7 +543,18 @@ current value if None is given.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="play.PlayChessApp.get_mode">
 <span class="sig-name descname"><span class="pre">get_mode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#play.PlayChessApp.get_mode" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets current play mode</p>
+<dd><p>Get a descriptive string of the current play configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mode</strong><span class="classifier">str</span></dt><dd><p>One of:
+- “&lt;EngineName&gt; vs &lt;EngineName&gt;” (if training)
+- “&lt;EngineName&gt; vs &lt;PlayerName&gt;” (if player_index==0)
+- “&lt;PlayerName&gt; vs &lt;EngineName&gt;” (if player_index==1)</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -844,13 +867,17 @@ its Tcl name NAME.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="play.PlayChessApp.new_game">
 <span class="sig-name descname"><span class="pre">new_game</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#play.PlayChessApp.new_game" title="Permalink to this definition">¶</a></dt>
-<dd><p>Start a new game.</p>
+<dd><p>Start a brand‐new game after user confirmation.</p>
+<p>If idle, asks “Are you sure?”, resets engines’ boards, and updates the display.
+Displays an error if a training session is running.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="play.PlayChessApp.on_closing">
 <span class="sig-name descname"><span class="pre">on_closing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#play.PlayChessApp.on_closing" title="Permalink to this definition">¶</a></dt>
-<dd><p>Clean up resources before closing the application.</p>
+<dd><p>Clean up and confirm exit when the window is closed.</p>
+<p>If the app is idle, prompts the user to confirm quitting, then destroys the window.
+If an update is in progress, retries after a short delay.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -993,15 +1020,17 @@ should when sys.stderr is None.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="play.PlayChessApp.reset_engines_board">
 <span class="sig-name descname"><span class="pre">reset_engines_board</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#play.PlayChessApp.reset_engines_board" title="Permalink to this definition">¶</a></dt>
-<dd><p>Resets the Engines’ board to a fresh board.</p>
-<p>Ensures both engines .board property points the same object.</p>
+<dd><p>Reset both engines to share the same board instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>new_board</strong><span class="classifier">Optional[Board]</span></dt><dd></dd>
+<dt><strong>new_board</strong><span class="classifier">chess.Board, optional</span></dt><dd><p>Board to assign to both engines. If None, creates a new fresh Board.</p>
+</dd>
 </dl>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>Ensures both <cite>.engine.board</cite> references point to the same object.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1023,15 +1052,19 @@ and pad (how much space to let additionally).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="play.PlayChessApp.save_to_pgn">
 <span class="sig-name descname"><span class="pre">save_to_pgn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">game</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Game</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#play.PlayChessApp.save_to_pgn" title="Permalink to this definition">¶</a></dt>
-<dd><p>Saves a game to a pgn file.</p>
+<dd><p>Write a completed Game object to a PGN file on disk.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>file_name</strong><span class="classifier">str</span></dt><dd></dd>
-<dt><strong>game</strong><span class="classifier">chess.pgn.Game</span></dt><dd></dd>
+<dt><strong>file_name</strong><span class="classifier">str</span></dt><dd><p>Full file path where the PGN will be written.</p>
+</dd>
+<dt><strong>game</strong><span class="classifier">chess.pgn.Game</span></dt><dd><p>The Game instance to serialize.</p>
+</dd>
 </dl>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>Creates <cite>pgn_dir</cite> and <cite>training_dir</cite> if they do not exist.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1094,13 +1127,16 @@ type - type of the selection (e.g. STRING, FILE_NAME).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="play.PlayChessApp.set_depth">
 <span class="sig-name descname"><span class="pre">set_depth</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#play.PlayChessApp.set_depth" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prompt the user to set a new recursion depth for the engine.</p>
+<dd><p>Prompt the user to change the engine search depth.</p>
+<p>If idle and not training, calls <cite>ask_depth()</cite>, updates both engines’ <cite>.depth</cite>,
+and updates the window title. Shows an error if a training session is active.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="play.PlayChessApp.set_title">
 <span class="sig-name descname"><span class="pre">set_title</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#play.PlayChessApp.set_title" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the app window title.</p>
+<dd><p>Update the window’s title to reflect the current mode and search depth.</p>
+<p>Title format: “&lt;mode&gt; | Depth = &lt;depth&gt;”, where &lt;mode&gt; comes from <cite>get_mode()</cite>.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1112,11 +1148,12 @@ type - type of the selection (e.g. STRING, FILE_NAME).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="play.PlayChessApp.show_game_over">
 <span class="sig-name descname"><span class="pre">show_game_over</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outcome</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Outcome</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#play.PlayChessApp.show_game_over" title="Permalink to this definition">¶</a></dt>
-<dd><p>Display the game outcome.</p>
+<dd><p>Display an informational dialog with the game outcome.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>outcome</strong><span class="classifier">typing.Optional[chess.Outcome]</span></dt><dd></dd>
+<dt><strong>outcome</strong><span class="classifier">chess.Outcome, optional</span></dt><dd><p>Outcome to display. If None, computes from the current engine board.</p>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -1230,7 +1267,31 @@ Returns the set value.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="play.PlayChessApp.train_engine">
 <span class="sig-name descname"><span class="pre">train_engine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#play.PlayChessApp.train_engine" title="Permalink to this definition">¶</a></dt>
-<dd><p>Start a training session for the engine</p>
+<dd><p>Run a training loop where two engines play multiple games and update Q-values.</p>
+<p class="rubric">Notes</p>
+<ol class="arabic">
+<li><p>Iterates over a predefined range of game IDs.</p></li>
+<li><p>Plays moves alternating engines until game ends.</p></li>
+<li><p>Saves each game to a PGN with proper headers.</p></li>
+<li><p>If an engine is CMHMEngine2, submits <cite>update_q_values()</cite> and waits.</p></li>
+<li><dl>
+<dt>Swaps engine colors between games.</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>If two <strong>distinct</strong> engine instances were provided via <cite>engine_type_2</cite>, then after <strong>N</strong> games:</dt><dd><ul>
+<li><p><cite>self.engines</cite> will be in its original order if <strong>N</strong> is even.</p></li>
+<li><p><cite>self.engines</cite> will be swapped if <strong>N</strong> is odd.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>This ensures engines alternate colors across the training set but means the final list order depends</p></li>
+</ul>
+<p>on the (user‐configurable) number of games.</p>
+</dd>
+</dl>
+</li>
+<li><p>Restores training flag when complete.</p></li>
+</ol>
 </dd></dl>
 
 <dl class="py attribute">
@@ -1279,7 +1340,8 @@ all functions.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="play.PlayChessApp.update_board">
 <span class="sig-name descname"><span class="pre">update_board</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#play.PlayChessApp.update_board" title="Permalink to this definition">¶</a></dt>
-<dd><p>Update the chessboard display.</p>
+<dd><p>Refresh the chessboard GUI.</p>
+<p>Clears the current canvas, redraws the board and pieces, then forces an update.</p>
 </dd></dl>
 
 <dl class="py method">
