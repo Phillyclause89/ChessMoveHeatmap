@@ -3,9 +3,11 @@ from datetime import datetime
 from os import makedirs, path
 from tkinter import Canvas, Menu, Tk, messagebox
 from typing import Callable, Dict, List, Optional, Union
+from concurrent.futures import Future, ThreadPoolExecutor
 
 from chess import Board, Move, Outcome, Piece, SQUARES
 from chess.pgn import Game
+from numpy import float64
 
 from chmengine import CMHMEngine, CMHMEngine2, Pick, set_all_datetime_headers
 from chmutils import BaseChessTkApp, DEFAULT_COLORS, DEFAULT_FONT, get_local_time
@@ -93,6 +95,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         self.highlight_squares = set()
         # TODO: Prompt user to start a new (or load an incomplete) game.
         self.update_board()
+        self._move_executor = ThreadPoolExecutor(max_workers=1)
         self.bind("<Configure>", self.on_resize)
         self.focus_force()
         self.updating = False
@@ -188,14 +191,23 @@ class PlayChessApp(Tk, BaseChessTkApp):
                 engine_black = self.engines[0]['engine']
                 # We go out of our way to make sure both engines point to the same board object
                 board = engine_white.board
+                future: Future = Future()
+                illegal_move: Optional[Move] = Move.from_uci('a1b8')
+                # Kick off loop with a done future containing an illegal pick result
+                future.set_result(Pick(illegal_move, float64(None)))
                 while board.outcome(claim_draw=True) is None:
+                    # TODO: Use these unused variables
                     all_moves: List[Move] = engine_white.current_moves_list()
                     move_number: int = board.fullmove_number
-                    if board.turn:
-                        engine_pick: Pick = engine_white.pick_move()
-                    else:
-                        engine_pick: Pick = engine_black.pick_move()
-                    board.push(engine_pick.move)
+                    if future.done():
+                        pick: Pick = future.result()
+                        move: Move = pick.move
+                        if move != illegal_move:
+                            board.push(move)
+                        if board.turn:
+                            future: Future = self._move_executor.submit(engine_white.pick_move)
+                        else:
+                            future: Future = self._move_executor.submit(engine_black.pick_move)
                     self.updating = True
                     self.update_board()
                     self.updating = False
