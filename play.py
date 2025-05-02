@@ -393,7 +393,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
             x1: int
             y1: int
             x0, x1, y0, y1 = self.get_xys(col=col, flipped_row=row_flipped, square_size=self.square_size)
-            color: str = self.colors[(row + col) % 2]
+            color: str = self.colors[int(not (row + col) % 2)]
             self.canvas.create_rectangle(x0, y0, x1, y1, fill=color, outline="black")
             piece: Optional[Piece] = self.engines[0]['engine'].board.piece_at(square)
             if piece is not None:
