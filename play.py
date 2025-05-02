@@ -68,7 +68,9 @@ class PlayChessApp(Tk, BaseChessTkApp):
         site : str, optional
             Site string for PGN headers (default: "{player_name}’s place").
         engine_type_2 : Callable, optional
-            Class or factory for the secondary engine (default: same as `engine_type`).
+            Class or factory for the secondary engine. If None, the secondary engine
+            is set to the *same* instance created by `engine_type`, enabling that
+            single engine instance to play against itself in training mode.
         depth_2 : int, optional
             Search depth for the secondary engine (default: same as `depth` if not provided).
         """
@@ -222,13 +224,18 @@ class PlayChessApp(Tk, BaseChessTkApp):
     def train_engine(self):
         """Run a training loop where two engines play multiple games and update Q-values.
 
-        Behavior
-        --------
+        Notes
+        -----
         1. Iterates over a predefined range of game IDs.
         2. Plays moves alternating engines until game ends.
         3. Saves each game to a PGN with proper headers.
         4. If an engine is CMHMEngine2, submits `update_q_values()` and waits.
         5. Swaps engine colors between games.
+            - If two **distinct** engine instances were provided via `engine_type_2`, then after **N** games:
+                - `self.engines` will be in its original order if **N** is even.
+                - `self.engines` will be swapped if **N** is odd.
+            - This ensures engines alternate colors across the training set but means the final list order depends
+            on the (user‐configurable) number of games.
         6. Restores training flag when complete.
 
         Errors
