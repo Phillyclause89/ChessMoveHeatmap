@@ -269,6 +269,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
                         move: Move = pick.move
                         if move != illegal_move:
                             board.push(move)
+                            self.highlight_squares = {move.from_square, move.to_square}
                         if board.turn:
                             future: Future = self._move_executor.submit(engine_white.pick_move)
                         else:
@@ -293,6 +294,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
                     f"{game_heads['Date']}_{game_heads['Event'].replace(' ', '_')}_{game_heads['Round']}.pgn"
                 )
                 self.save_to_pgn(file_name=file_name, game=game)
+                self.highlight_squares = set()
                 for engine in {engine_white, engine_black}:
                     if isinstance(engine, CMHMEngine2):
                         # This is going to pop all the moves out of the shared board...
@@ -379,6 +381,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         - Uses `self.square_size`, `self.colors`, and `self.font` for layout.
         - Flips rank ordering so that white’s back rank appears at the bottom.
         """
+        board: Board = self.engines[0]['engine'].board
         square: int
         half_square_size: int = self.square_size // 2
         piece_bg: str = "⬤"
@@ -393,9 +396,21 @@ class PlayChessApp(Tk, BaseChessTkApp):
             x1: int
             y1: int
             x0, x1, y0, y1 = self.get_xys(col=col, flipped_row=row_flipped, square_size=self.square_size)
-            color: str = self.colors[int(not (row + col) % 2)]
-            self.canvas.create_rectangle(x0, y0, x1, y1, fill=color, outline="black")
-            piece: Optional[Piece] = self.engines[0]['engine'].board.piece_at(square)
+            color: str = self.colors[(row_flipped + col) % 2]
+            boarder_width: int = 1
+            outline_color: str = "black"
+            if square in self.highlight_squares:
+                boarder_width = 3
+                if board.turn:
+                    outline_color = "yellow"
+                else:
+                    outline_color = "blue"
+            offset: int = boarder_width // 2
+            self.canvas.create_rectangle(
+                x0 + offset, y0 + offset, x1 - offset, y1 - offset,
+                fill=color, outline=outline_color, width=boarder_width
+            )
+            piece: Optional[Piece] = board.piece_at(square)
             if piece is not None:
                 # TODO: Refactor this into a `PieceTk` (or `CanvasPiece`) class that can support drag and drop
                 # CanvasPiece aligns with CanvasTooltip better...
