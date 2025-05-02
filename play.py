@@ -1,8 +1,9 @@
 """Play against the CMHMEngine in a GUI."""
 from datetime import datetime
 from os import makedirs, path
-from tkinter import Canvas, Menu, Tk, messagebox
-from typing import Callable, Dict, List, Optional, Union
+from pathlib import Path
+from tkinter import Canvas, Menu, Tk, messagebox, simpledialog
+from typing import Callable, Dict, List, Optional, Tuple, Union
 from concurrent.futures import Future, ThreadPoolExecutor
 
 from chess import Board, Move, Outcome, Piece, SQUARES
@@ -17,6 +18,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
     """Play against the CMHMEngine in a GUI."""
     training: bool
     site: str
+    game_line: List[Pick]
     # TODO: Refactor these into their own Player and Engines dataclasses
     player: Dict[str, Union[str, int]] = dict(
         name="Unknown",
@@ -107,6 +109,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         self.canvas.pack(fill="both", expand=True)
         self.current_move_index = -1
         self.highlight_squares = set()
+        self.game_line = [Pick(Move.from_uci('a1b8'), float64(None))] #  index0 of the game-line will hold illegal move
         # TODO: Prompt user to start a new (or load an incomplete) game.
         self.update_board()
         self._move_executor = ThreadPoolExecutor(max_workers=1)
@@ -244,10 +247,13 @@ class PlayChessApp(Tk, BaseChessTkApp):
         """
         if not self.updating and not self.training:
             self.training = True
-            # TODO: Prompt user for training game start and end number
-            illegal_move: Move = Move.from_uci('a1b8')
-            start_game_index: int = 0
-            end_game_index: int = 1
+            illegal_pick: Pick = self.game_line[0]
+            start_game_index: Optional[int]
+            end_game_index: Optional[int]
+            start_game_index, end_game_index = self.get_training_game_indexes()
+            if start_game_index is None or end_game_index is None or end_game_index <= start_game_index:
+                self.training = False
+                return messagebox.showerror("Error Starting Training Mode", "Invalid game index(es) submitted.")
             game_index: int
             for game_id in range(start_game_index + 1, end_game_index + 1):
                 local_time: datetime = get_local_time()
@@ -258,7 +264,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
                 board: Board = engine_white.board
                 future: Future = Future()
                 # Kick off loop with a done future containing an illegal pick result
-                future.set_result(Pick(illegal_move, float64(None)))
+                future.set_result(illegal_pick)
                 while board.outcome(claim_draw=True) is None:
                     # TODO: Use these unused variables
                     all_moves: List[Move] = engine_white.current_moves_list()
@@ -267,13 +273,12 @@ class PlayChessApp(Tk, BaseChessTkApp):
                         # TODO surface eval score in pick to GUI
                         pick: Pick = future.result()
                         move: Move = pick.move
-                        if move != illegal_move:
+                        if pick != illegal_pick:
                             board.push(move)
                             self.highlight_squares = {move.from_square, move.to_square}
-                        if board.turn:
-                            future: Future = self._move_executor.submit(engine_white.pick_move)
-                        else:
-                            future: Future = self._move_executor.submit(engine_black.pick_move)
+                        future: Future = self._move_executor.submit(
+                            engine_white.pick_move
+                        ) if board.turn else self._move_executor.submit(engine_black.pick_move)
                     self.updating = True
                     self.update_board()
                     self.updating = False
@@ -319,6 +324,42 @@ class PlayChessApp(Tk, BaseChessTkApp):
             messagebox.showerror("Error", "The engine is already training.")
         else:
             self.after(100, self.train_engine())
+
+    def get_training_game_indexes(self) -> Tuple[Optional[int], Optional[int]]:
+        """Gets the training game start and end index (game id is +1 from game index)
+
+        Returns
+        -------
+        Tuple[Optional[int], Optional[int]]
+            start index, end index
+        """
+
+        pgn_dir: str = path.join(self.pgn_dir, self.training_dir)
+        file_count: int = 0
+        if path.isdir(pgn_dir):
+            file_count = len([item for item in Path(pgn_dir).iterdir() if item.is_file()])
+        message: str = (
+            "Do you want auto-set the start index to match the "
+            f"continuation point ({file_count}) of the existing training games?"
+        )
+        if file_count > 0 and messagebox.askyesno(f"{file_count} Previous Training Games Detected", message):
+            # Our start will be ✅ and default end will be ✅+1 (only one prompt)
+            # I could make the prompt be for a relative value, but then I'd have to error handle file_count + None case
+            return file_count, simpledialog.askinteger(
+                "Set Training Run End Index",
+                "Set the end index for the training run:",
+                initialvalue=file_count + 1
+            )
+        # Else we prompt for both values (allowing possible overwrites of existing files)
+        return simpledialog.askinteger(
+            "Set Training Run Start Index",
+            "Set the start index for the training run:",
+            initialvalue=0
+        ), simpledialog.askinteger(
+            "Set Training Run End Index",
+            "Set the end index for the training run:",
+            initialvalue=1
+        )
 
     def save_to_pgn(self, file_name: str, game: Game) -> None:
         """Write a completed Game object to a PGN file on disk.
