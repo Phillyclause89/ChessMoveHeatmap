@@ -217,4 +217,4 @@ class Pick(PickT):
         -------
         str
         """
-        return f"Pick(move={self._move.__repr__()}, score={format(self._score, format_spec)})"
+        return f"Pick(move={self._move.uci()}, score={format(self._score, format_spec)})"

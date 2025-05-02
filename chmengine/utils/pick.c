@@ -2310,6 +2310,7 @@ static const char __pyx_k_int[] = "int";
 static const char __pyx_k_key[] = "key";
 static const char __pyx_k_len[] = "__len__";
 static const char __pyx_k_str[] = "str";
+static const char __pyx_k_uci[] = "uci";
 static const char __pyx_k_Move[] = "Move";
 static const char __pyx_k_None[] = "None";
 static const char __pyx_k_Pick[] = "Pick";
@@ -2562,6 +2563,7 @@ typedef struct {
   PyObject *__pyx_kp_u_the_argument_for_move_must_be_ty;
   PyObject *__pyx_n_s_throw;
   PyObject *__pyx_n_s_typing;
+  PyObject *__pyx_n_s_uci;
   PyObject *__pyx_n_s_value;
   PyObject *__pyx_int_0;
   PyObject *__pyx_int_1;
@@ -2744,6 +2746,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_u_the_argument_for_move_must_be_ty);
   Py_CLEAR(clear_module_state->__pyx_n_s_throw);
   Py_CLEAR(clear_module_state->__pyx_n_s_typing);
+  Py_CLEAR(clear_module_state->__pyx_n_s_uci);
   Py_CLEAR(clear_module_state->__pyx_n_s_value);
   Py_CLEAR(clear_module_state->__pyx_int_0);
   Py_CLEAR(clear_module_state->__pyx_int_1);
@@ -2904,6 +2907,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_u_the_argument_for_move_must_be_ty);
   Py_VISIT(traverse_module_state->__pyx_n_s_throw);
   Py_VISIT(traverse_module_state->__pyx_n_s_typing);
+  Py_VISIT(traverse_module_state->__pyx_n_s_uci);
   Py_VISIT(traverse_module_state->__pyx_n_s_value);
   Py_VISIT(traverse_module_state->__pyx_int_0);
   Py_VISIT(traverse_module_state->__pyx_int_1);
@@ -3074,6 +3078,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_u_the_argument_for_move_must_be_ty __pyx_mstate_global->__pyx_kp_u_the_argument_for_move_must_be_ty
 #define __pyx_n_s_throw __pyx_mstate_global->__pyx_n_s_throw
 #define __pyx_n_s_typing __pyx_mstate_global->__pyx_n_s_typing
+#define __pyx_n_s_uci __pyx_mstate_global->__pyx_n_s_uci
 #define __pyx_n_s_value __pyx_mstate_global->__pyx_n_s_value
 #define __pyx_int_0 __pyx_mstate_global->__pyx_int_0
 #define __pyx_int_1 __pyx_mstate_global->__pyx_int_1
@@ -5634,7 +5639,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_19__format__(CYTHON_UNUS
   /* "chmengine/utils/pick.py":220
  *         str
  *         """
- *         return f"Pick(move={self._move.__repr__()}, score={format(self._score, format_spec)})"             # <<<<<<<<<<<<<<
+ *         return f"Pick(move={self._move.uci()}, score={format(self._score, format_spec)})"             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = PyTuple_New(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 220, __pyx_L1_error)
@@ -5647,7 +5652,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_4pick_4Pick_19__format__(CYTHON_UNUS
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_kp_u_Pick_move);
   __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_move); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_repr); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 220, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_uci); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_5 = NULL;
@@ -6026,6 +6031,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_u_the_argument_for_move_must_be_ty, __pyx_k_the_argument_for_move_must_be_ty, sizeof(__pyx_k_the_argument_for_move_must_be_ty), 0, 1, 0, 0},
     {&__pyx_n_s_throw, __pyx_k_throw, sizeof(__pyx_k_throw), 0, 0, 1, 1},
     {&__pyx_n_s_typing, __pyx_k_typing, sizeof(__pyx_k_typing), 0, 0, 1, 1},
+    {&__pyx_n_s_uci, __pyx_k_uci, sizeof(__pyx_k_uci), 0, 0, 1, 1},
     {&__pyx_n_s_value, __pyx_k_value, sizeof(__pyx_k_value), 0, 0, 1, 1},
     {0, 0, 0, 0, 0, 0, 0}
   };

@@ -42,7 +42,8 @@ class PlayChessApp(Tk, BaseChessTkApp):
     ]
     training_dir: str = "trainings"
     pgn_dir: str = "pgns"
-    depth = 1
+    depth: int = 1
+    fullmove_number: int = 1
 
     def __init__(
             self,
@@ -267,14 +268,14 @@ class PlayChessApp(Tk, BaseChessTkApp):
                 future.set_result(illegal_pick)
                 while board.outcome(claim_draw=True) is None:
                     # TODO: Use these unused variables
-                    all_moves: List[Move] = engine_white.current_moves_list()
-                    move_number: int = board.fullmove_number
                     if future.done():
                         # TODO surface eval score in pick to GUI
                         pick: Pick = future.result()
-                        move: Move = pick.move
                         if pick != illegal_pick:
+                            move: Move = pick.move
                             board.push(move)
+                            self.fullmove_number = board.fullmove_number
+                            self.game_line.append(pick)
                             self.highlight_squares = {move.from_square, move.to_square}
                         future: Future = self._move_executor.submit(
                             engine_white.pick_move
@@ -427,6 +428,13 @@ class PlayChessApp(Tk, BaseChessTkApp):
         half_square_size: int = self.square_size // 2
         piece_bg: str = "⬤"
         font_size = int(self.square_size * 0.6)
+        game_line_text: str = ' <- '.join([f"{p:.2f}" for p in self.game_line[-1:0:-1]])
+        self.canvas.create_text(
+            1, half_square_size // 2,
+            anchor='w',
+            text=f"{game_line_text}",
+            font=(self.font, font_size // 8),
+        )
         for square in SQUARES:
             row: int
             col: int
@@ -437,6 +445,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
             x1: int
             y1: int
             x0, x1, y0, y1 = self.get_xys(col=col, flipped_row=row_flipped, square_size=self.square_size)
+            y0, y1 = y0 + half_square_size, y1 + half_square_size
             color: str = self.colors[(row_flipped + col) % 2]
             boarder_width: int = 1
             outline_color: str = "black"
