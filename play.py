@@ -53,12 +53,24 @@ class PlayChessApp(Tk, BaseChessTkApp):
             depth_2: Optional[int] = None,
 
     ) -> None:
-        """Initialize the PlayChessApp.
+        """Initialize the PlayChessApp GUI and configure engines.
 
         Parameters
         ----------
-        engine_type : typing.Callable
-        depth : int
+        engine_type : Callable, optional
+            Class or factory for the primary engine (default: CMHMEngine).
+        depth : int, optional
+            Initial search depth for the primary engine (default: class‐level `depth`).
+        player_name : str, optional
+            Human player’s name (default: "Unknown").
+        player_color_is_black : bool, optional
+            If True, human plays black; otherwise white.
+        site : str, optional
+            Site string for PGN headers (default: "{player_name}’s place").
+        engine_type_2 : Callable, optional
+            Class or factory for the secondary engine (default: same as `engine_type`).
+        depth_2 : int, optional
+            Search depth for the secondary engine (default: same as `depth` if not provided).
         """
         self.updating = True
         self.training = False
@@ -101,7 +113,11 @@ class PlayChessApp(Tk, BaseChessTkApp):
         self.updating = False
 
     def on_closing(self) -> None:
-        """Clean up resources before closing the application."""
+        """Clean up and confirm exit when the window is closed.
+
+        If the app is idle, prompts the user to confirm quitting, then destroys the window.
+        If an update is in progress, retries after a short delay.
+        """
         if not self.updating:
             self.updating = True
             if messagebox.askyesno("Quit", "Are you sure you want to quit?"):
@@ -112,7 +128,11 @@ class PlayChessApp(Tk, BaseChessTkApp):
             self.after(100, self.on_closing)
 
     def set_depth(self) -> None:
-        """Prompt the user to set a new recursion depth for the engine."""
+        """Prompt the user to change the engine search depth.
+
+        If idle and not training, calls `ask_depth()`, updates both engines’ `.depth`,
+        and updates the window title. Shows an error if a training session is active.
+        """
         if not self.updating and not self.training:
             self.updating = True
             new_depth: Optional[int] = self.ask_depth()
@@ -128,7 +148,11 @@ class PlayChessApp(Tk, BaseChessTkApp):
             self.after(100, self.set_depth)
 
     def create_menu(self) -> None:
-        """Construct the app menu."""
+        """Construct and attach the main menu bar.
+
+        - Adds a “File” menu with “New Game” and “New Training Session”.
+        - Invokes `add_options()` from BaseChessTkApp for additional entries.
+        """
         menu_bar: Menu = Menu(self)
         file_menu: Menu = Menu(menu_bar, tearoff=0)
         file_menu.add_command(label="New Game", command=self.new_game)
@@ -138,11 +162,23 @@ class PlayChessApp(Tk, BaseChessTkApp):
         self.config(menu=menu_bar)
 
     def set_title(self) -> None:
-        """Set the app window title."""
+        """Update the window’s title to reflect the current mode and search depth.
+
+        Title format: "<mode> | Depth = <depth>", where <mode> comes from `get_mode()`.
+        """
         self.title(f"{self.get_mode()} | Depth = {self.depth}")
 
     def get_mode(self) -> str:
-        """Gets current play mode"""
+        """Get a descriptive string of the current play configuration.
+
+        Returns
+        -------
+        mode : str
+            One of:
+            - "<EngineName> vs <EngineName>" (if training)
+            - "<EngineName> vs <PlayerName>" (if player_index==0)
+            - "<PlayerName> vs <EngineName>" (if player_index==1)
+        """
         if self.training:
             return f"{self.engines[0]['name']} vs {self.engines[1]['name']}"
         if self.player['index']:
@@ -150,7 +186,11 @@ class PlayChessApp(Tk, BaseChessTkApp):
         return f"{self.player['name']} vs {self.engines[1]['name']}"
 
     def new_game(self) -> None:
-        """Start a new game."""
+        """Start a brand‐new game after user confirmation.
+
+        If idle, asks “Are you sure?”, resets engines’ boards, and updates the display.
+        Displays an error if a training session is running.
+        """
         if not self.updating and not self.training:
             self.updating = True
             if messagebox.askyesno("New Game", "Are you sure you want to start a new game?"):
@@ -163,13 +203,16 @@ class PlayChessApp(Tk, BaseChessTkApp):
             self.after(100, self.new_game)
 
     def reset_engines_board(self, new_board: Optional[Board] = None):
-        """Resets the Engines' board to a fresh board.
-
-        Ensures both engines .board property points the same object.
+        """Reset both engines to share the same board instance.
 
         Parameters
         ----------
-        new_board : Optional[Board]
+        new_board : chess.Board, optional
+            Board to assign to both engines. If None, creates a new fresh Board.
+
+        Notes
+        -----
+        Ensures both `.engine.board` references point to the same object.
         """
         new_board = Board() if new_board is None else new_board
         for engine_dict in self.engines:
@@ -177,7 +220,21 @@ class PlayChessApp(Tk, BaseChessTkApp):
             engine_dict['engine']._board = new_board
 
     def train_engine(self):
-        """Start a training session for the engine"""
+        """Run a training loop where two engines play multiple games and update Q-values.
+
+        Behavior
+        --------
+        1. Iterates over a predefined range of game IDs.
+        2. Plays moves alternating engines until game ends.
+        3. Saves each game to a PGN with proper headers.
+        4. If an engine is CMHMEngine2, submits `update_q_values()` and waits.
+        5. Swaps engine colors between games.
+        6. Restores training flag when complete.
+
+        Errors
+        ------
+        Raises an error dialog if called while already training.
+        """
         if not self.updating and not self.training:
             self.training = True
             # TODO: Prompt user for training game start and end number
@@ -254,13 +311,18 @@ class PlayChessApp(Tk, BaseChessTkApp):
             self.after(100, self.train_engine())
 
     def save_to_pgn(self, file_name: str, game: Game) -> None:
-        """Saves a game to a pgn file.
+        """Write a completed Game object to a PGN file on disk.
 
         Parameters
         ----------
         file_name : str
+            Full file path where the PGN will be written.
         game : chess.pgn.Game
+            The Game instance to serialize.
 
+        Notes
+        -----
+        Creates `pgn_dir` and `training_dir` if they do not exist.
         """
         if not path.isdir(self.pgn_dir):
             makedirs(self.pgn_dir)
@@ -270,11 +332,12 @@ class PlayChessApp(Tk, BaseChessTkApp):
             print(game, file=file, end="\n\n")
 
     def show_game_over(self, outcome: Optional[Outcome] = None) -> None:
-        """Display the game outcome.
+        """Display an informational dialog with the game outcome.
 
         Parameters
         ----------
-        outcome : typing.Optional[chess.Outcome]
+        outcome : chess.Outcome, optional
+            Outcome to display. If None, computes from the current engine board.
         """
         outcome: Optional[Outcome] = self.engines[0]['engine'].board.outcome(
             claim_draw=True
@@ -282,17 +345,32 @@ class PlayChessApp(Tk, BaseChessTkApp):
         messagebox.showinfo("Game Over", f"Game Over: {outcome}")
 
     def update_board(self) -> None:
-        """Update the chessboard display."""
+        """Refresh the chessboard GUI.
+
+        Clears the current canvas, redraws the board and pieces, then forces an update.
+        """
         self.clear_board()
         self.draw_board()
         self.update()
 
     def clear_board(self) -> None:
-        """Clear the canvas."""
+        """Clear all drawings from the canvas.
+
+        Deletes every item so the board can be fully redrawn.
+        """
         self.canvas.delete("all")
 
     def draw_board(self) -> None:
-        """Draw the chessboard and pieces."""
+        """Draw the 8×8 chessboard grid and overlay piece symbols.
+
+        Iterates over all `chess.SQUARES`, draws each square’s background color,
+        and if a piece is present, centers its unicode symbol with a background marker.
+
+        Notes
+        -----
+        - Uses `self.square_size`, `self.colors`, and `self.font` for layout.
+        - Flips rank ordering so that white’s back rank appears at the bottom.
+        """
         square: int
         half_square_size: int = self.square_size // 2
         piece_bg: str = "⬤"
