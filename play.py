@@ -181,6 +181,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         if not self.updating and not self.training:
             self.training = True
             # TODO: Prompt user for training game start and end number
+            illegal_move: Move = Move.from_uci('a1b8')
             start_game_index: int = 0
             end_game_index: int = 1
             game_index: int
@@ -190,9 +191,8 @@ class PlayChessApp(Tk, BaseChessTkApp):
                 engine_white = self.engines[1]['engine']
                 engine_black = self.engines[0]['engine']
                 # We go out of our way to make sure both engines point to the same board object
-                board = engine_white.board
+                board: Board = engine_white.board
                 future: Future = Future()
-                illegal_move: Optional[Move] = Move.from_uci('a1b8')
                 # Kick off loop with a done future containing an illegal pick result
                 future.set_result(Pick(illegal_move, float64(None)))
                 while board.outcome(claim_draw=True) is None:
@@ -200,6 +200,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
                     all_moves: List[Move] = engine_white.current_moves_list()
                     move_number: int = board.fullmove_number
                     if future.done():
+                        # TODO surface eval score in pick to GUI
                         pick: Pick = future.result()
                         move: Move = pick.move
                         if move != illegal_move:
@@ -229,7 +230,12 @@ class PlayChessApp(Tk, BaseChessTkApp):
                 self.save_to_pgn(file_name=file_name, game=game)
                 for engine in {engine_white, engine_black}:
                     if isinstance(engine, CMHMEngine2):
-                        engine.update_q_values()  # This is going to pop all the moves out of the shared board...
+                        # This is going to pop all the moves out of the shared board...
+                        update_future: Future = self._move_executor.submit(engine.update_q_values)
+                        while not update_future.done():
+                            self.updating = True
+                            self.update_board()
+                            self.updating = False
                 self.reset_engines_board()
                 self.updating = True
                 self.update_board()
