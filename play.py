@@ -91,8 +91,8 @@ class PlayChessApp(Tk, BaseChessTkApp):
             self.engines[1]['name'],
             self.engines[0]['name']
         ) = (
-            str(self.engines[1]['engine']),
-            str(self.engines[0]['engine'])
+            self.engines[1]['engine'].__class__.__name__,
+            self.engines[0]['engine'].__class__.__name__
         )
         self.depth = self.engines[1]['engine'].depth
         self.set_title()
@@ -288,6 +288,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
                 game_heads["Termination"] = outcome.termination.name
                 game_heads["CMHMEngineDepth"] = str(self.depth)
                 file_name: str = path.join(
+                    self.pgn_dir,
                     self.training_dir,
                     f"{game_heads['Date']}_{game_heads['Event'].replace(' ', '_')}_{game_heads['Round']}.pgn"
                 )
