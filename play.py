@@ -284,9 +284,9 @@ class PlayChessApp(Tk, BaseChessTkApp):
                         if pick != illegal_pick:
                             move: Move = pick.move
                             board.push(move)
-                            self.face = self.get_smily_face()
                             self.fullmove_number = board.fullmove_number
                             self.game_line.append(pick)
+                            self.face = self.get_smily_face()
                             self.highlight_squares = {move.from_square, move.to_square}
                         future: Future = self._move_executor.submit(
                             engine_white.pick_move
@@ -433,9 +433,9 @@ class PlayChessApp(Tk, BaseChessTkApp):
         last_score: float64 = self.game_line[-1].score
         turn: bool = self.engines[0]['engine'].board.turn
         key: str = 'draw'
-        if last_score > 17 and turn or last_score < -17 and not turn:
+        if (last_score > 17 and turn) or (last_score < -17 and not turn):
             key = 'winning'
-        if last_score < -17 and turn or last_score > 17 and not turn:
+        if (last_score < -17 and turn) or (last_score > 17 and not turn):
             key = 'losing'
         return choice(self.faces[key])
 
@@ -455,7 +455,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         half_square_size: int = self.square_size // 2
         piece_bg: str = "⬤"
         font_size = int(self.square_size * 0.6)
-        game_line_font: Tuple[str, int] = (self.font, font_size // 6)
+        game_line_font: Tuple[str, int] = (self.font, font_size // 5)
         self.canvas.create_text(
             half_square_size // 8, (half_square_size // 4),
             anchor='w',
