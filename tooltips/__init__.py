@@ -3,6 +3,10 @@ from tkinter import Canvas, Event, Frame, LEFT, NSEW, SOLID, Tk, Toplevel, ttk
 from tkinter.ttk import Label
 from typing import Optional, Tuple
 
+__all__ = [
+    'CanvasTooltip',
+]
+
 
 class ChessHeatMapApp(Tk):
     """ChessHeatMapApp"""

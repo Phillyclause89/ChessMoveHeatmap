@@ -1,5 +1,6 @@
 """A silly chess engine that picks moves using heatmaps"""
-from chmengine.engines import CMHMEngine, CMHMEngine2
+from chmengine import engines, play, utils
+from chmengine.engines import CMHMEngine, CMHMEngine2, Quartney
 from chmengine.play import PlayCMHMEngine
 from chmengine.utils import (
     Pick,
@@ -17,9 +18,14 @@ from chmengine.utils import (
 )
 
 __all__ = [
+    # Mods
+    'engines',
+    'play',
+    'utils',
     # Classes
     'CMHMEngine',
     'CMHMEngine2',
+    'Quartney',
     'PlayCMHMEngine',
     'Pick',
     # functions

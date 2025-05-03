@@ -27,6 +27,10 @@ from chmutils import (
 from heatmaps import ChessMoveHeatmap
 from tooltips import CanvasTooltip
 
+__all__ = [
+    'ChessHeatMapApp'
+]
+
 
 # pylint: disable=too-many-instance-attributes,too-many-public-methods
 

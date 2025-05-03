@@ -2108,6 +2108,7 @@ int __pyx_module_is_main_chmutils__game_builder = 0;
 /* #### Code section: string_decls ### */
 static const char __pyx_k_[] = ".";
 static const char __pyx_k__4[] = "?";
+static const char __pyx_k_all[] = "__all__";
 static const char __pyx_k_doc[] = "__doc__";
 static const char __pyx_k_None[] = "None";
 static const char __pyx_k_dict[] = "__dict__";
@@ -2173,11 +2174,13 @@ typedef struct {
   PyObject *__pyx_kp_u_;
   PyObject *__pyx_n_s_Exception;
   PyObject *__pyx_n_s_GBuilder;
+  PyObject *__pyx_n_u_GBuilder;
   PyObject *__pyx_n_s_GBuilder_handle_error;
   PyObject *__pyx_n_s_GameBuilder;
   PyObject *__pyx_n_s_None;
   PyObject *__pyx_kp_s_Overrides_GameBuilder_handle_err;
   PyObject *__pyx_n_s__4;
+  PyObject *__pyx_n_s_all;
   PyObject *__pyx_n_s_asyncio_coroutines;
   PyObject *__pyx_n_s_chess_pgn;
   PyObject *__pyx_n_s_chmutils_game_builder;
@@ -2249,11 +2252,13 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_u_);
   Py_CLEAR(clear_module_state->__pyx_n_s_Exception);
   Py_CLEAR(clear_module_state->__pyx_n_s_GBuilder);
+  Py_CLEAR(clear_module_state->__pyx_n_u_GBuilder);
   Py_CLEAR(clear_module_state->__pyx_n_s_GBuilder_handle_error);
   Py_CLEAR(clear_module_state->__pyx_n_s_GameBuilder);
   Py_CLEAR(clear_module_state->__pyx_n_s_None);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Overrides_GameBuilder_handle_err);
   Py_CLEAR(clear_module_state->__pyx_n_s__4);
+  Py_CLEAR(clear_module_state->__pyx_n_s_all);
   Py_CLEAR(clear_module_state->__pyx_n_s_asyncio_coroutines);
   Py_CLEAR(clear_module_state->__pyx_n_s_chess_pgn);
   Py_CLEAR(clear_module_state->__pyx_n_s_chmutils_game_builder);
@@ -2303,11 +2308,13 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_u_);
   Py_VISIT(traverse_module_state->__pyx_n_s_Exception);
   Py_VISIT(traverse_module_state->__pyx_n_s_GBuilder);
+  Py_VISIT(traverse_module_state->__pyx_n_u_GBuilder);
   Py_VISIT(traverse_module_state->__pyx_n_s_GBuilder_handle_error);
   Py_VISIT(traverse_module_state->__pyx_n_s_GameBuilder);
   Py_VISIT(traverse_module_state->__pyx_n_s_None);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Overrides_GameBuilder_handle_err);
   Py_VISIT(traverse_module_state->__pyx_n_s__4);
+  Py_VISIT(traverse_module_state->__pyx_n_s_all);
   Py_VISIT(traverse_module_state->__pyx_n_s_asyncio_coroutines);
   Py_VISIT(traverse_module_state->__pyx_n_s_chess_pgn);
   Py_VISIT(traverse_module_state->__pyx_n_s_chmutils_game_builder);
@@ -2367,11 +2374,13 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_u_ __pyx_mstate_global->__pyx_kp_u_
 #define __pyx_n_s_Exception __pyx_mstate_global->__pyx_n_s_Exception
 #define __pyx_n_s_GBuilder __pyx_mstate_global->__pyx_n_s_GBuilder
+#define __pyx_n_u_GBuilder __pyx_mstate_global->__pyx_n_u_GBuilder
 #define __pyx_n_s_GBuilder_handle_error __pyx_mstate_global->__pyx_n_s_GBuilder_handle_error
 #define __pyx_n_s_GameBuilder __pyx_mstate_global->__pyx_n_s_GameBuilder
 #define __pyx_n_s_None __pyx_mstate_global->__pyx_n_s_None
 #define __pyx_kp_s_Overrides_GameBuilder_handle_err __pyx_mstate_global->__pyx_kp_s_Overrides_GameBuilder_handle_err
 #define __pyx_n_s__4 __pyx_mstate_global->__pyx_n_s__4
+#define __pyx_n_s_all __pyx_mstate_global->__pyx_n_s_all
 #define __pyx_n_s_asyncio_coroutines __pyx_mstate_global->__pyx_n_s_asyncio_coroutines
 #define __pyx_n_s_chess_pgn __pyx_mstate_global->__pyx_n_s_chess_pgn
 #define __pyx_n_s_chmutils_game_builder __pyx_mstate_global->__pyx_n_s_chmutils_game_builder
@@ -2400,7 +2409,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_codeobj__3 __pyx_mstate_global->__pyx_codeobj__3
 /* #### Code section: module_code ### */
 
-/* "chmutils/game_builder.py":8
+/* "chmutils/game_builder.py":12
  *     r"""Overrides `GameBuilder.handle_error` to raise exception."""
  * 
  *     def handle_error(self, error: Exception) -> None:             # <<<<<<<<<<<<<<
@@ -2465,7 +2474,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 8, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 12, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -2473,14 +2482,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 8, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 12, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("handle_error", 1, 2, 2, 1); __PYX_ERR(0, 8, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("handle_error", 1, 2, 2, 1); __PYX_ERR(0, 12, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "handle_error") < 0)) __PYX_ERR(0, 8, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "handle_error") < 0)) __PYX_ERR(0, 12, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -2493,7 +2502,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("handle_error", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 8, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("handle_error", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 12, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2507,7 +2516,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_error), (&((PyTypeObject*)PyExc_Exception)[0]), 0, "error", 0))) __PYX_ERR(0, 8, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_error), (&((PyTypeObject*)PyExc_Exception)[0]), 0, "error", 0))) __PYX_ERR(0, 12, __pyx_L1_error)
   __pyx_r = __pyx_pf_8chmutils_12game_builder_8GBuilder_handle_error(__pyx_self, __pyx_v_self, __pyx_v_error);
 
   /* function exit code */
@@ -2533,15 +2542,15 @@ static PyObject *__pyx_pf_8chmutils_12game_builder_8GBuilder_handle_error(CYTHON
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("handle_error", 1);
 
-  /* "chmutils/game_builder.py":10
+  /* "chmutils/game_builder.py":14
  *     def handle_error(self, error: Exception) -> None:
  *         r"""Override of GameBuilder.handle_error method to raise errors."""
  *         raise error             # <<<<<<<<<<<<<<
  */
   __Pyx_Raise(__pyx_v_error, 0, 0, 0);
-  __PYX_ERR(0, 10, __pyx_L1_error)
+  __PYX_ERR(0, 14, __pyx_L1_error)
 
-  /* "chmutils/game_builder.py":8
+  /* "chmutils/game_builder.py":12
  *     r"""Overrides `GameBuilder.handle_error` to raise exception."""
  * 
  *     def handle_error(self, error: Exception) -> None:             # <<<<<<<<<<<<<<
@@ -2577,11 +2586,13 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_u_, __pyx_k_, sizeof(__pyx_k_), 0, 1, 0, 0},
     {&__pyx_n_s_Exception, __pyx_k_Exception, sizeof(__pyx_k_Exception), 0, 0, 1, 1},
     {&__pyx_n_s_GBuilder, __pyx_k_GBuilder, sizeof(__pyx_k_GBuilder), 0, 0, 1, 1},
+    {&__pyx_n_u_GBuilder, __pyx_k_GBuilder, sizeof(__pyx_k_GBuilder), 0, 1, 0, 1},
     {&__pyx_n_s_GBuilder_handle_error, __pyx_k_GBuilder_handle_error, sizeof(__pyx_k_GBuilder_handle_error), 0, 0, 1, 1},
     {&__pyx_n_s_GameBuilder, __pyx_k_GameBuilder, sizeof(__pyx_k_GameBuilder), 0, 0, 1, 1},
     {&__pyx_n_s_None, __pyx_k_None, sizeof(__pyx_k_None), 0, 0, 1, 1},
     {&__pyx_kp_s_Overrides_GameBuilder_handle_err, __pyx_k_Overrides_GameBuilder_handle_err, sizeof(__pyx_k_Overrides_GameBuilder_handle_err), 0, 0, 1, 0},
     {&__pyx_n_s__4, __pyx_k__4, sizeof(__pyx_k__4), 0, 0, 1, 1},
+    {&__pyx_n_s_all, __pyx_k_all, sizeof(__pyx_k_all), 0, 0, 1, 1},
     {&__pyx_n_s_asyncio_coroutines, __pyx_k_asyncio_coroutines, sizeof(__pyx_k_asyncio_coroutines), 0, 0, 1, 1},
     {&__pyx_n_s_chess_pgn, __pyx_k_chess_pgn, sizeof(__pyx_k_chess_pgn), 0, 0, 1, 1},
     {&__pyx_n_s_chmutils_game_builder, __pyx_k_chmutils_game_builder, sizeof(__pyx_k_chmutils_game_builder), 0, 0, 1, 1},
@@ -2620,17 +2631,17 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "chmutils/game_builder.py":8
+  /* "chmutils/game_builder.py":12
  *     r"""Overrides `GameBuilder.handle_error` to raise exception."""
  * 
  *     def handle_error(self, error: Exception) -> None:             # <<<<<<<<<<<<<<
  *         r"""Override of GameBuilder.handle_error method to raise errors."""
  *         raise error
  */
-  __pyx_tuple__2 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_error); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_error); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
-  __pyx_codeobj__3 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_game_builder_py, __pyx_n_s_handle_error, 8, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__3)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __pyx_codeobj__3 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_game_builder_py, __pyx_n_s_handle_error, 12, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__3)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -3002,7 +3013,7 @@ if (!__Pyx_RefNanny) {
  * """GBuilder class that overrides `GameBuilder.handle_error` to raise exception."""
  * from chess.pgn import GameBuilder             # <<<<<<<<<<<<<<
  * 
- * 
+ * __all__ = [
  */
   __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -3018,59 +3029,74 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmutils/game_builder.py":5
+  /* "chmutils/game_builder.py":4
+ * from chess.pgn import GameBuilder
+ * 
+ * __all__ = [             # <<<<<<<<<<<<<<
+ *     'GBuilder'
+ * ]
+ */
+  __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_INCREF(__pyx_n_u_GBuilder);
+  __Pyx_GIVEREF(__pyx_n_u_GBuilder);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 0, __pyx_n_u_GBuilder)) __PYX_ERR(0, 4, __pyx_L1_error);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_all, __pyx_t_3) < 0) __PYX_ERR(0, 4, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "chmutils/game_builder.py":9
  * 
  * 
  * class GBuilder(GameBuilder):             # <<<<<<<<<<<<<<
  *     r"""Overrides `GameBuilder.handle_error` to raise exception."""
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_GameBuilder); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_GameBuilder); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_3);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3)) __PYX_ERR(0, 9, __pyx_L1_error);
   __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PEP560_update_bases(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PEP560_update_bases(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_CalculateMetaclass(NULL, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CalculateMetaclass(NULL, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_Py3MetaclassPrepare(__pyx_t_4, __pyx_t_3, __pyx_n_s_GBuilder, __pyx_n_s_GBuilder, (PyObject *) NULL, __pyx_n_s_chmutils_game_builder, __pyx_kp_s_Overrides_GameBuilder_handle_err); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_Py3MetaclassPrepare(__pyx_t_4, __pyx_t_3, __pyx_n_s_GBuilder, __pyx_n_s_GBuilder, (PyObject *) NULL, __pyx_n_s_chmutils_game_builder, __pyx_kp_s_Overrides_GameBuilder_handle_err); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   if (__pyx_t_3 != __pyx_t_2) {
-    if (unlikely((PyDict_SetItemString(__pyx_t_5, "__orig_bases__", __pyx_t_2) < 0))) __PYX_ERR(0, 5, __pyx_L1_error)
+    if (unlikely((PyDict_SetItemString(__pyx_t_5, "__orig_bases__", __pyx_t_2) < 0))) __PYX_ERR(0, 9, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "chmutils/game_builder.py":8
+  /* "chmutils/game_builder.py":12
  *     r"""Overrides `GameBuilder.handle_error` to raise exception."""
  * 
  *     def handle_error(self, error: Exception) -> None:             # <<<<<<<<<<<<<<
  *         r"""Override of GameBuilder.handle_error method to raise errors."""
  *         raise error
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_error, __pyx_n_s_Exception) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_12game_builder_8GBuilder_1handle_error, 0, __pyx_n_s_GBuilder_handle_error, NULL, __pyx_n_s_chmutils_game_builder, __pyx_d, ((PyObject *)__pyx_codeobj__3)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 8, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_error, __pyx_n_s_Exception) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_12game_builder_8GBuilder_1handle_error, 0, __pyx_n_s_GBuilder_handle_error, NULL, __pyx_n_s_chmutils_game_builder, __pyx_d, ((PyObject *)__pyx_codeobj__3)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_handle_error, __pyx_t_6) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_handle_error, __pyx_t_6) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "chmutils/game_builder.py":5
+  /* "chmutils/game_builder.py":9
  * 
  * 
  * class GBuilder(GameBuilder):             # <<<<<<<<<<<<<<
  *     r"""Overrides `GameBuilder.handle_error` to raise exception."""
  * 
  */
-  __pyx_t_6 = __Pyx_Py3ClassCreate(__pyx_t_4, __pyx_n_s_GBuilder, __pyx_t_3, __pyx_t_5, NULL, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_Py3ClassCreate(__pyx_t_4, __pyx_n_s_GBuilder, __pyx_t_3, __pyx_t_5, NULL, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_GBuilder, __pyx_t_6) < 0) __PYX_ERR(0, 5, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_GBuilder, __pyx_t_6) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;

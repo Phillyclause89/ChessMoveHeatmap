@@ -3,6 +3,8 @@ from concurrent.futures import ProcessPoolExecutor
 from multiprocessing import Process
 from typing import Optional, Tuple
 
+__all__ = ['PPExecutor']
+
 
 class PPExecutor(ProcessPoolExecutor):
     """Implements processes property for ProcessPoolExecutor"""

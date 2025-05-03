@@ -7,6 +7,8 @@ from typing import Dict, List, Optional, Tuple, Union
 from chess import Board, Move, Piece
 from numpy import float64, float_
 
+from chmutils import base_chess_tk_app, concurrent, game_builder
+
 from chmutils.base_chess_tk_app import (
     BaseChessTkApp,
     DARK_SQUARE_COLOR_PROMPT,
@@ -19,6 +21,10 @@ from chmutils.game_builder import GBuilder
 from heatmaps import ChessMoveHeatmap, GradientHeatmap, PIECES
 
 __all__ = [
+    # Mods
+    'base_chess_tk_app',
+    'concurrent',
+    'game_builder',
     # Classes
     'PPExecutor',
     'GBuilder',
@@ -35,13 +41,16 @@ __all__ = [
     'get_or_compute_heatmap',
     'get_or_compute_heatmap_with_better_discounts',
     'get_local_time',
+    'is_within_bmp',
     # Constants
     'PIECE_KEYS',
     'CACHE_DIR',
     'DARK_SQUARE_COLOR_PROMPT',
     'LIGHT_SQUARE_COLOR_PROMPT',
     'DEFAULT_COLORS',
-    'DEFAULT_FONT'
+    'DEFAULT_FONT',
+    # Mappings
+    'state_faces'
 ]
 
 
@@ -632,3 +641,41 @@ def get_local_time() -> datetime:
     datetime.datetime
     """
     return datetime.now(datetime.now().astimezone().tzinfo)
+
+
+state_faces: Dict[str, Tuple[str, ...]] = {
+    'winning': (
+        '☺', '✨', '╰(*°▽°*)╯', '(❁´◡`❁)', "(●'◡'●)", '(⌐■_■)', '(☞ﾟヮﾟ)☞', '(¬‿¬)', '❤', ';)', ':)', ':-)',
+        ':-D', ';-)', ';D', '（￣︶￣）↗　', '(～￣▽￣)～φ', '(゜▽゜*)', '♪(´▽`ʃ♡ƪ)', '╰(*°▽°*)╯o', '(*^▽^*)┛o',
+        '(*￣▽￣*)ブ', '♪(^∇^*)', '(oﾟvﾟ)ノ', '(/≧▽≦)/', '(((o(*ﾟ▽ﾟ*)o)))', '♪(´▽｀)', r'\(￣︶￣*\))', '(_　_)。゜zｚＺ',
+        '(￣o￣) . z Z', 'ヾ(^▽^*)))', '(～﹃～)~zZ', '(￣o￣) . z Z', '||ヽ(*￣▽￣*)ノミ', '|Юo(*°▽°*)o', '(ﾉ◕ヮ◕)ﾉ*:･ﾟ',
+        '✧(o゜▽゜)o☆', 'o(*￣▽￣*)oヽ', '(✿ﾟ▽ﾟ)ノ', '♪(´▽｀)', 'b(￣▽￣)d', 'o(^▽^)o', '(⌐■_■)', '(★‿★)', '( ͡• ͜ʖ ͡• )',
+        '( ͡° ͜ʖ ͡°)', '( ͡~ ͜ʖ ͡°)'
+    ),
+    'losing': (
+        '☹', '☠', '（；´д｀）ゞ', '＞﹏＜', '{{{(>_<)}}}', 'ಥ_ಥ', '(っ °Д °;)っ', '(ง •_•)ง', '＼（〇_ｏ）／', '(•ˋ _ ˊ•)',
+        '⚆_⚆', '(⊙_◎)', '(●__●)', '(((φ(◎ロ◎;)φ)))', '(◎﹏◎)', '(。・・)ノ', '○|￣|_╮', '（╯＿╰）', '╭┌( ´_ゝ` )┐',
+        '－_－b', '( ╯□╰ )', '(x_x)_〆', '(´Д｀ )', '(￣_￣|||)', '(￣▽￣)', '"╮(╯-╰)╭...', '( ＿ ＿)ノ｜', '(。﹏。)',
+        '(。>︿<)_θ', '(+_+)?', '(＠_＠;)', '(○´･д･)ﾉ', '(⊙_⊙)？', '(⊙_⊙;)...', '(*￣０￣)ノ', '＼（〇_ｏ）／', '(＃°Д°)',
+        '( ˘︹˘ )', '（︶^︶）', '(* ￣︿￣)ヽ', '（≧□≦）ノ', '╚(•⌂•)╝', '○|￣|_ =3', '(╯‵□′)╯︵┻━┻', '(╯°□°）╯︵ ┻━┻┻━┻ ︵',
+        ' ＼( °□° )／ ︵ ┻━┻', 'o(一︿一+)o', '(￣﹏￣；)', '(ㆆ_ㆆ)', '<(＿　＿)>', '{{{(>_<)}}}', '.·´¯`(>▂<)´¯`·. ',
+        '⊙﹏⊙', '∥┗( T﹏T )┛', 'ಥ_ಥ'
+    ),
+    'draw': (
+        '^_^', r"¯\_(ツ)_/¯", '(¬_¬ )', '^_^', '^_~', '^_____^', ':/', '+_+', '*_*', '=_=', '-_-', '⚆_⚆', '(⊙_◎)',
+        '(●__●)', '◉_◉', '♨_♨', '←_←', '→_→', '<@_@>', '<@_@>', '┑(￣Д ￣)┍', '(￣_,￣ )', '╮(╯-╰)╭', '……]((o_ _)彡',
+        '☆ㄟ( ▔, ▔ )ㄏ', '(。_。)', '(>* - *<)', '༼ つ ◕_◕ ༽つ', '（￣。。￣）', '(°°)～', '(‧‧)nnn≡', '[。。]≡',
+        r'--\(˙<>˙)/--', '(^◕.◕^)', '(^._.^)ﾉ', '(ʘ ͟ʖ ʘ)', '( ͠° ͟ʖ ͡°)', r'¯\_( ͡° ͜ʖ ͡°)_/¯', r'¯\_(ツ)_/¯',
+    ),
+}
+
+
+def is_within_bmp(s: str) -> bool:
+    """
+    Check whether all characters in the string `s` have Unicode code points
+    in the range U+0000 through U+FFFF (inclusive).
+
+    :param s: the input string to test
+    :return: True if every character is <= U+FFFF, False otherwise
+    """
+    return all(ord(ch) <= 0xFFFF for ch in s)

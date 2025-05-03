@@ -7,6 +7,7 @@ from chess import Board, Move, Outcome, pgn, square_distance
 from numpy import float64
 from numpy.typing import NDArray
 
+from chmengine.utils import pick
 from chmengine.utils.pick import Pick
 from chmutils import calculate_chess_move_heatmap_with_better_discount
 
@@ -18,6 +19,8 @@ except AttributeError:
         return bin(occ).count('1')
 
 __all__ = [
+    # Mods
+    'pick',
     # Classes
     'Pick',
     # Functions

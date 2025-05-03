@@ -1494,8 +1494,8 @@ static const char *__pyx_f[] = {
 /*--- Type declarations ---*/
 struct __pyx_obj_8heatmaps___pyx_scope_struct__genexpr;
 
-/* "heatmaps/__init__.py":10
- * from numpy.typing import ArrayLike, NDArray
+/* "heatmaps/__init__.py":20
+ * ]
  * 
  * PIECES: Tuple[Piece, ...] = tuple(Piece(p, c) for c in COLORS for p in PIECE_TYPES)             # <<<<<<<<<<<<<<
  * 
@@ -2531,6 +2531,7 @@ static const char __pyx_k__37[] = "_";
 static const char __pyx_k__50[] = "?";
 static const char __pyx_k_abs[] = "abs";
 static const char __pyx_k_add[] = "__add__";
+static const char __pyx_k_all[] = "__all__";
 static const char __pyx_k_doc[] = "__doc__";
 static const char __pyx_k_get[] = "get";
 static const char __pyx_k_got[] = ") got ";
@@ -2574,7 +2575,6 @@ static const char __pyx_k_dtype[] = "dtype";
 static const char __pyx_k_error[] = "error";
 static const char __pyx_k_got_2[] = ", got ";
 static const char __pyx_k_green[] = "green";
-static const char __pyx_k_isnan[] = "isnan";
 static const char __pyx_k_items[] = "items";
 static const char __pyx_k_numpy[] = "numpy";
 static const char __pyx_k_other[] = "other";
@@ -2732,7 +2732,7 @@ static const char __pyx_k_An_unexpected_error_occurred_dur[] = "An unexpected er
 static const char __pyx_k_ChessMoveHeatmapT_add_piece_coun[] = "ChessMoveHeatmapT.add_piece_counts";
 static const char __pyx_k_Data_must_be_either_a_NumPy_arra[] = "Data must be either a NumPy array of float64 or a GradientHeatmapT instance, got: ";
 static const char __pyx_k_GradientHeatmap__intensity_to_co[] = "GradientHeatmap._intensity_to_color_";
-static const char __pyx_k_GradientHeatmap__repr_html__line[] = "GradientHeatmap._repr_html_ (line 249)";
+static const char __pyx_k_GradientHeatmap__repr_html__line[] = "GradientHeatmap._repr_html_ (line 259)";
 static const char __pyx_k_Optional_NDArray_Dict_Piece_floa[] = "Optional[NDArray[Dict[Piece, float64]]]";
 static const char __pyx_k_Other_must_be_a_GradientHeatmapT[] = "Other must be a GradientHeatmapT ";
 static const char __pyx_k_Other_must_be_a_shape_64_ArrayLi[] = "Other must be a shape (64,) ArrayLike, got ";
@@ -2812,7 +2812,9 @@ typedef struct {
   PyObject *__pyx_n_s_AttributeError;
   PyObject *__pyx_n_s_COLORS;
   PyObject *__pyx_n_s_ChessMoveHeatmap;
+  PyObject *__pyx_n_u_ChessMoveHeatmap;
   PyObject *__pyx_n_s_ChessMoveHeatmapT;
+  PyObject *__pyx_n_u_ChessMoveHeatmapT;
   PyObject *__pyx_n_s_ChessMoveHeatmapT___add;
   PyObject *__pyx_n_s_ChessMoveHeatmapT___init;
   PyObject *__pyx_n_s_ChessMoveHeatmapT___truediv;
@@ -2827,7 +2829,9 @@ typedef struct {
   PyObject *__pyx_kp_u_FFFFFF;
   PyObject *__pyx_n_s_FloatingPointError;
   PyObject *__pyx_n_s_GradientHeatmap;
+  PyObject *__pyx_n_u_GradientHeatmap;
   PyObject *__pyx_n_s_GradientHeatmapT;
+  PyObject *__pyx_n_u_GradientHeatmapT;
   PyObject *__pyx_n_s_GradientHeatmapT___add;
   PyObject *__pyx_n_s_GradientHeatmapT___getitem;
   PyObject *__pyx_n_s_GradientHeatmapT___init;
@@ -2857,6 +2861,7 @@ typedef struct {
   PyObject *__pyx_kp_u_Other_must_be_a_shape;
   PyObject *__pyx_kp_u_Other_must_be_a_shape_64_ArrayLi;
   PyObject *__pyx_n_s_PIECES;
+  PyObject *__pyx_n_u_PIECES;
   PyObject *__pyx_n_s_PIECE_TYPES;
   PyObject *__pyx_n_s_Piece;
   PyObject *__pyx_n_s_Real;
@@ -2882,6 +2887,7 @@ typedef struct {
   PyObject *__pyx_n_s_abs;
   PyObject *__pyx_n_s_add;
   PyObject *__pyx_n_s_add_piece_counts;
+  PyObject *__pyx_n_s_all;
   PyObject *__pyx_n_s_annotations;
   PyObject *__pyx_n_s_args;
   PyObject *__pyx_n_s_array;
@@ -2944,7 +2950,6 @@ typedef struct {
   PyObject *__pyx_n_s_invalid;
   PyObject *__pyx_n_s_is_coroutine;
   PyObject *__pyx_kp_u_isenabled;
-  PyObject *__pyx_n_s_isnan;
   PyObject *__pyx_n_s_items;
   PyObject *__pyx_n_s_key_error;
   PyObject *__pyx_n_s_keys;
@@ -3138,7 +3143,9 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_AttributeError);
   Py_CLEAR(clear_module_state->__pyx_n_s_COLORS);
   Py_CLEAR(clear_module_state->__pyx_n_s_ChessMoveHeatmap);
+  Py_CLEAR(clear_module_state->__pyx_n_u_ChessMoveHeatmap);
   Py_CLEAR(clear_module_state->__pyx_n_s_ChessMoveHeatmapT);
+  Py_CLEAR(clear_module_state->__pyx_n_u_ChessMoveHeatmapT);
   Py_CLEAR(clear_module_state->__pyx_n_s_ChessMoveHeatmapT___add);
   Py_CLEAR(clear_module_state->__pyx_n_s_ChessMoveHeatmapT___init);
   Py_CLEAR(clear_module_state->__pyx_n_s_ChessMoveHeatmapT___truediv);
@@ -3153,7 +3160,9 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_u_FFFFFF);
   Py_CLEAR(clear_module_state->__pyx_n_s_FloatingPointError);
   Py_CLEAR(clear_module_state->__pyx_n_s_GradientHeatmap);
+  Py_CLEAR(clear_module_state->__pyx_n_u_GradientHeatmap);
   Py_CLEAR(clear_module_state->__pyx_n_s_GradientHeatmapT);
+  Py_CLEAR(clear_module_state->__pyx_n_u_GradientHeatmapT);
   Py_CLEAR(clear_module_state->__pyx_n_s_GradientHeatmapT___add);
   Py_CLEAR(clear_module_state->__pyx_n_s_GradientHeatmapT___getitem);
   Py_CLEAR(clear_module_state->__pyx_n_s_GradientHeatmapT___init);
@@ -3183,6 +3192,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_u_Other_must_be_a_shape);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Other_must_be_a_shape_64_ArrayLi);
   Py_CLEAR(clear_module_state->__pyx_n_s_PIECES);
+  Py_CLEAR(clear_module_state->__pyx_n_u_PIECES);
   Py_CLEAR(clear_module_state->__pyx_n_s_PIECE_TYPES);
   Py_CLEAR(clear_module_state->__pyx_n_s_Piece);
   Py_CLEAR(clear_module_state->__pyx_n_s_Real);
@@ -3208,6 +3218,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_abs);
   Py_CLEAR(clear_module_state->__pyx_n_s_add);
   Py_CLEAR(clear_module_state->__pyx_n_s_add_piece_counts);
+  Py_CLEAR(clear_module_state->__pyx_n_s_all);
   Py_CLEAR(clear_module_state->__pyx_n_s_annotations);
   Py_CLEAR(clear_module_state->__pyx_n_s_args);
   Py_CLEAR(clear_module_state->__pyx_n_s_array);
@@ -3270,7 +3281,6 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_invalid);
   Py_CLEAR(clear_module_state->__pyx_n_s_is_coroutine);
   Py_CLEAR(clear_module_state->__pyx_kp_u_isenabled);
-  Py_CLEAR(clear_module_state->__pyx_n_s_isnan);
   Py_CLEAR(clear_module_state->__pyx_n_s_items);
   Py_CLEAR(clear_module_state->__pyx_n_s_key_error);
   Py_CLEAR(clear_module_state->__pyx_n_s_keys);
@@ -3442,7 +3452,9 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_AttributeError);
   Py_VISIT(traverse_module_state->__pyx_n_s_COLORS);
   Py_VISIT(traverse_module_state->__pyx_n_s_ChessMoveHeatmap);
+  Py_VISIT(traverse_module_state->__pyx_n_u_ChessMoveHeatmap);
   Py_VISIT(traverse_module_state->__pyx_n_s_ChessMoveHeatmapT);
+  Py_VISIT(traverse_module_state->__pyx_n_u_ChessMoveHeatmapT);
   Py_VISIT(traverse_module_state->__pyx_n_s_ChessMoveHeatmapT___add);
   Py_VISIT(traverse_module_state->__pyx_n_s_ChessMoveHeatmapT___init);
   Py_VISIT(traverse_module_state->__pyx_n_s_ChessMoveHeatmapT___truediv);
@@ -3457,7 +3469,9 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_u_FFFFFF);
   Py_VISIT(traverse_module_state->__pyx_n_s_FloatingPointError);
   Py_VISIT(traverse_module_state->__pyx_n_s_GradientHeatmap);
+  Py_VISIT(traverse_module_state->__pyx_n_u_GradientHeatmap);
   Py_VISIT(traverse_module_state->__pyx_n_s_GradientHeatmapT);
+  Py_VISIT(traverse_module_state->__pyx_n_u_GradientHeatmapT);
   Py_VISIT(traverse_module_state->__pyx_n_s_GradientHeatmapT___add);
   Py_VISIT(traverse_module_state->__pyx_n_s_GradientHeatmapT___getitem);
   Py_VISIT(traverse_module_state->__pyx_n_s_GradientHeatmapT___init);
@@ -3487,6 +3501,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_u_Other_must_be_a_shape);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Other_must_be_a_shape_64_ArrayLi);
   Py_VISIT(traverse_module_state->__pyx_n_s_PIECES);
+  Py_VISIT(traverse_module_state->__pyx_n_u_PIECES);
   Py_VISIT(traverse_module_state->__pyx_n_s_PIECE_TYPES);
   Py_VISIT(traverse_module_state->__pyx_n_s_Piece);
   Py_VISIT(traverse_module_state->__pyx_n_s_Real);
@@ -3512,6 +3527,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_abs);
   Py_VISIT(traverse_module_state->__pyx_n_s_add);
   Py_VISIT(traverse_module_state->__pyx_n_s_add_piece_counts);
+  Py_VISIT(traverse_module_state->__pyx_n_s_all);
   Py_VISIT(traverse_module_state->__pyx_n_s_annotations);
   Py_VISIT(traverse_module_state->__pyx_n_s_args);
   Py_VISIT(traverse_module_state->__pyx_n_s_array);
@@ -3574,7 +3590,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_invalid);
   Py_VISIT(traverse_module_state->__pyx_n_s_is_coroutine);
   Py_VISIT(traverse_module_state->__pyx_kp_u_isenabled);
-  Py_VISIT(traverse_module_state->__pyx_n_s_isnan);
   Py_VISIT(traverse_module_state->__pyx_n_s_items);
   Py_VISIT(traverse_module_state->__pyx_n_s_key_error);
   Py_VISIT(traverse_module_state->__pyx_n_s_keys);
@@ -3756,7 +3771,9 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_AttributeError __pyx_mstate_global->__pyx_n_s_AttributeError
 #define __pyx_n_s_COLORS __pyx_mstate_global->__pyx_n_s_COLORS
 #define __pyx_n_s_ChessMoveHeatmap __pyx_mstate_global->__pyx_n_s_ChessMoveHeatmap
+#define __pyx_n_u_ChessMoveHeatmap __pyx_mstate_global->__pyx_n_u_ChessMoveHeatmap
 #define __pyx_n_s_ChessMoveHeatmapT __pyx_mstate_global->__pyx_n_s_ChessMoveHeatmapT
+#define __pyx_n_u_ChessMoveHeatmapT __pyx_mstate_global->__pyx_n_u_ChessMoveHeatmapT
 #define __pyx_n_s_ChessMoveHeatmapT___add __pyx_mstate_global->__pyx_n_s_ChessMoveHeatmapT___add
 #define __pyx_n_s_ChessMoveHeatmapT___init __pyx_mstate_global->__pyx_n_s_ChessMoveHeatmapT___init
 #define __pyx_n_s_ChessMoveHeatmapT___truediv __pyx_mstate_global->__pyx_n_s_ChessMoveHeatmapT___truediv
@@ -3771,7 +3788,9 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_u_FFFFFF __pyx_mstate_global->__pyx_kp_u_FFFFFF
 #define __pyx_n_s_FloatingPointError __pyx_mstate_global->__pyx_n_s_FloatingPointError
 #define __pyx_n_s_GradientHeatmap __pyx_mstate_global->__pyx_n_s_GradientHeatmap
+#define __pyx_n_u_GradientHeatmap __pyx_mstate_global->__pyx_n_u_GradientHeatmap
 #define __pyx_n_s_GradientHeatmapT __pyx_mstate_global->__pyx_n_s_GradientHeatmapT
+#define __pyx_n_u_GradientHeatmapT __pyx_mstate_global->__pyx_n_u_GradientHeatmapT
 #define __pyx_n_s_GradientHeatmapT___add __pyx_mstate_global->__pyx_n_s_GradientHeatmapT___add
 #define __pyx_n_s_GradientHeatmapT___getitem __pyx_mstate_global->__pyx_n_s_GradientHeatmapT___getitem
 #define __pyx_n_s_GradientHeatmapT___init __pyx_mstate_global->__pyx_n_s_GradientHeatmapT___init
@@ -3801,6 +3820,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_u_Other_must_be_a_shape __pyx_mstate_global->__pyx_kp_u_Other_must_be_a_shape
 #define __pyx_kp_u_Other_must_be_a_shape_64_ArrayLi __pyx_mstate_global->__pyx_kp_u_Other_must_be_a_shape_64_ArrayLi
 #define __pyx_n_s_PIECES __pyx_mstate_global->__pyx_n_s_PIECES
+#define __pyx_n_u_PIECES __pyx_mstate_global->__pyx_n_u_PIECES
 #define __pyx_n_s_PIECE_TYPES __pyx_mstate_global->__pyx_n_s_PIECE_TYPES
 #define __pyx_n_s_Piece __pyx_mstate_global->__pyx_n_s_Piece
 #define __pyx_n_s_Real __pyx_mstate_global->__pyx_n_s_Real
@@ -3826,6 +3846,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_abs __pyx_mstate_global->__pyx_n_s_abs
 #define __pyx_n_s_add __pyx_mstate_global->__pyx_n_s_add
 #define __pyx_n_s_add_piece_counts __pyx_mstate_global->__pyx_n_s_add_piece_counts
+#define __pyx_n_s_all __pyx_mstate_global->__pyx_n_s_all
 #define __pyx_n_s_annotations __pyx_mstate_global->__pyx_n_s_annotations
 #define __pyx_n_s_args __pyx_mstate_global->__pyx_n_s_args
 #define __pyx_n_s_array __pyx_mstate_global->__pyx_n_s_array
@@ -3888,7 +3909,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_invalid __pyx_mstate_global->__pyx_n_s_invalid
 #define __pyx_n_s_is_coroutine __pyx_mstate_global->__pyx_n_s_is_coroutine
 #define __pyx_kp_u_isenabled __pyx_mstate_global->__pyx_kp_u_isenabled
-#define __pyx_n_s_isnan __pyx_mstate_global->__pyx_n_s_isnan
 #define __pyx_n_s_items __pyx_mstate_global->__pyx_n_s_items
 #define __pyx_n_s_key_error __pyx_mstate_global->__pyx_n_s_key_error
 #define __pyx_n_s_keys __pyx_mstate_global->__pyx_n_s_keys
@@ -4025,8 +4045,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 /* #### Code section: module_code ### */
 static PyObject *__pyx_gb_8heatmaps_2generator(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "heatmaps/__init__.py":10
- * from numpy.typing import ArrayLike, NDArray
+/* "heatmaps/__init__.py":20
+ * ]
  * 
  * PIECES: Tuple[Piece, ...] = tuple(Piece(p, c) for c in COLORS for p in PIECE_TYPES)             # <<<<<<<<<<<<<<
  * 
@@ -4045,7 +4065,7 @@ static PyObject *__pyx_pf_8heatmaps_genexpr(CYTHON_UNUSED PyObject *__pyx_self, 
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_8heatmaps___pyx_scope_struct__genexpr *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 10, __pyx_L1_error)
+    __PYX_ERR(0, 20, __pyx_L1_error)
   } else {
     __Pyx_GOTREF((PyObject *)__pyx_cur_scope);
   }
@@ -4053,7 +4073,7 @@ static PyObject *__pyx_pf_8heatmaps_genexpr(CYTHON_UNUSED PyObject *__pyx_self, 
   __Pyx_INCREF(__pyx_cur_scope->__pyx_genexpr_arg_0);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_genexpr_arg_0);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_8heatmaps_2generator, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_genexpr, __pyx_n_s_heatmaps); if (unlikely(!gen)) __PYX_ERR(0, 10, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_8heatmaps_2generator, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_genexpr, __pyx_n_s_heatmaps); if (unlikely(!gen)) __PYX_ERR(0, 20, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -4096,16 +4116,16 @@ static PyObject *__pyx_gb_8heatmaps_2generator(__pyx_CoroutineObject *__pyx_gene
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 10, __pyx_L1_error)
-  if (unlikely(!__pyx_cur_scope->__pyx_genexpr_arg_0)) { __Pyx_RaiseUnboundLocalError(".0"); __PYX_ERR(0, 10, __pyx_L1_error) }
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (unlikely(!__pyx_cur_scope->__pyx_genexpr_arg_0)) { __Pyx_RaiseUnboundLocalError(".0"); __PYX_ERR(0, 20, __pyx_L1_error) }
   if (likely(PyList_CheckExact(__pyx_cur_scope->__pyx_genexpr_arg_0)) || PyTuple_CheckExact(__pyx_cur_scope->__pyx_genexpr_arg_0)) {
     __pyx_t_1 = __pyx_cur_scope->__pyx_genexpr_arg_0; __Pyx_INCREF(__pyx_t_1);
     __pyx_t_2 = 0;
     __pyx_t_3 = NULL;
   } else {
-    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_cur_scope->__pyx_genexpr_arg_0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 10, __pyx_L1_error)
+    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_cur_scope->__pyx_genexpr_arg_0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 10, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 20, __pyx_L1_error)
   }
   for (;;) {
     if (likely(!__pyx_t_3)) {
@@ -4113,28 +4133,28 @@ static PyObject *__pyx_gb_8heatmaps_2generator(__pyx_CoroutineObject *__pyx_gene
         {
           Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
           #if !CYTHON_ASSUME_SAFE_MACROS
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 10, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 20, __pyx_L1_error)
           #endif
           if (__pyx_t_2 >= __pyx_temp) break;
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely((0 < 0))) __PYX_ERR(0, 10, __pyx_L1_error)
+        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely((0 < 0))) __PYX_ERR(0, 20, __pyx_L1_error)
         #else
-        __pyx_t_4 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 10, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 20, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       } else {
         {
           Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_1);
           #if !CYTHON_ASSUME_SAFE_MACROS
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 10, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 20, __pyx_L1_error)
           #endif
           if (__pyx_t_2 >= __pyx_temp) break;
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely((0 < 0))) __PYX_ERR(0, 10, __pyx_L1_error)
+        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely((0 < 0))) __PYX_ERR(0, 20, __pyx_L1_error)
         #else
-        __pyx_t_4 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 10, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 20, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       }
@@ -4144,7 +4164,7 @@ static PyObject *__pyx_gb_8heatmaps_2generator(__pyx_CoroutineObject *__pyx_gene
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 10, __pyx_L1_error)
+          else __PYX_ERR(0, 20, __pyx_L1_error)
         }
         break;
       }
@@ -4154,16 +4174,16 @@ static PyObject *__pyx_gb_8heatmaps_2generator(__pyx_CoroutineObject *__pyx_gene
     __Pyx_XDECREF_SET(__pyx_cur_scope->__pyx_v_c, __pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_4);
     __pyx_t_4 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_PIECE_TYPES); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 10, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_PIECE_TYPES); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 20, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     if (likely(PyList_CheckExact(__pyx_t_4)) || PyTuple_CheckExact(__pyx_t_4)) {
       __pyx_t_5 = __pyx_t_4; __Pyx_INCREF(__pyx_t_5);
       __pyx_t_6 = 0;
       __pyx_t_7 = NULL;
     } else {
-      __pyx_t_6 = -1; __pyx_t_5 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 10, __pyx_L1_error)
+      __pyx_t_6 = -1; __pyx_t_5 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 20, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_7 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 10, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 20, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     for (;;) {
@@ -4172,28 +4192,28 @@ static PyObject *__pyx_gb_8heatmaps_2generator(__pyx_CoroutineObject *__pyx_gene
           {
             Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_5);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 10, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 20, __pyx_L1_error)
             #endif
             if (__pyx_t_6 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_4 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_4); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 10, __pyx_L1_error)
+          __pyx_t_4 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_4); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 20, __pyx_L1_error)
           #else
-          __pyx_t_4 = __Pyx_PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 10, __pyx_L1_error)
+          __pyx_t_4 = __Pyx_PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 20, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_4);
           #endif
         } else {
           {
             Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_5);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 10, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 20, __pyx_L1_error)
             #endif
             if (__pyx_t_6 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_4); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 10, __pyx_L1_error)
+          __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_4); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 20, __pyx_L1_error)
           #else
-          __pyx_t_4 = __Pyx_PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 10, __pyx_L1_error)
+          __pyx_t_4 = __Pyx_PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 20, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_4);
           #endif
         }
@@ -4203,7 +4223,7 @@ static PyObject *__pyx_gb_8heatmaps_2generator(__pyx_CoroutineObject *__pyx_gene
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 10, __pyx_L1_error)
+            else __PYX_ERR(0, 20, __pyx_L1_error)
           }
           break;
         }
@@ -4213,7 +4233,7 @@ static PyObject *__pyx_gb_8heatmaps_2generator(__pyx_CoroutineObject *__pyx_gene
       __Pyx_XDECREF_SET(__pyx_cur_scope->__pyx_v_p, __pyx_t_4);
       __Pyx_GIVEREF(__pyx_t_4);
       __pyx_t_4 = 0;
-      __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_Piece); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 10, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_Piece); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 20, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_9 = NULL;
       __pyx_t_10 = 0;
@@ -4233,7 +4253,7 @@ static PyObject *__pyx_gb_8heatmaps_2generator(__pyx_CoroutineObject *__pyx_gene
         PyObject *__pyx_callargs[3] = {__pyx_t_9, __pyx_cur_scope->__pyx_v_p, __pyx_cur_scope->__pyx_v_c};
         __pyx_t_4 = __Pyx_PyObject_FastCall(__pyx_t_8, __pyx_callargs+1-__pyx_t_10, 2+__pyx_t_10);
         __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 10, __pyx_L1_error)
+        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 20, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       }
@@ -4264,7 +4284,7 @@ static PyObject *__pyx_gb_8heatmaps_2generator(__pyx_CoroutineObject *__pyx_gene
       __Pyx_XGOTREF(__pyx_t_5);
       __pyx_t_6 = __pyx_cur_scope->__pyx_t_4;
       __pyx_t_7 = __pyx_cur_scope->__pyx_t_5;
-      if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 10, __pyx_L1_error)
+      if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 20, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
@@ -4293,7 +4313,7 @@ static PyObject *__pyx_gb_8heatmaps_2generator(__pyx_CoroutineObject *__pyx_gene
   return __pyx_r;
 }
 
-/* "heatmaps/__init__.py":29
+/* "heatmaps/__init__.py":39
  *     _shape: Tuple[int, int] = (64, 2)
  * 
  *     def __init__(self) -> None:             # <<<<<<<<<<<<<<
@@ -4355,12 +4375,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 29, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 39, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__init__") < 0)) __PYX_ERR(0, 29, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__init__") < 0)) __PYX_ERR(0, 39, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -4371,7 +4391,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 29, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 39, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4410,37 +4430,37 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT___init__(CYTHON_UNUSED Py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 1);
 
-  /* "heatmaps/__init__.py":31
+  /* "heatmaps/__init__.py":41
  *     def __init__(self) -> None:
  *         """Initialize a heatmap with zeros."""
  *         self._data = zeros(self._shape, dtype=float64)             # <<<<<<<<<<<<<<
  * 
  *     def __getitem__(self, square: Union[int, Iterable]) -> NDArray[float64]:
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shape); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shape); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2)) __PYX_ERR(0, 31, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_float64); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_float64); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_4) < 0) __PYX_ERR(0, 31, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_4) < 0) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_data, __pyx_t_4) < 0) __PYX_ERR(0, 31, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_data, __pyx_t_4) < 0) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "heatmaps/__init__.py":29
+  /* "heatmaps/__init__.py":39
  *     _shape: Tuple[int, int] = (64, 2)
  * 
  *     def __init__(self) -> None:             # <<<<<<<<<<<<<<
@@ -4464,7 +4484,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT___init__(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "heatmaps/__init__.py":33
+/* "heatmaps/__init__.py":43
  *         self._data = zeros(self._shape, dtype=float64)
  * 
  *     def __getitem__(self, square: Union[int, Iterable]) -> NDArray[float64]:             # <<<<<<<<<<<<<<
@@ -4529,7 +4549,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 33, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 43, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -4537,14 +4557,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 33, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 43, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("__getitem__", 1, 2, 2, 1); __PYX_ERR(0, 33, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__getitem__", 1, 2, 2, 1); __PYX_ERR(0, 43, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__getitem__") < 0)) __PYX_ERR(0, 33, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__getitem__") < 0)) __PYX_ERR(0, 43, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -4557,7 +4577,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__getitem__", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 33, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__getitem__", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 43, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4613,7 +4633,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_2__getitem__(CYTHON_UNUSE
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__getitem__", 1);
 
-  /* "heatmaps/__init__.py":46
+  /* "heatmaps/__init__.py":56
  *             A NumPy array of shape (2,) representing the heatmap data for the square.
  *         """
  *         try:             # <<<<<<<<<<<<<<
@@ -4629,7 +4649,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_2__getitem__(CYTHON_UNUSE
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* "heatmaps/__init__.py":47
+      /* "heatmaps/__init__.py":57
  *         """
  *         try:
  *             return self.data[square]             # <<<<<<<<<<<<<<
@@ -4637,16 +4657,16 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_2__getitem__(CYTHON_UNUSE
  *             raise IndexError(f"square must be in range({self.shape[0]}) got {square}") from index_error
  */
       __Pyx_XDECREF(__pyx_r);
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_data_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 47, __pyx_L3_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_data_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 57, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_5 = __Pyx_PyObject_GetItem(__pyx_t_4, __pyx_v_square); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 47, __pyx_L3_error)
+      __pyx_t_5 = __Pyx_PyObject_GetItem(__pyx_t_4, __pyx_v_square); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 57, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __pyx_r = __pyx_t_5;
       __pyx_t_5 = 0;
       goto __pyx_L7_try_return;
 
-      /* "heatmaps/__init__.py":46
+      /* "heatmaps/__init__.py":56
  *             A NumPy array of shape (2,) representing the heatmap data for the square.
  *         """
  *         try:             # <<<<<<<<<<<<<<
@@ -4658,7 +4678,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_2__getitem__(CYTHON_UNUSE
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "heatmaps/__init__.py":48
+    /* "heatmaps/__init__.py":58
  *         try:
  *             return self.data[square]
  *         except IndexError as index_error:             # <<<<<<<<<<<<<<
@@ -4668,7 +4688,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_2__getitem__(CYTHON_UNUSE
     __pyx_t_6 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_IndexError);
     if (__pyx_t_6) {
       __Pyx_AddTraceback("heatmaps.GradientHeatmapT.__getitem__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_4, &__pyx_t_7) < 0) __PYX_ERR(0, 48, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_4, &__pyx_t_7) < 0) __PYX_ERR(0, 58, __pyx_L5_except_error)
       __Pyx_XGOTREF(__pyx_t_5);
       __Pyx_XGOTREF(__pyx_t_4);
       __Pyx_XGOTREF(__pyx_t_7);
@@ -4676,14 +4696,14 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_2__getitem__(CYTHON_UNUSE
       __pyx_v_index_error = __pyx_t_4;
       /*try:*/ {
 
-        /* "heatmaps/__init__.py":49
+        /* "heatmaps/__init__.py":59
  *             return self.data[square]
  *         except IndexError as index_error:
  *             raise IndexError(f"square must be in range({self.shape[0]}) got {square}") from index_error             # <<<<<<<<<<<<<<
  * 
  *     def __setitem__(self, square: int, value: Union[NDArray[float64], ArrayLike]) -> None:
  */
-        __pyx_t_8 = PyTuple_New(4); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 49, __pyx_L14_error)
+        __pyx_t_8 = PyTuple_New(4); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 59, __pyx_L14_error)
         __Pyx_GOTREF(__pyx_t_8);
         __pyx_t_9 = 0;
         __pyx_t_10 = 127;
@@ -4691,12 +4711,12 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_2__getitem__(CYTHON_UNUSE
         __pyx_t_9 += 24;
         __Pyx_GIVEREF(__pyx_kp_u_square_must_be_in_range);
         PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_kp_u_square_must_be_in_range);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 49, __pyx_L14_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 59, __pyx_L14_error)
         __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_12 = __Pyx_GetItemInt(__pyx_t_11, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 49, __pyx_L14_error)
+        __pyx_t_12 = __Pyx_GetItemInt(__pyx_t_11, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 59, __pyx_L14_error)
         __Pyx_GOTREF(__pyx_t_12);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_11 = __Pyx_PyObject_FormatSimple(__pyx_t_12, __pyx_empty_unicode); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 49, __pyx_L14_error)
+        __pyx_t_11 = __Pyx_PyObject_FormatSimple(__pyx_t_12, __pyx_empty_unicode); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 59, __pyx_L14_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
         __pyx_t_10 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_11) > __pyx_t_10) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_11) : __pyx_t_10;
@@ -4708,25 +4728,25 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_2__getitem__(CYTHON_UNUSE
         __pyx_t_9 += 6;
         __Pyx_GIVEREF(__pyx_kp_u_got);
         PyTuple_SET_ITEM(__pyx_t_8, 2, __pyx_kp_u_got);
-        __pyx_t_11 = __Pyx_PyObject_FormatSimple(__pyx_v_square, __pyx_empty_unicode); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 49, __pyx_L14_error)
+        __pyx_t_11 = __Pyx_PyObject_FormatSimple(__pyx_v_square, __pyx_empty_unicode); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 59, __pyx_L14_error)
         __Pyx_GOTREF(__pyx_t_11);
         __pyx_t_10 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_11) > __pyx_t_10) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_11) : __pyx_t_10;
         __pyx_t_9 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_11);
         __Pyx_GIVEREF(__pyx_t_11);
         PyTuple_SET_ITEM(__pyx_t_8, 3, __pyx_t_11);
         __pyx_t_11 = 0;
-        __pyx_t_11 = __Pyx_PyUnicode_Join(__pyx_t_8, 4, __pyx_t_9, __pyx_t_10); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 49, __pyx_L14_error)
+        __pyx_t_11 = __Pyx_PyUnicode_Join(__pyx_t_8, 4, __pyx_t_9, __pyx_t_10); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 59, __pyx_L14_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-        __pyx_t_8 = __Pyx_PyObject_CallOneArg(__pyx_builtin_IndexError, __pyx_t_11); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 49, __pyx_L14_error)
+        __pyx_t_8 = __Pyx_PyObject_CallOneArg(__pyx_builtin_IndexError, __pyx_t_11); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 59, __pyx_L14_error)
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __Pyx_Raise(__pyx_t_8, 0, 0, __pyx_v_index_error);
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-        __PYX_ERR(0, 49, __pyx_L14_error)
+        __PYX_ERR(0, 59, __pyx_L14_error)
       }
 
-      /* "heatmaps/__init__.py":48
+      /* "heatmaps/__init__.py":58
  *         try:
  *             return self.data[square]
  *         except IndexError as index_error:             # <<<<<<<<<<<<<<
@@ -4772,7 +4792,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_2__getitem__(CYTHON_UNUSE
     }
     goto __pyx_L5_except_error;
 
-    /* "heatmaps/__init__.py":46
+    /* "heatmaps/__init__.py":56
  *             A NumPy array of shape (2,) representing the heatmap data for the square.
  *         """
  *         try:             # <<<<<<<<<<<<<<
@@ -4793,7 +4813,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_2__getitem__(CYTHON_UNUSE
     goto __pyx_L0;
   }
 
-  /* "heatmaps/__init__.py":33
+  /* "heatmaps/__init__.py":43
  *         self._data = zeros(self._shape, dtype=float64)
  * 
  *     def __getitem__(self, square: Union[int, Iterable]) -> NDArray[float64]:             # <<<<<<<<<<<<<<
@@ -4818,7 +4838,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_2__getitem__(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "heatmaps/__init__.py":51
+/* "heatmaps/__init__.py":61
  *             raise IndexError(f"square must be in range({self.shape[0]}) got {square}") from index_error
  * 
  *     def __setitem__(self, square: int, value: Union[NDArray[float64], ArrayLike]) -> None:             # <<<<<<<<<<<<<<
@@ -4886,7 +4906,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 51, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 61, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -4894,9 +4914,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 51, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 61, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("__setitem__", 1, 3, 3, 1); __PYX_ERR(0, 51, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__setitem__", 1, 3, 3, 1); __PYX_ERR(0, 61, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -4904,14 +4924,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[2]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 51, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 61, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("__setitem__", 1, 3, 3, 2); __PYX_ERR(0, 51, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__setitem__", 1, 3, 3, 2); __PYX_ERR(0, 61, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__setitem__") < 0)) __PYX_ERR(0, 51, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__setitem__") < 0)) __PYX_ERR(0, 61, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 3)) {
       goto __pyx_L5_argtuple_error;
@@ -4926,7 +4946,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__setitem__", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 51, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__setitem__", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 61, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4940,7 +4960,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_square), (&PyInt_Type), 0, "square", 1))) __PYX_ERR(0, 51, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_square), (&PyInt_Type), 0, "square", 1))) __PYX_ERR(0, 61, __pyx_L1_error)
   __pyx_r = __pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(__pyx_self, __pyx_v_self, __pyx_v_square, __pyx_v_value);
 
   /* function exit code */
@@ -4999,27 +5019,27 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__setitem__", 1);
 
-  /* "heatmaps/__init__.py":68
+  /* "heatmaps/__init__.py":78
  *             If the provided square is not in range(64)
  *         """
  *         expected_shape = (self.shape[1],)             # <<<<<<<<<<<<<<
  *         try:
  *             if value.shape == expected_shape and value.dtype == float64:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 78, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 78, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 78, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2)) __PYX_ERR(0, 68, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2)) __PYX_ERR(0, 78, __pyx_L1_error);
   __pyx_t_2 = 0;
   __pyx_v_expected_shape = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "heatmaps/__init__.py":69
+  /* "heatmaps/__init__.py":79
  *         """
  *         expected_shape = (self.shape[1],)
  *         try:             # <<<<<<<<<<<<<<
@@ -5035,50 +5055,50 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
     __Pyx_XGOTREF(__pyx_t_5);
     /*try:*/ {
 
-      /* "heatmaps/__init__.py":70
+      /* "heatmaps/__init__.py":80
  *         expected_shape = (self.shape[1],)
  *         try:
  *             if value.shape == expected_shape and value.dtype == float64:             # <<<<<<<<<<<<<<
  *                 self.data[square] = value
  *                 return None
  */
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_value, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L3_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_value, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_v_expected_shape, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 70, __pyx_L3_error)
+      __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_v_expected_shape, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 80, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 70, __pyx_L3_error)
+      __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 80, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       if (__pyx_t_7) {
       } else {
         __pyx_t_6 = __pyx_t_7;
         goto __pyx_L10_bool_binop_done;
       }
-      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_value, __pyx_n_s_dtype); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 70, __pyx_L3_error)
+      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_value, __pyx_n_s_dtype); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 80, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_float64); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L3_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_float64); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_8 = PyObject_RichCompare(__pyx_t_2, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_8); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 70, __pyx_L3_error)
+      __pyx_t_8 = PyObject_RichCompare(__pyx_t_2, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_8); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 80, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_8); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 70, __pyx_L3_error)
+      __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_8); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 80, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_6 = __pyx_t_7;
       __pyx_L10_bool_binop_done:;
       if (__pyx_t_6) {
 
-        /* "heatmaps/__init__.py":71
+        /* "heatmaps/__init__.py":81
  *         try:
  *             if value.shape == expected_shape and value.dtype == float64:
  *                 self.data[square] = value             # <<<<<<<<<<<<<<
  *                 return None
  *             raise ValueError(f"Value must have shape {expected_shape}, got {value.shape}.")
  */
-        __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_data_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 71, __pyx_L3_error)
+        __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_data_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 81, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_8);
-        if (unlikely((PyObject_SetItem(__pyx_t_8, __pyx_v_square, __pyx_v_value) < 0))) __PYX_ERR(0, 71, __pyx_L3_error)
+        if (unlikely((PyObject_SetItem(__pyx_t_8, __pyx_v_square, __pyx_v_value) < 0))) __PYX_ERR(0, 81, __pyx_L3_error)
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-        /* "heatmaps/__init__.py":72
+        /* "heatmaps/__init__.py":82
  *             if value.shape == expected_shape and value.dtype == float64:
  *                 self.data[square] = value
  *                 return None             # <<<<<<<<<<<<<<
@@ -5089,7 +5109,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
         __pyx_r = Py_None; __Pyx_INCREF(Py_None);
         goto __pyx_L7_try_return;
 
-        /* "heatmaps/__init__.py":70
+        /* "heatmaps/__init__.py":80
  *         expected_shape = (self.shape[1],)
  *         try:
  *             if value.shape == expected_shape and value.dtype == float64:             # <<<<<<<<<<<<<<
@@ -5098,14 +5118,14 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
  */
       }
 
-      /* "heatmaps/__init__.py":73
+      /* "heatmaps/__init__.py":83
  *                 self.data[square] = value
  *                 return None
  *             raise ValueError(f"Value must have shape {expected_shape}, got {value.shape}.")             # <<<<<<<<<<<<<<
  *         except AttributeError:
  *             try:
  */
-      __pyx_t_8 = PyTuple_New(5); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 73, __pyx_L3_error)
+      __pyx_t_8 = PyTuple_New(5); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 83, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_9 = 0;
       __pyx_t_10 = 127;
@@ -5113,7 +5133,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
       __pyx_t_9 += 22;
       __Pyx_GIVEREF(__pyx_kp_u_Value_must_have_shape);
       PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_kp_u_Value_must_have_shape);
-      __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_v_expected_shape, __pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L3_error)
+      __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_v_expected_shape, __pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_t_10 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) > __pyx_t_10) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) : __pyx_t_10;
       __pyx_t_9 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_1);
@@ -5124,9 +5144,9 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
       __pyx_t_9 += 6;
       __Pyx_GIVEREF(__pyx_kp_u_got_2);
       PyTuple_SET_ITEM(__pyx_t_8, 2, __pyx_kp_u_got_2);
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_value, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L3_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_value, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_2 = __Pyx_PyObject_FormatSimple(__pyx_t_1, __pyx_empty_unicode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 73, __pyx_L3_error)
+      __pyx_t_2 = __Pyx_PyObject_FormatSimple(__pyx_t_1, __pyx_empty_unicode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 83, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_10 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) > __pyx_t_10) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) : __pyx_t_10;
@@ -5138,17 +5158,17 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
       __pyx_t_9 += 1;
       __Pyx_GIVEREF(__pyx_kp_u_);
       PyTuple_SET_ITEM(__pyx_t_8, 4, __pyx_kp_u_);
-      __pyx_t_2 = __Pyx_PyUnicode_Join(__pyx_t_8, 5, __pyx_t_9, __pyx_t_10); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 73, __pyx_L3_error)
+      __pyx_t_2 = __Pyx_PyUnicode_Join(__pyx_t_8, 5, __pyx_t_9, __pyx_t_10); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 83, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __pyx_t_8 = __Pyx_PyObject_CallOneArg(__pyx_builtin_ValueError, __pyx_t_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 73, __pyx_L3_error)
+      __pyx_t_8 = __Pyx_PyObject_CallOneArg(__pyx_builtin_ValueError, __pyx_t_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 83, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_Raise(__pyx_t_8, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __PYX_ERR(0, 73, __pyx_L3_error)
+      __PYX_ERR(0, 83, __pyx_L3_error)
 
-      /* "heatmaps/__init__.py":69
+      /* "heatmaps/__init__.py":79
  *         """
  *         expected_shape = (self.shape[1],)
  *         try:             # <<<<<<<<<<<<<<
@@ -5161,7 +5181,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-    /* "heatmaps/__init__.py":74
+    /* "heatmaps/__init__.py":84
  *                 return None
  *             raise ValueError(f"Value must have shape {expected_shape}, got {value.shape}.")
  *         except AttributeError:             # <<<<<<<<<<<<<<
@@ -5171,12 +5191,12 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
     __pyx_t_11 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_AttributeError);
     if (__pyx_t_11) {
       __Pyx_AddTraceback("heatmaps.GradientHeatmapT.__setitem__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_8, &__pyx_t_2, &__pyx_t_1) < 0) __PYX_ERR(0, 74, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_8, &__pyx_t_2, &__pyx_t_1) < 0) __PYX_ERR(0, 84, __pyx_L5_except_error)
       __Pyx_XGOTREF(__pyx_t_8);
       __Pyx_XGOTREF(__pyx_t_2);
       __Pyx_XGOTREF(__pyx_t_1);
 
-      /* "heatmaps/__init__.py":75
+      /* "heatmaps/__init__.py":85
  *             raise ValueError(f"Value must have shape {expected_shape}, got {value.shape}.")
  *         except AttributeError:
  *             try:             # <<<<<<<<<<<<<<
@@ -5192,7 +5212,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
         __Pyx_XGOTREF(__pyx_t_14);
         /*try:*/ {
 
-          /* "heatmaps/__init__.py":76
+          /* "heatmaps/__init__.py":86
  *         except AttributeError:
  *             try:
  *                 return self.__setitem__(square, asarray(value, dtype=float64))             # <<<<<<<<<<<<<<
@@ -5200,22 +5220,22 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
  *                 raise value_error
  */
           __Pyx_XDECREF(__pyx_r);
-          __pyx_t_16 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_setitem); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 76, __pyx_L14_error)
+          __pyx_t_16 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_setitem); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 86, __pyx_L14_error)
           __Pyx_GOTREF(__pyx_t_16);
-          __Pyx_GetModuleGlobalName(__pyx_t_17, __pyx_n_s_asarray); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 76, __pyx_L14_error)
+          __Pyx_GetModuleGlobalName(__pyx_t_17, __pyx_n_s_asarray); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 86, __pyx_L14_error)
           __Pyx_GOTREF(__pyx_t_17);
-          __pyx_t_18 = PyTuple_New(1); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 76, __pyx_L14_error)
+          __pyx_t_18 = PyTuple_New(1); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 86, __pyx_L14_error)
           __Pyx_GOTREF(__pyx_t_18);
           __Pyx_INCREF(__pyx_v_value);
           __Pyx_GIVEREF(__pyx_v_value);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_18, 0, __pyx_v_value)) __PYX_ERR(0, 76, __pyx_L14_error);
-          __pyx_t_19 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 76, __pyx_L14_error)
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_18, 0, __pyx_v_value)) __PYX_ERR(0, 86, __pyx_L14_error);
+          __pyx_t_19 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 86, __pyx_L14_error)
           __Pyx_GOTREF(__pyx_t_19);
-          __Pyx_GetModuleGlobalName(__pyx_t_20, __pyx_n_s_float64); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 76, __pyx_L14_error)
+          __Pyx_GetModuleGlobalName(__pyx_t_20, __pyx_n_s_float64); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 86, __pyx_L14_error)
           __Pyx_GOTREF(__pyx_t_20);
-          if (PyDict_SetItem(__pyx_t_19, __pyx_n_s_dtype, __pyx_t_20) < 0) __PYX_ERR(0, 76, __pyx_L14_error)
+          if (PyDict_SetItem(__pyx_t_19, __pyx_n_s_dtype, __pyx_t_20) < 0) __PYX_ERR(0, 86, __pyx_L14_error)
           __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-          __pyx_t_20 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_t_18, __pyx_t_19); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 76, __pyx_L14_error)
+          __pyx_t_20 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_t_18, __pyx_t_19); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 86, __pyx_L14_error)
           __Pyx_GOTREF(__pyx_t_20);
           __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
           __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
@@ -5239,7 +5259,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
             __pyx_t_15 = __Pyx_PyObject_FastCall(__pyx_t_16, __pyx_callargs+1-__pyx_t_21, 2+__pyx_t_21);
             __Pyx_XDECREF(__pyx_t_19); __pyx_t_19 = 0;
             __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-            if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 76, __pyx_L14_error)
+            if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 86, __pyx_L14_error)
             __Pyx_GOTREF(__pyx_t_15);
             __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
           }
@@ -5250,7 +5270,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
           __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
           goto __pyx_L18_try_return;
 
-          /* "heatmaps/__init__.py":75
+          /* "heatmaps/__init__.py":85
  *             raise ValueError(f"Value must have shape {expected_shape}, got {value.shape}.")
  *         except AttributeError:
  *             try:             # <<<<<<<<<<<<<<
@@ -5266,7 +5286,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
         __Pyx_XDECREF(__pyx_t_19); __pyx_t_19 = 0;
         __Pyx_XDECREF(__pyx_t_20); __pyx_t_20 = 0;
 
-        /* "heatmaps/__init__.py":77
+        /* "heatmaps/__init__.py":87
  *             try:
  *                 return self.__setitem__(square, asarray(value, dtype=float64))
  *             except ValueError as value_error:             # <<<<<<<<<<<<<<
@@ -5276,7 +5296,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
         __pyx_t_11 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_ValueError);
         if (__pyx_t_11) {
           __Pyx_AddTraceback("heatmaps.GradientHeatmapT.__setitem__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-          if (__Pyx_GetException(&__pyx_t_15, &__pyx_t_16, &__pyx_t_20) < 0) __PYX_ERR(0, 77, __pyx_L16_except_error)
+          if (__Pyx_GetException(&__pyx_t_15, &__pyx_t_16, &__pyx_t_20) < 0) __PYX_ERR(0, 87, __pyx_L16_except_error)
           __Pyx_XGOTREF(__pyx_t_15);
           __Pyx_XGOTREF(__pyx_t_16);
           __Pyx_XGOTREF(__pyx_t_20);
@@ -5284,7 +5304,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
           __pyx_v_value_error = __pyx_t_16;
           /*try:*/ {
 
-            /* "heatmaps/__init__.py":78
+            /* "heatmaps/__init__.py":88
  *                 return self.__setitem__(square, asarray(value, dtype=float64))
  *             except ValueError as value_error:
  *                 raise value_error             # <<<<<<<<<<<<<<
@@ -5292,10 +5312,10 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
  *             raise IndexError(f"square must be in range({self.shape[0]}) got {square}") from i
  */
             __Pyx_Raise(__pyx_v_value_error, 0, 0, 0);
-            __PYX_ERR(0, 78, __pyx_L27_error)
+            __PYX_ERR(0, 88, __pyx_L27_error)
           }
 
-          /* "heatmaps/__init__.py":77
+          /* "heatmaps/__init__.py":87
  *             try:
  *                 return self.__setitem__(square, asarray(value, dtype=float64))
  *             except ValueError as value_error:             # <<<<<<<<<<<<<<
@@ -5341,7 +5361,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
         }
         goto __pyx_L16_except_error;
 
-        /* "heatmaps/__init__.py":75
+        /* "heatmaps/__init__.py":85
  *             raise ValueError(f"Value must have shape {expected_shape}, got {value.shape}.")
  *         except AttributeError:
  *             try:             # <<<<<<<<<<<<<<
@@ -5363,7 +5383,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
       }
     }
 
-    /* "heatmaps/__init__.py":79
+    /* "heatmaps/__init__.py":89
  *             except ValueError as value_error:
  *                 raise value_error
  *         except IndexError as i:             # <<<<<<<<<<<<<<
@@ -5373,7 +5393,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
     __pyx_t_22 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_IndexError);
     if (__pyx_t_22) {
       __Pyx_AddTraceback("heatmaps.GradientHeatmapT.__setitem__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_2, &__pyx_t_8) < 0) __PYX_ERR(0, 79, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_2, &__pyx_t_8) < 0) __PYX_ERR(0, 89, __pyx_L5_except_error)
       __Pyx_XGOTREF(__pyx_t_1);
       __Pyx_XGOTREF(__pyx_t_2);
       __Pyx_XGOTREF(__pyx_t_8);
@@ -5381,14 +5401,14 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
       __pyx_v_i = __pyx_t_2;
       /*try:*/ {
 
-        /* "heatmaps/__init__.py":80
+        /* "heatmaps/__init__.py":90
  *                 raise value_error
  *         except IndexError as i:
  *             raise IndexError(f"square must be in range({self.shape[0]}) got {square}") from i             # <<<<<<<<<<<<<<
  * 
  *     def __add__(self, other: Union["GradientHeatmapT", NDArray[float64], ArrayLike]) -> "GradientHeatmap":
  */
-        __pyx_t_20 = PyTuple_New(4); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 80, __pyx_L38_error)
+        __pyx_t_20 = PyTuple_New(4); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 90, __pyx_L38_error)
         __Pyx_GOTREF(__pyx_t_20);
         __pyx_t_9 = 0;
         __pyx_t_10 = 127;
@@ -5396,12 +5416,12 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
         __pyx_t_9 += 24;
         __Pyx_GIVEREF(__pyx_kp_u_square_must_be_in_range);
         PyTuple_SET_ITEM(__pyx_t_20, 0, __pyx_kp_u_square_must_be_in_range);
-        __pyx_t_16 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 80, __pyx_L38_error)
+        __pyx_t_16 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 90, __pyx_L38_error)
         __Pyx_GOTREF(__pyx_t_16);
-        __pyx_t_15 = __Pyx_GetItemInt(__pyx_t_16, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 80, __pyx_L38_error)
+        __pyx_t_15 = __Pyx_GetItemInt(__pyx_t_16, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 90, __pyx_L38_error)
         __Pyx_GOTREF(__pyx_t_15);
         __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
-        __pyx_t_16 = __Pyx_PyObject_FormatSimple(__pyx_t_15, __pyx_empty_unicode); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 80, __pyx_L38_error)
+        __pyx_t_16 = __Pyx_PyObject_FormatSimple(__pyx_t_15, __pyx_empty_unicode); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 90, __pyx_L38_error)
         __Pyx_GOTREF(__pyx_t_16);
         __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
         __pyx_t_10 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_16) > __pyx_t_10) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_16) : __pyx_t_10;
@@ -5413,25 +5433,25 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
         __pyx_t_9 += 6;
         __Pyx_GIVEREF(__pyx_kp_u_got);
         PyTuple_SET_ITEM(__pyx_t_20, 2, __pyx_kp_u_got);
-        __pyx_t_16 = __Pyx_PyObject_FormatSimple(__pyx_v_square, __pyx_empty_unicode); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 80, __pyx_L38_error)
+        __pyx_t_16 = __Pyx_PyObject_FormatSimple(__pyx_v_square, __pyx_empty_unicode); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 90, __pyx_L38_error)
         __Pyx_GOTREF(__pyx_t_16);
         __pyx_t_10 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_16) > __pyx_t_10) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_16) : __pyx_t_10;
         __pyx_t_9 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_16);
         __Pyx_GIVEREF(__pyx_t_16);
         PyTuple_SET_ITEM(__pyx_t_20, 3, __pyx_t_16);
         __pyx_t_16 = 0;
-        __pyx_t_16 = __Pyx_PyUnicode_Join(__pyx_t_20, 4, __pyx_t_9, __pyx_t_10); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 80, __pyx_L38_error)
+        __pyx_t_16 = __Pyx_PyUnicode_Join(__pyx_t_20, 4, __pyx_t_9, __pyx_t_10); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 90, __pyx_L38_error)
         __Pyx_GOTREF(__pyx_t_16);
         __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-        __pyx_t_20 = __Pyx_PyObject_CallOneArg(__pyx_builtin_IndexError, __pyx_t_16); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 80, __pyx_L38_error)
+        __pyx_t_20 = __Pyx_PyObject_CallOneArg(__pyx_builtin_IndexError, __pyx_t_16); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 90, __pyx_L38_error)
         __Pyx_GOTREF(__pyx_t_20);
         __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
         __Pyx_Raise(__pyx_t_20, 0, 0, __pyx_v_i);
         __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-        __PYX_ERR(0, 80, __pyx_L38_error)
+        __PYX_ERR(0, 90, __pyx_L38_error)
       }
 
-      /* "heatmaps/__init__.py":79
+      /* "heatmaps/__init__.py":89
  *             except ValueError as value_error:
  *                 raise value_error
  *         except IndexError as i:             # <<<<<<<<<<<<<<
@@ -5480,7 +5500,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
     }
     goto __pyx_L5_except_error;
 
-    /* "heatmaps/__init__.py":69
+    /* "heatmaps/__init__.py":79
  *         """
  *         expected_shape = (self.shape[1],)
  *         try:             # <<<<<<<<<<<<<<
@@ -5507,7 +5527,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
     goto __pyx_L0;
   }
 
-  /* "heatmaps/__init__.py":51
+  /* "heatmaps/__init__.py":61
  *             raise IndexError(f"square must be in range({self.shape[0]}) got {square}") from index_error
  * 
  *     def __setitem__(self, square: int, value: Union[NDArray[float64], ArrayLike]) -> None:             # <<<<<<<<<<<<<<
@@ -5537,7 +5557,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_4__setitem__(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "heatmaps/__init__.py":82
+/* "heatmaps/__init__.py":92
  *             raise IndexError(f"square must be in range({self.shape[0]}) got {square}") from i
  * 
  *     def __add__(self, other: Union["GradientHeatmapT", NDArray[float64], ArrayLike]) -> "GradientHeatmap":             # <<<<<<<<<<<<<<
@@ -5602,7 +5622,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 82, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 92, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -5610,14 +5630,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 82, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 92, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("__add__", 1, 2, 2, 1); __PYX_ERR(0, 82, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__add__", 1, 2, 2, 1); __PYX_ERR(0, 92, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__add__") < 0)) __PYX_ERR(0, 82, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__add__") < 0)) __PYX_ERR(0, 92, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -5630,7 +5650,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__add__", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 82, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__add__", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 92, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -5697,7 +5717,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__add__", 1);
 
-  /* "heatmaps/__init__.py":104
+  /* "heatmaps/__init__.py":114
  *             A new `GradientHeatmap` instance with element-wise summed data.
  *         """
  *         try:             # <<<<<<<<<<<<<<
@@ -5713,25 +5733,25 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* "heatmaps/__init__.py":105
+      /* "heatmaps/__init__.py":115
  *         """
  *         try:
  *             if other.shape == self.shape:             # <<<<<<<<<<<<<<
  *                 return GradientHeatmap(self.data + other.data)
  *             raise ValueError(f"Other {type(other)} must have shape {self.shape}, got {other.shape}.")
  */
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 105, __pyx_L3_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 115, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L3_error)
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 115, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_6 = PyObject_RichCompare(__pyx_t_4, __pyx_t_5, Py_EQ); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 105, __pyx_L3_error)
+      __pyx_t_6 = PyObject_RichCompare(__pyx_t_4, __pyx_t_5, Py_EQ); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 115, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 105, __pyx_L3_error)
+      __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 115, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       if (__pyx_t_7) {
 
-        /* "heatmaps/__init__.py":106
+        /* "heatmaps/__init__.py":116
  *         try:
  *             if other.shape == self.shape:
  *                 return GradientHeatmap(self.data + other.data)             # <<<<<<<<<<<<<<
@@ -5739,13 +5759,13 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
  *         except AttributeError:
  */
         __Pyx_XDECREF(__pyx_r);
-        __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_GradientHeatmap); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 106, __pyx_L3_error)
+        __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_GradientHeatmap); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 116, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_data_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 106, __pyx_L3_error)
+        __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_data_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 116, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_data_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 106, __pyx_L3_error)
+        __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_data_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 116, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_8);
-        __pyx_t_9 = PyNumber_Add(__pyx_t_4, __pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 106, __pyx_L3_error)
+        __pyx_t_9 = PyNumber_Add(__pyx_t_4, __pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 116, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -5768,7 +5788,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
           __pyx_t_6 = __Pyx_PyObject_FastCall(__pyx_t_5, __pyx_callargs+1-__pyx_t_10, 1+__pyx_t_10);
           __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 106, __pyx_L3_error)
+          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 116, __pyx_L3_error)
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         }
@@ -5776,7 +5796,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
         __pyx_t_6 = 0;
         goto __pyx_L7_try_return;
 
-        /* "heatmaps/__init__.py":105
+        /* "heatmaps/__init__.py":115
  *         """
  *         try:
  *             if other.shape == self.shape:             # <<<<<<<<<<<<<<
@@ -5785,14 +5805,14 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
  */
       }
 
-      /* "heatmaps/__init__.py":107
+      /* "heatmaps/__init__.py":117
  *             if other.shape == self.shape:
  *                 return GradientHeatmap(self.data + other.data)
  *             raise ValueError(f"Other {type(other)} must have shape {self.shape}, got {other.shape}.")             # <<<<<<<<<<<<<<
  *         except AttributeError:
  *             try:
  */
-      __pyx_t_6 = PyTuple_New(7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 107, __pyx_L3_error)
+      __pyx_t_6 = PyTuple_New(7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 117, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_6);
       __pyx_t_11 = 0;
       __pyx_t_12 = 127;
@@ -5800,7 +5820,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
       __pyx_t_11 += 6;
       __Pyx_GIVEREF(__pyx_kp_u_Other);
       PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_kp_u_Other);
-      __pyx_t_5 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_other)), __pyx_empty_unicode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 107, __pyx_L3_error)
+      __pyx_t_5 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_other)), __pyx_empty_unicode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 117, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_5);
       __pyx_t_12 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) > __pyx_t_12) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) : __pyx_t_12;
       __pyx_t_11 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_5);
@@ -5811,9 +5831,9 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
       __pyx_t_11 += 17;
       __Pyx_GIVEREF(__pyx_kp_u_must_have_shape);
       PyTuple_SET_ITEM(__pyx_t_6, 2, __pyx_kp_u_must_have_shape);
-      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 107, __pyx_L3_error)
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 117, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_9 = __Pyx_PyObject_FormatSimple(__pyx_t_5, __pyx_empty_unicode); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 107, __pyx_L3_error)
+      __pyx_t_9 = __Pyx_PyObject_FormatSimple(__pyx_t_5, __pyx_empty_unicode); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 117, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_12 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_9) > __pyx_t_12) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_9) : __pyx_t_12;
@@ -5825,9 +5845,9 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
       __pyx_t_11 += 6;
       __Pyx_GIVEREF(__pyx_kp_u_got_2);
       PyTuple_SET_ITEM(__pyx_t_6, 4, __pyx_kp_u_got_2);
-      __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 107, __pyx_L3_error)
+      __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 117, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_5 = __Pyx_PyObject_FormatSimple(__pyx_t_9, __pyx_empty_unicode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 107, __pyx_L3_error)
+      __pyx_t_5 = __Pyx_PyObject_FormatSimple(__pyx_t_9, __pyx_empty_unicode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 117, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_t_12 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) > __pyx_t_12) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) : __pyx_t_12;
@@ -5839,17 +5859,17 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
       __pyx_t_11 += 1;
       __Pyx_GIVEREF(__pyx_kp_u_);
       PyTuple_SET_ITEM(__pyx_t_6, 6, __pyx_kp_u_);
-      __pyx_t_5 = __Pyx_PyUnicode_Join(__pyx_t_6, 7, __pyx_t_11, __pyx_t_12); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 107, __pyx_L3_error)
+      __pyx_t_5 = __Pyx_PyUnicode_Join(__pyx_t_6, 7, __pyx_t_11, __pyx_t_12); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 117, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_builtin_ValueError, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 107, __pyx_L3_error)
+      __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_builtin_ValueError, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 117, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_Raise(__pyx_t_6, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __PYX_ERR(0, 107, __pyx_L3_error)
+      __PYX_ERR(0, 117, __pyx_L3_error)
 
-      /* "heatmaps/__init__.py":104
+      /* "heatmaps/__init__.py":114
  *             A new `GradientHeatmap` instance with element-wise summed data.
  *         """
  *         try:             # <<<<<<<<<<<<<<
@@ -5864,7 +5884,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-    /* "heatmaps/__init__.py":108
+    /* "heatmaps/__init__.py":118
  *                 return GradientHeatmap(self.data + other.data)
  *             raise ValueError(f"Other {type(other)} must have shape {self.shape}, got {other.shape}.")
  *         except AttributeError:             # <<<<<<<<<<<<<<
@@ -5874,12 +5894,12 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
     __pyx_t_13 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_AttributeError);
     if (__pyx_t_13) {
       __Pyx_AddTraceback("heatmaps.GradientHeatmapT.__add__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_5, &__pyx_t_9) < 0) __PYX_ERR(0, 108, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_5, &__pyx_t_9) < 0) __PYX_ERR(0, 118, __pyx_L5_except_error)
       __Pyx_XGOTREF(__pyx_t_6);
       __Pyx_XGOTREF(__pyx_t_5);
       __Pyx_XGOTREF(__pyx_t_9);
 
-      /* "heatmaps/__init__.py":109
+      /* "heatmaps/__init__.py":119
  *             raise ValueError(f"Other {type(other)} must have shape {self.shape}, got {other.shape}.")
  *         except AttributeError:
  *             try:             # <<<<<<<<<<<<<<
@@ -5895,7 +5915,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
         __Pyx_XGOTREF(__pyx_t_16);
         /*try:*/ {
 
-          /* "heatmaps/__init__.py":110
+          /* "heatmaps/__init__.py":120
  *         except AttributeError:
  *             try:
  *                 return self.__add__(GradientHeatmap(asarray(other, dtype=float64)))             # <<<<<<<<<<<<<<
@@ -5903,24 +5923,24 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
  *                 text: str = "Other must be a GradientHeatmapT "
  */
           __Pyx_XDECREF(__pyx_r);
-          __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 110, __pyx_L12_error)
+          __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 120, __pyx_L12_error)
           __Pyx_GOTREF(__pyx_t_4);
-          __Pyx_GetModuleGlobalName(__pyx_t_18, __pyx_n_s_GradientHeatmap); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 110, __pyx_L12_error)
+          __Pyx_GetModuleGlobalName(__pyx_t_18, __pyx_n_s_GradientHeatmap); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 120, __pyx_L12_error)
           __Pyx_GOTREF(__pyx_t_18);
-          __Pyx_GetModuleGlobalName(__pyx_t_19, __pyx_n_s_asarray); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 110, __pyx_L12_error)
+          __Pyx_GetModuleGlobalName(__pyx_t_19, __pyx_n_s_asarray); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 120, __pyx_L12_error)
           __Pyx_GOTREF(__pyx_t_19);
-          __pyx_t_20 = PyTuple_New(1); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 110, __pyx_L12_error)
+          __pyx_t_20 = PyTuple_New(1); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 120, __pyx_L12_error)
           __Pyx_GOTREF(__pyx_t_20);
           __Pyx_INCREF(__pyx_v_other);
           __Pyx_GIVEREF(__pyx_v_other);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_20, 0, __pyx_v_other)) __PYX_ERR(0, 110, __pyx_L12_error);
-          __pyx_t_21 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 110, __pyx_L12_error)
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_20, 0, __pyx_v_other)) __PYX_ERR(0, 120, __pyx_L12_error);
+          __pyx_t_21 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 120, __pyx_L12_error)
           __Pyx_GOTREF(__pyx_t_21);
-          __Pyx_GetModuleGlobalName(__pyx_t_22, __pyx_n_s_float64); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 110, __pyx_L12_error)
+          __Pyx_GetModuleGlobalName(__pyx_t_22, __pyx_n_s_float64); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 120, __pyx_L12_error)
           __Pyx_GOTREF(__pyx_t_22);
-          if (PyDict_SetItem(__pyx_t_21, __pyx_n_s_dtype, __pyx_t_22) < 0) __PYX_ERR(0, 110, __pyx_L12_error)
+          if (PyDict_SetItem(__pyx_t_21, __pyx_n_s_dtype, __pyx_t_22) < 0) __PYX_ERR(0, 120, __pyx_L12_error)
           __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
-          __pyx_t_22 = __Pyx_PyObject_Call(__pyx_t_19, __pyx_t_20, __pyx_t_21); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 110, __pyx_L12_error)
+          __pyx_t_22 = __Pyx_PyObject_Call(__pyx_t_19, __pyx_t_20, __pyx_t_21); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 120, __pyx_L12_error)
           __Pyx_GOTREF(__pyx_t_22);
           __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
           __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
@@ -5944,7 +5964,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
             __pyx_t_17 = __Pyx_PyObject_FastCall(__pyx_t_18, __pyx_callargs+1-__pyx_t_10, 1+__pyx_t_10);
             __Pyx_XDECREF(__pyx_t_21); __pyx_t_21 = 0;
             __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
-            if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 110, __pyx_L12_error)
+            if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 120, __pyx_L12_error)
             __Pyx_GOTREF(__pyx_t_17);
             __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
           }
@@ -5967,7 +5987,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
             __pyx_t_8 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_10, 1+__pyx_t_10);
             __Pyx_XDECREF(__pyx_t_18); __pyx_t_18 = 0;
             __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-            if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 110, __pyx_L12_error)
+            if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 120, __pyx_L12_error)
             __Pyx_GOTREF(__pyx_t_8);
             __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
           }
@@ -5978,7 +5998,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
           goto __pyx_L16_try_return;
 
-          /* "heatmaps/__init__.py":109
+          /* "heatmaps/__init__.py":119
  *             raise ValueError(f"Other {type(other)} must have shape {self.shape}, got {other.shape}.")
  *         except AttributeError:
  *             try:             # <<<<<<<<<<<<<<
@@ -5996,7 +6016,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
         __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-        /* "heatmaps/__init__.py":111
+        /* "heatmaps/__init__.py":121
  *             try:
  *                 return self.__add__(GradientHeatmap(asarray(other, dtype=float64)))
  *             except Exception as exception:             # <<<<<<<<<<<<<<
@@ -6006,7 +6026,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
         __pyx_t_13 = __Pyx_PyErr_ExceptionMatches(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
         if (__pyx_t_13) {
           __Pyx_AddTraceback("heatmaps.GradientHeatmapT.__add__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-          if (__Pyx_GetException(&__pyx_t_8, &__pyx_t_4, &__pyx_t_17) < 0) __PYX_ERR(0, 111, __pyx_L14_except_error)
+          if (__Pyx_GetException(&__pyx_t_8, &__pyx_t_4, &__pyx_t_17) < 0) __PYX_ERR(0, 121, __pyx_L14_except_error)
           __Pyx_XGOTREF(__pyx_t_8);
           __Pyx_XGOTREF(__pyx_t_4);
           __Pyx_XGOTREF(__pyx_t_17);
@@ -6014,7 +6034,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
           __pyx_v_exception = __pyx_t_4;
           /*try:*/ {
 
-            /* "heatmaps/__init__.py":112
+            /* "heatmaps/__init__.py":122
  *                 return self.__add__(GradientHeatmap(asarray(other, dtype=float64)))
  *             except Exception as exception:
  *                 text: str = "Other must be a GradientHeatmapT "             # <<<<<<<<<<<<<<
@@ -6024,14 +6044,14 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
             __Pyx_INCREF(__pyx_kp_u_Other_must_be_a_GradientHeatmapT);
             __pyx_v_text = __pyx_kp_u_Other_must_be_a_GradientHeatmapT;
 
-            /* "heatmaps/__init__.py":113
+            /* "heatmaps/__init__.py":123
  *             except Exception as exception:
  *                 text: str = "Other must be a GradientHeatmapT "
  *                 text += f"or a shape {self.shape} NDArray[np.float64] like, got {type(other)}"             # <<<<<<<<<<<<<<
  *                 raise TypeError(text) from exception
  * 
  */
-            __pyx_t_18 = PyTuple_New(4); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 113, __pyx_L25_error)
+            __pyx_t_18 = PyTuple_New(4); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 123, __pyx_L25_error)
             __Pyx_GOTREF(__pyx_t_18);
             __pyx_t_11 = 0;
             __pyx_t_12 = 127;
@@ -6039,9 +6059,9 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
             __pyx_t_11 += 11;
             __Pyx_GIVEREF(__pyx_kp_u_or_a_shape);
             PyTuple_SET_ITEM(__pyx_t_18, 0, __pyx_kp_u_or_a_shape);
-            __pyx_t_22 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 113, __pyx_L25_error)
+            __pyx_t_22 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 123, __pyx_L25_error)
             __Pyx_GOTREF(__pyx_t_22);
-            __pyx_t_21 = __Pyx_PyObject_FormatSimple(__pyx_t_22, __pyx_empty_unicode); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 113, __pyx_L25_error)
+            __pyx_t_21 = __Pyx_PyObject_FormatSimple(__pyx_t_22, __pyx_empty_unicode); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 123, __pyx_L25_error)
             __Pyx_GOTREF(__pyx_t_21);
             __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
             __pyx_t_12 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_21) > __pyx_t_12) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_21) : __pyx_t_12;
@@ -6053,37 +6073,37 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
             __pyx_t_11 += 31;
             __Pyx_GIVEREF(__pyx_kp_u_NDArray_np_float64_like_got);
             PyTuple_SET_ITEM(__pyx_t_18, 2, __pyx_kp_u_NDArray_np_float64_like_got);
-            __pyx_t_21 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_other)), __pyx_empty_unicode); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 113, __pyx_L25_error)
+            __pyx_t_21 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_other)), __pyx_empty_unicode); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 123, __pyx_L25_error)
             __Pyx_GOTREF(__pyx_t_21);
             __pyx_t_12 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_21) > __pyx_t_12) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_21) : __pyx_t_12;
             __pyx_t_11 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_21);
             __Pyx_GIVEREF(__pyx_t_21);
             PyTuple_SET_ITEM(__pyx_t_18, 3, __pyx_t_21);
             __pyx_t_21 = 0;
-            __pyx_t_21 = __Pyx_PyUnicode_Join(__pyx_t_18, 4, __pyx_t_11, __pyx_t_12); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 113, __pyx_L25_error)
+            __pyx_t_21 = __Pyx_PyUnicode_Join(__pyx_t_18, 4, __pyx_t_11, __pyx_t_12); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 123, __pyx_L25_error)
             __Pyx_GOTREF(__pyx_t_21);
             __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-            __pyx_t_18 = __Pyx_PyUnicode_ConcatInPlace(__pyx_v_text, __pyx_t_21); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 113, __pyx_L25_error)
+            __pyx_t_18 = __Pyx_PyUnicode_ConcatInPlace(__pyx_v_text, __pyx_t_21); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 123, __pyx_L25_error)
             __Pyx_GOTREF(__pyx_t_18);
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
             __Pyx_DECREF_SET(__pyx_v_text, ((PyObject*)__pyx_t_18));
             __pyx_t_18 = 0;
 
-            /* "heatmaps/__init__.py":114
+            /* "heatmaps/__init__.py":124
  *                 text: str = "Other must be a GradientHeatmapT "
  *                 text += f"or a shape {self.shape} NDArray[np.float64] like, got {type(other)}"
  *                 raise TypeError(text) from exception             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-            __pyx_t_18 = __Pyx_PyObject_CallOneArg(__pyx_builtin_TypeError, __pyx_v_text); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 114, __pyx_L25_error)
+            __pyx_t_18 = __Pyx_PyObject_CallOneArg(__pyx_builtin_TypeError, __pyx_v_text); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 124, __pyx_L25_error)
             __Pyx_GOTREF(__pyx_t_18);
             __Pyx_Raise(__pyx_t_18, 0, 0, __pyx_v_exception);
             __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-            __PYX_ERR(0, 114, __pyx_L25_error)
+            __PYX_ERR(0, 124, __pyx_L25_error)
           }
 
-          /* "heatmaps/__init__.py":111
+          /* "heatmaps/__init__.py":121
  *             try:
  *                 return self.__add__(GradientHeatmap(asarray(other, dtype=float64)))
  *             except Exception as exception:             # <<<<<<<<<<<<<<
@@ -6131,7 +6151,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
         }
         goto __pyx_L14_except_error;
 
-        /* "heatmaps/__init__.py":109
+        /* "heatmaps/__init__.py":119
  *             raise ValueError(f"Other {type(other)} must have shape {self.shape}, got {other.shape}.")
  *         except AttributeError:
  *             try:             # <<<<<<<<<<<<<<
@@ -6154,7 +6174,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
     }
     goto __pyx_L5_except_error;
 
-    /* "heatmaps/__init__.py":104
+    /* "heatmaps/__init__.py":114
  *             A new `GradientHeatmap` instance with element-wise summed data.
  *         """
  *         try:             # <<<<<<<<<<<<<<
@@ -6181,7 +6201,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
     goto __pyx_L0;
   }
 
-  /* "heatmaps/__init__.py":82
+  /* "heatmaps/__init__.py":92
  *             raise IndexError(f"square must be in range({self.shape[0]}) got {square}") from i
  * 
  *     def __add__(self, other: Union["GradientHeatmapT", NDArray[float64], ArrayLike]) -> "GradientHeatmap":             # <<<<<<<<<<<<<<
@@ -6212,7 +6232,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_6__add__(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "heatmaps/__init__.py":116
+/* "heatmaps/__init__.py":126
  *                 raise TypeError(text) from exception
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -6274,12 +6294,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 116, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 126, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "shape") < 0)) __PYX_ERR(0, 116, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "shape") < 0)) __PYX_ERR(0, 126, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -6290,7 +6310,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("shape", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 116, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("shape", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 126, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -6326,7 +6346,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_8shape(CYTHON_UNUSED PyOb
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("shape", 1);
 
-  /* "heatmaps/__init__.py":119
+  /* "heatmaps/__init__.py":129
  *     def shape(self) -> Tuple[int, int]:
  *         """Return the shape of the heatmap."""
  *         return self._shape             # <<<<<<<<<<<<<<
@@ -6334,14 +6354,14 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_8shape(CYTHON_UNUSED PyOb
  *     @shape.setter
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shape); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 119, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shape); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 129, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(PyTuple_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("tuple", __pyx_t_1))) __PYX_ERR(0, 119, __pyx_L1_error)
+  if (!(likely(PyTuple_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("tuple", __pyx_t_1))) __PYX_ERR(0, 129, __pyx_L1_error)
   __pyx_r = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "heatmaps/__init__.py":116
+  /* "heatmaps/__init__.py":126
  *                 raise TypeError(text) from exception
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -6360,7 +6380,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_8shape(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "heatmaps/__init__.py":121
+/* "heatmaps/__init__.py":131
  *         return self._shape
  * 
  *     @shape.setter             # <<<<<<<<<<<<<<
@@ -6425,7 +6445,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 121, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 131, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -6433,14 +6453,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 121, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 131, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("shape", 1, 2, 2, 1); __PYX_ERR(0, 121, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("shape", 1, 2, 2, 1); __PYX_ERR(0, 131, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "shape") < 0)) __PYX_ERR(0, 121, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "shape") < 0)) __PYX_ERR(0, 131, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -6453,7 +6473,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("shape", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 121, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("shape", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 131, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -6467,7 +6487,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), (&PyTuple_Type), 0, "value", 1))) __PYX_ERR(0, 122, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), (&PyTuple_Type), 0, "value", 1))) __PYX_ERR(0, 132, __pyx_L1_error)
   __pyx_r = __pyx_pf_8heatmaps_16GradientHeatmapT_10shape(__pyx_self, __pyx_v_self, __pyx_v_value);
 
   /* function exit code */
@@ -6494,20 +6514,20 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_10shape(CYTHON_UNUSED PyO
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("shape", 1);
 
-  /* "heatmaps/__init__.py":124
+  /* "heatmaps/__init__.py":134
  *     def shape(self, value: Tuple[int, int]) -> None:
  *         """Prevent modification of the shape."""
  *         raise AttributeError("Shape is immutable and cannot be changed.")             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_AttributeError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_AttributeError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 134, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(0, 124, __pyx_L1_error)
+  __PYX_ERR(0, 134, __pyx_L1_error)
 
-  /* "heatmaps/__init__.py":121
+  /* "heatmaps/__init__.py":131
  *         return self._shape
  * 
  *     @shape.setter             # <<<<<<<<<<<<<<
@@ -6525,7 +6545,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_10shape(CYTHON_UNUSED PyO
   return __pyx_r;
 }
 
-/* "heatmaps/__init__.py":126
+/* "heatmaps/__init__.py":136
  *         raise AttributeError("Shape is immutable and cannot be changed.")
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -6587,12 +6607,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 126, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 136, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "data") < 0)) __PYX_ERR(0, 126, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "data") < 0)) __PYX_ERR(0, 136, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -6603,7 +6623,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("data", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 126, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("data", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 136, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -6639,7 +6659,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_12data(CYTHON_UNUSED PyOb
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("data", 1);
 
-  /* "heatmaps/__init__.py":129
+  /* "heatmaps/__init__.py":139
  *     def data(self) -> NDArray[float64]:
  *         """Return the heatmap data."""
  *         return self._data             # <<<<<<<<<<<<<<
@@ -6647,13 +6667,13 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_12data(CYTHON_UNUSED PyOb
  *     @data.setter
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_data); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 129, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_data); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 139, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "heatmaps/__init__.py":126
+  /* "heatmaps/__init__.py":136
  *         raise AttributeError("Shape is immutable and cannot be changed.")
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -6672,7 +6692,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_12data(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "heatmaps/__init__.py":131
+/* "heatmaps/__init__.py":141
  *         return self._data
  * 
  *     @data.setter             # <<<<<<<<<<<<<<
@@ -6737,7 +6757,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 131, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 141, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -6745,14 +6765,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 131, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 141, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("data", 1, 2, 2, 1); __PYX_ERR(0, 131, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("data", 1, 2, 2, 1); __PYX_ERR(0, 141, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "data") < 0)) __PYX_ERR(0, 131, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "data") < 0)) __PYX_ERR(0, 141, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -6765,7 +6785,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("data", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 131, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("data", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 141, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -6829,7 +6849,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_14data(CYTHON_UNUSED PyOb
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("data", 1);
 
-  /* "heatmaps/__init__.py":153
+  /* "heatmaps/__init__.py":163
  *             If the value cannot be converted to a NumPy array of shape (64, 2).
  *         """
  *         try:             # <<<<<<<<<<<<<<
@@ -6845,50 +6865,50 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_14data(CYTHON_UNUSED PyOb
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* "heatmaps/__init__.py":154
+      /* "heatmaps/__init__.py":164
  *         """
  *         try:
  *             if value.shape == self.shape and value.dtype == float64:             # <<<<<<<<<<<<<<
  *                 self._data = value
  *                 return
  */
-      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_value, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 154, __pyx_L3_error)
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_value, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 164, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 154, __pyx_L3_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 164, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = PyObject_RichCompare(__pyx_t_5, __pyx_t_6, Py_EQ); __Pyx_XGOTREF(__pyx_t_7); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 154, __pyx_L3_error)
+      __pyx_t_7 = PyObject_RichCompare(__pyx_t_5, __pyx_t_6, Py_EQ); __Pyx_XGOTREF(__pyx_t_7); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 164, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 154, __pyx_L3_error)
+      __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 164, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       if (__pyx_t_8) {
       } else {
         __pyx_t_4 = __pyx_t_8;
         goto __pyx_L10_bool_binop_done;
       }
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_value, __pyx_n_s_dtype); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 154, __pyx_L3_error)
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_value, __pyx_n_s_dtype); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 164, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_7);
-      __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 154, __pyx_L3_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 164, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_5 = PyObject_RichCompare(__pyx_t_7, __pyx_t_6, Py_EQ); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 154, __pyx_L3_error)
+      __pyx_t_5 = PyObject_RichCompare(__pyx_t_7, __pyx_t_6, Py_EQ); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 164, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 154, __pyx_L3_error)
+      __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 164, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_4 = __pyx_t_8;
       __pyx_L10_bool_binop_done:;
       if (__pyx_t_4) {
 
-        /* "heatmaps/__init__.py":155
+        /* "heatmaps/__init__.py":165
  *         try:
  *             if value.shape == self.shape and value.dtype == float64:
  *                 self._data = value             # <<<<<<<<<<<<<<
  *                 return
  *             raise ValueError(f"Other {type(value)} must have shape {self.shape}, got {value.shape}.")
  */
-        if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_data, __pyx_v_value) < 0) __PYX_ERR(0, 155, __pyx_L3_error)
+        if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_data, __pyx_v_value) < 0) __PYX_ERR(0, 165, __pyx_L3_error)
 
-        /* "heatmaps/__init__.py":156
+        /* "heatmaps/__init__.py":166
  *             if value.shape == self.shape and value.dtype == float64:
  *                 self._data = value
  *                 return             # <<<<<<<<<<<<<<
@@ -6899,7 +6919,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_14data(CYTHON_UNUSED PyOb
         __pyx_r = Py_None; __Pyx_INCREF(Py_None);
         goto __pyx_L7_try_return;
 
-        /* "heatmaps/__init__.py":154
+        /* "heatmaps/__init__.py":164
  *         """
  *         try:
  *             if value.shape == self.shape and value.dtype == float64:             # <<<<<<<<<<<<<<
@@ -6908,14 +6928,14 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_14data(CYTHON_UNUSED PyOb
  */
       }
 
-      /* "heatmaps/__init__.py":157
+      /* "heatmaps/__init__.py":167
  *                 self._data = value
  *                 return
  *             raise ValueError(f"Other {type(value)} must have shape {self.shape}, got {value.shape}.")             # <<<<<<<<<<<<<<
  *         except AttributeError:
  *             try:
  */
-      __pyx_t_5 = PyTuple_New(7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 157, __pyx_L3_error)
+      __pyx_t_5 = PyTuple_New(7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 167, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_5);
       __pyx_t_9 = 0;
       __pyx_t_10 = 127;
@@ -6923,7 +6943,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_14data(CYTHON_UNUSED PyOb
       __pyx_t_9 += 6;
       __Pyx_GIVEREF(__pyx_kp_u_Other);
       PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_kp_u_Other);
-      __pyx_t_6 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_value)), __pyx_empty_unicode); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 157, __pyx_L3_error)
+      __pyx_t_6 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_value)), __pyx_empty_unicode); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 167, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_6);
       __pyx_t_10 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_6) > __pyx_t_10) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_6) : __pyx_t_10;
       __pyx_t_9 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_6);
@@ -6934,9 +6954,9 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_14data(CYTHON_UNUSED PyOb
       __pyx_t_9 += 17;
       __Pyx_GIVEREF(__pyx_kp_u_must_have_shape);
       PyTuple_SET_ITEM(__pyx_t_5, 2, __pyx_kp_u_must_have_shape);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 157, __pyx_L3_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 167, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = __Pyx_PyObject_FormatSimple(__pyx_t_6, __pyx_empty_unicode); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 157, __pyx_L3_error)
+      __pyx_t_7 = __Pyx_PyObject_FormatSimple(__pyx_t_6, __pyx_empty_unicode); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 167, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_10 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_7) > __pyx_t_10) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_7) : __pyx_t_10;
@@ -6948,9 +6968,9 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_14data(CYTHON_UNUSED PyOb
       __pyx_t_9 += 6;
       __Pyx_GIVEREF(__pyx_kp_u_got_2);
       PyTuple_SET_ITEM(__pyx_t_5, 4, __pyx_kp_u_got_2);
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_value, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 157, __pyx_L3_error)
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_value, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 167, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_6 = __Pyx_PyObject_FormatSimple(__pyx_t_7, __pyx_empty_unicode); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 157, __pyx_L3_error)
+      __pyx_t_6 = __Pyx_PyObject_FormatSimple(__pyx_t_7, __pyx_empty_unicode); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 167, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __pyx_t_10 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_6) > __pyx_t_10) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_6) : __pyx_t_10;
@@ -6962,17 +6982,17 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_14data(CYTHON_UNUSED PyOb
       __pyx_t_9 += 1;
       __Pyx_GIVEREF(__pyx_kp_u_);
       PyTuple_SET_ITEM(__pyx_t_5, 6, __pyx_kp_u_);
-      __pyx_t_6 = __Pyx_PyUnicode_Join(__pyx_t_5, 7, __pyx_t_9, __pyx_t_10); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 157, __pyx_L3_error)
+      __pyx_t_6 = __Pyx_PyUnicode_Join(__pyx_t_5, 7, __pyx_t_9, __pyx_t_10); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 167, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_ValueError, __pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 157, __pyx_L3_error)
+      __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_ValueError, __pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 167, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_Raise(__pyx_t_5, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __PYX_ERR(0, 157, __pyx_L3_error)
+      __PYX_ERR(0, 167, __pyx_L3_error)
 
-      /* "heatmaps/__init__.py":153
+      /* "heatmaps/__init__.py":163
  *             If the value cannot be converted to a NumPy array of shape (64, 2).
  *         """
  *         try:             # <<<<<<<<<<<<<<
@@ -6985,7 +7005,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_14data(CYTHON_UNUSED PyOb
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "heatmaps/__init__.py":158
+    /* "heatmaps/__init__.py":168
  *                 return
  *             raise ValueError(f"Other {type(value)} must have shape {self.shape}, got {value.shape}.")
  *         except AttributeError:             # <<<<<<<<<<<<<<
@@ -6995,12 +7015,12 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_14data(CYTHON_UNUSED PyOb
     __pyx_t_11 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_AttributeError);
     if (__pyx_t_11) {
       __Pyx_AddTraceback("heatmaps.GradientHeatmapT.data", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_6, &__pyx_t_7) < 0) __PYX_ERR(0, 158, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_6, &__pyx_t_7) < 0) __PYX_ERR(0, 168, __pyx_L5_except_error)
       __Pyx_XGOTREF(__pyx_t_5);
       __Pyx_XGOTREF(__pyx_t_6);
       __Pyx_XGOTREF(__pyx_t_7);
 
-      /* "heatmaps/__init__.py":159
+      /* "heatmaps/__init__.py":169
  *             raise ValueError(f"Other {type(value)} must have shape {self.shape}, got {value.shape}.")
  *         except AttributeError:
  *             try:             # <<<<<<<<<<<<<<
@@ -7016,35 +7036,35 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_14data(CYTHON_UNUSED PyOb
         __Pyx_XGOTREF(__pyx_t_14);
         /*try:*/ {
 
-          /* "heatmaps/__init__.py":160
+          /* "heatmaps/__init__.py":170
  *         except AttributeError:
  *             try:
  *                 self.data = asarray(value, dtype=float64)             # <<<<<<<<<<<<<<
  *                 return
  *             except Exception as exception:
  */
-          __Pyx_GetModuleGlobalName(__pyx_t_15, __pyx_n_s_asarray); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 160, __pyx_L14_error)
+          __Pyx_GetModuleGlobalName(__pyx_t_15, __pyx_n_s_asarray); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 170, __pyx_L14_error)
           __Pyx_GOTREF(__pyx_t_15);
-          __pyx_t_16 = PyTuple_New(1); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 160, __pyx_L14_error)
+          __pyx_t_16 = PyTuple_New(1); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 170, __pyx_L14_error)
           __Pyx_GOTREF(__pyx_t_16);
           __Pyx_INCREF(__pyx_v_value);
           __Pyx_GIVEREF(__pyx_v_value);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_16, 0, __pyx_v_value)) __PYX_ERR(0, 160, __pyx_L14_error);
-          __pyx_t_17 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 160, __pyx_L14_error)
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_16, 0, __pyx_v_value)) __PYX_ERR(0, 170, __pyx_L14_error);
+          __pyx_t_17 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 170, __pyx_L14_error)
           __Pyx_GOTREF(__pyx_t_17);
-          __Pyx_GetModuleGlobalName(__pyx_t_18, __pyx_n_s_float64); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 160, __pyx_L14_error)
+          __Pyx_GetModuleGlobalName(__pyx_t_18, __pyx_n_s_float64); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 170, __pyx_L14_error)
           __Pyx_GOTREF(__pyx_t_18);
-          if (PyDict_SetItem(__pyx_t_17, __pyx_n_s_dtype, __pyx_t_18) < 0) __PYX_ERR(0, 160, __pyx_L14_error)
+          if (PyDict_SetItem(__pyx_t_17, __pyx_n_s_dtype, __pyx_t_18) < 0) __PYX_ERR(0, 170, __pyx_L14_error)
           __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-          __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_t_16, __pyx_t_17); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 160, __pyx_L14_error)
+          __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_t_16, __pyx_t_17); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 170, __pyx_L14_error)
           __Pyx_GOTREF(__pyx_t_18);
           __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
           __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
           __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-          if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_data_2, __pyx_t_18) < 0) __PYX_ERR(0, 160, __pyx_L14_error)
+          if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_data_2, __pyx_t_18) < 0) __PYX_ERR(0, 170, __pyx_L14_error)
           __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
 
-          /* "heatmaps/__init__.py":161
+          /* "heatmaps/__init__.py":171
  *             try:
  *                 self.data = asarray(value, dtype=float64)
  *                 return             # <<<<<<<<<<<<<<
@@ -7058,7 +7078,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_14data(CYTHON_UNUSED PyOb
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
           goto __pyx_L18_try_return;
 
-          /* "heatmaps/__init__.py":159
+          /* "heatmaps/__init__.py":169
  *             raise ValueError(f"Other {type(value)} must have shape {self.shape}, got {value.shape}.")
  *         except AttributeError:
  *             try:             # <<<<<<<<<<<<<<
@@ -7072,7 +7092,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_14data(CYTHON_UNUSED PyOb
         __Pyx_XDECREF(__pyx_t_17); __pyx_t_17 = 0;
         __Pyx_XDECREF(__pyx_t_18); __pyx_t_18 = 0;
 
-        /* "heatmaps/__init__.py":162
+        /* "heatmaps/__init__.py":172
  *                 self.data = asarray(value, dtype=float64)
  *                 return
  *             except Exception as exception:             # <<<<<<<<<<<<<<
@@ -7082,7 +7102,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_14data(CYTHON_UNUSED PyOb
         __pyx_t_11 = __Pyx_PyErr_ExceptionMatches(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
         if (__pyx_t_11) {
           __Pyx_AddTraceback("heatmaps.GradientHeatmapT.data", __pyx_clineno, __pyx_lineno, __pyx_filename);
-          if (__Pyx_GetException(&__pyx_t_18, &__pyx_t_17, &__pyx_t_16) < 0) __PYX_ERR(0, 162, __pyx_L16_except_error)
+          if (__Pyx_GetException(&__pyx_t_18, &__pyx_t_17, &__pyx_t_16) < 0) __PYX_ERR(0, 172, __pyx_L16_except_error)
           __Pyx_XGOTREF(__pyx_t_18);
           __Pyx_XGOTREF(__pyx_t_17);
           __Pyx_XGOTREF(__pyx_t_16);
@@ -7090,14 +7110,14 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_14data(CYTHON_UNUSED PyOb
           __pyx_v_exception = __pyx_t_17;
           /*try:*/ {
 
-            /* "heatmaps/__init__.py":163
+            /* "heatmaps/__init__.py":173
  *                 return
  *             except Exception as exception:
  *                 raise TypeError(f"Other must be a shape {self.shape} ArrayLike, got {type(value)}") from exception             # <<<<<<<<<<<<<<
  * 
  * 
  */
-            __pyx_t_15 = PyTuple_New(4); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 163, __pyx_L27_error)
+            __pyx_t_15 = PyTuple_New(4); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 173, __pyx_L27_error)
             __Pyx_GOTREF(__pyx_t_15);
             __pyx_t_9 = 0;
             __pyx_t_10 = 127;
@@ -7105,9 +7125,9 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_14data(CYTHON_UNUSED PyOb
             __pyx_t_9 += 22;
             __Pyx_GIVEREF(__pyx_kp_u_Other_must_be_a_shape);
             PyTuple_SET_ITEM(__pyx_t_15, 0, __pyx_kp_u_Other_must_be_a_shape);
-            __pyx_t_19 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 163, __pyx_L27_error)
+            __pyx_t_19 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 173, __pyx_L27_error)
             __Pyx_GOTREF(__pyx_t_19);
-            __pyx_t_20 = __Pyx_PyObject_FormatSimple(__pyx_t_19, __pyx_empty_unicode); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 163, __pyx_L27_error)
+            __pyx_t_20 = __Pyx_PyObject_FormatSimple(__pyx_t_19, __pyx_empty_unicode); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 173, __pyx_L27_error)
             __Pyx_GOTREF(__pyx_t_20);
             __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
             __pyx_t_10 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_20) > __pyx_t_10) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_20) : __pyx_t_10;
@@ -7119,25 +7139,25 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_14data(CYTHON_UNUSED PyOb
             __pyx_t_9 += 16;
             __Pyx_GIVEREF(__pyx_kp_u_ArrayLike_got);
             PyTuple_SET_ITEM(__pyx_t_15, 2, __pyx_kp_u_ArrayLike_got);
-            __pyx_t_20 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_value)), __pyx_empty_unicode); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 163, __pyx_L27_error)
+            __pyx_t_20 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_value)), __pyx_empty_unicode); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 173, __pyx_L27_error)
             __Pyx_GOTREF(__pyx_t_20);
             __pyx_t_10 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_20) > __pyx_t_10) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_20) : __pyx_t_10;
             __pyx_t_9 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_20);
             __Pyx_GIVEREF(__pyx_t_20);
             PyTuple_SET_ITEM(__pyx_t_15, 3, __pyx_t_20);
             __pyx_t_20 = 0;
-            __pyx_t_20 = __Pyx_PyUnicode_Join(__pyx_t_15, 4, __pyx_t_9, __pyx_t_10); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 163, __pyx_L27_error)
+            __pyx_t_20 = __Pyx_PyUnicode_Join(__pyx_t_15, 4, __pyx_t_9, __pyx_t_10); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 173, __pyx_L27_error)
             __Pyx_GOTREF(__pyx_t_20);
             __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-            __pyx_t_15 = __Pyx_PyObject_CallOneArg(__pyx_builtin_TypeError, __pyx_t_20); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 163, __pyx_L27_error)
+            __pyx_t_15 = __Pyx_PyObject_CallOneArg(__pyx_builtin_TypeError, __pyx_t_20); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 173, __pyx_L27_error)
             __Pyx_GOTREF(__pyx_t_15);
             __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
             __Pyx_Raise(__pyx_t_15, 0, 0, __pyx_v_exception);
             __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-            __PYX_ERR(0, 163, __pyx_L27_error)
+            __PYX_ERR(0, 173, __pyx_L27_error)
           }
 
-          /* "heatmaps/__init__.py":162
+          /* "heatmaps/__init__.py":172
  *                 self.data = asarray(value, dtype=float64)
  *                 return
  *             except Exception as exception:             # <<<<<<<<<<<<<<
@@ -7183,7 +7203,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_14data(CYTHON_UNUSED PyOb
         }
         goto __pyx_L16_except_error;
 
-        /* "heatmaps/__init__.py":159
+        /* "heatmaps/__init__.py":169
  *             raise ValueError(f"Other {type(value)} must have shape {self.shape}, got {value.shape}.")
  *         except AttributeError:
  *             try:             # <<<<<<<<<<<<<<
@@ -7206,7 +7226,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_14data(CYTHON_UNUSED PyOb
     }
     goto __pyx_L5_except_error;
 
-    /* "heatmaps/__init__.py":153
+    /* "heatmaps/__init__.py":163
  *             If the value cannot be converted to a NumPy array of shape (64, 2).
  *         """
  *         try:             # <<<<<<<<<<<<<<
@@ -7233,7 +7253,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_14data(CYTHON_UNUSED PyOb
     goto __pyx_L0;
   }
 
-  /* "heatmaps/__init__.py":131
+  /* "heatmaps/__init__.py":141
  *         return self._data
  * 
  *     @data.setter             # <<<<<<<<<<<<<<
@@ -7261,7 +7281,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_14data(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "heatmaps/__init__.py":169
+/* "heatmaps/__init__.py":179
  *     """A subclass of `GradientHeatmapT` that supports additional operations like normalization and color conversion."""
  * 
  *     def __init__(self, data: Union[Optional[NDArray[float64]], GradientHeatmapT, ArrayLike] = None) -> None:             # <<<<<<<<<<<<<<
@@ -7327,19 +7347,19 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 169, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 179, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_data_2);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 169, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 179, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__init__") < 0)) __PYX_ERR(0, 169, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__init__") < 0)) __PYX_ERR(0, 179, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -7355,7 +7375,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 169, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 179, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -7398,7 +7418,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap___init__(CYTHON_UNUSED PyO
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 1);
 
-  /* "heatmaps/__init__.py":180
+  /* "heatmaps/__init__.py":190
  *             - If an unsupported type is provided, a `TypeError` is raised.
  *         """
  *         super().__init__()             # <<<<<<<<<<<<<<
@@ -7406,20 +7426,20 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap___init__(CYTHON_UNUSED PyO
  *             return
  */
   __pyx_t_2 = __Pyx_CyFunction_GetClassObj(__pyx_self);
-  if (!__pyx_t_2) { PyErr_SetString(PyExc_SystemError, "super(): empty __class__ cell"); __PYX_ERR(0, 180, __pyx_L1_error) }
+  if (!__pyx_t_2) { PyErr_SetString(PyExc_SystemError, "super(): empty __class__ cell"); __PYX_ERR(0, 190, __pyx_L1_error) }
   __Pyx_INCREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2)) __PYX_ERR(0, 180, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2)) __PYX_ERR(0, 190, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_self);
   __Pyx_GIVEREF(__pyx_v_self);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_v_self)) __PYX_ERR(0, 180, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_v_self)) __PYX_ERR(0, 190, __pyx_L1_error);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_init); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_init); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -7440,13 +7460,13 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap___init__(CYTHON_UNUSED PyO
     PyObject *__pyx_callargs[2] = {__pyx_t_2, NULL};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 180, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "heatmaps/__init__.py":181
+  /* "heatmaps/__init__.py":191
  *         """
  *         super().__init__()
  *         if data is None:             # <<<<<<<<<<<<<<
@@ -7456,7 +7476,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap___init__(CYTHON_UNUSED PyO
   __pyx_t_5 = (__pyx_v_data == Py_None);
   if (__pyx_t_5) {
 
-    /* "heatmaps/__init__.py":182
+    /* "heatmaps/__init__.py":192
  *         super().__init__()
  *         if data is None:
  *             return             # <<<<<<<<<<<<<<
@@ -7467,7 +7487,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap___init__(CYTHON_UNUSED PyO
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "heatmaps/__init__.py":181
+    /* "heatmaps/__init__.py":191
  *         """
  *         super().__init__()
  *         if data is None:             # <<<<<<<<<<<<<<
@@ -7476,43 +7496,43 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap___init__(CYTHON_UNUSED PyO
  */
   }
 
-  /* "heatmaps/__init__.py":183
+  /* "heatmaps/__init__.py":193
  *         if data is None:
  *             return
  *         if isinstance(data, ndarray) and data.dtype == float64:             # <<<<<<<<<<<<<<
  *             self.data = deepcopy(data)
  *         elif isinstance(data, (
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_ndarray); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 183, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_ndarray); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = PyObject_IsInstance(__pyx_v_data, __pyx_t_1); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 183, __pyx_L1_error)
+  __pyx_t_6 = PyObject_IsInstance(__pyx_v_data, __pyx_t_1); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_6) {
   } else {
     __pyx_t_5 = __pyx_t_6;
     goto __pyx_L5_bool_binop_done;
   }
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_data, __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 183, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_data, __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_float64); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 183, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_float64); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 183, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 183, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_5 = __pyx_t_6;
   __pyx_L5_bool_binop_done:;
   if (__pyx_t_5) {
 
-    /* "heatmaps/__init__.py":184
+    /* "heatmaps/__init__.py":194
  *             return
  *         if isinstance(data, ndarray) and data.dtype == float64:
  *             self.data = deepcopy(data)             # <<<<<<<<<<<<<<
  *         elif isinstance(data, (
  *                 GradientHeatmapT, GradientHeatmap, ChessMoveHeatmapT, ChessMoveHeatmap,
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 184, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 194, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_1 = NULL;
     __pyx_t_4 = 0;
@@ -7532,14 +7552,14 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap___init__(CYTHON_UNUSED PyO
       PyObject *__pyx_callargs[2] = {__pyx_t_1, __pyx_v_data};
       __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 184, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 194, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_data_2, __pyx_t_2) < 0) __PYX_ERR(0, 184, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_data_2, __pyx_t_2) < 0) __PYX_ERR(0, 194, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "heatmaps/__init__.py":183
+    /* "heatmaps/__init__.py":193
  *         if data is None:
  *             return
  *         if isinstance(data, ndarray) and data.dtype == float64:             # <<<<<<<<<<<<<<
@@ -7549,23 +7569,23 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap___init__(CYTHON_UNUSED PyO
     goto __pyx_L4;
   }
 
-  /* "heatmaps/__init__.py":186
+  /* "heatmaps/__init__.py":196
  *             self.data = deepcopy(data)
  *         elif isinstance(data, (
  *                 GradientHeatmapT, GradientHeatmap, ChessMoveHeatmapT, ChessMoveHeatmap,             # <<<<<<<<<<<<<<
  *         )) or str(type(self)).replace('__main__', 'heatmaps') == str(type(data)):
  *             self.data = deepcopy(data.data)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_GradientHeatmapT); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 186, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_GradientHeatmapT); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 196, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_GradientHeatmap); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 186, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_GradientHeatmap); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 196, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_ChessMoveHeatmapT); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 186, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_ChessMoveHeatmapT); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 196, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_ChessMoveHeatmap); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 186, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_ChessMoveHeatmap); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 196, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
 
-  /* "heatmaps/__init__.py":185
+  /* "heatmaps/__init__.py":195
  *         if isinstance(data, ndarray) and data.dtype == float64:
  *             self.data = deepcopy(data)
  *         elif isinstance(data, (             # <<<<<<<<<<<<<<
@@ -7579,7 +7599,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap___init__(CYTHON_UNUSED PyO
     goto __pyx_L9_bool_binop_done;
   }
 
-  /* "heatmaps/__init__.py":186
+  /* "heatmaps/__init__.py":196
  *             self.data = deepcopy(data)
  *         elif isinstance(data, (
  *                 GradientHeatmapT, GradientHeatmap, ChessMoveHeatmapT, ChessMoveHeatmap,             # <<<<<<<<<<<<<<
@@ -7593,7 +7613,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap___init__(CYTHON_UNUSED PyO
     goto __pyx_L9_bool_binop_done;
   }
 
-  /* "heatmaps/__init__.py":185
+  /* "heatmaps/__init__.py":195
  *         if isinstance(data, ndarray) and data.dtype == float64:
  *             self.data = deepcopy(data)
  *         elif isinstance(data, (             # <<<<<<<<<<<<<<
@@ -7607,7 +7627,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap___init__(CYTHON_UNUSED PyO
     goto __pyx_L9_bool_binop_done;
   }
 
-  /* "heatmaps/__init__.py":186
+  /* "heatmaps/__init__.py":196
  *             self.data = deepcopy(data)
  *         elif isinstance(data, (
  *                 GradientHeatmapT, GradientHeatmap, ChessMoveHeatmapT, ChessMoveHeatmap,             # <<<<<<<<<<<<<<
@@ -7627,27 +7647,27 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap___init__(CYTHON_UNUSED PyO
     goto __pyx_L7_bool_binop_done;
   }
 
-  /* "heatmaps/__init__.py":187
+  /* "heatmaps/__init__.py":197
  *         elif isinstance(data, (
  *                 GradientHeatmapT, GradientHeatmap, ChessMoveHeatmapT, ChessMoveHeatmap,
  *         )) or str(type(self)).replace('__main__', 'heatmaps') == str(type(data)):             # <<<<<<<<<<<<<<
  *             self.data = deepcopy(data.data)
  *         else:
  */
-  __pyx_t_2 = __Pyx_PyObject_Unicode(((PyObject *)Py_TYPE(__pyx_v_self))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Unicode(((PyObject *)Py_TYPE(__pyx_v_self))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyUnicode_Replace(((PyObject*)__pyx_t_2), __pyx_n_u_main, __pyx_n_u_heatmaps, -1L); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_3 = PyUnicode_Replace(((PyObject*)__pyx_t_2), __pyx_n_u_main, __pyx_n_u_heatmaps, -1L); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_Unicode(((PyObject *)Py_TYPE(__pyx_v_data))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Unicode(((PyObject *)Py_TYPE(__pyx_v_data))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_3, __pyx_t_2, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_3, __pyx_t_2, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_5 = __pyx_t_6;
   __pyx_L7_bool_binop_done:;
 
-  /* "heatmaps/__init__.py":185
+  /* "heatmaps/__init__.py":195
  *         if isinstance(data, ndarray) and data.dtype == float64:
  *             self.data = deepcopy(data)
  *         elif isinstance(data, (             # <<<<<<<<<<<<<<
@@ -7656,16 +7676,16 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap___init__(CYTHON_UNUSED PyO
  */
   if (likely(__pyx_t_5)) {
 
-    /* "heatmaps/__init__.py":188
+    /* "heatmaps/__init__.py":198
  *                 GradientHeatmapT, GradientHeatmap, ChessMoveHeatmapT, ChessMoveHeatmap,
  *         )) or str(type(self)).replace('__main__', 'heatmaps') == str(type(data)):
  *             self.data = deepcopy(data.data)             # <<<<<<<<<<<<<<
  *         else:
  *             raise TypeError(
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 188, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 198, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_data, __pyx_n_s_data_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 188, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_data, __pyx_n_s_data_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 198, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_7 = NULL;
     __pyx_t_4 = 0;
@@ -7686,14 +7706,14 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap___init__(CYTHON_UNUSED PyO
       __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
       __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 188, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 198, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_data_2, __pyx_t_2) < 0) __PYX_ERR(0, 188, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_data_2, __pyx_t_2) < 0) __PYX_ERR(0, 198, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "heatmaps/__init__.py":185
+    /* "heatmaps/__init__.py":195
  *         if isinstance(data, ndarray) and data.dtype == float64:
  *             self.data = deepcopy(data)
  *         elif isinstance(data, (             # <<<<<<<<<<<<<<
@@ -7703,7 +7723,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap___init__(CYTHON_UNUSED PyO
     goto __pyx_L4;
   }
 
-  /* "heatmaps/__init__.py":190
+  /* "heatmaps/__init__.py":200
  *             self.data = deepcopy(data.data)
  *         else:
  *             raise TypeError(             # <<<<<<<<<<<<<<
@@ -7712,36 +7732,36 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap___init__(CYTHON_UNUSED PyO
  */
   /*else*/ {
 
-    /* "heatmaps/__init__.py":191
+    /* "heatmaps/__init__.py":201
  *         else:
  *             raise TypeError(
  *                 f"Data must be either a NumPy array of float64 or a GradientHeatmapT instance, got: {type(data)}"             # <<<<<<<<<<<<<<
  *             )
  * 
  */
-    __pyx_t_2 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_data)), __pyx_empty_unicode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 191, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_data)), __pyx_empty_unicode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 201, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyUnicode_Concat(__pyx_kp_u_Data_must_be_either_a_NumPy_arra, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 191, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyUnicode_Concat(__pyx_kp_u_Data_must_be_either_a_NumPy_arra, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 201, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "heatmaps/__init__.py":190
+    /* "heatmaps/__init__.py":200
  *             self.data = deepcopy(data.data)
  *         else:
  *             raise TypeError(             # <<<<<<<<<<<<<<
  *                 f"Data must be either a NumPy array of float64 or a GradientHeatmapT instance, got: {type(data)}"
  *             )
  */
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_TypeError, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 190, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_TypeError, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 200, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 190, __pyx_L1_error)
+    __PYX_ERR(0, 200, __pyx_L1_error)
   }
   __pyx_L4:;
 
-  /* "heatmaps/__init__.py":169
+  /* "heatmaps/__init__.py":179
  *     """A subclass of `GradientHeatmapT` that supports additional operations like normalization and color conversion."""
  * 
  *     def __init__(self, data: Union[Optional[NDArray[float64]], GradientHeatmapT, ArrayLike] = None) -> None:             # <<<<<<<<<<<<<<
@@ -7765,7 +7785,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap___init__(CYTHON_UNUSED PyO
   return __pyx_r;
 }
 
-/* "heatmaps/__init__.py":194
+/* "heatmaps/__init__.py":204
  *             )
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -7827,12 +7847,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 194, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 204, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_normalize_") < 0)) __PYX_ERR(0, 194, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_normalize_") < 0)) __PYX_ERR(0, 204, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -7843,7 +7863,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_normalize_", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 194, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_normalize_", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 204, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -7883,29 +7903,29 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_2_normalize_(CYTHON_UNUSED
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_normalize_", 1);
 
-  /* "heatmaps/__init__.py":205
+  /* "heatmaps/__init__.py":215
  *             The normalized heatmap data.
  *         """
  *         max_value: float64 = self.data.max(initial=None)             # <<<<<<<<<<<<<<
  *         return self.data / max_value if max_value > 0 else self.data
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_data_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_data_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 215, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_max); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_max); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 215, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 215, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_initial, Py_None) < 0) __PYX_ERR(0, 205, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 205, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_initial, Py_None) < 0) __PYX_ERR(0, 215, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 215, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_max_value = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "heatmaps/__init__.py":206
+  /* "heatmaps/__init__.py":216
  *         """
  *         max_value: float64 = self.data.max(initial=None)
  *         return self.data / max_value if max_value > 0 else self.data             # <<<<<<<<<<<<<<
@@ -7913,19 +7933,19 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_2_normalize_(CYTHON_UNUSED
  *     @staticmethod
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyObject_RichCompare(__pyx_v_max_value, __pyx_int_0, Py_GT); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 206, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 206, __pyx_L1_error)
+  __pyx_t_1 = PyObject_RichCompare(__pyx_v_max_value, __pyx_int_0, Py_GT); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 216, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_4) {
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_data_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 206, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_data_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 216, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_t_1, __pyx_v_max_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 206, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_t_1, __pyx_v_max_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 216, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_3 = __pyx_t_2;
     __pyx_t_2 = 0;
   } else {
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_data_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 206, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_data_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 216, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_3 = __pyx_t_2;
     __pyx_t_2 = 0;
@@ -7934,7 +7954,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_2_normalize_(CYTHON_UNUSED
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "heatmaps/__init__.py":194
+  /* "heatmaps/__init__.py":204
  *             )
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -7956,7 +7976,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_2_normalize_(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "heatmaps/__init__.py":208
+/* "heatmaps/__init__.py":218
  *         return self.data / max_value if max_value > 0 else self.data
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
@@ -8021,7 +8041,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 208, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 218, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -8029,14 +8049,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 208, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 218, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("_intensity_to_color_", 1, 2, 2, 1); __PYX_ERR(0, 208, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_intensity_to_color_", 1, 2, 2, 1); __PYX_ERR(0, 218, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_intensity_to_color_") < 0)) __PYX_ERR(0, 208, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_intensity_to_color_") < 0)) __PYX_ERR(0, 218, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -8049,7 +8069,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_intensity_to_color_", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 208, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_intensity_to_color_", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 218, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -8097,16 +8117,16 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_4_intensity_to_color_(CYTH
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_intensity_to_color_", 1);
 
-  /* "heatmaps/__init__.py":228
+  /* "heatmaps/__init__.py":238
  *             A hexadecimal color string in the format '#rrggbb'.
  *         """
  *         delta: float64 = np_abs(red64 - blue64)             # <<<<<<<<<<<<<<
  *         green: int = 175 + int(80 * delta) if (red64 or blue64) else 175
  *         red: int = 175 + int(80 * red64) if red64 else 175
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np_abs); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 228, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np_abs); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyNumber_Subtract(__pyx_v_red64, __pyx_v_blue64); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 228, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Subtract(__pyx_v_red64, __pyx_v_blue64); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   __pyx_t_5 = 0;
@@ -8127,106 +8147,106 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_4_intensity_to_color_(CYTH
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 228, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 238, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __pyx_v_delta = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "heatmaps/__init__.py":229
+  /* "heatmaps/__init__.py":239
  *         """
  *         delta: float64 = np_abs(red64 - blue64)
  *         green: int = 175 + int(80 * delta) if (red64 or blue64) else 175             # <<<<<<<<<<<<<<
  *         red: int = 175 + int(80 * red64) if red64 else 175
  *         blue: int = 175 + int(80 * blue64) if blue64 else 175
  */
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_red64); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 229, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_red64); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 239, __pyx_L1_error)
   if (!__pyx_t_7) {
   } else {
     __pyx_t_6 = __pyx_t_7;
     goto __pyx_L3_bool_binop_done;
   }
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_blue64); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 229, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_blue64); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 239, __pyx_L1_error)
   __pyx_t_6 = __pyx_t_7;
   __pyx_L3_bool_binop_done:;
   if (__pyx_t_6) {
-    __pyx_t_2 = __Pyx_PyInt_MultiplyCObj(__pyx_int_80, __pyx_v_delta, 80, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 229, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyInt_MultiplyCObj(__pyx_int_80, __pyx_v_delta, 80, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 239, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 229, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 239, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyInt_AddCObj(__pyx_int_175, __pyx_t_3, 0xAF, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 229, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyInt_AddCObj(__pyx_int_175, __pyx_t_3, 0xAF, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 239, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_2))) __PYX_ERR(0, 229, __pyx_L1_error)
+    if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_2))) __PYX_ERR(0, 239, __pyx_L1_error)
     __pyx_t_1 = __pyx_t_2;
     __pyx_t_2 = 0;
   } else {
-    if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_int_175)) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_int_175))) __PYX_ERR(0, 229, __pyx_L1_error)
+    if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_int_175)) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_int_175))) __PYX_ERR(0, 239, __pyx_L1_error)
     __Pyx_INCREF(__pyx_int_175);
     __pyx_t_1 = __pyx_int_175;
   }
   __pyx_v_green = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "heatmaps/__init__.py":230
+  /* "heatmaps/__init__.py":240
  *         delta: float64 = np_abs(red64 - blue64)
  *         green: int = 175 + int(80 * delta) if (red64 or blue64) else 175
  *         red: int = 175 + int(80 * red64) if red64 else 175             # <<<<<<<<<<<<<<
  *         blue: int = 175 + int(80 * blue64) if blue64 else 175
  *         return f"#{red:02x}{green:02x}{blue:02x}"
  */
-  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_v_red64); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 230, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_v_red64); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 240, __pyx_L1_error)
   if (__pyx_t_6) {
-    __pyx_t_2 = __Pyx_PyInt_MultiplyCObj(__pyx_int_80, __pyx_v_red64, 80, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 230, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyInt_MultiplyCObj(__pyx_int_80, __pyx_v_red64, 80, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 240, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 230, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 240, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyInt_AddCObj(__pyx_int_175, __pyx_t_3, 0xAF, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 230, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyInt_AddCObj(__pyx_int_175, __pyx_t_3, 0xAF, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 240, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_2))) __PYX_ERR(0, 230, __pyx_L1_error)
+    if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_2))) __PYX_ERR(0, 240, __pyx_L1_error)
     __pyx_t_1 = __pyx_t_2;
     __pyx_t_2 = 0;
   } else {
-    if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_int_175)) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_int_175))) __PYX_ERR(0, 230, __pyx_L1_error)
+    if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_int_175)) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_int_175))) __PYX_ERR(0, 240, __pyx_L1_error)
     __Pyx_INCREF(__pyx_int_175);
     __pyx_t_1 = __pyx_int_175;
   }
   __pyx_v_red = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "heatmaps/__init__.py":231
+  /* "heatmaps/__init__.py":241
  *         green: int = 175 + int(80 * delta) if (red64 or blue64) else 175
  *         red: int = 175 + int(80 * red64) if red64 else 175
  *         blue: int = 175 + int(80 * blue64) if blue64 else 175             # <<<<<<<<<<<<<<
  *         return f"#{red:02x}{green:02x}{blue:02x}"
  * 
  */
-  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_v_blue64); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 231, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_v_blue64); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 241, __pyx_L1_error)
   if (__pyx_t_6) {
-    __pyx_t_2 = __Pyx_PyInt_MultiplyCObj(__pyx_int_80, __pyx_v_blue64, 80, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 231, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyInt_MultiplyCObj(__pyx_int_80, __pyx_v_blue64, 80, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 241, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 231, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 241, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyInt_AddCObj(__pyx_int_175, __pyx_t_3, 0xAF, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 231, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyInt_AddCObj(__pyx_int_175, __pyx_t_3, 0xAF, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 241, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_2))) __PYX_ERR(0, 231, __pyx_L1_error)
+    if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_2))) __PYX_ERR(0, 241, __pyx_L1_error)
     __pyx_t_1 = __pyx_t_2;
     __pyx_t_2 = 0;
   } else {
-    if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_int_175)) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_int_175))) __PYX_ERR(0, 231, __pyx_L1_error)
+    if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_int_175)) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_int_175))) __PYX_ERR(0, 241, __pyx_L1_error)
     __Pyx_INCREF(__pyx_int_175);
     __pyx_t_1 = __pyx_int_175;
   }
   __pyx_v_blue = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "heatmaps/__init__.py":232
+  /* "heatmaps/__init__.py":242
  *         red: int = 175 + int(80 * red64) if red64 else 175
  *         blue: int = 175 + int(80 * blue64) if blue64 else 175
  *         return f"#{red:02x}{green:02x}{blue:02x}"             # <<<<<<<<<<<<<<
@@ -8234,7 +8254,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_4_intensity_to_color_(CYTH
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 232, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 242, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_8 = 0;
   __pyx_t_9 = 127;
@@ -8242,35 +8262,35 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_4_intensity_to_color_(CYTH
   __pyx_t_8 += 1;
   __Pyx_GIVEREF(__pyx_kp_u__3);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_kp_u__3);
-  __pyx_t_2 = __Pyx_PyObject_Format(__pyx_v_red, __pyx_kp_u_02x); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 232, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Format(__pyx_v_red, __pyx_kp_u_02x); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 242, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_9 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) > __pyx_t_9) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) : __pyx_t_9;
   __pyx_t_8 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_Format(__pyx_v_green, __pyx_kp_u_02x); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 232, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Format(__pyx_v_green, __pyx_kp_u_02x); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 242, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_9 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) > __pyx_t_9) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) : __pyx_t_9;
   __pyx_t_8 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_t_2);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_Format(__pyx_v_blue, __pyx_kp_u_02x); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 232, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Format(__pyx_v_blue, __pyx_kp_u_02x); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 242, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_9 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) > __pyx_t_9) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) : __pyx_t_9;
   __pyx_t_8 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 3, __pyx_t_2);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyUnicode_Join(__pyx_t_1, 4, __pyx_t_8, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 232, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyUnicode_Join(__pyx_t_1, 4, __pyx_t_8, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 242, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "heatmaps/__init__.py":208
+  /* "heatmaps/__init__.py":218
  *         return self.data / max_value if max_value > 0 else self.data
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
@@ -8296,7 +8316,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_4_intensity_to_color_(CYTH
   return __pyx_r;
 }
 
-/* "heatmaps/__init__.py":234
+/* "heatmaps/__init__.py":244
  *         return f"#{red:02x}{green:02x}{blue:02x}"
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -8358,12 +8378,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 234, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 244, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "colors") < 0)) __PYX_ERR(0, 234, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "colors") < 0)) __PYX_ERR(0, 244, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -8374,7 +8394,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("colors", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 234, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("colors", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 244, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -8421,7 +8441,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_6colors(CYTHON_UNUSED PyOb
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("colors", 1);
 
-  /* "heatmaps/__init__.py":247
+  /* "heatmaps/__init__.py":257
  *             NumPy array of hexadecimal color codes.
  *         """
  *         return array([self._intensity_to_color_(s[1], s[0]) for s in self._normalize_], dtype=str_)             # <<<<<<<<<<<<<<
@@ -8429,21 +8449,21 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_6colors(CYTHON_UNUSED PyOb
  *     def _repr_html_(self) -> str:
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_array); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 247, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_array); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   { /* enter inner scope */
-    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 247, __pyx_L5_error)
+    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 257, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normalize); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 247, __pyx_L5_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normalize); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 257, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_3);
     if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
       __pyx_t_4 = __pyx_t_3; __Pyx_INCREF(__pyx_t_4);
       __pyx_t_5 = 0;
       __pyx_t_6 = NULL;
     } else {
-      __pyx_t_5 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 247, __pyx_L5_error)
+      __pyx_t_5 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 257, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_6 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 247, __pyx_L5_error)
+      __pyx_t_6 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 257, __pyx_L5_error)
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     for (;;) {
@@ -8452,28 +8472,28 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_6colors(CYTHON_UNUSED PyOb
           {
             Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_4);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 247, __pyx_L5_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 257, __pyx_L5_error)
             #endif
             if (__pyx_t_5 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_3 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_3); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 247, __pyx_L5_error)
+          __pyx_t_3 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_3); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 257, __pyx_L5_error)
           #else
-          __pyx_t_3 = __Pyx_PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 247, __pyx_L5_error)
+          __pyx_t_3 = __Pyx_PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 257, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_3);
           #endif
         } else {
           {
             Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_4);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 247, __pyx_L5_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 257, __pyx_L5_error)
             #endif
             if (__pyx_t_5 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_3); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 247, __pyx_L5_error)
+          __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_3); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 257, __pyx_L5_error)
           #else
-          __pyx_t_3 = __Pyx_PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 247, __pyx_L5_error)
+          __pyx_t_3 = __Pyx_PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 257, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_3);
           #endif
         }
@@ -8483,7 +8503,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_6colors(CYTHON_UNUSED PyOb
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 247, __pyx_L5_error)
+            else __PYX_ERR(0, 257, __pyx_L5_error)
           }
           break;
         }
@@ -8491,11 +8511,11 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_6colors(CYTHON_UNUSED PyOb
       }
       __Pyx_XDECREF_SET(__pyx_8genexpr1__pyx_v_s, __pyx_t_3);
       __pyx_t_3 = 0;
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_intensity_to_color); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 247, __pyx_L5_error)
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_intensity_to_color); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 257, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_8 = __Pyx_GetItemInt(__pyx_8genexpr1__pyx_v_s, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 247, __pyx_L5_error)
+      __pyx_t_8 = __Pyx_GetItemInt(__pyx_8genexpr1__pyx_v_s, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 257, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_9 = __Pyx_GetItemInt(__pyx_8genexpr1__pyx_v_s, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 247, __pyx_L5_error)
+      __pyx_t_9 = __Pyx_GetItemInt(__pyx_8genexpr1__pyx_v_s, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 257, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_9);
       __pyx_t_10 = NULL;
       __pyx_t_11 = 0;
@@ -8517,11 +8537,11 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_6colors(CYTHON_UNUSED PyOb
         __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 247, __pyx_L5_error)
+        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 257, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       }
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_2, (PyObject*)__pyx_t_3))) __PYX_ERR(0, 247, __pyx_L5_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_2, (PyObject*)__pyx_t_3))) __PYX_ERR(0, 257, __pyx_L5_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -8532,18 +8552,18 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_6colors(CYTHON_UNUSED PyOb
     goto __pyx_L1_error;
     __pyx_L9_exit_scope:;
   } /* exit inner scope */
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 247, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2)) __PYX_ERR(0, 247, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2)) __PYX_ERR(0, 257, __pyx_L1_error);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 247, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_str); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 247, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_str); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_3) < 0) __PYX_ERR(0, 247, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_3) < 0) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 247, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -8552,7 +8572,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_6colors(CYTHON_UNUSED PyOb
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "heatmaps/__init__.py":234
+  /* "heatmaps/__init__.py":244
  *         return f"#{red:02x}{green:02x}{blue:02x}"
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -8579,7 +8599,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_6colors(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "heatmaps/__init__.py":249
+/* "heatmaps/__init__.py":259
  *         return array([self._intensity_to_color_(s[1], s[0]) for s in self._normalize_], dtype=str_)
  * 
  *     def _repr_html_(self) -> str:             # <<<<<<<<<<<<<<
@@ -8641,12 +8661,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 249, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 259, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_repr_html_") < 0)) __PYX_ERR(0, 249, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_repr_html_") < 0)) __PYX_ERR(0, 259, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -8657,7 +8677,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_repr_html_", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 249, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_repr_html_", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 259, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -8709,26 +8729,26 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_repr_html_", 1);
 
-  /* "heatmaps/__init__.py":282
+  /* "heatmaps/__init__.py":292
  *         # >>> heatmap._repr_html_()  # This will generate an HTML table representation of the heatmap.
  *         """
  *         colors: NDArray[str_] = self.colors  # Get final color values             # <<<<<<<<<<<<<<
  *         sep: str_ = str_("</td><td>")
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_colors); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 282, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_colors); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 292, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_colors = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "heatmaps/__init__.py":283
+  /* "heatmaps/__init__.py":293
  *         """
  *         colors: NDArray[str_] = self.colors  # Get final color values
  *         sep: str_ = str_("</td><td>")             # <<<<<<<<<<<<<<
  * 
  *         html: str_ = str_(f"<h4>{repr(self)}</h4>")
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_str); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 283, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_str); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 293, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -8748,23 +8768,23 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
     PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_kp_u_td_td};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 283, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 293, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __pyx_v_sep = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "heatmaps/__init__.py":285
+  /* "heatmaps/__init__.py":295
  *         sep: str_ = str_("</td><td>")
  * 
  *         html: str_ = str_(f"<h4>{repr(self)}</h4>")             # <<<<<<<<<<<<<<
  *         html += str_("<table border='1' style='border-collapse: collapse; text-align: center;'>")
  *         html += str_("<tr><th>Square</th><th>White Intensity</th><th>Black Intensity</th><th>Heat Map Color</th></tr>")
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_str); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 285, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_str); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 295, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 285, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 295, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_5 = 0;
   __pyx_t_6 = 127;
@@ -8772,9 +8792,9 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
   __pyx_t_5 += 4;
   __Pyx_GIVEREF(__pyx_kp_u_h4);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_kp_u_h4);
-  __pyx_t_7 = PyObject_Repr(__pyx_v_self); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 285, __pyx_L1_error)
+  __pyx_t_7 = PyObject_Repr(__pyx_v_self); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 295, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_8 = __Pyx_PyObject_FormatSimple(__pyx_t_7, __pyx_empty_unicode); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 285, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_FormatSimple(__pyx_t_7, __pyx_empty_unicode); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 295, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_t_6 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_8) > __pyx_t_6) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_8) : __pyx_t_6;
@@ -8786,7 +8806,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
   __pyx_t_5 += 5;
   __Pyx_GIVEREF(__pyx_kp_u_h4_2);
   PyTuple_SET_ITEM(__pyx_t_3, 2, __pyx_kp_u_h4_2);
-  __pyx_t_8 = __Pyx_PyUnicode_Join(__pyx_t_3, 3, __pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 285, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyUnicode_Join(__pyx_t_3, 3, __pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 295, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -8808,21 +8828,21 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 285, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 295, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __pyx_v_html = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "heatmaps/__init__.py":286
+  /* "heatmaps/__init__.py":296
  * 
  *         html: str_ = str_(f"<h4>{repr(self)}</h4>")
  *         html += str_("<table border='1' style='border-collapse: collapse; text-align: center;'>")             # <<<<<<<<<<<<<<
  *         html += str_("<tr><th>Square</th><th>White Intensity</th><th>Black Intensity</th><th>Heat Map Color</th></tr>")
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_str); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 286, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_str); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 296, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_8 = NULL;
   __pyx_t_4 = 0;
@@ -8842,24 +8862,24 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
     PyObject *__pyx_callargs[2] = {__pyx_t_8, __pyx_kp_u_table_border_1_style_border_col};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 286, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 296, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  __pyx_t_2 = PyNumber_InPlaceAdd(__pyx_v_html, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 286, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_InPlaceAdd(__pyx_v_html, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 296, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF_SET(__pyx_v_html, __pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "heatmaps/__init__.py":287
+  /* "heatmaps/__init__.py":297
  *         html: str_ = str_(f"<h4>{repr(self)}</h4>")
  *         html += str_("<table border='1' style='border-collapse: collapse; text-align: center;'>")
  *         html += str_("<tr><th>Square</th><th>White Intensity</th><th>Black Intensity</th><th>Heat Map Color</th></tr>")             # <<<<<<<<<<<<<<
  * 
  *         i: int
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_str); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 287, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_str); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 297, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_8 = NULL;
   __pyx_t_4 = 0;
@@ -8879,17 +8899,17 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
     PyObject *__pyx_callargs[2] = {__pyx_t_8, __pyx_kp_u_tr_th_Square_th_th_White_Intens};
     __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 287, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 297, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
-  __pyx_t_1 = PyNumber_InPlaceAdd(__pyx_v_html, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 287, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_InPlaceAdd(__pyx_v_html, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 297, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF_SET(__pyx_v_html, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "heatmaps/__init__.py":290
+  /* "heatmaps/__init__.py":300
  * 
  *         i: int
  *         for i in range(64):             # <<<<<<<<<<<<<<
@@ -8897,49 +8917,49 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
  *             text_color: str_ = str_("#FFFFFF") if int(bg_color[1:3], 16) < 128 else str_("#000000")
  */
   for (__pyx_t_9 = 0; __pyx_t_9 < 64; __pyx_t_9+=1) {
-    __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 290, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 300, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_XDECREF_SET(__pyx_v_i, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "heatmaps/__init__.py":291
+    /* "heatmaps/__init__.py":301
  *         i: int
  *         for i in range(64):
  *             bg_color: str_ = colors[i]  # Background color based on heatmap intensity             # <<<<<<<<<<<<<<
  *             text_color: str_ = str_("#FFFFFF") if int(bg_color[1:3], 16) < 128 else str_("#000000")
  * 
  */
-    __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_v_colors, __pyx_v_i); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 291, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_v_colors, __pyx_v_i); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 301, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_XDECREF_SET(__pyx_v_bg_color, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "heatmaps/__init__.py":292
+    /* "heatmaps/__init__.py":302
  *         for i in range(64):
  *             bg_color: str_ = colors[i]  # Background color based on heatmap intensity
  *             text_color: str_ = str_("#FFFFFF") if int(bg_color[1:3], 16) < 128 else str_("#000000")             # <<<<<<<<<<<<<<
  * 
  *             html += str_(f"<tr style='background-color:{bg_color}; color:{text_color};'>")
  */
-    __pyx_t_2 = __Pyx_PyObject_GetSlice(__pyx_v_bg_color, 1, 3, NULL, NULL, &__pyx_slice__4, 1, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 292, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetSlice(__pyx_v_bg_color, 1, 3, NULL, NULL, &__pyx_slice__4, 1, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 302, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_8 = PyTuple_New(2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 292, __pyx_L1_error)
+    __pyx_t_8 = PyTuple_New(2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 302, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_GIVEREF(__pyx_t_2);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_2)) __PYX_ERR(0, 292, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_2)) __PYX_ERR(0, 302, __pyx_L1_error);
     __Pyx_INCREF(__pyx_int_16);
     __Pyx_GIVEREF(__pyx_int_16);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_8, 1, __pyx_int_16)) __PYX_ERR(0, 292, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_8, 1, __pyx_int_16)) __PYX_ERR(0, 302, __pyx_L1_error);
     __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)(&PyInt_Type)), __pyx_t_8, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 292, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)(&PyInt_Type)), __pyx_t_8, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 302, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    __pyx_t_8 = PyObject_RichCompare(__pyx_t_2, __pyx_int_128, Py_LT); __Pyx_XGOTREF(__pyx_t_8); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 292, __pyx_L1_error)
+    __pyx_t_8 = PyObject_RichCompare(__pyx_t_2, __pyx_int_128, Py_LT); __Pyx_XGOTREF(__pyx_t_8); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 302, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_t_8); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 292, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_t_8); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 302, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     if (__pyx_t_10) {
-      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_str); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 292, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_str); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 302, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_t_3 = NULL;
       __pyx_t_4 = 0;
@@ -8959,14 +8979,14 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
         PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_kp_u_FFFFFF};
         __pyx_t_8 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
         __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-        if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 292, __pyx_L1_error)
+        if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 302, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       }
       __pyx_t_1 = __pyx_t_8;
       __pyx_t_8 = 0;
     } else {
-      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_str); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 292, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_str); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 302, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_t_3 = NULL;
       __pyx_t_4 = 0;
@@ -8986,7 +9006,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
         PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_kp_u_000000};
         __pyx_t_8 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
         __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-        if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 292, __pyx_L1_error)
+        if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 302, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       }
@@ -8996,16 +9016,16 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
     __Pyx_XDECREF_SET(__pyx_v_text_color, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "heatmaps/__init__.py":294
+    /* "heatmaps/__init__.py":304
  *             text_color: str_ = str_("#FFFFFF") if int(bg_color[1:3], 16) < 128 else str_("#000000")
  * 
  *             html += str_(f"<tr style='background-color:{bg_color}; color:{text_color};'>")             # <<<<<<<<<<<<<<
  *             html += str_(f"<td>{i}{sep}{self.data[i, 0]:.2f}{sep}{self.data[i, 1]:.2f}{sep}{bg_color}</td></tr>")
  * 
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_str); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 294, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_str); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 304, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_2 = PyTuple_New(5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 294, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_New(5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 304, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_5 = 0;
     __pyx_t_6 = 127;
@@ -9013,7 +9033,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
     __pyx_t_5 += 28;
     __Pyx_GIVEREF(__pyx_kp_u_tr_style_background_color);
     PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_kp_u_tr_style_background_color);
-    __pyx_t_3 = __Pyx_PyObject_FormatSimple(__pyx_v_bg_color, __pyx_empty_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 294, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_FormatSimple(__pyx_v_bg_color, __pyx_empty_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 304, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_6 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_3) > __pyx_t_6) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_3) : __pyx_t_6;
     __pyx_t_5 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_3);
@@ -9024,7 +9044,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
     __pyx_t_5 += 8;
     __Pyx_GIVEREF(__pyx_kp_u_color);
     PyTuple_SET_ITEM(__pyx_t_2, 2, __pyx_kp_u_color);
-    __pyx_t_3 = __Pyx_PyObject_FormatSimple(__pyx_v_text_color, __pyx_empty_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 294, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_FormatSimple(__pyx_v_text_color, __pyx_empty_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 304, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_6 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_3) > __pyx_t_6) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_3) : __pyx_t_6;
     __pyx_t_5 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_3);
@@ -9035,7 +9055,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
     __pyx_t_5 += 3;
     __Pyx_GIVEREF(__pyx_kp_u__5);
     PyTuple_SET_ITEM(__pyx_t_2, 4, __pyx_kp_u__5);
-    __pyx_t_3 = __Pyx_PyUnicode_Join(__pyx_t_2, 5, __pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 294, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyUnicode_Join(__pyx_t_2, 5, __pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 304, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = NULL;
@@ -9057,26 +9077,26 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_8, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 294, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 304, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     }
-    __pyx_t_8 = PyNumber_InPlaceAdd(__pyx_v_html, __pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 294, __pyx_L1_error)
+    __pyx_t_8 = PyNumber_InPlaceAdd(__pyx_v_html, __pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 304, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF_SET(__pyx_v_html, __pyx_t_8);
     __pyx_t_8 = 0;
 
-    /* "heatmaps/__init__.py":295
+    /* "heatmaps/__init__.py":305
  * 
  *             html += str_(f"<tr style='background-color:{bg_color}; color:{text_color};'>")
  *             html += str_(f"<td>{i}{sep}{self.data[i, 0]:.2f}{sep}{self.data[i, 1]:.2f}{sep}{bg_color}</td></tr>")             # <<<<<<<<<<<<<<
  * 
  *         html += str_("</table>")
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_str); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 295, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_str); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 305, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyTuple_New(9); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 295, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(9); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 305, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_5 = 0;
     __pyx_t_6 = 127;
@@ -9084,35 +9104,35 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
     __pyx_t_5 += 4;
     __Pyx_GIVEREF(__pyx_kp_u_td);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_kp_u_td);
-    __pyx_t_2 = __Pyx_PyObject_FormatSimple(__pyx_v_i, __pyx_empty_unicode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 295, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_FormatSimple(__pyx_v_i, __pyx_empty_unicode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 305, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_6 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) > __pyx_t_6) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) : __pyx_t_6;
     __pyx_t_5 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_2);
     PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
     __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_FormatSimple(__pyx_v_sep, __pyx_empty_unicode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 295, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_FormatSimple(__pyx_v_sep, __pyx_empty_unicode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 305, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_6 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) > __pyx_t_6) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) : __pyx_t_6;
     __pyx_t_5 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_2);
     PyTuple_SET_ITEM(__pyx_t_3, 2, __pyx_t_2);
     __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_data_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 295, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_data_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 305, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_7 = PyTuple_New(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 295, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 305, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_INCREF(__pyx_v_i);
     __Pyx_GIVEREF(__pyx_v_i);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_v_i)) __PYX_ERR(0, 295, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_v_i)) __PYX_ERR(0, 305, __pyx_L1_error);
     __Pyx_INCREF(__pyx_int_0);
     __Pyx_GIVEREF(__pyx_int_0);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_int_0)) __PYX_ERR(0, 295, __pyx_L1_error);
-    __pyx_t_11 = __Pyx_PyObject_GetItem(__pyx_t_2, __pyx_t_7); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 295, __pyx_L1_error)
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_int_0)) __PYX_ERR(0, 305, __pyx_L1_error);
+    __pyx_t_11 = __Pyx_PyObject_GetItem(__pyx_t_2, __pyx_t_7); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 305, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_PyObject_Format(__pyx_t_11, __pyx_kp_u_2f); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 295, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_Format(__pyx_t_11, __pyx_kp_u_2f); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 305, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
     __pyx_t_6 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_7) > __pyx_t_6) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_7) : __pyx_t_6;
@@ -9120,28 +9140,28 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
     __Pyx_GIVEREF(__pyx_t_7);
     PyTuple_SET_ITEM(__pyx_t_3, 3, __pyx_t_7);
     __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_PyObject_FormatSimple(__pyx_v_sep, __pyx_empty_unicode); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 295, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_FormatSimple(__pyx_v_sep, __pyx_empty_unicode); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 305, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __pyx_t_6 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_7) > __pyx_t_6) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_7) : __pyx_t_6;
     __pyx_t_5 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_7);
     __Pyx_GIVEREF(__pyx_t_7);
     PyTuple_SET_ITEM(__pyx_t_3, 4, __pyx_t_7);
     __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_data_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 295, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_data_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 305, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_11 = PyTuple_New(2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 295, __pyx_L1_error)
+    __pyx_t_11 = PyTuple_New(2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 305, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     __Pyx_INCREF(__pyx_v_i);
     __Pyx_GIVEREF(__pyx_v_i);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_v_i)) __PYX_ERR(0, 295, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_v_i)) __PYX_ERR(0, 305, __pyx_L1_error);
     __Pyx_INCREF(__pyx_int_1);
     __Pyx_GIVEREF(__pyx_int_1);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 1, __pyx_int_1)) __PYX_ERR(0, 295, __pyx_L1_error);
-    __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_t_7, __pyx_t_11); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 295, __pyx_L1_error)
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 1, __pyx_int_1)) __PYX_ERR(0, 305, __pyx_L1_error);
+    __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_t_7, __pyx_t_11); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 305, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    __pyx_t_11 = __Pyx_PyObject_Format(__pyx_t_2, __pyx_kp_u_2f); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 295, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_PyObject_Format(__pyx_t_2, __pyx_kp_u_2f); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 305, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_6 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_11) > __pyx_t_6) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_11) : __pyx_t_6;
@@ -9149,14 +9169,14 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
     __Pyx_GIVEREF(__pyx_t_11);
     PyTuple_SET_ITEM(__pyx_t_3, 5, __pyx_t_11);
     __pyx_t_11 = 0;
-    __pyx_t_11 = __Pyx_PyObject_FormatSimple(__pyx_v_sep, __pyx_empty_unicode); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 295, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_PyObject_FormatSimple(__pyx_v_sep, __pyx_empty_unicode); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 305, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     __pyx_t_6 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_11) > __pyx_t_6) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_11) : __pyx_t_6;
     __pyx_t_5 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_11);
     __Pyx_GIVEREF(__pyx_t_11);
     PyTuple_SET_ITEM(__pyx_t_3, 6, __pyx_t_11);
     __pyx_t_11 = 0;
-    __pyx_t_11 = __Pyx_PyObject_FormatSimple(__pyx_v_bg_color, __pyx_empty_unicode); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 295, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_PyObject_FormatSimple(__pyx_v_bg_color, __pyx_empty_unicode); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 305, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     __pyx_t_6 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_11) > __pyx_t_6) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_11) : __pyx_t_6;
     __pyx_t_5 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_11);
@@ -9167,7 +9187,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
     __pyx_t_5 += 10;
     __Pyx_GIVEREF(__pyx_kp_u_td_tr);
     PyTuple_SET_ITEM(__pyx_t_3, 8, __pyx_kp_u_td_tr);
-    __pyx_t_11 = __Pyx_PyUnicode_Join(__pyx_t_3, 9, __pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 295, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_PyUnicode_Join(__pyx_t_3, 9, __pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 305, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_3 = NULL;
@@ -9189,25 +9209,25 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
       __pyx_t_8 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-      if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 295, __pyx_L1_error)
+      if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 305, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     }
-    __pyx_t_1 = PyNumber_InPlaceAdd(__pyx_v_html, __pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 295, __pyx_L1_error)
+    __pyx_t_1 = PyNumber_InPlaceAdd(__pyx_v_html, __pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 305, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF_SET(__pyx_v_html, __pyx_t_1);
     __pyx_t_1 = 0;
   }
 
-  /* "heatmaps/__init__.py":297
+  /* "heatmaps/__init__.py":307
  *             html += str_(f"<td>{i}{sep}{self.data[i, 0]:.2f}{sep}{self.data[i, 1]:.2f}{sep}{bg_color}</td></tr>")
  * 
  *         html += str_("</table>")             # <<<<<<<<<<<<<<
  *         return html
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_str); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 297, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_str); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 307, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __pyx_t_11 = NULL;
   __pyx_t_4 = 0;
@@ -9227,17 +9247,17 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
     PyObject *__pyx_callargs[2] = {__pyx_t_11, __pyx_kp_u_table};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_8, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 297, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 307, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   }
-  __pyx_t_8 = PyNumber_InPlaceAdd(__pyx_v_html, __pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 297, __pyx_L1_error)
+  __pyx_t_8 = PyNumber_InPlaceAdd(__pyx_v_html, __pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 307, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF_SET(__pyx_v_html, __pyx_t_8);
   __pyx_t_8 = 0;
 
-  /* "heatmaps/__init__.py":298
+  /* "heatmaps/__init__.py":308
  * 
  *         html += str_("</table>")
  *         return html             # <<<<<<<<<<<<<<
@@ -9245,12 +9265,12 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  if (!(likely(PyUnicode_CheckExact(__pyx_v_html))||((__pyx_v_html) == Py_None) || __Pyx_RaiseUnexpectedTypeError("unicode", __pyx_v_html))) __PYX_ERR(0, 298, __pyx_L1_error)
+  if (!(likely(PyUnicode_CheckExact(__pyx_v_html))||((__pyx_v_html) == Py_None) || __Pyx_RaiseUnexpectedTypeError("unicode", __pyx_v_html))) __PYX_ERR(0, 308, __pyx_L1_error)
   __Pyx_INCREF(__pyx_v_html);
   __pyx_r = ((PyObject*)__pyx_v_html);
   goto __pyx_L0;
 
-  /* "heatmaps/__init__.py":249
+  /* "heatmaps/__init__.py":259
  *         return array([self._intensity_to_color_(s[1], s[0]) for s in self._normalize_], dtype=str_)
  * 
  *     def _repr_html_(self) -> str:             # <<<<<<<<<<<<<<
@@ -9280,7 +9300,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap_8_repr_html_(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "heatmaps/__init__.py":316
+/* "heatmaps/__init__.py":326
  *     _piece_counts: NDArray[Dict[Piece, float64]]
  * 
  *     def __init__(self, **kwargs) -> None:             # <<<<<<<<<<<<<<
@@ -9345,12 +9365,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 316, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 326, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, __pyx_v_kwargs, values + 0, kwd_pos_args, "__init__") < 0)) __PYX_ERR(0, 316, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, __pyx_v_kwargs, values + 0, kwd_pos_args, "__init__") < 0)) __PYX_ERR(0, 326, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -9361,7 +9381,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 316, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 326, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -9411,7 +9431,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT___init__(CYTHON_UNUSED P
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 1);
 
-  /* "heatmaps/__init__.py":322
+  /* "heatmaps/__init__.py":332
  *         `piece_counts` array is created with zero values for all pieces on each square.
  *         """
  *         super().__init__(**kwargs)             # <<<<<<<<<<<<<<
@@ -9419,65 +9439,65 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT___init__(CYTHON_UNUSED P
  *         self._piece_counts = array(
  */
   __pyx_t_1 = __Pyx_CyFunction_GetClassObj(__pyx_self);
-  if (!__pyx_t_1) { PyErr_SetString(PyExc_SystemError, "super(): empty __class__ cell"); __PYX_ERR(0, 322, __pyx_L1_error) }
+  if (!__pyx_t_1) { PyErr_SetString(PyExc_SystemError, "super(): empty __class__ cell"); __PYX_ERR(0, 332, __pyx_L1_error) }
   __Pyx_INCREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 322, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 332, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 322, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 332, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_self);
   __Pyx_GIVEREF(__pyx_v_self);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_self)) __PYX_ERR(0, 322, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_self)) __PYX_ERR(0, 332, __pyx_L1_error);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 322, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 332, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 322, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 332, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyDict_Copy(__pyx_v_kwargs); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 322, __pyx_L1_error)
+  __pyx_t_1 = PyDict_Copy(__pyx_v_kwargs); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 332, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 322, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 332, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "heatmaps/__init__.py":324
+  /* "heatmaps/__init__.py":334
  *         super().__init__(**kwargs)
  *         piece_key: Piece
  *         self._piece_counts = array(             # <<<<<<<<<<<<<<
  *             [{piece_key: float64(0) for piece_key in PIECES} for _ in range(64)],
  *             dtype=dict
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 324, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 334, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   { /* enter inner scope */
 
-    /* "heatmaps/__init__.py":325
+    /* "heatmaps/__init__.py":335
  *         piece_key: Piece
  *         self._piece_counts = array(
  *             [{piece_key: float64(0) for piece_key in PIECES} for _ in range(64)],             # <<<<<<<<<<<<<<
  *             dtype=dict
  *         )
  */
-    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 325, __pyx_L1_error)
+    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 335, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     for (__pyx_t_4 = 0; __pyx_t_4 < 64; __pyx_t_4+=1) {
       __pyx_8genexpr2__pyx_v__ = __pyx_t_4;
       { /* enter inner scope */
-        __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 325, __pyx_L7_error)
+        __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 335, __pyx_L7_error)
         __Pyx_GOTREF(__pyx_t_2);
-        __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_PIECES); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 325, __pyx_L7_error)
+        __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_PIECES); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 335, __pyx_L7_error)
         __Pyx_GOTREF(__pyx_t_5);
         if (likely(PyList_CheckExact(__pyx_t_5)) || PyTuple_CheckExact(__pyx_t_5)) {
           __pyx_t_6 = __pyx_t_5; __Pyx_INCREF(__pyx_t_6);
           __pyx_t_7 = 0;
           __pyx_t_8 = NULL;
         } else {
-          __pyx_t_7 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 325, __pyx_L7_error)
+          __pyx_t_7 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 335, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_8 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 325, __pyx_L7_error)
+          __pyx_t_8 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 335, __pyx_L7_error)
         }
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         for (;;) {
@@ -9486,28 +9506,28 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT___init__(CYTHON_UNUSED P
               {
                 Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_6);
                 #if !CYTHON_ASSUME_SAFE_MACROS
-                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 325, __pyx_L7_error)
+                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 335, __pyx_L7_error)
                 #endif
                 if (__pyx_t_7 >= __pyx_temp) break;
               }
               #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-              __pyx_t_5 = PyList_GET_ITEM(__pyx_t_6, __pyx_t_7); __Pyx_INCREF(__pyx_t_5); __pyx_t_7++; if (unlikely((0 < 0))) __PYX_ERR(0, 325, __pyx_L7_error)
+              __pyx_t_5 = PyList_GET_ITEM(__pyx_t_6, __pyx_t_7); __Pyx_INCREF(__pyx_t_5); __pyx_t_7++; if (unlikely((0 < 0))) __PYX_ERR(0, 335, __pyx_L7_error)
               #else
-              __pyx_t_5 = __Pyx_PySequence_ITEM(__pyx_t_6, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 325, __pyx_L7_error)
+              __pyx_t_5 = __Pyx_PySequence_ITEM(__pyx_t_6, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 335, __pyx_L7_error)
               __Pyx_GOTREF(__pyx_t_5);
               #endif
             } else {
               {
                 Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_6);
                 #if !CYTHON_ASSUME_SAFE_MACROS
-                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 325, __pyx_L7_error)
+                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 335, __pyx_L7_error)
                 #endif
                 if (__pyx_t_7 >= __pyx_temp) break;
               }
               #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-              __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_6, __pyx_t_7); __Pyx_INCREF(__pyx_t_5); __pyx_t_7++; if (unlikely((0 < 0))) __PYX_ERR(0, 325, __pyx_L7_error)
+              __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_6, __pyx_t_7); __Pyx_INCREF(__pyx_t_5); __pyx_t_7++; if (unlikely((0 < 0))) __PYX_ERR(0, 335, __pyx_L7_error)
               #else
-              __pyx_t_5 = __Pyx_PySequence_ITEM(__pyx_t_6, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 325, __pyx_L7_error)
+              __pyx_t_5 = __Pyx_PySequence_ITEM(__pyx_t_6, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 335, __pyx_L7_error)
               __Pyx_GOTREF(__pyx_t_5);
               #endif
             }
@@ -9517,7 +9537,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT___init__(CYTHON_UNUSED P
               PyObject* exc_type = PyErr_Occurred();
               if (exc_type) {
                 if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                else __PYX_ERR(0, 325, __pyx_L7_error)
+                else __PYX_ERR(0, 335, __pyx_L7_error)
               }
               break;
             }
@@ -9525,7 +9545,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT___init__(CYTHON_UNUSED P
           }
           __Pyx_XDECREF_SET(__pyx_8genexpr3__pyx_v_piece_key, __pyx_t_5);
           __pyx_t_5 = 0;
-          __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_float64); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 325, __pyx_L7_error)
+          __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_float64); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 335, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_9);
           __pyx_t_10 = NULL;
           __pyx_t_11 = 0;
@@ -9545,11 +9565,11 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT___init__(CYTHON_UNUSED P
             PyObject *__pyx_callargs[2] = {__pyx_t_10, __pyx_int_0};
             __pyx_t_5 = __Pyx_PyObject_FastCall(__pyx_t_9, __pyx_callargs+1-__pyx_t_11, 1+__pyx_t_11);
             __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
-            if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 325, __pyx_L7_error)
+            if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 335, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
           }
-          if (unlikely(PyDict_SetItem(__pyx_t_2, (PyObject*)__pyx_8genexpr3__pyx_v_piece_key, (PyObject*)__pyx_t_5))) __PYX_ERR(0, 325, __pyx_L7_error)
+          if (unlikely(PyDict_SetItem(__pyx_t_2, (PyObject*)__pyx_8genexpr3__pyx_v_piece_key, (PyObject*)__pyx_t_5))) __PYX_ERR(0, 335, __pyx_L7_error)
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         }
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -9560,51 +9580,51 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT___init__(CYTHON_UNUSED P
         goto __pyx_L1_error;
         __pyx_L11_exit_scope:;
       } /* exit inner scope */
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_2))) __PYX_ERR(0, 325, __pyx_L1_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_2))) __PYX_ERR(0, 335, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
   } /* exit inner scope */
 
-  /* "heatmaps/__init__.py":324
+  /* "heatmaps/__init__.py":334
  *         super().__init__(**kwargs)
  *         piece_key: Piece
  *         self._piece_counts = array(             # <<<<<<<<<<<<<<
  *             [{piece_key: float64(0) for piece_key in PIECES} for _ in range(64)],
  *             dtype=dict
  */
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 324, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 334, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 324, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 334, __pyx_L1_error);
   __pyx_t_1 = 0;
 
-  /* "heatmaps/__init__.py":326
+  /* "heatmaps/__init__.py":336
  *         self._piece_counts = array(
  *             [{piece_key: float64(0) for piece_key in PIECES} for _ in range(64)],
  *             dtype=dict             # <<<<<<<<<<<<<<
  *         )
  * 
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 326, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 336, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, ((PyObject *)(&PyDict_Type))) < 0) __PYX_ERR(0, 326, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, ((PyObject *)(&PyDict_Type))) < 0) __PYX_ERR(0, 336, __pyx_L1_error)
 
-  /* "heatmaps/__init__.py":324
+  /* "heatmaps/__init__.py":334
  *         super().__init__(**kwargs)
  *         piece_key: Piece
  *         self._piece_counts = array(             # <<<<<<<<<<<<<<
  *             [{piece_key: float64(0) for piece_key in PIECES} for _ in range(64)],
  *             dtype=dict
  */
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 324, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 334, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_piece_counts, __pyx_t_6) < 0) __PYX_ERR(0, 324, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_piece_counts, __pyx_t_6) < 0) __PYX_ERR(0, 334, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "heatmaps/__init__.py":316
+  /* "heatmaps/__init__.py":326
  *     _piece_counts: NDArray[Dict[Piece, float64]]
  * 
  *     def __init__(self, **kwargs) -> None:             # <<<<<<<<<<<<<<
@@ -9632,7 +9652,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT___init__(CYTHON_UNUSED P
   return __pyx_r;
 }
 
-/* "heatmaps/__init__.py":329
+/* "heatmaps/__init__.py":339
  *         )
  * 
  *     def __truediv__(self, divisor: Real) -> "ChessMoveHeatmap":             # <<<<<<<<<<<<<<
@@ -9697,7 +9717,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 329, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 339, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -9705,14 +9725,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 329, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 339, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("__truediv__", 1, 2, 2, 1); __PYX_ERR(0, 329, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__truediv__", 1, 2, 2, 1); __PYX_ERR(0, 339, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__truediv__") < 0)) __PYX_ERR(0, 329, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__truediv__") < 0)) __PYX_ERR(0, 339, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -9725,7 +9745,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__truediv__", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 329, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__truediv__", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 339, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -9794,7 +9814,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__truediv__", 1);
 
-  /* "heatmaps/__init__.py":346
+  /* "heatmaps/__init__.py":356
  *         piece: Piece
  *         count: float64
  *         try:             # <<<<<<<<<<<<<<
@@ -9810,7 +9830,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* "heatmaps/__init__.py":347
+      /* "heatmaps/__init__.py":357
  *         count: float64
  *         try:
  *             return ChessMoveHeatmap(             # <<<<<<<<<<<<<<
@@ -9818,64 +9838,64 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
  *                 piece_counts=array(
  */
       __Pyx_XDECREF(__pyx_r);
-      __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_ChessMoveHeatmap); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 347, __pyx_L3_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_ChessMoveHeatmap); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 357, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_4);
 
-      /* "heatmaps/__init__.py":348
+      /* "heatmaps/__init__.py":358
  *         try:
  *             return ChessMoveHeatmap(
  *                 data=self.data / divisor,             # <<<<<<<<<<<<<<
  *                 piece_counts=array(
  *                     [
  */
-      __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 348, __pyx_L3_error)
+      __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 358, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_data_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 348, __pyx_L3_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_data_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 358, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = __Pyx_PyNumber_Divide(__pyx_t_6, __pyx_v_divisor); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 348, __pyx_L3_error)
+      __pyx_t_7 = __Pyx_PyNumber_Divide(__pyx_t_6, __pyx_v_divisor); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 358, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_data_2, __pyx_t_7) < 0) __PYX_ERR(0, 348, __pyx_L3_error)
+      if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_data_2, __pyx_t_7) < 0) __PYX_ERR(0, 358, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-      /* "heatmaps/__init__.py":349
+      /* "heatmaps/__init__.py":359
  *             return ChessMoveHeatmap(
  *                 data=self.data / divisor,
  *                 piece_counts=array(             # <<<<<<<<<<<<<<
  *                     [
  *                         {
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_array); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 349, __pyx_L3_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_array); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 359, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_7);
       { /* enter inner scope */
 
-        /* "heatmaps/__init__.py":350
+        /* "heatmaps/__init__.py":360
  *                 data=self.data / divisor,
  *                 piece_counts=array(
  *                     [             # <<<<<<<<<<<<<<
  *                         {
  *                             piece: count / divisor for piece, count in piece_count.items()
  */
-        __pyx_t_6 = PyList_New(0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 350, __pyx_L11_error)
+        __pyx_t_6 = PyList_New(0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 360, __pyx_L11_error)
         __Pyx_GOTREF(__pyx_t_6);
 
-        /* "heatmaps/__init__.py":353
+        /* "heatmaps/__init__.py":363
  *                         {
  *                             piece: count / divisor for piece, count in piece_count.items()
  *                         } for piece_count in self.piece_counts             # <<<<<<<<<<<<<<
  *                     ],
  *                     dtype=dict
  */
-        __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_piece_counts_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 353, __pyx_L11_error)
+        __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_piece_counts_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 363, __pyx_L11_error)
         __Pyx_GOTREF(__pyx_t_8);
         if (likely(PyList_CheckExact(__pyx_t_8)) || PyTuple_CheckExact(__pyx_t_8)) {
           __pyx_t_9 = __pyx_t_8; __Pyx_INCREF(__pyx_t_9);
           __pyx_t_10 = 0;
           __pyx_t_11 = NULL;
         } else {
-          __pyx_t_10 = -1; __pyx_t_9 = PyObject_GetIter(__pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 353, __pyx_L11_error)
+          __pyx_t_10 = -1; __pyx_t_9 = PyObject_GetIter(__pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 363, __pyx_L11_error)
           __Pyx_GOTREF(__pyx_t_9);
-          __pyx_t_11 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_9); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 353, __pyx_L11_error)
+          __pyx_t_11 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_9); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 363, __pyx_L11_error)
         }
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
         for (;;) {
@@ -9884,28 +9904,28 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
               {
                 Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_9);
                 #if !CYTHON_ASSUME_SAFE_MACROS
-                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 353, __pyx_L11_error)
+                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 363, __pyx_L11_error)
                 #endif
                 if (__pyx_t_10 >= __pyx_temp) break;
               }
               #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-              __pyx_t_8 = PyList_GET_ITEM(__pyx_t_9, __pyx_t_10); __Pyx_INCREF(__pyx_t_8); __pyx_t_10++; if (unlikely((0 < 0))) __PYX_ERR(0, 353, __pyx_L11_error)
+              __pyx_t_8 = PyList_GET_ITEM(__pyx_t_9, __pyx_t_10); __Pyx_INCREF(__pyx_t_8); __pyx_t_10++; if (unlikely((0 < 0))) __PYX_ERR(0, 363, __pyx_L11_error)
               #else
-              __pyx_t_8 = __Pyx_PySequence_ITEM(__pyx_t_9, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 353, __pyx_L11_error)
+              __pyx_t_8 = __Pyx_PySequence_ITEM(__pyx_t_9, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 363, __pyx_L11_error)
               __Pyx_GOTREF(__pyx_t_8);
               #endif
             } else {
               {
                 Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_9);
                 #if !CYTHON_ASSUME_SAFE_MACROS
-                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 353, __pyx_L11_error)
+                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 363, __pyx_L11_error)
                 #endif
                 if (__pyx_t_10 >= __pyx_temp) break;
               }
               #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-              __pyx_t_8 = PyTuple_GET_ITEM(__pyx_t_9, __pyx_t_10); __Pyx_INCREF(__pyx_t_8); __pyx_t_10++; if (unlikely((0 < 0))) __PYX_ERR(0, 353, __pyx_L11_error)
+              __pyx_t_8 = PyTuple_GET_ITEM(__pyx_t_9, __pyx_t_10); __Pyx_INCREF(__pyx_t_8); __pyx_t_10++; if (unlikely((0 < 0))) __PYX_ERR(0, 363, __pyx_L11_error)
               #else
-              __pyx_t_8 = __Pyx_PySequence_ITEM(__pyx_t_9, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 353, __pyx_L11_error)
+              __pyx_t_8 = __Pyx_PySequence_ITEM(__pyx_t_9, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 363, __pyx_L11_error)
               __Pyx_GOTREF(__pyx_t_8);
               #endif
             }
@@ -9915,28 +9935,28 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
               PyObject* exc_type = PyErr_Occurred();
               if (exc_type) {
                 if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                else __PYX_ERR(0, 353, __pyx_L11_error)
+                else __PYX_ERR(0, 363, __pyx_L11_error)
               }
               break;
             }
             __Pyx_GOTREF(__pyx_t_8);
           }
-          if (!(likely(PyDict_CheckExact(__pyx_t_8))||((__pyx_t_8) == Py_None) || __Pyx_RaiseUnexpectedTypeError("dict", __pyx_t_8))) __PYX_ERR(0, 353, __pyx_L11_error)
+          if (!(likely(PyDict_CheckExact(__pyx_t_8))||((__pyx_t_8) == Py_None) || __Pyx_RaiseUnexpectedTypeError("dict", __pyx_t_8))) __PYX_ERR(0, 363, __pyx_L11_error)
           __Pyx_XDECREF_SET(__pyx_8genexpr4__pyx_v_piece_count, ((PyObject*)__pyx_t_8));
           __pyx_t_8 = 0;
           { /* enter inner scope */
 
-            /* "heatmaps/__init__.py":351
+            /* "heatmaps/__init__.py":361
  *                 piece_counts=array(
  *                     [
  *                         {             # <<<<<<<<<<<<<<
  *                             piece: count / divisor for piece, count in piece_count.items()
  *                         } for piece_count in self.piece_counts
  */
-            __pyx_t_8 = PyDict_New(); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 351, __pyx_L16_error)
+            __pyx_t_8 = PyDict_New(); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 361, __pyx_L16_error)
             __Pyx_GOTREF(__pyx_t_8);
 
-            /* "heatmaps/__init__.py":352
+            /* "heatmaps/__init__.py":362
  *                     [
  *                         {
  *                             piece: count / divisor for piece, count in piece_count.items()             # <<<<<<<<<<<<<<
@@ -9946,9 +9966,9 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
             __pyx_t_13 = 0;
             if (unlikely(__pyx_8genexpr4__pyx_v_piece_count == Py_None)) {
               PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "items");
-              __PYX_ERR(0, 352, __pyx_L16_error)
+              __PYX_ERR(0, 362, __pyx_L16_error)
             }
-            __pyx_t_16 = __Pyx_dict_iterator(__pyx_8genexpr4__pyx_v_piece_count, 1, __pyx_n_s_items, (&__pyx_t_14), (&__pyx_t_15)); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 352, __pyx_L16_error)
+            __pyx_t_16 = __Pyx_dict_iterator(__pyx_8genexpr4__pyx_v_piece_count, 1, __pyx_n_s_items, (&__pyx_t_14), (&__pyx_t_15)); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 362, __pyx_L16_error)
             __Pyx_GOTREF(__pyx_t_16);
             __Pyx_XDECREF(__pyx_t_12);
             __pyx_t_12 = __pyx_t_16;
@@ -9956,16 +9976,16 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
             while (1) {
               __pyx_t_18 = __Pyx_dict_iter_next(__pyx_t_12, __pyx_t_14, &__pyx_t_13, &__pyx_t_16, &__pyx_t_17, NULL, __pyx_t_15);
               if (unlikely(__pyx_t_18 == 0)) break;
-              if (unlikely(__pyx_t_18 == -1)) __PYX_ERR(0, 352, __pyx_L16_error)
+              if (unlikely(__pyx_t_18 == -1)) __PYX_ERR(0, 362, __pyx_L16_error)
               __Pyx_GOTREF(__pyx_t_16);
               __Pyx_GOTREF(__pyx_t_17);
               __Pyx_XDECREF_SET(__pyx_8genexpr5__pyx_v_piece, __pyx_t_16);
               __pyx_t_16 = 0;
               __Pyx_XDECREF_SET(__pyx_8genexpr5__pyx_v_count, __pyx_t_17);
               __pyx_t_17 = 0;
-              __pyx_t_17 = __Pyx_PyNumber_Divide(__pyx_8genexpr5__pyx_v_count, __pyx_v_divisor); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 352, __pyx_L16_error)
+              __pyx_t_17 = __Pyx_PyNumber_Divide(__pyx_8genexpr5__pyx_v_count, __pyx_v_divisor); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 362, __pyx_L16_error)
               __Pyx_GOTREF(__pyx_t_17);
-              if (unlikely(PyDict_SetItem(__pyx_t_8, (PyObject*)__pyx_8genexpr5__pyx_v_piece, (PyObject*)__pyx_t_17))) __PYX_ERR(0, 352, __pyx_L16_error)
+              if (unlikely(PyDict_SetItem(__pyx_t_8, (PyObject*)__pyx_8genexpr5__pyx_v_piece, (PyObject*)__pyx_t_17))) __PYX_ERR(0, 362, __pyx_L16_error)
               __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
             }
             __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
@@ -9978,10 +9998,10 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
             goto __pyx_L11_error;
             __pyx_L19_exit_scope:;
           } /* exit inner scope */
-          if (unlikely(__Pyx_ListComp_Append(__pyx_t_6, (PyObject*)__pyx_t_8))) __PYX_ERR(0, 350, __pyx_L11_error)
+          if (unlikely(__Pyx_ListComp_Append(__pyx_t_6, (PyObject*)__pyx_t_8))) __PYX_ERR(0, 360, __pyx_L11_error)
           __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-          /* "heatmaps/__init__.py":353
+          /* "heatmaps/__init__.py":363
  *                         {
  *                             piece: count / divisor for piece, count in piece_count.items()
  *                         } for piece_count in self.piece_counts             # <<<<<<<<<<<<<<
@@ -9998,53 +10018,53 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
         __pyx_L21_exit_scope:;
       } /* exit inner scope */
 
-      /* "heatmaps/__init__.py":349
+      /* "heatmaps/__init__.py":359
  *             return ChessMoveHeatmap(
  *                 data=self.data / divisor,
  *                 piece_counts=array(             # <<<<<<<<<<<<<<
  *                     [
  *                         {
  */
-      __pyx_t_9 = PyTuple_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 349, __pyx_L3_error)
+      __pyx_t_9 = PyTuple_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 359, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_GIVEREF(__pyx_t_6);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_6)) __PYX_ERR(0, 349, __pyx_L3_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_6)) __PYX_ERR(0, 359, __pyx_L3_error);
       __pyx_t_6 = 0;
 
-      /* "heatmaps/__init__.py":355
+      /* "heatmaps/__init__.py":365
  *                         } for piece_count in self.piece_counts
  *                     ],
  *                     dtype=dict             # <<<<<<<<<<<<<<
  *                 )
  *             )
  */
-      __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 355, __pyx_L3_error)
+      __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 365, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_6);
-      if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_dtype, ((PyObject *)(&PyDict_Type))) < 0) __PYX_ERR(0, 355, __pyx_L3_error)
+      if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_dtype, ((PyObject *)(&PyDict_Type))) < 0) __PYX_ERR(0, 365, __pyx_L3_error)
 
-      /* "heatmaps/__init__.py":349
+      /* "heatmaps/__init__.py":359
  *             return ChessMoveHeatmap(
  *                 data=self.data / divisor,
  *                 piece_counts=array(             # <<<<<<<<<<<<<<
  *                     [
  *                         {
  */
-      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_9, __pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 349, __pyx_L3_error)
+      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_9, __pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 359, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_piece_counts_2, __pyx_t_8) < 0) __PYX_ERR(0, 348, __pyx_L3_error)
+      if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_piece_counts_2, __pyx_t_8) < 0) __PYX_ERR(0, 358, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-      /* "heatmaps/__init__.py":347
+      /* "heatmaps/__init__.py":357
  *         count: float64
  *         try:
  *             return ChessMoveHeatmap(             # <<<<<<<<<<<<<<
  *                 data=self.data / divisor,
  *                 piece_counts=array(
  */
-      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 347, __pyx_L3_error)
+      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 357, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -10052,7 +10072,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
       __pyx_t_8 = 0;
       goto __pyx_L7_try_return;
 
-      /* "heatmaps/__init__.py":346
+      /* "heatmaps/__init__.py":356
  *         piece: Piece
  *         count: float64
  *         try:             # <<<<<<<<<<<<<<
@@ -10071,7 +10091,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-    /* "heatmaps/__init__.py":358
+    /* "heatmaps/__init__.py":368
  *                 )
  *             )
  *         except ZeroDivisionError as error:             # <<<<<<<<<<<<<<
@@ -10081,7 +10101,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
     __pyx_t_15 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_ZeroDivisionError);
     if (__pyx_t_15) {
       __Pyx_AddTraceback("heatmaps.ChessMoveHeatmapT.__truediv__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_8, &__pyx_t_5, &__pyx_t_4) < 0) __PYX_ERR(0, 358, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_8, &__pyx_t_5, &__pyx_t_4) < 0) __PYX_ERR(0, 368, __pyx_L5_except_error)
       __Pyx_XGOTREF(__pyx_t_8);
       __Pyx_XGOTREF(__pyx_t_5);
       __Pyx_XGOTREF(__pyx_t_4);
@@ -10089,21 +10109,21 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
       __pyx_v_error = __pyx_t_5;
       /*try:*/ {
 
-        /* "heatmaps/__init__.py":360
+        /* "heatmaps/__init__.py":370
  *         except ZeroDivisionError as error:
  *             # Handle division by zero
  *             raise ZeroDivisionError("Division by zero is not allowed.") from error             # <<<<<<<<<<<<<<
  *         except FloatingPointError as error:
  *             # Check for division by zero
  */
-        __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_ZeroDivisionError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 360, __pyx_L27_error)
+        __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_ZeroDivisionError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 370, __pyx_L27_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_Raise(__pyx_t_6, 0, 0, __pyx_v_error);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __PYX_ERR(0, 360, __pyx_L27_error)
+        __PYX_ERR(0, 370, __pyx_L27_error)
       }
 
-      /* "heatmaps/__init__.py":358
+      /* "heatmaps/__init__.py":368
  *                 )
  *             )
  *         except ZeroDivisionError as error:             # <<<<<<<<<<<<<<
@@ -10151,7 +10171,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
       }
     }
 
-    /* "heatmaps/__init__.py":361
+    /* "heatmaps/__init__.py":371
  *             # Handle division by zero
  *             raise ZeroDivisionError("Division by zero is not allowed.") from error
  *         except FloatingPointError as error:             # <<<<<<<<<<<<<<
@@ -10161,7 +10181,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
     __pyx_t_18 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_FloatingPointError);
     if (__pyx_t_18) {
       __Pyx_AddTraceback("heatmaps.ChessMoveHeatmapT.__truediv__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_4, &__pyx_t_5, &__pyx_t_8) < 0) __PYX_ERR(0, 361, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_4, &__pyx_t_5, &__pyx_t_8) < 0) __PYX_ERR(0, 371, __pyx_L5_except_error)
       __Pyx_XGOTREF(__pyx_t_4);
       __Pyx_XGOTREF(__pyx_t_5);
       __Pyx_XGOTREF(__pyx_t_8);
@@ -10169,30 +10189,30 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
       __pyx_v_error = __pyx_t_5;
       /*try:*/ {
 
-        /* "heatmaps/__init__.py":363
+        /* "heatmaps/__init__.py":373
  *         except FloatingPointError as error:
  *             # Check for division by zero
  *             if divisor == 0:             # <<<<<<<<<<<<<<
  *                 raise ZeroDivisionError("Division by zero is not allowed.") from error
  *             # Fallback for other floating-point errors
  */
-        __pyx_t_26 = (__Pyx_PyInt_BoolEqObjC(__pyx_v_divisor, __pyx_int_0, 0, 0)); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 363, __pyx_L38_error)
+        __pyx_t_26 = (__Pyx_PyInt_BoolEqObjC(__pyx_v_divisor, __pyx_int_0, 0, 0)); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 373, __pyx_L38_error)
         if (unlikely(__pyx_t_26)) {
 
-          /* "heatmaps/__init__.py":364
+          /* "heatmaps/__init__.py":374
  *             # Check for division by zero
  *             if divisor == 0:
  *                 raise ZeroDivisionError("Division by zero is not allowed.") from error             # <<<<<<<<<<<<<<
  *             # Fallback for other floating-point errors
  *             raise ArithmeticError("A floating-point error occurred during division.") from error
  */
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_ZeroDivisionError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 364, __pyx_L38_error)
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_ZeroDivisionError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 374, __pyx_L38_error)
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_Raise(__pyx_t_6, 0, 0, __pyx_v_error);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-          __PYX_ERR(0, 364, __pyx_L38_error)
+          __PYX_ERR(0, 374, __pyx_L38_error)
 
-          /* "heatmaps/__init__.py":363
+          /* "heatmaps/__init__.py":373
  *         except FloatingPointError as error:
  *             # Check for division by zero
  *             if divisor == 0:             # <<<<<<<<<<<<<<
@@ -10201,21 +10221,21 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
  */
         }
 
-        /* "heatmaps/__init__.py":366
+        /* "heatmaps/__init__.py":376
  *                 raise ZeroDivisionError("Division by zero is not allowed.") from error
  *             # Fallback for other floating-point errors
  *             raise ArithmeticError("A floating-point error occurred during division.") from error             # <<<<<<<<<<<<<<
  *         except TypeError as error:
  *             # Handle non-numeric or unsupported divisor types
  */
-        __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_ArithmeticError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 366, __pyx_L38_error)
+        __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_ArithmeticError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 376, __pyx_L38_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_Raise(__pyx_t_6, 0, 0, __pyx_v_error);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __PYX_ERR(0, 366, __pyx_L38_error)
+        __PYX_ERR(0, 376, __pyx_L38_error)
       }
 
-      /* "heatmaps/__init__.py":361
+      /* "heatmaps/__init__.py":371
  *             # Handle division by zero
  *             raise ZeroDivisionError("Division by zero is not allowed.") from error
  *         except FloatingPointError as error:             # <<<<<<<<<<<<<<
@@ -10263,7 +10283,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
       }
     }
 
-    /* "heatmaps/__init__.py":367
+    /* "heatmaps/__init__.py":377
  *             # Fallback for other floating-point errors
  *             raise ArithmeticError("A floating-point error occurred during division.") from error
  *         except TypeError as error:             # <<<<<<<<<<<<<<
@@ -10273,7 +10293,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
     __pyx_t_15 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_TypeError);
     if (__pyx_t_15) {
       __Pyx_AddTraceback("heatmaps.ChessMoveHeatmapT.__truediv__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_8, &__pyx_t_5, &__pyx_t_4) < 0) __PYX_ERR(0, 367, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_8, &__pyx_t_5, &__pyx_t_4) < 0) __PYX_ERR(0, 377, __pyx_L5_except_error)
       __Pyx_XGOTREF(__pyx_t_8);
       __Pyx_XGOTREF(__pyx_t_5);
       __Pyx_XGOTREF(__pyx_t_4);
@@ -10281,14 +10301,14 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
       __pyx_v_error = __pyx_t_5;
       /*try:*/ {
 
-        /* "heatmaps/__init__.py":369
+        /* "heatmaps/__init__.py":379
  *         except TypeError as error:
  *             # Handle non-numeric or unsupported divisor types
  *             raise TypeError(f"Unsupported type for divisor: {type(divisor)}. Expected a real number.") from error             # <<<<<<<<<<<<<<
  *         except Exception as error:
  *             # Catch any other unexpected errors
  */
-        __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 369, __pyx_L50_error)
+        __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 379, __pyx_L50_error)
         __Pyx_GOTREF(__pyx_t_6);
         __pyx_t_10 = 0;
         __pyx_t_28 = 127;
@@ -10296,7 +10316,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
         __pyx_t_10 += 30;
         __Pyx_GIVEREF(__pyx_kp_u_Unsupported_type_for_divisor);
         PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_kp_u_Unsupported_type_for_divisor);
-        __pyx_t_9 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_divisor)), __pyx_empty_unicode); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 369, __pyx_L50_error)
+        __pyx_t_9 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_divisor)), __pyx_empty_unicode); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 379, __pyx_L50_error)
         __Pyx_GOTREF(__pyx_t_9);
         __pyx_t_28 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_9) > __pyx_t_28) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_9) : __pyx_t_28;
         __pyx_t_10 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_9);
@@ -10307,18 +10327,18 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
         __pyx_t_10 += 25;
         __Pyx_GIVEREF(__pyx_kp_u_Expected_a_real_number);
         PyTuple_SET_ITEM(__pyx_t_6, 2, __pyx_kp_u_Expected_a_real_number);
-        __pyx_t_9 = __Pyx_PyUnicode_Join(__pyx_t_6, 3, __pyx_t_10, __pyx_t_28); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 369, __pyx_L50_error)
+        __pyx_t_9 = __Pyx_PyUnicode_Join(__pyx_t_6, 3, __pyx_t_10, __pyx_t_28); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 379, __pyx_L50_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_builtin_TypeError, __pyx_t_9); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 369, __pyx_L50_error)
+        __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_builtin_TypeError, __pyx_t_9); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 379, __pyx_L50_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         __Pyx_Raise(__pyx_t_6, 0, 0, __pyx_v_error);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __PYX_ERR(0, 369, __pyx_L50_error)
+        __PYX_ERR(0, 379, __pyx_L50_error)
       }
 
-      /* "heatmaps/__init__.py":367
+      /* "heatmaps/__init__.py":377
  *             # Fallback for other floating-point errors
  *             raise ArithmeticError("A floating-point error occurred during division.") from error
  *         except TypeError as error:             # <<<<<<<<<<<<<<
@@ -10366,7 +10386,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
       }
     }
 
-    /* "heatmaps/__init__.py":370
+    /* "heatmaps/__init__.py":380
  *             # Handle non-numeric or unsupported divisor types
  *             raise TypeError(f"Unsupported type for divisor: {type(divisor)}. Expected a real number.") from error
  *         except Exception as error:             # <<<<<<<<<<<<<<
@@ -10376,7 +10396,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
     __pyx_t_18 = __Pyx_PyErr_ExceptionMatches(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
     if (__pyx_t_18) {
       __Pyx_AddTraceback("heatmaps.ChessMoveHeatmapT.__truediv__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_4, &__pyx_t_5, &__pyx_t_8) < 0) __PYX_ERR(0, 370, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_4, &__pyx_t_5, &__pyx_t_8) < 0) __PYX_ERR(0, 380, __pyx_L5_except_error)
       __Pyx_XGOTREF(__pyx_t_4);
       __Pyx_XGOTREF(__pyx_t_5);
       __Pyx_XGOTREF(__pyx_t_8);
@@ -10384,30 +10404,30 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
       __pyx_v_error = __pyx_t_5;
       /*try:*/ {
 
-        /* "heatmaps/__init__.py":372
+        /* "heatmaps/__init__.py":382
  *         except Exception as error:
  *             # Catch any other unexpected errors
  *             raise ArithmeticError(f"An unexpected error occurred during division: {type(error).__name__}") from error             # <<<<<<<<<<<<<<
  * 
  *     def __add__(
  */
-        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(((PyObject *)Py_TYPE(__pyx_v_error)), __pyx_n_s_name); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 372, __pyx_L61_error)
+        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(((PyObject *)Py_TYPE(__pyx_v_error)), __pyx_n_s_name); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 382, __pyx_L61_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_9 = __Pyx_PyObject_FormatSimple(__pyx_t_6, __pyx_empty_unicode); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 372, __pyx_L61_error)
+        __pyx_t_9 = __Pyx_PyObject_FormatSimple(__pyx_t_6, __pyx_empty_unicode); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 382, __pyx_L61_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_6 = __Pyx_PyUnicode_Concat(__pyx_kp_u_An_unexpected_error_occurred_dur, __pyx_t_9); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 372, __pyx_L61_error)
+        __pyx_t_6 = __Pyx_PyUnicode_Concat(__pyx_kp_u_An_unexpected_error_occurred_dur, __pyx_t_9); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 382, __pyx_L61_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_9 = __Pyx_PyObject_CallOneArg(__pyx_builtin_ArithmeticError, __pyx_t_6); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 372, __pyx_L61_error)
+        __pyx_t_9 = __Pyx_PyObject_CallOneArg(__pyx_builtin_ArithmeticError, __pyx_t_6); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 382, __pyx_L61_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_Raise(__pyx_t_9, 0, 0, __pyx_v_error);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __PYX_ERR(0, 372, __pyx_L61_error)
+        __PYX_ERR(0, 382, __pyx_L61_error)
       }
 
-      /* "heatmaps/__init__.py":370
+      /* "heatmaps/__init__.py":380
  *             # Handle non-numeric or unsupported divisor types
  *             raise TypeError(f"Unsupported type for divisor: {type(divisor)}. Expected a real number.") from error
  *         except Exception as error:             # <<<<<<<<<<<<<<
@@ -10456,7 +10476,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
     }
     goto __pyx_L5_except_error;
 
-    /* "heatmaps/__init__.py":346
+    /* "heatmaps/__init__.py":356
  *         piece: Piece
  *         count: float64
  *         try:             # <<<<<<<<<<<<<<
@@ -10477,7 +10497,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
     goto __pyx_L0;
   }
 
-  /* "heatmaps/__init__.py":329
+  /* "heatmaps/__init__.py":339
  *         )
  * 
  *     def __truediv__(self, divisor: Real) -> "ChessMoveHeatmap":             # <<<<<<<<<<<<<<
@@ -10508,7 +10528,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_2__truediv__(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "heatmaps/__init__.py":374
+/* "heatmaps/__init__.py":384
  *             raise ArithmeticError(f"An unexpected error occurred during division: {type(error).__name__}") from error
  * 
  *     def __add__(             # <<<<<<<<<<<<<<
@@ -10573,7 +10593,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 374, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 384, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -10581,14 +10601,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 374, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 384, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("__add__", 1, 2, 2, 1); __PYX_ERR(0, 374, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__add__", 1, 2, 2, 1); __PYX_ERR(0, 384, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__add__") < 0)) __PYX_ERR(0, 374, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__add__") < 0)) __PYX_ERR(0, 384, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -10601,7 +10621,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__add__", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 374, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__add__", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 384, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -10683,7 +10703,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__add__", 1);
 
-  /* "heatmaps/__init__.py":384
+  /* "heatmaps/__init__.py":394
  *     ) -> "ChessMoveHeatmap":
  *         """Perform element-wise addition with another heatmap or compatible array."""
  *         try:             # <<<<<<<<<<<<<<
@@ -10699,7 +10719,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* "heatmaps/__init__.py":386
+      /* "heatmaps/__init__.py":396
  *         try:
  * 
  *             return ChessMoveHeatmap(             # <<<<<<<<<<<<<<
@@ -10707,39 +10727,39 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
  *                 piece_counts=self.add_piece_counts(other.piece_counts)
  */
       __Pyx_XDECREF(__pyx_r);
-      __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_ChessMoveHeatmap); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 386, __pyx_L3_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_ChessMoveHeatmap); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 396, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_4);
 
-      /* "heatmaps/__init__.py":387
+      /* "heatmaps/__init__.py":397
  * 
  *             return ChessMoveHeatmap(
  *                 data=self.data + other.data,             # <<<<<<<<<<<<<<
  *                 piece_counts=self.add_piece_counts(other.piece_counts)
  *             )
  */
-      __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 387, __pyx_L3_error)
+      __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 397, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_data_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 387, __pyx_L3_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_data_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 397, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_data_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 387, __pyx_L3_error)
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_data_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 397, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_8 = PyNumber_Add(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 387, __pyx_L3_error)
+      __pyx_t_8 = PyNumber_Add(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 397, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_data_2, __pyx_t_8) < 0) __PYX_ERR(0, 387, __pyx_L3_error)
+      if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_data_2, __pyx_t_8) < 0) __PYX_ERR(0, 397, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-      /* "heatmaps/__init__.py":388
+      /* "heatmaps/__init__.py":398
  *             return ChessMoveHeatmap(
  *                 data=self.data + other.data,
  *                 piece_counts=self.add_piece_counts(other.piece_counts)             # <<<<<<<<<<<<<<
  *             )
  *         except AttributeError as attribute_error:
  */
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_piece_counts); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 388, __pyx_L3_error)
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_add_piece_counts); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 398, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_piece_counts_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 388, __pyx_L3_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_piece_counts_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 398, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_6);
       __pyx_t_9 = NULL;
       __pyx_t_10 = 0;
@@ -10760,21 +10780,21 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
         __pyx_t_8 = __Pyx_PyObject_FastCall(__pyx_t_7, __pyx_callargs+1-__pyx_t_10, 1+__pyx_t_10);
         __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 388, __pyx_L3_error)
+        if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 398, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       }
-      if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_piece_counts_2, __pyx_t_8) < 0) __PYX_ERR(0, 387, __pyx_L3_error)
+      if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_piece_counts_2, __pyx_t_8) < 0) __PYX_ERR(0, 397, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-      /* "heatmaps/__init__.py":386
+      /* "heatmaps/__init__.py":396
  *         try:
  * 
  *             return ChessMoveHeatmap(             # <<<<<<<<<<<<<<
  *                 data=self.data + other.data,
  *                 piece_counts=self.add_piece_counts(other.piece_counts)
  */
-      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 386, __pyx_L3_error)
+      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 396, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -10782,7 +10802,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
       __pyx_t_8 = 0;
       goto __pyx_L7_try_return;
 
-      /* "heatmaps/__init__.py":384
+      /* "heatmaps/__init__.py":394
  *     ) -> "ChessMoveHeatmap":
  *         """Perform element-wise addition with another heatmap or compatible array."""
  *         try:             # <<<<<<<<<<<<<<
@@ -10798,7 +10818,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-    /* "heatmaps/__init__.py":390
+    /* "heatmaps/__init__.py":400
  *                 piece_counts=self.add_piece_counts(other.piece_counts)
  *             )
  *         except AttributeError as attribute_error:             # <<<<<<<<<<<<<<
@@ -10808,7 +10828,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
     __pyx_t_11 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_AttributeError);
     if (__pyx_t_11) {
       __Pyx_AddTraceback("heatmaps.ChessMoveHeatmapT.__add__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_8, &__pyx_t_5, &__pyx_t_4) < 0) __PYX_ERR(0, 390, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_8, &__pyx_t_5, &__pyx_t_4) < 0) __PYX_ERR(0, 400, __pyx_L5_except_error)
       __Pyx_XGOTREF(__pyx_t_8);
       __Pyx_XGOTREF(__pyx_t_5);
       __Pyx_XGOTREF(__pyx_t_4);
@@ -10816,7 +10836,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
       __pyx_v_attribute_error = __pyx_t_5;
       /*try:*/ {
 
-        /* "heatmaps/__init__.py":391
+        /* "heatmaps/__init__.py":401
  *             )
  *         except AttributeError as attribute_error:
  *             try:             # <<<<<<<<<<<<<<
@@ -10832,7 +10852,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
           __Pyx_XGOTREF(__pyx_t_14);
           /*try:*/ {
 
-            /* "heatmaps/__init__.py":392
+            /* "heatmaps/__init__.py":402
  *         except AttributeError as attribute_error:
  *             try:
  *                 return self + ChessMoveHeatmap(             # <<<<<<<<<<<<<<
@@ -10840,53 +10860,53 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
  *                     piece_counts=other.get("piece_counts", KeyError)
  */
             __Pyx_XDECREF(__pyx_r);
-            __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_ChessMoveHeatmap); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 392, __pyx_L16_error)
+            __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_ChessMoveHeatmap); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 402, __pyx_L16_error)
             __Pyx_GOTREF(__pyx_t_7);
 
-            /* "heatmaps/__init__.py":393
+            /* "heatmaps/__init__.py":403
  *             try:
  *                 return self + ChessMoveHeatmap(
  *                     data=other.get("data", KeyError),             # <<<<<<<<<<<<<<
  *                     piece_counts=other.get("piece_counts", KeyError)
  *                 )
  */
-            __pyx_t_6 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 393, __pyx_L16_error)
+            __pyx_t_6 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 403, __pyx_L16_error)
             __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_get); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 393, __pyx_L16_error)
+            __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_get); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 403, __pyx_L16_error)
             __Pyx_GOTREF(__pyx_t_9);
-            __pyx_t_15 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 393, __pyx_L16_error)
+            __pyx_t_15 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 403, __pyx_L16_error)
             __Pyx_GOTREF(__pyx_t_15);
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-            if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_data_2, __pyx_t_15) < 0) __PYX_ERR(0, 393, __pyx_L16_error)
+            if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_data_2, __pyx_t_15) < 0) __PYX_ERR(0, 403, __pyx_L16_error)
             __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
 
-            /* "heatmaps/__init__.py":394
+            /* "heatmaps/__init__.py":404
  *                 return self + ChessMoveHeatmap(
  *                     data=other.get("data", KeyError),
  *                     piece_counts=other.get("piece_counts", KeyError)             # <<<<<<<<<<<<<<
  *                 )
  *             except AttributeError as attribute_error2:
  */
-            __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_get); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 394, __pyx_L16_error)
+            __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_get); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 404, __pyx_L16_error)
             __Pyx_GOTREF(__pyx_t_15);
-            __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 394, __pyx_L16_error)
+            __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 404, __pyx_L16_error)
             __Pyx_GOTREF(__pyx_t_9);
             __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-            if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_piece_counts_2, __pyx_t_9) < 0) __PYX_ERR(0, 393, __pyx_L16_error)
+            if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_piece_counts_2, __pyx_t_9) < 0) __PYX_ERR(0, 403, __pyx_L16_error)
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-            /* "heatmaps/__init__.py":392
+            /* "heatmaps/__init__.py":402
  *         except AttributeError as attribute_error:
  *             try:
  *                 return self + ChessMoveHeatmap(             # <<<<<<<<<<<<<<
  *                     data=other.get("data", KeyError),
  *                     piece_counts=other.get("piece_counts", KeyError)
  */
-            __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 392, __pyx_L16_error)
+            __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 402, __pyx_L16_error)
             __Pyx_GOTREF(__pyx_t_9);
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-            __pyx_t_6 = PyNumber_Add(__pyx_v_self, __pyx_t_9); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 392, __pyx_L16_error)
+            __pyx_t_6 = PyNumber_Add(__pyx_v_self, __pyx_t_9); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 402, __pyx_L16_error)
             __Pyx_GOTREF(__pyx_t_6);
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
             __pyx_r = __pyx_t_6;
@@ -10896,7 +10916,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
             goto __pyx_L20_try_return;
 
-            /* "heatmaps/__init__.py":391
+            /* "heatmaps/__init__.py":401
  *             )
  *         except AttributeError as attribute_error:
  *             try:             # <<<<<<<<<<<<<<
@@ -10910,7 +10930,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
           __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
           __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-          /* "heatmaps/__init__.py":396
+          /* "heatmaps/__init__.py":406
  *                     piece_counts=other.get("piece_counts", KeyError)
  *                 )
  *             except AttributeError as attribute_error2:             # <<<<<<<<<<<<<<
@@ -10920,7 +10940,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
           __pyx_t_11 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_AttributeError);
           if (__pyx_t_11) {
             __Pyx_AddTraceback("heatmaps.ChessMoveHeatmapT.__add__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-            if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_9, &__pyx_t_7) < 0) __PYX_ERR(0, 396, __pyx_L18_except_error)
+            if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_9, &__pyx_t_7) < 0) __PYX_ERR(0, 406, __pyx_L18_except_error)
             __Pyx_XGOTREF(__pyx_t_6);
             __Pyx_XGOTREF(__pyx_t_9);
             __Pyx_XGOTREF(__pyx_t_7);
@@ -10928,7 +10948,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
             __pyx_v_attribute_error2 = __pyx_t_9;
             /*try:*/ {
 
-              /* "heatmaps/__init__.py":397
+              /* "heatmaps/__init__.py":407
  *                 )
  *             except AttributeError as attribute_error2:
  *                 try:             # <<<<<<<<<<<<<<
@@ -10944,7 +10964,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
                 __Pyx_XGOTREF(__pyx_t_18);
                 /*try:*/ {
 
-                  /* "heatmaps/__init__.py":398
+                  /* "heatmaps/__init__.py":408
  *             except AttributeError as attribute_error2:
  *                 try:
  *                     return self + ChessMoveHeatmap(             # <<<<<<<<<<<<<<
@@ -10952,47 +10972,47 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
  *                         piece_counts=other[1]
  */
                   __Pyx_XDECREF(__pyx_r);
-                  __Pyx_GetModuleGlobalName(__pyx_t_15, __pyx_n_s_ChessMoveHeatmap); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 398, __pyx_L31_error)
+                  __Pyx_GetModuleGlobalName(__pyx_t_15, __pyx_n_s_ChessMoveHeatmap); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 408, __pyx_L31_error)
                   __Pyx_GOTREF(__pyx_t_15);
 
-                  /* "heatmaps/__init__.py":399
+                  /* "heatmaps/__init__.py":409
  *                 try:
  *                     return self + ChessMoveHeatmap(
  *                         data=other[0],             # <<<<<<<<<<<<<<
  *                         piece_counts=other[1]
  *                     )
  */
-                  __pyx_t_19 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 399, __pyx_L31_error)
+                  __pyx_t_19 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 409, __pyx_L31_error)
                   __Pyx_GOTREF(__pyx_t_19);
-                  __pyx_t_20 = __Pyx_GetItemInt(__pyx_v_other, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 399, __pyx_L31_error)
+                  __pyx_t_20 = __Pyx_GetItemInt(__pyx_v_other, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 409, __pyx_L31_error)
                   __Pyx_GOTREF(__pyx_t_20);
-                  if (PyDict_SetItem(__pyx_t_19, __pyx_n_s_data_2, __pyx_t_20) < 0) __PYX_ERR(0, 399, __pyx_L31_error)
+                  if (PyDict_SetItem(__pyx_t_19, __pyx_n_s_data_2, __pyx_t_20) < 0) __PYX_ERR(0, 409, __pyx_L31_error)
                   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
 
-                  /* "heatmaps/__init__.py":400
+                  /* "heatmaps/__init__.py":410
  *                     return self + ChessMoveHeatmap(
  *                         data=other[0],
  *                         piece_counts=other[1]             # <<<<<<<<<<<<<<
  *                     )
  *                 except IndexError as index_error:
  */
-                  __pyx_t_20 = __Pyx_GetItemInt(__pyx_v_other, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 400, __pyx_L31_error)
+                  __pyx_t_20 = __Pyx_GetItemInt(__pyx_v_other, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 410, __pyx_L31_error)
                   __Pyx_GOTREF(__pyx_t_20);
-                  if (PyDict_SetItem(__pyx_t_19, __pyx_n_s_piece_counts_2, __pyx_t_20) < 0) __PYX_ERR(0, 399, __pyx_L31_error)
+                  if (PyDict_SetItem(__pyx_t_19, __pyx_n_s_piece_counts_2, __pyx_t_20) < 0) __PYX_ERR(0, 409, __pyx_L31_error)
                   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
 
-                  /* "heatmaps/__init__.py":398
+                  /* "heatmaps/__init__.py":408
  *             except AttributeError as attribute_error2:
  *                 try:
  *                     return self + ChessMoveHeatmap(             # <<<<<<<<<<<<<<
  *                         data=other[0],
  *                         piece_counts=other[1]
  */
-                  __pyx_t_20 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_empty_tuple, __pyx_t_19); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 398, __pyx_L31_error)
+                  __pyx_t_20 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_empty_tuple, __pyx_t_19); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 408, __pyx_L31_error)
                   __Pyx_GOTREF(__pyx_t_20);
                   __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
                   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-                  __pyx_t_19 = PyNumber_Add(__pyx_v_self, __pyx_t_20); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 398, __pyx_L31_error)
+                  __pyx_t_19 = PyNumber_Add(__pyx_v_self, __pyx_t_20); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 408, __pyx_L31_error)
                   __Pyx_GOTREF(__pyx_t_19);
                   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
                   __pyx_r = __pyx_t_19;
@@ -11005,7 +11025,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
                   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
                   goto __pyx_L35_try_return;
 
-                  /* "heatmaps/__init__.py":397
+                  /* "heatmaps/__init__.py":407
  *                 )
  *             except AttributeError as attribute_error2:
  *                 try:             # <<<<<<<<<<<<<<
@@ -11018,7 +11038,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
                 __Pyx_XDECREF(__pyx_t_19); __pyx_t_19 = 0;
                 __Pyx_XDECREF(__pyx_t_20); __pyx_t_20 = 0;
 
-                /* "heatmaps/__init__.py":402
+                /* "heatmaps/__init__.py":412
  *                         piece_counts=other[1]
  *                     )
  *                 except IndexError as index_error:             # <<<<<<<<<<<<<<
@@ -11028,7 +11048,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
                 __pyx_t_11 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_IndexError);
                 if (__pyx_t_11) {
                   __Pyx_AddTraceback("heatmaps.ChessMoveHeatmapT.__add__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-                  if (__Pyx_GetException(&__pyx_t_19, &__pyx_t_20, &__pyx_t_15) < 0) __PYX_ERR(0, 402, __pyx_L33_except_error)
+                  if (__Pyx_GetException(&__pyx_t_19, &__pyx_t_20, &__pyx_t_15) < 0) __PYX_ERR(0, 412, __pyx_L33_except_error)
                   __Pyx_XGOTREF(__pyx_t_19);
                   __Pyx_XGOTREF(__pyx_t_20);
                   __Pyx_XGOTREF(__pyx_t_15);
@@ -11036,14 +11056,14 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
                   __pyx_v_index_error = __pyx_t_20;
                   /*try:*/ {
 
-                    /* "heatmaps/__init__.py":403
+                    /* "heatmaps/__init__.py":413
  *                     )
  *                 except IndexError as index_error:
  *                     raise ValueError(f"Other {type(other)} must be of len 2 got: {len(other)}") from index_error             # <<<<<<<<<<<<<<
  *                 except Exception as error1:
  *                     raise error1 from attribute_error2
  */
-                    __pyx_t_21 = PyTuple_New(4); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 403, __pyx_L44_error)
+                    __pyx_t_21 = PyTuple_New(4); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 413, __pyx_L44_error)
                     __Pyx_GOTREF(__pyx_t_21);
                     __pyx_t_22 = 0;
                     __pyx_t_23 = 127;
@@ -11051,7 +11071,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
                     __pyx_t_22 += 6;
                     __Pyx_GIVEREF(__pyx_kp_u_Other);
                     PyTuple_SET_ITEM(__pyx_t_21, 0, __pyx_kp_u_Other);
-                    __pyx_t_24 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_other)), __pyx_empty_unicode); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 403, __pyx_L44_error)
+                    __pyx_t_24 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_other)), __pyx_empty_unicode); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 413, __pyx_L44_error)
                     __Pyx_GOTREF(__pyx_t_24);
                     __pyx_t_23 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_24) > __pyx_t_23) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_24) : __pyx_t_23;
                     __pyx_t_22 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_24);
@@ -11062,25 +11082,25 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
                     __pyx_t_22 += 23;
                     __Pyx_GIVEREF(__pyx_kp_u_must_be_of_len_2_got);
                     PyTuple_SET_ITEM(__pyx_t_21, 2, __pyx_kp_u_must_be_of_len_2_got);
-                    __pyx_t_25 = PyObject_Length(__pyx_v_other); if (unlikely(__pyx_t_25 == ((Py_ssize_t)-1))) __PYX_ERR(0, 403, __pyx_L44_error)
-                    __pyx_t_24 = __Pyx_PyUnicode_From_Py_ssize_t(__pyx_t_25, 0, ' ', 'd'); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 403, __pyx_L44_error)
+                    __pyx_t_25 = PyObject_Length(__pyx_v_other); if (unlikely(__pyx_t_25 == ((Py_ssize_t)-1))) __PYX_ERR(0, 413, __pyx_L44_error)
+                    __pyx_t_24 = __Pyx_PyUnicode_From_Py_ssize_t(__pyx_t_25, 0, ' ', 'd'); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 413, __pyx_L44_error)
                     __Pyx_GOTREF(__pyx_t_24);
                     __pyx_t_22 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_24);
                     __Pyx_GIVEREF(__pyx_t_24);
                     PyTuple_SET_ITEM(__pyx_t_21, 3, __pyx_t_24);
                     __pyx_t_24 = 0;
-                    __pyx_t_24 = __Pyx_PyUnicode_Join(__pyx_t_21, 4, __pyx_t_22, __pyx_t_23); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 403, __pyx_L44_error)
+                    __pyx_t_24 = __Pyx_PyUnicode_Join(__pyx_t_21, 4, __pyx_t_22, __pyx_t_23); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 413, __pyx_L44_error)
                     __Pyx_GOTREF(__pyx_t_24);
                     __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-                    __pyx_t_21 = __Pyx_PyObject_CallOneArg(__pyx_builtin_ValueError, __pyx_t_24); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 403, __pyx_L44_error)
+                    __pyx_t_21 = __Pyx_PyObject_CallOneArg(__pyx_builtin_ValueError, __pyx_t_24); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 413, __pyx_L44_error)
                     __Pyx_GOTREF(__pyx_t_21);
                     __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
                     __Pyx_Raise(__pyx_t_21, 0, 0, __pyx_v_index_error);
                     __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-                    __PYX_ERR(0, 403, __pyx_L44_error)
+                    __PYX_ERR(0, 413, __pyx_L44_error)
                   }
 
-                  /* "heatmaps/__init__.py":402
+                  /* "heatmaps/__init__.py":412
  *                         piece_counts=other[1]
  *                     )
  *                 except IndexError as index_error:             # <<<<<<<<<<<<<<
@@ -11124,7 +11144,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
                   }
                 }
 
-                /* "heatmaps/__init__.py":404
+                /* "heatmaps/__init__.py":414
  *                 except IndexError as index_error:
  *                     raise ValueError(f"Other {type(other)} must be of len 2 got: {len(other)}") from index_error
  *                 except Exception as error1:             # <<<<<<<<<<<<<<
@@ -11134,7 +11154,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
                 __pyx_t_26 = __Pyx_PyErr_ExceptionMatches(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
                 if (__pyx_t_26) {
                   __Pyx_AddTraceback("heatmaps.ChessMoveHeatmapT.__add__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-                  if (__Pyx_GetException(&__pyx_t_15, &__pyx_t_20, &__pyx_t_19) < 0) __PYX_ERR(0, 404, __pyx_L33_except_error)
+                  if (__Pyx_GetException(&__pyx_t_15, &__pyx_t_20, &__pyx_t_19) < 0) __PYX_ERR(0, 414, __pyx_L33_except_error)
                   __Pyx_XGOTREF(__pyx_t_15);
                   __Pyx_XGOTREF(__pyx_t_20);
                   __Pyx_XGOTREF(__pyx_t_19);
@@ -11142,7 +11162,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
                   __pyx_v_error1 = __pyx_t_20;
                   /*try:*/ {
 
-                    /* "heatmaps/__init__.py":405
+                    /* "heatmaps/__init__.py":415
  *                     raise ValueError(f"Other {type(other)} must be of len 2 got: {len(other)}") from index_error
  *                 except Exception as error1:
  *                     raise error1 from attribute_error2             # <<<<<<<<<<<<<<
@@ -11150,10 +11170,10 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
  *             except KeyError as key_error:
  */
                     __Pyx_Raise(__pyx_v_error1, 0, 0, __pyx_v_attribute_error2);
-                    __PYX_ERR(0, 405, __pyx_L55_error)
+                    __PYX_ERR(0, 415, __pyx_L55_error)
                   }
 
-                  /* "heatmaps/__init__.py":404
+                  /* "heatmaps/__init__.py":414
  *                 except IndexError as index_error:
  *                     raise ValueError(f"Other {type(other)} must be of len 2 got: {len(other)}") from index_error
  *                 except Exception as error1:             # <<<<<<<<<<<<<<
@@ -11198,7 +11218,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
                 }
                 goto __pyx_L33_except_error;
 
-                /* "heatmaps/__init__.py":397
+                /* "heatmaps/__init__.py":407
  *                 )
  *             except AttributeError as attribute_error2:
  *                 try:             # <<<<<<<<<<<<<<
@@ -11220,7 +11240,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
               }
             }
 
-            /* "heatmaps/__init__.py":396
+            /* "heatmaps/__init__.py":406
  *                     piece_counts=other.get("piece_counts", KeyError)
  *                 )
  *             except AttributeError as attribute_error2:             # <<<<<<<<<<<<<<
@@ -11275,7 +11295,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
             }
           }
 
-          /* "heatmaps/__init__.py":407
+          /* "heatmaps/__init__.py":417
  *                     raise error1 from attribute_error2
  * 
  *             except KeyError as key_error:             # <<<<<<<<<<<<<<
@@ -11285,7 +11305,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
           __pyx_t_26 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_KeyError);
           if (__pyx_t_26) {
             __Pyx_AddTraceback("heatmaps.ChessMoveHeatmapT.__add__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-            if (__Pyx_GetException(&__pyx_t_7, &__pyx_t_9, &__pyx_t_6) < 0) __PYX_ERR(0, 407, __pyx_L18_except_error)
+            if (__Pyx_GetException(&__pyx_t_7, &__pyx_t_9, &__pyx_t_6) < 0) __PYX_ERR(0, 417, __pyx_L18_except_error)
             __Pyx_XGOTREF(__pyx_t_7);
             __Pyx_XGOTREF(__pyx_t_9);
             __Pyx_XGOTREF(__pyx_t_6);
@@ -11293,32 +11313,32 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
             __pyx_v_key_error = __pyx_t_9;
             /*try:*/ {
 
-              /* "heatmaps/__init__.py":408
+              /* "heatmaps/__init__.py":418
  * 
  *             except KeyError as key_error:
  *                 if 'data' not in other or 0 not in other:             # <<<<<<<<<<<<<<
  *                     text = f"Other {type(other)} does not have a 'data' key: keys:{other.keys()}"
  *                     raise KeyError(text) from key_error
  */
-              __pyx_t_37 = (__Pyx_PySequence_ContainsTF(__pyx_n_u_data_2, __pyx_v_other, Py_NE)); if (unlikely((__pyx_t_37 < 0))) __PYX_ERR(0, 408, __pyx_L70_error)
+              __pyx_t_37 = (__Pyx_PySequence_ContainsTF(__pyx_n_u_data_2, __pyx_v_other, Py_NE)); if (unlikely((__pyx_t_37 < 0))) __PYX_ERR(0, 418, __pyx_L70_error)
               if (!__pyx_t_37) {
               } else {
                 __pyx_t_36 = __pyx_t_37;
                 goto __pyx_L73_bool_binop_done;
               }
-              __pyx_t_37 = (__Pyx_PySequence_ContainsTF(__pyx_int_0, __pyx_v_other, Py_NE)); if (unlikely((__pyx_t_37 < 0))) __PYX_ERR(0, 408, __pyx_L70_error)
+              __pyx_t_37 = (__Pyx_PySequence_ContainsTF(__pyx_int_0, __pyx_v_other, Py_NE)); if (unlikely((__pyx_t_37 < 0))) __PYX_ERR(0, 418, __pyx_L70_error)
               __pyx_t_36 = __pyx_t_37;
               __pyx_L73_bool_binop_done:;
               if (unlikely(__pyx_t_36)) {
 
-                /* "heatmaps/__init__.py":409
+                /* "heatmaps/__init__.py":419
  *             except KeyError as key_error:
  *                 if 'data' not in other or 0 not in other:
  *                     text = f"Other {type(other)} does not have a 'data' key: keys:{other.keys()}"             # <<<<<<<<<<<<<<
  *                     raise KeyError(text) from key_error
  *                 text = f"Other {type(other)} does not have a 'piece_counts' key: keys:{other.keys()}"
  */
-                __pyx_t_19 = PyTuple_New(4); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 409, __pyx_L70_error)
+                __pyx_t_19 = PyTuple_New(4); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 419, __pyx_L70_error)
                 __Pyx_GOTREF(__pyx_t_19);
                 __pyx_t_22 = 0;
                 __pyx_t_23 = 127;
@@ -11326,7 +11346,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
                 __pyx_t_22 += 6;
                 __Pyx_GIVEREF(__pyx_kp_u_Other);
                 PyTuple_SET_ITEM(__pyx_t_19, 0, __pyx_kp_u_Other);
-                __pyx_t_20 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_other)), __pyx_empty_unicode); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 409, __pyx_L70_error)
+                __pyx_t_20 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_other)), __pyx_empty_unicode); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 419, __pyx_L70_error)
                 __Pyx_GOTREF(__pyx_t_20);
                 __pyx_t_23 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_20) > __pyx_t_23) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_20) : __pyx_t_23;
                 __pyx_t_22 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_20);
@@ -11337,7 +11357,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
                 __pyx_t_22 += 34;
                 __Pyx_GIVEREF(__pyx_kp_u_does_not_have_a_data_key_keys);
                 PyTuple_SET_ITEM(__pyx_t_19, 2, __pyx_kp_u_does_not_have_a_data_key_keys);
-                __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_keys); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 409, __pyx_L70_error)
+                __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_keys); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 419, __pyx_L70_error)
                 __Pyx_GOTREF(__pyx_t_15);
                 __pyx_t_21 = NULL;
                 __pyx_t_10 = 0;
@@ -11357,11 +11377,11 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
                   PyObject *__pyx_callargs[2] = {__pyx_t_21, NULL};
                   __pyx_t_20 = __Pyx_PyObject_FastCall(__pyx_t_15, __pyx_callargs+1-__pyx_t_10, 0+__pyx_t_10);
                   __Pyx_XDECREF(__pyx_t_21); __pyx_t_21 = 0;
-                  if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 409, __pyx_L70_error)
+                  if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 419, __pyx_L70_error)
                   __Pyx_GOTREF(__pyx_t_20);
                   __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
                 }
-                __pyx_t_15 = __Pyx_PyObject_FormatSimple(__pyx_t_20, __pyx_empty_unicode); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 409, __pyx_L70_error)
+                __pyx_t_15 = __Pyx_PyObject_FormatSimple(__pyx_t_20, __pyx_empty_unicode); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 419, __pyx_L70_error)
                 __Pyx_GOTREF(__pyx_t_15);
                 __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
                 __pyx_t_23 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_15) > __pyx_t_23) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_15) : __pyx_t_23;
@@ -11369,26 +11389,26 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
                 __Pyx_GIVEREF(__pyx_t_15);
                 PyTuple_SET_ITEM(__pyx_t_19, 3, __pyx_t_15);
                 __pyx_t_15 = 0;
-                __pyx_t_15 = __Pyx_PyUnicode_Join(__pyx_t_19, 4, __pyx_t_22, __pyx_t_23); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 409, __pyx_L70_error)
+                __pyx_t_15 = __Pyx_PyUnicode_Join(__pyx_t_19, 4, __pyx_t_22, __pyx_t_23); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 419, __pyx_L70_error)
                 __Pyx_GOTREF(__pyx_t_15);
                 __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
                 __pyx_v_text = ((PyObject*)__pyx_t_15);
                 __pyx_t_15 = 0;
 
-                /* "heatmaps/__init__.py":410
+                /* "heatmaps/__init__.py":420
  *                 if 'data' not in other or 0 not in other:
  *                     text = f"Other {type(other)} does not have a 'data' key: keys:{other.keys()}"
  *                     raise KeyError(text) from key_error             # <<<<<<<<<<<<<<
  *                 text = f"Other {type(other)} does not have a 'piece_counts' key: keys:{other.keys()}"
  *                 raise KeyError(text) from key_error
  */
-                __pyx_t_15 = __Pyx_PyObject_CallOneArg(__pyx_builtin_KeyError, __pyx_v_text); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 410, __pyx_L70_error)
+                __pyx_t_15 = __Pyx_PyObject_CallOneArg(__pyx_builtin_KeyError, __pyx_v_text); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 420, __pyx_L70_error)
                 __Pyx_GOTREF(__pyx_t_15);
                 __Pyx_Raise(__pyx_t_15, 0, 0, __pyx_v_key_error);
                 __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-                __PYX_ERR(0, 410, __pyx_L70_error)
+                __PYX_ERR(0, 420, __pyx_L70_error)
 
-                /* "heatmaps/__init__.py":408
+                /* "heatmaps/__init__.py":418
  * 
  *             except KeyError as key_error:
  *                 if 'data' not in other or 0 not in other:             # <<<<<<<<<<<<<<
@@ -11397,14 +11417,14 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
  */
               }
 
-              /* "heatmaps/__init__.py":411
+              /* "heatmaps/__init__.py":421
  *                     text = f"Other {type(other)} does not have a 'data' key: keys:{other.keys()}"
  *                     raise KeyError(text) from key_error
  *                 text = f"Other {type(other)} does not have a 'piece_counts' key: keys:{other.keys()}"             # <<<<<<<<<<<<<<
  *                 raise KeyError(text) from key_error
  *             except Exception as error0:
  */
-              __pyx_t_15 = PyTuple_New(4); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 411, __pyx_L70_error)
+              __pyx_t_15 = PyTuple_New(4); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 421, __pyx_L70_error)
               __Pyx_GOTREF(__pyx_t_15);
               __pyx_t_22 = 0;
               __pyx_t_23 = 127;
@@ -11412,7 +11432,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
               __pyx_t_22 += 6;
               __Pyx_GIVEREF(__pyx_kp_u_Other);
               PyTuple_SET_ITEM(__pyx_t_15, 0, __pyx_kp_u_Other);
-              __pyx_t_19 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_other)), __pyx_empty_unicode); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 411, __pyx_L70_error)
+              __pyx_t_19 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_other)), __pyx_empty_unicode); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 421, __pyx_L70_error)
               __Pyx_GOTREF(__pyx_t_19);
               __pyx_t_23 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_19) > __pyx_t_23) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_19) : __pyx_t_23;
               __pyx_t_22 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_19);
@@ -11423,7 +11443,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
               __pyx_t_22 += 42;
               __Pyx_GIVEREF(__pyx_kp_u_does_not_have_a_piece_counts_ke);
               PyTuple_SET_ITEM(__pyx_t_15, 2, __pyx_kp_u_does_not_have_a_piece_counts_ke);
-              __pyx_t_20 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_keys); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 411, __pyx_L70_error)
+              __pyx_t_20 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_keys); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 421, __pyx_L70_error)
               __Pyx_GOTREF(__pyx_t_20);
               __pyx_t_21 = NULL;
               __pyx_t_10 = 0;
@@ -11443,11 +11463,11 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
                 PyObject *__pyx_callargs[2] = {__pyx_t_21, NULL};
                 __pyx_t_19 = __Pyx_PyObject_FastCall(__pyx_t_20, __pyx_callargs+1-__pyx_t_10, 0+__pyx_t_10);
                 __Pyx_XDECREF(__pyx_t_21); __pyx_t_21 = 0;
-                if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 411, __pyx_L70_error)
+                if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 421, __pyx_L70_error)
                 __Pyx_GOTREF(__pyx_t_19);
                 __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
               }
-              __pyx_t_20 = __Pyx_PyObject_FormatSimple(__pyx_t_19, __pyx_empty_unicode); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 411, __pyx_L70_error)
+              __pyx_t_20 = __Pyx_PyObject_FormatSimple(__pyx_t_19, __pyx_empty_unicode); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 421, __pyx_L70_error)
               __Pyx_GOTREF(__pyx_t_20);
               __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
               __pyx_t_23 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_20) > __pyx_t_23) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_20) : __pyx_t_23;
@@ -11455,27 +11475,27 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
               __Pyx_GIVEREF(__pyx_t_20);
               PyTuple_SET_ITEM(__pyx_t_15, 3, __pyx_t_20);
               __pyx_t_20 = 0;
-              __pyx_t_20 = __Pyx_PyUnicode_Join(__pyx_t_15, 4, __pyx_t_22, __pyx_t_23); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 411, __pyx_L70_error)
+              __pyx_t_20 = __Pyx_PyUnicode_Join(__pyx_t_15, 4, __pyx_t_22, __pyx_t_23); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 421, __pyx_L70_error)
               __Pyx_GOTREF(__pyx_t_20);
               __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
               __pyx_v_text = ((PyObject*)__pyx_t_20);
               __pyx_t_20 = 0;
 
-              /* "heatmaps/__init__.py":412
+              /* "heatmaps/__init__.py":422
  *                     raise KeyError(text) from key_error
  *                 text = f"Other {type(other)} does not have a 'piece_counts' key: keys:{other.keys()}"
  *                 raise KeyError(text) from key_error             # <<<<<<<<<<<<<<
  *             except Exception as error0:
  *                 raise error0 from attribute_error
  */
-              __pyx_t_20 = __Pyx_PyObject_CallOneArg(__pyx_builtin_KeyError, __pyx_v_text); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 412, __pyx_L70_error)
+              __pyx_t_20 = __Pyx_PyObject_CallOneArg(__pyx_builtin_KeyError, __pyx_v_text); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 422, __pyx_L70_error)
               __Pyx_GOTREF(__pyx_t_20);
               __Pyx_Raise(__pyx_t_20, 0, 0, __pyx_v_key_error);
               __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-              __PYX_ERR(0, 412, __pyx_L70_error)
+              __PYX_ERR(0, 422, __pyx_L70_error)
             }
 
-            /* "heatmaps/__init__.py":407
+            /* "heatmaps/__init__.py":417
  *                     raise error1 from attribute_error2
  * 
  *             except KeyError as key_error:             # <<<<<<<<<<<<<<
@@ -11522,7 +11542,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
             }
           }
 
-          /* "heatmaps/__init__.py":413
+          /* "heatmaps/__init__.py":423
  *                 text = f"Other {type(other)} does not have a 'piece_counts' key: keys:{other.keys()}"
  *                 raise KeyError(text) from key_error
  *             except Exception as error0:             # <<<<<<<<<<<<<<
@@ -11532,7 +11552,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
           __pyx_t_11 = __Pyx_PyErr_ExceptionMatches(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
           if (__pyx_t_11) {
             __Pyx_AddTraceback("heatmaps.ChessMoveHeatmapT.__add__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-            if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_9, &__pyx_t_7) < 0) __PYX_ERR(0, 413, __pyx_L18_except_error)
+            if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_9, &__pyx_t_7) < 0) __PYX_ERR(0, 423, __pyx_L18_except_error)
             __Pyx_XGOTREF(__pyx_t_6);
             __Pyx_XGOTREF(__pyx_t_9);
             __Pyx_XGOTREF(__pyx_t_7);
@@ -11540,7 +11560,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
             __pyx_v_error0 = __pyx_t_9;
             /*try:*/ {
 
-              /* "heatmaps/__init__.py":414
+              /* "heatmaps/__init__.py":424
  *                 raise KeyError(text) from key_error
  *             except Exception as error0:
  *                 raise error0 from attribute_error             # <<<<<<<<<<<<<<
@@ -11548,10 +11568,10 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
  *     def add_piece_counts(self, other_piece_counts: NDArray[Dict[Piece, float64]]) -> NDArray[Dict[Piece, float64]]:
  */
               __Pyx_Raise(__pyx_v_error0, 0, 0, __pyx_v_attribute_error);
-              __PYX_ERR(0, 414, __pyx_L84_error)
+              __PYX_ERR(0, 424, __pyx_L84_error)
             }
 
-            /* "heatmaps/__init__.py":413
+            /* "heatmaps/__init__.py":423
  *                 text = f"Other {type(other)} does not have a 'piece_counts' key: keys:{other.keys()}"
  *                 raise KeyError(text) from key_error
  *             except Exception as error0:             # <<<<<<<<<<<<<<
@@ -11599,7 +11619,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
           }
           goto __pyx_L18_except_error;
 
-          /* "heatmaps/__init__.py":391
+          /* "heatmaps/__init__.py":401
  *             )
  *         except AttributeError as attribute_error:
  *             try:             # <<<<<<<<<<<<<<
@@ -11627,7 +11647,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
         }
       }
 
-      /* "heatmaps/__init__.py":390
+      /* "heatmaps/__init__.py":400
  *                 piece_counts=self.add_piece_counts(other.piece_counts)
  *             )
  *         except AttributeError as attribute_error:             # <<<<<<<<<<<<<<
@@ -11686,7 +11706,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
     }
     goto __pyx_L5_except_error;
 
-    /* "heatmaps/__init__.py":384
+    /* "heatmaps/__init__.py":394
  *     ) -> "ChessMoveHeatmap":
  *         """Perform element-wise addition with another heatmap or compatible array."""
  *         try:             # <<<<<<<<<<<<<<
@@ -11713,7 +11733,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
     goto __pyx_L0;
   }
 
-  /* "heatmaps/__init__.py":374
+  /* "heatmaps/__init__.py":384
  *             raise ArithmeticError(f"An unexpected error occurred during division: {type(error).__name__}") from error
  * 
  *     def __add__(             # <<<<<<<<<<<<<<
@@ -11749,7 +11769,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_4__add__(CYTHON_UNUSED P
   return __pyx_r;
 }
 
-/* "heatmaps/__init__.py":416
+/* "heatmaps/__init__.py":426
  *                 raise error0 from attribute_error
  * 
  *     def add_piece_counts(self, other_piece_counts: NDArray[Dict[Piece, float64]]) -> NDArray[Dict[Piece, float64]]:             # <<<<<<<<<<<<<<
@@ -11814,7 +11834,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 416, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 426, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -11822,14 +11842,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 416, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 426, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("add_piece_counts", 1, 2, 2, 1); __PYX_ERR(0, 416, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_piece_counts", 1, 2, 2, 1); __PYX_ERR(0, 426, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "add_piece_counts") < 0)) __PYX_ERR(0, 416, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "add_piece_counts") < 0)) __PYX_ERR(0, 426, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -11842,7 +11862,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("add_piece_counts", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 416, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("add_piece_counts", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 426, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -11897,7 +11917,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_6add_piece_counts(CYTHON
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("add_piece_counts", 1);
 
-  /* "heatmaps/__init__.py":432
+  /* "heatmaps/__init__.py":442
  *         sp_v: float64
  *         sp_k: Piece
  *         return array(             # <<<<<<<<<<<<<<
@@ -11905,38 +11925,38 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_6add_piece_counts(CYTHON
  *                 {
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_array); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 432, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_array); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 442, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   { /* enter inner scope */
 
-    /* "heatmaps/__init__.py":433
+    /* "heatmaps/__init__.py":443
  *         sp_k: Piece
  *         return array(
  *             [             # <<<<<<<<<<<<<<
  *                 {
  *                     sp_k: sp_v + other_pcount.get(sp_k, float64(0.0)) for sp_k, sp_v in self_pcount.items()
  */
-    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 433, __pyx_L5_error)
+    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 443, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_2);
 
-    /* "heatmaps/__init__.py":436
+    /* "heatmaps/__init__.py":446
  *                 {
  *                     sp_k: sp_v + other_pcount.get(sp_k, float64(0.0)) for sp_k, sp_v in self_pcount.items()
  *                 } for self_pcount, other_pcount in zip(self.piece_counts, other_piece_counts)             # <<<<<<<<<<<<<<
  *             ],
  *             dtype=dict
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_piece_counts_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 436, __pyx_L5_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_piece_counts_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 446, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 436, __pyx_L5_error)
+    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 446, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_3);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3)) __PYX_ERR(0, 436, __pyx_L5_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3)) __PYX_ERR(0, 446, __pyx_L5_error);
     __Pyx_INCREF(__pyx_v_other_piece_counts);
     __Pyx_GIVEREF(__pyx_v_other_piece_counts);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_v_other_piece_counts)) __PYX_ERR(0, 436, __pyx_L5_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_v_other_piece_counts)) __PYX_ERR(0, 446, __pyx_L5_error);
     __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_zip, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 436, __pyx_L5_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_zip, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 446, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
@@ -11944,9 +11964,9 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_6add_piece_counts(CYTHON
       __pyx_t_5 = 0;
       __pyx_t_6 = NULL;
     } else {
-      __pyx_t_5 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 436, __pyx_L5_error)
+      __pyx_t_5 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 446, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_6 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 436, __pyx_L5_error)
+      __pyx_t_6 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 446, __pyx_L5_error)
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     for (;;) {
@@ -11955,28 +11975,28 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_6add_piece_counts(CYTHON
           {
             Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_4);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 436, __pyx_L5_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 446, __pyx_L5_error)
             #endif
             if (__pyx_t_5 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_3 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_3); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 436, __pyx_L5_error)
+          __pyx_t_3 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_3); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 446, __pyx_L5_error)
           #else
-          __pyx_t_3 = __Pyx_PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 436, __pyx_L5_error)
+          __pyx_t_3 = __Pyx_PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 446, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_3);
           #endif
         } else {
           {
             Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_4);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 436, __pyx_L5_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 446, __pyx_L5_error)
             #endif
             if (__pyx_t_5 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_3); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 436, __pyx_L5_error)
+          __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_3); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 446, __pyx_L5_error)
           #else
-          __pyx_t_3 = __Pyx_PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 436, __pyx_L5_error)
+          __pyx_t_3 = __Pyx_PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 446, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_3);
           #endif
         }
@@ -11986,7 +12006,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_6add_piece_counts(CYTHON
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 436, __pyx_L5_error)
+            else __PYX_ERR(0, 446, __pyx_L5_error)
           }
           break;
         }
@@ -11998,7 +12018,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_6add_piece_counts(CYTHON
         if (unlikely(size != 2)) {
           if (size > 2) __Pyx_RaiseTooManyValuesError(2);
           else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-          __PYX_ERR(0, 436, __pyx_L5_error)
+          __PYX_ERR(0, 446, __pyx_L5_error)
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
         if (likely(PyTuple_CheckExact(sequence))) {
@@ -12011,15 +12031,15 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_6add_piece_counts(CYTHON
         __Pyx_INCREF(__pyx_t_7);
         __Pyx_INCREF(__pyx_t_8);
         #else
-        __pyx_t_7 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 436, __pyx_L5_error)
+        __pyx_t_7 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 446, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_7);
-        __pyx_t_8 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 436, __pyx_L5_error)
+        __pyx_t_8 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 446, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_8);
         #endif
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       } else {
         Py_ssize_t index = -1;
-        __pyx_t_9 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 436, __pyx_L5_error)
+        __pyx_t_9 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 446, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __pyx_t_10 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_9);
@@ -12027,7 +12047,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_6add_piece_counts(CYTHON
         __Pyx_GOTREF(__pyx_t_7);
         index = 1; __pyx_t_8 = __pyx_t_10(__pyx_t_9); if (unlikely(!__pyx_t_8)) goto __pyx_L8_unpacking_failed;
         __Pyx_GOTREF(__pyx_t_8);
-        if (__Pyx_IternextUnpackEndCheck(__pyx_t_10(__pyx_t_9), 2) < 0) __PYX_ERR(0, 436, __pyx_L5_error)
+        if (__Pyx_IternextUnpackEndCheck(__pyx_t_10(__pyx_t_9), 2) < 0) __PYX_ERR(0, 446, __pyx_L5_error)
         __pyx_t_10 = NULL;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         goto __pyx_L9_unpacking_done;
@@ -12035,28 +12055,28 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_6add_piece_counts(CYTHON
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         __pyx_t_10 = NULL;
         if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-        __PYX_ERR(0, 436, __pyx_L5_error)
+        __PYX_ERR(0, 446, __pyx_L5_error)
         __pyx_L9_unpacking_done:;
       }
-      if (!(likely(PyDict_CheckExact(__pyx_t_7))||((__pyx_t_7) == Py_None) || __Pyx_RaiseUnexpectedTypeError("dict", __pyx_t_7))) __PYX_ERR(0, 436, __pyx_L5_error)
-      if (!(likely(PyDict_CheckExact(__pyx_t_8))||((__pyx_t_8) == Py_None) || __Pyx_RaiseUnexpectedTypeError("dict", __pyx_t_8))) __PYX_ERR(0, 436, __pyx_L5_error)
+      if (!(likely(PyDict_CheckExact(__pyx_t_7))||((__pyx_t_7) == Py_None) || __Pyx_RaiseUnexpectedTypeError("dict", __pyx_t_7))) __PYX_ERR(0, 446, __pyx_L5_error)
+      if (!(likely(PyDict_CheckExact(__pyx_t_8))||((__pyx_t_8) == Py_None) || __Pyx_RaiseUnexpectedTypeError("dict", __pyx_t_8))) __PYX_ERR(0, 446, __pyx_L5_error)
       __Pyx_XDECREF_SET(__pyx_8genexpr6__pyx_v_self_pcount, ((PyObject*)__pyx_t_7));
       __pyx_t_7 = 0;
       __Pyx_XDECREF_SET(__pyx_8genexpr6__pyx_v_other_pcount, ((PyObject*)__pyx_t_8));
       __pyx_t_8 = 0;
       { /* enter inner scope */
 
-        /* "heatmaps/__init__.py":434
+        /* "heatmaps/__init__.py":444
  *         return array(
  *             [
  *                 {             # <<<<<<<<<<<<<<
  *                     sp_k: sp_v + other_pcount.get(sp_k, float64(0.0)) for sp_k, sp_v in self_pcount.items()
  *                 } for self_pcount, other_pcount in zip(self.piece_counts, other_piece_counts)
  */
-        __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 434, __pyx_L12_error)
+        __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 444, __pyx_L12_error)
         __Pyx_GOTREF(__pyx_t_3);
 
-        /* "heatmaps/__init__.py":435
+        /* "heatmaps/__init__.py":445
  *             [
  *                 {
  *                     sp_k: sp_v + other_pcount.get(sp_k, float64(0.0)) for sp_k, sp_v in self_pcount.items()             # <<<<<<<<<<<<<<
@@ -12066,9 +12086,9 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_6add_piece_counts(CYTHON
         __pyx_t_11 = 0;
         if (unlikely(__pyx_8genexpr6__pyx_v_self_pcount == Py_None)) {
           PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "items");
-          __PYX_ERR(0, 435, __pyx_L12_error)
+          __PYX_ERR(0, 445, __pyx_L12_error)
         }
-        __pyx_t_7 = __Pyx_dict_iterator(__pyx_8genexpr6__pyx_v_self_pcount, 1, __pyx_n_s_items, (&__pyx_t_12), (&__pyx_t_13)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 435, __pyx_L12_error)
+        __pyx_t_7 = __Pyx_dict_iterator(__pyx_8genexpr6__pyx_v_self_pcount, 1, __pyx_n_s_items, (&__pyx_t_12), (&__pyx_t_13)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 445, __pyx_L12_error)
         __Pyx_GOTREF(__pyx_t_7);
         __Pyx_XDECREF(__pyx_t_8);
         __pyx_t_8 = __pyx_t_7;
@@ -12076,7 +12096,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_6add_piece_counts(CYTHON
         while (1) {
           __pyx_t_14 = __Pyx_dict_iter_next(__pyx_t_8, __pyx_t_12, &__pyx_t_11, &__pyx_t_7, &__pyx_t_9, NULL, __pyx_t_13);
           if (unlikely(__pyx_t_14 == 0)) break;
-          if (unlikely(__pyx_t_14 == -1)) __PYX_ERR(0, 435, __pyx_L12_error)
+          if (unlikely(__pyx_t_14 == -1)) __PYX_ERR(0, 445, __pyx_L12_error)
           __Pyx_GOTREF(__pyx_t_7);
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_XDECREF_SET(__pyx_8genexpr7__pyx_v_sp_k, __pyx_t_7);
@@ -12085,9 +12105,9 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_6add_piece_counts(CYTHON
           __pyx_t_9 = 0;
           if (unlikely(__pyx_8genexpr6__pyx_v_other_pcount == Py_None)) {
             PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "get");
-            __PYX_ERR(0, 435, __pyx_L12_error)
+            __PYX_ERR(0, 445, __pyx_L12_error)
           }
-          __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_float64); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 435, __pyx_L12_error)
+          __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_float64); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 445, __pyx_L12_error)
           __Pyx_GOTREF(__pyx_t_7);
           __pyx_t_15 = NULL;
           __pyx_t_16 = 0;
@@ -12107,17 +12127,17 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_6add_piece_counts(CYTHON
             PyObject *__pyx_callargs[2] = {__pyx_t_15, __pyx_float_0_0};
             __pyx_t_9 = __Pyx_PyObject_FastCall(__pyx_t_7, __pyx_callargs+1-__pyx_t_16, 1+__pyx_t_16);
             __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
-            if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 435, __pyx_L12_error)
+            if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 445, __pyx_L12_error)
             __Pyx_GOTREF(__pyx_t_9);
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
           }
-          __pyx_t_7 = __Pyx_PyDict_GetItemDefault(__pyx_8genexpr6__pyx_v_other_pcount, __pyx_8genexpr7__pyx_v_sp_k, __pyx_t_9); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 435, __pyx_L12_error)
+          __pyx_t_7 = __Pyx_PyDict_GetItemDefault(__pyx_8genexpr6__pyx_v_other_pcount, __pyx_8genexpr7__pyx_v_sp_k, __pyx_t_9); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 445, __pyx_L12_error)
           __Pyx_GOTREF(__pyx_t_7);
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-          __pyx_t_9 = PyNumber_Add(__pyx_8genexpr7__pyx_v_sp_v, __pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 435, __pyx_L12_error)
+          __pyx_t_9 = PyNumber_Add(__pyx_8genexpr7__pyx_v_sp_v, __pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 445, __pyx_L12_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-          if (unlikely(PyDict_SetItem(__pyx_t_3, (PyObject*)__pyx_8genexpr7__pyx_v_sp_k, (PyObject*)__pyx_t_9))) __PYX_ERR(0, 435, __pyx_L12_error)
+          if (unlikely(PyDict_SetItem(__pyx_t_3, (PyObject*)__pyx_8genexpr7__pyx_v_sp_k, (PyObject*)__pyx_t_9))) __PYX_ERR(0, 445, __pyx_L12_error)
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         }
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -12130,10 +12150,10 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_6add_piece_counts(CYTHON
         goto __pyx_L5_error;
         __pyx_L15_exit_scope:;
       } /* exit inner scope */
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_2, (PyObject*)__pyx_t_3))) __PYX_ERR(0, 433, __pyx_L5_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_2, (PyObject*)__pyx_t_3))) __PYX_ERR(0, 443, __pyx_L5_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-      /* "heatmaps/__init__.py":436
+      /* "heatmaps/__init__.py":446
  *                 {
  *                     sp_k: sp_v + other_pcount.get(sp_k, float64(0.0)) for sp_k, sp_v in self_pcount.items()
  *                 } for self_pcount, other_pcount in zip(self.piece_counts, other_piece_counts)             # <<<<<<<<<<<<<<
@@ -12152,38 +12172,38 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_6add_piece_counts(CYTHON
     __pyx_L17_exit_scope:;
   } /* exit inner scope */
 
-  /* "heatmaps/__init__.py":432
+  /* "heatmaps/__init__.py":442
  *         sp_v: float64
  *         sp_k: Piece
  *         return array(             # <<<<<<<<<<<<<<
  *             [
  *                 {
  */
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 432, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 442, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2)) __PYX_ERR(0, 432, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2)) __PYX_ERR(0, 442, __pyx_L1_error);
   __pyx_t_2 = 0;
 
-  /* "heatmaps/__init__.py":438
+  /* "heatmaps/__init__.py":448
  *                 } for self_pcount, other_pcount in zip(self.piece_counts, other_piece_counts)
  *             ],
  *             dtype=dict             # <<<<<<<<<<<<<<
  *         )
  * 
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 438, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 448, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, ((PyObject *)(&PyDict_Type))) < 0) __PYX_ERR(0, 438, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, ((PyObject *)(&PyDict_Type))) < 0) __PYX_ERR(0, 448, __pyx_L1_error)
 
-  /* "heatmaps/__init__.py":432
+  /* "heatmaps/__init__.py":442
  *         sp_v: float64
  *         sp_k: Piece
  *         return array(             # <<<<<<<<<<<<<<
  *             [
  *                 {
  */
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 432, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 442, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -12192,7 +12212,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_6add_piece_counts(CYTHON
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "heatmaps/__init__.py":416
+  /* "heatmaps/__init__.py":426
  *                 raise error0 from attribute_error
  * 
  *     def add_piece_counts(self, other_piece_counts: NDArray[Dict[Piece, float64]]) -> NDArray[Dict[Piece, float64]]:             # <<<<<<<<<<<<<<
@@ -12222,7 +12242,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_6add_piece_counts(CYTHON
   return __pyx_r;
 }
 
-/* "heatmaps/__init__.py":441
+/* "heatmaps/__init__.py":451
  *         )
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -12284,12 +12304,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 441, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 451, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "piece_counts") < 0)) __PYX_ERR(0, 441, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "piece_counts") < 0)) __PYX_ERR(0, 451, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -12300,7 +12320,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("piece_counts", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 441, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("piece_counts", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 451, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -12336,7 +12356,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_8piece_counts(CYTHON_UNU
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("piece_counts", 1);
 
-  /* "heatmaps/__init__.py":452
+  /* "heatmaps/__init__.py":462
  *             to their associated count or intensity.
  *         """
  *         return self._piece_counts             # <<<<<<<<<<<<<<
@@ -12344,13 +12364,13 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_8piece_counts(CYTHON_UNU
  *     @piece_counts.setter
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_piece_counts); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 452, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_piece_counts); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 462, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "heatmaps/__init__.py":441
+  /* "heatmaps/__init__.py":451
  *         )
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -12369,7 +12389,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_8piece_counts(CYTHON_UNU
   return __pyx_r;
 }
 
-/* "heatmaps/__init__.py":454
+/* "heatmaps/__init__.py":464
  *         return self._piece_counts
  * 
  *     @piece_counts.setter             # <<<<<<<<<<<<<<
@@ -12434,7 +12454,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 454, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 464, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -12442,14 +12462,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 454, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 464, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("piece_counts", 1, 2, 2, 1); __PYX_ERR(0, 454, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("piece_counts", 1, 2, 2, 1); __PYX_ERR(0, 464, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "piece_counts") < 0)) __PYX_ERR(0, 454, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "piece_counts") < 0)) __PYX_ERR(0, 464, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -12462,7 +12482,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("piece_counts", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 454, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("piece_counts", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 464, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -12525,7 +12545,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_10piece_counts(CYTHON_UN
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("piece_counts", 1);
 
-  /* "heatmaps/__init__.py":472
+  /* "heatmaps/__init__.py":482
  *             If the value cannot be converted to a NumPy array of dictionaries.
  *         """
  *         try:             # <<<<<<<<<<<<<<
@@ -12541,44 +12561,44 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_10piece_counts(CYTHON_UN
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* "heatmaps/__init__.py":473
+      /* "heatmaps/__init__.py":483
  *         """
  *         try:
  *             if value.shape == (64,) and value.dtype == object:             # <<<<<<<<<<<<<<
  *                 self._piece_counts = value
  *                 return
  */
-      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_value, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 473, __pyx_L3_error)
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_value, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 483, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_6 = PyObject_RichCompare(__pyx_t_5, __pyx_tuple__10, Py_EQ); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 473, __pyx_L3_error)
+      __pyx_t_6 = PyObject_RichCompare(__pyx_t_5, __pyx_tuple__10, Py_EQ); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 483, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 473, __pyx_L3_error)
+      __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 483, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       if (__pyx_t_7) {
       } else {
         __pyx_t_4 = __pyx_t_7;
         goto __pyx_L10_bool_binop_done;
       }
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_value, __pyx_n_s_dtype); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 473, __pyx_L3_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_value, __pyx_n_s_dtype); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 483, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_5 = PyObject_RichCompare(__pyx_t_6, __pyx_builtin_object, Py_EQ); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 473, __pyx_L3_error)
+      __pyx_t_5 = PyObject_RichCompare(__pyx_t_6, __pyx_builtin_object, Py_EQ); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 483, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 473, __pyx_L3_error)
+      __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 483, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_4 = __pyx_t_7;
       __pyx_L10_bool_binop_done:;
       if (__pyx_t_4) {
 
-        /* "heatmaps/__init__.py":474
+        /* "heatmaps/__init__.py":484
  *         try:
  *             if value.shape == (64,) and value.dtype == object:
  *                 self._piece_counts = value             # <<<<<<<<<<<<<<
  *                 return
  *             raise ValueError(f"Other {type(value)} must have shape (64,), got {value.shape}.")
  */
-        if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_piece_counts, __pyx_v_value) < 0) __PYX_ERR(0, 474, __pyx_L3_error)
+        if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_piece_counts, __pyx_v_value) < 0) __PYX_ERR(0, 484, __pyx_L3_error)
 
-        /* "heatmaps/__init__.py":475
+        /* "heatmaps/__init__.py":485
  *             if value.shape == (64,) and value.dtype == object:
  *                 self._piece_counts = value
  *                 return             # <<<<<<<<<<<<<<
@@ -12589,7 +12609,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_10piece_counts(CYTHON_UN
         __pyx_r = Py_None; __Pyx_INCREF(Py_None);
         goto __pyx_L7_try_return;
 
-        /* "heatmaps/__init__.py":473
+        /* "heatmaps/__init__.py":483
  *         """
  *         try:
  *             if value.shape == (64,) and value.dtype == object:             # <<<<<<<<<<<<<<
@@ -12598,14 +12618,14 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_10piece_counts(CYTHON_UN
  */
       }
 
-      /* "heatmaps/__init__.py":476
+      /* "heatmaps/__init__.py":486
  *                 self._piece_counts = value
  *                 return
  *             raise ValueError(f"Other {type(value)} must have shape (64,), got {value.shape}.")             # <<<<<<<<<<<<<<
  *         except AttributeError:
  *             try:
  */
-      __pyx_t_5 = PyTuple_New(5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 476, __pyx_L3_error)
+      __pyx_t_5 = PyTuple_New(5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 486, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_5);
       __pyx_t_8 = 0;
       __pyx_t_9 = 127;
@@ -12613,7 +12633,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_10piece_counts(CYTHON_UN
       __pyx_t_8 += 6;
       __Pyx_GIVEREF(__pyx_kp_u_Other);
       PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_kp_u_Other);
-      __pyx_t_6 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_value)), __pyx_empty_unicode); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 476, __pyx_L3_error)
+      __pyx_t_6 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_value)), __pyx_empty_unicode); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 486, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_6);
       __pyx_t_9 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_6) > __pyx_t_9) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_6) : __pyx_t_9;
       __pyx_t_8 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_6);
@@ -12624,9 +12644,9 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_10piece_counts(CYTHON_UN
       __pyx_t_8 += 28;
       __Pyx_GIVEREF(__pyx_kp_u_must_have_shape_64_got);
       PyTuple_SET_ITEM(__pyx_t_5, 2, __pyx_kp_u_must_have_shape_64_got);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_value, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 476, __pyx_L3_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_value, __pyx_n_s_shape_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 486, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_10 = __Pyx_PyObject_FormatSimple(__pyx_t_6, __pyx_empty_unicode); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 476, __pyx_L3_error)
+      __pyx_t_10 = __Pyx_PyObject_FormatSimple(__pyx_t_6, __pyx_empty_unicode); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 486, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_10);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_9 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_10) > __pyx_t_9) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_10) : __pyx_t_9;
@@ -12638,17 +12658,17 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_10piece_counts(CYTHON_UN
       __pyx_t_8 += 1;
       __Pyx_GIVEREF(__pyx_kp_u_);
       PyTuple_SET_ITEM(__pyx_t_5, 4, __pyx_kp_u_);
-      __pyx_t_10 = __Pyx_PyUnicode_Join(__pyx_t_5, 5, __pyx_t_8, __pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 476, __pyx_L3_error)
+      __pyx_t_10 = __Pyx_PyUnicode_Join(__pyx_t_5, 5, __pyx_t_8, __pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 486, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_10);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_ValueError, __pyx_t_10); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 476, __pyx_L3_error)
+      __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_ValueError, __pyx_t_10); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 486, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_Raise(__pyx_t_5, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __PYX_ERR(0, 476, __pyx_L3_error)
+      __PYX_ERR(0, 486, __pyx_L3_error)
 
-      /* "heatmaps/__init__.py":472
+      /* "heatmaps/__init__.py":482
  *             If the value cannot be converted to a NumPy array of dictionaries.
  *         """
  *         try:             # <<<<<<<<<<<<<<
@@ -12661,7 +12681,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_10piece_counts(CYTHON_UN
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "heatmaps/__init__.py":477
+    /* "heatmaps/__init__.py":487
  *                 return
  *             raise ValueError(f"Other {type(value)} must have shape (64,), got {value.shape}.")
  *         except AttributeError:             # <<<<<<<<<<<<<<
@@ -12671,12 +12691,12 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_10piece_counts(CYTHON_UN
     __pyx_t_11 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_AttributeError);
     if (__pyx_t_11) {
       __Pyx_AddTraceback("heatmaps.ChessMoveHeatmapT.piece_counts", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_10, &__pyx_t_6) < 0) __PYX_ERR(0, 477, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_10, &__pyx_t_6) < 0) __PYX_ERR(0, 487, __pyx_L5_except_error)
       __Pyx_XGOTREF(__pyx_t_5);
       __Pyx_XGOTREF(__pyx_t_10);
       __Pyx_XGOTREF(__pyx_t_6);
 
-      /* "heatmaps/__init__.py":478
+      /* "heatmaps/__init__.py":488
  *             raise ValueError(f"Other {type(value)} must have shape (64,), got {value.shape}.")
  *         except AttributeError:
  *             try:             # <<<<<<<<<<<<<<
@@ -12692,32 +12712,32 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_10piece_counts(CYTHON_UN
         __Pyx_XGOTREF(__pyx_t_14);
         /*try:*/ {
 
-          /* "heatmaps/__init__.py":479
+          /* "heatmaps/__init__.py":489
  *         except AttributeError:
  *             try:
  *                 self.piece_counts = asarray(value, dtype=dict)             # <<<<<<<<<<<<<<
  *                 return
  *             except Exception as exception:
  */
-          __Pyx_GetModuleGlobalName(__pyx_t_15, __pyx_n_s_asarray); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 479, __pyx_L14_error)
+          __Pyx_GetModuleGlobalName(__pyx_t_15, __pyx_n_s_asarray); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 489, __pyx_L14_error)
           __Pyx_GOTREF(__pyx_t_15);
-          __pyx_t_16 = PyTuple_New(1); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 479, __pyx_L14_error)
+          __pyx_t_16 = PyTuple_New(1); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 489, __pyx_L14_error)
           __Pyx_GOTREF(__pyx_t_16);
           __Pyx_INCREF(__pyx_v_value);
           __Pyx_GIVEREF(__pyx_v_value);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_16, 0, __pyx_v_value)) __PYX_ERR(0, 479, __pyx_L14_error);
-          __pyx_t_17 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 479, __pyx_L14_error)
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_16, 0, __pyx_v_value)) __PYX_ERR(0, 489, __pyx_L14_error);
+          __pyx_t_17 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 489, __pyx_L14_error)
           __Pyx_GOTREF(__pyx_t_17);
-          if (PyDict_SetItem(__pyx_t_17, __pyx_n_s_dtype, ((PyObject *)(&PyDict_Type))) < 0) __PYX_ERR(0, 479, __pyx_L14_error)
-          __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_t_16, __pyx_t_17); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 479, __pyx_L14_error)
+          if (PyDict_SetItem(__pyx_t_17, __pyx_n_s_dtype, ((PyObject *)(&PyDict_Type))) < 0) __PYX_ERR(0, 489, __pyx_L14_error)
+          __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_t_16, __pyx_t_17); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 489, __pyx_L14_error)
           __Pyx_GOTREF(__pyx_t_18);
           __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
           __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
           __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-          if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_piece_counts_2, __pyx_t_18) < 0) __PYX_ERR(0, 479, __pyx_L14_error)
+          if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_piece_counts_2, __pyx_t_18) < 0) __PYX_ERR(0, 489, __pyx_L14_error)
           __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
 
-          /* "heatmaps/__init__.py":480
+          /* "heatmaps/__init__.py":490
  *             try:
  *                 self.piece_counts = asarray(value, dtype=dict)
  *                 return             # <<<<<<<<<<<<<<
@@ -12731,7 +12751,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_10piece_counts(CYTHON_UN
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
           goto __pyx_L18_try_return;
 
-          /* "heatmaps/__init__.py":478
+          /* "heatmaps/__init__.py":488
  *             raise ValueError(f"Other {type(value)} must have shape (64,), got {value.shape}.")
  *         except AttributeError:
  *             try:             # <<<<<<<<<<<<<<
@@ -12745,7 +12765,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_10piece_counts(CYTHON_UN
         __Pyx_XDECREF(__pyx_t_17); __pyx_t_17 = 0;
         __Pyx_XDECREF(__pyx_t_18); __pyx_t_18 = 0;
 
-        /* "heatmaps/__init__.py":481
+        /* "heatmaps/__init__.py":491
  *                 self.piece_counts = asarray(value, dtype=dict)
  *                 return
  *             except Exception as exception:             # <<<<<<<<<<<<<<
@@ -12755,7 +12775,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_10piece_counts(CYTHON_UN
         __pyx_t_11 = __Pyx_PyErr_ExceptionMatches(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
         if (__pyx_t_11) {
           __Pyx_AddTraceback("heatmaps.ChessMoveHeatmapT.piece_counts", __pyx_clineno, __pyx_lineno, __pyx_filename);
-          if (__Pyx_GetException(&__pyx_t_18, &__pyx_t_17, &__pyx_t_16) < 0) __PYX_ERR(0, 481, __pyx_L16_except_error)
+          if (__Pyx_GetException(&__pyx_t_18, &__pyx_t_17, &__pyx_t_16) < 0) __PYX_ERR(0, 491, __pyx_L16_except_error)
           __Pyx_XGOTREF(__pyx_t_18);
           __Pyx_XGOTREF(__pyx_t_17);
           __Pyx_XGOTREF(__pyx_t_16);
@@ -12763,27 +12783,27 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_10piece_counts(CYTHON_UN
           __pyx_v_exception = __pyx_t_17;
           /*try:*/ {
 
-            /* "heatmaps/__init__.py":482
+            /* "heatmaps/__init__.py":492
  *                 return
  *             except Exception as exception:
  *                 raise TypeError(f"Other must be a shape (64,) ArrayLike, got {type(value)}") from exception             # <<<<<<<<<<<<<<
  * 
  * 
  */
-            __pyx_t_15 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_value)), __pyx_empty_unicode); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 482, __pyx_L27_error)
+            __pyx_t_15 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_value)), __pyx_empty_unicode); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 492, __pyx_L27_error)
             __Pyx_GOTREF(__pyx_t_15);
-            __pyx_t_19 = __Pyx_PyUnicode_Concat(__pyx_kp_u_Other_must_be_a_shape_64_ArrayLi, __pyx_t_15); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 482, __pyx_L27_error)
+            __pyx_t_19 = __Pyx_PyUnicode_Concat(__pyx_kp_u_Other_must_be_a_shape_64_ArrayLi, __pyx_t_15); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 492, __pyx_L27_error)
             __Pyx_GOTREF(__pyx_t_19);
             __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-            __pyx_t_15 = __Pyx_PyObject_CallOneArg(__pyx_builtin_TypeError, __pyx_t_19); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 482, __pyx_L27_error)
+            __pyx_t_15 = __Pyx_PyObject_CallOneArg(__pyx_builtin_TypeError, __pyx_t_19); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 492, __pyx_L27_error)
             __Pyx_GOTREF(__pyx_t_15);
             __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
             __Pyx_Raise(__pyx_t_15, 0, 0, __pyx_v_exception);
             __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-            __PYX_ERR(0, 482, __pyx_L27_error)
+            __PYX_ERR(0, 492, __pyx_L27_error)
           }
 
-          /* "heatmaps/__init__.py":481
+          /* "heatmaps/__init__.py":491
  *                 self.piece_counts = asarray(value, dtype=dict)
  *                 return
  *             except Exception as exception:             # <<<<<<<<<<<<<<
@@ -12828,7 +12848,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_10piece_counts(CYTHON_UN
         }
         goto __pyx_L16_except_error;
 
-        /* "heatmaps/__init__.py":478
+        /* "heatmaps/__init__.py":488
  *             raise ValueError(f"Other {type(value)} must have shape (64,), got {value.shape}.")
  *         except AttributeError:
  *             try:             # <<<<<<<<<<<<<<
@@ -12851,7 +12871,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_10piece_counts(CYTHON_UN
     }
     goto __pyx_L5_except_error;
 
-    /* "heatmaps/__init__.py":472
+    /* "heatmaps/__init__.py":482
  *             If the value cannot be converted to a NumPy array of dictionaries.
  *         """
  *         try:             # <<<<<<<<<<<<<<
@@ -12878,7 +12898,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_10piece_counts(CYTHON_UN
     goto __pyx_L0;
   }
 
-  /* "heatmaps/__init__.py":454
+  /* "heatmaps/__init__.py":464
  *         return self._piece_counts
  * 
  *     @piece_counts.setter             # <<<<<<<<<<<<<<
@@ -12905,7 +12925,7 @@ static PyObject *__pyx_pf_8heatmaps_17ChessMoveHeatmapT_10piece_counts(CYTHON_UN
   return __pyx_r;
 }
 
-/* "heatmaps/__init__.py":493
+/* "heatmaps/__init__.py":503
  *     """
  * 
  *     def __init__(             # <<<<<<<<<<<<<<
@@ -12957,7 +12977,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_piece_counts_2,0};
 
-    /* "heatmaps/__init__.py":495
+    /* "heatmaps/__init__.py":505
  *     def __init__(
  *             self,
  *             piece_counts: Optional[NDArray[Dict[Piece, float64]]] = None,             # <<<<<<<<<<<<<<
@@ -12982,19 +13002,19 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 493, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 503, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_piece_counts_2);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 493, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 503, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, __pyx_v_kwargs, values + 0, kwd_pos_args, "__init__") < 0)) __PYX_ERR(0, 493, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, __pyx_v_kwargs, values + 0, kwd_pos_args, "__init__") < 0)) __PYX_ERR(0, 503, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -13010,7 +13030,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 493, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 503, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -13027,7 +13047,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_L4_argument_unpacking_done:;
   __pyx_r = __pyx_pf_8heatmaps_16ChessMoveHeatmap___init__(__pyx_self, __pyx_v_self, __pyx_v_piece_counts, __pyx_v_kwargs);
 
-  /* "heatmaps/__init__.py":493
+  /* "heatmaps/__init__.py":503
  *     """
  * 
  *     def __init__(             # <<<<<<<<<<<<<<
@@ -13064,7 +13084,7 @@ static PyObject *__pyx_pf_8heatmaps_16ChessMoveHeatmap___init__(CYTHON_UNUSED Py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 1);
 
-  /* "heatmaps/__init__.py":514
+  /* "heatmaps/__init__.py":524
  *             If `piece_counts` is provided but is not a NumPy array with the expected dtype.
  *         """
  *         super().__init__(**kwargs)             # <<<<<<<<<<<<<<
@@ -13072,43 +13092,43 @@ static PyObject *__pyx_pf_8heatmaps_16ChessMoveHeatmap___init__(CYTHON_UNUSED Py
  *         if piece_counts is None and data is None:
  */
   __pyx_t_1 = __Pyx_CyFunction_GetClassObj(__pyx_self);
-  if (!__pyx_t_1) { PyErr_SetString(PyExc_SystemError, "super(): empty __class__ cell"); __PYX_ERR(0, 514, __pyx_L1_error) }
+  if (!__pyx_t_1) { PyErr_SetString(PyExc_SystemError, "super(): empty __class__ cell"); __PYX_ERR(0, 524, __pyx_L1_error) }
   __Pyx_INCREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 514, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 524, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 514, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 524, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_self);
   __Pyx_GIVEREF(__pyx_v_self);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_self)) __PYX_ERR(0, 514, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_self)) __PYX_ERR(0, 524, __pyx_L1_error);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 514, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 524, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 514, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 524, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyDict_Copy(__pyx_v_kwargs); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 514, __pyx_L1_error)
+  __pyx_t_1 = PyDict_Copy(__pyx_v_kwargs); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 524, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 514, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 524, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "heatmaps/__init__.py":515
+  /* "heatmaps/__init__.py":525
  *         """
  *         super().__init__(**kwargs)
  *         data: Optional[object] = kwargs.get("data")             # <<<<<<<<<<<<<<
  *         if piece_counts is None and data is None:
  *             return
  */
-  __pyx_t_3 = __Pyx_PyDict_GetItemDefault(__pyx_v_kwargs, __pyx_n_u_data_2, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 515, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_GetItemDefault(__pyx_v_kwargs, __pyx_n_u_data_2, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 525, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_v_data = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "heatmaps/__init__.py":516
+  /* "heatmaps/__init__.py":526
  *         super().__init__(**kwargs)
  *         data: Optional[object] = kwargs.get("data")
  *         if piece_counts is None and data is None:             # <<<<<<<<<<<<<<
@@ -13126,7 +13146,7 @@ static PyObject *__pyx_pf_8heatmaps_16ChessMoveHeatmap___init__(CYTHON_UNUSED Py
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_4) {
 
-    /* "heatmaps/__init__.py":517
+    /* "heatmaps/__init__.py":527
  *         data: Optional[object] = kwargs.get("data")
  *         if piece_counts is None and data is None:
  *             return             # <<<<<<<<<<<<<<
@@ -13137,7 +13157,7 @@ static PyObject *__pyx_pf_8heatmaps_16ChessMoveHeatmap___init__(CYTHON_UNUSED Py
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "heatmaps/__init__.py":516
+    /* "heatmaps/__init__.py":526
  *         super().__init__(**kwargs)
  *         data: Optional[object] = kwargs.get("data")
  *         if piece_counts is None and data is None:             # <<<<<<<<<<<<<<
@@ -13146,40 +13166,40 @@ static PyObject *__pyx_pf_8heatmaps_16ChessMoveHeatmap___init__(CYTHON_UNUSED Py
  */
   }
 
-  /* "heatmaps/__init__.py":518
+  /* "heatmaps/__init__.py":528
  *         if piece_counts is None and data is None:
  *             return
  *         if isinstance(piece_counts, ndarray) and piece_counts.dtype == object:             # <<<<<<<<<<<<<<
  *             self.piece_counts = deepcopy(piece_counts)
  *         elif isinstance(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_ndarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 518, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_ndarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 528, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = PyObject_IsInstance(__pyx_v_piece_counts, __pyx_t_3); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 518, __pyx_L1_error)
+  __pyx_t_5 = PyObject_IsInstance(__pyx_v_piece_counts, __pyx_t_3); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 528, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (__pyx_t_5) {
   } else {
     __pyx_t_4 = __pyx_t_5;
     goto __pyx_L7_bool_binop_done;
   }
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_piece_counts, __pyx_n_s_dtype); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 518, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_piece_counts, __pyx_n_s_dtype); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 528, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyObject_RichCompare(__pyx_t_3, __pyx_builtin_object, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 518, __pyx_L1_error)
+  __pyx_t_1 = PyObject_RichCompare(__pyx_t_3, __pyx_builtin_object, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 528, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 518, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 528, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_4 = __pyx_t_5;
   __pyx_L7_bool_binop_done:;
   if (__pyx_t_4) {
 
-    /* "heatmaps/__init__.py":519
+    /* "heatmaps/__init__.py":529
  *             return
  *         if isinstance(piece_counts, ndarray) and piece_counts.dtype == object:
  *             self.piece_counts = deepcopy(piece_counts)             # <<<<<<<<<<<<<<
  *         elif isinstance(
  *                 data, (ChessMoveHeatmapT, ChessMoveHeatmap)
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 519, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 529, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_2 = NULL;
     __pyx_t_6 = 0;
@@ -13199,14 +13219,14 @@ static PyObject *__pyx_pf_8heatmaps_16ChessMoveHeatmap___init__(CYTHON_UNUSED Py
       PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_v_piece_counts};
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 519, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 529, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_piece_counts_2, __pyx_t_1) < 0) __PYX_ERR(0, 519, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_piece_counts_2, __pyx_t_1) < 0) __PYX_ERR(0, 529, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "heatmaps/__init__.py":518
+    /* "heatmaps/__init__.py":528
  *         if piece_counts is None and data is None:
  *             return
  *         if isinstance(piece_counts, ndarray) and piece_counts.dtype == object:             # <<<<<<<<<<<<<<
@@ -13216,19 +13236,19 @@ static PyObject *__pyx_pf_8heatmaps_16ChessMoveHeatmap___init__(CYTHON_UNUSED Py
     goto __pyx_L6;
   }
 
-  /* "heatmaps/__init__.py":521
+  /* "heatmaps/__init__.py":531
  *             self.piece_counts = deepcopy(piece_counts)
  *         elif isinstance(
  *                 data, (ChessMoveHeatmapT, ChessMoveHeatmap)             # <<<<<<<<<<<<<<
  *         ) or str(type(self)).replace('__main__', 'heatmaps') == str(type(data)):
  *             self.piece_counts = deepcopy(data.piece_counts)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_ChessMoveHeatmapT); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 521, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_ChessMoveHeatmapT); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 531, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_ChessMoveHeatmap); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 521, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_ChessMoveHeatmap); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 531, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "heatmaps/__init__.py":520
+  /* "heatmaps/__init__.py":530
  *         if isinstance(piece_counts, ndarray) and piece_counts.dtype == object:
  *             self.piece_counts = deepcopy(piece_counts)
  *         elif isinstance(             # <<<<<<<<<<<<<<
@@ -13242,7 +13262,7 @@ static PyObject *__pyx_pf_8heatmaps_16ChessMoveHeatmap___init__(CYTHON_UNUSED Py
     goto __pyx_L11_bool_binop_done;
   }
 
-  /* "heatmaps/__init__.py":521
+  /* "heatmaps/__init__.py":531
  *             self.piece_counts = deepcopy(piece_counts)
  *         elif isinstance(
  *                 data, (ChessMoveHeatmapT, ChessMoveHeatmap)             # <<<<<<<<<<<<<<
@@ -13260,27 +13280,27 @@ static PyObject *__pyx_pf_8heatmaps_16ChessMoveHeatmap___init__(CYTHON_UNUSED Py
     goto __pyx_L9_bool_binop_done;
   }
 
-  /* "heatmaps/__init__.py":522
+  /* "heatmaps/__init__.py":532
  *         elif isinstance(
  *                 data, (ChessMoveHeatmapT, ChessMoveHeatmap)
  *         ) or str(type(self)).replace('__main__', 'heatmaps') == str(type(data)):             # <<<<<<<<<<<<<<
  *             self.piece_counts = deepcopy(data.piece_counts)
  *         elif piece_counts is not None:
  */
-  __pyx_t_1 = __Pyx_PyObject_Unicode(((PyObject *)Py_TYPE(__pyx_v_self))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 522, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Unicode(((PyObject *)Py_TYPE(__pyx_v_self))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 532, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyUnicode_Replace(((PyObject*)__pyx_t_1), __pyx_n_u_main, __pyx_n_u_heatmaps, -1L); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 522, __pyx_L1_error)
+  __pyx_t_3 = PyUnicode_Replace(((PyObject*)__pyx_t_1), __pyx_n_u_main, __pyx_n_u_heatmaps, -1L); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 532, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Unicode(((PyObject *)Py_TYPE(__pyx_v_data))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 522, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Unicode(((PyObject *)Py_TYPE(__pyx_v_data))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 532, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = (__Pyx_PyUnicode_Equals(__pyx_t_3, __pyx_t_1, Py_EQ)); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 522, __pyx_L1_error)
+  __pyx_t_5 = (__Pyx_PyUnicode_Equals(__pyx_t_3, __pyx_t_1, Py_EQ)); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 532, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_4 = __pyx_t_5;
   __pyx_L9_bool_binop_done:;
 
-  /* "heatmaps/__init__.py":520
+  /* "heatmaps/__init__.py":530
  *         if isinstance(piece_counts, ndarray) and piece_counts.dtype == object:
  *             self.piece_counts = deepcopy(piece_counts)
  *         elif isinstance(             # <<<<<<<<<<<<<<
@@ -13289,16 +13309,16 @@ static PyObject *__pyx_pf_8heatmaps_16ChessMoveHeatmap___init__(CYTHON_UNUSED Py
  */
   if (__pyx_t_4) {
 
-    /* "heatmaps/__init__.py":523
+    /* "heatmaps/__init__.py":533
  *                 data, (ChessMoveHeatmapT, ChessMoveHeatmap)
  *         ) or str(type(self)).replace('__main__', 'heatmaps') == str(type(data)):
  *             self.piece_counts = deepcopy(data.piece_counts)             # <<<<<<<<<<<<<<
  *         elif piece_counts is not None:
  *             raise TypeError(f"piece_counts must be a NumPy array of dict, got {type(piece_counts)}")
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 523, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 533, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_data, __pyx_n_s_piece_counts_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 523, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_data, __pyx_n_s_piece_counts_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 533, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_8 = NULL;
     __pyx_t_6 = 0;
@@ -13319,14 +13339,14 @@ static PyObject *__pyx_pf_8heatmaps_16ChessMoveHeatmap___init__(CYTHON_UNUSED Py
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
       __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 523, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 533, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_piece_counts_2, __pyx_t_1) < 0) __PYX_ERR(0, 523, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_piece_counts_2, __pyx_t_1) < 0) __PYX_ERR(0, 533, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "heatmaps/__init__.py":520
+    /* "heatmaps/__init__.py":530
  *         if isinstance(piece_counts, ndarray) and piece_counts.dtype == object:
  *             self.piece_counts = deepcopy(piece_counts)
  *         elif isinstance(             # <<<<<<<<<<<<<<
@@ -13336,7 +13356,7 @@ static PyObject *__pyx_pf_8heatmaps_16ChessMoveHeatmap___init__(CYTHON_UNUSED Py
     goto __pyx_L6;
   }
 
-  /* "heatmaps/__init__.py":524
+  /* "heatmaps/__init__.py":534
  *         ) or str(type(self)).replace('__main__', 'heatmaps') == str(type(data)):
  *             self.piece_counts = deepcopy(data.piece_counts)
  *         elif piece_counts is not None:             # <<<<<<<<<<<<<<
@@ -13345,24 +13365,24 @@ static PyObject *__pyx_pf_8heatmaps_16ChessMoveHeatmap___init__(CYTHON_UNUSED Py
   __pyx_t_4 = (__pyx_v_piece_counts != Py_None);
   if (unlikely(__pyx_t_4)) {
 
-    /* "heatmaps/__init__.py":525
+    /* "heatmaps/__init__.py":535
  *             self.piece_counts = deepcopy(data.piece_counts)
  *         elif piece_counts is not None:
  *             raise TypeError(f"piece_counts must be a NumPy array of dict, got {type(piece_counts)}")             # <<<<<<<<<<<<<<
  */
-    __pyx_t_1 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_piece_counts)), __pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 525, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_FormatSimple(((PyObject *)Py_TYPE(__pyx_v_piece_counts)), __pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 535, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyUnicode_Concat(__pyx_kp_u_piece_counts_must_be_a_NumPy_arr, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 525, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyUnicode_Concat(__pyx_kp_u_piece_counts_must_be_a_NumPy_arr, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 535, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_TypeError, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 525, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_TypeError, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 535, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 525, __pyx_L1_error)
+    __PYX_ERR(0, 535, __pyx_L1_error)
 
-    /* "heatmaps/__init__.py":524
+    /* "heatmaps/__init__.py":534
  *         ) or str(type(self)).replace('__main__', 'heatmaps') == str(type(data)):
  *             self.piece_counts = deepcopy(data.piece_counts)
  *         elif piece_counts is not None:             # <<<<<<<<<<<<<<
@@ -13371,7 +13391,7 @@ static PyObject *__pyx_pf_8heatmaps_16ChessMoveHeatmap___init__(CYTHON_UNUSED Py
   }
   __pyx_L6:;
 
-  /* "heatmaps/__init__.py":493
+  /* "heatmaps/__init__.py":503
  *     """
  * 
  *     def __init__(             # <<<<<<<<<<<<<<
@@ -13608,7 +13628,9 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_AttributeError, __pyx_k_AttributeError, sizeof(__pyx_k_AttributeError), 0, 0, 1, 1},
     {&__pyx_n_s_COLORS, __pyx_k_COLORS, sizeof(__pyx_k_COLORS), 0, 0, 1, 1},
     {&__pyx_n_s_ChessMoveHeatmap, __pyx_k_ChessMoveHeatmap, sizeof(__pyx_k_ChessMoveHeatmap), 0, 0, 1, 1},
+    {&__pyx_n_u_ChessMoveHeatmap, __pyx_k_ChessMoveHeatmap, sizeof(__pyx_k_ChessMoveHeatmap), 0, 1, 0, 1},
     {&__pyx_n_s_ChessMoveHeatmapT, __pyx_k_ChessMoveHeatmapT, sizeof(__pyx_k_ChessMoveHeatmapT), 0, 0, 1, 1},
+    {&__pyx_n_u_ChessMoveHeatmapT, __pyx_k_ChessMoveHeatmapT, sizeof(__pyx_k_ChessMoveHeatmapT), 0, 1, 0, 1},
     {&__pyx_n_s_ChessMoveHeatmapT___add, __pyx_k_ChessMoveHeatmapT___add, sizeof(__pyx_k_ChessMoveHeatmapT___add), 0, 0, 1, 1},
     {&__pyx_n_s_ChessMoveHeatmapT___init, __pyx_k_ChessMoveHeatmapT___init, sizeof(__pyx_k_ChessMoveHeatmapT___init), 0, 0, 1, 1},
     {&__pyx_n_s_ChessMoveHeatmapT___truediv, __pyx_k_ChessMoveHeatmapT___truediv, sizeof(__pyx_k_ChessMoveHeatmapT___truediv), 0, 0, 1, 1},
@@ -13623,7 +13645,9 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_u_FFFFFF, __pyx_k_FFFFFF, sizeof(__pyx_k_FFFFFF), 0, 1, 0, 0},
     {&__pyx_n_s_FloatingPointError, __pyx_k_FloatingPointError, sizeof(__pyx_k_FloatingPointError), 0, 0, 1, 1},
     {&__pyx_n_s_GradientHeatmap, __pyx_k_GradientHeatmap, sizeof(__pyx_k_GradientHeatmap), 0, 0, 1, 1},
+    {&__pyx_n_u_GradientHeatmap, __pyx_k_GradientHeatmap, sizeof(__pyx_k_GradientHeatmap), 0, 1, 0, 1},
     {&__pyx_n_s_GradientHeatmapT, __pyx_k_GradientHeatmapT, sizeof(__pyx_k_GradientHeatmapT), 0, 0, 1, 1},
+    {&__pyx_n_u_GradientHeatmapT, __pyx_k_GradientHeatmapT, sizeof(__pyx_k_GradientHeatmapT), 0, 1, 0, 1},
     {&__pyx_n_s_GradientHeatmapT___add, __pyx_k_GradientHeatmapT___add, sizeof(__pyx_k_GradientHeatmapT___add), 0, 0, 1, 1},
     {&__pyx_n_s_GradientHeatmapT___getitem, __pyx_k_GradientHeatmapT___getitem, sizeof(__pyx_k_GradientHeatmapT___getitem), 0, 0, 1, 1},
     {&__pyx_n_s_GradientHeatmapT___init, __pyx_k_GradientHeatmapT___init, sizeof(__pyx_k_GradientHeatmapT___init), 0, 0, 1, 1},
@@ -13653,6 +13677,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_u_Other_must_be_a_shape, __pyx_k_Other_must_be_a_shape, sizeof(__pyx_k_Other_must_be_a_shape), 0, 1, 0, 0},
     {&__pyx_kp_u_Other_must_be_a_shape_64_ArrayLi, __pyx_k_Other_must_be_a_shape_64_ArrayLi, sizeof(__pyx_k_Other_must_be_a_shape_64_ArrayLi), 0, 1, 0, 0},
     {&__pyx_n_s_PIECES, __pyx_k_PIECES, sizeof(__pyx_k_PIECES), 0, 0, 1, 1},
+    {&__pyx_n_u_PIECES, __pyx_k_PIECES, sizeof(__pyx_k_PIECES), 0, 1, 0, 1},
     {&__pyx_n_s_PIECE_TYPES, __pyx_k_PIECE_TYPES, sizeof(__pyx_k_PIECE_TYPES), 0, 0, 1, 1},
     {&__pyx_n_s_Piece, __pyx_k_Piece, sizeof(__pyx_k_Piece), 0, 0, 1, 1},
     {&__pyx_n_s_Real, __pyx_k_Real, sizeof(__pyx_k_Real), 0, 0, 1, 1},
@@ -13678,6 +13703,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_abs, __pyx_k_abs, sizeof(__pyx_k_abs), 0, 0, 1, 1},
     {&__pyx_n_s_add, __pyx_k_add, sizeof(__pyx_k_add), 0, 0, 1, 1},
     {&__pyx_n_s_add_piece_counts, __pyx_k_add_piece_counts, sizeof(__pyx_k_add_piece_counts), 0, 0, 1, 1},
+    {&__pyx_n_s_all, __pyx_k_all, sizeof(__pyx_k_all), 0, 0, 1, 1},
     {&__pyx_n_s_annotations, __pyx_k_annotations, sizeof(__pyx_k_annotations), 0, 0, 1, 1},
     {&__pyx_n_s_args, __pyx_k_args, sizeof(__pyx_k_args), 0, 0, 1, 1},
     {&__pyx_n_s_array, __pyx_k_array, sizeof(__pyx_k_array), 0, 0, 1, 1},
@@ -13740,7 +13766,6 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_invalid, __pyx_k_invalid, sizeof(__pyx_k_invalid), 0, 0, 1, 1},
     {&__pyx_n_s_is_coroutine, __pyx_k_is_coroutine, sizeof(__pyx_k_is_coroutine), 0, 0, 1, 1},
     {&__pyx_kp_u_isenabled, __pyx_k_isenabled, sizeof(__pyx_k_isenabled), 0, 1, 0, 0},
-    {&__pyx_n_s_isnan, __pyx_k_isnan, sizeof(__pyx_k_isnan), 0, 0, 1, 1},
     {&__pyx_n_s_items, __pyx_k_items, sizeof(__pyx_k_items), 0, 0, 1, 1},
     {&__pyx_n_s_key_error, __pyx_k_key_error, sizeof(__pyx_k_key_error), 0, 0, 1, 1},
     {&__pyx_n_s_keys, __pyx_k_keys, sizeof(__pyx_k_keys), 0, 0, 1, 1},
@@ -13825,20 +13850,20 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
 }
 /* #### Code section: cached_builtins ### */
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_property = __Pyx_GetBuiltinName(__pyx_n_s_property); if (!__pyx_builtin_property) __PYX_ERR(0, 116, __pyx_L1_error)
-  __pyx_builtin_staticmethod = __Pyx_GetBuiltinName(__pyx_n_s_staticmethod); if (!__pyx_builtin_staticmethod) __PYX_ERR(0, 208, __pyx_L1_error)
-  __pyx_builtin_IndexError = __Pyx_GetBuiltinName(__pyx_n_s_IndexError); if (!__pyx_builtin_IndexError) __PYX_ERR(0, 48, __pyx_L1_error)
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 73, __pyx_L1_error)
-  __pyx_builtin_AttributeError = __Pyx_GetBuiltinName(__pyx_n_s_AttributeError); if (!__pyx_builtin_AttributeError) __PYX_ERR(0, 74, __pyx_L1_error)
-  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 114, __pyx_L1_error)
-  __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_n_s_super); if (!__pyx_builtin_super) __PYX_ERR(0, 180, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 290, __pyx_L1_error)
-  __pyx_builtin_ZeroDivisionError = __Pyx_GetBuiltinName(__pyx_n_s_ZeroDivisionError); if (!__pyx_builtin_ZeroDivisionError) __PYX_ERR(0, 358, __pyx_L1_error)
-  __pyx_builtin_FloatingPointError = __Pyx_GetBuiltinName(__pyx_n_s_FloatingPointError); if (!__pyx_builtin_FloatingPointError) __PYX_ERR(0, 361, __pyx_L1_error)
-  __pyx_builtin_ArithmeticError = __Pyx_GetBuiltinName(__pyx_n_s_ArithmeticError); if (!__pyx_builtin_ArithmeticError) __PYX_ERR(0, 366, __pyx_L1_error)
-  __pyx_builtin_KeyError = __Pyx_GetBuiltinName(__pyx_n_s_KeyError); if (!__pyx_builtin_KeyError) __PYX_ERR(0, 393, __pyx_L1_error)
-  __pyx_builtin_zip = __Pyx_GetBuiltinName(__pyx_n_s_zip); if (!__pyx_builtin_zip) __PYX_ERR(0, 436, __pyx_L1_error)
-  __pyx_builtin_object = __Pyx_GetBuiltinName(__pyx_n_s_object); if (!__pyx_builtin_object) __PYX_ERR(0, 473, __pyx_L1_error)
+  __pyx_builtin_property = __Pyx_GetBuiltinName(__pyx_n_s_property); if (!__pyx_builtin_property) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_builtin_staticmethod = __Pyx_GetBuiltinName(__pyx_n_s_staticmethod); if (!__pyx_builtin_staticmethod) __PYX_ERR(0, 218, __pyx_L1_error)
+  __pyx_builtin_IndexError = __Pyx_GetBuiltinName(__pyx_n_s_IndexError); if (!__pyx_builtin_IndexError) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 83, __pyx_L1_error)
+  __pyx_builtin_AttributeError = __Pyx_GetBuiltinName(__pyx_n_s_AttributeError); if (!__pyx_builtin_AttributeError) __PYX_ERR(0, 84, __pyx_L1_error)
+  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_n_s_super); if (!__pyx_builtin_super) __PYX_ERR(0, 190, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 300, __pyx_L1_error)
+  __pyx_builtin_ZeroDivisionError = __Pyx_GetBuiltinName(__pyx_n_s_ZeroDivisionError); if (!__pyx_builtin_ZeroDivisionError) __PYX_ERR(0, 368, __pyx_L1_error)
+  __pyx_builtin_FloatingPointError = __Pyx_GetBuiltinName(__pyx_n_s_FloatingPointError); if (!__pyx_builtin_FloatingPointError) __PYX_ERR(0, 371, __pyx_L1_error)
+  __pyx_builtin_ArithmeticError = __Pyx_GetBuiltinName(__pyx_n_s_ArithmeticError); if (!__pyx_builtin_ArithmeticError) __PYX_ERR(0, 376, __pyx_L1_error)
+  __pyx_builtin_KeyError = __Pyx_GetBuiltinName(__pyx_n_s_KeyError); if (!__pyx_builtin_KeyError) __PYX_ERR(0, 403, __pyx_L1_error)
+  __pyx_builtin_zip = __Pyx_GetBuiltinName(__pyx_n_s_zip); if (!__pyx_builtin_zip) __PYX_ERR(0, 446, __pyx_L1_error)
+  __pyx_builtin_object = __Pyx_GetBuiltinName(__pyx_n_s_object); if (!__pyx_builtin_object) __PYX_ERR(0, 483, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -13849,324 +13874,324 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "heatmaps/__init__.py":124
+  /* "heatmaps/__init__.py":134
  *     def shape(self, value: Tuple[int, int]) -> None:
  *         """Prevent modification of the shape."""
  *         raise AttributeError("Shape is immutable and cannot be changed.")             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_Shape_is_immutable_and_cannot_be); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_Shape_is_immutable_and_cannot_be); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 134, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "heatmaps/__init__.py":292
+  /* "heatmaps/__init__.py":302
  *         for i in range(64):
  *             bg_color: str_ = colors[i]  # Background color based on heatmap intensity
  *             text_color: str_ = str_("#FFFFFF") if int(bg_color[1:3], 16) < 128 else str_("#000000")             # <<<<<<<<<<<<<<
  * 
  *             html += str_(f"<tr style='background-color:{bg_color}; color:{text_color};'>")
  */
-  __pyx_slice__4 = PySlice_New(__pyx_int_1, __pyx_int_3, Py_None); if (unlikely(!__pyx_slice__4)) __PYX_ERR(0, 292, __pyx_L1_error)
+  __pyx_slice__4 = PySlice_New(__pyx_int_1, __pyx_int_3, Py_None); if (unlikely(!__pyx_slice__4)) __PYX_ERR(0, 302, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_slice__4);
   __Pyx_GIVEREF(__pyx_slice__4);
 
-  /* "heatmaps/__init__.py":360
+  /* "heatmaps/__init__.py":370
  *         except ZeroDivisionError as error:
  *             # Handle division by zero
  *             raise ZeroDivisionError("Division by zero is not allowed.") from error             # <<<<<<<<<<<<<<
  *         except FloatingPointError as error:
  *             # Check for division by zero
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_u_Division_by_zero_is_not_allowed); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 360, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_u_Division_by_zero_is_not_allowed); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 370, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "heatmaps/__init__.py":366
+  /* "heatmaps/__init__.py":376
  *                 raise ZeroDivisionError("Division by zero is not allowed.") from error
  *             # Fallback for other floating-point errors
  *             raise ArithmeticError("A floating-point error occurred during division.") from error             # <<<<<<<<<<<<<<
  *         except TypeError as error:
  *             # Handle non-numeric or unsupported divisor types
  */
-  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_u_A_floating_point_error_occurred); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 366, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_u_A_floating_point_error_occurred); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 376, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
 
-  /* "heatmaps/__init__.py":393
+  /* "heatmaps/__init__.py":403
  *             try:
  *                 return self + ChessMoveHeatmap(
  *                     data=other.get("data", KeyError),             # <<<<<<<<<<<<<<
  *                     piece_counts=other.get("piece_counts", KeyError)
  *                 )
  */
-  __pyx_tuple__8 = PyTuple_Pack(2, __pyx_n_u_data_2, __pyx_builtin_KeyError); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 393, __pyx_L1_error)
+  __pyx_tuple__8 = PyTuple_Pack(2, __pyx_n_u_data_2, __pyx_builtin_KeyError); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 403, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
 
-  /* "heatmaps/__init__.py":394
+  /* "heatmaps/__init__.py":404
  *                 return self + ChessMoveHeatmap(
  *                     data=other.get("data", KeyError),
  *                     piece_counts=other.get("piece_counts", KeyError)             # <<<<<<<<<<<<<<
  *                 )
  *             except AttributeError as attribute_error2:
  */
-  __pyx_tuple__9 = PyTuple_Pack(2, __pyx_n_u_piece_counts_2, __pyx_builtin_KeyError); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 394, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(2, __pyx_n_u_piece_counts_2, __pyx_builtin_KeyError); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 404, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
 
-  /* "heatmaps/__init__.py":473
+  /* "heatmaps/__init__.py":483
  *         """
  *         try:
  *             if value.shape == (64,) and value.dtype == object:             # <<<<<<<<<<<<<<
  *                 self._piece_counts = value
  *                 return
  */
-  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_int_64); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 473, __pyx_L1_error)
+  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_int_64); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 483, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
 
-  /* "heatmaps/__init__.py":27
+  /* "heatmaps/__init__.py":37
  *     """
  *     _data: NDArray[float64]
  *     _shape: Tuple[int, int] = (64, 2)             # <<<<<<<<<<<<<<
  * 
  *     def __init__(self) -> None:
  */
-  __pyx_tuple__11 = PyTuple_Pack(2, __pyx_int_64, __pyx_int_2); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_tuple__11 = PyTuple_Pack(2, __pyx_int_64, __pyx_int_2); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
 
-  /* "heatmaps/__init__.py":29
+  /* "heatmaps/__init__.py":39
  *     _shape: Tuple[int, int] = (64, 2)
  * 
  *     def __init__(self) -> None:             # <<<<<<<<<<<<<<
  *         """Initialize a heatmap with zeros."""
  *         self._data = zeros(self._shape, dtype=float64)
  */
-  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__12);
   __Pyx_GIVEREF(__pyx_tuple__12);
-  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_init, 29, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_init, 39, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) __PYX_ERR(0, 39, __pyx_L1_error)
 
-  /* "heatmaps/__init__.py":33
+  /* "heatmaps/__init__.py":43
  *         self._data = zeros(self._shape, dtype=float64)
  * 
  *     def __getitem__(self, square: Union[int, Iterable]) -> NDArray[float64]:             # <<<<<<<<<<<<<<
  *         """Retrieve the heatmap data for a given square.
  * 
  */
-  __pyx_tuple__14 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_square, __pyx_n_s_index_error); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_tuple__14 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_square, __pyx_n_s_index_error); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__14);
   __Pyx_GIVEREF(__pyx_tuple__14);
-  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_getitem, 33, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_getitem, 43, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 43, __pyx_L1_error)
 
-  /* "heatmaps/__init__.py":51
+  /* "heatmaps/__init__.py":61
  *             raise IndexError(f"square must be in range({self.shape[0]}) got {square}") from index_error
  * 
  *     def __setitem__(self, square: int, value: Union[NDArray[float64], ArrayLike]) -> None:             # <<<<<<<<<<<<<<
  *         """Set the heatmap data for a given square.
  * 
  */
-  __pyx_tuple__16 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_square, __pyx_n_s_value, __pyx_n_s_expected_shape, __pyx_n_s_value_error, __pyx_n_s_i); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_tuple__16 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_square, __pyx_n_s_value, __pyx_n_s_expected_shape, __pyx_n_s_value_error, __pyx_n_s_i); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__16);
   __Pyx_GIVEREF(__pyx_tuple__16);
-  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_setitem, 51, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_setitem, 61, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 61, __pyx_L1_error)
 
-  /* "heatmaps/__init__.py":82
+  /* "heatmaps/__init__.py":92
  *             raise IndexError(f"square must be in range({self.shape[0]}) got {square}") from i
  * 
  *     def __add__(self, other: Union["GradientHeatmapT", NDArray[float64], ArrayLike]) -> "GradientHeatmap":             # <<<<<<<<<<<<<<
  *         """Perform element-wise addition with another heatmap or compatible array.
  * 
  */
-  __pyx_tuple__18 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_other, __pyx_n_s_exception, __pyx_n_s_text); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_tuple__18 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_other, __pyx_n_s_exception, __pyx_n_s_text); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__18);
   __Pyx_GIVEREF(__pyx_tuple__18);
-  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_add, 82, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_add, 92, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 92, __pyx_L1_error)
 
-  /* "heatmaps/__init__.py":116
+  /* "heatmaps/__init__.py":126
  *                 raise TypeError(text) from exception
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def shape(self) -> Tuple[int, int]:
  *         """Return the shape of the heatmap."""
  */
-  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_shape_2, 116, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 116, __pyx_L1_error)
+  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_shape_2, 126, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 126, __pyx_L1_error)
 
-  /* "heatmaps/__init__.py":121
+  /* "heatmaps/__init__.py":131
  *         return self._shape
  * 
  *     @shape.setter             # <<<<<<<<<<<<<<
  *     def shape(self, value: Tuple[int, int]) -> None:
  *         """Prevent modification of the shape."""
  */
-  __pyx_tuple__21 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_value); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 121, __pyx_L1_error)
+  __pyx_tuple__21 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_value); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__21);
   __Pyx_GIVEREF(__pyx_tuple__21);
-  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_shape_2, 121, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 121, __pyx_L1_error)
+  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_shape_2, 131, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 131, __pyx_L1_error)
 
-  /* "heatmaps/__init__.py":126
+  /* "heatmaps/__init__.py":136
  *         raise AttributeError("Shape is immutable and cannot be changed.")
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def data(self) -> NDArray[float64]:
  *         """Return the heatmap data."""
  */
-  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_data_2, 126, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_data_2, 136, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) __PYX_ERR(0, 136, __pyx_L1_error)
 
-  /* "heatmaps/__init__.py":131
+  /* "heatmaps/__init__.py":141
  *         return self._data
  * 
  *     @data.setter             # <<<<<<<<<<<<<<
  *     def data(self, value: Union[NDArray[float64], ArrayLike]) -> None:
  *         """Set the heatmap data, ensuring correct type and shape.
  */
-  __pyx_tuple__24 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_value, __pyx_n_s_exception); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __pyx_tuple__24 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_value, __pyx_n_s_exception); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(0, 141, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__24);
   __Pyx_GIVEREF(__pyx_tuple__24);
-  __pyx_codeobj__25 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__24, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_data_2, 131, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__25)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __pyx_codeobj__25 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__24, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_data_2, 141, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__25)) __PYX_ERR(0, 141, __pyx_L1_error)
 
-  /* "heatmaps/__init__.py":169
+  /* "heatmaps/__init__.py":179
  *     """A subclass of `GradientHeatmapT` that supports additional operations like normalization and color conversion."""
  * 
  *     def __init__(self, data: Union[Optional[NDArray[float64]], GradientHeatmapT, ArrayLike] = None) -> None:             # <<<<<<<<<<<<<<
  *         """Initialize a gradient heatmap.
  * 
  */
-  __pyx_tuple__26 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_data_2); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 169, __pyx_L1_error)
+  __pyx_tuple__26 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_data_2); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 179, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__26);
   __Pyx_GIVEREF(__pyx_tuple__26);
-  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_init, 169, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(0, 169, __pyx_L1_error)
-  __pyx_tuple__28 = PyTuple_Pack(1, Py_None); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 169, __pyx_L1_error)
+  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_init, 179, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_tuple__28 = PyTuple_Pack(1, Py_None); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 179, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__28);
   __Pyx_GIVEREF(__pyx_tuple__28);
 
-  /* "heatmaps/__init__.py":194
+  /* "heatmaps/__init__.py":204
  *             )
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def _normalize_(self) -> NDArray[float64]:
  *         """Return the normalized heatmap data.
  */
-  __pyx_tuple__29 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_max_value); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_tuple__29 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_max_value); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 204, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__29);
   __Pyx_GIVEREF(__pyx_tuple__29);
-  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_normalize, 194, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_normalize, 204, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 204, __pyx_L1_error)
 
-  /* "heatmaps/__init__.py":208
+  /* "heatmaps/__init__.py":218
  *         return self.data / max_value if max_value > 0 else self.data
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
  *     def _intensity_to_color_(red64: float64, blue64: float64) -> str:
  *         """Convert intensity values into a hexadecimal color string.
  */
-  __pyx_tuple__31 = PyTuple_Pack(6, __pyx_n_s_red64, __pyx_n_s_blue64, __pyx_n_s_delta, __pyx_n_s_green, __pyx_n_s_red, __pyx_n_s_blue); if (unlikely(!__pyx_tuple__31)) __PYX_ERR(0, 208, __pyx_L1_error)
+  __pyx_tuple__31 = PyTuple_Pack(6, __pyx_n_s_red64, __pyx_n_s_blue64, __pyx_n_s_delta, __pyx_n_s_green, __pyx_n_s_red, __pyx_n_s_blue); if (unlikely(!__pyx_tuple__31)) __PYX_ERR(0, 218, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__31);
   __Pyx_GIVEREF(__pyx_tuple__31);
-  __pyx_codeobj__32 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__31, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_intensity_to_color, 208, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__32)) __PYX_ERR(0, 208, __pyx_L1_error)
+  __pyx_codeobj__32 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__31, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_intensity_to_color, 218, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__32)) __PYX_ERR(0, 218, __pyx_L1_error)
 
-  /* "heatmaps/__init__.py":234
+  /* "heatmaps/__init__.py":244
  *         return f"#{red:02x}{green:02x}{blue:02x}"
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def colors(self) -> NDArray[str_]:
  *         """Generate an array of color strings for each square.
  */
-  __pyx_tuple__33 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_s); if (unlikely(!__pyx_tuple__33)) __PYX_ERR(0, 234, __pyx_L1_error)
+  __pyx_tuple__33 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_s); if (unlikely(!__pyx_tuple__33)) __PYX_ERR(0, 244, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__33);
   __Pyx_GIVEREF(__pyx_tuple__33);
-  __pyx_codeobj__34 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_colors, 234, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__34)) __PYX_ERR(0, 234, __pyx_L1_error)
+  __pyx_codeobj__34 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_colors, 244, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__34)) __PYX_ERR(0, 244, __pyx_L1_error)
 
-  /* "heatmaps/__init__.py":249
+  /* "heatmaps/__init__.py":259
  *         return array([self._intensity_to_color_(s[1], s[0]) for s in self._normalize_], dtype=str_)
  * 
  *     def _repr_html_(self) -> str:             # <<<<<<<<<<<<<<
  *         """Render the heatmap's data as an HTML table with colorized rows representing move intensities.
  * 
  */
-  __pyx_tuple__35 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_colors, __pyx_n_s_sep, __pyx_n_s_html, __pyx_n_s_i, __pyx_n_s_bg_color, __pyx_n_s_text_color); if (unlikely(!__pyx_tuple__35)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __pyx_tuple__35 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_colors, __pyx_n_s_sep, __pyx_n_s_html, __pyx_n_s_i, __pyx_n_s_bg_color, __pyx_n_s_text_color); if (unlikely(!__pyx_tuple__35)) __PYX_ERR(0, 259, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__35);
   __Pyx_GIVEREF(__pyx_tuple__35);
-  __pyx_codeobj__36 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__35, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_repr_html, 249, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__36)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __pyx_codeobj__36 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__35, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_repr_html, 259, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__36)) __PYX_ERR(0, 259, __pyx_L1_error)
 
-  /* "heatmaps/__init__.py":316
+  /* "heatmaps/__init__.py":326
  *     _piece_counts: NDArray[Dict[Piece, float64]]
  * 
  *     def __init__(self, **kwargs) -> None:             # <<<<<<<<<<<<<<
  *         """Initialize the ChessMoveHeatmapT.
  * 
  */
-  __pyx_tuple__38 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_kwargs, __pyx_n_s_piece_key, __pyx_n_s__37, __pyx_n_s_piece_key); if (unlikely(!__pyx_tuple__38)) __PYX_ERR(0, 316, __pyx_L1_error)
+  __pyx_tuple__38 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_kwargs, __pyx_n_s_piece_key, __pyx_n_s__37, __pyx_n_s_piece_key); if (unlikely(!__pyx_tuple__38)) __PYX_ERR(0, 326, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__38);
   __Pyx_GIVEREF(__pyx_tuple__38);
-  __pyx_codeobj__39 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__38, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_init, 316, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__39)) __PYX_ERR(0, 316, __pyx_L1_error)
+  __pyx_codeobj__39 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__38, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_init, 326, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__39)) __PYX_ERR(0, 326, __pyx_L1_error)
 
-  /* "heatmaps/__init__.py":329
+  /* "heatmaps/__init__.py":339
  *         )
  * 
  *     def __truediv__(self, divisor: Real) -> "ChessMoveHeatmap":             # <<<<<<<<<<<<<<
  *         """Returns a new ChessMoveHeatmap where each value is divided by the given divisor.
  * 
  */
-  __pyx_tuple__40 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_divisor, __pyx_n_s_piece_count, __pyx_n_s_piece, __pyx_n_s_count, __pyx_n_s_error, __pyx_n_s_piece_count, __pyx_n_s_piece, __pyx_n_s_count); if (unlikely(!__pyx_tuple__40)) __PYX_ERR(0, 329, __pyx_L1_error)
+  __pyx_tuple__40 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_divisor, __pyx_n_s_piece_count, __pyx_n_s_piece, __pyx_n_s_count, __pyx_n_s_error, __pyx_n_s_piece_count, __pyx_n_s_piece, __pyx_n_s_count); if (unlikely(!__pyx_tuple__40)) __PYX_ERR(0, 339, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__40);
   __Pyx_GIVEREF(__pyx_tuple__40);
-  __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_truediv, 329, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) __PYX_ERR(0, 329, __pyx_L1_error)
+  __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_truediv, 339, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) __PYX_ERR(0, 339, __pyx_L1_error)
 
-  /* "heatmaps/__init__.py":374
+  /* "heatmaps/__init__.py":384
  *             raise ArithmeticError(f"An unexpected error occurred during division: {type(error).__name__}") from error
  * 
  *     def __add__(             # <<<<<<<<<<<<<<
  *             self,
  *             other: Union[
  */
-  __pyx_tuple__42 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_other, __pyx_n_s_attribute_error, __pyx_n_s_attribute_error2, __pyx_n_s_index_error, __pyx_n_s_error1, __pyx_n_s_key_error, __pyx_n_s_text, __pyx_n_s_error0); if (unlikely(!__pyx_tuple__42)) __PYX_ERR(0, 374, __pyx_L1_error)
+  __pyx_tuple__42 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_other, __pyx_n_s_attribute_error, __pyx_n_s_attribute_error2, __pyx_n_s_index_error, __pyx_n_s_error1, __pyx_n_s_key_error, __pyx_n_s_text, __pyx_n_s_error0); if (unlikely(!__pyx_tuple__42)) __PYX_ERR(0, 384, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__42);
   __Pyx_GIVEREF(__pyx_tuple__42);
-  __pyx_codeobj__43 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__42, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_add, 374, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__43)) __PYX_ERR(0, 374, __pyx_L1_error)
+  __pyx_codeobj__43 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__42, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_add, 384, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__43)) __PYX_ERR(0, 384, __pyx_L1_error)
 
-  /* "heatmaps/__init__.py":416
+  /* "heatmaps/__init__.py":426
  *                 raise error0 from attribute_error
  * 
  *     def add_piece_counts(self, other_piece_counts: NDArray[Dict[Piece, float64]]) -> NDArray[Dict[Piece, float64]]:             # <<<<<<<<<<<<<<
  *         """
  * 
  */
-  __pyx_tuple__44 = PyTuple_Pack(10, __pyx_n_s_self, __pyx_n_s_other_piece_counts, __pyx_n_s_self_pcount, __pyx_n_s_other_pcount, __pyx_n_s_sp_v, __pyx_n_s_sp_k, __pyx_n_s_self_pcount, __pyx_n_s_other_pcount, __pyx_n_s_sp_k, __pyx_n_s_sp_v); if (unlikely(!__pyx_tuple__44)) __PYX_ERR(0, 416, __pyx_L1_error)
+  __pyx_tuple__44 = PyTuple_Pack(10, __pyx_n_s_self, __pyx_n_s_other_piece_counts, __pyx_n_s_self_pcount, __pyx_n_s_other_pcount, __pyx_n_s_sp_v, __pyx_n_s_sp_k, __pyx_n_s_self_pcount, __pyx_n_s_other_pcount, __pyx_n_s_sp_k, __pyx_n_s_sp_v); if (unlikely(!__pyx_tuple__44)) __PYX_ERR(0, 426, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__44);
   __Pyx_GIVEREF(__pyx_tuple__44);
-  __pyx_codeobj__45 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__44, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_add_piece_counts, 416, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__45)) __PYX_ERR(0, 416, __pyx_L1_error)
+  __pyx_codeobj__45 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__44, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_add_piece_counts, 426, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__45)) __PYX_ERR(0, 426, __pyx_L1_error)
 
-  /* "heatmaps/__init__.py":441
+  /* "heatmaps/__init__.py":451
  *         )
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def piece_counts(self) -> NDArray[Dict[Piece, float64]]:
  *         """
  */
-  __pyx_codeobj__46 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_piece_counts_2, 441, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__46)) __PYX_ERR(0, 441, __pyx_L1_error)
+  __pyx_codeobj__46 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_piece_counts_2, 451, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__46)) __PYX_ERR(0, 451, __pyx_L1_error)
 
-  /* "heatmaps/__init__.py":454
+  /* "heatmaps/__init__.py":464
  *         return self._piece_counts
  * 
  *     @piece_counts.setter             # <<<<<<<<<<<<<<
  *     def piece_counts(self, value: NDArray[Dict[Piece, float64]]) -> None:
  *         """
  */
-  __pyx_codeobj__47 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__24, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_piece_counts_2, 454, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__47)) __PYX_ERR(0, 454, __pyx_L1_error)
+  __pyx_codeobj__47 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__24, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_piece_counts_2, 464, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__47)) __PYX_ERR(0, 464, __pyx_L1_error)
 
-  /* "heatmaps/__init__.py":493
+  /* "heatmaps/__init__.py":503
  *     """
  * 
  *     def __init__(             # <<<<<<<<<<<<<<
  *             self,
  *             piece_counts: Optional[NDArray[Dict[Piece, float64]]] = None,
  */
-  __pyx_tuple__48 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_piece_counts_2, __pyx_n_s_kwargs, __pyx_n_s_data_2); if (unlikely(!__pyx_tuple__48)) __PYX_ERR(0, 493, __pyx_L1_error)
+  __pyx_tuple__48 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_piece_counts_2, __pyx_n_s_kwargs, __pyx_n_s_data_2); if (unlikely(!__pyx_tuple__48)) __PYX_ERR(0, 503, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__48);
   __Pyx_GIVEREF(__pyx_tuple__48);
-  __pyx_codeobj__49 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__48, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_init, 493, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__49)) __PYX_ERR(0, 493, __pyx_L1_error)
+  __pyx_codeobj__49 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__48, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_heatmaps___init___py, __pyx_n_s_init, 503, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__49)) __PYX_ERR(0, 503, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -14240,15 +14265,15 @@ static int __Pyx_modinit_type_init_code(void) {
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
   #if CYTHON_USE_TYPE_SPECS
-  __pyx_ptype_8heatmaps___pyx_scope_struct__genexpr = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_8heatmaps___pyx_scope_struct__genexpr_spec, NULL); if (unlikely(!__pyx_ptype_8heatmaps___pyx_scope_struct__genexpr)) __PYX_ERR(0, 10, __pyx_L1_error)
-  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_8heatmaps___pyx_scope_struct__genexpr_spec, __pyx_ptype_8heatmaps___pyx_scope_struct__genexpr) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_ptype_8heatmaps___pyx_scope_struct__genexpr = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_8heatmaps___pyx_scope_struct__genexpr_spec, NULL); if (unlikely(!__pyx_ptype_8heatmaps___pyx_scope_struct__genexpr)) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_8heatmaps___pyx_scope_struct__genexpr_spec, __pyx_ptype_8heatmaps___pyx_scope_struct__genexpr) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
   #else
   __pyx_ptype_8heatmaps___pyx_scope_struct__genexpr = &__pyx_type_8heatmaps___pyx_scope_struct__genexpr;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
   #endif
   #if !CYTHON_USE_TYPE_SPECS
-  if (__Pyx_PyType_Ready(__pyx_ptype_8heatmaps___pyx_scope_struct__genexpr) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
+  if (__Pyx_PyType_Ready(__pyx_ptype_8heatmaps___pyx_scope_struct__genexpr) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
   #endif
   #if PY_MAJOR_VERSION < 3
   __pyx_ptype_8heatmaps___pyx_scope_struct__genexpr->tp_print = 0;
@@ -14678,7 +14703,7 @@ if (!__Pyx_RefNanny) {
  * from typing import Dict, Iterable, Optional, Tuple, Union
  * 
  * from chess import COLORS, PIECE_TYPES, Piece             # <<<<<<<<<<<<<<
- * from numpy import abs as np_abs, array, asarray, float64, isnan, ndarray, seterr, str_, zeros
+ * from numpy import abs as np_abs, array, asarray, float64, ndarray, seterr, str_, zeros
  * from numpy.typing import ArrayLike, NDArray
  */
   __pyx_t_3 = PyList_New(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 6, __pyx_L1_error)
@@ -14712,11 +14737,11 @@ if (!__Pyx_RefNanny) {
   /* "heatmaps/__init__.py":7
  * 
  * from chess import COLORS, PIECE_TYPES, Piece
- * from numpy import abs as np_abs, array, asarray, float64, isnan, ndarray, seterr, str_, zeros             # <<<<<<<<<<<<<<
+ * from numpy import abs as np_abs, array, asarray, float64, ndarray, seterr, str_, zeros             # <<<<<<<<<<<<<<
  * from numpy.typing import ArrayLike, NDArray
  * 
  */
-  __pyx_t_2 = PyList_New(9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_t_2 = PyList_New(8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_n_s_abs);
   __Pyx_GIVEREF(__pyx_n_s_abs);
@@ -14730,21 +14755,18 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(__pyx_n_s_float64);
   __Pyx_GIVEREF(__pyx_n_s_float64);
   if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 3, __pyx_n_s_float64)) __PYX_ERR(0, 7, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_s_isnan);
-  __Pyx_GIVEREF(__pyx_n_s_isnan);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 4, __pyx_n_s_isnan)) __PYX_ERR(0, 7, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_s_ndarray);
   __Pyx_GIVEREF(__pyx_n_s_ndarray);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 5, __pyx_n_s_ndarray)) __PYX_ERR(0, 7, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 4, __pyx_n_s_ndarray)) __PYX_ERR(0, 7, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_s_seterr);
   __Pyx_GIVEREF(__pyx_n_s_seterr);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 6, __pyx_n_s_seterr)) __PYX_ERR(0, 7, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 5, __pyx_n_s_seterr)) __PYX_ERR(0, 7, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_s_str);
   __Pyx_GIVEREF(__pyx_n_s_str);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 7, __pyx_n_s_str)) __PYX_ERR(0, 7, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 6, __pyx_n_s_str)) __PYX_ERR(0, 7, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_s_zeros);
   __Pyx_GIVEREF(__pyx_n_s_zeros);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 8, __pyx_n_s_zeros)) __PYX_ERR(0, 7, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 7, __pyx_n_s_zeros)) __PYX_ERR(0, 7, __pyx_L1_error);
   __pyx_t_3 = __Pyx_Import(__pyx_n_s_numpy, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -14763,10 +14785,6 @@ if (!__Pyx_RefNanny) {
   __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_float64, __pyx_t_2) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_isnan); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 7, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_isnan, __pyx_t_2) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_ndarray); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -14788,10 +14806,10 @@ if (!__Pyx_RefNanny) {
 
   /* "heatmaps/__init__.py":8
  * from chess import COLORS, PIECE_TYPES, Piece
- * from numpy import abs as np_abs, array, asarray, float64, isnan, ndarray, seterr, str_, zeros
+ * from numpy import abs as np_abs, array, asarray, float64, ndarray, seterr, str_, zeros
  * from numpy.typing import ArrayLike, NDArray             # <<<<<<<<<<<<<<
  * 
- * PIECES: Tuple[Piece, ...] = tuple(Piece(p, c) for c in COLORS for p in PIECE_TYPES)
+ * __all__ = [
  */
   __pyx_t_3 = PyList_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -14817,157 +14835,184 @@ if (!__Pyx_RefNanny) {
   /* "heatmaps/__init__.py":10
  * from numpy.typing import ArrayLike, NDArray
  * 
+ * __all__ = [             # <<<<<<<<<<<<<<
+ *     # Classes
+ *     'GradientHeatmap',
+ */
+  __pyx_t_2 = PyList_New(5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_INCREF(__pyx_n_u_GradientHeatmap);
+  __Pyx_GIVEREF(__pyx_n_u_GradientHeatmap);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_u_GradientHeatmap)) __PYX_ERR(0, 10, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_u_GradientHeatmapT);
+  __Pyx_GIVEREF(__pyx_n_u_GradientHeatmapT);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_u_GradientHeatmapT)) __PYX_ERR(0, 10, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_u_ChessMoveHeatmap);
+  __Pyx_GIVEREF(__pyx_n_u_ChessMoveHeatmap);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 2, __pyx_n_u_ChessMoveHeatmap)) __PYX_ERR(0, 10, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_u_ChessMoveHeatmapT);
+  __Pyx_GIVEREF(__pyx_n_u_ChessMoveHeatmapT);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 3, __pyx_n_u_ChessMoveHeatmapT)) __PYX_ERR(0, 10, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_u_PIECES);
+  __Pyx_GIVEREF(__pyx_n_u_PIECES);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 4, __pyx_n_u_PIECES)) __PYX_ERR(0, 10, __pyx_L1_error);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_all, __pyx_t_2) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "heatmaps/__init__.py":20
+ * ]
+ * 
  * PIECES: Tuple[Piece, ...] = tuple(Piece(p, c) for c in COLORS for p in PIECE_TYPES)             # <<<<<<<<<<<<<<
  * 
  * seterr(invalid="raise")
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_COLORS); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_COLORS); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __pyx_pf_8heatmaps_genexpr(NULL, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_t_3 = __pyx_pf_8heatmaps_genexpr(NULL, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PySequence_Tuple(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PySequence_Tuple(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_PIECES, __pyx_t_2) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_PIECES, __pyx_t_2) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "heatmaps/__init__.py":12
+  /* "heatmaps/__init__.py":22
  * PIECES: Tuple[Piece, ...] = tuple(Piece(p, c) for c in COLORS for p in PIECE_TYPES)
  * 
  * seterr(invalid="raise")             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_seterr); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_seterr); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_invalid, __pyx_n_u_raise) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 12, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_invalid, __pyx_n_u_raise) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "heatmaps/__init__.py":15
+  /* "heatmaps/__init__.py":25
  * 
  * 
  * class GradientHeatmapT:             # <<<<<<<<<<<<<<
  *     """A base class representing a gradient heatmap for a chessboard position.
  * 
  */
-  __pyx_t_4 = __Pyx_Py3MetaclassPrepare((PyObject *) NULL, __pyx_empty_tuple, __pyx_n_s_GradientHeatmapT, __pyx_n_s_GradientHeatmapT, (PyObject *) NULL, __pyx_n_s_heatmaps, __pyx_kp_s_A_base_class_representing_a_grad); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_Py3MetaclassPrepare((PyObject *) NULL, __pyx_empty_tuple, __pyx_n_s_GradientHeatmapT, __pyx_n_s_GradientHeatmapT, (PyObject *) NULL, __pyx_n_s_heatmaps, __pyx_kp_s_A_base_class_representing_a_grad); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 25, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 25, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_data, __pyx_kp_s_NDArray_float64) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_shape, __pyx_kp_s_Tuple_int_int) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_annotations, __pyx_t_3) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_data, __pyx_kp_s_NDArray_float64) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_shape, __pyx_kp_s_Tuple_int_int) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_annotations, __pyx_t_3) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "heatmaps/__init__.py":27
+  /* "heatmaps/__init__.py":37
  *     """
  *     _data: NDArray[float64]
  *     _shape: Tuple[int, int] = (64, 2)             # <<<<<<<<<<<<<<
  * 
  *     def __init__(self) -> None:
  */
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_shape, __pyx_tuple__11) < 0) __PYX_ERR(0, 27, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_shape, __pyx_tuple__11) < 0) __PYX_ERR(0, 37, __pyx_L1_error)
 
-  /* "heatmaps/__init__.py":29
+  /* "heatmaps/__init__.py":39
  *     _shape: Tuple[int, int] = (64, 2)
  * 
  *     def __init__(self) -> None:             # <<<<<<<<<<<<<<
  *         """Initialize a heatmap with zeros."""
  *         self._data = zeros(self._shape, dtype=float64)
  */
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_16GradientHeatmapT_1__init__, 0, __pyx_n_s_GradientHeatmapT___init, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__13)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 29, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_16GradientHeatmapT_1__init__, 0, __pyx_n_s_GradientHeatmapT___init, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__13)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_init, __pyx_t_2) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_init, __pyx_t_2) < 0) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "heatmaps/__init__.py":33
+  /* "heatmaps/__init__.py":43
  *         self._data = zeros(self._shape, dtype=float64)
  * 
  *     def __getitem__(self, square: Union[int, Iterable]) -> NDArray[float64]:             # <<<<<<<<<<<<<<
  *         """Retrieve the heatmap data for a given square.
  * 
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_square, __pyx_kp_s_Union_int_Iterable) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_kp_s_NDArray_float64) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_16GradientHeatmapT_3__getitem__, 0, __pyx_n_s_GradientHeatmapT___getitem, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 33, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_square, __pyx_kp_s_Union_int_Iterable) < 0) __PYX_ERR(0, 43, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_kp_s_NDArray_float64) < 0) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_16GradientHeatmapT_3__getitem__, 0, __pyx_n_s_GradientHeatmapT___getitem, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_getitem, __pyx_t_3) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_getitem, __pyx_t_3) < 0) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "heatmaps/__init__.py":51
+  /* "heatmaps/__init__.py":61
  *             raise IndexError(f"square must be in range({self.shape[0]}) got {square}") from index_error
  * 
  *     def __setitem__(self, square: int, value: Union[NDArray[float64], ArrayLike]) -> None:             # <<<<<<<<<<<<<<
  *         """Set the heatmap data for a given square.
  * 
  */
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_square, __pyx_n_s_int) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_value, __pyx_kp_s_Union_NDArray_float64_ArrayLike) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_16GradientHeatmapT_5__setitem__, 0, __pyx_n_s_GradientHeatmapT___setitem, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_square, __pyx_n_s_int) < 0) __PYX_ERR(0, 61, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_value, __pyx_kp_s_Union_NDArray_float64_ArrayLike) < 0) __PYX_ERR(0, 61, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 61, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_16GradientHeatmapT_5__setitem__, 0, __pyx_n_s_GradientHeatmapT___setitem, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_setitem, __pyx_t_2) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_setitem, __pyx_t_2) < 0) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "heatmaps/__init__.py":82
+  /* "heatmaps/__init__.py":92
  *             raise IndexError(f"square must be in range({self.shape[0]}) got {square}") from i
  * 
  *     def __add__(self, other: Union["GradientHeatmapT", NDArray[float64], ArrayLike]) -> "GradientHeatmap":             # <<<<<<<<<<<<<<
  *         """Perform element-wise addition with another heatmap or compatible array.
  * 
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_other, __pyx_kp_s_Union_GradientHeatmapT_NDArray_f) < 0) __PYX_ERR(0, 82, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_kp_s_GradientHeatmap_2) < 0) __PYX_ERR(0, 82, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_16GradientHeatmapT_7__add__, 0, __pyx_n_s_GradientHeatmapT___add, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__19)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 82, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_other, __pyx_kp_s_Union_GradientHeatmapT_NDArray_f) < 0) __PYX_ERR(0, 92, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_kp_s_GradientHeatmap_2) < 0) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_16GradientHeatmapT_7__add__, 0, __pyx_n_s_GradientHeatmapT___add, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__19)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_add, __pyx_t_3) < 0) __PYX_ERR(0, 82, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_add, __pyx_t_3) < 0) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "heatmaps/__init__.py":116
+  /* "heatmaps/__init__.py":126
  *                 raise TypeError(text) from exception
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def shape(self) -> Tuple[int, int]:
  *         """Return the shape of the heatmap."""
  */
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 116, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_kp_s_Tuple_int_int) < 0) __PYX_ERR(0, 116, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_16GradientHeatmapT_9shape, 0, __pyx_n_s_GradientHeatmapT_shape, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__20)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 116, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_kp_s_Tuple_int_int) < 0) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_16GradientHeatmapT_9shape, 0, __pyx_n_s_GradientHeatmapT_shape, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__20)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_property, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 116, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_property, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_shape_2, __pyx_t_3) < 0) __PYX_ERR(0, 116, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_shape_2, __pyx_t_3) < 0) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "heatmaps/__init__.py":121
+  /* "heatmaps/__init__.py":131
  *         return self._shape
  * 
  *     @shape.setter             # <<<<<<<<<<<<<<
@@ -14979,16 +15024,16 @@ if (!__Pyx_RefNanny) {
     PyErr_Clear();
     __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_shape_2);
   }
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 121, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_setter); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 121, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_setter); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 121, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_value, __pyx_kp_s_Tuple_int_int) < 0) __PYX_ERR(0, 121, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 121, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_16GradientHeatmapT_11shape, 0, __pyx_n_s_GradientHeatmapT_shape, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 121, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_value, __pyx_kp_s_Tuple_int_int) < 0) __PYX_ERR(0, 131, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 131, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_16GradientHeatmapT_11shape, 0, __pyx_n_s_GradientHeatmapT_shape, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -15011,34 +15056,34 @@ if (!__Pyx_RefNanny) {
     __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_5, __pyx_callargs+1-__pyx_t_7, 1+__pyx_t_7);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 121, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 131, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_shape_2, __pyx_t_3) < 0) __PYX_ERR(0, 121, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_shape_2, __pyx_t_3) < 0) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "heatmaps/__init__.py":126
+  /* "heatmaps/__init__.py":136
  *         raise AttributeError("Shape is immutable and cannot be changed.")
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def data(self) -> NDArray[float64]:
  *         """Return the heatmap data."""
  */
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_kp_s_NDArray_float64) < 0) __PYX_ERR(0, 126, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_16GradientHeatmapT_13data, 0, __pyx_n_s_GradientHeatmapT_data, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__23)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 126, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_kp_s_NDArray_float64) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_16GradientHeatmapT_13data, 0, __pyx_n_s_GradientHeatmapT_data, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__23)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_property, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_property, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_data_2, __pyx_t_3) < 0) __PYX_ERR(0, 126, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_data_2, __pyx_t_3) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "heatmaps/__init__.py":131
+  /* "heatmaps/__init__.py":141
  *         return self._data
  * 
  *     @data.setter             # <<<<<<<<<<<<<<
@@ -15050,16 +15095,16 @@ if (!__Pyx_RefNanny) {
     PyErr_Clear();
     __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_data_2);
   }
-  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 131, __pyx_L1_error)
+  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 141, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_setter); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_setter); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 141, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 141, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_value, __pyx_kp_s_Union_NDArray_float64_ArrayLike) < 0) __PYX_ERR(0, 131, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 131, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_16GradientHeatmapT_15data, 0, __pyx_n_s_GradientHeatmapT_data, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__25)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_value, __pyx_kp_s_Union_NDArray_float64_ArrayLike) < 0) __PYX_ERR(0, 141, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 141, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_16GradientHeatmapT_15data, 0, __pyx_n_s_GradientHeatmapT_data, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__25)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 141, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_5);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -15082,65 +15127,65 @@ if (!__Pyx_RefNanny) {
     __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_7, 1+__pyx_t_7);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 131, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 141, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
-  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_data_2, __pyx_t_3) < 0) __PYX_ERR(0, 131, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_data_2, __pyx_t_3) < 0) __PYX_ERR(0, 141, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "heatmaps/__init__.py":15
+  /* "heatmaps/__init__.py":25
  * 
  * 
  * class GradientHeatmapT:             # <<<<<<<<<<<<<<
  *     """A base class representing a gradient heatmap for a chessboard position.
  * 
  */
-  __pyx_t_3 = __Pyx_Py3ClassCreate(((PyObject*)&PyType_Type), __pyx_n_s_GradientHeatmapT, __pyx_empty_tuple, __pyx_t_4, NULL, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_Py3ClassCreate(((PyObject*)&PyType_Type), __pyx_n_s_GradientHeatmapT, __pyx_empty_tuple, __pyx_t_4, NULL, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 25, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_GradientHeatmapT, __pyx_t_3) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_GradientHeatmapT, __pyx_t_3) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "heatmaps/__init__.py":166
+  /* "heatmaps/__init__.py":176
  * 
  * 
  * class GradientHeatmap(GradientHeatmapT):             # <<<<<<<<<<<<<<
  *     """A subclass of `GradientHeatmapT` that supports additional operations like normalization and color conversion."""
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_GradientHeatmapT); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 166, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_GradientHeatmapT); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 176, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 176, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_4);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4)) __PYX_ERR(0, 166, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4)) __PYX_ERR(0, 176, __pyx_L1_error);
   __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PEP560_update_bases(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PEP560_update_bases(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 176, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_6 = __Pyx_CalculateMetaclass(NULL, __pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CalculateMetaclass(NULL, __pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 176, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = __Pyx_Py3MetaclassPrepare(__pyx_t_6, __pyx_t_4, __pyx_n_s_GradientHeatmap, __pyx_n_s_GradientHeatmap, (PyObject *) NULL, __pyx_n_s_heatmaps, __pyx_kp_s_A_subclass_of_GradientHeatmapT_t); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Py3MetaclassPrepare(__pyx_t_6, __pyx_t_4, __pyx_n_s_GradientHeatmap, __pyx_n_s_GradientHeatmap, (PyObject *) NULL, __pyx_n_s_heatmaps, __pyx_kp_s_A_subclass_of_GradientHeatmapT_t); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 176, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (__pyx_t_4 != __pyx_t_3) {
-    if (unlikely((PyDict_SetItemString(__pyx_t_2, "__orig_bases__", __pyx_t_3) < 0))) __PYX_ERR(0, 166, __pyx_L1_error)
+    if (unlikely((PyDict_SetItemString(__pyx_t_2, "__orig_bases__", __pyx_t_3) < 0))) __PYX_ERR(0, 176, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 176, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "heatmaps/__init__.py":169
+  /* "heatmaps/__init__.py":179
  *     """A subclass of `GradientHeatmapT` that supports additional operations like normalization and color conversion."""
  * 
  *     def __init__(self, data: Union[Optional[NDArray[float64]], GradientHeatmapT, ArrayLike] = None) -> None:             # <<<<<<<<<<<<<<
  *         """Initialize a gradient heatmap.
  * 
  */
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 169, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 179, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_data_2, __pyx_kp_s_Union_Optional_NDArray_float64_G) < 0) __PYX_ERR(0, 169, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 169, __pyx_L1_error)
-  __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_15GradientHeatmap_1__init__, 0, __pyx_n_s_GradientHeatmap___init, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__27)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 169, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_data_2, __pyx_kp_s_Union_Optional_NDArray_float64_G) < 0) __PYX_ERR(0, 179, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_15GradientHeatmap_1__init__, 0, __pyx_n_s_GradientHeatmap___init, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__27)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 179, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_INCREF(__pyx_t_8);
   PyList_Append(__pyx_t_3, __pyx_t_8);
@@ -15148,232 +15193,232 @@ if (!__Pyx_RefNanny) {
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_8, __pyx_tuple__28);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_8, __pyx_t_5);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_init, __pyx_t_8) < 0) __PYX_ERR(0, 169, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_init, __pyx_t_8) < 0) __PYX_ERR(0, 179, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-  /* "heatmaps/__init__.py":194
+  /* "heatmaps/__init__.py":204
  *             )
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def _normalize_(self) -> NDArray[float64]:
  *         """Return the normalized heatmap data.
  */
-  __pyx_t_8 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 204, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_return, __pyx_kp_s_NDArray_float64) < 0) __PYX_ERR(0, 194, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_15GradientHeatmap_3_normalize_, 0, __pyx_n_s_GradientHeatmap__normalize, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__30)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 194, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_return, __pyx_kp_s_NDArray_float64) < 0) __PYX_ERR(0, 204, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_15GradientHeatmap_3_normalize_, 0, __pyx_n_s_GradientHeatmap__normalize, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__30)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 204, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_8);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = __Pyx_PyObject_CallOneArg(__pyx_builtin_property, __pyx_t_5); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_CallOneArg(__pyx_builtin_property, __pyx_t_5); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 204, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_normalize, __pyx_t_8) < 0) __PYX_ERR(0, 194, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_normalize, __pyx_t_8) < 0) __PYX_ERR(0, 204, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-  /* "heatmaps/__init__.py":208
+  /* "heatmaps/__init__.py":218
  *         return self.data / max_value if max_value > 0 else self.data
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
  *     def _intensity_to_color_(red64: float64, blue64: float64) -> str:
  *         """Convert intensity values into a hexadecimal color string.
  */
-  __pyx_t_8 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 208, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 218, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_red64, __pyx_n_s_float64) < 0) __PYX_ERR(0, 208, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_blue64, __pyx_n_s_float64) < 0) __PYX_ERR(0, 208, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_return, __pyx_n_s_str_2) < 0) __PYX_ERR(0, 208, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_15GradientHeatmap_5_intensity_to_color_, __Pyx_CYFUNCTION_STATICMETHOD, __pyx_n_s_GradientHeatmap__intensity_to_co, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__32)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 208, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_red64, __pyx_n_s_float64) < 0) __PYX_ERR(0, 218, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_blue64, __pyx_n_s_float64) < 0) __PYX_ERR(0, 218, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_return, __pyx_n_s_str_2) < 0) __PYX_ERR(0, 218, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_15GradientHeatmap_5_intensity_to_color_, __Pyx_CYFUNCTION_STATICMETHOD, __pyx_n_s_GradientHeatmap__intensity_to_co, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__32)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 218, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_8);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = __Pyx_PyObject_CallOneArg(__pyx_builtin_staticmethod, __pyx_t_5); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 208, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_CallOneArg(__pyx_builtin_staticmethod, __pyx_t_5); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 218, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_intensity_to_color, __pyx_t_8) < 0) __PYX_ERR(0, 208, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_intensity_to_color, __pyx_t_8) < 0) __PYX_ERR(0, 218, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-  /* "heatmaps/__init__.py":234
+  /* "heatmaps/__init__.py":244
  *         return f"#{red:02x}{green:02x}{blue:02x}"
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def colors(self) -> NDArray[str_]:
  *         """Generate an array of color strings for each square.
  */
-  __pyx_t_8 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 234, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 244, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_return, __pyx_kp_s_NDArray_str) < 0) __PYX_ERR(0, 234, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_15GradientHeatmap_7colors, 0, __pyx_n_s_GradientHeatmap_colors, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__34)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 234, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_return, __pyx_kp_s_NDArray_str) < 0) __PYX_ERR(0, 244, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_15GradientHeatmap_7colors, 0, __pyx_n_s_GradientHeatmap_colors, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__34)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 244, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_8);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = __Pyx_PyObject_CallOneArg(__pyx_builtin_property, __pyx_t_5); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 234, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_CallOneArg(__pyx_builtin_property, __pyx_t_5); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 244, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_colors, __pyx_t_8) < 0) __PYX_ERR(0, 234, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_colors, __pyx_t_8) < 0) __PYX_ERR(0, 244, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-  /* "heatmaps/__init__.py":249
+  /* "heatmaps/__init__.py":259
  *         return array([self._intensity_to_color_(s[1], s[0]) for s in self._normalize_], dtype=str_)
  * 
  *     def _repr_html_(self) -> str:             # <<<<<<<<<<<<<<
  *         """Render the heatmap's data as an HTML table with colorized rows representing move intensities.
  * 
  */
-  __pyx_t_8 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 259, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_return, __pyx_n_s_str_2) < 0) __PYX_ERR(0, 249, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_15GradientHeatmap_9_repr_html_, 0, __pyx_n_s_GradientHeatmap__repr_html, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__36)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 249, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_return, __pyx_n_s_str_2) < 0) __PYX_ERR(0, 259, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_15GradientHeatmap_9_repr_html_, 0, __pyx_n_s_GradientHeatmap__repr_html, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__36)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 259, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_8);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_repr_html, __pyx_t_5) < 0) __PYX_ERR(0, 249, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_repr_html, __pyx_t_5) < 0) __PYX_ERR(0, 259, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "heatmaps/__init__.py":166
+  /* "heatmaps/__init__.py":176
  * 
  * 
  * class GradientHeatmap(GradientHeatmapT):             # <<<<<<<<<<<<<<
  *     """A subclass of `GradientHeatmapT` that supports additional operations like normalization and color conversion."""
  * 
  */
-  __pyx_t_5 = __Pyx_Py3ClassCreate(__pyx_t_6, __pyx_n_s_GradientHeatmap, __pyx_t_4, __pyx_t_2, NULL, 0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_Py3ClassCreate(__pyx_t_6, __pyx_n_s_GradientHeatmap, __pyx_t_4, __pyx_t_2, NULL, 0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 176, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_CyFunction_InitClassCell(__pyx_t_3, __pyx_t_5) < 0) __PYX_ERR(0, 166, __pyx_L1_error)
+  if (__Pyx_CyFunction_InitClassCell(__pyx_t_3, __pyx_t_5) < 0) __PYX_ERR(0, 176, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_GradientHeatmap, __pyx_t_5) < 0) __PYX_ERR(0, 166, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_GradientHeatmap, __pyx_t_5) < 0) __PYX_ERR(0, 176, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "heatmaps/__init__.py":301
+  /* "heatmaps/__init__.py":311
  * 
  * 
  * class ChessMoveHeatmapT(GradientHeatmap):             # <<<<<<<<<<<<<<
  *     """A gradient heatmap that additionally tracks chess piece counts per square.
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_GradientHeatmap); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 301, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_GradientHeatmap); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 301, __pyx_L1_error)
+  __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_GIVEREF(__pyx_t_4);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4)) __PYX_ERR(0, 301, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4)) __PYX_ERR(0, 311, __pyx_L1_error);
   __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PEP560_update_bases(__pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 301, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PEP560_update_bases(__pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = __Pyx_CalculateMetaclass(NULL, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 301, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CalculateMetaclass(NULL, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_Py3MetaclassPrepare(__pyx_t_2, __pyx_t_4, __pyx_n_s_ChessMoveHeatmapT, __pyx_n_s_ChessMoveHeatmapT, (PyObject *) NULL, __pyx_n_s_heatmaps, __pyx_kp_s_A_gradient_heatmap_that_addition); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 301, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_Py3MetaclassPrepare(__pyx_t_2, __pyx_t_4, __pyx_n_s_ChessMoveHeatmapT, __pyx_n_s_ChessMoveHeatmapT, (PyObject *) NULL, __pyx_n_s_heatmaps, __pyx_kp_s_A_gradient_heatmap_that_addition); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   if (__pyx_t_4 != __pyx_t_6) {
-    if (unlikely((PyDict_SetItemString(__pyx_t_5, "__orig_bases__", __pyx_t_6) < 0))) __PYX_ERR(0, 301, __pyx_L1_error)
+    if (unlikely((PyDict_SetItemString(__pyx_t_5, "__orig_bases__", __pyx_t_6) < 0))) __PYX_ERR(0, 311, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyList_New(0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 301, __pyx_L1_error)
+  __pyx_t_6 = PyList_New(0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 301, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_piece_counts, __pyx_kp_s_NDArray_Dict_Piece_float64) < 0) __PYX_ERR(0, 301, __pyx_L1_error)
-  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_annotations, __pyx_t_3) < 0) __PYX_ERR(0, 301, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_piece_counts, __pyx_kp_s_NDArray_Dict_Piece_float64) < 0) __PYX_ERR(0, 311, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_annotations, __pyx_t_3) < 0) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "heatmaps/__init__.py":316
+  /* "heatmaps/__init__.py":326
  *     _piece_counts: NDArray[Dict[Piece, float64]]
  * 
  *     def __init__(self, **kwargs) -> None:             # <<<<<<<<<<<<<<
  *         """Initialize the ChessMoveHeatmapT.
  * 
  */
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 316, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 326, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 316, __pyx_L1_error)
-  __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_17ChessMoveHeatmapT_1__init__, 0, __pyx_n_s_ChessMoveHeatmapT___init, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__39)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 316, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 326, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_17ChessMoveHeatmapT_1__init__, 0, __pyx_n_s_ChessMoveHeatmapT___init, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__39)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 326, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_INCREF(__pyx_t_8);
   PyList_Append(__pyx_t_6, __pyx_t_8);
   __Pyx_GIVEREF(__pyx_t_8);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_8, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_init, __pyx_t_8) < 0) __PYX_ERR(0, 316, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_init, __pyx_t_8) < 0) __PYX_ERR(0, 326, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-  /* "heatmaps/__init__.py":329
+  /* "heatmaps/__init__.py":339
  *         )
  * 
  *     def __truediv__(self, divisor: Real) -> "ChessMoveHeatmap":             # <<<<<<<<<<<<<<
  *         """Returns a new ChessMoveHeatmap where each value is divided by the given divisor.
  * 
  */
-  __pyx_t_8 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 329, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 339, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_divisor, __pyx_n_s_Real) < 0) __PYX_ERR(0, 329, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_return, __pyx_kp_s_ChessMoveHeatmap_2) < 0) __PYX_ERR(0, 329, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_17ChessMoveHeatmapT_3__truediv__, 0, __pyx_n_s_ChessMoveHeatmapT___truediv, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__41)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 329, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_divisor, __pyx_n_s_Real) < 0) __PYX_ERR(0, 339, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_return, __pyx_kp_s_ChessMoveHeatmap_2) < 0) __PYX_ERR(0, 339, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_17ChessMoveHeatmapT_3__truediv__, 0, __pyx_n_s_ChessMoveHeatmapT___truediv, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__41)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 339, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_8);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_truediv, __pyx_t_3) < 0) __PYX_ERR(0, 329, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_truediv, __pyx_t_3) < 0) __PYX_ERR(0, 339, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "heatmaps/__init__.py":374
+  /* "heatmaps/__init__.py":384
  *             raise ArithmeticError(f"An unexpected error occurred during division: {type(error).__name__}") from error
  * 
  *     def __add__(             # <<<<<<<<<<<<<<
  *             self,
  *             other: Union[
  */
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 374, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 384, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_other, __pyx_kp_s_Union_ChessMoveHeatmapT_Tuple_ND) < 0) __PYX_ERR(0, 374, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_kp_s_ChessMoveHeatmap_2) < 0) __PYX_ERR(0, 374, __pyx_L1_error)
-  __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_17ChessMoveHeatmapT_5__add__, 0, __pyx_n_s_ChessMoveHeatmapT___add, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__43)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 374, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_other, __pyx_kp_s_Union_ChessMoveHeatmapT_Tuple_ND) < 0) __PYX_ERR(0, 384, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_kp_s_ChessMoveHeatmap_2) < 0) __PYX_ERR(0, 384, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_17ChessMoveHeatmapT_5__add__, 0, __pyx_n_s_ChessMoveHeatmapT___add, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__43)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 384, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_8, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_add, __pyx_t_8) < 0) __PYX_ERR(0, 374, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_add, __pyx_t_8) < 0) __PYX_ERR(0, 384, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-  /* "heatmaps/__init__.py":416
+  /* "heatmaps/__init__.py":426
  *                 raise error0 from attribute_error
  * 
  *     def add_piece_counts(self, other_piece_counts: NDArray[Dict[Piece, float64]]) -> NDArray[Dict[Piece, float64]]:             # <<<<<<<<<<<<<<
  *         """
  * 
  */
-  __pyx_t_8 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 416, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 426, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_other_piece_counts, __pyx_kp_s_NDArray_Dict_Piece_float64) < 0) __PYX_ERR(0, 416, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_return, __pyx_kp_s_NDArray_Dict_Piece_float64) < 0) __PYX_ERR(0, 416, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_17ChessMoveHeatmapT_7add_piece_counts, 0, __pyx_n_s_ChessMoveHeatmapT_add_piece_coun, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__45)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 416, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_other_piece_counts, __pyx_kp_s_NDArray_Dict_Piece_float64) < 0) __PYX_ERR(0, 426, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_return, __pyx_kp_s_NDArray_Dict_Piece_float64) < 0) __PYX_ERR(0, 426, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_17ChessMoveHeatmapT_7add_piece_counts, 0, __pyx_n_s_ChessMoveHeatmapT_add_piece_coun, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__45)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 426, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_8);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_add_piece_counts, __pyx_t_3) < 0) __PYX_ERR(0, 416, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_add_piece_counts, __pyx_t_3) < 0) __PYX_ERR(0, 426, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "heatmaps/__init__.py":441
+  /* "heatmaps/__init__.py":451
  *         )
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def piece_counts(self) -> NDArray[Dict[Piece, float64]]:
  *         """
  */
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 441, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 451, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_kp_s_NDArray_Dict_Piece_float64) < 0) __PYX_ERR(0, 441, __pyx_L1_error)
-  __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_17ChessMoveHeatmapT_9piece_counts, 0, __pyx_n_s_ChessMoveHeatmapT_piece_counts, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__46)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 441, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_kp_s_NDArray_Dict_Piece_float64) < 0) __PYX_ERR(0, 451, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_17ChessMoveHeatmapT_9piece_counts, 0, __pyx_n_s_ChessMoveHeatmapT_piece_counts, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__46)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 451, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_8, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_property, __pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 441, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_property, __pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 451, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_piece_counts_2, __pyx_t_3) < 0) __PYX_ERR(0, 441, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_piece_counts_2, __pyx_t_3) < 0) __PYX_ERR(0, 451, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "heatmaps/__init__.py":454
+  /* "heatmaps/__init__.py":464
  *         return self._piece_counts
  * 
  *     @piece_counts.setter             # <<<<<<<<<<<<<<
@@ -15385,16 +15430,16 @@ if (!__Pyx_RefNanny) {
     PyErr_Clear();
     __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_piece_counts_2);
   }
-  if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 454, __pyx_L1_error)
+  if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 464, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_setter); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 454, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_setter); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 464, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 454, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 464, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_value, __pyx_kp_s_NDArray_Dict_Piece_float64) < 0) __PYX_ERR(0, 454, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 454, __pyx_L1_error)
-  __pyx_t_10 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_17ChessMoveHeatmapT_11piece_counts, 0, __pyx_n_s_ChessMoveHeatmapT_piece_counts, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__47)); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 454, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_value, __pyx_kp_s_NDArray_Dict_Piece_float64) < 0) __PYX_ERR(0, 464, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 464, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_17ChessMoveHeatmapT_11piece_counts, 0, __pyx_n_s_ChessMoveHeatmapT_piece_counts, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__47)); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 464, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_10, __pyx_t_8);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -15417,69 +15462,69 @@ if (!__Pyx_RefNanny) {
     __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_9, __pyx_callargs+1-__pyx_t_7, 1+__pyx_t_7);
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 454, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 464, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   }
-  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_piece_counts_2, __pyx_t_3) < 0) __PYX_ERR(0, 454, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_piece_counts_2, __pyx_t_3) < 0) __PYX_ERR(0, 464, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "heatmaps/__init__.py":301
+  /* "heatmaps/__init__.py":311
  * 
  * 
  * class ChessMoveHeatmapT(GradientHeatmap):             # <<<<<<<<<<<<<<
  *     """A gradient heatmap that additionally tracks chess piece counts per square.
  * 
  */
-  __pyx_t_3 = __Pyx_Py3ClassCreate(__pyx_t_2, __pyx_n_s_ChessMoveHeatmapT, __pyx_t_4, __pyx_t_5, NULL, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 301, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_Py3ClassCreate(__pyx_t_2, __pyx_n_s_ChessMoveHeatmapT, __pyx_t_4, __pyx_t_5, NULL, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (__Pyx_CyFunction_InitClassCell(__pyx_t_6, __pyx_t_3) < 0) __PYX_ERR(0, 301, __pyx_L1_error)
+  if (__Pyx_CyFunction_InitClassCell(__pyx_t_6, __pyx_t_3) < 0) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ChessMoveHeatmapT, __pyx_t_3) < 0) __PYX_ERR(0, 301, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ChessMoveHeatmapT, __pyx_t_3) < 0) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "heatmaps/__init__.py":485
+  /* "heatmaps/__init__.py":495
  * 
  * 
  * class ChessMoveHeatmap(ChessMoveHeatmapT):             # <<<<<<<<<<<<<<
  *     """A concrete extension of `ChessMoveHeatmapT` for tracking move-related piece counts.
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_ChessMoveHeatmapT); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 485, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_ChessMoveHeatmapT); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 495, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 485, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 495, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_4);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_4)) __PYX_ERR(0, 485, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_4)) __PYX_ERR(0, 495, __pyx_L1_error);
   __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PEP560_update_bases(__pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 485, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PEP560_update_bases(__pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 495, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_CalculateMetaclass(NULL, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 485, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CalculateMetaclass(NULL, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 495, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_3 = __Pyx_Py3MetaclassPrepare(__pyx_t_5, __pyx_t_4, __pyx_n_s_ChessMoveHeatmap, __pyx_n_s_ChessMoveHeatmap, (PyObject *) NULL, __pyx_n_s_heatmaps, __pyx_kp_s_A_concrete_extension_of_ChessMov); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 485, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_Py3MetaclassPrepare(__pyx_t_5, __pyx_t_4, __pyx_n_s_ChessMoveHeatmap, __pyx_n_s_ChessMoveHeatmap, (PyObject *) NULL, __pyx_n_s_heatmaps, __pyx_kp_s_A_concrete_extension_of_ChessMov); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 495, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   if (__pyx_t_4 != __pyx_t_2) {
-    if (unlikely((PyDict_SetItemString(__pyx_t_3, "__orig_bases__", __pyx_t_2) < 0))) __PYX_ERR(0, 485, __pyx_L1_error)
+    if (unlikely((PyDict_SetItemString(__pyx_t_3, "__orig_bases__", __pyx_t_2) < 0))) __PYX_ERR(0, 495, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 485, __pyx_L1_error)
+  __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 495, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "heatmaps/__init__.py":493
+  /* "heatmaps/__init__.py":503
  *     """
  * 
  *     def __init__(             # <<<<<<<<<<<<<<
  *             self,
  *             piece_counts: Optional[NDArray[Dict[Piece, float64]]] = None,
  */
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 493, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 503, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_piece_counts_2, __pyx_kp_s_Optional_NDArray_Dict_Piece_floa) < 0) __PYX_ERR(0, 493, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 493, __pyx_L1_error)
-  __pyx_t_9 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_16ChessMoveHeatmap_1__init__, 0, __pyx_n_s_ChessMoveHeatmap___init, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__49)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 493, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_piece_counts_2, __pyx_kp_s_Optional_NDArray_Dict_Piece_floa) < 0) __PYX_ERR(0, 503, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 503, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_16ChessMoveHeatmap_1__init__, 0, __pyx_n_s_ChessMoveHeatmap___init, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__49)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 503, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_INCREF(__pyx_t_9);
   PyList_Append(__pyx_t_2, __pyx_t_9);
@@ -15487,21 +15532,21 @@ if (!__Pyx_RefNanny) {
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_9, __pyx_tuple__28);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_9, __pyx_t_6);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_init, __pyx_t_9) < 0) __PYX_ERR(0, 493, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_init, __pyx_t_9) < 0) __PYX_ERR(0, 503, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-  /* "heatmaps/__init__.py":485
+  /* "heatmaps/__init__.py":495
  * 
  * 
  * class ChessMoveHeatmap(ChessMoveHeatmapT):             # <<<<<<<<<<<<<<
  *     """A concrete extension of `ChessMoveHeatmapT` for tracking move-related piece counts.
  * 
  */
-  __pyx_t_9 = __Pyx_Py3ClassCreate(__pyx_t_5, __pyx_n_s_ChessMoveHeatmap, __pyx_t_4, __pyx_t_3, NULL, 0, 0); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 485, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_Py3ClassCreate(__pyx_t_5, __pyx_n_s_ChessMoveHeatmap, __pyx_t_4, __pyx_t_3, NULL, 0, 0); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 495, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  if (__Pyx_CyFunction_InitClassCell(__pyx_t_2, __pyx_t_9) < 0) __PYX_ERR(0, 485, __pyx_L1_error)
+  if (__Pyx_CyFunction_InitClassCell(__pyx_t_2, __pyx_t_9) < 0) __PYX_ERR(0, 495, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ChessMoveHeatmap, __pyx_t_9) < 0) __PYX_ERR(0, 485, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ChessMoveHeatmap, __pyx_t_9) < 0) __PYX_ERR(0, 495, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;

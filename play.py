@@ -2,6 +2,7 @@
 from datetime import datetime
 from os import makedirs, path
 from pathlib import Path
+from random import choice
 from tkinter import Canvas, Menu, Tk, messagebox, simpledialog
 from typing import Callable, Dict, List, Optional, Tuple, Union
 from concurrent.futures import Future, ThreadPoolExecutor
@@ -11,7 +12,11 @@ from chess.pgn import Game
 from numpy import float64
 
 from chmengine import CMHMEngine, CMHMEngine2, Pick, set_all_datetime_headers
-from chmutils import BaseChessTkApp, DEFAULT_COLORS, DEFAULT_FONT, get_local_time
+from chmutils import BaseChessTkApp, DEFAULT_COLORS, DEFAULT_FONT, get_local_time, state_faces
+
+__all__ = [
+    'PlayChessApp'
+]
 
 
 class PlayChessApp(Tk, BaseChessTkApp):
@@ -44,6 +49,8 @@ class PlayChessApp(Tk, BaseChessTkApp):
     pgn_dir: str = "pgns"
     depth: int = 1
     fullmove_number: int = 1
+    faces: Dict[str, Tuple[str, ...]] = state_faces
+    face: str
 
     def __init__(
             self,
@@ -111,6 +118,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         self.current_move_index = -1
         self.highlight_squares = set()
         self.game_line = [Pick(Move.from_uci('a1b8'), float64(None))]  # index0 of the game-line will hold illegal move
+        self.face = self.get_smily_face()
         # TODO: Prompt user to start a new (or load an incomplete) game.
         self.update_board()
         self._move_executor = ThreadPoolExecutor(max_workers=1)
@@ -274,6 +282,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
                         if pick != illegal_pick:
                             move: Move = pick.move
                             board.push(move)
+                            self.face = self.get_smily_face()
                             self.fullmove_number = board.fullmove_number
                             self.game_line.append(pick)
                             self.highlight_squares = {move.from_square, move.to_square}
@@ -412,6 +421,22 @@ class PlayChessApp(Tk, BaseChessTkApp):
         """
         self.canvas.delete("all")
 
+    def get_smily_face(self) -> str:
+        """Gets a random smily face per state of mind the engine is in.
+
+        Returns
+        -------
+        str
+        """
+        last_score: float64 = self.game_line[-1].score
+        turn: bool = self.engines[0]['engine'].board.turn
+        key: str = 'draw'
+        if last_score > 17 and turn or last_score < -17 and not turn:
+            key = 'winning'
+        if last_score < -17 and turn or last_score > 17 and not turn:
+            key = 'losing'
+        return choice(self.faces[key])
+
     def draw_board(self) -> None:
         """Draw the 8×8 chessboard grid and overlay piece symbols.
 
@@ -428,12 +453,20 @@ class PlayChessApp(Tk, BaseChessTkApp):
         half_square_size: int = self.square_size // 2
         piece_bg: str = "⬤"
         font_size = int(self.square_size * 0.6)
-        game_line_text: str = ' <- '.join([f"{p:.2f}" for p in self.game_line[-1:0:-1]])
+        game_line_font: Tuple[str, int] = (self.font, font_size // 6)
+
         self.canvas.create_text(
-            1, half_square_size // 2,
+            half_square_size // 8, (half_square_size // 4),
             anchor='w',
-            text=f"{game_line_text}",
-            font=(self.font, font_size // 8),
+            text=f"{self.face} Picking Move #{self.fullmove_number} (Pick #{len(self.game_line)})...",
+            font=game_line_font
+        )
+        game_line_text: str = ' ⬅ '.join([f"{p:.2f}" for p in self.game_line[-1:0:-1]])
+        self.canvas.create_text(
+            half_square_size // 8, (half_square_size // 4) * 3,
+            anchor='w',
+            text=f"Previous Picks: {game_line_text}",
+            font=game_line_font,
         )
         for square in SQUARES:
             row: int
