@@ -10,8 +10,10 @@ class TestCMHEngineImports(TestCase):
     _name = ['chmengine']
     _engine1 = ['CMHMEngine']
     _engine2 = ['CMHMEngine2']
+    _engine3 = ['Quartney']
     _engine_manager = ['PlayCMHMEngine']
     _pick = ['Pick']
+    _modules = ['engines', 'play', 'utils']
     _functions = [
         'format_moves',
         'calculate_white_minus_black_score',
@@ -25,8 +27,8 @@ class TestCMHEngineImports(TestCase):
         'set_all_datetime_headers',
         'set_utc_headers',
     ]
-    _engines = _engine1 + _engine2
-    _all = _engines + _engine_manager + _pick + _functions
+    _engines = _engine1 + _engine2 + _engine3
+    _all = _engines + _engine_manager + _pick + _functions + _modules
 
     def setUp(self) -> None:
         """Ensure dir() is fresh each TC"""
@@ -40,20 +42,21 @@ class TestCMHEngineImports(TestCase):
         _dir_1 = dir()
         self.assertEqual(sorted(_dir_1), sorted(self._name + self._dir))
         self.assertEqual(sorted(chmengine.__all__), sorted(self._all))
-        self.assertEqual(sorted(chmengine.engines.__all__), sorted(self._engines))
+        self.assertEqual(sorted(chmengine.engines.__all__), sorted(self._engines + ['cmhmey1', 'cmhmey2', 'quartney']))
         self.assertEqual(sorted(chmengine.play.__all__), sorted(self._engine_manager))
         self.assertTrue(callable(getattr(chmengine, "CMHMEngine")))
 
     def test_from_imports(self) -> None:
         """test from chmengine imports"""
         # pylint: disable=import-outside-toplevel
-        from chmengine import CMHMEngine, CMHMEngine2, PlayCMHMEngine, Pick
+        from chmengine import CMHMEngine, CMHMEngine2, PlayCMHMEngine, Pick, Quartney
         _dir_1 = dir()
-        self.assertEqual(sorted(_dir_1), sorted(self._all + self._dir))
+        self.assertEqual(sorted(_dir_1), sorted(self._engines + self._pick + self._engine_manager + self._dir))
         self.assertIsInstance(CMHMEngine, Callable)
         self.assertIsInstance(CMHMEngine2, Callable)
         self.assertIsInstance(PlayCMHMEngine, Callable)
         self.assertIsInstance(Pick, Callable)
+        self.assertIsInstance(Quartney, Callable)
 
     def test_star_imports(self) -> None:
         """test from chmengine import *"""
