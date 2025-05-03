@@ -1,10 +1,11 @@
 """Play against the CMHMEngine in a GUI."""
 from datetime import datetime
+from itertools import cycle
 from os import makedirs, path
 from pathlib import Path
 from random import choice
 from tkinter import Canvas, Menu, Tk, messagebox, simpledialog
-from typing import Callable, Dict, List, Optional, Tuple, Union
+from typing import Callable, Dict, List, Optional, Tuple, Union, Generator
 from concurrent.futures import Future, ThreadPoolExecutor
 
 from chess import Board, Move, Outcome, Piece, SQUARES
@@ -23,6 +24,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
     """Play against the CMHMEngine in a GUI."""
     training: bool
     site: str
+    face: str
     game_line: List[Pick]
     # TODO: Refactor these into their own Player and Engines dataclasses
     player: Dict[str, Union[str, int]] = dict(
@@ -50,7 +52,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
     depth: int = 1
     fullmove_number: int = 1
     faces: Dict[str, Tuple[str, ...]] = state_faces
-    face: str
+    dot_dot: Generator[str, str, str] = cycle(['.', '..', '...'])
 
     def __init__(
             self,
@@ -454,11 +456,10 @@ class PlayChessApp(Tk, BaseChessTkApp):
         piece_bg: str = "⬤"
         font_size = int(self.square_size * 0.6)
         game_line_font: Tuple[str, int] = (self.font, font_size // 6)
-
         self.canvas.create_text(
             half_square_size // 8, (half_square_size // 4),
             anchor='w',
-            text=f"{self.face} Picking Move #{self.fullmove_number} (Pick #{len(self.game_line)})...",
+            text=f"{self.face} Picking Move #{self.fullmove_number} (Pick #{len(self.game_line)}){next(self.dot_dot)}",
             font=game_line_font
         )
         game_line_text: str = ' ⬅ '.join([f"{p:.2f}" for p in self.game_line[-1:0:-1]])
