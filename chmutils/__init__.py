@@ -8,7 +8,6 @@ from chess import Board, Move, Piece
 from numpy import float64, float_
 
 from chmutils import base_chess_tk_app, concurrent, game_builder
-
 from chmutils.base_chess_tk_app import (
     BaseChessTkApp,
     DARK_SQUARE_COLOR_PROMPT,

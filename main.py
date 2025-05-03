@@ -16,14 +16,8 @@ from chess.pgn import Game, Headers
 from numpy import float64
 from numpy.typing import NDArray
 
-from chmutils import (
-    PPExecutor,
-    get_or_compute_heatmap_with_better_discounts,
-    GBuilder,
-    BaseChessTkApp,
-    DEFAULT_COLORS,
-    DEFAULT_FONT
-)
+from chmutils import (BaseChessTkApp, DEFAULT_COLORS, DEFAULT_FONT, GBuilder, PPExecutor,
+                      get_or_compute_heatmap_with_better_discounts)
 from heatmaps import ChessMoveHeatmap
 from tooltips import CanvasTooltip
 

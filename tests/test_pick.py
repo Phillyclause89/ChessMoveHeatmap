@@ -1,6 +1,8 @@
 """Tests the Pick class"""
 from unittest import TestCase
+
 from chess import Move
+
 from chmengine.utils.pick import Pick
 
 F3: Move = Move.from_uci('f2f3')

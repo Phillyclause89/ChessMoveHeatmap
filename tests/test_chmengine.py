@@ -3,8 +3,6 @@
 from typing import Callable
 from unittest import TestCase, main
 
-from numpy import testing
-
 
 class TestCMHEngineImports(TestCase):
     """Tests chmengine package imports"""

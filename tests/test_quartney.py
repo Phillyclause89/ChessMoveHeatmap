@@ -1,7 +1,7 @@
 """Tests Quartney"""
+from os import path
 from typing import Callable
 from unittest import TestCase
-from os import path
 
 from chmutils import BetterHeatmapCache, HeatmapCache
 from tests.utils import CACHE_DIR, clear_test_cache

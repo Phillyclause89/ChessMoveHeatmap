@@ -1,12 +1,12 @@
 """Play against the CMHMEngine in a GUI."""
+from concurrent.futures import Future, ThreadPoolExecutor
 from datetime import datetime
 from itertools import cycle
 from os import makedirs, path
 from pathlib import Path
 from random import choice
 from tkinter import Canvas, Menu, Tk, messagebox, simpledialog
-from typing import Callable, Dict, List, Optional, Tuple, Union, Generator
-from concurrent.futures import Future, ThreadPoolExecutor
+from typing import Callable, Dict, Generator, List, Optional, Tuple, Union
 
 from chess import Board, Move, Outcome, Piece, SQUARES
 from chess.pgn import Game

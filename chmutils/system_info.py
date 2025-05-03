@@ -1,8 +1,7 @@
-import os
+import json
 import platform
 import subprocess
-import json
-from dataclasses import dataclass, field, asdict
+from dataclasses import asdict, dataclass, field
 
 
 @dataclass
