@@ -1270,6 +1270,291 @@ the candidate list if the new sum is lower than the current best.</p>
 
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="chmengine.engines.Quartney">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chmengine.engines.</span></span><span class="sig-name descname"><span class="pre">Quartney</span></span><a class="headerlink" href="#chmengine.engines.Quartney" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mother class of Cmhmey Jr., managing Q‑table persistence and move selection.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chmengine.engines.Quartney.board">
+<span class="sig-name descname"><span class="pre">board</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#chmengine.engines.Quartney.board" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chmengine.engines.Quartney.cache_dir">
+<span class="sig-name descname"><span class="pre">cache_dir</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'.\\SQLite3Caches\\QTables'</span></em><a class="headerlink" href="#chmengine.engines.Quartney.cache_dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="chmengine.engines.Quartney.depth">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">depth</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#chmengine.engines.Quartney.depth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current search depth used for heatmap and Q‑table lookups.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>int</dt><dd><p>Depth ≥ 0.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine</span> <span class="kn">import</span> <span class="n">CMHMEngine2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine2</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span><span class="o">.</span><span class="n">depth</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.Quartney.fen">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#chmengine.engines.Quartney.fen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the FEN string representing <cite>board</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">chess.Board</span></dt><dd><p>Board to serialize.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>str</dt><dd><p>FEN string of <cite>board</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.Quartney.get_q_value">
+<span class="sig-name descname"><span class="pre">get_q_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pieces_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.engines.Quartney.get_q_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a cached Q‑value for a position, or None if uncached.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>fen</strong><span class="classifier">str, optional</span></dt><dd><p>FEN of the position (deprecated; use <cite>board</cite>).</p>
+</dd>
+<dt><strong>board</strong><span class="classifier">chess.Board, optional</span></dt><dd><p>Board object for filename lookup.</p>
+</dd>
+<dt><strong>pieces_count</strong><span class="classifier">int, optional</span></dt><dd><p>Override piece count for selecting DB file.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>float64 or None</dt><dd><p>Stored Q‑value, or <cite>None</cite> if no entry exists.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine</span> <span class="kn">import</span> <span class="n">CMHMEngine2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine2</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">get_q_value</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.Quartney.pick_move">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pick_move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pick_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a></span></span><a class="headerlink" href="#chmengine.engines.Quartney.pick_move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select a move based on heatmap scores and update its Q‑value.</p>
+<p>This method evaluates all legal moves on <cite>board</cite> (or on
+the engine’s current board if <cite>board</cite> is None), picks one of
+the top‑scoring moves at random, writes the new Q‑value to
+the database, and returns <cite>(move, score)</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>pick_by</strong><span class="classifier">str, default=””</span></dt><dd><p>Legacy parameter (ignored).</p>
+</dd>
+<dt><strong>board</strong><span class="classifier">chess.Board, optional</span></dt><dd><p>Board to pick from; defaults to <cite>self.board</cite>.</p>
+</dd>
+<dt><strong>debug</strong><span class="classifier">bool, default=False</span></dt><dd><p>If <cite>True</cite>, print the full move‑score table.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>(chess.Move, numpy.float64)</dt><dd><p>The chosen move and its score.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ValueError</dt><dd><p>If there are no legal moves.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine.engines.cmhmey2</span> <span class="kn">import</span> <span class="n">CMHMEngine2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine2</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">move</span><span class="p">,</span> <span class="n">score</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">pick_move</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.Quartney.pieces_count">
+<span class="sig-name descname"><span class="pre">pieces_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#chmengine.engines.Quartney.pieces_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of pieces on the board in O(1) time.</p>
+<p>This uses <cite>Board.occupied.bit_count()</cite> when given a <cite>board</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">chess.Board, optional</span></dt><dd><p>Board whose pieces to count. Preferred parameter.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>Total number of pieces on the board.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine.engines.cmhmey2</span> <span class="kn">import</span> <span class="n">CMHMEngine2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine2</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span><span class="o">.</span><span class="n">pieces_count</span><span class="p">()</span>
+<span class="go">32</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.Quartney.qdb_path">
+<span class="sig-name descname"><span class="pre">qdb_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pieces_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#chmengine.engines.Quartney.qdb_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the full path to the Q‑table database file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">chess.Board, optional</span></dt><dd><p>Board object for file naming.</p>
+</dd>
+<dt><strong>pieces_count</strong><span class="classifier">int or str, optional</span></dt><dd><p>Explicit piece count override.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>str</dt><dd><p>Relative path: <cite>&lt;cache_dir&gt;/&lt;qtable_filename(…)&gt;</cite></p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine.engines.cmhmey2</span> <span class="kn">import</span> <span class="n">CMHMEngine2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine2</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span><span class="o">.</span><span class="n">qdb_path</span><span class="p">()</span> <span class="o">==</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">engine</span><span class="o">.</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">engine</span><span class="o">.</span><span class="n">qtable_filename</span><span class="p">())</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.Quartney.qtable_filename">
+<span class="sig-name descname"><span class="pre">qtable_filename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pieces_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#chmengine.engines.Quartney.qtable_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the Q‑table filename based on depth and piece count.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">chess.Board, optional</span></dt><dd><p>Board object to derive FEN (and piece count) if <cite>fen</cite> is not given.</p>
+</dd>
+<dt><strong>pieces_count</strong><span class="classifier">int or str, optional</span></dt><dd><p>Explicit piece count to use. If provided, skips recomputing from board/FEN.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>str</dt><dd><p>File name of the form
+<cite>“qtable_depth_{depth}_piece_count_{pieces_count}.db”</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine.engines.cmhmey2</span> <span class="kn">import</span> <span class="n">CMHMEngine2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine2</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span><span class="o">.</span><span class="n">qtable_filename</span><span class="p">()</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">engine</span><span class="o">.</span><span class="n">cache_dir</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.Quartney.set_q_value">
+<span class="sig-name descname"><span class="pre">set_q_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pieces_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmengine.engines.Quartney.set_q_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert or update the Q‑value for a given position in the DB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>value</strong><span class="classifier">float</span></dt><dd><p>Q‑value to store.</p>
+</dd>
+<dt><strong>fen</strong><span class="classifier">str, optional</span></dt><dd><p>Position FEN (deprecated; prefer <cite>board</cite>).</p>
+</dd>
+<dt><strong>board</strong><span class="classifier">chess.Board, optional</span></dt><dd><p>Board object for filename lookup.</p>
+</dd>
+<dt><strong>pieces_count</strong><span class="classifier">int, optional</span></dt><dd><p>Override piece count for selecting DB file.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine</span> <span class="kn">import</span> <span class="n">CMHMEngine2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine2</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span><span class="o">.</span><span class="n">set_q_value</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;1k6/8/8/8/8/3K4/8/8 w - - 0 1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.Quartney.update_q_values">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_q_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmengine.engines.Quartney.update_q_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Back-propagate game outcome through the Q-table.</p>
+<p>Pops all moves from the current board history and adjusts each
+stored Q-value in the database based on the final result
+(win/lose/draw).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>debug</strong><span class="classifier">bool, default=False</span></dt><dd><p>If True, print diagnostics for each back-step.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Updates the SQLite Q-table entries for every move in the game.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chess</span> <span class="kn">import</span> <span class="n">pgn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine</span> <span class="kn">import</span> <span class="n">CMHMEngine2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pgn_buffer</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">(</span>
+<span class="gp">... </span><span class="w">   </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="gp">... </span><span class="sd">   1. f3 e5 2. g4 Qh4# 0-1</span>
+<span class="gp">...</span>
+<span class="gp">...</span>
+<span class="gp">... </span><span class="sd">   &#39;&#39;&#39;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">game</span> <span class="o">=</span> <span class="n">pgn</span><span class="o">.</span><span class="n">read_game</span><span class="p">(</span><span class="n">pgn_buffer</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">board</span> <span class="o">=</span> <span class="n">game</span><span class="o">.</span><span class="n">board</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">game</span><span class="o">.</span><span class="n">mainline_moves</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">board</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">move</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine2</span><span class="p">(</span><span class="n">board</span><span class="o">=</span><span class="n">board</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span><span class="o">.</span><span class="n">fen</span><span class="p">()</span>
+<span class="go">&#39;rnb1kbnr/pppp1ppp/8/4p3/6Pq/5P2/PPPPP2P/RNBQKBNR w KQkq - 1 3&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span><span class="o">.</span><span class="n">update_q_values</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span><span class="o">.</span><span class="n">fen</span><span class="p">()</span>
+<span class="go">&#39;rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
 <p class="rubric">Modules</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>

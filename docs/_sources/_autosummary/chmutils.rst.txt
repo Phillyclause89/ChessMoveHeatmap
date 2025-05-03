@@ -22,6 +22,7 @@
       get_or_compute_heatmap
       get_or_compute_heatmap_with_better_discounts
       inflate_heatmap
+      is_within_bmp
    
    
 
