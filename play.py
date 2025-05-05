@@ -13,7 +13,7 @@ from chess.pgn import Game
 from numpy import float64
 
 from chmengine import CMHMEngine, CMHMEngine2, Pick, set_all_datetime_headers
-from chmutils import BaseChessTkApp, DEFAULT_COLORS, DEFAULT_FONT, get_local_time, state_faces
+from chmutils import BaseChessTkApp, DEFAULT_COLORS, DEFAULT_FONT, get_local_time, state_faces, Player
 
 __all__ = [
     'PlayChessApp'
@@ -26,12 +26,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
     site: str
     face: str
     game_line: List[Pick]
-    # TODO: Refactor these into their own Player and Engines dataclasses
-    player: Dict[str, Union[str, int]] = dict(
-        name="Unknown",
-        index=0,  # 0 is white in our mapping (inverse from python-chess lib)
-        color='white'
-    )
+    player: Player = Player()
     # PlayChessApp.engines indexes align with python-chess
     engines: List[Dict[str, Union[str, int, Optional[CMHMEngine]]]] = [
         dict(
@@ -58,7 +53,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
             self,
             engine_type: Callable = CMHMEngine,
             depth: int = depth,
-            player_name: str = player['name'],
+            player_name: str = player.name,
             player_color_is_black: bool = False,
             site: Optional[str] = None,
             engine_type_2: Optional[Callable] = None,
@@ -89,10 +84,10 @@ class PlayChessApp(Tk, BaseChessTkApp):
         self.updating = True
         self.training = False
         super().__init__()
-        self.player['name'] = player_name
-        self.site = f"{self.player['name']}'s place" if site is None else site
+        self.player.name = player_name
+        self.site = f"{self.player.name}'s place" if site is None else site
         if player_color_is_black:
-            self.player['index'], self.player['color'] = 1, 'black'
+            self.player.index = 1
         self.engines[1]['engine'] = engine_type(depth=depth)
         self.engines[0]['engine'] = self.engines[1]['engine'] if engine_type_2 is None else engine_type_2(
             depth=depth if depth_2 is None else depth_2
@@ -197,9 +192,9 @@ class PlayChessApp(Tk, BaseChessTkApp):
         """
         if self.training:
             return f"{self.engines[0]['name']} vs {self.engines[1]['name']}"
-        if self.player['index']:
-            return f"{self.engines[0]['name']} vs {self.player['name']}"
-        return f"{self.player['name']} vs {self.engines[1]['name']}"
+        if self.player.index:
+            return f"{self.engines[0]['name']} vs {self.player.name}"
+        return f"{self.player.name} vs {self.engines[1]['name']}"
 
     def new_game(self) -> None:
         """Start a brand‐new game after user confirmation.

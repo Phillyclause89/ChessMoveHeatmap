@@ -17,6 +17,7 @@ from chmutils.base_chess_tk_app import (
 )
 from chmutils.concurrent import PPExecutor
 from chmutils.game_builder import GBuilder
+from chmutils.player import Player
 from heatmaps import ChessMoveHeatmap, GradientHeatmap, PIECES
 
 __all__ = [
@@ -25,6 +26,7 @@ __all__ = [
     'concurrent',
     'game_builder',
     # Classes
+    'Player',
     'PPExecutor',
     'GBuilder',
     'BaseChessTkApp',
