@@ -1,5 +1,6 @@
 """Play against the CMHMEngine in a GUI."""
 from concurrent.futures import Future, ThreadPoolExecutor
+from dataclasses import dataclass
 from datetime import datetime
 from itertools import cycle
 from os import makedirs, path
@@ -13,11 +14,49 @@ from chess.pgn import Game
 from numpy import float64
 
 from chmengine import CMHMEngine, CMHMEngine2, Pick, set_all_datetime_headers
-from chmutils import BaseChessTkApp, DEFAULT_COLORS, DEFAULT_FONT, get_local_time, state_faces, Player
+from chmutils import BaseChessTkApp, DEFAULT_COLORS, DEFAULT_FONT, Player, get_local_time, state_faces
 
 __all__ = [
     'PlayChessApp'
 ]
+
+
+@dataclass
+class EngineContainer:
+    """Container for the engine(s)."""
+    _white: CMHMEngine
+    _black: CMHMEngine
+
+    def __init__(
+            self,
+            engine_type: Callable = CMHMEngine,
+            depth: int = 1,
+            engine_type_2: Optional[Callable] = None,
+            depth_2: Optional[int] = None
+    ) -> None:
+        """Initialize the EngineContainer"""
+        self._white = engine_type(depth=depth)
+        self._black = self._white if engine_type_2 is None else engine_type_2(
+            depth=depth if depth_2 is None else depth_2
+        )
+        # CMHMEngine.board.setter sets a copy thus we need to bypass the method to set the same object instance
+        self._black._board = self._white.board
+
+    @property
+    def white(self) -> CMHMEngine:
+        """Gets the engine playing as white"""
+        return self._white
+
+    @white.setter
+    def white(self, new_engine: Union[Callable, CMHMEngine]):
+        """Sets the engine playing as white"""
+        try:
+            self._white = new_engine(depth=self._white.depth)
+        except TypeError as error:
+            if isinstance(new_engine, CMHMEngine):
+                self._white = new_engine
+            else:
+                raise TypeError(f"new_engine must be type CMHMEngine, got {type(new_engine)}") from error
 
 
 class PlayChessApp(Tk, BaseChessTkApp):
@@ -26,22 +65,8 @@ class PlayChessApp(Tk, BaseChessTkApp):
     site: str
     face: str
     game_line: List[Pick]
+    engines: EngineContainer
     player: Player = Player()
-    # PlayChessApp.engines indexes align with python-chess
-    engines: List[Dict[str, Union[str, int, Optional[CMHMEngine]]]] = [
-        dict(
-            engine=None,
-            name='None',
-            index=1,  # 1 is black in our mapping (inverse from python-chess lib)
-            color='black'
-        ),
-        dict(
-            engine=None,
-            name='None',
-            index=0,  # 0 is white in our mapping (inverse from python-chess lib)
-            color='white'
-        ),
-    ]
     training_dir: str = "trainings"
     pgn_dir: str = "pgns"
     depth: int = 1
@@ -88,20 +113,8 @@ class PlayChessApp(Tk, BaseChessTkApp):
         self.site = f"{self.player.name}'s place" if site is None else site
         if player_color_is_black:
             self.player.index = 1
-        self.engines[1]['engine'] = engine_type(depth=depth)
-        self.engines[0]['engine'] = self.engines[1]['engine'] if engine_type_2 is None else engine_type_2(
-            depth=depth if depth_2 is None else depth_2
-        )
-        # noinspection PyProtectedMember
-        self.engines[0]['engine']._board = self.engines[1]['engine'].board
-        (
-            self.engines[1]['name'],
-            self.engines[0]['name']
-        ) = (
-            self.engines[1]['engine'].__class__.__name__,
-            self.engines[0]['engine'].__class__.__name__
-        )
-        self.depth = self.engines[1]['engine'].depth
+        self.engines = EngineContainer(engine_type, depth, engine_type_2, depth_2)
+        self.depth = self.engines.white.depth
         self.set_title()
         screen_height: int = self.winfo_screenheight()
         screen_width: int = int(screen_height * 0.75)
