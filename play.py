@@ -780,7 +780,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
             if self.selected_square is None:
                 square: Optional[int] = self.coord_to_square(event.x, event.y)
                 legal_moves: List[Move] = list(self.engines.board.legal_moves)
-                from_to_map: Dict[int:Tuple[int]] = {
+                from_to_map: Dict[int:Tuple[int, ...]] = {
                     m.from_square: tuple(
                         mt.to_square for mt in legal_moves if mt.from_square == m.from_square
                     ) for m in legal_moves
@@ -806,6 +806,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
                     score=self.game_line[-1].score
                 )
                 self.engines.push(pick)
+                # TODO: Check self.engines.board.outcome here and activate some endgame debrief flow if game-over
                 self.fullmove_number = self.engines.board.fullmove_number
                 self.game_line.append(pick)
                 self.face = self.get_smily_face()
@@ -826,10 +827,12 @@ class PlayChessApp(Tk, BaseChessTkApp):
                     self.updating = False
                 pick = future.result()
                 self.engines.push(pick)
+                # TODO: Check self.engines.board.outcome here again and activate some endgame debrief flow if game-over
                 self.fullmove_number = self.engines.board.fullmove_number
                 self.game_line.append(pick)
                 self.face = self.get_smily_face()
                 self.highlight_squares = {pick.move.from_square, pick.move.to_square}
+                # TODO: Add autosave point here (or via self.after) once save system is developed
             self.updating = True
             self.update_board()
             self.updating = False
