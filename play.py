@@ -7,7 +7,7 @@ from os import makedirs, path
 from pathlib import Path
 from random import choice
 from tkinter import Canvas, Menu, Tk, messagebox, simpledialog
-from typing import Callable, Dict, Generator, List, Optional, Tuple
+from typing import Callable, Dict, Generator, Iterator, List, Optional, Set, Tuple
 
 from chess import Board, Move, Outcome, Piece, SQUARES
 from chess.pgn import Game
@@ -35,7 +35,15 @@ class EngineContainer:
             engine_type_2: Optional[Callable] = None,
             depth_2: Optional[int] = None
     ) -> None:
-        """Initialize the EngineContainer"""
+        """Initialize the EngineContainer
+
+        Parameters
+        ----------
+        engine_type : Callable
+        depth : int
+        engine_type_2 : Optional[Callable]
+        depth_2 : Optional[int]
+        """
         self._white = engine_type(depth=depth)
         # Allows for same Engine instance or different based on engine_type_2 being passed
         self._black = self._white if engine_type_2 is None else engine_type_2(
@@ -46,12 +54,22 @@ class EngineContainer:
 
     @property
     def board(self) -> Board:
-        """Gets the shared board object between the engines"""
+        """Gets the shared board object between the engines
+
+        Returns
+        -------
+        Board
+        """
         return self._white.board
 
     @board.setter
     def board(self, new_board: Board) -> None:
-        """Sets the shared board object to a copy of the new board"""
+        """Sets the shared board object to a copy of the new board
+
+        Parameters
+        ----------
+        new_board : Board
+        """
         try:
             if not new_board.is_valid():
                 raise ValueError(f"new_board is not valid: {new_board}")
@@ -62,12 +80,22 @@ class EngineContainer:
 
     @property
     def white(self) -> CMHMEngine:
-        """Gets the engine playing as white"""
+        """Gets the engine playing as white
+
+        Returns
+        -------
+        CMHMEngine
+        """
         return self._white
 
     @white.setter
     def white(self, new_engine: CMHMEngine) -> None:
-        """Sets the engine playing as white"""
+        """Sets the engine playing as white
+
+        Parameters
+        ----------
+        new_engine : CMHMEngine
+        """
         if isinstance(new_engine, CMHMEngine):
             self._white = new_engine
             self._white._board = self._black.board
@@ -76,12 +104,22 @@ class EngineContainer:
 
     @property
     def black(self) -> CMHMEngine:
-        """Gets the engine playing as white"""
+        """Gets the engine playing as white
+
+        Returns
+        -------
+        CMHMEngine
+        """
         return self._black
 
     @black.setter
     def black(self, new_engine: CMHMEngine) -> None:
-        """Sets the engine playing as white"""
+        """Sets the engine playing as white
+
+        Parameters
+        ----------
+        new_engine : CMHMEngine
+        """
         if isinstance(new_engine, CMHMEngine):
             self._black = new_engine
             self._black._board = self._white.board
@@ -89,41 +127,83 @@ class EngineContainer:
             raise TypeError(f"new_engine must be type CMHMEngine, got {type(new_engine)}")
 
     @property
-    def white_name(self):
-        """Gets class name of white engine."""
+    def white_name(self) -> str:
+        """Gets class name of white engine.
+
+        Returns
+        -------
+        str
+        """
         return self._white.__class__.__name__
 
     @white_name.setter
-    def white_name(self, new_name: Callable):
+    def white_name(self, new_name: Callable) -> None:
+        """
+
+        Parameters
+        ----------
+        new_name : Callable
+        """
         self.white = new_name(depth=self._white.depth)
 
     @property
-    def black_name(self):
-        """Gets class name of white engine."""
+    def black_name(self) -> str:
+        """Gets class name of white engine.
+
+        Returns
+        -------
+        str
+        """
         return self._black.__class__.__name__
 
     @black_name.setter
-    def black_name(self, new_name: Callable):
+    def black_name(self, new_name: Callable) -> None:
+        """
+
+        Parameters
+        ----------
+        new_name : Callable
+        """
         self.black = new_name(depth=self._white.depth)
 
     @property
     def depths(self) -> Tuple[int, int]:
-        """Gets the depth values of the engine(s)"""
+        """Gets the depth values of the engine(s)
+
+        Returns
+        -------
+        Tuple[int, int]
+        """
         return self._white.depth, self._black.depth
 
     @depths.setter
     def depths(self, new_depths: Tuple[int, int]) -> None:
-        """Sets the engine(s) new depths"""
+        """Sets the engine(s) new depths
+
+        Parameters
+        ----------
+        new_depths : Tuple[int, int]
+        """
         self._white.depth, self._black.depth = new_depths
 
     @property
     def depth(self) -> int:
-        """Gets the depth value of the engine at play per the board state"""
+        """Gets the depth value of the engine at play per the board state
+
+        Returns
+        -------
+        int
+        """
         return self._white.depth if self._white.board.turn else self._black.depth
 
     @depth.setter
     def depth(self, new_depth: int) -> None:
-        """Sets the depth value of the engine at play per the board state"""
+        """Sets the depth value of the engine at play per the board state
+
+        Parameters
+        ----------
+        new_depth : int
+        """
         if self._white.board.turn:
             self._white.depth = int(new_depth)
         else:
@@ -133,27 +213,79 @@ class EngineContainer:
         """Flips the board sides the engine is playing."""
         self._black, self._white = self._white, self._black
 
-    def push(self, pick: Pick):
-        """Push a Pick's Move to the shared board."""
+    def push(self, pick: Pick) -> None:
+        """Push a Pick's Move to the shared board.
+
+        Parameters
+        ----------
+        pick : Pick
+        """
         self._white.board.push(move=pick.move)
 
     def __getitem__(self, chess_lib_index: object) -> CMHMEngine:
-        """Gets the engine corresponding to the python-chess lib COLOR_NAMES index"""
+        """Gets the engine corresponding to the python-chess lib COLOR_NAMES index
+
+        Parameters
+        ----------
+        chess_lib_index : object
+        """
         return self._white if chess_lib_index else self._black
 
     def __setitem__(self, chess_lib_index: object, new_engine: CMHMEngine) -> None:
-        """Sets the engine corresponding to the python-chess lib COLOR_NAMES index"""
+        """Sets the engine corresponding to the python-chess lib COLOR_NAMES index
+
+        Parameters
+        ----------
+        chess_lib_index : object
+        new_engine : CMHMEngine
+        """
         if chess_lib_index:
             self.white = new_engine
         else:
             self.black = new_engine
 
-    def __len__(self):
-        """The length of the container is the number of unique engine objects"""
-        return sum({self._white, self._black})
+    def __len__(self) -> int:
+        """The length of the container is the number of unique engine instances
 
-    def __contains__(self, item):
+        Returns
+        -------
+        int
+        """
+        return sum(self.to_set())
+
+    def __contains__(self, item: object) -> bool:
+        """
+
+        Parameters
+        ----------
+        item : object
+
+        Returns
+        -------
+        bool
+
+        """
         return item is self._white or item is self._black
+
+    def __iter__(self) -> Iterator[CMHMEngine]:
+        """
+        Returns
+        -------
+        Iterator[CMHMEngine]
+
+        """
+        engine: CMHMEngine
+        for engine in self.to_set():
+            yield engine
+
+    def to_set(self) -> Set[CMHMEngine]:
+        """
+
+        Returns
+        -------
+        Set[CMHMEngine]
+        """
+        return {self._white, self._black}
 
 
 class PlayChessApp(Tk, BaseChessTkApp):
@@ -410,7 +542,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
                 )
                 self.save_to_pgn(file_name=file_name, game=game)
                 self.highlight_squares = set()
-                for engine in {self.engines.white, self.engines.black}:
+                for engine in self.engines:
                     if isinstance(engine, CMHMEngine2):
                         # This is going to pop all the moves out of the shared board...
                         update_future: Future = self._move_executor.submit(engine.update_q_values)
