@@ -1,7 +1,7 @@
-﻿play
-====
+chmutils.player
+===============
 
-.. automodule:: play
+.. automodule:: chmutils.player
 
    
    
@@ -17,8 +17,7 @@
 
    .. autosummary::
    
-      EngineContainer
-      PlayChessApp
+      Player
    
    
 

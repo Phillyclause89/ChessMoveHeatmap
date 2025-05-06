@@ -52,5 +52,6 @@
    chmutils.base_chess_tk_app
    chmutils.concurrent
    chmutils.game_builder
+   chmutils.player
    chmutils.system_info
 

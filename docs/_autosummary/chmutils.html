@@ -605,6 +605,49 @@ a Future instance representing the execution of the callable.</p>
 
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="chmutils.Player">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chmutils.</span></span><span class="sig-name descname"><span class="pre">Player</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chmutils.Player" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Player dataclass for engine manager</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="chmutils.Player.color">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">color</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#chmutils.Player.color" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>str</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="chmutils.Player.index">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">index</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#chmutils.Player.index" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>int</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="chmutils.Player.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#chmutils.Player.name" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>str</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="chmutils.calculate_chess_move_heatmap">
 <span class="sig-prename descclassname"><span class="pre">chmutils.</span></span><span class="sig-name descname"><span class="pre">calculate_chess_move_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heatmap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="heatmaps.html#heatmaps.ChessMoveHeatmap" title="heatmaps.ChessMoveHeatmap"><span class="pre">ChessMoveHeatmap</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="heatmaps.html#heatmaps.ChessMoveHeatmap" title="heatmaps.ChessMoveHeatmap"><span class="pre">ChessMoveHeatmap</span></a></span></span><a class="headerlink" href="#chmutils.calculate_chess_move_heatmap" title="Permalink to this definition">¶</a></dt>
@@ -1029,7 +1072,10 @@ in the range U+0000 through U+FFFF (inclusive).</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="chmutils.game_builder.html#module-chmutils.game_builder" title="chmutils.game_builder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chmutils.game_builder</span></code></a></p></td>
 <td><p>GBuilder class that overrides <cite>GameBuilder.handle_error</cite> to raise exception.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="chmutils.system_info.html#module-chmutils.system_info" title="chmutils.system_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chmutils.system_info</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="chmutils.player.html#module-chmutils.player" title="chmutils.player"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chmutils.player</span></code></a></p></td>
+<td><p>Player class</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="chmutils.system_info.html#module-chmutils.system_info" title="chmutils.system_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chmutils.system_info</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>

@@ -41,16 +41,161 @@
 <p class="rubric">Classes</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#play.PlayChessApp" title="play.PlayChessApp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PlayChessApp</span></code></a>(engine_type, depth, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#play.EngineContainer" title="play.EngineContainer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EngineContainer</span></code></a>(engine_type, depth, ...)</p></td>
+<td><p>Container for the engine(s).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#play.PlayChessApp" title="play.PlayChessApp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PlayChessApp</span></code></a>(engine_type, depth, ...)</p></td>
 <td><p>Play against the CMHMEngine in a GUI.</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py class">
+<dt class="sig sig-object py" id="play.EngineContainer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">play.</span></span><span class="sig-name descname"><span class="pre">EngineContainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine_type:</span> <span class="pre">~typing.Callable</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'chmengine.engines.cmhmey1.CMHMEngine'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine_type_2:</span> <span class="pre">~typing.Optional[~typing.Callable]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth_2:</span> <span class="pre">~typing.Optional[int]</span> <span class="pre">=</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#play.EngineContainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Container for the engine(s).</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="play.EngineContainer.black">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">black</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="chmengine.engines.cmhmey1.html#chmengine.engines.cmhmey1.CMHMEngine" title="chmengine.engines.cmhmey1.CMHMEngine"><span class="pre">CMHMEngine</span></a></em><a class="headerlink" href="#play.EngineContainer.black" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the engine playing as white</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>CMHMEngine</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="play.EngineContainer.black_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">black_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#play.EngineContainer.black_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets class name of white engine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>str</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="play.EngineContainer.board">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">board</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Board</span></em><a class="headerlink" href="#play.EngineContainer.board" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the shared board object between the engines</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>Board</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="play.EngineContainer.depth">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">depth</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#play.EngineContainer.depth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the depth value of the engine at play per the board state</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>int</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="play.EngineContainer.depths">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">depths</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#play.EngineContainer.depths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the depth values of the engine(s)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>Tuple[int, int]</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="play.EngineContainer.flip">
+<span class="sig-name descname"><span class="pre">flip</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#play.EngineContainer.flip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flips the board sides the engine is playing.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="play.EngineContainer.push">
+<span class="sig-name descname"><span class="pre">push</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pick</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#play.EngineContainer.push" title="Permalink to this definition">¶</a></dt>
+<dd><p>Push a Pick’s Move to the shared board.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>pick</strong><span class="classifier">Pick</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="play.EngineContainer.to_set">
+<span class="sig-name descname"><span class="pre">to_set</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="chmengine.engines.cmhmey1.html#chmengine.engines.cmhmey1.CMHMEngine" title="chmengine.engines.cmhmey1.CMHMEngine"><span class="pre">CMHMEngine</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#play.EngineContainer.to_set" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>Set[CMHMEngine]</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="play.EngineContainer.white">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">white</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="chmengine.engines.cmhmey1.html#chmengine.engines.cmhmey1.CMHMEngine" title="chmengine.engines.cmhmey1.CMHMEngine"><span class="pre">CMHMEngine</span></a></em><a class="headerlink" href="#play.EngineContainer.white" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the engine playing as white</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>CMHMEngine</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="play.EngineContainer.white_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">white_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#play.EngineContainer.white_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets class name of white engine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>str</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="play.PlayChessApp">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">play.</span></span><span class="sig-name descname"><span class="pre">PlayChessApp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine_type:</span> <span class="pre">~typing.Callable</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'chmengine.engines.cmhmey1.CMHMEngine'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player_name:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'Unknown'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player_color_is_black:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site:</span> <span class="pre">~typing.Optional[str]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine_type_2:</span> <span class="pre">~typing.Optional[~typing.Callable]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth_2:</span> <span class="pre">~typing.Optional[int]</span> <span class="pre">=</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#play.PlayChessApp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Tk</span></code>, <a class="reference internal" href="chmutils.base_chess_tk_app.html#chmutils.base_chess_tk_app.BaseChessTkApp" title="chmutils.base_chess_tk_app.BaseChessTkApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseChessTkApp</span></code></a></p>
 <p>Play against the CMHMEngine in a GUI.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="play.PlayChessApp.activate_piece">
+<span class="sig-name descname"><span class="pre">activate_piece</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Event</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#play.PlayChessApp.activate_piece" title="Permalink to this definition">¶</a></dt>
+<dd><p>Responds to click events on the Canvas to see if they correspond to playing a move</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>event</strong><span class="classifier">Event</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="play.PlayChessApp.add_options">
 <span class="sig-name descname"><span class="pre">add_options</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">menu_bar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Menu</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#play.PlayChessApp.add_options" title="Permalink to this definition">¶</a></dt>
@@ -366,6 +511,13 @@ the allowed keyword arguments call the method keys.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="play.PlayChessApp.coord_to_square">
+<span class="sig-name descname"><span class="pre">coord_to_square</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#play.PlayChessApp.coord_to_square" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert canvas coordinates to a 0–63 square index,
+or return None if the click is off‐board.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="play.PlayChessApp.create_menu">
 <span class="sig-name descname"><span class="pre">create_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#play.PlayChessApp.create_menu" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct and attach the main menu bar.</p>
@@ -426,7 +578,7 @@ and if a piece is present, centers its unicode symbol with a background marker.<
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="play.PlayChessApp.engines">
-<span class="sig-name descname"><span class="pre">engines</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="chmengine.engines.cmhmey1.html#chmengine.engines.cmhmey1.CMHMEngine" title="chmengine.engines.cmhmey1.CMHMEngine"><span class="pre">CMHMEngine</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[{'engine':</span> <span class="pre">None,</span> <span class="pre">'name':</span> <span class="pre">'None',</span> <span class="pre">'index':</span> <span class="pre">1,</span> <span class="pre">'color':</span> <span class="pre">'black'},</span> <span class="pre">{'engine':</span> <span class="pre">None,</span> <span class="pre">'name':</span> <span class="pre">'None',</span> <span class="pre">'index':</span> <span class="pre">0,</span> <span class="pre">'color':</span> <span class="pre">'white'}]</span></em><a class="headerlink" href="#play.PlayChessApp.engines" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">engines</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#play.EngineContainer" title="play.EngineContainer"><span class="pre">EngineContainer</span></a></em><a class="headerlink" href="#play.PlayChessApp.engines" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -574,8 +726,8 @@ current value if None is given.</p>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>mode</strong><span class="classifier">str</span></dt><dd><p>One of:
 - “&lt;EngineName&gt; vs &lt;EngineName&gt;” (if training)
-- “&lt;EngineName&gt; vs &lt;PlayerName&gt;” (if player_index==0)
-- “&lt;PlayerName&gt; vs &lt;EngineName&gt;” (if player_index==1)</p>
+- “&lt;PlayerName&gt; vs &lt;EngineName&gt;” (if player_index==0)
+- “&lt;EngineName&gt; vs &lt;PlayerName&gt;” (if player_index==1)</p>
 </dd>
 </dl>
 </dd>
@@ -1010,7 +1162,7 @@ in its packing order.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="play.PlayChessApp.player">
-<span class="sig-name descname"><span class="pre">player</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'color':</span> <span class="pre">'white',</span> <span class="pre">'index':</span> <span class="pre">0,</span> <span class="pre">'name':</span> <span class="pre">'Unknown'}</span></em><a class="headerlink" href="#play.PlayChessApp.player" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">player</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="chmutils.player.html#chmutils.player.Player" title="chmutils.player.Player"><span class="pre">Player</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Player(_name='Unknown',</span> <span class="pre">_index=0,</span> <span class="pre">_color='white',</span> <span class="pre">_COLORS=('white',</span> <span class="pre">'black'))</span></em><a class="headerlink" href="#play.PlayChessApp.player" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1020,6 +1172,11 @@ in its packing order.</p>
 be defined by the user if WHO is “user”, and by its own policy if WHO is
 “program”.</p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="play.PlayChessApp.possible_squares">
+<span class="sig-name descname"><span class="pre">possible_squares</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></em><a class="headerlink" href="#play.PlayChessApp.possible_squares" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="play.PlayChessApp.propagate">
@@ -1118,6 +1275,11 @@ and pad (how much space to let additionally).</p>
 <p class="rubric">Notes</p>
 <p>Creates <cite>pgn_dir</cite> and <cite>training_dir</cite> if they do not exist.</p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="play.PlayChessApp.selected_square">
+<span class="sig-name descname"><span class="pre">selected_square</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#play.PlayChessApp.selected_square" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="play.PlayChessApp.selection_clear">
