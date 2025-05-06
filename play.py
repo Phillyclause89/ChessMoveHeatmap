@@ -303,7 +303,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
     faces: Dict[str, Tuple[str, ...]] = state_faces
     dot_dot: Generator[str, str, str] = cycle(['.', '..', '...'])
     selected_square: Optional[int] = None
-    possible_squares: Tuple[Optional[int], ...] = tuple()
+    possible_squares: Tuple[int, ...] = tuple()
 
     def __init__(
             self,
@@ -690,7 +690,9 @@ class PlayChessApp(Tk, BaseChessTkApp):
         square: int
         half_square_size: int = self.square_size // 2
         piece_bg: str = "⬤"
+        selected_bg: str = '♦'
         font_size = int(self.square_size * 0.6)
+        bg_size = font_size + 25
         game_line_font: Tuple[str, int] = (self.font, font_size // 5)
         self.canvas.create_text(
             half_square_size // 8, (half_square_size // 4),
@@ -732,18 +734,23 @@ class PlayChessApp(Tk, BaseChessTkApp):
             )
             piece: Optional[Piece] = board.piece_at(square)
             if piece is not None:
-                # TODO: Refactor this into a `PieceTk` (or `CanvasPiece`) class that can support drag and drop
-                # CanvasPiece aligns with CanvasTooltip better...
-                # TODO: Consider adapting such a `CanvasPiece` in `main.ChessHeatMapApp.create_piece`.
                 piece_x = x0 + half_square_size
                 piece_y = y0 + half_square_size
                 self.canvas.create_text(
                     piece_x,
                     piece_y,
                     text=piece_bg,
-                    font=(self.font, font_size + 25),
+                    font=(self.font, bg_size),
                     fill="white" if piece.color else "black"
                 )
+                if square == self.selected_square:
+                    self.canvas.create_text(
+                        piece_x,
+                        piece_y - 9,
+                        text=selected_bg,
+                        font=(self.font, bg_size + 63),
+                        fill="Green"
+                    )
                 self.canvas.create_text(
                     piece_x,
                     piece_y,
@@ -781,7 +788,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         if not self.updating and not self.training and self.engines.board.turn == bool(self.player):
             if self.selected_square is None:
                 square: Optional[int] = self.coord_to_square(event.x, event.y)
-                legal_moves: List[Optional[Move]] = list(self.engines.board.legal_moves)
+                legal_moves: List[Move] = list(self.engines.board.legal_moves)
                 from_to_map: Dict[int:Tuple[int]] = {
                     m.from_square: tuple(
                         mt.to_square for mt in legal_moves if mt.from_square == m.from_square
@@ -793,6 +800,13 @@ class PlayChessApp(Tk, BaseChessTkApp):
                 self.possible_squares = from_to_map[square]
             else:
                 square: Optional[int] = self.coord_to_square(event.x, event.y)
+                if square == self.selected_square:
+                    self.selected_square = None
+                    self.possible_squares = tuple()
+                    self.updating = True
+                    self.update_board()
+                    self.updating = False
+                    return
                 if square is None or square not in self.possible_squares:
                     return
                 pick: Pick = Pick(
