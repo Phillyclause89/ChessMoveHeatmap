@@ -7,7 +7,7 @@ from os import makedirs, path
 from pathlib import Path
 from random import choice
 from tkinter import Canvas, Menu, Tk, messagebox, simpledialog
-from typing import Callable, Dict, Generator, List, Optional, Tuple, Union
+from typing import Callable, Dict, Generator, List, Optional, Tuple
 
 from chess import Board, Move, Outcome, Piece, SQUARES
 from chess.pgn import Game
@@ -36,6 +36,7 @@ class EngineContainer:
     ) -> None:
         """Initialize the EngineContainer"""
         self._white = engine_type(depth=depth)
+        # Allows for same Engine instance or different based on engine_type_2 being passed
         self._black = self._white if engine_type_2 is None else engine_type_2(
             depth=depth if depth_2 is None else depth_2
         )
@@ -43,20 +44,115 @@ class EngineContainer:
         self._black._board = self._white.board
 
     @property
+    def board(self) -> Board:
+        """Gets the shared board object between the engines"""
+        return self._white.board
+
+    @board.setter
+    def board(self, new_board: Board) -> None:
+        """Sets the shared board object to a copy of the new board"""
+        try:
+            if not new_board.is_valid():
+                raise ValueError(f"new_board is not valid: {new_board}")
+            self._white._board = new_board
+            self._black._board = self._white.board
+        except AttributeError as error:
+            raise TypeError(f"new_board must be type `chess.Board`, got `{type(new_board)}`") from error
+
+    @property
     def white(self) -> CMHMEngine:
         """Gets the engine playing as white"""
         return self._white
 
     @white.setter
-    def white(self, new_engine: Union[Callable, CMHMEngine]):
+    def white(self, new_engine: CMHMEngine) -> None:
         """Sets the engine playing as white"""
-        try:
-            self._white = new_engine(depth=self._white.depth)
-        except TypeError as error:
-            if isinstance(new_engine, CMHMEngine):
-                self._white = new_engine
-            else:
-                raise TypeError(f"new_engine must be type CMHMEngine, got {type(new_engine)}") from error
+        if isinstance(new_engine, CMHMEngine):
+            self._white = new_engine
+            self._white._board = self._black.board
+        else:
+            raise TypeError(f"new_engine must be type CMHMEngine, got {type(new_engine)}")
+
+    @property
+    def black(self) -> CMHMEngine:
+        """Gets the engine playing as white"""
+        return self._black
+
+    @black.setter
+    def black(self, new_engine: CMHMEngine) -> None:
+        """Sets the engine playing as white"""
+        if isinstance(new_engine, CMHMEngine):
+            self._black = new_engine
+            self._black._board = self._white.board
+        else:
+            raise TypeError(f"new_engine must be type CMHMEngine, got {type(new_engine)}")
+
+    @property
+    def white_name(self):
+        """Gets class name of white engine."""
+        return self._white.__class__.__name__
+
+    @white_name.setter
+    def white_name(self, new_name: Callable):
+        self.white = new_name(depth=self._white.depth)
+
+    @property
+    def black_name(self):
+        """Gets class name of white engine."""
+        return self._black.__class__.__name__
+
+    @black_name.setter
+    def black_name(self, new_name: Callable):
+        self.black = new_name(depth=self._white.depth)
+
+    @property
+    def depths(self) -> Tuple[int, int]:
+        """Gets the depth values of the engine(s)"""
+        return self._white.depth, self._black.depth
+
+    @depths.setter
+    def depths(self, new_depths: Tuple[int, int]) -> None:
+        """Sets the engine(s) new depths"""
+        self._white.depth, self._black.depth = new_depths
+
+    @property
+    def depth(self) -> int:
+        """Gets the depth value of the engine at play per the board state"""
+        return self._white.depth if self._white.board.turn else self._black.depth
+
+    @depth.setter
+    def depth(self, new_depth: int) -> None:
+        """Sets the depth value of the engine at play per the board state"""
+        if self._white.board.turn:
+            self._white.depth = int(new_depth)
+        else:
+            self._black.depth = int(new_depth)
+
+    def flip(self) -> None:
+        """Flips the board sides the engine is playing."""
+        self._black, self._white = self._white, self._black
+
+    def push(self, pick: Pick):
+        """Push a Pick's Move to the shared board."""
+        self._white.board.push(move=pick.move)
+
+    def __getitem__(self, chess_lib_index: object) -> CMHMEngine:
+        """Gets the engine corresponding to the python-chess lib COLOR_NAMES index"""
+        return self._white if chess_lib_index else self._black
+
+    def __setitem__(self, chess_lib_index: object, new_engine: CMHMEngine) -> None:
+        """Sets the engine corresponding to the python-chess lib COLOR_NAMES index"""
+        if chess_lib_index:
+            self.white = new_engine
+        else:
+            self.black = new_engine
+
+    def __len__(self):
+        """The length of the container is the number of unique engine objects"""
+        return sum({self._white, self._black})
+
+    def __contains__(self, item):
+        return item is self._white or item is self._black
 
 
 class PlayChessApp(Tk, BaseChessTkApp):
@@ -114,7 +210,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         if player_color_is_black:
             self.player.index = 1
         self.engines = EngineContainer(engine_type, depth, engine_type_2, depth_2)
-        self.depth = self.engines.white.depth
+        self.depth = self.engines.depth
         self.set_title()
         screen_height: int = self.winfo_screenheight()
         screen_width: int = int(screen_height * 0.75)
@@ -161,8 +257,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
             self.updating = True
             new_depth: Optional[int] = self.ask_depth()
             if new_depth is not None and new_depth != self.depth:
-                for engine_dict in self.engines:
-                    engine_dict['engine'].depth = new_depth
+                self.engines.depths = new_depth, new_depth
                 self.depth = new_depth
                 self.set_title()
             self.updating = False
@@ -200,14 +295,14 @@ class PlayChessApp(Tk, BaseChessTkApp):
         mode : str
             One of:
             - "<EngineName> vs <EngineName>" (if training)
-            - "<EngineName> vs <PlayerName>" (if player_index==0)
-            - "<PlayerName> vs <EngineName>" (if player_index==1)
+            - "<PlayerName> vs <EngineName>" (if player_index==0)
+            - "<EngineName> vs <PlayerName>" (if player_index==1)
         """
         if self.training:
-            return f"{self.engines[0]['name']} vs {self.engines[1]['name']}"
+            return f"{self.engines.white_name} vs {self.engines.black_name}"
         if self.player.index:
-            return f"{self.engines[0]['name']} vs {self.player.name}"
-        return f"{self.player.name} vs {self.engines[1]['name']}"
+            return f"{self.engines.white_name} vs {self.player.name}"
+        return f"{self.player.name} vs {self.engines.black_name}"
 
     def new_game(self) -> None:
         """Start a brand‐new game after user confirmation.
@@ -239,9 +334,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         Ensures both `.engine.board` references point to the same object.
         """
         new_board = Board() if new_board is None else new_board
-        for engine_dict in self.engines:
-            # noinspection PyProtectedMember
-            engine_dict['engine']._board = new_board
+        self.engines.board = new_board
 
     def train_engine(self):
         """Run a training loop where two engines play multiple games and update Q-values.
@@ -277,10 +370,8 @@ class PlayChessApp(Tk, BaseChessTkApp):
             for game_id in range(start_game_index + 1, end_game_index + 1):
                 local_time: datetime = get_local_time()
                 self.set_title()
-                engine_white = self.engines[1]['engine']
-                engine_black = self.engines[0]['engine']
                 # We go out of our way to make sure both engines point to the same board object
-                board: Board = engine_white.board
+                board: Board = self.engines.board
                 future: Future = Future()
                 # Kick off loop with a done future containing an illegal pick result
                 future.set_result(illegal_pick)
@@ -297,8 +388,8 @@ class PlayChessApp(Tk, BaseChessTkApp):
                             self.face = self.get_smily_face()
                             self.highlight_squares = {move.from_square, move.to_square}
                         future: Future = self._move_executor.submit(
-                            engine_white.pick_move
-                        ) if board.turn else self._move_executor.submit(engine_black.pick_move)
+                            self.engines.white.pick_move
+                        ) if board.turn else self._move_executor.submit(self.engines.black.pick_move)
                     self.updating = True
                     self.update_board()
                     self.updating = False
@@ -309,8 +400,8 @@ class PlayChessApp(Tk, BaseChessTkApp):
                 game_heads["Site"] = self.site
                 game_heads["Round"] = str(game_id)
                 set_all_datetime_headers(game_heads=game_heads, local_time=local_time)
-                game_heads["White"] = self.engines[1]['name']
-                game_heads["Black"] = self.engines[0]['name']
+                game_heads["White"] = self.engines.white_name
+                game_heads["Black"] = self.engines.black_name
                 game_heads["Termination"] = outcome.termination.name
                 game_heads["CMHMEngineDepth"] = str(self.depth)
                 file_name: str = path.join(
@@ -320,7 +411,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
                 )
                 self.save_to_pgn(file_name=file_name, game=game)
                 self.highlight_squares = set()
-                for engine in {engine_white, engine_black}:
+                for engine in {self.engines.white, self.engines.black}:
                     if isinstance(engine, CMHMEngine2):
                         # This is going to pop all the moves out of the shared board...
                         update_future: Future = self._move_executor.submit(engine.update_q_values)
@@ -332,13 +423,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
                 self.updating = True
                 self.update_board()
                 self.updating = False
-                (
-                    self.engines[0]['engine'], self.engines[1]['engine'],
-                    self.engines[0]['name'], self.engines[1]['name'],
-                ) = (
-                    self.engines[1]['engine'], self.engines[0]['engine'],
-                    self.engines[1]['name'], self.engines[0]['name'],
-                )
+                self.engines.flip()
             self.training = False
         elif self.training:
             messagebox.showerror("Error", "The engine is already training.")
@@ -410,7 +495,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         outcome : chess.Outcome, optional
             Outcome to display. If None, computes from the current engine board.
         """
-        outcome: Optional[Outcome] = self.engines[0]['engine'].board.outcome(
+        outcome: Optional[Outcome] = self.engines.board.outcome(
             claim_draw=True
         ) if outcome is None else outcome
         messagebox.showinfo("Game Over", f"Game Over: {outcome}")
@@ -439,7 +524,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         str
         """
         last_score: float64 = self.game_line[-1].score
-        turn: bool = self.engines[0]['engine'].board.turn
+        turn: bool = self.engines.board.turn
         key: str = 'draw'
         if (last_score > 17 and turn) or (last_score < -17 and not turn):
             key = 'winning'
@@ -458,7 +543,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         - Uses `self.square_size`, `self.colors`, and `self.font` for layout.
         - Flips rank ordering so that white’s back rank appears at the bottom.
         """
-        board: Board = self.engines[0]['engine'].board
+        board: Board = self.engines.board
         square: int
         half_square_size: int = self.square_size // 2
         piece_bg: str = "⬤"
