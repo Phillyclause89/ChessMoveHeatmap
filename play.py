@@ -551,10 +551,10 @@ class PlayChessApp(Tk, BaseChessTkApp):
                             self.update_board()
                             self.updating = False
                 self.reset_engines_board()
+                self.engines.flip()
                 self.updating = True
                 self.update_board()
                 self.updating = False
-                self.engines.flip()
             self.training = False
         elif self.training:
             messagebox.showerror("Error", "The engine is already training.")
