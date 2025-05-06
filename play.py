@@ -690,7 +690,6 @@ class PlayChessApp(Tk, BaseChessTkApp):
         square: int
         half_square_size: int = self.square_size // 2
         piece_bg: str = "⬤"
-        selected_bg: str = '♦'
         font_size = int(self.square_size * 0.6)
         bg_size = font_size + 25
         game_line_font: Tuple[str, int] = (self.font, font_size // 5)
@@ -741,16 +740,8 @@ class PlayChessApp(Tk, BaseChessTkApp):
                     piece_y,
                     text=piece_bg,
                     font=(self.font, bg_size),
-                    fill="white" if piece.color else "black"
+                    fill="light green" if square == self.selected_square else "white" if piece.color else "black"
                 )
-                if square == self.selected_square:
-                    self.canvas.create_text(
-                        piece_x,
-                        piece_y - 9,
-                        text=selected_bg,
-                        font=(self.font, bg_size + 63),
-                        fill="Green"
-                    )
                 self.canvas.create_text(
                     piece_x,
                     piece_y,
