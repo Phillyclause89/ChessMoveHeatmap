@@ -377,9 +377,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
                 # Kick off loop with a done future containing an illegal pick result
                 future.set_result(illegal_pick)
                 while board.outcome(claim_draw=True) is None:
-                    # TODO: Use these unused variables
                     if future.done():
-                        # TODO surface eval score in pick to GUI
                         pick: Pick = future.result()
                         if pick != illegal_pick:
                             move: Move = pick.move
