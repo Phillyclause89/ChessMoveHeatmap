@@ -7,7 +7,7 @@ from os import makedirs, path
 from pathlib import Path
 from random import choice
 from tkinter import Canvas, Event, Menu, Tk, messagebox, simpledialog
-from typing import Any, Callable, Dict, Generator, Iterator, List, Optional, Set, Tuple
+from typing import Callable, Dict, Generator, Iterator, List, Optional, Set, Tuple
 
 from chess import Board, Move, Outcome, Piece, SQUARES
 from chess.pgn import Game
