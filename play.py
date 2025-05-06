@@ -17,7 +17,8 @@ from chmengine import CMHMEngine, CMHMEngine2, Pick, set_all_datetime_headers
 from chmutils import BaseChessTkApp, DEFAULT_COLORS, DEFAULT_FONT, Player, get_local_time, state_faces
 
 __all__ = [
-    'PlayChessApp'
+    'PlayChessApp',
+    'EngineContainer'
 ]
 
 
