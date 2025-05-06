@@ -2240,11 +2240,12 @@ static PyObject *__pyx_builtin_ValueError;
 /* #### Code section: string_decls ### */
 static const char __pyx_k_[] = "`";
 static const char __pyx_k__2[] = ".";
-static const char __pyx_k__16[] = "?";
+static const char __pyx_k__17[] = "?";
 static const char __pyx_k_doc[] = "__doc__";
 static const char __pyx_k_int[] = "int";
 static const char __pyx_k_str[] = "str";
 static const char __pyx_k_None[] = "None";
+static const char __pyx_k_bool[] = "__bool__";
 static const char __pyx_k_dict[] = "__dict__";
 static const char __pyx_k_init[] = "__init__";
 static const char __pyx_k_main[] = "__main__";
@@ -2261,6 +2262,7 @@ static const char __pyx_k_strip[] = "strip";
 static const char __pyx_k_super[] = "super";
 static const char __pyx_k_COLORS[] = "_COLORS";
 static const char __pyx_k_Player[] = "Player";
+static const char __pyx_k_bool_2[] = "bool";
 static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_module[] = "__module__";
 static const char __pyx_k_name_2[] = "_name";
@@ -2294,6 +2296,7 @@ static const char __pyx_k_Player_class[] = "Player class";
 static const char __pyx_k_Player_color[] = "Player.color";
 static const char __pyx_k_Player_index[] = "Player.index";
 static const char __pyx_k_is_coroutine[] = "_is_coroutine";
+static const char __pyx_k_Player___bool[] = "Player.__bool__";
 static const char __pyx_k_Player___init[] = "Player.__init__";
 static const char __pyx_k_Tuple_str_str[] = "Tuple[str, str]";
 static const char __pyx_k_class_getitem[] = "__class_getitem__";
@@ -2314,6 +2317,7 @@ static PyObject *__pyx_pf_8chmutils_6player_6Player_6index(CYTHON_UNUSED PyObjec
 static PyObject *__pyx_pf_8chmutils_6player_6Player_8index(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_new_index); /* proto */
 static PyObject *__pyx_pf_8chmutils_6player_6Player_10color(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_8chmutils_6player_6Player_12color(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_new_color); /* proto */
+static PyObject *__pyx_pf_8chmutils_6player_6Player_14__bool__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
 static __Pyx_CachedCFunction __pyx_umethod_PyUnicode_Type_strip = {0, 0, 0, 0, 0};
 /* #### Code section: late_includes ### */
 /* #### Code section: module_state ### */
@@ -2354,6 +2358,7 @@ typedef struct {
   PyObject *__pyx_kp_s_Optional_int;
   PyObject *__pyx_kp_s_Optional_str;
   PyObject *__pyx_n_s_Player;
+  PyObject *__pyx_n_s_Player___bool;
   PyObject *__pyx_n_s_Player___init;
   PyObject *__pyx_n_s_Player_color;
   PyObject *__pyx_kp_s_Player_dataclass_for_engine_mana;
@@ -2364,10 +2369,12 @@ typedef struct {
   PyObject *__pyx_n_s_TypeError;
   PyObject *__pyx_n_u_Unknown;
   PyObject *__pyx_n_s_ValueError;
-  PyObject *__pyx_n_s__16;
+  PyObject *__pyx_n_s__17;
   PyObject *__pyx_kp_u__2;
   PyObject *__pyx_n_s_annotations;
   PyObject *__pyx_n_s_asyncio_coroutines;
+  PyObject *__pyx_n_s_bool;
+  PyObject *__pyx_n_s_bool_2;
   PyObject *__pyx_n_s_chess;
   PyObject *__pyx_n_s_chmutils_player;
   PyObject *__pyx_kp_s_chmutils_player_py;
@@ -2425,6 +2432,7 @@ typedef struct {
   PyObject *__pyx_codeobj__12;
   PyObject *__pyx_codeobj__13;
   PyObject *__pyx_codeobj__15;
+  PyObject *__pyx_codeobj__16;
 } __pyx_mstate;
 
 #if CYTHON_USE_MODULE_STATE
@@ -2477,6 +2485,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_s_Optional_int);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Optional_str);
   Py_CLEAR(clear_module_state->__pyx_n_s_Player);
+  Py_CLEAR(clear_module_state->__pyx_n_s_Player___bool);
   Py_CLEAR(clear_module_state->__pyx_n_s_Player___init);
   Py_CLEAR(clear_module_state->__pyx_n_s_Player_color);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Player_dataclass_for_engine_mana);
@@ -2487,10 +2496,12 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_TypeError);
   Py_CLEAR(clear_module_state->__pyx_n_u_Unknown);
   Py_CLEAR(clear_module_state->__pyx_n_s_ValueError);
-  Py_CLEAR(clear_module_state->__pyx_n_s__16);
+  Py_CLEAR(clear_module_state->__pyx_n_s__17);
   Py_CLEAR(clear_module_state->__pyx_kp_u__2);
   Py_CLEAR(clear_module_state->__pyx_n_s_annotations);
   Py_CLEAR(clear_module_state->__pyx_n_s_asyncio_coroutines);
+  Py_CLEAR(clear_module_state->__pyx_n_s_bool);
+  Py_CLEAR(clear_module_state->__pyx_n_s_bool_2);
   Py_CLEAR(clear_module_state->__pyx_n_s_chess);
   Py_CLEAR(clear_module_state->__pyx_n_s_chmutils_player);
   Py_CLEAR(clear_module_state->__pyx_kp_s_chmutils_player_py);
@@ -2548,6 +2559,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_codeobj__12);
   Py_CLEAR(clear_module_state->__pyx_codeobj__13);
   Py_CLEAR(clear_module_state->__pyx_codeobj__15);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__16);
   return 0;
 }
 #endif
@@ -2578,6 +2590,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_s_Optional_int);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Optional_str);
   Py_VISIT(traverse_module_state->__pyx_n_s_Player);
+  Py_VISIT(traverse_module_state->__pyx_n_s_Player___bool);
   Py_VISIT(traverse_module_state->__pyx_n_s_Player___init);
   Py_VISIT(traverse_module_state->__pyx_n_s_Player_color);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Player_dataclass_for_engine_mana);
@@ -2588,10 +2601,12 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_TypeError);
   Py_VISIT(traverse_module_state->__pyx_n_u_Unknown);
   Py_VISIT(traverse_module_state->__pyx_n_s_ValueError);
-  Py_VISIT(traverse_module_state->__pyx_n_s__16);
+  Py_VISIT(traverse_module_state->__pyx_n_s__17);
   Py_VISIT(traverse_module_state->__pyx_kp_u__2);
   Py_VISIT(traverse_module_state->__pyx_n_s_annotations);
   Py_VISIT(traverse_module_state->__pyx_n_s_asyncio_coroutines);
+  Py_VISIT(traverse_module_state->__pyx_n_s_bool);
+  Py_VISIT(traverse_module_state->__pyx_n_s_bool_2);
   Py_VISIT(traverse_module_state->__pyx_n_s_chess);
   Py_VISIT(traverse_module_state->__pyx_n_s_chmutils_player);
   Py_VISIT(traverse_module_state->__pyx_kp_s_chmutils_player_py);
@@ -2649,6 +2664,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_codeobj__12);
   Py_VISIT(traverse_module_state->__pyx_codeobj__13);
   Py_VISIT(traverse_module_state->__pyx_codeobj__15);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__16);
   return 0;
 }
 #endif
@@ -2689,6 +2705,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_s_Optional_int __pyx_mstate_global->__pyx_kp_s_Optional_int
 #define __pyx_kp_s_Optional_str __pyx_mstate_global->__pyx_kp_s_Optional_str
 #define __pyx_n_s_Player __pyx_mstate_global->__pyx_n_s_Player
+#define __pyx_n_s_Player___bool __pyx_mstate_global->__pyx_n_s_Player___bool
 #define __pyx_n_s_Player___init __pyx_mstate_global->__pyx_n_s_Player___init
 #define __pyx_n_s_Player_color __pyx_mstate_global->__pyx_n_s_Player_color
 #define __pyx_kp_s_Player_dataclass_for_engine_mana __pyx_mstate_global->__pyx_kp_s_Player_dataclass_for_engine_mana
@@ -2699,10 +2716,12 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_TypeError __pyx_mstate_global->__pyx_n_s_TypeError
 #define __pyx_n_u_Unknown __pyx_mstate_global->__pyx_n_u_Unknown
 #define __pyx_n_s_ValueError __pyx_mstate_global->__pyx_n_s_ValueError
-#define __pyx_n_s__16 __pyx_mstate_global->__pyx_n_s__16
+#define __pyx_n_s__17 __pyx_mstate_global->__pyx_n_s__17
 #define __pyx_kp_u__2 __pyx_mstate_global->__pyx_kp_u__2
 #define __pyx_n_s_annotations __pyx_mstate_global->__pyx_n_s_annotations
 #define __pyx_n_s_asyncio_coroutines __pyx_mstate_global->__pyx_n_s_asyncio_coroutines
+#define __pyx_n_s_bool __pyx_mstate_global->__pyx_n_s_bool
+#define __pyx_n_s_bool_2 __pyx_mstate_global->__pyx_n_s_bool_2
 #define __pyx_n_s_chess __pyx_mstate_global->__pyx_n_s_chess
 #define __pyx_n_s_chmutils_player __pyx_mstate_global->__pyx_n_s_chmutils_player
 #define __pyx_kp_s_chmutils_player_py __pyx_mstate_global->__pyx_kp_s_chmutils_player_py
@@ -2760,6 +2779,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_codeobj__12 __pyx_mstate_global->__pyx_codeobj__12
 #define __pyx_codeobj__13 __pyx_mstate_global->__pyx_codeobj__13
 #define __pyx_codeobj__15 __pyx_mstate_global->__pyx_codeobj__15
+#define __pyx_codeobj__16 __pyx_mstate_global->__pyx_codeobj__16
 /* #### Code section: module_code ### */
 
 /* "chmutils/player.py":16
@@ -4349,6 +4369,7 @@ static PyObject *__pyx_pf_8chmutils_6player_6Player_12color(CYTHON_UNUSED PyObje
  *             self._color = new_color
  *         except ValueError as error:             # <<<<<<<<<<<<<<
  *             raise ValueError(f"new_color must be 'black' or 'white', got `{new_color}`") from error
+ * 
  */
     __pyx_t_8 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_ValueError);
     if (__pyx_t_8) {
@@ -4365,6 +4386,8 @@ static PyObject *__pyx_pf_8chmutils_6player_6Player_12color(CYTHON_UNUSED PyObje
  *             self._color = new_color
  *         except ValueError as error:
  *             raise ValueError(f"new_color must be 'black' or 'white', got `{new_color}`") from error             # <<<<<<<<<<<<<<
+ * 
+ *     def __bool__(self) -> bool:
  */
         __pyx_t_9 = PyTuple_New(3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 105, __pyx_L14_error)
         __Pyx_GOTREF(__pyx_t_9);
@@ -4401,6 +4424,7 @@ static PyObject *__pyx_pf_8chmutils_6player_6Player_12color(CYTHON_UNUSED PyObje
  *             self._color = new_color
  *         except ValueError as error:             # <<<<<<<<<<<<<<
  *             raise ValueError(f"new_color must be 'black' or 'white', got `{new_color}`") from error
+ * 
  */
       /*finally:*/ {
         __pyx_L14_error:;
@@ -4483,6 +4507,153 @@ static PyObject *__pyx_pf_8chmutils_6player_6Player_12color(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
+/* "chmutils/player.py":107
+ *             raise ValueError(f"new_color must be 'black' or 'white', got `{new_color}`") from error
+ * 
+ *     def __bool__(self) -> bool:             # <<<<<<<<<<<<<<
+ *         return not self._index
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_8chmutils_6player_6Player_15__bool__(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+static PyMethodDef __pyx_mdef_8chmutils_6player_6Player_15__bool__ = {"__bool__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_6player_6Player_15__bool__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_8chmutils_6player_6Player_15__bool__(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  PyObject *__pyx_v_self = 0;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[1] = {0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__bool__ (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_MACROS
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,0};
+    if (__pyx_kwds) {
+      Py_ssize_t kw_args;
+      switch (__pyx_nargs) {
+        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = __Pyx_NumKwargs_FASTCALL(__pyx_kwds);
+      switch (__pyx_nargs) {
+        case  0:
+        if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_self)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 107, __pyx_L3_error)
+        else goto __pyx_L5_argtuple_error;
+      }
+      if (unlikely(kw_args > 0)) {
+        const Py_ssize_t kwd_pos_args = __pyx_nargs;
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__bool__") < 0)) __PYX_ERR(0, 107, __pyx_L3_error)
+      }
+    } else if (unlikely(__pyx_nargs != 1)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+    }
+    __pyx_v_self = values[0];
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("__bool__", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 107, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_AddTraceback("chmutils.player.Player.__bool__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_8chmutils_6player_6Player_14__bool__(__pyx_self, __pyx_v_self);
+
+  /* function exit code */
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_8chmutils_6player_6Player_14__bool__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_t_2;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__bool__", 1);
+
+  /* "chmutils/player.py":108
+ * 
+ *     def __bool__(self) -> bool:
+ *         return not self._index             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_index_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 108, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyBool_FromLong((!__pyx_t_2)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "chmutils/player.py":107
+ *             raise ValueError(f"new_color must be 'black' or 'white', got `{new_color}`") from error
+ * 
+ *     def __bool__(self) -> bool:             # <<<<<<<<<<<<<<
+ *         return not self._index
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("chmutils.player.Player.__bool__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
 static PyMethodDef __pyx_methods[] = {
   {0, 0, 0, 0}
 };
@@ -4509,6 +4680,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_s_Optional_int, __pyx_k_Optional_int, sizeof(__pyx_k_Optional_int), 0, 0, 1, 0},
     {&__pyx_kp_s_Optional_str, __pyx_k_Optional_str, sizeof(__pyx_k_Optional_str), 0, 0, 1, 0},
     {&__pyx_n_s_Player, __pyx_k_Player, sizeof(__pyx_k_Player), 0, 0, 1, 1},
+    {&__pyx_n_s_Player___bool, __pyx_k_Player___bool, sizeof(__pyx_k_Player___bool), 0, 0, 1, 1},
     {&__pyx_n_s_Player___init, __pyx_k_Player___init, sizeof(__pyx_k_Player___init), 0, 0, 1, 1},
     {&__pyx_n_s_Player_color, __pyx_k_Player_color, sizeof(__pyx_k_Player_color), 0, 0, 1, 1},
     {&__pyx_kp_s_Player_dataclass_for_engine_mana, __pyx_k_Player_dataclass_for_engine_mana, sizeof(__pyx_k_Player_dataclass_for_engine_mana), 0, 0, 1, 0},
@@ -4519,10 +4691,12 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
     {&__pyx_n_u_Unknown, __pyx_k_Unknown, sizeof(__pyx_k_Unknown), 0, 1, 0, 1},
     {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
-    {&__pyx_n_s__16, __pyx_k__16, sizeof(__pyx_k__16), 0, 0, 1, 1},
+    {&__pyx_n_s__17, __pyx_k__17, sizeof(__pyx_k__17), 0, 0, 1, 1},
     {&__pyx_kp_u__2, __pyx_k__2, sizeof(__pyx_k__2), 0, 1, 0, 0},
     {&__pyx_n_s_annotations, __pyx_k_annotations, sizeof(__pyx_k_annotations), 0, 0, 1, 1},
     {&__pyx_n_s_asyncio_coroutines, __pyx_k_asyncio_coroutines, sizeof(__pyx_k_asyncio_coroutines), 0, 0, 1, 1},
+    {&__pyx_n_s_bool, __pyx_k_bool, sizeof(__pyx_k_bool), 0, 0, 1, 1},
+    {&__pyx_n_s_bool_2, __pyx_k_bool_2, sizeof(__pyx_k_bool_2), 0, 0, 1, 1},
     {&__pyx_n_s_chess, __pyx_k_chess, sizeof(__pyx_k_chess), 0, 0, 1, 1},
     {&__pyx_n_s_chmutils_player, __pyx_k_chmutils_player, sizeof(__pyx_k_chmutils_player), 0, 0, 1, 1},
     {&__pyx_kp_s_chmutils_player_py, __pyx_k_chmutils_player_py, sizeof(__pyx_k_chmutils_player_py), 0, 0, 1, 0},
@@ -4666,6 +4840,14 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__14);
   __Pyx_GIVEREF(__pyx_tuple__14);
   __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_player_py, __pyx_n_s_color, 92, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 92, __pyx_L1_error)
+
+  /* "chmutils/player.py":107
+ *             raise ValueError(f"new_color must be 'black' or 'white', got `{new_color}`") from error
+ * 
+ *     def __bool__(self) -> bool:             # <<<<<<<<<<<<<<
+ *         return not self._index
+ */
+  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmutils_player_py, __pyx_n_s_bool, 107, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 107, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -5417,6 +5599,22 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_color, __pyx_t_5) < 0) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
+  /* "chmutils/player.py":107
+ *             raise ValueError(f"new_color must be 'black' or 'white', got `{new_color}`") from error
+ * 
+ *     def __bool__(self) -> bool:             # <<<<<<<<<<<<<<
+ *         return not self._index
+ */
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_bool_2) < 0) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_6player_6Player_15__bool__, 0, __pyx_n_s_Player___bool, NULL, __pyx_n_s_chmutils_player, __pyx_d, ((PyObject *)__pyx_codeobj__16)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_5);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_bool, __pyx_t_2) < 0) __PYX_ERR(0, 107, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
   /* "chmutils/player.py":8
  * 
  * 
@@ -5424,8 +5622,8 @@ if (!__Pyx_RefNanny) {
  * class Player:
  *     """Player dataclass for engine manager"""
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_dataclass); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 8, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_dataclass); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
 
   /* "chmutils/player.py":9
  * 
@@ -5439,28 +5637,28 @@ if (!__Pyx_RefNanny) {
   __pyx_t_6 = NULL;
   __pyx_t_7 = 0;
   #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_2);
+  if (unlikely(PyMethod_Check(__pyx_t_5))) {
+    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_5);
     if (likely(__pyx_t_6)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
       __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
+      __Pyx_DECREF_SET(__pyx_t_5, function);
       __pyx_t_7 = 1;
     }
   }
   #endif
   {
     PyObject *__pyx_callargs[2] = {__pyx_t_6, __pyx_t_4};
-    __pyx_t_5 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_7, 1+__pyx_t_7);
+    __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_5, __pyx_callargs+1-__pyx_t_7, 1+__pyx_t_7);
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 8, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_5);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 8, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Player, __pyx_t_5) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Player, __pyx_t_2) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "chmutils/player.py":1
@@ -9236,7 +9434,7 @@ __Pyx_PyType_GetName(PyTypeObject* tp)
     if (unlikely(name == NULL) || unlikely(!PyUnicode_Check(name))) {
         PyErr_Clear();
         Py_XDECREF(name);
-        name = __Pyx_NewRef(__pyx_n_s__16);
+        name = __Pyx_NewRef(__pyx_n_s__17);
     }
     return name;
 }

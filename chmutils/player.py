@@ -103,3 +103,6 @@ class Player:
             self._color = new_color
         except ValueError as error:
             raise ValueError(f"new_color must be 'black' or 'white', got `{new_color}`") from error
+
+    def __bool__(self) -> bool:
+        return not self._index

@@ -6,8 +6,8 @@ from itertools import cycle
 from os import makedirs, path
 from pathlib import Path
 from random import choice
-from tkinter import Canvas, Menu, Tk, messagebox, simpledialog
-from typing import Callable, Dict, Generator, Iterator, List, Optional, Set, Tuple
+from tkinter import Canvas, Event, Menu, Tk, messagebox, simpledialog
+from typing import Any, Callable, Dict, Generator, Iterator, List, Optional, Set, Tuple
 
 from chess import Board, Move, Outcome, Piece, SQUARES
 from chess.pgn import Game
@@ -302,6 +302,8 @@ class PlayChessApp(Tk, BaseChessTkApp):
     fullmove_number: int = 1
     faces: Dict[str, Tuple[str, ...]] = state_faces
     dot_dot: Generator[str, str, str] = cycle(['.', '..', '...'])
+    selected_square: Optional[int] = None
+    possible_squares: Tuple[Optional[int], ...] = tuple()
 
     def __init__(
             self,
@@ -362,6 +364,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         self.update_board()
         self._move_executor = ThreadPoolExecutor(max_workers=1)
         self.bind("<Configure>", self.on_resize)
+        self.canvas.bind('<Button-1>', self.activate_piece)
         self.focus_force()
         self.updating = False
 
@@ -374,6 +377,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         if not self.updating:
             self.updating = True
             if messagebox.askyesno("Quit", "Are you sure you want to quit?"):
+                self._move_executor.shutdown()
                 # TODO Add save game method call here.
                 self.destroy()
             self.updating = False
@@ -468,6 +472,12 @@ class PlayChessApp(Tk, BaseChessTkApp):
         """
         new_board = Board() if new_board is None else new_board
         self.engines.board = new_board
+        self.game_line = self.game_line[0:1] + [Pick(move=m, score=float64(None)) for m in new_board.move_stack]
+        self.selected_square = None
+        self.highlight_squares = {
+            self.game_line[-1].move.to_square, self.game_line[-1].move.from_square
+        } if self.game_line[-1] != self.game_line[0] else set()
+        self.face = self.get_smily_face()
 
     def train_engine(self):
         """Run a training loop where two engines play multiple games and update Q-values.
@@ -522,6 +532,8 @@ class PlayChessApp(Tk, BaseChessTkApp):
                             self.engines.white.pick_move
                         ) if board.turn else self._move_executor.submit(self.engines.black.pick_move)
                     self.updating = True
+                    width: int = self.winfo_width()
+                    self.square_size = width // 8
                     self.update_board()
                     self.updating = False
                 outcome: Outcome = board.outcome(claim_draw=True)
@@ -739,6 +751,74 @@ class PlayChessApp(Tk, BaseChessTkApp):
                     font=(self.font, font_size),
                     fill="blue" if piece.color else "yellow"
                 )
+
+    def coord_to_square(self, x: int, y: int) -> Optional[int]:
+        """
+        Convert canvas coordinates to a 0–63 square index,
+        or return None if the click is off‐board.
+        """
+        s = self.square_size
+        y_offset = s // 2
+        y_rel = y - y_offset
+
+        if not (0 <= x < 8 * s and 0 <= y_rel < 8 * s):
+            return None
+
+        col = x // s
+        row_flipped = y_rel // s
+        row = 7 - row_flipped
+
+        # either:
+        return row * 8 + col
+
+    def activate_piece(self, event: Event):
+        if not self.updating and not self.training and self.engines.board.turn == bool(self.player):
+            if self.selected_square is None:
+                square: Optional[int] = self.coord_to_square(event.x, event.y)
+                legal_moves: List[Optional[Move]] = list(self.engines.board.legal_moves)
+                from_to_map: Dict[int:Tuple[int]] = {
+                    m.from_square: tuple(
+                        mt.to_square for mt in legal_moves if mt.from_square == m.from_square
+                    ) for m in legal_moves
+                }
+                if square is None or square not in from_to_map:
+                    return
+                self.selected_square = square
+                self.possible_squares = from_to_map[square]
+            else:
+                square: Optional[int] = self.coord_to_square(event.x, event.y)
+                if square is None or square not in self.possible_squares:
+                    return
+                pick: Pick = Pick(Move(from_square=self.selected_square, to_square=square), float64(None))
+                self.engines.push(pick)
+                self.fullmove_number = self.engines.board.fullmove_number
+                self.game_line.append(pick)
+                self.face = self.get_smily_face()
+                self.highlight_squares = {pick.move.from_square, pick.move.to_square}
+                self.selected_square = None
+                self.possible_squares = tuple()
+                self.updating = True
+                self.update_board()
+                self.updating = False
+                future: Future = self._move_executor.submit(
+                    self.engines.white.pick_move
+                ) if self.engines.board.turn else self._move_executor.submit(self.engines.black.pick_move)
+                while not future.done():
+                    self.updating = True
+                    width: int = self.winfo_width()
+                    self.square_size = width // 8
+                    self.update_board()
+                    self.updating = False
+                pick = future.result()
+                self.engines.push(pick)
+                self.fullmove_number = self.engines.board.fullmove_number
+                self.game_line.append(pick)
+                self.face = self.get_smily_face()
+                self.highlight_squares = {pick.move.from_square, pick.move.to_square}
+            self.updating = True
+            self.update_board()
+            self.updating = False
+            print(self.selected_square, self.possible_squares)
 
 
 if __name__ == "__main__":
