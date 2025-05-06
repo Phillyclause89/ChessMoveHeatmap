@@ -771,7 +771,13 @@ class PlayChessApp(Tk, BaseChessTkApp):
         # either:
         return row * 8 + col
 
-    def activate_piece(self, event: Event):
+    def activate_piece(self, event: Event) -> None:
+        """Responds to click events on the Canvas to see if they correspond to playing a move
+
+        Parameters
+        ----------
+        event : Event
+        """
         if not self.updating and not self.training and self.engines.board.turn == bool(self.player):
             if self.selected_square is None:
                 square: Optional[int] = self.coord_to_square(event.x, event.y)
@@ -789,7 +795,11 @@ class PlayChessApp(Tk, BaseChessTkApp):
                 square: Optional[int] = self.coord_to_square(event.x, event.y)
                 if square is None or square not in self.possible_squares:
                     return
-                pick: Pick = Pick(Move(from_square=self.selected_square, to_square=square), float64(None))
+                pick: Pick = Pick(
+                    move=Move(from_square=self.selected_square, to_square=square),
+                    # Since we don't run the pick_move method on human moves, we default to the line's last pick score.
+                    score=self.game_line[-1].score
+                )
                 self.engines.push(pick)
                 self.fullmove_number = self.engines.board.fullmove_number
                 self.game_line.append(pick)
