@@ -2116,7 +2116,6 @@ static const char __pyx_k_typing[] = "typing";
 static const char __pyx_k_values[] = "values";
 static const char __pyx_k_Process[] = "Process";
 static const char __pyx_k_prepare[] = "__prepare__";
-static const char __pyx_k_Optional[] = "Optional";
 static const char __pyx_k_property[] = "property";
 static const char __pyx_k_qualname[] = "__qualname__";
 static const char __pyx_k_set_name[] = "__set_name__";
@@ -2126,6 +2125,7 @@ static const char __pyx_k_PPExecutor[] = "PPExecutor";
 static const char __pyx_k_mro_entries[] = "__mro_entries__";
 static const char __pyx_k_processes_2[] = "processes";
 static const char __pyx_k_is_coroutine[] = "_is_coroutine";
+static const char __pyx_k_Tuple_Process[] = "Tuple[Process, ...]";
 static const char __pyx_k_init_subclass[] = "__init_subclass__";
 static const char __pyx_k_multiprocessing[] = "multiprocessing";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
@@ -2134,7 +2134,6 @@ static const char __pyx_k_concurrent_futures[] = "concurrent.futures";
 static const char __pyx_k_ProcessPoolExecutor[] = "ProcessPoolExecutor";
 static const char __pyx_k_chmutils_concurrent[] = "chmutils.concurrent";
 static const char __pyx_k_PPExecutor_processes[] = "PPExecutor.processes";
-static const char __pyx_k_Tuple_Optional_Process[] = "Tuple[Optional[Process], ...]";
 static const char __pyx_k_chmutils_concurrent_py[] = "chmutils\\concurrent.py";
 static const char __pyx_k_Implements_processes_property_fo[] = "Implements processes property for ProcessPoolExecutor";
 static const char __pyx_k_PPExecutor_class_that_implements[] = "PPExecutor class that implements processes property for ProcessPoolExecutor";
@@ -2171,14 +2170,13 @@ typedef struct {
   #endif
   PyObject *__pyx_kp_u_;
   PyObject *__pyx_kp_s_Implements_processes_property_fo;
-  PyObject *__pyx_n_s_Optional;
   PyObject *__pyx_n_s_PPExecutor;
   PyObject *__pyx_n_u_PPExecutor;
   PyObject *__pyx_n_s_PPExecutor_processes;
   PyObject *__pyx_n_s_Process;
   PyObject *__pyx_n_s_ProcessPoolExecutor;
   PyObject *__pyx_n_s_Tuple;
-  PyObject *__pyx_kp_s_Tuple_Optional_Process;
+  PyObject *__pyx_kp_s_Tuple_Process;
   PyObject *__pyx_n_s__4;
   PyObject *__pyx_n_s_all;
   PyObject *__pyx_n_s_asyncio_coroutines;
@@ -2255,14 +2253,13 @@ static int __pyx_m_clear(PyObject *m) {
   #endif
   Py_CLEAR(clear_module_state->__pyx_kp_u_);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Implements_processes_property_fo);
-  Py_CLEAR(clear_module_state->__pyx_n_s_Optional);
   Py_CLEAR(clear_module_state->__pyx_n_s_PPExecutor);
   Py_CLEAR(clear_module_state->__pyx_n_u_PPExecutor);
   Py_CLEAR(clear_module_state->__pyx_n_s_PPExecutor_processes);
   Py_CLEAR(clear_module_state->__pyx_n_s_Process);
   Py_CLEAR(clear_module_state->__pyx_n_s_ProcessPoolExecutor);
   Py_CLEAR(clear_module_state->__pyx_n_s_Tuple);
-  Py_CLEAR(clear_module_state->__pyx_kp_s_Tuple_Optional_Process);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_Tuple_Process);
   Py_CLEAR(clear_module_state->__pyx_n_s__4);
   Py_CLEAR(clear_module_state->__pyx_n_s_all);
   Py_CLEAR(clear_module_state->__pyx_n_s_asyncio_coroutines);
@@ -2317,14 +2314,13 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   #endif
   Py_VISIT(traverse_module_state->__pyx_kp_u_);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Implements_processes_property_fo);
-  Py_VISIT(traverse_module_state->__pyx_n_s_Optional);
   Py_VISIT(traverse_module_state->__pyx_n_s_PPExecutor);
   Py_VISIT(traverse_module_state->__pyx_n_u_PPExecutor);
   Py_VISIT(traverse_module_state->__pyx_n_s_PPExecutor_processes);
   Py_VISIT(traverse_module_state->__pyx_n_s_Process);
   Py_VISIT(traverse_module_state->__pyx_n_s_ProcessPoolExecutor);
   Py_VISIT(traverse_module_state->__pyx_n_s_Tuple);
-  Py_VISIT(traverse_module_state->__pyx_kp_s_Tuple_Optional_Process);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_Tuple_Process);
   Py_VISIT(traverse_module_state->__pyx_n_s__4);
   Py_VISIT(traverse_module_state->__pyx_n_s_all);
   Py_VISIT(traverse_module_state->__pyx_n_s_asyncio_coroutines);
@@ -2389,14 +2385,13 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #endif
 #define __pyx_kp_u_ __pyx_mstate_global->__pyx_kp_u_
 #define __pyx_kp_s_Implements_processes_property_fo __pyx_mstate_global->__pyx_kp_s_Implements_processes_property_fo
-#define __pyx_n_s_Optional __pyx_mstate_global->__pyx_n_s_Optional
 #define __pyx_n_s_PPExecutor __pyx_mstate_global->__pyx_n_s_PPExecutor
 #define __pyx_n_u_PPExecutor __pyx_mstate_global->__pyx_n_u_PPExecutor
 #define __pyx_n_s_PPExecutor_processes __pyx_mstate_global->__pyx_n_s_PPExecutor_processes
 #define __pyx_n_s_Process __pyx_mstate_global->__pyx_n_s_Process
 #define __pyx_n_s_ProcessPoolExecutor __pyx_mstate_global->__pyx_n_s_ProcessPoolExecutor
 #define __pyx_n_s_Tuple __pyx_mstate_global->__pyx_n_s_Tuple
-#define __pyx_kp_s_Tuple_Optional_Process __pyx_mstate_global->__pyx_kp_s_Tuple_Optional_Process
+#define __pyx_kp_s_Tuple_Process __pyx_mstate_global->__pyx_kp_s_Tuple_Process
 #define __pyx_n_s__4 __pyx_mstate_global->__pyx_n_s__4
 #define __pyx_n_s_all __pyx_mstate_global->__pyx_n_s_all
 #define __pyx_n_s_asyncio_coroutines __pyx_mstate_global->__pyx_n_s_asyncio_coroutines
@@ -2435,7 +2430,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
  *     """Implements processes property for ProcessPoolExecutor"""
  * 
  *     @property             # <<<<<<<<<<<<<<
- *     def processes(self) -> Tuple[Optional[Process], ...]:
+ *     def processes(self) -> Tuple[Process, ...]:
  *         r"""Expose the private `_processes` from ProcessPoolExecutor.
  */
 
@@ -2447,7 +2442,7 @@ PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_8chmutils_10concurrent_10PPExecutor_processes, "Expose the private `_processes` from ProcessPoolExecutor.\n\n        Returns\n        -------\n        Tuple[Optional[Process], ...]\n            A tuple of Process objects currently managed by the executor.\n        ");
+PyDoc_STRVAR(__pyx_doc_8chmutils_10concurrent_10PPExecutor_processes, "Expose the private `_processes` from ProcessPoolExecutor.\n\n        Returns\n        -------\n        Tuple[Process, ...]\n            A tuple of Process objects currently managed by the executor.\n        ");
 static PyMethodDef __pyx_mdef_8chmutils_10concurrent_10PPExecutor_1processes = {"processes", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8chmutils_10concurrent_10PPExecutor_1processes, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8chmutils_10concurrent_10PPExecutor_processes};
 static PyObject *__pyx_pw_8chmutils_10concurrent_10PPExecutor_1processes(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
@@ -2592,7 +2587,7 @@ static PyObject *__pyx_pf_8chmutils_10concurrent_10PPExecutor_processes(CYTHON_U
  *     """Implements processes property for ProcessPoolExecutor"""
  * 
  *     @property             # <<<<<<<<<<<<<<
- *     def processes(self) -> Tuple[Optional[Process], ...]:
+ *     def processes(self) -> Tuple[Process, ...]:
  *         r"""Expose the private `_processes` from ProcessPoolExecutor.
  */
 
@@ -2627,14 +2622,13 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
   __Pyx_StringTabEntry __pyx_string_tab[] = {
     {&__pyx_kp_u_, __pyx_k_, sizeof(__pyx_k_), 0, 1, 0, 0},
     {&__pyx_kp_s_Implements_processes_property_fo, __pyx_k_Implements_processes_property_fo, sizeof(__pyx_k_Implements_processes_property_fo), 0, 0, 1, 0},
-    {&__pyx_n_s_Optional, __pyx_k_Optional, sizeof(__pyx_k_Optional), 0, 0, 1, 1},
     {&__pyx_n_s_PPExecutor, __pyx_k_PPExecutor, sizeof(__pyx_k_PPExecutor), 0, 0, 1, 1},
     {&__pyx_n_u_PPExecutor, __pyx_k_PPExecutor, sizeof(__pyx_k_PPExecutor), 0, 1, 0, 1},
     {&__pyx_n_s_PPExecutor_processes, __pyx_k_PPExecutor_processes, sizeof(__pyx_k_PPExecutor_processes), 0, 0, 1, 1},
     {&__pyx_n_s_Process, __pyx_k_Process, sizeof(__pyx_k_Process), 0, 0, 1, 1},
     {&__pyx_n_s_ProcessPoolExecutor, __pyx_k_ProcessPoolExecutor, sizeof(__pyx_k_ProcessPoolExecutor), 0, 0, 1, 1},
     {&__pyx_n_s_Tuple, __pyx_k_Tuple, sizeof(__pyx_k_Tuple), 0, 0, 1, 1},
-    {&__pyx_kp_s_Tuple_Optional_Process, __pyx_k_Tuple_Optional_Process, sizeof(__pyx_k_Tuple_Optional_Process), 0, 0, 1, 0},
+    {&__pyx_kp_s_Tuple_Process, __pyx_k_Tuple_Process, sizeof(__pyx_k_Tuple_Process), 0, 0, 1, 0},
     {&__pyx_n_s__4, __pyx_k__4, sizeof(__pyx_k__4), 0, 0, 1, 1},
     {&__pyx_n_s_all, __pyx_k_all, sizeof(__pyx_k_all), 0, 0, 1, 1},
     {&__pyx_n_s_asyncio_coroutines, __pyx_k_asyncio_coroutines, sizeof(__pyx_k_asyncio_coroutines), 0, 0, 1, 1},
@@ -2686,7 +2680,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     """Implements processes property for ProcessPoolExecutor"""
  * 
  *     @property             # <<<<<<<<<<<<<<
- *     def processes(self) -> Tuple[Optional[Process], ...]:
+ *     def processes(self) -> Tuple[Process, ...]:
  *         r"""Expose the private `_processes` from ProcessPoolExecutor.
  */
   __pyx_tuple__2 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 12, __pyx_L1_error)
@@ -3064,7 +3058,7 @@ if (!__Pyx_RefNanny) {
  * """PPExecutor class that implements processes property for ProcessPoolExecutor"""
  * from concurrent.futures import ProcessPoolExecutor             # <<<<<<<<<<<<<<
  * from multiprocessing import Process
- * from typing import Optional, Tuple
+ * from typing import Tuple
  */
   __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -3084,7 +3078,7 @@ if (!__Pyx_RefNanny) {
  * """PPExecutor class that implements processes property for ProcessPoolExecutor"""
  * from concurrent.futures import ProcessPoolExecutor
  * from multiprocessing import Process             # <<<<<<<<<<<<<<
- * from typing import Optional, Tuple
+ * from typing import Tuple
  * 
  */
   __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 3, __pyx_L1_error)
@@ -3104,24 +3098,17 @@ if (!__Pyx_RefNanny) {
   /* "chmutils/concurrent.py":4
  * from concurrent.futures import ProcessPoolExecutor
  * from multiprocessing import Process
- * from typing import Optional, Tuple             # <<<<<<<<<<<<<<
+ * from typing import Tuple             # <<<<<<<<<<<<<<
  * 
  * __all__ = ['PPExecutor']
  */
-  __pyx_t_2 = PyList_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_INCREF(__pyx_n_s_Optional);
-  __Pyx_GIVEREF(__pyx_n_s_Optional);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_Optional)) __PYX_ERR(0, 4, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_s_Tuple);
   __Pyx_GIVEREF(__pyx_n_s_Tuple);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_s_Tuple)) __PYX_ERR(0, 4, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_Tuple)) __PYX_ERR(0, 4, __pyx_L1_error);
   __pyx_t_3 = __Pyx_Import(__pyx_n_s_typing, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_Optional); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Optional, __pyx_t_2) < 0) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_Tuple); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -3130,7 +3117,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "chmutils/concurrent.py":6
- * from typing import Optional, Tuple
+ * from typing import Tuple
  * 
  * __all__ = ['PPExecutor']             # <<<<<<<<<<<<<<
  * 
@@ -3173,12 +3160,12 @@ if (!__Pyx_RefNanny) {
  *     """Implements processes property for ProcessPoolExecutor"""
  * 
  *     @property             # <<<<<<<<<<<<<<
- *     def processes(self) -> Tuple[Optional[Process], ...]:
+ *     def processes(self) -> Tuple[Process, ...]:
  *         r"""Expose the private `_processes` from ProcessPoolExecutor.
  */
   __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_kp_s_Tuple_Optional_Process) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_kp_s_Tuple_Process) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
   __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_8chmutils_10concurrent_10PPExecutor_1processes, 0, __pyx_n_s_PPExecutor_processes, NULL, __pyx_n_s_chmutils_concurrent, __pyx_d, ((PyObject *)__pyx_codeobj__3)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_2);
