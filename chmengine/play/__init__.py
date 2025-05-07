@@ -3,7 +3,7 @@ from datetime import datetime
 from os import makedirs, path
 from typing import Callable, List, Optional
 
-from chess import Board, COLOR_NAMES, Move, Outcome, pgn
+from chess import Board, COLOR_NAMES, Move, Outcome
 from chess.pgn import Game, Headers
 from numpy import float64
 
@@ -16,16 +16,16 @@ __all__ = ['PlayCMHMEngine']
 
 class PlayCMHMEngine:
     """Play a game against the engine."""
+    engine: CMHMEngine
+    round_results: List[Game]
     player_name: str = "Unknown"
     cpu_name: str = "chmengine.CMHMEngine"
     site: str = player_name
     game_round: int = 0
-    round_results: List[Optional[pgn.Game]]
     player_color: str = COLOR_NAMES[1]
     player_index: int = 0
     cpu_color: str = COLOR_NAMES[0]
     cpu_index: int = 1
-    engine: CMHMEngine
     pgn_dir: str = "pgns"
     training_dir: str = "trainings"
 
@@ -140,7 +140,7 @@ class PlayCMHMEngine:
                 print(f"My recommended move has a {pick_by} score of {my_move_choice[1]:.2f}: {my_move_choice[0]}")
             except ValueError:
                 outcome: Optional[Outcome] = self.engine.board.outcome()
-                game: Game = pgn.Game.from_board(self.engine.board)
+                game: Game = Game.from_board(self.engine.board)
                 if isinstance(self.engine, CMHMEngine2):
                     self.engine.update_q_values()
                 print(f"Game Over: {outcome}\n{self.engine.board}")
@@ -165,7 +165,7 @@ class PlayCMHMEngine:
                 self.engine.board = Board()
                 break
 
-    def save_to_pgn(self, file_name: str, game: pgn.Game) -> None:
+    def save_to_pgn(self, file_name: str, game: Game) -> None:
         """Saves a game to a pgn file.
 
         Parameters
@@ -213,7 +213,7 @@ class PlayCMHMEngine:
                 self.engine.board.push(move)
             print(self.engine.board)
             outcome: Outcome = self.engine.board.outcome(claim_draw=True)
-            game = pgn.Game.from_board(self.engine.board)
+            game = Game.from_board(self.engine.board)
             self.engine.update_q_values(debug=debug)
             game_heads = game.headers
             game_heads["Event"] = "CMHMEngine2 vs CMHMEngine2"
