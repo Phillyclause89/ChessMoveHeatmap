@@ -43,20 +43,20 @@ def main(compiler_directives: Dict[str, str]) -> None:
     """
     args: Namespace = get_script_args()
     both: bool = args.all or (args.chess and args.main)
-    force_flag: List[Optional[str]] = ['--force'] if args.force else []
+    force_flag: List[str] = ['--force'] if args.force else []
     if not args.chess or both:
         setup_main(compiler_directives, force_flag)
     if not args.main or both:
         setup_chess(compiler_directives, force_flag)
 
 
-def setup_chess(compiler_directives: Dict[str, str], force_flag: List[Optional[str]]) -> None:
+def setup_chess(compiler_directives: Dict[str, str], force_flag: List[str]) -> None:
     """Compiles the chess lib (excluding _interactive.py)
 
     Parameters
     ----------
     compiler_directives : Dict[str,str]
-    force_flag : List[Optional[str]]
+    force_flag : List[str]
     """
     ext_modules_chess: Any = cythonize(
         module_list=CHESS_SCRIPTS,
@@ -69,13 +69,13 @@ def setup_chess(compiler_directives: Dict[str, str], force_flag: List[Optional[s
     )
 
 
-def setup_main(compiler_directives: Dict[str, str], force_flag: List[Optional[str]]) -> None:
+def setup_main(compiler_directives: Dict[str, str], force_flag: List[str]) -> None:
     """Compiles the ChessMoveHeatmap lib
 
     Parameters
     ----------
     compiler_directives : Dict[str,str]
-    force_flag : List[Optional[str]]
+    force_flag : List[str]
     """
     ext_modules_main: Any = cythonize(
         module_list=MAIN_MODULES,
