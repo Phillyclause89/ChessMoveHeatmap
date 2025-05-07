@@ -6,8 +6,8 @@ from itertools import cycle
 from os import makedirs, path
 from pathlib import Path
 from random import choice
-from tkinter import Canvas, Event, Menu, Tk, messagebox, simpledialog
-from typing import Callable, Dict, Generator, Iterator, List, Optional, Set, Tuple
+from tkinter import Button, Canvas, Event, Label, Menu, Misc, Tk, X, messagebox, simpledialog
+from typing import Callable, Dict, Generator, Iterator, List, Optional, Set, Tuple, Union
 
 from chess import Board, Move, Outcome, Piece, SQUARES
 from chess.pgn import Game
@@ -288,6 +288,77 @@ class EngineContainer:
         return {self._white, self._black}
 
 
+class PromotionDialog(simpledialog.Dialog):
+    """Prompts user for promotion choice."""
+    selected_promotion: Optional[Move]
+    promotions: Iterator[Move]
+    board: Board
+
+    def __init__(self, parent: Tk, promotions: Iterator[Move], board: Board) -> None:
+        """PromotionDialog.__init__
+
+        Parameters
+        ----------
+        parent : Tk
+        promotions : Iterator[Move]
+        board : Board
+        """
+        self.promotions, self.board, self.selected_promotion = promotions, board, None
+        super().__init__(parent, title='Pawn Promotion!')
+
+    def buttonbox(self):
+        """Overrides default buttons."""
+
+    def body(self, master: Misc) -> None:
+        """
+        Parameters
+        ----------
+        master : Misc
+        """
+        Label(master, text="Choose a promotion piece:").pack(pady=10)
+        move: Move
+        for move in self.promotions:
+            btn: Button = Button(
+                master,
+                text=self.board.san(move),
+                command=lambda m=move: self.on_select(m)
+            )
+            btn.pack(fill=X, padx=10, pady=5)
+        return None  # No initial focus
+
+    def on_select(self, move: Move) -> None:
+        """Update selected_promotion field and close.
+
+        Parameters
+        ----------
+        move : Move
+        """
+        self.selected_promotion = move
+        self.destroy()
+
+
+def get_promotion_choice(promotions: List[Move], board: Board) -> Optional[Move]:
+    """Gets the player's choice of possible promotion moves.
+
+    Parameters
+    ----------
+    promotions : List[Move]
+        List of legal promotion moves available to the player.
+    board : Board
+        The current chess board instance.
+
+    Returns
+    -------
+    Union[Move, None]
+        The move selected by the player, or None if no selection is made.
+    """
+    root: Tk = Tk()
+    root.withdraw()
+    dialog: PromotionDialog = PromotionDialog(parent=root, promotions=promotions, board=board)
+    root.destroy()
+    return dialog.selected_promotion
+
+
 class PlayChessApp(Tk, BaseChessTkApp):
     """Play against the CMHMEngine in a GUI."""
     training: bool
@@ -364,6 +435,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         self.update_board()
         self._move_executor = ThreadPoolExecutor(max_workers=1)
         self.bind("<Configure>", self.on_resize)
+        self.protocol("WM_DELETE_WINDOW", self.on_closing)
         self.canvas.bind('<Button-1>', self.activate_piece)
         self.focus_force()
         self.updating = False
@@ -808,8 +880,23 @@ class PlayChessApp(Tk, BaseChessTkApp):
                     return
                 if square is None or square not in self.possible_squares:
                     return
+                player_move: Move = Move(from_square=self.selected_square, to_square=square)
+                if not self.engines.board.is_legal(move=player_move):
+                    # The only way end up here is by pawn promotions.
+                    promotions: List[Move] = [
+                        m for m in self.engines.board.legal_moves if
+                        m.promotion is not None and m.to_square == player_move.to_square
+                    ]
+                    # Prompt player to pick the promotion move from promotions
+                    promotion_move: Optional[Move] = get_promotion_choice(
+                        promotions=promotions,
+                        board=self.engines.board
+                    )
+                    if player_move is None:
+                        return
+                    player_move = promotion_move
                 pick: Pick = Pick(
-                    move=Move(from_square=self.selected_square, to_square=square),
+                    move=player_move,
                     # Since we don't run the pick_move method on human moves, we default to the line's last pick score.
                     score=self.game_line[-1].score
                 )
