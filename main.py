@@ -37,10 +37,10 @@ class ChessHeatMapApp(Tk, BaseChessTkApp):
     the loaded PGN game. It extends `tk.Tk` to provide a GUI with
     interactive features.
     """
-    tooltips: List[Optional[CanvasTooltip]]
-    pieces_maps: Dict[Optional[int], Optional[NDArray[Dict[Piece, float64]]]]
-    heatmap_futures: Dict[Optional[int], Optional[Future]]  # Refactored to dict so -1 can be a key
-    heatmaps: Dict[Optional[int], Optional[NDArray[str]]]
+    tooltips: List[CanvasTooltip]
+    pieces_maps: Dict[int, NDArray[Dict[Piece, float64]]]
+    heatmap_futures: Dict[int, Future]  # Refactored to dict so -1 can be a key
+    heatmaps: Dict[int, NDArray[str]]
     executor: Optional[PPExecutor]
     moves: Optional[List[Optional[Move]]]
     game: Optional[Game]
@@ -206,9 +206,10 @@ class ChessHeatMapApp(Tk, BaseChessTkApp):
         try:
             file: TextIO
             with open(file_path, mode="r", encoding="utf-8") as file:
+                # noinspection PyArgumentList
                 game: Optional[Game] = pgn.read_game(file, Visitor=GBuilder)
                 board: Board = game.board()
-                moves: List[Optional[Move]] = list(game.mainline_moves())
+                moves: List[Move] = list(game.mainline_moves())
                 self.clear_heatmaps()
                 self.game = game
                 self.moves = moves
@@ -526,7 +527,7 @@ class ChessHeatMapApp(Tk, BaseChessTkApp):
     def get_active_maps(
             self, future: Future, map_index: int
     ) -> Tuple[ChessMoveHeatmap, NDArray[str], NDArray[Dict[Piece, float64]]]:
-        """Gets maps for rendering active positon.
+        """Gets maps for rendering active position.
 
         Parameters
         ----------
