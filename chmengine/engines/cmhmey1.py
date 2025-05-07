@@ -637,7 +637,7 @@ class CMHMEngine:
 
         Returns
         -------
-        List[Tuple[chess.Move, heatmaps.GradientHeatmap]]
+        List[Tuple[Move, GradientHeatmap]]
             A list of (move, heatmap) tuples.
 
         Examples
@@ -648,7 +648,7 @@ class CMHMEngine:
         >>> first_move
         Move.from_uci('g1h3')
         """
-        return list(self.get_or_calc_move_maps().items())
+        return list((a, b) for a, b in self.get_or_calc_move_maps().items())
 
     def get_or_calc_move_maps(self, depth: Optional[int] = None) -> Dict[Move, GradientHeatmap]:
         """Compute or retrieve precomputed heatmaps for all legal moves from the current board.
@@ -663,7 +663,7 @@ class CMHMEngine:
 
         Returns
         -------
-        Dict[chess.Move, heatmaps.GradientHeatmap]
+        Dict[Move, GradientHeatmap]
             A dictionary mapping each legal move to its corresponding heatmap.
 
         Raises
