@@ -27,7 +27,7 @@ class BaseChessTkApp(metaclass=ABCMeta):
     depth: int
     font: str
     colors: List[str]
-    highlight_squares: Set[Optional[int]]
+    highlight_squares: Set[int]
     current_move_index: int
 
     @abstractmethod

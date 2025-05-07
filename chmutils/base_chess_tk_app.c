@@ -2359,6 +2359,7 @@ static const char __pyx_k_return[] = "return";
 static const char __pyx_k_typing[] = "typing";
 static const char __pyx_k_ABCMeta[] = "ABCMeta";
 static const char __pyx_k_Options[] = "Options";
+static const char __pyx_k_Set_int[] = "Set[int]";
 static const char __pyx_k_WARNING[] = "\nWARNING: ";
 static const char __pyx_k_command[] = "command";
 static const char __pyx_k_disable[] = "disable";
@@ -2413,7 +2414,6 @@ static const char __pyx_k_init_subclass[] = "__init_subclass__";
 static const char __pyx_k_BaseChessTkApp[] = "BaseChessTkApp";
 static const char __pyx_k_DEFAULT_COLORS[] = "DEFAULT_COLORS";
 static const char __pyx_k_abstractmethod[] = "abstractmethod";
-static const char __pyx_k_Set_Optional_int[] = "Set[Optional[int]]";
 static const char __pyx_k_Optional_Callable[] = "Optional[Callable]";
 static const char __pyx_k_highlight_squares[] = "highlight_squares";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
@@ -2562,7 +2562,7 @@ typedef struct {
   PyObject *__pyx_kp_u_Pick_Light_Square_Color;
   PyObject *__pyx_n_s_Set;
   PyObject *__pyx_kp_u_Set_Depth;
-  PyObject *__pyx_kp_s_Set_Optional_int;
+  PyObject *__pyx_kp_s_Set_int;
   PyObject *__pyx_n_s_Tk;
   PyObject *__pyx_n_s_Tuple;
   PyObject *__pyx_kp_s_Tuple_int_int_int_int;
@@ -2791,7 +2791,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_u_Pick_Light_Square_Color);
   Py_CLEAR(clear_module_state->__pyx_n_s_Set);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Set_Depth);
-  Py_CLEAR(clear_module_state->__pyx_kp_s_Set_Optional_int);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_Set_int);
   Py_CLEAR(clear_module_state->__pyx_n_s_Tk);
   Py_CLEAR(clear_module_state->__pyx_n_s_Tuple);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Tuple_int_int_int_int);
@@ -2998,7 +2998,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_u_Pick_Light_Square_Color);
   Py_VISIT(traverse_module_state->__pyx_n_s_Set);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Set_Depth);
-  Py_VISIT(traverse_module_state->__pyx_kp_s_Set_Optional_int);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_Set_int);
   Py_VISIT(traverse_module_state->__pyx_n_s_Tk);
   Py_VISIT(traverse_module_state->__pyx_n_s_Tuple);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Tuple_int_int_int_int);
@@ -3215,7 +3215,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_u_Pick_Light_Square_Color __pyx_mstate_global->__pyx_kp_u_Pick_Light_Square_Color
 #define __pyx_n_s_Set __pyx_mstate_global->__pyx_n_s_Set
 #define __pyx_kp_u_Set_Depth __pyx_mstate_global->__pyx_kp_u_Set_Depth
-#define __pyx_kp_s_Set_Optional_int __pyx_mstate_global->__pyx_kp_s_Set_Optional_int
+#define __pyx_kp_s_Set_int __pyx_mstate_global->__pyx_kp_s_Set_int
 #define __pyx_n_s_Tk __pyx_mstate_global->__pyx_n_s_Tk
 #define __pyx_n_s_Tuple __pyx_mstate_global->__pyx_n_s_Tuple
 #define __pyx_kp_s_Tuple_int_int_int_int __pyx_mstate_global->__pyx_kp_s_Tuple_int_int_int_int
@@ -7666,7 +7666,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_u_Pick_Light_Square_Color, __pyx_k_Pick_Light_Square_Color, sizeof(__pyx_k_Pick_Light_Square_Color), 0, 1, 0, 0},
     {&__pyx_n_s_Set, __pyx_k_Set, sizeof(__pyx_k_Set), 0, 0, 1, 1},
     {&__pyx_kp_u_Set_Depth, __pyx_k_Set_Depth, sizeof(__pyx_k_Set_Depth), 0, 1, 0, 0},
-    {&__pyx_kp_s_Set_Optional_int, __pyx_k_Set_Optional_int, sizeof(__pyx_k_Set_Optional_int), 0, 0, 1, 0},
+    {&__pyx_kp_s_Set_int, __pyx_k_Set_int, sizeof(__pyx_k_Set_int), 0, 0, 1, 0},
     {&__pyx_n_s_Tk, __pyx_k_Tk, sizeof(__pyx_k_Tk), 0, 0, 1, 1},
     {&__pyx_n_s_Tuple, __pyx_k_Tuple, sizeof(__pyx_k_Tuple), 0, 0, 1, 1},
     {&__pyx_kp_s_Tuple_int_int_int_int, __pyx_k_Tuple_int_int_int_int, sizeof(__pyx_k_Tuple_int_int_int_int), 0, 0, 1, 0},
@@ -8610,7 +8610,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_depth, __pyx_n_s_int) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_font, __pyx_n_s_str) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_colors, __pyx_kp_s_List_str) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_highlight_squares, __pyx_kp_s_Set_Optional_int) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_highlight_squares, __pyx_kp_s_Set_int) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_current_move_index, __pyx_n_s_int) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
   if (__Pyx_SetNameInClass(__pyx_t_4, __pyx_n_s_annotations, __pyx_t_5) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
