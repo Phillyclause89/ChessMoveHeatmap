@@ -38,6 +38,14 @@
   <section id="module-play">
 <span id="play"></span><h1>play<a class="headerlink" href="#module-play" title="Permalink to this heading">¶</a></h1>
 <p>Play against the CMHMEngine in a GUI.</p>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_promotion_choice</span></code>(promotions, board)</p></td>
+<td><p>Gets the player's choice of possible promotion moves.</p></td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Classes</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
@@ -46,6 +54,9 @@
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#play.PlayChessApp" title="play.PlayChessApp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PlayChessApp</span></code></a>(engine_type, depth, ...)</p></td>
 <td><p>Play against the CMHMEngine in a GUI.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PromotionDialog</span></code>(parent, promotions, board)</p></td>
+<td><p>Prompts user for promotion choice.</p></td>
 </tr>
 </tbody>
 </table>
@@ -284,6 +295,19 @@ whether this is a topmost window (displays above all other
 windows).</p>
 <p>On Macintosh, XXXXX</p>
 <p>On Unix, there are currently no special attribute values.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="play.PlayChessApp.await_engine_pick">
+<span class="sig-name descname"><span class="pre">await_engine_pick</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a></span></span><a class="headerlink" href="#play.PlayChessApp.await_engine_pick" title="Permalink to this definition">¶</a></dt>
+<dd><p>Awaits the engine’s pick for the next move.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>Pick</dt><dd></dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
