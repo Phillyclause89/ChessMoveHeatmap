@@ -18,6 +18,7 @@ from chmutils.base_chess_tk_app import (
 from chmutils.concurrent import PPExecutor
 from chmutils.game_builder import GBuilder
 from chmutils.player import Player
+from chmutils.promotion_dialog import PromotionDialog, get_promotion_choice
 from heatmaps import ChessMoveHeatmap, GradientHeatmap, PIECES
 
 __all__ = [
@@ -32,6 +33,7 @@ __all__ = [
     'BaseChessTkApp',
     'HeatmapCache',
     'BetterHeatmapCache',
+    'PromotionDialog',
     # Functions
     'calculate_heatmap',
     'calculate_chess_move_heatmap',
@@ -43,6 +45,7 @@ __all__ = [
     'get_or_compute_heatmap_with_better_discounts',
     'get_local_time',
     'is_within_bmp',
+    'get_promotion_choice',
     # Constants
     'PIECE_KEYS',
     'CACHE_DIR',

@@ -6,15 +6,16 @@ from itertools import cycle
 from os import makedirs, path
 from pathlib import Path
 from random import choice
-from tkinter import Button, Canvas, Event, Label, Menu, Misc, Tk, X, messagebox, simpledialog
-from typing import Callable, Dict, Generator, Iterator, List, Optional, Set, Tuple, Union
+from tkinter import Canvas, Event, Menu, Tk, messagebox, simpledialog
+from typing import Callable, Dict, Generator, Iterator, List, Optional, Set, Tuple
 
 from chess import Board, Move, Outcome, Piece, SQUARES
 from chess.pgn import Game
 from numpy import float64
 
 from chmengine import CMHMEngine, CMHMEngine2, Pick, set_all_datetime_headers
-from chmutils import BaseChessTkApp, DEFAULT_COLORS, DEFAULT_FONT, Player, get_local_time, state_faces
+from chmutils import (BaseChessTkApp, DEFAULT_COLORS, DEFAULT_FONT, Player, get_local_time, get_promotion_choice,
+                      state_faces)
 
 __all__ = [
     'PlayChessApp',
@@ -286,77 +287,6 @@ class EngineContainer:
         Set[CMHMEngine]
         """
         return {self._white, self._black}
-
-
-class PromotionDialog(simpledialog.Dialog):
-    """Prompts user for promotion choice."""
-    selected_promotion: Optional[Move]
-    promotions: Iterator[Move]
-    board: Board
-
-    def __init__(self, parent: Tk, promotions: Iterator[Move], board: Board) -> None:
-        """PromotionDialog.__init__
-
-        Parameters
-        ----------
-        parent : Tk
-        promotions : Iterator[Move]
-        board : Board
-        """
-        self.promotions, self.board, self.selected_promotion = promotions, board, None
-        super().__init__(parent, title='Pawn Promotion!')
-
-    def buttonbox(self):
-        """Overrides default buttons."""
-
-    def body(self, master: Misc) -> None:
-        """
-        Parameters
-        ----------
-        master : Misc
-        """
-        Label(master, text="Choose a promotion piece:").pack(pady=10)
-        move: Move
-        for move in self.promotions:
-            btn: Button = Button(
-                master,
-                text=self.board.san(move),
-                command=lambda m=move: self.on_select(m)
-            )
-            btn.pack(fill=X, padx=10, pady=5)
-        return None  # No initial focus
-
-    def on_select(self, move: Move) -> None:
-        """Update selected_promotion field and close.
-
-        Parameters
-        ----------
-        move : Move
-        """
-        self.selected_promotion = move
-        self.destroy()
-
-
-def get_promotion_choice(promotions: List[Move], board: Board) -> Optional[Move]:
-    """Gets the player's choice of possible promotion moves.
-
-    Parameters
-    ----------
-    promotions : List[Move]
-        List of legal promotion moves available to the player.
-    board : Board
-        The current chess board instance.
-
-    Returns
-    -------
-    Union[Move, None]
-        The move selected by the player, or None if no selection is made.
-    """
-    root: Tk = Tk()
-    root.withdraw()
-    dialog: PromotionDialog = PromotionDialog(parent=root, promotions=promotions, board=board)
-    root.destroy()
-    return dialog.selected_promotion
 
 
 class PlayChessApp(Tk, BaseChessTkApp):
