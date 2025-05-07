@@ -31,6 +31,8 @@ Ensure you have Python **3.7 - 3.10** installed. Python **3.11+** is not support
 
 ### **Steps to Set Up the Project**
 
+**PhillyNote:** There are no distribution plans for this project beyond what is accommodated here on GitHub.
+
 1. **Clone the Repository**:
 
    ```bash
