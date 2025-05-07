@@ -42,19 +42,17 @@ __all__ = [
 ]
 
 
-def format_moves(
-        picks: List[Optional[Pick]]
-) -> List[Optional[Tuple[str, str]]]:
+def format_moves(picks: List[Pick]) -> List[Tuple[str, str]]:
     """Format a list of (move, score) tuples into UCI strings and formatted scores.
 
     Parameters
     ----------
-    picks : list of Picks
+    picks : List[Pick]
         The list of Picks (moves and their evaluation scores.)
 
     Returns
     -------
-    list of tuple of (str, str) or None
+    List[Tuple[str, str]
         Formatted list where each tuple contains the move in UCI format
         and the score rounded to two decimal places.
         Entries with `None` moves are excluded.
@@ -381,20 +379,20 @@ def pieces_count_from_board(board: Board) -> int:
 
 
 def insert_choice_into_current_moves(
-        choices_ordered_best_to_worst: List[Optional[Pick]],
+        choices_ordered_best_to_worst: List[Pick],
         pick: Pick
 ) -> List[Pick]:
     """Insert a new candidate move into the current player's move list (best to worst).
 
     Parameters
     ----------
-    choices_ordered_best_to_worst : list of (Optional[chess.Move], Optional[float64])
+    choices_ordered_best_to_worst : List[Pick]
         Current ordered list of move choices.
     pick : Pick
 
     Returns
     -------
-    list of Pick(chess.Move, float64)
+    List[Pick]
         Updated list with the move inserted.
     """
     if len(choices_ordered_best_to_worst) == 0:
@@ -406,20 +404,20 @@ def insert_choice_into_current_moves(
 
 
 def insert_choice_into_response_moves(
-        choices_ordered_worst_to_best: List[Optional[Pick]],
+        choices_ordered_worst_to_best: List[Pick],
         pick: Pick
 ) -> List[Pick]:
     """Insert a new candidate move into the opponent's response list (worst to best).
 
     Parameters
     ----------
-    choices_ordered_worst_to_best : list of (Optional[chess.Move], Optional[float64])
+    choices_ordered_worst_to_best : List[Pick]
         Opponent's candidate responses, sorted from the lowest score to highest.
     pick : Pick
 
     Returns
     -------
-    list of Pick(chess.Move, float64)
+    List[Pick]
         Updated response list.
     """
     if len(choices_ordered_worst_to_best) == 0:
