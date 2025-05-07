@@ -450,7 +450,15 @@ class PlayChessApp(Tk, BaseChessTkApp):
         if not self.updating and not self.training:
             self.updating = True
             if messagebox.askyesno("New Game", "Are you sure you want to start a new game?"):
+                if messagebox.askyesno(
+                        f"You are set to play as {self.player.color.title()}",
+                        "Would you line to switch sides before starting a new game?"
+                ):
+                    self.player.index = int(not self.player.index)
                 self.reset_engines_board()
+                if bool(self.player.index) == self.engines.board.turn:
+                    pick = self.await_engine_pick()
+                    self.engines.push(pick)
                 self.update_board()
             self.updating = False
         elif self.training:
@@ -816,16 +824,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
                 self.updating = True
                 self.update_board()
                 self.updating = False
-                future: Future = self._move_executor.submit(
-                    self.engines.white.pick_move
-                ) if self.engines.board.turn else self._move_executor.submit(self.engines.black.pick_move)
-                while not future.done():
-                    self.updating = True
-                    width: int = self.winfo_width()
-                    self.square_size = width // 8
-                    self.update_board()
-                    self.updating = False
-                pick = future.result()
+                pick = self.await_engine_pick()
                 self.engines.push(pick)
                 # TODO: Check self.engines.board.outcome here again and activate some endgame debrief flow if game-over
                 self.fullmove_number = self.engines.board.fullmove_number
@@ -837,6 +836,24 @@ class PlayChessApp(Tk, BaseChessTkApp):
             self.update_board()
             self.updating = False
             print(self.selected_square, self.possible_squares)
+
+    def await_engine_pick(self) -> Pick:
+        """Awaits the engine's pick for the next move.
+
+        Returns
+        -------
+        Pick
+        """
+        future: Future = self._move_executor.submit(
+            self.engines.white.pick_move
+        ) if self.engines.board.turn else self._move_executor.submit(self.engines.black.pick_move)
+        while not future.done():
+            self.updating = True
+            width: int = self.winfo_width()
+            self.square_size = width // 8
+            self.update_board()
+            self.updating = False
+        return future.result()
 
 
 if __name__ == "__main__":
