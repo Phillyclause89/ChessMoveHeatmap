@@ -142,7 +142,7 @@ class CMHMEngine2(CMHMEngine, Quartney):
         if len(current_moves) == 0:
             raise ValueError(f"Current Board has no legal moves: {self.fen(board=board)}")
         # moves will be current moves ordered by engine's score best to worst (from white's perspective)
-        current_move_choices_ordered: List[Optional[Pick]] = []
+        current_move_choices_ordered: List[Pick] = []
         current_move: Move
         for current_move in current_moves:
             current_move_choices_ordered = self._update_current_move_choices_ordered_(
@@ -164,7 +164,7 @@ class CMHMEngine2(CMHMEngine, Quartney):
 
     def _update_current_move_choices_ordered_(
             self,
-            current_move_choices_ordered: List[Optional[Pick]],
+            current_move_choices_ordered: List[Pick],
             current_move: Move,
             board: Board
     ) -> List[Pick]:
@@ -177,7 +177,7 @@ class CMHMEngine2(CMHMEngine, Quartney):
     # pylint: disable=too-many-arguments
     def _update_current_move_choices_(
             self,
-            current_move_choices_ordered: List[Optional[Pick]],
+            current_move_choices_ordered: List[Pick],
             new_board: Board,
             current_move: Move
     ) -> List[Pick]:
@@ -194,7 +194,7 @@ class CMHMEngine2(CMHMEngine, Quartney):
 
         Parameters
         ----------
-        current_move_choices_ordered : List[Optional[Pick]]
+        current_move_choices_ordered : List[Pick]
             The current list of move candidates and their associated evaluation scores, ordered
             best to worst from White's perspective.
         new_board : chess.Board
@@ -207,7 +207,7 @@ class CMHMEngine2(CMHMEngine, Quartney):
         List[Pick]
             The updated move candidate list with `current_move` inserted in score order.
         """
-        response_moves: List[Optional[Pick]]
+        response_moves: List[Pick]
         response_moves = self._get_or_calculate_responses_(
             new_board=new_board,
             go_deeper=True
@@ -231,7 +231,7 @@ class CMHMEngine2(CMHMEngine, Quartney):
             self,
             new_board: Board,
             go_deeper: bool
-    ) -> List[Optional[Pick]]:
+    ) -> List[Pick]:
         """Retrieve the opponent's response moves and evaluate them.
 
         This method computes heatmap-based evaluation scores for each legal response move from the new board
@@ -252,7 +252,7 @@ class CMHMEngine2(CMHMEngine, Quartney):
         # However, that is not our Final score,
         # the score after finding the best response to our move should be the final score.
         next_moves: List[Move] = self.current_moves_list(board=new_board)
-        response_moves: List[Optional[Pick]] = []
+        response_moves: List[Pick] = []
         next_move: Move
         for next_move in next_moves:
             response_moves = self._get_or_calc_response_move_scores_(
@@ -266,7 +266,7 @@ class CMHMEngine2(CMHMEngine, Quartney):
     def _get_or_calc_response_move_scores_(
             self,
             next_move: Move,
-            response_moves: List[Optional[Pick]],
+            response_moves: List[Pick],
             new_board: Board,
             go_deeper: bool
     ) -> List[Pick]:
@@ -284,7 +284,7 @@ class CMHMEngine2(CMHMEngine, Quartney):
         ----------
         next_move : chess.Move
             The opponent’s move to simulate and evaluate.
-        response_moves : List[Optional[Pick]]
+        response_moves : List[Pick]
             Current ordered list of response candidates (worst→best from current player’s POV).
         new_board : chess.Board
             Position after the candidate move was applied; it’s now the opponent’s turn.

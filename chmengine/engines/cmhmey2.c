@@ -2363,7 +2363,6 @@ static const char __pyx_k_update_q_values[] = "update_q_values";
 static const char __pyx_k_final_move_score[] = "final_move_score";
 static const char __pyx_k_board_copy_pushed[] = "board_copy_pushed";
 static const char __pyx_k_CMHMEngine2___init[] = "CMHMEngine2.__init__";
-static const char __pyx_k_List_Optional_Pick[] = "List[Optional[Pick]]";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_current_moves_list[] = "current_moves_list";
@@ -2456,7 +2455,6 @@ typedef struct {
   PyObject *__pyx_kp_u_Game_Pick_Score;
   PyObject *__pyx_kp_u_Initialize_the_CMHMEngine2_insta;
   PyObject *__pyx_n_s_List;
-  PyObject *__pyx_kp_s_List_Optional_Pick;
   PyObject *__pyx_kp_s_List_Pick;
   PyObject *__pyx_n_s_Move;
   PyObject *__pyx_kp_u_New_Pick_Score;
@@ -2646,7 +2644,6 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_u_Game_Pick_Score);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Initialize_the_CMHMEngine2_insta);
   Py_CLEAR(clear_module_state->__pyx_n_s_List);
-  Py_CLEAR(clear_module_state->__pyx_kp_s_List_Optional_Pick);
   Py_CLEAR(clear_module_state->__pyx_kp_s_List_Pick);
   Py_CLEAR(clear_module_state->__pyx_n_s_Move);
   Py_CLEAR(clear_module_state->__pyx_kp_u_New_Pick_Score);
@@ -2814,7 +2811,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_u_Game_Pick_Score);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Initialize_the_CMHMEngine2_insta);
   Py_VISIT(traverse_module_state->__pyx_n_s_List);
-  Py_VISIT(traverse_module_state->__pyx_kp_s_List_Optional_Pick);
   Py_VISIT(traverse_module_state->__pyx_kp_s_List_Pick);
   Py_VISIT(traverse_module_state->__pyx_n_s_Move);
   Py_VISIT(traverse_module_state->__pyx_kp_u_New_Pick_Score);
@@ -2992,7 +2988,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_u_Game_Pick_Score __pyx_mstate_global->__pyx_kp_u_Game_Pick_Score
 #define __pyx_kp_u_Initialize_the_CMHMEngine2_insta __pyx_mstate_global->__pyx_kp_u_Initialize_the_CMHMEngine2_insta
 #define __pyx_n_s_List __pyx_mstate_global->__pyx_n_s_List
-#define __pyx_kp_s_List_Optional_Pick __pyx_mstate_global->__pyx_kp_s_List_Optional_Pick
 #define __pyx_kp_s_List_Pick __pyx_mstate_global->__pyx_kp_s_List_Pick
 #define __pyx_n_s_Move __pyx_mstate_global->__pyx_n_s_Move
 #define __pyx_kp_u_New_Pick_Score __pyx_mstate_global->__pyx_kp_u_New_Pick_Score
@@ -4137,7 +4132,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_4pick_move(
  *         if len(current_moves) == 0:
  *             raise ValueError(f"Current Board has no legal moves: {self.fen(board=board)}")             # <<<<<<<<<<<<<<
  *         # moves will be current moves ordered by engine's score best to worst (from white's perspective)
- *         current_move_choices_ordered: List[Optional[Pick]] = []
+ *         current_move_choices_ordered: List[Pick] = []
  */
     __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fen); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
@@ -4173,7 +4168,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_4pick_move(
   /* "chmengine/engines/cmhmey2.py":145
  *             raise ValueError(f"Current Board has no legal moves: {self.fen(board=board)}")
  *         # moves will be current moves ordered by engine's score best to worst (from white's perspective)
- *         current_move_choices_ordered: List[Optional[Pick]] = []             # <<<<<<<<<<<<<<
+ *         current_move_choices_ordered: List[Pick] = []             # <<<<<<<<<<<<<<
  *         current_move: Move
  *         for current_move in current_moves:
  */
@@ -4183,7 +4178,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_4pick_move(
   __pyx_t_3 = 0;
 
   /* "chmengine/engines/cmhmey2.py":147
- *         current_move_choices_ordered: List[Optional[Pick]] = []
+ *         current_move_choices_ordered: List[Pick] = []
  *         current_move: Move
  *         for current_move in current_moves:             # <<<<<<<<<<<<<<
  *             current_move_choices_ordered = self._update_current_move_choices_ordered_(
@@ -4267,7 +4262,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_4pick_move(
     __pyx_t_6 = 0;
 
     /* "chmengine/engines/cmhmey2.py":147
- *         current_move_choices_ordered: List[Optional[Pick]] = []
+ *         current_move_choices_ordered: List[Pick] = []
  *         current_move: Move
  *         for current_move in current_moves:             # <<<<<<<<<<<<<<
  *             current_move_choices_ordered = self._update_current_move_choices_ordered_(
@@ -4535,7 +4530,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_4pick_move(
  * 
  *     def _update_current_move_choices_ordered_(             # <<<<<<<<<<<<<<
  *             self,
- *             current_move_choices_ordered: List[Optional[Pick]],
+ *             current_move_choices_ordered: List[Pick],
  */
 
 /* Python wrapper */
@@ -4666,7 +4661,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_current_move_choices_ordered), (&PyList_Type), 1, "current_move_choices_ordered", 1))) __PYX_ERR(0, 167, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_current_move_choices_ordered), (&PyList_Type), 0, "current_move_choices_ordered", 1))) __PYX_ERR(0, 167, __pyx_L1_error)
   __pyx_r = __pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_6_update_current_move_choices_ordered_(__pyx_self, __pyx_v_self, __pyx_v_current_move_choices_ordered, __pyx_v_current_move, __pyx_v_board);
 
   /* function exit code */
@@ -4769,7 +4764,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_6_update_cu
  * 
  *     def _update_current_move_choices_ordered_(             # <<<<<<<<<<<<<<
  *             self,
- *             current_move_choices_ordered: List[Optional[Pick]],
+ *             current_move_choices_ordered: List[Pick],
  */
 
   /* function exit code */
@@ -4791,7 +4786,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_6_update_cu
  *     # pylint: disable=too-many-arguments
  *     def _update_current_move_choices_(             # <<<<<<<<<<<<<<
  *             self,
- *             current_move_choices_ordered: List[Optional[Pick]],
+ *             current_move_choices_ordered: List[Pick],
  */
 
 /* Python wrapper */
@@ -4802,7 +4797,7 @@ PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_7engines_7cmhmey2_11CMHMEngine2_8_update_current_move_choices_, "Evaluate a candidate move and update the list of best move choices.\n\n        This method evaluates a move by pushing it to a new board, calculating the response moves\n        from the opponent, and assigning the move a score based on the worst-case opponent response.\n        If no responses are available (e.g., checkmate or stalemate), it falls back to Q-table values\n        or a static evaluation.\n\n        Scores follow the classical convention:\n        - Positive values favor White.\n        - Negative values favor Black.\n\n        Parameters\n        ----------\n        current_move_choices_ordered : List[Optional[Pick]]\n            The current list of move candidates and their associated evaluation scores, ordered\n            best to worst from White's perspective.\n        new_board : chess.Board\n            The board state resulting from applying `current_move`.\n        current_move : chess.Move\n            The move being evaluated.\n\n        Returns\n        -------\n        List[Pick]\n            The updated move candidate list with `current_move` inserted in score order.\n        ");
+PyDoc_STRVAR(__pyx_doc_9chmengine_7engines_7cmhmey2_11CMHMEngine2_8_update_current_move_choices_, "Evaluate a candidate move and update the list of best move choices.\n\n        This method evaluates a move by pushing it to a new board, calculating the response moves\n        from the opponent, and assigning the move a score based on the worst-case opponent response.\n        If no responses are available (e.g., checkmate or stalemate), it falls back to Q-table values\n        or a static evaluation.\n\n        Scores follow the classical convention:\n        - Positive values favor White.\n        - Negative values favor Black.\n\n        Parameters\n        ----------\n        current_move_choices_ordered : List[Pick]\n            The current list of move candidates and their associated evaluation scores, ordered\n            best to worst from White's perspective.\n        new_board : chess.Board\n            The board state resulting from applying `current_move`.\n        current_move : chess.Move\n            The move being evaluated.\n\n        Returns\n        -------\n        List[Pick]\n            The updated move candidate list with `current_move` inserted in score order.\n        ");
 static PyMethodDef __pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_9_update_current_move_choices_ = {"_update_current_move_choices_", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_9_update_current_move_choices_, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_7engines_7cmhmey2_11CMHMEngine2_8_update_current_move_choices_};
 static PyObject *__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_9_update_current_move_choices_(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
@@ -4923,7 +4918,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_current_move_choices_ordered), (&PyList_Type), 1, "current_move_choices_ordered", 1))) __PYX_ERR(0, 180, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_current_move_choices_ordered), (&PyList_Type), 0, "current_move_choices_ordered", 1))) __PYX_ERR(0, 180, __pyx_L1_error)
   __pyx_r = __pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_8_update_current_move_choices_(__pyx_self, __pyx_v_self, __pyx_v_current_move_choices_ordered, __pyx_v_new_board, __pyx_v_current_move);
 
   /* function exit code */
@@ -4961,7 +4956,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_8_update_cu
 
   /* "chmengine/engines/cmhmey2.py":211
  *         """
- *         response_moves: List[Optional[Pick]]
+ *         response_moves: List[Pick]
  *         response_moves = self._get_or_calculate_responses_(             # <<<<<<<<<<<<<<
  *             new_board=new_board,
  *             go_deeper=True
@@ -4970,7 +4965,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_8_update_cu
   __Pyx_GOTREF(__pyx_t_1);
 
   /* "chmengine/engines/cmhmey2.py":212
- *         response_moves: List[Optional[Pick]]
+ *         response_moves: List[Pick]
  *         response_moves = self._get_or_calculate_responses_(
  *             new_board=new_board,             # <<<<<<<<<<<<<<
  *             go_deeper=True
@@ -4991,7 +4986,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_8_update_cu
 
   /* "chmengine/engines/cmhmey2.py":211
  *         """
- *         response_moves: List[Optional[Pick]]
+ *         response_moves: List[Pick]
  *         response_moves = self._get_or_calculate_responses_(             # <<<<<<<<<<<<<<
  *             new_board=new_board,
  *             go_deeper=True
@@ -5236,7 +5231,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_8_update_cu
  *     # pylint: disable=too-many-arguments
  *     def _update_current_move_choices_(             # <<<<<<<<<<<<<<
  *             self,
- *             current_move_choices_ordered: List[Optional[Pick]],
+ *             current_move_choices_ordered: List[Pick],
  */
 
   /* function exit code */
@@ -5412,7 +5407,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_10_get_or_c
  *         # However, that is not our Final score,
  *         # the score after finding the best response to our move should be the final score.
  *         next_moves: List[Move] = self.current_moves_list(board=new_board)             # <<<<<<<<<<<<<<
- *         response_moves: List[Optional[Pick]] = []
+ *         response_moves: List[Pick] = []
  *         next_move: Move
  */
   __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_current_moves_list); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 254, __pyx_L1_error)
@@ -5431,7 +5426,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_10_get_or_c
   /* "chmengine/engines/cmhmey2.py":255
  *         # the score after finding the best response to our move should be the final score.
  *         next_moves: List[Move] = self.current_moves_list(board=new_board)
- *         response_moves: List[Optional[Pick]] = []             # <<<<<<<<<<<<<<
+ *         response_moves: List[Pick] = []             # <<<<<<<<<<<<<<
  *         next_move: Move
  *         for next_move in next_moves:
  */
@@ -5441,7 +5436,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_10_get_or_c
   __pyx_t_3 = 0;
 
   /* "chmengine/engines/cmhmey2.py":257
- *         response_moves: List[Optional[Pick]] = []
+ *         response_moves: List[Pick] = []
  *         next_move: Move
  *         for next_move in next_moves:             # <<<<<<<<<<<<<<
  *             response_moves = self._get_or_calc_response_move_scores_(
@@ -5534,7 +5529,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_10_get_or_c
     __pyx_t_5 = 0;
 
     /* "chmengine/engines/cmhmey2.py":257
- *         response_moves: List[Optional[Pick]] = []
+ *         response_moves: List[Pick] = []
  *         next_move: Move
  *         for next_move in next_moves:             # <<<<<<<<<<<<<<
  *             response_moves = self._get_or_calc_response_move_scores_(
@@ -5596,7 +5591,7 @@ PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_7engines_7cmhmey2_11CMHMEngine2_12_get_or_calc_response_move_scores_, "Evaluate one opponent response move and insert it into the ordered response list.\n\n        This method simulates `next_move` on `new_board`, then:\n\n            1. **Deepens** one ply (only on checks or captures) if `go_deeper` is True and there are legal replies.\n            2. Otherwise, **fetches** the cached Q-value for that position if available.\n            3. Otherwise, **falls back** to a static heatmap-based evaluation.\n\n        The score is always from White-positive/Black-negative perspective.\n\n        Parameters\n        ----------\n        next_move : chess.Move\n            The opponent\342\200\231s move to simulate and evaluate.\n        response_moves : List[Optional[Pick]]\n            Current ordered list of response candidates (worst\342\206\222best from current player\342\200\231s POV).\n        new_board : chess.Board\n            Position after the candidate move was applied; it\342\200\231s now the opponent\342\200\231s turn.\n        go_deeper : bool\n            If True, allows one extra ply of recursive scoring on checks or captures.\n\n        Returns\n        -------\n        List[Pick]\n            Updated response list with `(next_move, score)` inserted in order.\n        ");
+PyDoc_STRVAR(__pyx_doc_9chmengine_7engines_7cmhmey2_11CMHMEngine2_12_get_or_calc_response_move_scores_, "Evaluate one opponent response move and insert it into the ordered response list.\n\n        This method simulates `next_move` on `new_board`, then:\n\n            1. **Deepens** one ply (only on checks or captures) if `go_deeper` is True and there are legal replies.\n            2. Otherwise, **fetches** the cached Q-value for that position if available.\n            3. Otherwise, **falls back** to a static heatmap-based evaluation.\n\n        The score is always from White-positive/Black-negative perspective.\n\n        Parameters\n        ----------\n        next_move : chess.Move\n            The opponent\342\200\231s move to simulate and evaluate.\n        response_moves : List[Pick]\n            Current ordered list of response candidates (worst\342\206\222best from current player\342\200\231s POV).\n        new_board : chess.Board\n            Position after the candidate move was applied; it\342\200\231s now the opponent\342\200\231s turn.\n        go_deeper : bool\n            If True, allows one extra ply of recursive scoring on checks or captures.\n\n        Returns\n        -------\n        List[Pick]\n            Updated response list with `(next_move, score)` inserted in order.\n        ");
 static PyMethodDef __pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_13_get_or_calc_response_move_scores_ = {"_get_or_calc_response_move_scores_", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_13_get_or_calc_response_move_scores_, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_7engines_7cmhmey2_11CMHMEngine2_12_get_or_calc_response_move_scores_};
 static PyObject *__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_13_get_or_calc_response_move_scores_(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
@@ -5732,7 +5727,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_response_moves), (&PyList_Type), 1, "response_moves", 1))) __PYX_ERR(0, 269, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_response_moves), (&PyList_Type), 0, "response_moves", 1))) __PYX_ERR(0, 269, __pyx_L1_error)
   __pyx_r = __pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_12_get_or_calc_response_move_scores_(__pyx_self, __pyx_v_self, __pyx_v_next_move, __pyx_v_response_moves, __pyx_v_new_board, __pyx_v_go_deeper);
 
   /* function exit code */
@@ -6242,7 +6237,6 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_u_Game_Pick_Score, __pyx_k_Game_Pick_Score, sizeof(__pyx_k_Game_Pick_Score), 0, 1, 0, 0},
     {&__pyx_kp_u_Initialize_the_CMHMEngine2_insta, __pyx_k_Initialize_the_CMHMEngine2_insta, sizeof(__pyx_k_Initialize_the_CMHMEngine2_insta), 0, 1, 0, 0},
     {&__pyx_n_s_List, __pyx_k_List, sizeof(__pyx_k_List), 0, 0, 1, 1},
-    {&__pyx_kp_s_List_Optional_Pick, __pyx_k_List_Optional_Pick, sizeof(__pyx_k_List_Optional_Pick), 0, 0, 1, 0},
     {&__pyx_kp_s_List_Pick, __pyx_k_List_Pick, sizeof(__pyx_k_List_Pick), 0, 0, 1, 0},
     {&__pyx_n_s_Move, __pyx_k_Move, sizeof(__pyx_k_Move), 0, 0, 1, 1},
     {&__pyx_kp_u_New_Pick_Score, __pyx_k_New_Pick_Score, sizeof(__pyx_k_New_Pick_Score), 0, 1, 0, 0},
@@ -6415,7 +6409,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  *     def _update_current_move_choices_ordered_(             # <<<<<<<<<<<<<<
  *             self,
- *             current_move_choices_ordered: List[Optional[Pick]],
+ *             current_move_choices_ordered: List[Pick],
  */
   __pyx_tuple__13 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_current_move_choices_ordered, __pyx_n_s_current_move, __pyx_n_s_board, __pyx_n_s_new_board); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 165, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__13);
@@ -6427,7 +6421,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     # pylint: disable=too-many-arguments
  *     def _update_current_move_choices_(             # <<<<<<<<<<<<<<
  *             self,
- *             current_move_choices_ordered: List[Optional[Pick]],
+ *             current_move_choices_ordered: List[Pick],
  */
   __pyx_tuple__15 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_current_move_choices_ordered, __pyx_n_s_new_board, __pyx_n_s_current_move, __pyx_n_s_response_moves, __pyx_n_s_initial_q_val, __pyx_n_s_final_move_score); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 178, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__15);
@@ -7130,11 +7124,11 @@ if (!__Pyx_RefNanny) {
  * 
  *     def _update_current_move_choices_ordered_(             # <<<<<<<<<<<<<<
  *             self,
- *             current_move_choices_ordered: List[Optional[Pick]],
+ *             current_move_choices_ordered: List[Pick],
  */
   __pyx_t_7 = __Pyx_PyDict_NewPresized(4); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 165, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_current_move_choices_ordered, __pyx_kp_s_List_Optional_Pick) < 0) __PYX_ERR(0, 165, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_current_move_choices_ordered, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 165, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_current_move, __pyx_n_s_Move) < 0) __PYX_ERR(0, 165, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 165, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 165, __pyx_L1_error)
@@ -7150,11 +7144,11 @@ if (!__Pyx_RefNanny) {
  *     # pylint: disable=too-many-arguments
  *     def _update_current_move_choices_(             # <<<<<<<<<<<<<<
  *             self,
- *             current_move_choices_ordered: List[Optional[Pick]],
+ *             current_move_choices_ordered: List[Pick],
  */
   __pyx_t_6 = __Pyx_PyDict_NewPresized(4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 178, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_current_move_choices_ordered, __pyx_kp_s_List_Optional_Pick) < 0) __PYX_ERR(0, 178, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_current_move_choices_ordered, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 178, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_new_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 178, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_current_move, __pyx_n_s_Move) < 0) __PYX_ERR(0, 178, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_return, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 178, __pyx_L1_error)
@@ -7176,7 +7170,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_new_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 230, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_go_deeper, __pyx_n_s_bool) < 0) __PYX_ERR(0, 230, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_kp_s_List_Optional_Pick) < 0) __PYX_ERR(0, 230, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 230, __pyx_L1_error)
   __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_11_get_or_calculate_responses_, 0, __pyx_n_s_CMHMEngine2__get_or_calculate_re, NULL, __pyx_n_s_chmengine_engines_cmhmey2, __pyx_d, ((PyObject *)__pyx_codeobj__18)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 230, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_7);
@@ -7194,7 +7188,7 @@ if (!__Pyx_RefNanny) {
   __pyx_t_6 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 266, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_next_move, __pyx_n_s_Move) < 0) __PYX_ERR(0, 266, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_response_moves, __pyx_kp_s_List_Optional_Pick) < 0) __PYX_ERR(0, 266, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_response_moves, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 266, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_new_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 266, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_go_deeper, __pyx_n_s_bool) < 0) __PYX_ERR(0, 266, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_return, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 266, __pyx_L1_error)
