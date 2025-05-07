@@ -154,8 +154,8 @@ def calculate_chess_move_heatmap(
         board: Board, depth: int = 1,
         heatmap: Optional[ChessMoveHeatmap] = None,
         discount: int = 1) -> ChessMoveHeatmap:
-    """
-    Recursively computes a chess move heatmap that tracks both move intensities and piece counts.
+    # noinspection PyUnresolvedReferences
+    """Recursively computes a chess move heatmap that tracks both move intensities and piece counts.
 
     This function extends the standard gradient heatmap calculation by additionally updating,
     for each move, a per-square dictionary of chess piece counts. For each legal move, the target
@@ -205,7 +205,6 @@ def calculate_chess_move_heatmap(
     >>> depth2_cmhm = calculate_chess_move_heatmap(brd, depth=3)
     >>> print(", ".join([f"{p.unicode_symbol()}: {cnt}" for p, cnt in depth2_cmhm.piece_counts[16].items() if cnt]))
     ♙: 1.849999999999993, ♘: 1.849999999999984, ♗: 0.10000000000000005, ♖: 0.05000000000000001, ♝: 0.09067002690459958
-
     """
     if heatmap is None:
         heatmap = ChessMoveHeatmap()
@@ -234,8 +233,8 @@ def calculate_chess_move_heatmap(
 
 
 def calculate_chess_move_heatmap_with_better_discount(board: Board, depth: int = 1) -> ChessMoveHeatmap:
-    """
-    Recursively computes a chess move heatmap for a given board state while applying a discount
+    # noinspection PyUnresolvedReferences
+    """Recursively computes a chess move heatmap for a given board state while applying a discount
     to moves based on the branching factor at each level of recursion. This discounting approach
     reduces the weight of moves that occur in positions with many legal alternatives, thereby
     emphasizing moves from branches with fewer alternatives.
@@ -288,7 +287,7 @@ def calculate_chess_move_heatmap_with_better_discount(board: Board, depth: int =
     depth_map = fill_depth_map_with_counts(board, depth, depth_map)
     heatmap: ChessMoveHeatmap = ChessMoveHeatmap()
     # Aggregate the heatmaps from each depth level with appropriate discounting.
-    # discount is the total number branches at each depth, inittalliy this is always 1.
+    # discount is the total number branches at each depth, initially this is always 1.
     discount: int = 1
     branches: int
     heatmap_at_depth: ChessMoveHeatmap
@@ -492,16 +491,16 @@ class HeatmapCache:
             cur: Cursor = conn.cursor()
             cur.execute("PRAGMA journal_mode=WAL;")
             # Construct column definitions for each square.
-            col_defs: List[str] = []
+            col_definitions: List[str] = []
             square: int
             for square in range(64):
-                col_defs.append(f"sq{square}_white REAL")
-                col_defs.append(f"sq{square}_black REAL")
+                col_definitions.append(f"sq{square}_white REAL")
+                col_definitions.append(f"sq{square}_black REAL")
                 key: Piece
                 for key in PIECE_KEYS:
-                    col_defs.append(f"sq{square}_piece_{key.unicode_symbol()} REAL")
+                    col_definitions.append(f"sq{square}_piece_{key.unicode_symbol()} REAL")
 
-            cols: str = ", ".join(col_defs)
+            cols: str = ", ".join(col_definitions)
             create_stmt: str = f"CREATE TABLE IF NOT EXISTS heatmap_cache (cache_key TEXT PRIMARY KEY, {cols})"
             cur.execute(create_stmt)
 
@@ -600,7 +599,7 @@ def get_or_compute_heatmap(board: Board, depth: int) -> ChessMoveHeatmap:
 
 
 class BetterHeatmapCache(HeatmapCache):
-    """Overides cache_dir"""
+    """Overrides cache_dir"""
     cache_dir: str = path.join(".", CACHE_DIR, "Better")
 
 
