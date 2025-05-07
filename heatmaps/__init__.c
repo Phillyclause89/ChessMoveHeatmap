@@ -2734,12 +2734,12 @@ static const char __pyx_k_Data_must_be_either_a_NumPy_arra[] = "Data must be eit
 static const char __pyx_k_GradientHeatmap__intensity_to_co[] = "GradientHeatmap._intensity_to_color_";
 static const char __pyx_k_GradientHeatmap__repr_html__line[] = "GradientHeatmap._repr_html_ (line 259)";
 static const char __pyx_k_Optional_NDArray_Dict_Piece_floa[] = "Optional[NDArray[Dict[Piece, float64]]]";
+static const char __pyx_k_Optional_Union_NDArray_float64_G[] = "Optional[Union[NDArray[float64], GradientHeatmapT, ArrayLike]]";
 static const char __pyx_k_Other_must_be_a_GradientHeatmapT[] = "Other must be a GradientHeatmapT ";
 static const char __pyx_k_Other_must_be_a_shape_64_ArrayLi[] = "Other must be a shape (64,) ArrayLike, got ";
 static const char __pyx_k_Shape_is_immutable_and_cannot_be[] = "Shape is immutable and cannot be changed.";
 static const char __pyx_k_Union_ChessMoveHeatmapT_Tuple_ND[] = "Union['ChessMoveHeatmapT', Tuple[NDArray[float64], NDArray[Dict[Piece, float64]]], ArrayLike, Dict[str, Union[NDArray[float64], NDArray[Dict[Piece, float64]]]]]";
 static const char __pyx_k_Union_GradientHeatmapT_NDArray_f[] = "Union['GradientHeatmapT', NDArray[float64], ArrayLike]";
-static const char __pyx_k_Union_Optional_NDArray_float64_G[] = "Union[Optional[NDArray[float64]], GradientHeatmapT, ArrayLike]";
 static const char __pyx_k_piece_counts_must_be_a_NumPy_arr[] = "piece_counts must be a NumPy array of dict, got ";
 /* #### Code section: decls ### */
 static PyObject *__pyx_pf_8heatmaps_genexpr(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_genexpr_arg_0); /* proto */
@@ -2856,6 +2856,7 @@ typedef struct {
   PyObject *__pyx_n_s_None;
   PyObject *__pyx_n_s_Optional;
   PyObject *__pyx_kp_s_Optional_NDArray_Dict_Piece_floa;
+  PyObject *__pyx_kp_s_Optional_Union_NDArray_float64_G;
   PyObject *__pyx_kp_u_Other;
   PyObject *__pyx_kp_u_Other_must_be_a_GradientHeatmapT;
   PyObject *__pyx_kp_u_Other_must_be_a_shape;
@@ -2874,7 +2875,6 @@ typedef struct {
   PyObject *__pyx_kp_s_Union_ChessMoveHeatmapT_Tuple_ND;
   PyObject *__pyx_kp_s_Union_GradientHeatmapT_NDArray_f;
   PyObject *__pyx_kp_s_Union_NDArray_float64_ArrayLike;
-  PyObject *__pyx_kp_s_Union_Optional_NDArray_float64_G;
   PyObject *__pyx_kp_s_Union_int_Iterable;
   PyObject *__pyx_kp_u_Unsupported_type_for_divisor;
   PyObject *__pyx_n_s_ValueError;
@@ -3187,6 +3187,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_None);
   Py_CLEAR(clear_module_state->__pyx_n_s_Optional);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Optional_NDArray_Dict_Piece_floa);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_Optional_Union_NDArray_float64_G);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Other);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Other_must_be_a_GradientHeatmapT);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Other_must_be_a_shape);
@@ -3205,7 +3206,6 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_s_Union_ChessMoveHeatmapT_Tuple_ND);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Union_GradientHeatmapT_NDArray_f);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Union_NDArray_float64_ArrayLike);
-  Py_CLEAR(clear_module_state->__pyx_kp_s_Union_Optional_NDArray_float64_G);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Union_int_Iterable);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Unsupported_type_for_divisor);
   Py_CLEAR(clear_module_state->__pyx_n_s_ValueError);
@@ -3496,6 +3496,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_None);
   Py_VISIT(traverse_module_state->__pyx_n_s_Optional);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Optional_NDArray_Dict_Piece_floa);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_Optional_Union_NDArray_float64_G);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Other);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Other_must_be_a_GradientHeatmapT);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Other_must_be_a_shape);
@@ -3514,7 +3515,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_s_Union_ChessMoveHeatmapT_Tuple_ND);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Union_GradientHeatmapT_NDArray_f);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Union_NDArray_float64_ArrayLike);
-  Py_VISIT(traverse_module_state->__pyx_kp_s_Union_Optional_NDArray_float64_G);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Union_int_Iterable);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Unsupported_type_for_divisor);
   Py_VISIT(traverse_module_state->__pyx_n_s_ValueError);
@@ -3815,6 +3815,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_None __pyx_mstate_global->__pyx_n_s_None
 #define __pyx_n_s_Optional __pyx_mstate_global->__pyx_n_s_Optional
 #define __pyx_kp_s_Optional_NDArray_Dict_Piece_floa __pyx_mstate_global->__pyx_kp_s_Optional_NDArray_Dict_Piece_floa
+#define __pyx_kp_s_Optional_Union_NDArray_float64_G __pyx_mstate_global->__pyx_kp_s_Optional_Union_NDArray_float64_G
 #define __pyx_kp_u_Other __pyx_mstate_global->__pyx_kp_u_Other
 #define __pyx_kp_u_Other_must_be_a_GradientHeatmapT __pyx_mstate_global->__pyx_kp_u_Other_must_be_a_GradientHeatmapT
 #define __pyx_kp_u_Other_must_be_a_shape __pyx_mstate_global->__pyx_kp_u_Other_must_be_a_shape
@@ -3833,7 +3834,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_s_Union_ChessMoveHeatmapT_Tuple_ND __pyx_mstate_global->__pyx_kp_s_Union_ChessMoveHeatmapT_Tuple_ND
 #define __pyx_kp_s_Union_GradientHeatmapT_NDArray_f __pyx_mstate_global->__pyx_kp_s_Union_GradientHeatmapT_NDArray_f
 #define __pyx_kp_s_Union_NDArray_float64_ArrayLike __pyx_mstate_global->__pyx_kp_s_Union_NDArray_float64_ArrayLike
-#define __pyx_kp_s_Union_Optional_NDArray_float64_G __pyx_mstate_global->__pyx_kp_s_Union_Optional_NDArray_float64_G
 #define __pyx_kp_s_Union_int_Iterable __pyx_mstate_global->__pyx_kp_s_Union_int_Iterable
 #define __pyx_kp_u_Unsupported_type_for_divisor __pyx_mstate_global->__pyx_kp_u_Unsupported_type_for_divisor
 #define __pyx_n_s_ValueError __pyx_mstate_global->__pyx_n_s_ValueError
@@ -7284,7 +7284,7 @@ static PyObject *__pyx_pf_8heatmaps_16GradientHeatmapT_14data(CYTHON_UNUSED PyOb
 /* "heatmaps/__init__.py":179
  *     """A subclass of `GradientHeatmapT` that supports additional operations like normalization and color conversion."""
  * 
- *     def __init__(self, data: Union[Optional[NDArray[float64]], GradientHeatmapT, ArrayLike] = None) -> None:             # <<<<<<<<<<<<<<
+ *     def __init__(self, data: Optional[Union[NDArray[float64], GradientHeatmapT, ArrayLike]] = None) -> None:             # <<<<<<<<<<<<<<
  *         """Initialize a gradient heatmap.
  * 
  */
@@ -7764,7 +7764,7 @@ static PyObject *__pyx_pf_8heatmaps_15GradientHeatmap___init__(CYTHON_UNUSED PyO
   /* "heatmaps/__init__.py":179
  *     """A subclass of `GradientHeatmapT` that supports additional operations like normalization and color conversion."""
  * 
- *     def __init__(self, data: Union[Optional[NDArray[float64]], GradientHeatmapT, ArrayLike] = None) -> None:             # <<<<<<<<<<<<<<
+ *     def __init__(self, data: Optional[Union[NDArray[float64], GradientHeatmapT, ArrayLike]] = None) -> None:             # <<<<<<<<<<<<<<
  *         """Initialize a gradient heatmap.
  * 
  */
@@ -13672,6 +13672,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_None, __pyx_k_None, sizeof(__pyx_k_None), 0, 0, 1, 1},
     {&__pyx_n_s_Optional, __pyx_k_Optional, sizeof(__pyx_k_Optional), 0, 0, 1, 1},
     {&__pyx_kp_s_Optional_NDArray_Dict_Piece_floa, __pyx_k_Optional_NDArray_Dict_Piece_floa, sizeof(__pyx_k_Optional_NDArray_Dict_Piece_floa), 0, 0, 1, 0},
+    {&__pyx_kp_s_Optional_Union_NDArray_float64_G, __pyx_k_Optional_Union_NDArray_float64_G, sizeof(__pyx_k_Optional_Union_NDArray_float64_G), 0, 0, 1, 0},
     {&__pyx_kp_u_Other, __pyx_k_Other, sizeof(__pyx_k_Other), 0, 1, 0, 0},
     {&__pyx_kp_u_Other_must_be_a_GradientHeatmapT, __pyx_k_Other_must_be_a_GradientHeatmapT, sizeof(__pyx_k_Other_must_be_a_GradientHeatmapT), 0, 1, 0, 0},
     {&__pyx_kp_u_Other_must_be_a_shape, __pyx_k_Other_must_be_a_shape, sizeof(__pyx_k_Other_must_be_a_shape), 0, 1, 0, 0},
@@ -13690,7 +13691,6 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_s_Union_ChessMoveHeatmapT_Tuple_ND, __pyx_k_Union_ChessMoveHeatmapT_Tuple_ND, sizeof(__pyx_k_Union_ChessMoveHeatmapT_Tuple_ND), 0, 0, 1, 0},
     {&__pyx_kp_s_Union_GradientHeatmapT_NDArray_f, __pyx_k_Union_GradientHeatmapT_NDArray_f, sizeof(__pyx_k_Union_GradientHeatmapT_NDArray_f), 0, 0, 1, 0},
     {&__pyx_kp_s_Union_NDArray_float64_ArrayLike, __pyx_k_Union_NDArray_float64_ArrayLike, sizeof(__pyx_k_Union_NDArray_float64_ArrayLike), 0, 0, 1, 0},
-    {&__pyx_kp_s_Union_Optional_NDArray_float64_G, __pyx_k_Union_Optional_NDArray_float64_G, sizeof(__pyx_k_Union_Optional_NDArray_float64_G), 0, 0, 1, 0},
     {&__pyx_kp_s_Union_int_Iterable, __pyx_k_Union_int_Iterable, sizeof(__pyx_k_Union_int_Iterable), 0, 0, 1, 0},
     {&__pyx_kp_u_Unsupported_type_for_divisor, __pyx_k_Unsupported_type_for_divisor, sizeof(__pyx_k_Unsupported_type_for_divisor), 0, 1, 0, 0},
     {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
@@ -14055,7 +14055,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   /* "heatmaps/__init__.py":179
  *     """A subclass of `GradientHeatmapT` that supports additional operations like normalization and color conversion."""
  * 
- *     def __init__(self, data: Union[Optional[NDArray[float64]], GradientHeatmapT, ArrayLike] = None) -> None:             # <<<<<<<<<<<<<<
+ *     def __init__(self, data: Optional[Union[NDArray[float64], GradientHeatmapT, ArrayLike]] = None) -> None:             # <<<<<<<<<<<<<<
  *         """Initialize a gradient heatmap.
  * 
  */
@@ -15177,13 +15177,13 @@ if (!__Pyx_RefNanny) {
   /* "heatmaps/__init__.py":179
  *     """A subclass of `GradientHeatmapT` that supports additional operations like normalization and color conversion."""
  * 
- *     def __init__(self, data: Union[Optional[NDArray[float64]], GradientHeatmapT, ArrayLike] = None) -> None:             # <<<<<<<<<<<<<<
+ *     def __init__(self, data: Optional[Union[NDArray[float64], GradientHeatmapT, ArrayLike]] = None) -> None:             # <<<<<<<<<<<<<<
  *         """Initialize a gradient heatmap.
  * 
  */
   __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 179, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_data_2, __pyx_kp_s_Union_Optional_NDArray_float64_G) < 0) __PYX_ERR(0, 179, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_data_2, __pyx_kp_s_Optional_Union_NDArray_float64_G) < 0) __PYX_ERR(0, 179, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 179, __pyx_L1_error)
   __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_8heatmaps_15GradientHeatmap_1__init__, 0, __pyx_n_s_GradientHeatmap___init, NULL, __pyx_n_s_heatmaps, __pyx_d, ((PyObject *)__pyx_codeobj__27)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 179, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);

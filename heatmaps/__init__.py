@@ -176,7 +176,7 @@ class GradientHeatmapT:
 class GradientHeatmap(GradientHeatmapT):
     """A subclass of `GradientHeatmapT` that supports additional operations like normalization and color conversion."""
 
-    def __init__(self, data: Union[Optional[NDArray[float64]], GradientHeatmapT, ArrayLike] = None) -> None:
+    def __init__(self, data: Optional[Union[NDArray[float64], GradientHeatmapT, ArrayLike]] = None) -> None:
         """Initialize a gradient heatmap.
 
         Parameters
