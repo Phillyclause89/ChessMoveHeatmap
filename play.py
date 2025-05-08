@@ -299,6 +299,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
     site: str
     face: str
     game_line: List[Pick]
+    start_time: datetime
     engines: EngineContainer
     player: Player = Player()
     training_dir: str = "trainings"
@@ -372,6 +373,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
         self.canvas.bind('<Button-1>', self.activate_piece)
         self.focus_force()
+        self.start_time = get_local_time()
         if bool(self.player.index) == self.engines.board.turn:
             pick = self.await_engine_pick()
             self.engines.push(pick)
@@ -496,6 +498,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
             self.game_line[-1].move.to_square, self.game_line[-1].move.from_square
         } if self.game_line[-1] != self.game_line[0] else set()
         self.face = self.get_smily_face()
+        self.start_time = get_local_time()
 
     def train_engine(self):
         """Run a training loop where two engines play multiple games and update Q-values.
@@ -529,7 +532,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
                 return messagebox.showerror("Error Starting Training Mode", "Invalid game index(es) submitted.")
             game_index: int
             for game_id in range(start_game_index + 1, end_game_index + 1):
-                local_time: datetime = get_local_time()
+                self.start_time = get_local_time()
                 self.set_title()
                 # We go out of our way to make sure both engines point to the same board object
                 board: Board = self.engines.board
@@ -560,7 +563,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
                 game_heads["Event"] = self.get_mode()
                 game_heads["Site"] = self.site
                 game_heads["Round"] = str(game_id)
-                set_all_datetime_headers(game_heads=game_heads, local_time=local_time)
+                set_all_datetime_headers(game_heads=game_heads, local_time=self.start_time)
                 game_heads["White"] = self.engines.white_name
                 game_heads["Black"] = self.engines.black_name
                 game_heads["Termination"] = outcome.termination.name
@@ -648,18 +651,50 @@ class PlayChessApp(Tk, BaseChessTkApp):
         with open(file_name, "w", encoding="utf-8") as file:
             print(game, file=file, end="\n\n")
 
-    def show_game_over(self, outcome: Optional[Outcome] = None) -> None:
+    def show_game_over(self, outcome: Optional[Outcome] = None, local_start_time: Optional[datetime] = None) -> None:
         """Display an informational dialog with the game outcome.
 
         Parameters
         ----------
         outcome : chess.Outcome, optional
             Outcome to display. If None, computes from the current engine board.
+        local_start_time : datetime, optional
+            The start time of the game in local timezone.
         """
+        local_start_time = self.start_time if local_start_time is None else local_start_time
         outcome: Optional[Outcome] = self.engines.board.outcome(
             claim_draw=True
         ) if outcome is None else outcome
         messagebox.showinfo("Game Over", f"Game Over: {outcome}")
+        pgn_dir: str = path.join(self.pgn_dir, self.training_dir)
+        round_number: int = 1
+        if path.isdir(pgn_dir):
+            round_number = len([item for item in Path(pgn_dir).iterdir() if item.is_file()]) + 1
+        game: Game = Game.from_board(self.engines.board)
+        game_heads = game.headers
+        game_heads["Event"] = self.get_mode()
+        game_heads["Site"] = self.site
+        game_heads["Round"] = str(round_number)
+        set_all_datetime_headers(game_heads=game_heads, local_time=local_start_time)
+        game_heads["White"] = self.engines.white_name if self.player.index else self.player.name
+        game_heads["Black"] = self.player.name if self.player.index else self.engines.black_name
+        game_heads["Termination"] = outcome.termination.name
+        game_heads["CMHMEngineDepth"] = str(self.depth)
+        file_name: str = path.join(
+            pgn_dir,
+            f"{game_heads['Date']}_{game_heads['Event'].replace(' ', '_')}_{game_heads['Round']}.pgn"
+        )
+        self.save_to_pgn(file_name=file_name, game=game)
+        self.highlight_squares = set()
+        for engine in self.engines:
+            if isinstance(engine, CMHMEngine2):
+                # This is going to pop all the moves out of the shared board...
+                update_future: Future = self._move_executor.submit(engine.update_q_values)
+                while not update_future.done():
+                    self.updating = True
+                    self.update_board()
+                    self.updating = False
+        self.reset_engines_board()
 
     def update_board(self) -> None:
         """Refresh the chessboard GUI.
@@ -839,19 +874,23 @@ class PlayChessApp(Tk, BaseChessTkApp):
                     score=self.game_line[-1].score
                 )
                 self.engines.push(pick)
-                # TODO: Check self.engines.board.outcome here and activate some endgame debrief flow if game-over
-                self.fullmove_number = self.engines.board.fullmove_number
                 self.game_line.append(pick)
                 self.face = self.get_smily_face()
                 self.highlight_squares = {pick.move.from_square, pick.move.to_square}
                 self.selected_square = None
                 self.possible_squares = tuple()
+                outcome: Outcome = self.engines.board.outcome(claim_draw=True)
+                if outcome is not None:
+                    return self.show_game_over(outcome=outcome)
+                self.fullmove_number = self.engines.board.fullmove_number
                 self.updating = True
                 self.update_board()
                 self.updating = False
                 pick = self.await_engine_pick()
                 self.engines.push(pick)
-                # TODO: Check self.engines.board.outcome here again and activate some endgame debrief flow if game-over
+                outcome: Outcome = self.engines.board.outcome(claim_draw=True)
+                if outcome is not None:
+                    return self.show_game_over(outcome=outcome)
                 self.fullmove_number = self.engines.board.fullmove_number
                 self.game_line.append(pick)
                 self.face = self.get_smily_face()
@@ -897,8 +936,8 @@ class PlayChessApp(Tk, BaseChessTkApp):
         Label(dlg, text="Site:").grid(row=1, column=0, sticky="e", padx=5, pady=5)
         site_entry: Entry = Entry(dlg, textvariable=site_var)
         site_entry.grid(row=1, column=1, padx=5, pady=5)
-        # Color choice
-        Label(dlg, text="Color:").grid(row=2, column=0, sticky="e", padx=5, pady=5)
+        # Index/(Color) choice
+        Label(dlg, text="Starting Side:").grid(row=2, column=0, sticky="e", padx=5, pady=5)
         color_frame: Frame = Frame(dlg)
         color_frame.grid(row=2, column=1, padx=5, pady=5, sticky="w")
         Radiobutton(color_frame, text="White", variable=index_var, value=0).pack(side="left")
