@@ -598,12 +598,24 @@ class PlayChessApp(Tk, BaseChessTkApp):
         else:
             self.after(100, self.train_engine)
 
-    def add_eval_comments_to_mainline(self, game: Game):
-        """Updates the game object's mainline with eval scores existing in self.game_line.
+    def add_eval_comments_to_mainline(self, game: Game) -> None:
+        """Annotate each half-move in the Game’s main line with the corresponding eval score.
+
+        This mutates `game` in place by setting `node.comment = "{eval=…}"` on
+        each `ChildNode` in `game.mainline()`.
+
+        **Alignment requirement**
+        It is the caller’s responsibility to ensure that:
+          - `self.game_line` has exactly one dummy pick at index 0 (for the “illegal” move), and
+          - `len(self.game_line) - 1 == number of half-moves in game.mainline()`.
+
+        If those are out of sync, the for-loop will silently stop at the shorter of the two,
+        so any mis-alignment should be checked *before* calling this method.
 
         Parameters
         ----------
-        game : Game
+        game : chess.pgn.Game
+            A PGN `Game` whose main-line nodes you want to annotate with eval comments sourced from `self.game_line`.
         """
         node: ChildNode
         pick: Pick
