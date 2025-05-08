@@ -6,7 +6,10 @@ from itertools import cycle
 from os import makedirs, path
 from pathlib import Path
 from random import choice
-from tkinter import Canvas, Event, Menu, Tk, messagebox, simpledialog
+from tkinter import (
+    Button, Canvas, Entry, Event, Frame, IntVar, Label, Menu, Radiobutton, StringVar, Tk, Toplevel, messagebox,
+    simpledialog
+)
 from typing import Callable, Dict, Generator, Iterator, List, Optional, Set, Tuple
 
 from chess import Board, Move, Outcome, Piece, SQUARES
@@ -14,8 +17,9 @@ from chess.pgn import Game
 from numpy import float64
 
 from chmengine import CMHMEngine, CMHMEngine2, Pick, set_all_datetime_headers
-from chmutils import (BaseChessTkApp, DEFAULT_COLORS, DEFAULT_FONT, Player, get_local_time, get_promotion_choice,
-                      state_faces)
+from chmutils import (
+    BaseChessTkApp, DEFAULT_COLORS, DEFAULT_FONT, Player, get_local_time, get_promotion_choice, state_faces
+)
 
 __all__ = [
     'PlayChessApp',
@@ -341,19 +345,20 @@ class PlayChessApp(Tk, BaseChessTkApp):
         self.updating = True
         self.training = False
         super().__init__()
-        self.player.name = player_name
-        self.site = f"{self.player.name}'s place" if site is None else site
-        if player_color_is_black:
-            self.player.index = 1
-        self.engines = EngineContainer(engine_type, depth, engine_type_2, depth_2)
-        self.depth = self.engines.depth
-        self.set_title()
         screen_height: int = self.winfo_screenheight()
         screen_width: int = int(screen_height * 0.75)
         self.geometry(f"{screen_width}x{screen_height}")
         self.square_size = screen_width // 8
         self.colors = list(DEFAULT_COLORS)
         self.font = DEFAULT_FONT
+        self.player.name = player_name
+        self.site = f"{self.player.name}'s place" if site is None else site
+        if player_color_is_black:
+            self.player.index = 1
+        self.onboard_player()
+        self.engines = EngineContainer(engine_type, depth, engine_type_2, depth_2)
+        self.depth = self.engines.depth
+        self.set_title()
         self.create_menu()
         self.canvas = Canvas(self)
         self.canvas.pack(fill="both", expand=True)
@@ -361,13 +366,16 @@ class PlayChessApp(Tk, BaseChessTkApp):
         self.highlight_squares = set()
         self.game_line = [Pick(Move.from_uci('a1b8'), float64(None))]  # index0 of the game-line will hold illegal move
         self.face = self.get_smily_face()
-        # TODO: Prompt user to start a new (or load an incomplete) game.
         self.update_board()
         self._move_executor = ThreadPoolExecutor(max_workers=1)
         self.bind("<Configure>", self.on_resize)
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
         self.canvas.bind('<Button-1>', self.activate_piece)
         self.focus_force()
+        if bool(self.player.index) == self.engines.board.turn:
+            pick = self.await_engine_pick()
+            self.engines.push(pick)
+            self.update_board()
         self.updating = False
 
     def on_closing(self) -> None:
@@ -871,6 +879,55 @@ class PlayChessApp(Tk, BaseChessTkApp):
             self.update_board()
             self.updating = False
         return future.result()
+
+    def onboard_player(self) -> None:
+        """Onboards player at app start"""
+        dlg: Toplevel = Toplevel(self)
+        dlg.title("Enter Player Info")
+        dlg.transient(self)
+        dlg.grab_set()
+        name_var: StringVar = StringVar(value=self.player.name or "")
+        site_var: StringVar = StringVar(value=self.site or "")
+        index_var: IntVar = IntVar(value=self.player.index or 0)
+        # Player Name
+        Label(dlg, text="Player Name:").grid(row=0, column=0, sticky="e", padx=5, pady=5)
+        name_entry: Entry = Entry(dlg, textvariable=name_var)
+        name_entry.grid(row=0, column=1, padx=5, pady=5)
+        # Site
+        Label(dlg, text="Site:").grid(row=1, column=0, sticky="e", padx=5, pady=5)
+        site_entry: Entry = Entry(dlg, textvariable=site_var)
+        site_entry.grid(row=1, column=1, padx=5, pady=5)
+        # Color choice
+        Label(dlg, text="Color:").grid(row=2, column=0, sticky="e", padx=5, pady=5)
+        color_frame: Frame = Frame(dlg)
+        color_frame.grid(row=2, column=1, padx=5, pady=5, sticky="w")
+        Radiobutton(color_frame, text="White", variable=index_var, value=0).pack(side="left")
+        Radiobutton(color_frame, text="Black", variable=index_var, value=1).pack(side="left")
+
+        def submit() -> None:
+            """updates the app with player info"""
+            # assign back to your app state
+            self.player.name = name_var.get().strip()
+            self.player.index = index_var.get()
+            self.site = site_var.get().strip()
+            dlg.destroy()
+
+        submit_btn: Button = Button(dlg, text="Submit", command=submit)
+        submit_btn.grid(row=3, column=0, columnspan=2, pady=(10, 5))
+        dlg.bind("<Return>", lambda e: submit())
+        self.update_idletasks()
+        dlg.update_idletasks()
+        parent_x: int = self.winfo_rootx()
+        parent_y: int = self.winfo_rooty()
+        parent_w: int = self.winfo_width()
+        parent_h: int = self.winfo_height()
+        dlg_w: int = dlg.winfo_reqwidth()
+        dlg_h: int = dlg.winfo_reqheight()
+        x: int = parent_x + (parent_w // 2) - (dlg_w // 2)
+        y: int = parent_y + (parent_h // 2) - (dlg_h // 2)
+        dlg.geometry(f"{dlg_w}x{dlg_h}+{x}+{y}")
+        name_entry.focus_set()
+        self.wait_window(dlg)
 
 
 if __name__ == "__main__":
