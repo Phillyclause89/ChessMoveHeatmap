@@ -13,8 +13,8 @@ from tkinter import (
 from typing import Callable, Dict, Generator, Iterator, List, Optional, Set, Tuple
 
 from chess import Board, Move, Outcome, Piece, SQUARES
-from chess.pgn import Game
-from numpy import float64
+from chess.pgn import ChildNode, Game
+from numpy import float64, isnan
 
 from chmengine import CMHMEngine, CMHMEngine2, Pick, set_all_datetime_headers
 from chmutils import (
@@ -562,6 +562,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
                     self.updating = False
                 outcome: Outcome = board.outcome(claim_draw=True)
                 game: Game = Game.from_board(board)
+                self.add_eval_comments_to_mainline(game=game)
                 game_heads = game.headers
                 game_heads["Event"] = self.get_mode()
                 game_heads["Site"] = self.site
@@ -596,6 +597,18 @@ class PlayChessApp(Tk, BaseChessTkApp):
             messagebox.showerror("Error", "The engine is already training.")
         else:
             self.after(100, self.train_engine)
+
+    def add_eval_comments_to_mainline(self, game: Game):
+        """Updates the game object's mainline with eval scores existing in self.game_line.
+
+        Parameters
+        ----------
+        game : Game
+        """
+        node: ChildNode
+        pick: Pick
+        for node, pick in zip(game.mainline(), self.game_line[1:]):
+            node.comment = f"eval={pick.score:+.2f}" if not isnan(pick.score) else f"eval=?"
 
     def get_training_game_indexes(self) -> Tuple[Optional[int], Optional[int]]:
         """Gets the training game start and end index (game id is +1 from game index)
@@ -674,6 +687,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         if path.isdir(pgn_dir):
             round_number = len([item for item in Path(pgn_dir).iterdir() if item.is_file()]) + 1
         game: Game = Game.from_board(self.engines.board)
+        self.add_eval_comments_to_mainline(game=game)
         game_heads = game.headers
         game_heads["Event"] = self.get_mode()
         game_heads["Site"] = self.site
@@ -764,7 +778,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
             ),
             font=game_line_font
         )
-        game_line_text: str = ' ⬅ '.join([f"{p:.2f}" for p in self.game_line[-1:0:-1]])
+        game_line_text: str = ' ⬅ '.join([f"{p:+.2f}" for p in self.game_line[-1:0:-1]])
         self.canvas.create_text(
             half_square_size // 8, (half_square_size // 4) * 3,
             anchor='w',
