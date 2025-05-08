@@ -776,17 +776,31 @@ class PlayChessApp(Tk, BaseChessTkApp):
         font_size = int(self.square_size * 0.6)
         bg_size = font_size + 25
         game_line_font: Tuple[str, int] = (self.font, font_size // 5)
+        at_ply_name: str
+        at_ply_color: str
         if self.training:
-            at_ply: str = self.engines.white_name if board.turn else self.engines.black_name
+            at_ply_name, at_ply_color = (
+                self.engines.white_name, 'White'
+            ) if board.turn else (
+                self.engines.black_name, 'Black'
+            )
         elif self.player.index:
-            at_ply = self.engines.white_name if board.turn else self.player.name
+            at_ply_name, at_ply_color = (
+                self.engines.white_name, 'White'
+            ) if board.turn else (
+                self.player.name, 'Black'
+            )
         else:
-            at_ply = self.player.name if board.turn else self.engines.black_name
+            at_ply_name, at_ply_color = (
+                self.player.name, 'White'
+            ) if board.turn else (
+                self.engines.black_name, 'Black'
+            )
         self.canvas.create_text(
             half_square_size // 8, (half_square_size // 4),
             anchor='w',
             text=(
-                f"{self.face} {at_ply} is picking Move #{self.fullmove_number}"
+                f"{self.face} {at_ply_name} ({at_ply_color}) is picking Move #{self.fullmove_number}"
                 f" (Pick #{len(self.game_line)}){next(self.dot_dot)}"
             ),
             font=game_line_font
