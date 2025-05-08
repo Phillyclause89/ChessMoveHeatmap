@@ -299,7 +299,6 @@ class PlayChessApp(Tk, BaseChessTkApp):
     site: str
     face: str
     game_line: List[Pick]
-    start_time: datetime
     engines: EngineContainer
     player: Player = Player()
     training_dir: str = "trainings"
@@ -310,6 +309,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
     dot_dot: Generator[str, str, str] = cycle(['.', '..', '...'])
     selected_square: Optional[int] = None
     possible_squares: Tuple[int, ...] = tuple()
+    start_time: datetime = get_local_time()
 
     def __init__(
             self,
@@ -374,6 +374,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         self.canvas.bind('<Button-1>', self.activate_piece)
         self.focus_force()
         self.start_time = get_local_time()
+        self.set_title()
         if bool(self.player.index) == self.engines.board.turn:
             pick = self.await_engine_pick()
             self.engines.push(pick)
@@ -434,7 +435,9 @@ class PlayChessApp(Tk, BaseChessTkApp):
 
         Title format: "<mode> | Depth = <depth>", where <mode> comes from `get_mode()`.
         """
-        self.title(f"{self.get_mode()} | Depth = {self.depth}")
+        self.title(
+            f"{self.get_mode()} | Depth = {self.depth} | Date = {self.start_time.strftime('%Y.%m.%d')}"
+        )
 
     def get_mode(self) -> str:
         """Get a descriptive string of the current play configuration.
@@ -746,10 +749,19 @@ class PlayChessApp(Tk, BaseChessTkApp):
         font_size = int(self.square_size * 0.6)
         bg_size = font_size + 25
         game_line_font: Tuple[str, int] = (self.font, font_size // 5)
+        if self.training:
+            at_ply: str = self.engines.white_name if board.turn else self.engines.black_name
+        elif self.player.index:
+            at_ply = self.engines.white_name if board.turn else self.player.name
+        else:
+            at_ply = self.player.name if board.turn else self.engines.black_name
         self.canvas.create_text(
             half_square_size // 8, (half_square_size // 4),
             anchor='w',
-            text=f"{self.face} Picking Move #{self.fullmove_number} (Pick #{len(self.game_line)}){next(self.dot_dot)}",
+            text=(
+                f"{self.face} {at_ply} is picking Move #{self.fullmove_number}"
+                f" (Pick #{len(self.game_line)}){next(self.dot_dot)}"
+            ),
             font=game_line_font
         )
         game_line_text: str = ' ⬅ '.join([f"{p:.2f}" for p in self.game_line[-1:0:-1]])
