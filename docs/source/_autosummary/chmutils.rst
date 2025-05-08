@@ -53,5 +53,6 @@
    chmutils.concurrent
    chmutils.game_builder
    chmutils.player
+   chmutils.promotion_dialog
    chmutils.system_info
 

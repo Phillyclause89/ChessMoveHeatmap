@@ -238,7 +238,7 @@ applying the move and evaluating the resulting position with a given recursion d
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>Dict[chess.Move, heatmaps.GradientHeatmap]</dt><dd><p>A dictionary mapping each legal move to its corresponding heatmap.</p>
+<dt>Dict[Move, GradientHeatmap]</dt><dd><p>A dictionary mapping each legal move to its corresponding heatmap.</p>
 </dd>
 </dl>
 </dd>
@@ -269,7 +269,7 @@ tuples for easier iteration, where each tuple contains a move and its correspond
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt>List[Tuple[chess.Move, heatmaps.GradientHeatmap]]</dt><dd><p>A list of (move, heatmap) tuples.</p>
+<dt>List[Tuple[Move, GradientHeatmap]]</dt><dd><p>A list of (move, heatmap) tuples.</p>
 </dd>
 </dl>
 </dd>
@@ -765,7 +765,7 @@ applying the move and evaluating the resulting position with a given recursion d
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>Dict[chess.Move, heatmaps.GradientHeatmap]</dt><dd><p>A dictionary mapping each legal move to its corresponding heatmap.</p>
+<dt>Dict[Move, GradientHeatmap]</dt><dd><p>A dictionary mapping each legal move to its corresponding heatmap.</p>
 </dd>
 </dl>
 </dd>
@@ -796,7 +796,7 @@ tuples for easier iteration, where each tuple contains a move and its correspond
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt>List[Tuple[chess.Move, heatmaps.GradientHeatmap]]</dt><dd><p>A list of (move, heatmap) tuples.</p>
+<dt>List[Tuple[Move, GradientHeatmap]]</dt><dd><p>A list of (move, heatmap) tuples.</p>
 </dd>
 </dl>
 </dd>
@@ -1405,7 +1405,7 @@ It extends <cite>PickT</cite> and is the public-facing API for move-score pairs.
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="chmengine.PlayCMHMEngine.round_results">
-<span class="sig-name descname"><span class="pre">round_results</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Game</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#chmengine.PlayCMHMEngine.round_results" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">round_results</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Game</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#chmengine.PlayCMHMEngine.round_results" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1823,18 +1823,18 @@ Negative if the current player is mated, positive if they deliver mate.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="chmengine.format_moves">
-<span class="sig-prename descclassname"><span class="pre">chmengine.</span></span><span class="sig-name descname"><span class="pre">format_moves</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">picks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.format_moves" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">chmengine.</span></span><span class="sig-name descname"><span class="pre">format_moves</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">picks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.format_moves" title="Permalink to this definition">¶</a></dt>
 <dd><p>Format a list of (move, score) tuples into UCI strings and formatted scores.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>picks</strong><span class="classifier">list of Picks</span></dt><dd><p>The list of Picks (moves and their evaluation scores.)</p>
+<dt><strong>picks</strong><span class="classifier">List[Pick]</span></dt><dd><p>The list of Picks (moves and their evaluation scores.)</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>list of tuple of (str, str) or None</dt><dd><p>Formatted list where each tuple contains the move in UCI format
+<dt>List[Tuple[str, str]</dt><dd><p>Formatted list where each tuple contains the move in UCI format
 and the score rounded to two decimal places.
 Entries with <cite>None</cite> moves are excluded.</p>
 </dd>

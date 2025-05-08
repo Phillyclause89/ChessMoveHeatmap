@@ -9,12 +9,6 @@
 
    
    
-   .. rubric:: Functions
-
-   .. autosummary::
-   
-      get_promotion_choice
-   
    
 
    
@@ -25,7 +19,6 @@
    
       EngineContainer
       PlayChessApp
-      PromotionDialog
    
    
 

@@ -38,14 +38,6 @@
   <section id="module-play">
 <span id="play"></span><h1>play<a class="headerlink" href="#module-play" title="Permalink to this heading">¶</a></h1>
 <p>Play against the CMHMEngine in a GUI.</p>
-<p class="rubric">Functions</p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_promotion_choice</span></code>(promotions, board)</p></td>
-<td><p>Gets the player's choice of possible promotion moves.</p></td>
-</tr>
-</tbody>
-</table>
 <p class="rubric">Classes</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
@@ -54,9 +46,6 @@
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#play.PlayChessApp" title="play.PlayChessApp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PlayChessApp</span></code></a>(engine_type, depth, ...)</p></td>
 <td><p>Play against the CMHMEngine in a GUI.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PromotionDialog</span></code>(parent, promotions, board)</p></td>
-<td><p>Prompts user for promotion choice.</p></td>
 </tr>
 </tbody>
 </table>
@@ -951,7 +940,7 @@ the group leader of this widget if None is given.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="play.PlayChessApp.highlight_squares">
-<span class="sig-name descname"><span class="pre">highlight_squares</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#play.PlayChessApp.highlight_squares" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">highlight_squares</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#play.PlayChessApp.highlight_squares" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1114,6 +1103,12 @@ If an update is in progress, retries after a short delay.</p>
 <dd><p>Handle window resize events.</p>
 <p>This method is called whenever the user resizes the window, adjusting the canvas and square size
 to fit the new dimensions of the window. It triggers a board update after resizing.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="play.PlayChessApp.onboard_player">
+<span class="sig-name descname"><span class="pre">onboard_player</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#play.PlayChessApp.onboard_player" title="Permalink to this definition">¶</a></dt>
+<dd><p>Onboards player at app start</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1385,12 +1380,14 @@ and updates the window title. Shows an error if a training session is active.</p
 
 <dl class="py method">
 <dt class="sig sig-object py" id="play.PlayChessApp.show_game_over">
-<span class="sig-name descname"><span class="pre">show_game_over</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outcome</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Outcome</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#play.PlayChessApp.show_game_over" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">show_game_over</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outcome</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Outcome</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_start_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">datetime</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#play.PlayChessApp.show_game_over" title="Permalink to this definition">¶</a></dt>
 <dd><p>Display an informational dialog with the game outcome.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>outcome</strong><span class="classifier">chess.Outcome, optional</span></dt><dd><p>Outcome to display. If None, computes from the current engine board.</p>
+</dd>
+<dt><strong>local_start_time</strong><span class="classifier">datetime, optional</span></dt><dd><p>The start time of the game in local timezone.</p>
 </dd>
 </dl>
 </dd>
@@ -1426,6 +1423,11 @@ in its packing order.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="play.PlayChessApp.square_size">
 <span class="sig-name descname"><span class="pre">square_size</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#play.PlayChessApp.square_size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="play.PlayChessApp.start_time">
+<span class="sig-name descname"><span class="pre">start_time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">datetime.datetime(2025,</span> <span class="pre">5,</span> <span class="pre">7,</span> <span class="pre">20,</span> <span class="pre">18,</span> <span class="pre">34,</span> <span class="pre">503074,</span> <span class="pre">tzinfo=datetime.timezone(datetime.timedelta(days=-1,</span> <span class="pre">seconds=61200),</span> <span class="pre">'Pacific</span> <span class="pre">Daylight</span> <span class="pre">Time'))</span></em><a class="headerlink" href="#play.PlayChessApp.start_time" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">

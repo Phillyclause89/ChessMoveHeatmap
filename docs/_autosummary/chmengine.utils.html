@@ -278,18 +278,18 @@ Negative if the current player is mated, positive if they deliver mate.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="chmengine.utils.format_moves">
-<span class="sig-prename descclassname"><span class="pre">chmengine.utils.</span></span><span class="sig-name descname"><span class="pre">format_moves</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">picks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.utils.format_moves" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">chmengine.utils.</span></span><span class="sig-name descname"><span class="pre">format_moves</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">picks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.utils.format_moves" title="Permalink to this definition">¶</a></dt>
 <dd><p>Format a list of (move, score) tuples into UCI strings and formatted scores.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>picks</strong><span class="classifier">list of Picks</span></dt><dd><p>The list of Picks (moves and their evaluation scores.)</p>
+<dt><strong>picks</strong><span class="classifier">List[Pick]</span></dt><dd><p>The list of Picks (moves and their evaluation scores.)</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>list of tuple of (str, str) or None</dt><dd><p>Formatted list where each tuple contains the move in UCI format
+<dt>List[Tuple[str, str]</dt><dd><p>Formatted list where each tuple contains the move in UCI format
 and the score rounded to two decimal places.
 Entries with <cite>None</cite> moves are excluded.</p>
 </dd>
@@ -330,19 +330,19 @@ Entries with <cite>None</cite> moves are excluded.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="chmengine.utils.insert_choice_into_current_moves">
-<span class="sig-prename descclassname"><span class="pre">chmengine.utils.</span></span><span class="sig-name descname"><span class="pre">insert_choice_into_current_moves</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choices_ordered_best_to_worst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pick</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.utils.insert_choice_into_current_moves" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">chmengine.utils.</span></span><span class="sig-name descname"><span class="pre">insert_choice_into_current_moves</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choices_ordered_best_to_worst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pick</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.utils.insert_choice_into_current_moves" title="Permalink to this definition">¶</a></dt>
 <dd><p>Insert a new candidate move into the current player’s move list (best to worst).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>choices_ordered_best_to_worst</strong><span class="classifier">list of (Optional[chess.Move], Optional[float64])</span></dt><dd><p>Current ordered list of move choices.</p>
+<dt><strong>choices_ordered_best_to_worst</strong><span class="classifier">List[Pick]</span></dt><dd><p>Current ordered list of move choices.</p>
 </dd>
 <dt><strong>pick</strong><span class="classifier">Pick</span></dt><dd></dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>list of Pick(chess.Move, float64)</dt><dd><p>Updated list with the move inserted.</p>
+<dt>List[Pick]</dt><dd><p>Updated list with the move inserted.</p>
 </dd>
 </dl>
 </dd>
