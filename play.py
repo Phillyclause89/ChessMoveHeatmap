@@ -502,6 +502,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         } if self.game_line[-1] != self.game_line[0] else set()
         self.face = self.get_smily_face()
         self.start_time = get_local_time()
+        self.set_title()
 
     def train_engine(self):
         """Run a training loop where two engines play multiple games and update Q-values.
