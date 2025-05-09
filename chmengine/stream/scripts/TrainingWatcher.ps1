@@ -11,6 +11,13 @@
     Governs the exit logic for the script. By default, this script will continue to watch until 1000 pgn files are detected.
 .PARAMETER PollIntervalSeconds
     Sleep time between pulls of the output dirs. By default this is 2 seconds.
+.PARAMETER PoolAvg
+    The average Elo of the pool of players. This is used to calculate the predicted Elo of each player. By default this is 1500.
+.PARAMETER InitialElo
+    A hashtable of player names to their initial Elo ratings. This is used to calculate the predicted Elo of each player.
+    The hashtable should be in the format:
+        $InitialElo['Alice'] = @{ White=1600; Black=1580 }
+    If a player is not found in the hashtable, the PoolAvg value will be used instead.
 .INPUTS
     None - No pipeline input accepted.
 .OUTPUTS
@@ -18,17 +25,28 @@
 .NOTES
     Author:         Phillyclause89
     Creation Date:  4/15/2025
-    Purpose/Change: Initial script development
 
 .EXAMPLE
-    PS C:\Users\PhillyClause89\Documents\ChessMoveHeatmap> .\chmengine\stream\scripts\TrainingWatcher.ps1 -MaxGames 5 -PollIntervalSeconds 1
+    ```PowerShell
+    PS C:\Users\PhillyClause89\Documents\ChessMoveHeatmap> .\chmengine\stream\scripts\TrainingWatcher.ps1 -MaxGames 5 -PollIntervalSeconds 1 -PoolAvg 1000 -InitialElo @{'PhillyClause89' = @{ White=1700; Black=1680 }}
+    ```
+        `-MaxGames 5`                                                   : This will watch the training directory for 5 games, 
+        `-PollIntervalSeconds 1`                                        : polling every second, 
+        `-PoolAvg 1000`                                                 : and using an average Elo of 1000 for all players not defined in the -InitialElo mapping. 
+        `-InitialElo @{'PhillyClause89' = @{ White=1700; Black=1680 }}` : The initial Elo for PhillyClause89 will be set to 1700 for White and 1680 for Black.
 #>
 [CmdletBinding()]
 param(
     [string]$TrainingDirectory = '.\pgns\trainings\',
     [string]$QTableDirectory = '.\SQLite3Caches\QTables\',
     [int]$MaxGames = 1000,
-    [int]$PollIntervalSeconds = 2
+    [int]$PollIntervalSeconds = 2,
+    [int]$PoolAvg = 1500,
+    [hashtable]$InitialElo = @{
+        'CMHMEngine'     = @{ White = 100; Black = 50 }
+        'CMHMEngine2'    = @{ White = 350; Black = 300 }
+        'PhillyClause89' = @{ White = 1600; Black = 1550 }
+    }
 )
 
 function Get-PredictedEloPerSide {
@@ -36,11 +54,8 @@ function Get-PredictedEloPerSide {
     .SYNOPSIS
         Estimate White- and Black-side Elo for each player, with optional per-player initial Elos.
     .DESCRIPTION
-        Same as before, but if you supply -InitialElo, it should be a hashtable:
-        
-        $InitialElo['Alice'] = @{ White=1600; Black=1580 }
-        
-        On a per-player basis, per side, that value is used instead of -PoolAvg.
+        This function estimates the Elo rating for each player based on their win/loss/draw statistics.
+        It can also take an initial Elo rating for each player, which will be used as a base for the calculations.
     .PARAMETER Stats
         Hashtable of player → @{ White = @{Wins,Losses,Draws}; Black = @{...} }.
     .PARAMETER PoolAvg
@@ -53,8 +68,8 @@ function Get-PredictedEloPerSide {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)][hashtable]$Stats,
-        [int]$PoolAvg = 1500,
-        [hashtable]$InitialElo = @{}
+        [int]$PoolAvg = $PoolAvg,
+        [hashtable]$InitialElo = $InitialElo
     )
 
     $elos = @{}
@@ -124,16 +139,12 @@ function Get-PredictedEloPerSide {
 function Watch-TrainingGames {
     [CmdletBinding()]
     param (
-        [string]$TrainingDirectory = '.\pgns\trainings\',
-        [string]$QTableDirectory = '.\SQLite3Caches\QTables\',
-        [int]$MaxGames = 1000,
-        [int]$PollIntervalSeconds = 2,
-        [int]$PoolAvg = 1500,
-        [hashtable]$InitialElo = @{
-                'Stockfish' = @{ White = 3000; Black = 2900 }
-                'CMHMEngine2' = @{ White = 400; Black = 300 }
-                'PhillyClause89' = @{ White = 1600; Black = 1550 }
-            }
+        [string]$TrainingDirectory = $TrainingDirectory,
+        [string]$QTableDirectory = $QTableDirectory,
+        [int]$MaxGames = $MaxGames,
+        [int]$PollIntervalSeconds = $PollIntervalSeconds,
+        [int]$PoolAvg = $PoolAvg,
+        [hashtable]$InitialElo = $InitialElo
     )
 
     $lastSize = 0
@@ -203,7 +214,7 @@ function Watch-TrainingGames {
 
             $elos = Get-PredictedEloPerSide -Stats $stats -PoolAvg $PoolAvg -InitialElo $InitialElo
 
-            Write-Host "Training Games Completed: " -ForegroundColor 'DarkGreen' -NoNewline
+            Write-Host 'Training Games Completed: ' -ForegroundColor 'DarkGreen' -NoNewline
             Write-Host "$lastCount of $MaxGames" -ForegroundColor 'Green'
 
             foreach ($player in $stats.Keys | Sort-Object) {
@@ -219,19 +230,19 @@ function Watch-TrainingGames {
                 # Print e.g. "CMHMEngine2: White Wins: 10 Black Wins: 8 Draws: 2"
                 Write-Host "$($player):" -ForegroundColor 'DarkGreen' -NoNewline
                 Write-Host " White: Wins=$ww"  -ForegroundColor 'Cyan'   -NoNewline
-                Write-Host ", " -ForegroundColor 'Cyan' -NoNewline
+                Write-Host ', ' -ForegroundColor 'Cyan' -NoNewline
                 Write-Host "Losses=$wl" -ForegroundColor 'Yellow' -NoNewline
-                Write-Host ", " -ForegroundColor 'Cyan' -NoNewline
+                Write-Host ', ' -ForegroundColor 'Cyan' -NoNewline
                 Write-Host "Draws=$wd"  -ForegroundColor 'Magenta' -NoNewline
-                Write-Host ", " -ForegroundColor 'Cyan' -NoNewline
+                Write-Host ', ' -ForegroundColor 'Cyan' -NoNewline
                 Write-Host "Predicted Elo=$we" -ForegroundColor 'Cyan' -NoNewline
                 Write-Host ' |' -ForegroundColor 'Green' -NoNewline
                 Write-Host " Black: Wins=$bw"  -ForegroundColor 'Yellow' -NoNewline
-                Write-Host ", " -ForegroundColor 'Yellow' -NoNewline
+                Write-Host ', ' -ForegroundColor 'Yellow' -NoNewline
                 Write-Host "Losses=$bl" -ForegroundColor 'Cyan'   -NoNewline
-                Write-Host ", " -ForegroundColor 'Yellow' -NoNewline
+                Write-Host ', ' -ForegroundColor 'Yellow' -NoNewline
                 Write-Host "Draws=$bd"  -ForegroundColor 'Magenta' -NoNewline
-                Write-Host ", " -ForegroundColor 'Yellow' -NoNewline
+                Write-Host ', ' -ForegroundColor 'Yellow' -NoNewline
                 Write-Host "Predicted Elo=$be" -ForegroundColor 'Yellow' 
             }
             Write-Host 'Last Completed Game Line: ' -ForegroundColor 'DarkGreen' -NoNewline
@@ -253,7 +264,15 @@ function Watch-TrainingGames {
 
 # This simulates: `if __name__ == "__main__":` from python. kinda...
 if ($MyInvocation.InvocationName -ne '.') {
-    Watch-TrainingGames -TrainingDirectory $TrainingDirectory -QTableDirectory $QTableDirectory -MaxGames $MaxGames -PollIntervalSeconds $PollIntervalSeconds
+    $WTGArgs = @{
+        TrainingDirectory = $TrainingDirectory
+        QTableDirectory   = $QTableDirectory
+        MaxGames          = $MaxGames
+        PollIntervalSeconds = $PollIntervalSeconds
+        InitialElo        = $InitialElo
+        PoolAvg           = $PoolAvg
+    }
+    Watch-TrainingGames @WTGArgs
 }
 # P.s. I think PowerShell is a terrible scripting language and the guy who created it is certainly not Dutch.
 
