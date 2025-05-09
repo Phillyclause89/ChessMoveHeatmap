@@ -31,13 +31,109 @@ param(
     [int]$PollIntervalSeconds = 2
 )
 
+function Get-PredictedEloPerSide {
+    <#
+    .SYNOPSIS
+        Estimate White- and Black-side Elo for each player, with optional per-player initial Elos.
+    .DESCRIPTION
+        Same as before, but if you supply -InitialElo, it should be a hashtable:
+        
+        $InitialElo['Alice'] = @{ White=1600; Black=1580 }
+        
+        On a per-player basis, per side, that value is used instead of -PoolAvg.
+    .PARAMETER Stats
+        Hashtable of player → @{ White = @{Wins,Losses,Draws}; Black = @{...} }.
+    .PARAMETER PoolAvg
+        Fallback “field average” Elo if no InitialElo is provided for a player/side. Default 1500.
+    .PARAMETER InitialElo
+        OPTIONAL hashtable of player → @{ White=[int]; Black=[int] }.  Missing entries fall back to PoolAvg.
+    .OUTPUTS
+        Hashtable of player → @{ White=[double]; Black=[double] }.
+    #>
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][hashtable]$Stats,
+        [int]$PoolAvg = 1500,
+        [hashtable]$InitialElo = @{}
+    )
+
+    $elos = @{}
+
+    foreach ($player in $Stats.Keys) {
+        # Unpack stats
+        $wW = $Stats[$player].White.Wins
+        $lW = $Stats[$player].White.Losses
+        $dW = $Stats[$player].White.Draws
+        $wB = $Stats[$player].Black.Wins
+        $lB = $Stats[$player].Black.Losses
+        $dB = $Stats[$player].Black.Draws
+
+        # Determine base Elos
+        if ($InitialElo.ContainsKey($player) -and $InitialElo[$player].ContainsKey('White')) {
+            $baseWhite = $InitialElo[$player].White
+        }
+        else {
+            $baseWhite = $PoolAvg
+        }
+        if ($InitialElo.ContainsKey($player) -and $InitialElo[$player].ContainsKey('Black')) {
+            $baseBlack = $InitialElo[$player].Black
+        }
+        else {
+            $baseBlack = $PoolAvg
+        }
+
+        # Helper to compute side Elo given base
+        function Get-SideElo {
+            param(
+                [int]$wins,
+                [int]$losses,
+                [int]$draws,
+                [double]$baseElo
+            )
+            $games = $wins + $losses + $draws
+            if ($games -eq 0) { return $null }
+
+            $score = $wins + 0.5 * $draws
+            $S = $score / $games
+
+            if ($S -ge 1.0) {
+                $delta = 800
+            }
+            elseif ($S -le 0.0) {
+                $delta = -800
+            }
+            else {
+                $delta = -400 * [math]::Log10((1 / $S) - 1)
+            }
+            return [math]::Round($baseElo + $delta, 1)
+        }
+
+        $eloWhite = Get-SideElo -wins $wW -losses $lW -draws $dW -baseElo $baseWhite
+        $eloBlack = Get-SideElo -wins $wB -losses $lB -draws $dB -baseElo $baseBlack
+
+        $elos[$player] = @{
+            White = $eloWhite
+            Black = $eloBlack
+        }
+    }
+
+    return $elos
+}
+
+
 function Watch-TrainingGames {
     [CmdletBinding()]
     param (
         [string]$TrainingDirectory = '.\pgns\trainings\',
         [string]$QTableDirectory = '.\SQLite3Caches\QTables\',
         [int]$MaxGames = 1000,
-        [int]$PollIntervalSeconds = 2
+        [int]$PollIntervalSeconds = 2,
+        [int]$PoolAvg = 1500,
+        [hashtable]$InitialElo = @{
+                'Stockfish' = @{ White = 3000; Black = 2900 }
+                'CMHMEngine2' = @{ White = 400; Black = 300 }
+                'PhillyClause89' = @{ White = 1600; Black = 1550 }
+            }
     )
 
     $lastSize = 0
@@ -105,26 +201,40 @@ function Watch-TrainingGames {
                 $script:lastLine = $line
             }
 
-            Write-Host "Training Games Completed: $lastCount of $MaxGames"
+            $elos = Get-PredictedEloPerSide -Stats $stats -PoolAvg $PoolAvg -InitialElo $InitialElo
+
+            Write-Host "Training Games Completed: " -ForegroundColor 'DarkGreen' -NoNewline
+            Write-Host "$lastCount of $MaxGames" -ForegroundColor 'Green'
+
             foreach ($player in $stats.Keys | Sort-Object) {
                 $ww = $stats[$player].White.Wins
                 $wl = $stats[$player].White.Losses
                 $wd = $stats[$player].White.Draws
+                $we = $elos[$player].White
                 $bw = $stats[$player].Black.Wins
                 $bl = $stats[$player].Black.Losses
                 $bd = $stats[$player].Black.Draws
+                $be = $elos[$player].Black
 
                 # Print e.g. "CMHMEngine2: White Wins: 10 Black Wins: 8 Draws: 2"
-                Write-Host "$($player):" -ForegroundColor 'Green' -NoNewline
+                Write-Host "$($player):" -ForegroundColor 'DarkGreen' -NoNewline
                 Write-Host " White: Wins=$ww"  -ForegroundColor 'Cyan'   -NoNewline
-                Write-Host " Losses=$wl" -ForegroundColor 'Yellow' -NoNewline
-                Write-Host " Draws=$wd"  -ForegroundColor 'Magenta' -NoNewline
-                Write-Host " |" -ForegroundColor 'Green' -NoNewline
+                Write-Host ", " -ForegroundColor 'Cyan' -NoNewline
+                Write-Host "Losses=$wl" -ForegroundColor 'Yellow' -NoNewline
+                Write-Host ", " -ForegroundColor 'Cyan' -NoNewline
+                Write-Host "Draws=$wd"  -ForegroundColor 'Magenta' -NoNewline
+                Write-Host ", " -ForegroundColor 'Cyan' -NoNewline
+                Write-Host "Predicted Elo=$we" -ForegroundColor 'Cyan' -NoNewline
+                Write-Host ' |' -ForegroundColor 'Green' -NoNewline
                 Write-Host " Black: Wins=$bw"  -ForegroundColor 'Yellow' -NoNewline
-                Write-Host " Losses=$bl" -ForegroundColor 'Cyan'   -NoNewline
-                Write-Host " Draws=$bd"  -ForegroundColor 'Magenta'
+                Write-Host ", " -ForegroundColor 'Yellow' -NoNewline
+                Write-Host "Losses=$bl" -ForegroundColor 'Cyan'   -NoNewline
+                Write-Host ", " -ForegroundColor 'Yellow' -NoNewline
+                Write-Host "Draws=$bd"  -ForegroundColor 'Magenta' -NoNewline
+                Write-Host ", " -ForegroundColor 'Yellow' -NoNewline
+                Write-Host "Predicted Elo=$be" -ForegroundColor 'Yellow' 
             }
-            Write-Host 'Last Completed Game Line:'
+            Write-Host 'Last Completed Game Line: ' -ForegroundColor 'DarkGreen' -NoNewline
             Write-Host "$script:lastLine" -ForegroundColor $color
         }
 
