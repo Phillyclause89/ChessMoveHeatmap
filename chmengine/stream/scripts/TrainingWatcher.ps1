@@ -25,8 +25,8 @@
 #>
 [CmdletBinding()]
 param(
-    [string]$TrainingDirectory = ".\pgns\trainings\",
-    [string]$QTableDirectory = ".\SQLite3Caches\QTables\",
+    [string]$TrainingDirectory = '.\pgns\trainings\',
+    [string]$QTableDirectory = '.\SQLite3Caches\QTables\',
     [int]$MaxGames = 1000,
     [int]$PollIntervalSeconds = 2
 )
@@ -34,8 +34,8 @@ param(
 function Watch-TrainingGames {
     [CmdletBinding()]
     param (
-        [string]$TrainingDirectory = ".\pgns\trainings\",
-        [string]$QTableDirectory = ".\SQLite3Caches\QTables\",
+        [string]$TrainingDirectory = '.\pgns\trainings\',
+        [string]$QTableDirectory = '.\SQLite3Caches\QTables\',
         [int]$MaxGames = 1000,
         [int]$PollIntervalSeconds = 2
     )
@@ -50,16 +50,13 @@ function Watch-TrainingGames {
             Clear-Host
             $lastCount = $trainings.Count
 
-            $termTally = @{
-                "1-0" = 0
-                "0-1" = 0
-                "*"   = 0
-            }
+            $stats = @{}
 
-            $lastLine = ""
+            $script:lastLine = ''
 
             $trainings | Sort-Object -Property LastWriteTime, CreationTime | ForEach-Object {
                 $game = Get-Content $_.FullName
+                $event_ = $game | Where-Object { $_ -match '\[Event' }
                 $date = $game | Where-Object { $_ -match '\[UTCDate' }
                 $time = $game | Where-Object { $_ -match '\[UTCTime' }
                 $round = $game | Where-Object { $_ -match '\[Round' }
@@ -67,29 +64,68 @@ function Watch-TrainingGames {
                 $termination = $game | Where-Object { $_ -match '\[Termination' }
                 $line = $game | Where-Object { $_ -match '^1\.' }
 
-                if ($result -match "0-1") {
-                    $color = "Yellow"
-                    $termTally['0-1']++
+                $whiteName = (
+                    $game | Where-Object { $_ -match '^\[White ' } 
+                ) -replace '^\[White\s+"(.+)"\]', '$1'
+                $blackName = (
+                    $game | Where-Object { $_ -match '^\[Black ' } 
+                ) -replace '^\[Black\s+"(.+)"\]', '$1'
+                
+
+                foreach ($player in @($whiteName, $blackName)) {
+                    if (-not $stats.ContainsKey($player)) {
+                        $stats[$player] = @{
+                            White = @{ Wins = 0; Losses = 0; Draws = 0 }
+                            Black = @{ Wins = 0; Losses = 0; Draws = 0 }
+                        }
+                    }
                 }
-                elseif ($result -match "1-0") {
-                    $color = "Cyan"
-                    $termTally['1-0']++
-                }
-                else {
-                    $color = "Magenta"
-                    $termTally['*']++
+                switch ($result -replace '^\[Result\s+"(.+)"\]', '$1') {
+                    '1-0' {
+                        # White won
+                        $stats[$whiteName].White.Wins++
+                        $stats[$blackName].Black.Losses++
+                        $color = 'Cyan'
+                    }
+                    '0-1' {
+                        # Black won
+                        $stats[$blackName].Black.Wins++
+                        $stats[$whiteName].White.Losses++
+                        $color = 'Yellow'
+                    }
+                    default {
+                        # draw for both
+                        $stats[$whiteName].White.Draws++
+                        $stats[$blackName].Black.Draws++
+                        $color = 'Magenta'
+                    }
                 }
 
-                Write-Host "$date $time $round $result $termination" -ForegroundColor $color
-                $lastLine = $line
+                Write-Host "$date $time $round $event_ $result $termination" -ForegroundColor $color
+                $script:lastLine = $line
             }
 
             Write-Host "Training Games Completed: $lastCount of $MaxGames"
-            Write-Host "White Wins: $( $termTally.'1-0' ) " -ForegroundColor 'Cyan' -NoNewline
-            Write-Host "Black Wins: $( $termTally.'0-1' ) " -ForegroundColor 'Yellow' -NoNewline
-            Write-Host "Draws: $( $termTally.'*' )" -ForegroundColor 'Magenta'
-            Write-Host "Last Completed Game Line:"
-            Write-Host "$lastLine" -ForegroundColor $color
+            foreach ($player in $stats.Keys | Sort-Object) {
+                $ww = $stats[$player].White.Wins
+                $wl = $stats[$player].White.Losses
+                $wd = $stats[$player].White.Draws
+                $bw = $stats[$player].Black.Wins
+                $bl = $stats[$player].Black.Losses
+                $bd = $stats[$player].Black.Draws
+
+                # Print e.g. "CMHMEngine2: White Wins: 10 Black Wins: 8 Draws: 2"
+                Write-Host "$($player):" -ForegroundColor 'Green' -NoNewline
+                Write-Host " White: Wins=$ww"  -ForegroundColor 'Cyan'   -NoNewline
+                Write-Host " Losses=$wl" -ForegroundColor 'Yellow' -NoNewline
+                Write-Host " Draws=$wd"  -ForegroundColor 'Magenta' -NoNewline
+                Write-Host " |" -ForegroundColor 'Green' -NoNewline
+                Write-Host " Black: Wins=$bw"  -ForegroundColor 'Yellow' -NoNewline
+                Write-Host " Losses=$bl" -ForegroundColor 'Cyan'   -NoNewline
+                Write-Host " Draws=$bd"  -ForegroundColor 'Magenta'
+            }
+            Write-Host 'Last Completed Game Line:'
+            Write-Host "$script:lastLine" -ForegroundColor $color
         }
 
         # Monitor Q-table size
