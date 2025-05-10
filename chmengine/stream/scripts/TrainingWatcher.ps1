@@ -11,13 +11,13 @@
     Governs the exit logic for the script. By default, this script will continue to watch until 1000 pgn files are detected.
 .PARAMETER PollIntervalSeconds
     Sleep time between pulls of the output dirs. By default this is 2 seconds.
-.PARAMETER PoolAvg
-    The average Elo of the pool of players. This is used to calculate the predicted Elo of each player. By default this is 1500.
 .PARAMETER InitialElo
     A hashtable of player names to their initial Elo ratings. This is used to calculate the predicted Elo of each player.
     The hashtable should be in the format:
         $InitialElo['Alice'] = @{ White=1600; Black=1580 }
     If a player is not found in the hashtable, the PoolAvg value will be used instead.
+.PARAMETER PoolAvg
+    The average Elo of the pool of players. This is used to calculate the predicted Elo of each player. By default this is 1500.
 .INPUTS
     None - No pipeline input accepted.
 .OUTPUTS
@@ -40,13 +40,20 @@ param(
     [string]$TrainingDirectory = '.\pgns\trainings\',
     [string]$QTableDirectory = '.\SQLite3Caches\QTables\',
     [int]$MaxGames = 1000,
-    [int]$PollIntervalSeconds = 2,
-    [int]$PoolAvg = 1500,
+    [int]$PollIntervalSeconds = 2,    
     [hashtable]$InitialElo = @{
         'CMHMEngine'     = @{ White = 100; Black = 50 }
         'CMHMEngine2'    = @{ White = 350; Black = 300 }
         'PhillyClause89' = @{ White = 1600; Black = 1550 }
-    }
+    },
+    [int]$PoolAvg = (& {
+            if ($InitialElo.Count -eq 0) {
+                1500
+            }
+            else {
+                [math]::Round(($InitialElo.Values | Measure-Object -Property White -Sum).Sum / $InitialElo.Count, 0)
+            }
+        })
 )
 
 function Get-PredictedEloPerSide {
@@ -135,6 +142,42 @@ function Get-PredictedEloPerSide {
     return $elos
 }
 
+function Get-QTableColor {
+    param (
+        [double]$sizeMB,
+        [string]$QTableDirectory
+    )
+
+    # Resolve drive letter or root path
+    $driveRoot = (Get-Item -Path $QTableDirectory).PSDrive.Root
+    $driveInfo = Get-PSDrive | Where-Object { $_.Root -eq $driveRoot }
+
+    if (-not $driveInfo) {
+        return 'Gray'  # Fallback in case of error
+    }
+
+    $freeSpaceMB = [math]::Round($driveInfo.Free / 1MB, 3)
+
+    if ($freeSpaceMB -lt 500) {
+        return 'DarkRed'  # Danger zone
+    }
+
+    # Ratio of Q-table size to remaining free space
+    $usageRatio = $sizeMB / $freeSpaceMB
+
+    # Gradient logic (adjust thresholds as needed)
+    if ($usageRatio -lt 0.1) {
+        return 'Green'
+    } elseif ($usageRatio -lt 0.3) {
+        return 'Yellow'
+    } elseif ($usageRatio -lt 0.5) {
+        return 'DarkYellow'
+    } elseif ($usageRatio -lt 0.75) {
+        return 'Magenta'
+    } else {
+        return 'Red'
+    }
+}
 
 function Watch-TrainingGames {
     [CmdletBinding()]
@@ -228,16 +271,16 @@ function Watch-TrainingGames {
                 $be = $elos[$player].Black
 
                 # Print e.g. "CMHMEngine2: White Wins: 10 Black Wins: 8 Draws: 2"
-                Write-Host "$($player):" -ForegroundColor 'DarkGreen' -NoNewline
-                Write-Host " White: Wins=$ww"  -ForegroundColor 'Cyan'   -NoNewline
+                Write-Host "$($player)" -ForegroundColor 'DarkGreen' -NoNewline
+                Write-Host " (White): Wins=$ww"  -ForegroundColor 'Cyan'   -NoNewline
                 Write-Host ', ' -ForegroundColor 'Cyan' -NoNewline
                 Write-Host "Losses=$wl" -ForegroundColor 'Yellow' -NoNewline
                 Write-Host ', ' -ForegroundColor 'Cyan' -NoNewline
                 Write-Host "Draws=$wd"  -ForegroundColor 'Magenta' -NoNewline
                 Write-Host ', ' -ForegroundColor 'Cyan' -NoNewline
-                Write-Host "Predicted Elo=$we" -ForegroundColor 'Cyan' -NoNewline
-                Write-Host ' |' -ForegroundColor 'Green' -NoNewline
-                Write-Host " Black: Wins=$bw"  -ForegroundColor 'Yellow' -NoNewline
+                Write-Host "Predicted Elo=$we" -ForegroundColor 'Cyan'
+                Write-Host "$($player)" -ForegroundColor 'DarkGreen' -NoNewline
+                Write-Host " (Black): Wins=$bw"  -ForegroundColor 'Yellow' -NoNewline
                 Write-Host ', ' -ForegroundColor 'Yellow' -NoNewline
                 Write-Host "Losses=$bl" -ForegroundColor 'Cyan'   -NoNewline
                 Write-Host ', ' -ForegroundColor 'Yellow' -NoNewline
@@ -255,7 +298,7 @@ function Watch-TrainingGames {
 
         if ($sizeMB -gt $lastSize) {
             $lastSize = $sizeMB
-            Write-Host "`rQ Table Size: $sizeMB MB   " -NoNewline
+            Write-Host "`rQ Table Size: $sizeMB MB   " -NoNewline -ForegroundColor (Get-QTableColor -sizeMB $sizeMB -QTableDirectory $QTableDirectory)
         }
 
         Start-Sleep -Seconds $PollIntervalSeconds
@@ -265,12 +308,12 @@ function Watch-TrainingGames {
 # This simulates: `if __name__ == "__main__":` from python. kinda...
 if ($MyInvocation.InvocationName -ne '.') {
     $WTGArgs = @{
-        TrainingDirectory = $TrainingDirectory
-        QTableDirectory   = $QTableDirectory
-        MaxGames          = $MaxGames
+        TrainingDirectory   = $TrainingDirectory
+        QTableDirectory     = $QTableDirectory
+        MaxGames            = $MaxGames
         PollIntervalSeconds = $PollIntervalSeconds
-        InitialElo        = $InitialElo
-        PoolAvg           = $PoolAvg
+        InitialElo          = $InitialElo
+        PoolAvg             = $PoolAvg
     }
     Watch-TrainingGames @WTGArgs
 }
