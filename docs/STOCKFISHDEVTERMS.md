@@ -7,9 +7,10 @@
   * [`FEN`](https://www.chessprogramming.org/Forsyth-Edwards_Notation) – Forsyth–Edwards Notation for describing chess positions ([ChessProgramming][3])
   * [`PGN`](https://www.chessprogramming.org/Portable_Game_Notation) – Portable Game Notation for recording game moves ([ChessProgramming][4])
   * [`FRC`](https://en.wikipedia.org/wiki/Chess960) – Chess960 (Fischer Random Chess) variant ([Wikipedia][5])
-  * [`TC`](https://en.wikipedia.org/wiki/Time_control) – Time control mechanisms for games ([Wikipedia][6])
+  * [`DFRC`](https://en.wikipedia.org/wiki/Chess960) – Double Fischer Random Chess, a variant of FRC used in certain competitions like TCEC ([Wikipedia][5])
+  * [`TC`](https://en.wikipedia.org/wiki/Time_control) – Time control mechanisms for games ([Wikipedia][6]). Can also refer to TalkChess forums in some contexts.
   * [`50MR`](https://www.chessprogramming.org/Fifty-move_Rule) – Fifty‑move rule for draw conditions ([ChessProgramming][7])
-  * [`CCC`](https://www.chess.com/computer-chess-championship) – Chess.com Computer Chess Championship ([Chess.com][8])
+  * [`CCC`](https://www.chess.com/computer-chess-championship) – Chess.com Computer Chess Championship ([Chess.com][8]). Sometimes referred to as `CCCC`.
   * [`TCEC`](https://en.wikipedia.org/wiki/Top_Chess_Engine_Championship) – Top Chess Engine Championship ([Wikipedia][9])
   * [`CCRL`](https://www.chessprogramming.org/CCRL) – Computer Chess Rating Lists ([ChessProgramming][10])
   * [`CPW`](https://www.chessprogramming.org/Main_Page) – Chess Programming Wiki, a comprehensive engine‑dev reference ([ChessProgramming][11])
@@ -32,15 +33,17 @@
   * [`TM`](https://www.chessprogramming.org/Time_Management) – Time management heuristics ([ChessProgramming][15])
   * [`PV`](https://www.chessprogramming.org/Principal_Variation) – Principal variation
   * [`TT`](https://www.chessprogramming.org/Transposition_Table) – Transposition table
-  * [`PVS`](https://www.chessprogramming.org/Principal_Variation_Search) – Principal variation search
+  * [`PVS`](https://www.chessprogramming.org/Principal_Variation_Search) – Principal variation search. Not grouped with ZWS due to differing search use cases.
   * [`ID`](https://www.chessprogramming.org/Iterative_Deepening) – Iterative deepening
+  * [`IID`](https://www.chessprogramming.org/Internal_Iterative_Reductions) – Internal iterative deepening
   * [`QS`](https://www.chessprogramming.org/Quiescence_Search) – Quiescence search
-  * [`SEE`](https://www.chessprogramming.org/Static_Exchange_Evaluation) – Static exchange evaluation
+  * [`SEE`](https://www.chessprogramming.org/Static_Exchange_Evaluation) – Static exchange evaluation. SEE is not classified as a heuristic because it evaluates material gain/loss statically without deeper heuristics.
+  * [`ZWS`](https://www.chessprogramming.org/Zero_Window_Search) – Zero‑window search
 
 * **Heuristics**:
 
   * [`IIR`](https://www.chessprogramming.org/Internal_Iterative_Reductions) – Internal iterative reductions
-  * [`RFP`](https://www.chessprogramming.org/Reverse_Futility_Pruning) – Reverse futility pruning
+  * [`RFP`](https://www.chessprogramming.org/Reverse_Futility_Pruning) – Reverse futility pruning. Also referred to as `SNMP` (Static Null Move Pruning).
   * [`FP/FFP`](https://www.chessprogramming.org/Futility_Pruning) – Forward futility pruning
   * [`NMP`](https://www.chessprogramming.org/Null_Move) – Null move pruning
   * [`LMP`](https://www.chessprogramming.org/Late_Move_Pruning) – Late move pruning
@@ -57,6 +60,9 @@
   * [`MVV-LVA`](https://www.chessprogramming.org/MVV-LVA) – Most Valuable Victim – Least Valuable Aggressor
   * [`HH`](https://www.chessprogramming.org/History_Heuristic) – History heuristic
   * [`PCM`](https://www.chessprogramming.org/Prior_Countermove_Heuristic) – Prior counter‑move
+  * [`CMH`](https://www.chessprogramming.org/Countermove_Heuristic) – Counter move history
+  * [`FUH`](https://www.chessprogramming.org/Follow-up_History) – Follow up history
+  * [`HP`](https://www.chessprogramming.org/History_Pruning) – History pruning
 
 * **Evaluation**:
 
@@ -66,11 +72,13 @@
   * [`BAE`](https://www.chessprogramming.org/Big-Array_Eval) – Big‑array evaluation
   * [`RFB`](https://www.chessprogramming.org/Rook_Forward_Bonus) – Rook forward bonus
   * [`KS`](https://www.chessprogramming.org/King_Safety) – King safety considerations
+  * [`STM`](https://www.chessprogramming.org/Side_to_Move) – Side-to-move
 
 ---
 
 > *This is **not** exhaustive. See the CPW “Dictionary” or its [Acronym category](https://www.chessprogramming.org/Category:Acronym) for more.*
 
+---
 [1]: https://stockfishchess.org/?utm_source=chatgpt.com "Stockfish - Strong open-source chess engine"
 [2]: https://en.wikipedia.org/wiki/Leela_Chess_Zero?utm_source=chatgpt.com "Leela Chess Zero"
 [3]: https://www.chessprogramming.org/Forsyth-Edwards_Notation?utm_source=chatgpt.com "Forsyth-Edwards Notation - Chessprogramming wiki"
