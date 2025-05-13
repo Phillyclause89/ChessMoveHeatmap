@@ -18,7 +18,7 @@ from numpy import float64, isnan
 
 from chmengine import CMHMEngine, CMHMEngine2, Pick, set_all_datetime_headers
 from chmutils import (
-    BaseChessTkApp, DEFAULT_COLORS, DEFAULT_FONT, Player, get_local_time, get_promotion_choice, state_faces
+    BaseChessTkApp, DEFAULT_COLORS, DEFAULT_FONT, Player, get_local_time, get_promotion_choice, state_faces_within_bmp
 )
 
 __all__ = [
@@ -305,7 +305,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
     pgn_dir: str = "pgns"
     depth: int = 1
     fullmove_number: int = 1
-    faces: Dict[str, Tuple[str, ...]] = state_faces
+    faces: Dict[str, Tuple[str, ...]] = state_faces_within_bmp
     dot_dot: Generator[str, str, str] = cycle(['.', '..', '...'])
     selected_square: Optional[int] = None
     possible_squares: Tuple[int, ...] = tuple()
@@ -952,7 +952,6 @@ class PlayChessApp(Tk, BaseChessTkApp):
             self.updating = True
             self.update_board()
             self.updating = False
-            print(self.selected_square, self.possible_squares)
 
     def await_engine_pick(self) -> Pick:
         """Awaits the engine's pick for the next move.
