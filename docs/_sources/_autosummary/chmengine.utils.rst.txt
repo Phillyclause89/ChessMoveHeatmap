@@ -1,4 +1,4 @@
-chmengine.utils
+﻿chmengine.utils
 ===============
 
 .. automodule:: chmengine.utils
@@ -13,10 +13,14 @@ chmengine.utils
 
    .. autosummary::
    
+      better_checkmate_score
+      calculate_better_white_minus_black_score
       calculate_score
       calculate_white_minus_black_score
       checkmate_score
       format_moves
+      get_static_delta_score
+      get_static_value
       get_white_and_black_king_boxes
       insert_choice_into_current_moves
       insert_choice_into_response_moves

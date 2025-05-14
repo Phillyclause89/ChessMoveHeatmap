@@ -1,0 +1,15 @@
+[Event "CMHMEngine2 vs CMHMEngine2"]
+[Site "Phil's place"]
+[Date "2025.05.14"]
+[Round "55"]
+[White "CMHMEngine2"]
+[Black "CMHMEngine2"]
+[Result "*"]
+[Timezone "Pacific Daylight Time"]
+[UTCDate "2025.05.14"]
+[UTCTime "10:27:29"]
+[Termination "THREEFOLD_REPETITION"]
+[CMHMEngineDepth "1"]
+
+1. e4 { eval=+62.51 } 1... e5 { eval=+62.51 } 2. Nf3 { eval=+62.51 } 2... Qe7 { eval=+62.51 } 3. Bc4 { eval=+53.95 } 3... Qd6 { eval=+53.95 } 4. c3 { eval=-221.33 } 4... Qb6 { eval=+29.46 } 5. Qa4 { eval=-145.55 } 5... h5 { eval=+133.98 } 6. Ke2 { eval=-118.15 } 6... Rh6 { eval=+124.72 } 7. h4 { eval=-193.37 } 7... Rg6 { eval=+125.70 } 8. d4 { eval=-229.67 } 8... Rxg2 { eval=+203.88 } 9. Be3 { eval=-138.86 } 9... Qxb2+ { eval=+77.64 } 10. Nbd2 { eval=-155.76 } 10... Qxc3 { eval=+257.75 } 11. Qb5 { eval=-157.31 } 11... Rg6 { eval=+294.28 } 12. Qxe5+ { eval=+245.30 } 12... Be7 { eval=+300.39 } 13. Rab1 { eval=-125.53 } 13... Nc6 { eval=+391.51 } 14. Qb5 { eval=-183.96 } 14... d5 { eval=+296.19 } 15. Ng5 { eval=-232.17 } 15... Bg4+ { eval=-102.75 } 16. f3 { eval=-305.51 } 16... Qc2 { eval=+254.91 } 17. Rbd1 { eval=-305.83 } 17... Bd7 { eval=+134.71 } 18. Qxb7 { eval=-287.24 } 18... Rb8 { eval=+95.06 } 19. Qxc7 { eval=-377.09 } 19... Ne5 { eval=+108.30 } 20. Qxb8+ { eval=+49.93 } 20... Bd8 { eval=+248.21 } 21. Qxe5+ { eval=+46.74 } 21... Ne7 { eval=+264.19 } 22. Qb8 { eval=-163.88 } 22... Nc8 { eval=+231.84 } 23. Qe5+ { eval=+46.74 } 23... Ne7 { eval=+264.19 } 24. Qb8 { eval=-163.88 } 24... Nc8 { eval=+231.84 } 25. Qe5+ { eval=+0.00 } *
+

@@ -7,7 +7,9 @@ from numpy import float64
 
 from chmengine.engines.cmhmey1 import CMHMEngine
 from chmengine.engines.quartney import Quartney
-from chmengine.utils import (Pick, calculate_white_minus_black_score, format_moves, insert_choice_into_current_moves)
+from chmengine.utils import (
+    Pick, calculate_better_white_minus_black_score, format_moves, insert_choice_into_current_moves
+)
 
 __all__ = ['CMHMEngine2']
 
@@ -215,7 +217,7 @@ class CMHMEngine2(CMHMEngine, Quartney):
         if len(response_moves) == 0:
             initial_q_val: Optional[float64] = self.get_q_value(board=new_board)
             if initial_q_val is None:
-                final_move_score: float64 = calculate_white_minus_black_score(board=new_board, depth=self.depth)
+                final_move_score: float64 = calculate_better_white_minus_black_score(board=new_board, depth=self.depth)
                 self.set_q_value(value=final_move_score, board=new_board)
             else:
                 final_move_score = initial_q_val
@@ -315,7 +317,7 @@ class CMHMEngine2(CMHMEngine, Quartney):
             if next_q_val is not None:
                 next_move_score = next_q_val
             else:
-                next_move_score = calculate_white_minus_black_score(board=next_board, depth=self.depth)
+                next_move_score = calculate_better_white_minus_black_score(board=next_board, depth=self.depth)
                 self.set_q_value(value=next_move_score, board=next_board)
         return insert_choice_into_current_moves(
             choices_ordered_best_to_worst=response_moves, pick=Pick(move=next_move, score=next_move_score)

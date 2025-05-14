@@ -1735,6 +1735,109 @@ stored Q-value in the database based on the final result
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="chmengine.better_checkmate_score">
+<span class="sig-prename descclassname"><span class="pre">chmengine.</span></span><span class="sig-name descname"><span class="pre">better_checkmate_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float64</span></span></span><a class="headerlink" href="#chmengine.better_checkmate_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute an enhanced checkmate evaluation score.</p>
+<p>This function returns a large-magnitude score to represent a checkmate
+outcome, scaled by the number of pieces remaining, the search depth, and
+an additional safety margin multiplier. By multiplying by 64 (squares)
+and 27 (maximum queen moves), we ensure that non-checkmate positional
+scores remain bounded in comparison.</p>
+<p>The sign encodes which side is to move:
+- If it is White’s turn (i.e., White has just been checkmated), returns a</p>
+<blockquote>
+<div><p>large negative score (bad for White).</p>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="simple">
+<dt>If it is Black’s turn (i.e., Black has just been checkmated), returns</dt><dd><p>a large positive score (good for White).</p>
+</dd>
+</dl>
+</li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">chess.Board</span></dt><dd><p>The board position where checkmate has occurred.</p>
+</dd>
+<dt><strong>depth</strong><span class="classifier">int</span></dt><dd><p>The recursion depth used in the evaluation, included to amplify the score
+further for deeper searches.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>numpy.float64</dt><dd><p>A signed checkmate score with large magnitude, where positive values
+favor White and negative values favor Black.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmengine.calculate_better_white_minus_black_score">
+<span class="sig-prename descclassname"><span class="pre">chmengine.</span></span><span class="sig-name descname"><span class="pre">calculate_better_white_minus_black_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float64</span></span></span><a class="headerlink" href="#chmengine.calculate_better_white_minus_black_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute an enhanced White-minus-Black evaluation for a given board position.</p>
+<p>This function combines three components into a single signed score:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>Game termination</strong>:</dt><dd><ul class="simple">
+<li><p>If the position is a draw, returns 0.</p></li>
+<li><p>If the position is checkmate, returns a high upper-bound value via <cite>checkmate_score()</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Heatmap mobility delta</strong>:</dt><dd><p>Difference in total possible moves between White and Black, computed by
+<cite>calculate_chess_move_heatmap_with_better_discount()</cite>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>King-box mobility delta</strong>:</dt><dd><p>Difference in potential moves targeting the opponent’s king region and defending
+the own king region.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Static delta</strong>:</dt><dd><p>Material-mobility delta from <cite>get_static_delta_score()</cite>.</p>
+</dd>
+</dl>
+</li>
+</ol>
+<p>The final score is the sum of the mobility delta, king-box delta, and static delta,
+representing White’s advantage minus Black’s.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">chess.Board</span></dt><dd><p>The chess board position to evaluate.</p>
+</dd>
+<dt><strong>depth</strong><span class="classifier">int, default: 1</span></dt><dd><p>Recursion depth for the heatmap calculation. Higher values yield more thorough
+mobility estimates at the cost of increased computation time.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>numpy.float64</dt><dd><p>The signed evaluation: positive values favor White, negative values favor Black.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Time complexity is O(b^d) for the heatmap portion (where b ≈ 35 is the branching factor).</p></li>
+<li><dl class="simple">
+<dt>Checkmate scores use an upper-bound heuristic: all remaining pieces can move to every square,</dt><dd><p>scaled by (depth + 1).</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="chmengine.calculate_white_minus_black_score">
 <span class="sig-prename descclassname"><span class="pre">chmengine.</span></span><span class="sig-name descname"><span class="pre">calculate_white_minus_black_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float64</span></span></span><a class="headerlink" href="#chmengine.calculate_white_minus_black_score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate the board from a White-minus-Black perspective using heatmap evaluation.</p>
@@ -1844,6 +1947,52 @@ Entries with <cite>None</cite> moves are excluded.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="chmengine.get_static_delta_score">
+<span class="sig-prename descclassname"><span class="pre">chmengine.</span></span><span class="sig-name descname"><span class="pre">get_static_delta_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">heatmap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="heatmaps.html#heatmaps.ChessMoveHeatmap" title="heatmaps.ChessMoveHeatmap"><span class="pre">ChessMoveHeatmap</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float64</span></span></span><a class="headerlink" href="#chmengine.get_static_delta_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the static piece-based delta score from a ChessMoveHeatmap.</p>
+<p>This function multiplies each piece’s move count (from the heatmap’s <cite>piece_counts</cite>)
+by its static movement value (from <cite>get_static_value</cite>) and returns the difference
+between White’s total and Black’s total. It serves as a simple material–mobility heuristic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>heatmap</strong><span class="classifier">heatmaps.ChessMoveHeatmap</span></dt><dd><p>The heatmap object containing per-piece move counts for each square.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>numpy.float64</dt><dd><p>The signed delta score: (White’s static total) − (Black’s static total).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmengine.get_static_value">
+<span class="sig-prename descclassname"><span class="pre">chmengine.</span></span><span class="sig-name descname"><span class="pre">get_static_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">piece</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Piece</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#chmengine.get_static_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the static movement-based value for a given chess piece.</p>
+<p>This function returns a fixed integer value representing the maximum number of
+moves that the specified piece can make on an empty board. These values serve
+as a simple heuristic for piece mobility.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>piece</strong><span class="classifier">chess.Piece</span></dt><dd><p>The chess piece for which to look up the static move value.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>The static movement value for the piece, or 0 if the piece is not in the map.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="chmengine.get_white_and_black_king_boxes">
 <span class="sig-prename descclassname"><span class="pre">chmengine.</span></span><span class="sig-name descname"><span class="pre">get_white_and_black_king_boxes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.get_white_and_black_king_boxes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the list of squares surrounding each king on the board.</p>
@@ -1851,13 +2000,13 @@ Entries with <cite>None</cite> moves are excluded.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>board</strong><span class="classifier">chess.Board</span></dt><dd><p>The board from which to extract king square surroundings.</p>
+<dt><strong>board</strong><span class="classifier">Board</span></dt><dd><p>The board from which to extract king square surroundings.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>tuple of (list of int, list of int)</dt><dd><p>Tuple containing white king box and black king box square indices.
+<dt>Tuple[List[int], List[int]]</dt><dd><p>Tuple containing white king box and black king box square indices.
 (white_king_box, black_king_box)</p>
 </dd>
 </dl>
