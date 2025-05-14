@@ -1504,7 +1504,7 @@ struct __pyx_defaults1 {
   PyObject *__pyx_arg_number;
 };
 
-/* "chmengine/utils/__init__.py":653
+/* "chmengine/utils/__init__.py":673
  *         A tuple of lists, each initially containing one tuple (None, None).
  *     """
  *     return tuple([(None, None)] for _ in range(number))             # <<<<<<<<<<<<<<
@@ -1846,6 +1846,15 @@ static PyObject* __Pyx_PyObject_Format(PyObject* s, PyObject* f);
 #define __Pyx_PyObject_Format(s, f) PyObject_Format(s, f)
 #endif
 
+/* PyObject_Unicode.proto */
+#if PY_MAJOR_VERSION >= 3
+#define __Pyx_PyObject_Unicode(obj)\
+    (likely(PyUnicode_CheckExact(obj)) ? __Pyx_NewRef(obj) : PyObject_Str(obj))
+#else
+#define __Pyx_PyObject_Unicode(obj)\
+    (likely(PyUnicode_CheckExact(obj)) ? __Pyx_NewRef(obj) : PyObject_Unicode(obj))
+#endif
+
 /* GetItemInt.proto */
 #define __Pyx_GetItemInt(o, i, type, is_signed, to_py_func, is_list, wraparound, boundscheck)\
     (__Pyx_fits_Py_ssize_t(i, type, is_signed) ?\
@@ -2000,15 +2009,6 @@ static int __Pyx_GetException(PyObject **type, PyObject **value, PyObject **tb);
 
 /* pep479.proto */
 static void __Pyx_Generator_Replace_StopIteration(int in_async_gen);
-
-/* PyObject_Unicode.proto */
-#if PY_MAJOR_VERSION >= 3
-#define __Pyx_PyObject_Unicode(obj)\
-    (likely(PyUnicode_CheckExact(obj)) ? __Pyx_NewRef(obj) : PyObject_Str(obj))
-#else
-#define __Pyx_PyObject_Unicode(obj)\
-    (likely(PyUnicode_CheckExact(obj)) ? __Pyx_NewRef(obj) : PyObject_Unicode(obj))
-#endif
 
 /* SetPackagePathFromImportLib.proto */
 #if PY_MAJOR_VERSION >= 3 && !CYTHON_PEP489_MULTI_PHASE_INIT
@@ -2410,7 +2410,7 @@ static const char __pyx_k_s[] = "s";
 static const char __pyx_k_2f[] = ".2f";
 static const char __pyx_k__4[] = ".";
 static const char __pyx_k_gc[] = "gc";
-static const char __pyx_k__56[] = "?";
+static const char __pyx_k__58[] = "?";
 static const char __pyx_k_all[] = "__all__";
 static const char __pyx_k_bin[] = "bin";
 static const char __pyx_k_fen[] = "fen";
@@ -2423,6 +2423,7 @@ static const char __pyx_k_str[] = "str";
 static const char __pyx_k_sum[] = "sum";
 static const char __pyx_k_uci[] = "uci";
 static const char __pyx_k_utc[] = "utc";
+static const char __pyx_k_2f_2[] = "+.2f";
 static const char __pyx_k_Date[] = "Date";
 static const char __pyx_k_Dict[] = "Dict";
 static const char __pyx_k_List[] = "List";
@@ -2509,6 +2510,7 @@ static const char __pyx_k_king_square[] = "king_square";
 static const char __pyx_k_other_index[] = "other_index";
 static const char __pyx_k_pgn_Headers[] = "pgn.Headers";
 static const char __pyx_k_format_moves[] = "format_moves";
+static const char __pyx_k_format_picks[] = "format_picks";
 static const char __pyx_k_is_coroutine[] = "_is_coroutine";
 static const char __pyx_k_numpy_typing[] = "numpy.typing";
 static const char __pyx_k_piece_counts[] = "piece_counts";
@@ -2534,7 +2536,7 @@ static const char __pyx_k_set_utc_headers[] = "set_utc_headers";
 static const char __pyx_k_square_distance[] = "square_distance";
 static const char __pyx_k_ChessMoveHeatmap[] = "ChessMoveHeatmap";
 static const char __pyx_k_get_static_value[] = "get_static_value";
-static const char __pyx_k_is_draw_line_114[] = "is_draw (line 114)";
+static const char __pyx_k_is_draw_line_134[] = "is_draw (line 134)";
 static const char __pyx_k_transposed_black[] = "transposed_black";
 static const char __pyx_k_transposed_white[] = "transposed_white";
 static const char __pyx_k_black_king_square[] = "black_king_square";
@@ -2558,7 +2560,7 @@ static const char __pyx_k_initial_king_box_score[] = "initial_king_box_score";
 static const char __pyx_k_new_heatmap_transposed[] = "new_heatmap_transposed";
 static const char __pyx_k_Tuple_List_int_List_int[] = "Tuple[List[int], List[int]]";
 static const char __pyx_k_pieces_count_from_board[] = "pieces_count_from_board";
-static const char __pyx_k_checkmate_score_line_394[] = "checkmate_score (line 394)";
+static const char __pyx_k_checkmate_score_line_414[] = "checkmate_score (line 414)";
 static const char __pyx_k_is_valid_king_box_square[] = "is_valid_king_box_square";
 static const char __pyx_k_set_all_datetime_headers[] = "set_all_datetime_headers";
 static const char __pyx_k_chmengine_utils___init___py[] = "chmengine\\utils\\__init__.py";
@@ -2567,7 +2569,7 @@ static const char __pyx_k_insert_ordered_worst_to_best[] = "insert_ordered_worst
 static const char __pyx_k_choices_ordered_best_to_worst[] = "choices_ordered_best_to_worst";
 static const char __pyx_k_choices_ordered_worst_to_best[] = "choices_ordered_worst_to_best";
 static const char __pyx_k_get_white_and_black_king_boxes[] = "get_white_and_black_king_boxes";
-static const char __pyx_k_pieces_count_from_fen_line_499[] = "pieces_count_from_fen (line 499)";
+static const char __pyx_k_pieces_count_from_fen_line_519[] = "pieces_count_from_fen (line 519)";
 static const char __pyx_k_Evaluate_the_board_from_a_White[] = "Evaluate the board from a White-minus-Black perspective using heatmap evaluation.\n\n    This function returns a net evaluation score. Positive values favor White, negative values favor Black.\n    Terminal game states return fixed scores. Otherwise, the score is derived from:\n    - Heatmap intensity differences\n    - Control over king box areas\n\n    Parameters\n    ----------\n    board : chess.Board\n        The chess board to evaluate.\n    depth : int\n        Depth of future move evaluation.\n\n    Returns\n    -------\n    numpy.float64\n        Net evaluation score (White - Black). Terminal states return extreme values.\n\n    Examples\n    --------\n    >>> from chmengine.utils import is_draw\n    >>> from chess import Board, Move\n    >>> default_board, d = Board(), 1\n    >>> calculate_white_minus_black_score(board=default_board, depth=d)\n    0.0\n    >>> default_board.push(Move.from_uci('e2e4'))\n    >>> calculate_white_minus_black_score(board=default_board, depth=d)\n    10.0\n    >>> default_board.push(Move.from_uci('e7e5'))\n    >>> calculate_white_minus_black_score(board=default_board, depth=d)\n    0.20689655172414234\n    >>> default_board.push(Move.from_uci('g1f3'))\n    >>> calculate_white_minus_black_score(board=default_board, depth=d)\n    -2.1379310344827616\n    >>> default_board.push(Move.from_uci('b8c6'))\n    >>> calculate_white_minus_black_score(board=default_board, depth=d)\n    -3.925925925925924\n    >>> default_board.push(Move.from_uci('f1b5'))\n    >>> calculate_white_minus_black_score(board=default_board, depth=d)\n    2.133333333333335\n    >>> mate_board = Board('8/2p2p2/4p3/2k5/8/6q1/2K5/1r1q4 w - - 2 59')\n    >>> calculate_white_minus_black_score(board=mate_board, depth=d)\n    -1024.0\n    >>> draw_board = Board('6R1/7p/2p2p1k/p1P2Q2/P7/6K1/5P2/8 b - - 0 52')\n    >>> calculate_white_minus_black_score(board=draw_board, depth=d)\n    0.0\n    ";
 static const char __pyx_k_Return_a_large_signed_score_for[] = "Return a large signed score for checkmate results.\n\n    The score is scaled by number of remaining pieces and depth.\n    Negative if the current player is mated, positive if they deliver mate.\n\n    Parameters\n    ----------\n    board : chess.Board\n        Board state assumed to be in a terminal position.\n    depth : int\n        Search depth used, for scaling the final score.\n\n    Returns\n    -------\n    numpy.float64\n        Large positive or negative score depending on the outcome.\n\n    Examples\n    --------\n    >>> from chmengine.utils import is_draw\n    >>> from chess import Board\n    >>> blk_win_board = Board('8/2p2p2/4p3/2k5/8/6q1/2K5/1r1q4 w - - 2 59')\n    >>> checkmate_score(board=blk_win_board, depth=1)\n    -1024.0\n    ";
 static const char __pyx_k_Utilities_for_engine_evaluation[] = "Utilities for engine evaluation and scoring logic.";
@@ -2578,38 +2580,39 @@ static const char __pyx_k_Tuple_List_Tuple_Optional_Move_O[] = "Tuple[List[Tuple
 static const char __pyx_k_calculate_better_white_minus_bla[] = "calculate_better_white_minus_black_score";
 static const char __pyx_k_calculate_chess_move_heatmap_wit[] = "calculate_chess_move_heatmap_with_better_discount";
 static const char __pyx_k_calculate_white_minus_black_scor[] = "calculate_white_minus_black_score";
-static const char __pyx_k_get_white_and_black_king_boxes_l[] = "get_white_and_black_king_boxes (line 424)";
+static const char __pyx_k_get_white_and_black_king_boxes_l[] = "get_white_and_black_king_boxes (line 444)";
 static const char __pyx_k_insert_choice_into_current_moves[] = "insert_choice_into_current_moves";
 static const char __pyx_k_insert_choice_into_response_move[] = "insert_choice_into_response_moves";
 static const char __pyx_k_null_target_moves_locals_genexpr[] = "null_target_moves.<locals>.genexpr";
-static const char __pyx_k_pieces_count_from_board_line_533[] = "pieces_count_from_board (line 533)";
+static const char __pyx_k_pieces_count_from_board_line_553[] = "pieces_count_from_board (line 553)";
 static const char __pyx_k_Return_the_number_of_pieces_on_t_2[] = "Return the number of pieces on the board\n\n    This uses the internal bitboard to count occupied squares in O(1) time.\n    On Python \342\211\245 3.8 it calls `int.bit_count()`. On Python 3.7 it falls back\n    to `bin(...).count('1')` for compatibility.\n\n    Parameters\n    ----------\n    board : chess.Board\n        A board object to count pieces from\n\n    Returns\n    -------\n    int\n        Number of pieces on the board.\n\n    Examples\n    --------\n    >>> from chess import Board\n    >>> mate_board = Board('8/2p2p2/4p3/2k5/8/6q1/2K5/1r1q4 w - - 2 59')\n    >>> pieces_count_from_board(mate_board)\n    8\n    >>> pieces_count_from_board(Board())\n    32\n    ";
-static const char __pyx_k_calculate_white_minus_black_scor_2[] = "calculate_white_minus_black_score (line 141)";
+static const char __pyx_k_calculate_white_minus_black_scor_2[] = "calculate_white_minus_black_score (line 161)";
 /* #### Code section: decls ### */
 static PyObject *__pyx_pf_9chmengine_5utils__bit_count(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_occ); /* proto */
 static PyObject *__pyx_pf_9chmengine_5utils_2format_moves(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_picks); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_4calculate_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_current_index, PyObject *__pyx_v_new_heatmap_transposed, PyObject *__pyx_v_new_current_king_box, PyObject *__pyx_v_new_other_king_box); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_6is_draw(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_winner); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_10get_static_value(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_piece); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_12get_static_delta_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_heatmap); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_42__defaults__(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_16better_checkmate_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_18checkmate_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_20get_white_and_black_king_boxes(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_22insert_ordered_worst_to_best(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_ordered_picks, PyObject *__pyx_v_pick); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_24insert_ordered_best_to_worst(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_ordered_picks, PyObject *__pyx_v_pick); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_26pieces_count_from_fen(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fen); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_28pieces_count_from_board(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_30insert_choice_into_current_moves(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_choices_ordered_best_to_worst, PyObject *__pyx_v_pick); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_32insert_choice_into_response_moves(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_choices_ordered_worst_to_best, PyObject *__pyx_v_pick); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_34is_valid_king_box_square(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_square_id, PyObject *__pyx_v_king_square); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_4format_picks(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_picks); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_6calculate_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_current_index, PyObject *__pyx_v_new_heatmap_transposed, PyObject *__pyx_v_new_current_king_box, PyObject *__pyx_v_new_other_king_box); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_8is_draw(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_winner); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_10calculate_white_minus_black_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_12get_static_value(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_piece); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_14get_static_delta_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_heatmap); /* proto */
 static PyObject *__pyx_pf_9chmengine_5utils_44__defaults__(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_16calculate_better_white_minus_black_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_18better_checkmate_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_20checkmate_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_22get_white_and_black_king_boxes(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_24insert_ordered_worst_to_best(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_ordered_picks, PyObject *__pyx_v_pick); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_26insert_ordered_best_to_worst(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_ordered_picks, PyObject *__pyx_v_pick); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_28pieces_count_from_fen(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fen); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_30pieces_count_from_board(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_32insert_choice_into_current_moves(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_choices_ordered_best_to_worst, PyObject *__pyx_v_pick); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_34insert_choice_into_response_moves(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_choices_ordered_worst_to_best, PyObject *__pyx_v_pick); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_36is_valid_king_box_square(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_square_id, PyObject *__pyx_v_king_square); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_46__defaults__(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
 static PyObject *__pyx_pf_9chmengine_5utils_17null_target_moves_genexpr(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_genexpr_arg_0); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_36null_target_moves(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_number); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_38set_all_datetime_headers(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_game_heads, PyObject *__pyx_v_local_time); /* proto */
-static PyObject *__pyx_pf_9chmengine_5utils_40set_utc_headers(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_game_heads, PyObject *__pyx_v_local_time); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_38null_target_moves(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_number); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_40set_all_datetime_headers(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_game_heads, PyObject *__pyx_v_local_time); /* proto */
+static PyObject *__pyx_pf_9chmengine_5utils_42set_utc_headers(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_game_heads, PyObject *__pyx_v_local_time); /* proto */
 static PyObject *__pyx_tp_new_9chmengine_5utils___pyx_scope_struct__genexpr(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 /* #### Code section: late_includes ### */
 /* #### Code section: module_state ### */
@@ -2644,6 +2647,7 @@ typedef struct {
   PyTypeObject *__pyx_ptype_9chmengine_5utils___pyx_scope_struct__genexpr;
   PyObject *__pyx_kp_u_1;
   PyObject *__pyx_kp_u_2f;
+  PyObject *__pyx_kp_u_2f_2;
   PyObject *__pyx_n_s_AttributeError;
   PyObject *__pyx_n_u_B;
   PyObject *__pyx_n_s_Board;
@@ -2685,7 +2689,7 @@ typedef struct {
   PyObject *__pyx_n_u_UTCTime;
   PyObject *__pyx_kp_u_Y_m_d;
   PyObject *__pyx_kp_u__4;
-  PyObject *__pyx_n_s__56;
+  PyObject *__pyx_n_s__58;
   PyObject *__pyx_n_s_all;
   PyObject *__pyx_n_s_args;
   PyObject *__pyx_n_s_astimezone;
@@ -2714,7 +2718,7 @@ typedef struct {
   PyObject *__pyx_kp_u_calculate_white_minus_black_scor_2;
   PyObject *__pyx_n_s_checkmate_score;
   PyObject *__pyx_n_u_checkmate_score;
-  PyObject *__pyx_kp_u_checkmate_score_line_394;
+  PyObject *__pyx_kp_u_checkmate_score_line_414;
   PyObject *__pyx_n_s_chess;
   PyObject *__pyx_n_s_chmengine_utils;
   PyObject *__pyx_kp_u_chmengine_utils___init;
@@ -2740,6 +2744,8 @@ typedef struct {
   PyObject *__pyx_n_s_float64;
   PyObject *__pyx_n_s_format_moves;
   PyObject *__pyx_n_u_format_moves;
+  PyObject *__pyx_n_s_format_picks;
+  PyObject *__pyx_n_u_format_picks;
   PyObject *__pyx_n_s_from_symbol;
   PyObject *__pyx_n_s_game_heads;
   PyObject *__pyx_kp_u_gc;
@@ -2771,7 +2777,7 @@ typedef struct {
   PyObject *__pyx_n_s_is_coroutine;
   PyObject *__pyx_n_s_is_draw;
   PyObject *__pyx_n_u_is_draw;
-  PyObject *__pyx_kp_u_is_draw_line_114;
+  PyObject *__pyx_kp_u_is_draw_line_134;
   PyObject *__pyx_n_s_is_terminated;
   PyObject *__pyx_n_s_is_valid_king_box_square;
   PyObject *__pyx_n_u_is_valid_king_box_square;
@@ -2821,10 +2827,10 @@ typedef struct {
   PyObject *__pyx_n_s_piece_map;
   PyObject *__pyx_n_s_pieces_count_from_board;
   PyObject *__pyx_n_u_pieces_count_from_board;
-  PyObject *__pyx_kp_u_pieces_count_from_board_line_533;
+  PyObject *__pyx_kp_u_pieces_count_from_board_line_553;
   PyObject *__pyx_n_s_pieces_count_from_fen;
   PyObject *__pyx_n_u_pieces_count_from_fen;
-  PyObject *__pyx_kp_u_pieces_count_from_fen_line_499;
+  PyObject *__pyx_kp_u_pieces_count_from_fen_line_519;
   PyObject *__pyx_n_u_q;
   PyObject *__pyx_n_u_r;
   PyObject *__pyx_n_s_range;
@@ -2880,7 +2886,6 @@ typedef struct {
   PyObject *__pyx_tuple__11;
   PyObject *__pyx_tuple__13;
   PyObject *__pyx_tuple__15;
-  PyObject *__pyx_tuple__16;
   PyObject *__pyx_tuple__17;
   PyObject *__pyx_tuple__18;
   PyObject *__pyx_tuple__19;
@@ -2892,31 +2897,33 @@ typedef struct {
   PyObject *__pyx_tuple__25;
   PyObject *__pyx_tuple__26;
   PyObject *__pyx_tuple__27;
+  PyObject *__pyx_tuple__28;
   PyObject *__pyx_tuple__29;
   PyObject *__pyx_tuple__31;
   PyObject *__pyx_tuple__33;
-  PyObject *__pyx_tuple__36;
+  PyObject *__pyx_tuple__35;
   PyObject *__pyx_tuple__38;
-  PyObject *__pyx_tuple__41;
+  PyObject *__pyx_tuple__40;
   PyObject *__pyx_tuple__43;
   PyObject *__pyx_tuple__45;
   PyObject *__pyx_tuple__47;
   PyObject *__pyx_tuple__49;
   PyObject *__pyx_tuple__51;
   PyObject *__pyx_tuple__53;
+  PyObject *__pyx_tuple__55;
   PyObject *__pyx_codeobj__6;
   PyObject *__pyx_codeobj__8;
   PyObject *__pyx_codeobj__10;
   PyObject *__pyx_codeobj__12;
   PyObject *__pyx_codeobj__14;
-  PyObject *__pyx_codeobj__28;
+  PyObject *__pyx_codeobj__16;
   PyObject *__pyx_codeobj__30;
   PyObject *__pyx_codeobj__32;
   PyObject *__pyx_codeobj__34;
-  PyObject *__pyx_codeobj__35;
+  PyObject *__pyx_codeobj__36;
   PyObject *__pyx_codeobj__37;
   PyObject *__pyx_codeobj__39;
-  PyObject *__pyx_codeobj__40;
+  PyObject *__pyx_codeobj__41;
   PyObject *__pyx_codeobj__42;
   PyObject *__pyx_codeobj__44;
   PyObject *__pyx_codeobj__46;
@@ -2924,7 +2931,8 @@ typedef struct {
   PyObject *__pyx_codeobj__50;
   PyObject *__pyx_codeobj__52;
   PyObject *__pyx_codeobj__54;
-  PyObject *__pyx_codeobj__55;
+  PyObject *__pyx_codeobj__56;
+  PyObject *__pyx_codeobj__57;
 } __pyx_mstate;
 
 #if CYTHON_USE_MODULE_STATE
@@ -2971,6 +2979,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_type_9chmengine_5utils___pyx_scope_struct__genexpr);
   Py_CLEAR(clear_module_state->__pyx_kp_u_1);
   Py_CLEAR(clear_module_state->__pyx_kp_u_2f);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_2f_2);
   Py_CLEAR(clear_module_state->__pyx_n_s_AttributeError);
   Py_CLEAR(clear_module_state->__pyx_n_u_B);
   Py_CLEAR(clear_module_state->__pyx_n_s_Board);
@@ -3012,7 +3021,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_u_UTCTime);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Y_m_d);
   Py_CLEAR(clear_module_state->__pyx_kp_u__4);
-  Py_CLEAR(clear_module_state->__pyx_n_s__56);
+  Py_CLEAR(clear_module_state->__pyx_n_s__58);
   Py_CLEAR(clear_module_state->__pyx_n_s_all);
   Py_CLEAR(clear_module_state->__pyx_n_s_args);
   Py_CLEAR(clear_module_state->__pyx_n_s_astimezone);
@@ -3041,7 +3050,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_u_calculate_white_minus_black_scor_2);
   Py_CLEAR(clear_module_state->__pyx_n_s_checkmate_score);
   Py_CLEAR(clear_module_state->__pyx_n_u_checkmate_score);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_checkmate_score_line_394);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_checkmate_score_line_414);
   Py_CLEAR(clear_module_state->__pyx_n_s_chess);
   Py_CLEAR(clear_module_state->__pyx_n_s_chmengine_utils);
   Py_CLEAR(clear_module_state->__pyx_kp_u_chmengine_utils___init);
@@ -3067,6 +3076,8 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_float64);
   Py_CLEAR(clear_module_state->__pyx_n_s_format_moves);
   Py_CLEAR(clear_module_state->__pyx_n_u_format_moves);
+  Py_CLEAR(clear_module_state->__pyx_n_s_format_picks);
+  Py_CLEAR(clear_module_state->__pyx_n_u_format_picks);
   Py_CLEAR(clear_module_state->__pyx_n_s_from_symbol);
   Py_CLEAR(clear_module_state->__pyx_n_s_game_heads);
   Py_CLEAR(clear_module_state->__pyx_kp_u_gc);
@@ -3098,7 +3109,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_is_coroutine);
   Py_CLEAR(clear_module_state->__pyx_n_s_is_draw);
   Py_CLEAR(clear_module_state->__pyx_n_u_is_draw);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_is_draw_line_114);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_is_draw_line_134);
   Py_CLEAR(clear_module_state->__pyx_n_s_is_terminated);
   Py_CLEAR(clear_module_state->__pyx_n_s_is_valid_king_box_square);
   Py_CLEAR(clear_module_state->__pyx_n_u_is_valid_king_box_square);
@@ -3148,10 +3159,10 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_piece_map);
   Py_CLEAR(clear_module_state->__pyx_n_s_pieces_count_from_board);
   Py_CLEAR(clear_module_state->__pyx_n_u_pieces_count_from_board);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_pieces_count_from_board_line_533);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_pieces_count_from_board_line_553);
   Py_CLEAR(clear_module_state->__pyx_n_s_pieces_count_from_fen);
   Py_CLEAR(clear_module_state->__pyx_n_u_pieces_count_from_fen);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_pieces_count_from_fen_line_499);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_pieces_count_from_fen_line_519);
   Py_CLEAR(clear_module_state->__pyx_n_u_q);
   Py_CLEAR(clear_module_state->__pyx_n_u_r);
   Py_CLEAR(clear_module_state->__pyx_n_s_range);
@@ -3207,7 +3218,6 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_tuple__11);
   Py_CLEAR(clear_module_state->__pyx_tuple__13);
   Py_CLEAR(clear_module_state->__pyx_tuple__15);
-  Py_CLEAR(clear_module_state->__pyx_tuple__16);
   Py_CLEAR(clear_module_state->__pyx_tuple__17);
   Py_CLEAR(clear_module_state->__pyx_tuple__18);
   Py_CLEAR(clear_module_state->__pyx_tuple__19);
@@ -3219,31 +3229,33 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_tuple__25);
   Py_CLEAR(clear_module_state->__pyx_tuple__26);
   Py_CLEAR(clear_module_state->__pyx_tuple__27);
+  Py_CLEAR(clear_module_state->__pyx_tuple__28);
   Py_CLEAR(clear_module_state->__pyx_tuple__29);
   Py_CLEAR(clear_module_state->__pyx_tuple__31);
   Py_CLEAR(clear_module_state->__pyx_tuple__33);
-  Py_CLEAR(clear_module_state->__pyx_tuple__36);
+  Py_CLEAR(clear_module_state->__pyx_tuple__35);
   Py_CLEAR(clear_module_state->__pyx_tuple__38);
-  Py_CLEAR(clear_module_state->__pyx_tuple__41);
+  Py_CLEAR(clear_module_state->__pyx_tuple__40);
   Py_CLEAR(clear_module_state->__pyx_tuple__43);
   Py_CLEAR(clear_module_state->__pyx_tuple__45);
   Py_CLEAR(clear_module_state->__pyx_tuple__47);
   Py_CLEAR(clear_module_state->__pyx_tuple__49);
   Py_CLEAR(clear_module_state->__pyx_tuple__51);
   Py_CLEAR(clear_module_state->__pyx_tuple__53);
+  Py_CLEAR(clear_module_state->__pyx_tuple__55);
   Py_CLEAR(clear_module_state->__pyx_codeobj__6);
   Py_CLEAR(clear_module_state->__pyx_codeobj__8);
   Py_CLEAR(clear_module_state->__pyx_codeobj__10);
   Py_CLEAR(clear_module_state->__pyx_codeobj__12);
   Py_CLEAR(clear_module_state->__pyx_codeobj__14);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__28);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__16);
   Py_CLEAR(clear_module_state->__pyx_codeobj__30);
   Py_CLEAR(clear_module_state->__pyx_codeobj__32);
   Py_CLEAR(clear_module_state->__pyx_codeobj__34);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__35);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__36);
   Py_CLEAR(clear_module_state->__pyx_codeobj__37);
   Py_CLEAR(clear_module_state->__pyx_codeobj__39);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__40);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__41);
   Py_CLEAR(clear_module_state->__pyx_codeobj__42);
   Py_CLEAR(clear_module_state->__pyx_codeobj__44);
   Py_CLEAR(clear_module_state->__pyx_codeobj__46);
@@ -3251,7 +3263,8 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_codeobj__50);
   Py_CLEAR(clear_module_state->__pyx_codeobj__52);
   Py_CLEAR(clear_module_state->__pyx_codeobj__54);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__55);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__56);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__57);
   return 0;
 }
 #endif
@@ -3276,6 +3289,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_type_9chmengine_5utils___pyx_scope_struct__genexpr);
   Py_VISIT(traverse_module_state->__pyx_kp_u_1);
   Py_VISIT(traverse_module_state->__pyx_kp_u_2f);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_2f_2);
   Py_VISIT(traverse_module_state->__pyx_n_s_AttributeError);
   Py_VISIT(traverse_module_state->__pyx_n_u_B);
   Py_VISIT(traverse_module_state->__pyx_n_s_Board);
@@ -3317,7 +3331,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_u_UTCTime);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Y_m_d);
   Py_VISIT(traverse_module_state->__pyx_kp_u__4);
-  Py_VISIT(traverse_module_state->__pyx_n_s__56);
+  Py_VISIT(traverse_module_state->__pyx_n_s__58);
   Py_VISIT(traverse_module_state->__pyx_n_s_all);
   Py_VISIT(traverse_module_state->__pyx_n_s_args);
   Py_VISIT(traverse_module_state->__pyx_n_s_astimezone);
@@ -3346,7 +3360,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_u_calculate_white_minus_black_scor_2);
   Py_VISIT(traverse_module_state->__pyx_n_s_checkmate_score);
   Py_VISIT(traverse_module_state->__pyx_n_u_checkmate_score);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_checkmate_score_line_394);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_checkmate_score_line_414);
   Py_VISIT(traverse_module_state->__pyx_n_s_chess);
   Py_VISIT(traverse_module_state->__pyx_n_s_chmengine_utils);
   Py_VISIT(traverse_module_state->__pyx_kp_u_chmengine_utils___init);
@@ -3372,6 +3386,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_float64);
   Py_VISIT(traverse_module_state->__pyx_n_s_format_moves);
   Py_VISIT(traverse_module_state->__pyx_n_u_format_moves);
+  Py_VISIT(traverse_module_state->__pyx_n_s_format_picks);
+  Py_VISIT(traverse_module_state->__pyx_n_u_format_picks);
   Py_VISIT(traverse_module_state->__pyx_n_s_from_symbol);
   Py_VISIT(traverse_module_state->__pyx_n_s_game_heads);
   Py_VISIT(traverse_module_state->__pyx_kp_u_gc);
@@ -3403,7 +3419,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_is_coroutine);
   Py_VISIT(traverse_module_state->__pyx_n_s_is_draw);
   Py_VISIT(traverse_module_state->__pyx_n_u_is_draw);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_is_draw_line_114);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_is_draw_line_134);
   Py_VISIT(traverse_module_state->__pyx_n_s_is_terminated);
   Py_VISIT(traverse_module_state->__pyx_n_s_is_valid_king_box_square);
   Py_VISIT(traverse_module_state->__pyx_n_u_is_valid_king_box_square);
@@ -3453,10 +3469,10 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_piece_map);
   Py_VISIT(traverse_module_state->__pyx_n_s_pieces_count_from_board);
   Py_VISIT(traverse_module_state->__pyx_n_u_pieces_count_from_board);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_pieces_count_from_board_line_533);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_pieces_count_from_board_line_553);
   Py_VISIT(traverse_module_state->__pyx_n_s_pieces_count_from_fen);
   Py_VISIT(traverse_module_state->__pyx_n_u_pieces_count_from_fen);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_pieces_count_from_fen_line_499);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_pieces_count_from_fen_line_519);
   Py_VISIT(traverse_module_state->__pyx_n_u_q);
   Py_VISIT(traverse_module_state->__pyx_n_u_r);
   Py_VISIT(traverse_module_state->__pyx_n_s_range);
@@ -3512,7 +3528,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_tuple__11);
   Py_VISIT(traverse_module_state->__pyx_tuple__13);
   Py_VISIT(traverse_module_state->__pyx_tuple__15);
-  Py_VISIT(traverse_module_state->__pyx_tuple__16);
   Py_VISIT(traverse_module_state->__pyx_tuple__17);
   Py_VISIT(traverse_module_state->__pyx_tuple__18);
   Py_VISIT(traverse_module_state->__pyx_tuple__19);
@@ -3524,31 +3539,33 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_tuple__25);
   Py_VISIT(traverse_module_state->__pyx_tuple__26);
   Py_VISIT(traverse_module_state->__pyx_tuple__27);
+  Py_VISIT(traverse_module_state->__pyx_tuple__28);
   Py_VISIT(traverse_module_state->__pyx_tuple__29);
   Py_VISIT(traverse_module_state->__pyx_tuple__31);
   Py_VISIT(traverse_module_state->__pyx_tuple__33);
-  Py_VISIT(traverse_module_state->__pyx_tuple__36);
+  Py_VISIT(traverse_module_state->__pyx_tuple__35);
   Py_VISIT(traverse_module_state->__pyx_tuple__38);
-  Py_VISIT(traverse_module_state->__pyx_tuple__41);
+  Py_VISIT(traverse_module_state->__pyx_tuple__40);
   Py_VISIT(traverse_module_state->__pyx_tuple__43);
   Py_VISIT(traverse_module_state->__pyx_tuple__45);
   Py_VISIT(traverse_module_state->__pyx_tuple__47);
   Py_VISIT(traverse_module_state->__pyx_tuple__49);
   Py_VISIT(traverse_module_state->__pyx_tuple__51);
   Py_VISIT(traverse_module_state->__pyx_tuple__53);
+  Py_VISIT(traverse_module_state->__pyx_tuple__55);
   Py_VISIT(traverse_module_state->__pyx_codeobj__6);
   Py_VISIT(traverse_module_state->__pyx_codeobj__8);
   Py_VISIT(traverse_module_state->__pyx_codeobj__10);
   Py_VISIT(traverse_module_state->__pyx_codeobj__12);
   Py_VISIT(traverse_module_state->__pyx_codeobj__14);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__28);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__16);
   Py_VISIT(traverse_module_state->__pyx_codeobj__30);
   Py_VISIT(traverse_module_state->__pyx_codeobj__32);
   Py_VISIT(traverse_module_state->__pyx_codeobj__34);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__35);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__36);
   Py_VISIT(traverse_module_state->__pyx_codeobj__37);
   Py_VISIT(traverse_module_state->__pyx_codeobj__39);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__40);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__41);
   Py_VISIT(traverse_module_state->__pyx_codeobj__42);
   Py_VISIT(traverse_module_state->__pyx_codeobj__44);
   Py_VISIT(traverse_module_state->__pyx_codeobj__46);
@@ -3556,7 +3573,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_codeobj__50);
   Py_VISIT(traverse_module_state->__pyx_codeobj__52);
   Py_VISIT(traverse_module_state->__pyx_codeobj__54);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__55);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__56);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__57);
   return 0;
 }
 #endif
@@ -3591,6 +3609,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_ptype_9chmengine_5utils___pyx_scope_struct__genexpr __pyx_mstate_global->__pyx_ptype_9chmengine_5utils___pyx_scope_struct__genexpr
 #define __pyx_kp_u_1 __pyx_mstate_global->__pyx_kp_u_1
 #define __pyx_kp_u_2f __pyx_mstate_global->__pyx_kp_u_2f
+#define __pyx_kp_u_2f_2 __pyx_mstate_global->__pyx_kp_u_2f_2
 #define __pyx_n_s_AttributeError __pyx_mstate_global->__pyx_n_s_AttributeError
 #define __pyx_n_u_B __pyx_mstate_global->__pyx_n_u_B
 #define __pyx_n_s_Board __pyx_mstate_global->__pyx_n_s_Board
@@ -3632,7 +3651,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_u_UTCTime __pyx_mstate_global->__pyx_n_u_UTCTime
 #define __pyx_kp_u_Y_m_d __pyx_mstate_global->__pyx_kp_u_Y_m_d
 #define __pyx_kp_u__4 __pyx_mstate_global->__pyx_kp_u__4
-#define __pyx_n_s__56 __pyx_mstate_global->__pyx_n_s__56
+#define __pyx_n_s__58 __pyx_mstate_global->__pyx_n_s__58
 #define __pyx_n_s_all __pyx_mstate_global->__pyx_n_s_all
 #define __pyx_n_s_args __pyx_mstate_global->__pyx_n_s_args
 #define __pyx_n_s_astimezone __pyx_mstate_global->__pyx_n_s_astimezone
@@ -3661,7 +3680,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_u_calculate_white_minus_black_scor_2 __pyx_mstate_global->__pyx_kp_u_calculate_white_minus_black_scor_2
 #define __pyx_n_s_checkmate_score __pyx_mstate_global->__pyx_n_s_checkmate_score
 #define __pyx_n_u_checkmate_score __pyx_mstate_global->__pyx_n_u_checkmate_score
-#define __pyx_kp_u_checkmate_score_line_394 __pyx_mstate_global->__pyx_kp_u_checkmate_score_line_394
+#define __pyx_kp_u_checkmate_score_line_414 __pyx_mstate_global->__pyx_kp_u_checkmate_score_line_414
 #define __pyx_n_s_chess __pyx_mstate_global->__pyx_n_s_chess
 #define __pyx_n_s_chmengine_utils __pyx_mstate_global->__pyx_n_s_chmengine_utils
 #define __pyx_kp_u_chmengine_utils___init __pyx_mstate_global->__pyx_kp_u_chmengine_utils___init
@@ -3687,6 +3706,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_float64 __pyx_mstate_global->__pyx_n_s_float64
 #define __pyx_n_s_format_moves __pyx_mstate_global->__pyx_n_s_format_moves
 #define __pyx_n_u_format_moves __pyx_mstate_global->__pyx_n_u_format_moves
+#define __pyx_n_s_format_picks __pyx_mstate_global->__pyx_n_s_format_picks
+#define __pyx_n_u_format_picks __pyx_mstate_global->__pyx_n_u_format_picks
 #define __pyx_n_s_from_symbol __pyx_mstate_global->__pyx_n_s_from_symbol
 #define __pyx_n_s_game_heads __pyx_mstate_global->__pyx_n_s_game_heads
 #define __pyx_kp_u_gc __pyx_mstate_global->__pyx_kp_u_gc
@@ -3718,7 +3739,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_is_coroutine __pyx_mstate_global->__pyx_n_s_is_coroutine
 #define __pyx_n_s_is_draw __pyx_mstate_global->__pyx_n_s_is_draw
 #define __pyx_n_u_is_draw __pyx_mstate_global->__pyx_n_u_is_draw
-#define __pyx_kp_u_is_draw_line_114 __pyx_mstate_global->__pyx_kp_u_is_draw_line_114
+#define __pyx_kp_u_is_draw_line_134 __pyx_mstate_global->__pyx_kp_u_is_draw_line_134
 #define __pyx_n_s_is_terminated __pyx_mstate_global->__pyx_n_s_is_terminated
 #define __pyx_n_s_is_valid_king_box_square __pyx_mstate_global->__pyx_n_s_is_valid_king_box_square
 #define __pyx_n_u_is_valid_king_box_square __pyx_mstate_global->__pyx_n_u_is_valid_king_box_square
@@ -3768,10 +3789,10 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_piece_map __pyx_mstate_global->__pyx_n_s_piece_map
 #define __pyx_n_s_pieces_count_from_board __pyx_mstate_global->__pyx_n_s_pieces_count_from_board
 #define __pyx_n_u_pieces_count_from_board __pyx_mstate_global->__pyx_n_u_pieces_count_from_board
-#define __pyx_kp_u_pieces_count_from_board_line_533 __pyx_mstate_global->__pyx_kp_u_pieces_count_from_board_line_533
+#define __pyx_kp_u_pieces_count_from_board_line_553 __pyx_mstate_global->__pyx_kp_u_pieces_count_from_board_line_553
 #define __pyx_n_s_pieces_count_from_fen __pyx_mstate_global->__pyx_n_s_pieces_count_from_fen
 #define __pyx_n_u_pieces_count_from_fen __pyx_mstate_global->__pyx_n_u_pieces_count_from_fen
-#define __pyx_kp_u_pieces_count_from_fen_line_499 __pyx_mstate_global->__pyx_kp_u_pieces_count_from_fen_line_499
+#define __pyx_kp_u_pieces_count_from_fen_line_519 __pyx_mstate_global->__pyx_kp_u_pieces_count_from_fen_line_519
 #define __pyx_n_u_q __pyx_mstate_global->__pyx_n_u_q
 #define __pyx_n_u_r __pyx_mstate_global->__pyx_n_u_r
 #define __pyx_n_s_range __pyx_mstate_global->__pyx_n_s_range
@@ -3827,7 +3848,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_tuple__11 __pyx_mstate_global->__pyx_tuple__11
 #define __pyx_tuple__13 __pyx_mstate_global->__pyx_tuple__13
 #define __pyx_tuple__15 __pyx_mstate_global->__pyx_tuple__15
-#define __pyx_tuple__16 __pyx_mstate_global->__pyx_tuple__16
 #define __pyx_tuple__17 __pyx_mstate_global->__pyx_tuple__17
 #define __pyx_tuple__18 __pyx_mstate_global->__pyx_tuple__18
 #define __pyx_tuple__19 __pyx_mstate_global->__pyx_tuple__19
@@ -3839,31 +3859,33 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_tuple__25 __pyx_mstate_global->__pyx_tuple__25
 #define __pyx_tuple__26 __pyx_mstate_global->__pyx_tuple__26
 #define __pyx_tuple__27 __pyx_mstate_global->__pyx_tuple__27
+#define __pyx_tuple__28 __pyx_mstate_global->__pyx_tuple__28
 #define __pyx_tuple__29 __pyx_mstate_global->__pyx_tuple__29
 #define __pyx_tuple__31 __pyx_mstate_global->__pyx_tuple__31
 #define __pyx_tuple__33 __pyx_mstate_global->__pyx_tuple__33
-#define __pyx_tuple__36 __pyx_mstate_global->__pyx_tuple__36
+#define __pyx_tuple__35 __pyx_mstate_global->__pyx_tuple__35
 #define __pyx_tuple__38 __pyx_mstate_global->__pyx_tuple__38
-#define __pyx_tuple__41 __pyx_mstate_global->__pyx_tuple__41
+#define __pyx_tuple__40 __pyx_mstate_global->__pyx_tuple__40
 #define __pyx_tuple__43 __pyx_mstate_global->__pyx_tuple__43
 #define __pyx_tuple__45 __pyx_mstate_global->__pyx_tuple__45
 #define __pyx_tuple__47 __pyx_mstate_global->__pyx_tuple__47
 #define __pyx_tuple__49 __pyx_mstate_global->__pyx_tuple__49
 #define __pyx_tuple__51 __pyx_mstate_global->__pyx_tuple__51
 #define __pyx_tuple__53 __pyx_mstate_global->__pyx_tuple__53
+#define __pyx_tuple__55 __pyx_mstate_global->__pyx_tuple__55
 #define __pyx_codeobj__6 __pyx_mstate_global->__pyx_codeobj__6
 #define __pyx_codeobj__8 __pyx_mstate_global->__pyx_codeobj__8
 #define __pyx_codeobj__10 __pyx_mstate_global->__pyx_codeobj__10
 #define __pyx_codeobj__12 __pyx_mstate_global->__pyx_codeobj__12
 #define __pyx_codeobj__14 __pyx_mstate_global->__pyx_codeobj__14
-#define __pyx_codeobj__28 __pyx_mstate_global->__pyx_codeobj__28
+#define __pyx_codeobj__16 __pyx_mstate_global->__pyx_codeobj__16
 #define __pyx_codeobj__30 __pyx_mstate_global->__pyx_codeobj__30
 #define __pyx_codeobj__32 __pyx_mstate_global->__pyx_codeobj__32
 #define __pyx_codeobj__34 __pyx_mstate_global->__pyx_codeobj__34
-#define __pyx_codeobj__35 __pyx_mstate_global->__pyx_codeobj__35
+#define __pyx_codeobj__36 __pyx_mstate_global->__pyx_codeobj__36
 #define __pyx_codeobj__37 __pyx_mstate_global->__pyx_codeobj__37
 #define __pyx_codeobj__39 __pyx_mstate_global->__pyx_codeobj__39
-#define __pyx_codeobj__40 __pyx_mstate_global->__pyx_codeobj__40
+#define __pyx_codeobj__41 __pyx_mstate_global->__pyx_codeobj__41
 #define __pyx_codeobj__42 __pyx_mstate_global->__pyx_codeobj__42
 #define __pyx_codeobj__44 __pyx_mstate_global->__pyx_codeobj__44
 #define __pyx_codeobj__46 __pyx_mstate_global->__pyx_codeobj__46
@@ -3871,7 +3893,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_codeobj__50 __pyx_mstate_global->__pyx_codeobj__50
 #define __pyx_codeobj__52 __pyx_mstate_global->__pyx_codeobj__52
 #define __pyx_codeobj__54 __pyx_mstate_global->__pyx_codeobj__54
-#define __pyx_codeobj__55 __pyx_mstate_global->__pyx_codeobj__55
+#define __pyx_codeobj__56 __pyx_mstate_global->__pyx_codeobj__56
+#define __pyx_codeobj__57 __pyx_mstate_global->__pyx_codeobj__57
 /* #### Code section: module_code ### */
 
 /* "chmengine/utils/__init__.py":19
@@ -4056,7 +4079,7 @@ static PyObject *__pyx_pf_9chmengine_5utils__bit_count(CYTHON_UNUSED PyObject *_
   return __pyx_r;
 }
 
-/* "chmengine/utils/__init__.py":52
+/* "chmengine/utils/__init__.py":53
  * 
  * 
  * def format_moves(picks: List[Pick]) -> List[Tuple[str, str]]:             # <<<<<<<<<<<<<<
@@ -4118,12 +4141,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 52, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 53, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "format_moves") < 0)) __PYX_ERR(0, 52, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "format_moves") < 0)) __PYX_ERR(0, 53, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -4134,7 +4157,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("format_moves", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 52, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("format_moves", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 53, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4148,7 +4171,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_picks), (&PyList_Type), 0, "picks", 1))) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_picks), (&PyList_Type), 0, "picks", 1))) __PYX_ERR(0, 53, __pyx_L1_error)
   __pyx_r = __pyx_pf_9chmengine_5utils_2format_moves(__pyx_self, __pyx_v_picks);
 
   /* function exit code */
@@ -4187,7 +4210,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_2format_moves(CYTHON_UNUSED PyObject
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("format_moves", 1);
 
-  /* "chmengine/utils/__init__.py":67
+  /* "chmengine/utils/__init__.py":68
  *         Entries with `None` moves are excluded.
  *     """
  *     return [(m.uci(), f"{s:.2f}") for m, s in picks if len(picks)]             # <<<<<<<<<<<<<<
@@ -4196,7 +4219,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_2format_moves(CYTHON_UNUSED PyObject
  */
   __Pyx_XDECREF(__pyx_r);
   { /* enter inner scope */
-    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L5_error)
+    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_2 = __pyx_v_picks; __Pyx_INCREF(__pyx_t_2);
     __pyx_t_3 = 0;
@@ -4204,14 +4227,14 @@ static PyObject *__pyx_pf_9chmengine_5utils_2format_moves(CYTHON_UNUSED PyObject
       {
         Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_2);
         #if !CYTHON_ASSUME_SAFE_MACROS
-        if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 67, __pyx_L5_error)
+        if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 68, __pyx_L5_error)
         #endif
         if (__pyx_t_3 >= __pyx_temp) break;
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-      __pyx_t_4 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_4); __pyx_t_3++; if (unlikely((0 < 0))) __PYX_ERR(0, 67, __pyx_L5_error)
+      __pyx_t_4 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_4); __pyx_t_3++; if (unlikely((0 < 0))) __PYX_ERR(0, 68, __pyx_L5_error)
       #else
-      __pyx_t_4 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 67, __pyx_L5_error)
+      __pyx_t_4 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 68, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_4);
       #endif
       if ((likely(PyTuple_CheckExact(__pyx_t_4))) || (PyList_CheckExact(__pyx_t_4))) {
@@ -4220,7 +4243,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_2format_moves(CYTHON_UNUSED PyObject
         if (unlikely(size != 2)) {
           if (size > 2) __Pyx_RaiseTooManyValuesError(2);
           else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-          __PYX_ERR(0, 67, __pyx_L5_error)
+          __PYX_ERR(0, 68, __pyx_L5_error)
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
         if (likely(PyTuple_CheckExact(sequence))) {
@@ -4233,15 +4256,15 @@ static PyObject *__pyx_pf_9chmengine_5utils_2format_moves(CYTHON_UNUSED PyObject
         __Pyx_INCREF(__pyx_t_5);
         __Pyx_INCREF(__pyx_t_6);
         #else
-        __pyx_t_5 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 67, __pyx_L5_error)
+        __pyx_t_5 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 68, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 67, __pyx_L5_error)
+        __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 68, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_6);
         #endif
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       } else {
         Py_ssize_t index = -1;
-        __pyx_t_7 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 67, __pyx_L5_error)
+        __pyx_t_7 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 68, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_7);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __pyx_t_8 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_7);
@@ -4249,7 +4272,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_2format_moves(CYTHON_UNUSED PyObject
         __Pyx_GOTREF(__pyx_t_5);
         index = 1; __pyx_t_6 = __pyx_t_8(__pyx_t_7); if (unlikely(!__pyx_t_6)) goto __pyx_L8_unpacking_failed;
         __Pyx_GOTREF(__pyx_t_6);
-        if (__Pyx_IternextUnpackEndCheck(__pyx_t_8(__pyx_t_7), 2) < 0) __PYX_ERR(0, 67, __pyx_L5_error)
+        if (__Pyx_IternextUnpackEndCheck(__pyx_t_8(__pyx_t_7), 2) < 0) __PYX_ERR(0, 68, __pyx_L5_error)
         __pyx_t_8 = NULL;
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         goto __pyx_L9_unpacking_done;
@@ -4257,17 +4280,17 @@ static PyObject *__pyx_pf_9chmengine_5utils_2format_moves(CYTHON_UNUSED PyObject
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         __pyx_t_8 = NULL;
         if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-        __PYX_ERR(0, 67, __pyx_L5_error)
+        __PYX_ERR(0, 68, __pyx_L5_error)
         __pyx_L9_unpacking_done:;
       }
       __Pyx_XDECREF_SET(__pyx_7genexpr__pyx_v_m, __pyx_t_5);
       __pyx_t_5 = 0;
       __Pyx_XDECREF_SET(__pyx_7genexpr__pyx_v_s, __pyx_t_6);
       __pyx_t_6 = 0;
-      __pyx_t_9 = __Pyx_PyList_GET_SIZE(__pyx_v_picks); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 67, __pyx_L5_error)
+      __pyx_t_9 = __Pyx_PyList_GET_SIZE(__pyx_v_picks); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 68, __pyx_L5_error)
       __pyx_t_10 = (__pyx_t_9 != 0);
       if (__pyx_t_10) {
-        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_7genexpr__pyx_v_m, __pyx_n_s_uci); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 67, __pyx_L5_error)
+        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_7genexpr__pyx_v_m, __pyx_n_s_uci); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 68, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_6);
         __pyx_t_5 = NULL;
         __pyx_t_11 = 0;
@@ -4287,21 +4310,21 @@ static PyObject *__pyx_pf_9chmengine_5utils_2format_moves(CYTHON_UNUSED PyObject
           PyObject *__pyx_callargs[2] = {__pyx_t_5, NULL};
           __pyx_t_4 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_11, 0+__pyx_t_11);
           __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-          if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 67, __pyx_L5_error)
+          if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 68, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_4);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         }
-        __pyx_t_6 = __Pyx_PyObject_Format(__pyx_7genexpr__pyx_v_s, __pyx_kp_u_2f); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 67, __pyx_L5_error)
+        __pyx_t_6 = __Pyx_PyObject_Format(__pyx_7genexpr__pyx_v_s, __pyx_kp_u_2f); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 68, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 67, __pyx_L5_error)
+        __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 68, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_GIVEREF(__pyx_t_4);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4)) __PYX_ERR(0, 67, __pyx_L5_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4)) __PYX_ERR(0, 68, __pyx_L5_error);
         __Pyx_GIVEREF(__pyx_t_6);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_6)) __PYX_ERR(0, 67, __pyx_L5_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_6)) __PYX_ERR(0, 68, __pyx_L5_error);
         __pyx_t_4 = 0;
         __pyx_t_6 = 0;
-        if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_5))) __PYX_ERR(0, 67, __pyx_L5_error)
+        if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_5))) __PYX_ERR(0, 68, __pyx_L5_error)
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       }
     }
@@ -4319,7 +4342,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_2format_moves(CYTHON_UNUSED PyObject
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/utils/__init__.py":52
+  /* "chmengine/utils/__init__.py":53
  * 
  * 
  * def format_moves(picks: List[Pick]) -> List[Tuple[str, str]]:             # <<<<<<<<<<<<<<
@@ -4345,7 +4368,201 @@ static PyObject *__pyx_pf_9chmengine_5utils_2format_moves(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "chmengine/utils/__init__.py":70
+/* "chmengine/utils/__init__.py":71
+ * 
+ * 
+ * def format_picks(picks: List[Pick]) -> str:             # <<<<<<<<<<<<<<
+ *     """Format a list of Picks into UCI strings and formatted scores.
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_9chmengine_5utils_5format_picks(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4format_picks, "Format a list of Picks into UCI strings and formatted scores.\n\n    Parameters\n    ----------\n    picks : List[Pick]\n        The list of Picks (moves and their evaluation scores.)\n\n    Returns\n    -------\n    str\n        Formatted list where each tuple contains the move in UCI format\n        and the score rounded to two decimal places.\n        Entries with `None` moves are excluded.\n    ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_5format_picks = {"format_picks", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_5format_picks, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_4format_picks};
+static PyObject *__pyx_pw_9chmengine_5utils_5format_picks(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  PyObject *__pyx_v_picks = 0;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[1] = {0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("format_picks (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_MACROS
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_picks,0};
+    if (__pyx_kwds) {
+      Py_ssize_t kw_args;
+      switch (__pyx_nargs) {
+        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = __Pyx_NumKwargs_FASTCALL(__pyx_kwds);
+      switch (__pyx_nargs) {
+        case  0:
+        if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_picks)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 71, __pyx_L3_error)
+        else goto __pyx_L5_argtuple_error;
+      }
+      if (unlikely(kw_args > 0)) {
+        const Py_ssize_t kwd_pos_args = __pyx_nargs;
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "format_picks") < 0)) __PYX_ERR(0, 71, __pyx_L3_error)
+      }
+    } else if (unlikely(__pyx_nargs != 1)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+    }
+    __pyx_v_picks = ((PyObject*)values[0]);
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("format_picks", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 71, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_AddTraceback("chmengine.utils.format_picks", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_picks), (&PyList_Type), 0, "picks", 1))) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_r = __pyx_pf_9chmengine_5utils_4format_picks(__pyx_self, __pyx_v_picks);
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __pyx_r = NULL;
+  __pyx_L0:;
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_9chmengine_5utils_4format_picks(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_picks) {
+  PyObject *__pyx_8genexpr1__pyx_v_p = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  Py_ssize_t __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("format_picks", 1);
+
+  /* "chmengine/utils/__init__.py":87
+ *     """
+ *     p: Pick
+ *     return str([f"{p:+.2f}" for p in picks])             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __Pyx_XDECREF(__pyx_r);
+  { /* enter inner scope */
+    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L5_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_2 = __pyx_v_picks; __Pyx_INCREF(__pyx_t_2);
+    __pyx_t_3 = 0;
+    for (;;) {
+      {
+        Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_2);
+        #if !CYTHON_ASSUME_SAFE_MACROS
+        if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 87, __pyx_L5_error)
+        #endif
+        if (__pyx_t_3 >= __pyx_temp) break;
+      }
+      #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+      __pyx_t_4 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_4); __pyx_t_3++; if (unlikely((0 < 0))) __PYX_ERR(0, 87, __pyx_L5_error)
+      #else
+      __pyx_t_4 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 87, __pyx_L5_error)
+      __Pyx_GOTREF(__pyx_t_4);
+      #endif
+      __Pyx_XDECREF_SET(__pyx_8genexpr1__pyx_v_p, __pyx_t_4);
+      __pyx_t_4 = 0;
+      __pyx_t_4 = __Pyx_PyObject_Format(__pyx_8genexpr1__pyx_v_p, __pyx_kp_u_2f_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 87, __pyx_L5_error)
+      __Pyx_GOTREF(__pyx_t_4);
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_4))) __PYX_ERR(0, 87, __pyx_L5_error)
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    }
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_XDECREF(__pyx_8genexpr1__pyx_v_p); __pyx_8genexpr1__pyx_v_p = 0;
+    goto __pyx_L9_exit_scope;
+    __pyx_L5_error:;
+    __Pyx_XDECREF(__pyx_8genexpr1__pyx_v_p); __pyx_8genexpr1__pyx_v_p = 0;
+    goto __pyx_L1_error;
+    __pyx_L9_exit_scope:;
+  } /* exit inner scope */
+  __pyx_t_2 = __Pyx_PyObject_Unicode(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_r = ((PyObject*)__pyx_t_2);
+  __pyx_t_2 = 0;
+  goto __pyx_L0;
+
+  /* "chmengine/utils/__init__.py":71
+ * 
+ * 
+ * def format_picks(picks: List[Pick]) -> str:             # <<<<<<<<<<<<<<
+ *     """Format a list of Picks into UCI strings and formatted scores.
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_AddTraceback("chmengine.utils.format_picks", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_8genexpr1__pyx_v_p);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "chmengine/utils/__init__.py":90
  * 
  * 
  * def calculate_score(             # <<<<<<<<<<<<<<
@@ -4354,16 +4571,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_2format_moves(CYTHON_UNUSED PyObject
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_5calculate_score(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_5utils_7calculate_score(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_4calculate_score, "Compute a score for a board state based on heatmap control and king box pressure.\n\n    (Deprecated legacy score calc function)\n\n    Parameters\n    ----------\n    current_index : int\n        Index of the current player in the heatmap data (0 for White, 1 for Black).\n    new_heatmap_transposed : numpy.typing.NDArray[numpy.float64]\n        A transposed 2x64 array of heatmap intensities (player x squares).\n    new_current_king_box : list of int\n        Indices of squares surrounding the current player's king.\n    new_other_king_box : list of int\n        Indices of squares surrounding the opponent's king.\n\n    Returns\n    -------\n    numpy.float64\n        Total score computed by summing general control delta and weighted king box pressure.\n    ");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_5calculate_score = {"calculate_score", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_5calculate_score, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_4calculate_score};
-static PyObject *__pyx_pw_9chmengine_5utils_5calculate_score(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_6calculate_score, "Compute a score for a board state based on heatmap control and king box pressure.\n\n    (Deprecated legacy score calc function)\n\n    Parameters\n    ----------\n    current_index : int\n        Index of the current player in the heatmap data (0 for White, 1 for Black).\n    new_heatmap_transposed : numpy.typing.NDArray[numpy.float64]\n        A transposed 2x64 array of heatmap intensities (player x squares).\n    new_current_king_box : list of int\n        Indices of squares surrounding the current player's king.\n    new_other_king_box : list of int\n        Indices of squares surrounding the opponent's king.\n\n    Returns\n    -------\n    numpy.float64\n        Total score computed by summing general control delta and weighted king box pressure.\n    ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_7calculate_score = {"calculate_score", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_7calculate_score, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_6calculate_score};
+static PyObject *__pyx_pw_9chmengine_5utils_7calculate_score(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -4416,7 +4633,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 70, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 90, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -4424,9 +4641,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 70, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 90, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("calculate_score", 1, 4, 4, 1); __PYX_ERR(0, 70, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("calculate_score", 1, 4, 4, 1); __PYX_ERR(0, 90, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -4434,9 +4651,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[2]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 70, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 90, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("calculate_score", 1, 4, 4, 2); __PYX_ERR(0, 70, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("calculate_score", 1, 4, 4, 2); __PYX_ERR(0, 90, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -4444,14 +4661,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[3]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 70, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 90, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("calculate_score", 1, 4, 4, 3); __PYX_ERR(0, 70, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("calculate_score", 1, 4, 4, 3); __PYX_ERR(0, 90, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "calculate_score") < 0)) __PYX_ERR(0, 70, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "calculate_score") < 0)) __PYX_ERR(0, 90, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 4)) {
       goto __pyx_L5_argtuple_error;
@@ -4468,7 +4685,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("calculate_score", 1, 4, 4, __pyx_nargs); __PYX_ERR(0, 70, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("calculate_score", 1, 4, 4, __pyx_nargs); __PYX_ERR(0, 90, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4482,10 +4699,10 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_current_index), (&PyInt_Type), 0, "current_index", 1))) __PYX_ERR(0, 71, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_new_current_king_box), (&PyList_Type), 0, "new_current_king_box", 1))) __PYX_ERR(0, 73, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_new_other_king_box), (&PyList_Type), 0, "new_other_king_box", 1))) __PYX_ERR(0, 74, __pyx_L1_error)
-  __pyx_r = __pyx_pf_9chmengine_5utils_4calculate_score(__pyx_self, __pyx_v_current_index, __pyx_v_new_heatmap_transposed, __pyx_v_new_current_king_box, __pyx_v_new_other_king_box);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_current_index), (&PyInt_Type), 0, "current_index", 1))) __PYX_ERR(0, 91, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_new_current_king_box), (&PyList_Type), 0, "new_current_king_box", 1))) __PYX_ERR(0, 93, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_new_other_king_box), (&PyList_Type), 0, "new_other_king_box", 1))) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_r = __pyx_pf_9chmengine_5utils_6calculate_score(__pyx_self, __pyx_v_current_index, __pyx_v_new_heatmap_transposed, __pyx_v_new_current_king_box, __pyx_v_new_other_king_box);
 
   /* function exit code */
   goto __pyx_L0;
@@ -4502,7 +4719,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_5utils_4calculate_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_current_index, PyObject *__pyx_v_new_heatmap_transposed, PyObject *__pyx_v_new_current_king_box, PyObject *__pyx_v_new_other_king_box) {
+static PyObject *__pyx_pf_9chmengine_5utils_6calculate_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_current_index, PyObject *__pyx_v_new_heatmap_transposed, PyObject *__pyx_v_new_current_king_box, PyObject *__pyx_v_new_other_king_box) {
   PyObject *__pyx_v_other_index = 0;
   PyObject *__pyx_v_initial_move_score = NULL;
   PyObject *__pyx_v_initial_king_box_score = NULL;
@@ -4519,119 +4736,119 @@ static PyObject *__pyx_pf_9chmengine_5utils_4calculate_score(CYTHON_UNUSED PyObj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("calculate_score", 1);
 
-  /* "chmengine/utils/__init__.py":99
+  /* "chmengine/utils/__init__.py":119
  *     # where every possible move results in game termination.
  *     # score is initially, the delta of the sums of each player's heatmap.data values.
  *     other_index: int = int(not current_index)             # <<<<<<<<<<<<<<
  *     initial_move_score: float64 = sum(
  *         new_heatmap_transposed[current_index]
  */
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_current_index); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 99, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyBool_FromLong((!__pyx_t_1)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 99, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_current_index); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 119, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyBool_FromLong((!__pyx_t_1)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 119, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyInt_Type)), __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 99, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyInt_Type)), __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 119, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_3))) __PYX_ERR(0, 99, __pyx_L1_error)
+  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_3))) __PYX_ERR(0, 119, __pyx_L1_error)
   __pyx_v_other_index = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":101
+  /* "chmengine/utils/__init__.py":121
  *     other_index: int = int(not current_index)
  *     initial_move_score: float64 = sum(
  *         new_heatmap_transposed[current_index]             # <<<<<<<<<<<<<<
  *     ) - sum(
  *         new_heatmap_transposed[other_index]
  */
-  __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_new_heatmap_transposed, __pyx_v_current_index); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 101, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_new_heatmap_transposed, __pyx_v_current_index); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "chmengine/utils/__init__.py":100
+  /* "chmengine/utils/__init__.py":120
  *     # score is initially, the delta of the sums of each player's heatmap.data values.
  *     other_index: int = int(not current_index)
  *     initial_move_score: float64 = sum(             # <<<<<<<<<<<<<<
  *         new_heatmap_transposed[current_index]
  *     ) - sum(
  */
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 120, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":103
+  /* "chmengine/utils/__init__.py":123
  *         new_heatmap_transposed[current_index]
  *     ) - sum(
  *         new_heatmap_transposed[other_index]             # <<<<<<<<<<<<<<
  *     )
  *     # king box score adds weights to the scores of squares around the kings.
  */
-  __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_new_heatmap_transposed, __pyx_v_other_index); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 103, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_new_heatmap_transposed, __pyx_v_other_index); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 123, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "chmengine/utils/__init__.py":102
+  /* "chmengine/utils/__init__.py":122
  *     initial_move_score: float64 = sum(
  *         new_heatmap_transposed[current_index]
  *     ) - sum(             # <<<<<<<<<<<<<<
  *         new_heatmap_transposed[other_index]
  *     )
  */
-  __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 122, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyNumber_Subtract(__pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Subtract(__pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 122, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_initial_move_score = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":106
+  /* "chmengine/utils/__init__.py":126
  *     )
  *     # king box score adds weights to the scores of squares around the kings.
  *     initial_king_box_score: float64 = sum(new_heatmap_transposed[current_index][new_other_king_box])             # <<<<<<<<<<<<<<
  *     initial_king_box_score -= sum(
  *         new_heatmap_transposed[other_index][new_current_king_box]
  */
-  __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_new_heatmap_transposed, __pyx_v_current_index); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_new_heatmap_transposed, __pyx_v_current_index); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetItem(__pyx_t_3, __pyx_v_new_other_king_box); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetItem(__pyx_t_3, __pyx_v_new_other_king_box); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_initial_king_box_score = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":108
+  /* "chmengine/utils/__init__.py":128
  *     initial_king_box_score: float64 = sum(new_heatmap_transposed[current_index][new_other_king_box])
  *     initial_king_box_score -= sum(
  *         new_heatmap_transposed[other_index][new_current_king_box]             # <<<<<<<<<<<<<<
  *     )
  *     # Final score is the agg of both above.
  */
-  __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_new_heatmap_transposed, __pyx_v_other_index); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_new_heatmap_transposed, __pyx_v_other_index); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetItem(__pyx_t_3, __pyx_v_new_current_king_box); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetItem(__pyx_t_3, __pyx_v_new_current_king_box); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":107
+  /* "chmengine/utils/__init__.py":127
  *     # king box score adds weights to the scores of squares around the kings.
  *     initial_king_box_score: float64 = sum(new_heatmap_transposed[current_index][new_other_king_box])
  *     initial_king_box_score -= sum(             # <<<<<<<<<<<<<<
  *         new_heatmap_transposed[other_index][new_current_king_box]
  *     )
  */
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyNumber_InPlaceSubtract(__pyx_v_initial_king_box_score, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_4 = PyNumber_InPlaceSubtract(__pyx_v_initial_king_box_score, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF_SET(__pyx_v_initial_king_box_score, __pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "chmengine/utils/__init__.py":111
+  /* "chmengine/utils/__init__.py":131
  *     )
  *     # Final score is the agg of both above.
  *     return float64(initial_move_score + initial_king_box_score)             # <<<<<<<<<<<<<<
@@ -4639,9 +4856,9 @@ static PyObject *__pyx_pf_9chmengine_5utils_4calculate_score(CYTHON_UNUSED PyObj
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_float64); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 111, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_float64); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = PyNumber_Add(__pyx_v_initial_move_score, __pyx_v_initial_king_box_score); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 111, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Add(__pyx_v_initial_move_score, __pyx_v_initial_king_box_score); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
@@ -4662,7 +4879,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_4calculate_score(CYTHON_UNUSED PyObj
     __pyx_t_4 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 111, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 131, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
@@ -4670,7 +4887,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_4calculate_score(CYTHON_UNUSED PyObj
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/utils/__init__.py":70
+  /* "chmengine/utils/__init__.py":90
  * 
  * 
  * def calculate_score(             # <<<<<<<<<<<<<<
@@ -4695,7 +4912,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_4calculate_score(CYTHON_UNUSED PyObj
   return __pyx_r;
 }
 
-/* "chmengine/utils/__init__.py":114
+/* "chmengine/utils/__init__.py":134
  * 
  * 
  * def is_draw(winner: Optional[bool]) -> bool:             # <<<<<<<<<<<<<<
@@ -4704,16 +4921,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_4calculate_score(CYTHON_UNUSED PyObj
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_7is_draw(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_5utils_9is_draw(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_6is_draw, "Check if a game result is a draw based on the winner field.\n\n    Parameters\n    ----------\n    winner : bool or None\n        Result of Board.outcome(...).winner. True for White win, False for Black win, None for draw.\n\n    Returns\n    -------\n    bool\n        True if the game is a draw, False otherwise.\n\n    Examples\n    --------\n    >>> from chmengine.utils import is_draw\n    >>> from chess import Board\n    >>> mate_board = Board('8/2p2p2/4p3/2k5/8/6q1/2K5/1r1q4 w - - 2 59')\n    >>> is_draw(mate_board.outcome(claim_draw=True).winner)\n    False\n    >>> draw_board = Board('6R1/7p/2p2p1k/p1P2Q2/P7/6K1/5P2/8 b - - 0 52')\n    >>> is_draw(draw_board.outcome(claim_draw=True).winner)\n    True\n    ");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_7is_draw = {"is_draw", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_7is_draw, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_6is_draw};
-static PyObject *__pyx_pw_9chmengine_5utils_7is_draw(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_8is_draw, "Check if a game result is a draw based on the winner field.\n\n    Parameters\n    ----------\n    winner : bool or None\n        Result of Board.outcome(...).winner. True for White win, False for Black win, None for draw.\n\n    Returns\n    -------\n    bool\n        True if the game is a draw, False otherwise.\n\n    Examples\n    --------\n    >>> from chmengine.utils import is_draw\n    >>> from chess import Board\n    >>> mate_board = Board('8/2p2p2/4p3/2k5/8/6q1/2K5/1r1q4 w - - 2 59')\n    >>> is_draw(mate_board.outcome(claim_draw=True).winner)\n    False\n    >>> draw_board = Board('6R1/7p/2p2p1k/p1P2Q2/P7/6K1/5P2/8 b - - 0 52')\n    >>> is_draw(draw_board.outcome(claim_draw=True).winner)\n    True\n    ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_9is_draw = {"is_draw", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_9is_draw, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_8is_draw};
+static PyObject *__pyx_pw_9chmengine_5utils_9is_draw(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -4757,12 +4974,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 114, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 134, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "is_draw") < 0)) __PYX_ERR(0, 114, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "is_draw") < 0)) __PYX_ERR(0, 134, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -4773,7 +4990,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("is_draw", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 114, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("is_draw", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 134, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4787,7 +5004,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_9chmengine_5utils_6is_draw(__pyx_self, __pyx_v_winner);
+  __pyx_r = __pyx_pf_9chmengine_5utils_8is_draw(__pyx_self, __pyx_v_winner);
 
   /* function exit code */
   {
@@ -4800,7 +5017,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_5utils_6is_draw(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_winner) {
+static PyObject *__pyx_pf_9chmengine_5utils_8is_draw(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_winner) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
@@ -4810,7 +5027,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_6is_draw(CYTHON_UNUSED PyObject *__p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_draw", 1);
 
-  /* "chmengine/utils/__init__.py":138
+  /* "chmengine/utils/__init__.py":158
  *     True
  *     """
  *     return winner is None             # <<<<<<<<<<<<<<
@@ -4819,13 +5036,13 @@ static PyObject *__pyx_pf_9chmengine_5utils_6is_draw(CYTHON_UNUSED PyObject *__p
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = (__pyx_v_winner == Py_None);
-  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 158, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/utils/__init__.py":114
+  /* "chmengine/utils/__init__.py":134
  * 
  * 
  * def is_draw(winner: Optional[bool]) -> bool:             # <<<<<<<<<<<<<<
@@ -4844,7 +5061,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_6is_draw(CYTHON_UNUSED PyObject *__p
   return __pyx_r;
 }
 
-/* "chmengine/utils/__init__.py":141
+/* "chmengine/utils/__init__.py":161
  * 
  * 
  * def calculate_white_minus_black_score(             # <<<<<<<<<<<<<<
@@ -4853,16 +5070,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_6is_draw(CYTHON_UNUSED PyObject *__p
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_9calculate_white_minus_black_score(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_5utils_11calculate_white_minus_black_score(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_8calculate_white_minus_black_score, "Evaluate the board from a White-minus-Black perspective using heatmap evaluation.\n\n    This function returns a net evaluation score. Positive values favor White, negative values favor Black.\n    Terminal game states return fixed scores. Otherwise, the score is derived from:\n    - Heatmap intensity differences\n    - Control over king box areas\n\n    Parameters\n    ----------\n    board : chess.Board\n        The chess board to evaluate.\n    depth : int\n        Depth of future move evaluation.\n\n    Returns\n    -------\n    numpy.float64\n        Net evaluation score (White - Black). Terminal states return extreme values.\n\n    Examples\n    --------\n    >>> from chmengine.utils import is_draw\n    >>> from chess import Board, Move\n    >>> default_board, d = Board(), 1\n    >>> calculate_white_minus_black_score(board=default_board, depth=d)\n    0.0\n    >>> default_board.push(Move.from_uci('e2e4'))\n    >>> calculate_white_minus_black_score(board=default_board, depth=d)\n    10.0\n    >>> default_board.push(Move.from_uci('e7e5'))\n    >>> calculate_white_minus_black_score(board=default_board, depth=d)\n    0.20689655172414234\n    >>> default_board.push(Move.from_uci('g1f3'))\n    >>> calculate_white_minus_black_score(board=default_board, depth=d)\n    -2.1379310344827616\n    >>> default_board.push(Move.from_uci('b8c6'))\n    >>> calculate_white_minus_black_score(board=default_board, depth=d)\n    -3.925925925925924\n    >>> default_board.push(Move.from_uci('f1b5'))\n    >>> calculate_white_minus_black_score(board=default_board, depth=d)\n    2.133333333333335\n    >>> mate_board = Board('8/2p2p2/4p3/2k5/8/6q1/2K5/1r1q4 w - - 2 59')\n    >>> calculate_white_minus_black_score(board=mate_board, depth=d)\n    -1024.0\n    >>> draw_board = Board('6R1/7p/2p2p1k/p1P2Q2/P7/6K1/5P2/8 b - - 0 52')\n    >>> calculate_white_minus_black_score(board=draw_board, depth=d)\n    0.0\n    ");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_9calculate_white_minus_black_score = {"calculate_white_minus_black_score", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_9calculate_white_minus_black_score, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_8calculate_white_minus_black_score};
-static PyObject *__pyx_pw_9chmengine_5utils_9calculate_white_minus_black_score(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_10calculate_white_minus_black_score, "Evaluate the board from a White-minus-Black perspective using heatmap evaluation.\n\n    This function returns a net evaluation score. Positive values favor White, negative values favor Black.\n    Terminal game states return fixed scores. Otherwise, the score is derived from:\n    - Heatmap intensity differences\n    - Control over king box areas\n\n    Parameters\n    ----------\n    board : chess.Board\n        The chess board to evaluate.\n    depth : int\n        Depth of future move evaluation.\n\n    Returns\n    -------\n    numpy.float64\n        Net evaluation score (White - Black). Terminal states return extreme values.\n\n    Examples\n    --------\n    >>> from chmengine.utils import is_draw\n    >>> from chess import Board, Move\n    >>> default_board, d = Board(), 1\n    >>> calculate_white_minus_black_score(board=default_board, depth=d)\n    0.0\n    >>> default_board.push(Move.from_uci('e2e4'))\n    >>> calculate_white_minus_black_score(board=default_board, depth=d)\n    10.0\n    >>> default_board.push(Move.from_uci('e7e5'))\n    >>> calculate_white_minus_black_score(board=default_board, depth=d)\n    0.20689655172414234\n    >>> default_board.push(Move.from_uci('g1f3'))\n    >>> calculate_white_minus_black_score(board=default_board, depth=d)\n    -2.1379310344827616\n    >>> default_board.push(Move.from_uci('b8c6'))\n    >>> calculate_white_minus_black_score(board=default_board, depth=d)\n    -3.925925925925924\n    >>> default_board.push(Move.from_uci('f1b5'))\n    >>> calculate_white_minus_black_score(board=default_board, depth=d)\n    2.133333333333335\n    >>> mate_board = Board('8/2p2p2/4p3/2k5/8/6q1/2K5/1r1q4 w - - 2 59')\n    >>> calculate_white_minus_black_score(board=mate_board, depth=d)\n    -1024.0\n    >>> draw_board = Board('6R1/7p/2p2p1k/p1P2Q2/P7/6K1/5P2/8 b - - 0 52')\n    >>> calculate_white_minus_black_score(board=draw_board, depth=d)\n    0.0\n    ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_11calculate_white_minus_black_score = {"calculate_white_minus_black_score", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_11calculate_white_minus_black_score, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_10calculate_white_minus_black_score};
+static PyObject *__pyx_pw_9chmengine_5utils_11calculate_white_minus_black_score(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -4909,7 +5126,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 141, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 161, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -4917,14 +5134,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 141, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 161, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("calculate_white_minus_black_score", 1, 2, 2, 1); __PYX_ERR(0, 141, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("calculate_white_minus_black_score", 1, 2, 2, 1); __PYX_ERR(0, 161, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "calculate_white_minus_black_score") < 0)) __PYX_ERR(0, 141, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "calculate_white_minus_black_score") < 0)) __PYX_ERR(0, 161, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -4937,7 +5154,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("calculate_white_minus_black_score", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 141, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("calculate_white_minus_black_score", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 161, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4951,8 +5168,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_depth), (&PyInt_Type), 0, "depth", 1))) __PYX_ERR(0, 143, __pyx_L1_error)
-  __pyx_r = __pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(__pyx_self, __pyx_v_board, __pyx_v_depth);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_depth), (&PyInt_Type), 0, "depth", 1))) __PYX_ERR(0, 163, __pyx_L1_error)
+  __pyx_r = __pyx_pf_9chmengine_5utils_10calculate_white_minus_black_score(__pyx_self, __pyx_v_board, __pyx_v_depth);
 
   /* function exit code */
   goto __pyx_L0;
@@ -4969,7 +5186,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth) {
+static PyObject *__pyx_pf_9chmengine_5utils_10calculate_white_minus_black_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth) {
   PyObject *__pyx_v_outcome = NULL;
   PyObject *__pyx_v_is_terminated = NULL;
   PyObject *__pyx_v_heatmap_transposed = NULL;
@@ -4994,26 +5211,26 @@ static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(C
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("calculate_white_minus_black_score", 1);
 
-  /* "chmengine/utils/__init__.py":194
+  /* "chmengine/utils/__init__.py":214
  *     """
  *     # Early exit if Game Over.
  *     outcome: Optional[Outcome] = board.outcome(claim_draw=True)             # <<<<<<<<<<<<<<
  *     is_terminated: bool = outcome is not None
  *     if is_terminated and is_draw(outcome.winner):
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_board, __pyx_n_s_outcome); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_board, __pyx_n_s_outcome); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 214, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 214, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_claim_draw, Py_True) < 0) __PYX_ERR(0, 194, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 194, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_claim_draw, Py_True) < 0) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 214, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_outcome = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":195
+  /* "chmengine/utils/__init__.py":215
  *     # Early exit if Game Over.
  *     outcome: Optional[Outcome] = board.outcome(claim_draw=True)
  *     is_terminated: bool = outcome is not None             # <<<<<<<<<<<<<<
@@ -5021,27 +5238,27 @@ static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(C
  *         # Draws are easy to score: zero
  */
   __pyx_t_4 = (__pyx_v_outcome != Py_None);
-  __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 195, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 215, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_v_is_terminated = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":196
+  /* "chmengine/utils/__init__.py":216
  *     outcome: Optional[Outcome] = board.outcome(claim_draw=True)
  *     is_terminated: bool = outcome is not None
  *     if is_terminated and is_draw(outcome.winner):             # <<<<<<<<<<<<<<
  *         # Draws are easy to score: zero
  *         return float64(0)
  */
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_v_is_terminated); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 196, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_v_is_terminated); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 216, __pyx_L1_error)
   if (__pyx_t_5) {
   } else {
     __pyx_t_4 = __pyx_t_5;
     goto __pyx_L4_bool_binop_done;
   }
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_is_draw); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 196, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_is_draw); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 216, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_outcome, __pyx_n_s_winner); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 196, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_outcome, __pyx_n_s_winner); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 216, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_6 = NULL;
   __pyx_t_7 = 0;
@@ -5062,17 +5279,17 @@ static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(C
     __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_7, 1+__pyx_t_7);
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 196, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 216, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 196, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 216, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_4 = __pyx_t_5;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_4) {
 
-    /* "chmengine/utils/__init__.py":198
+    /* "chmengine/utils/__init__.py":218
  *     if is_terminated and is_draw(outcome.winner):
  *         # Draws are easy to score: zero
  *         return float64(0)             # <<<<<<<<<<<<<<
@@ -5080,7 +5297,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(C
  *         # Checkmate score is an unrealistically high upperbound in possible moves (all pieces can move to every square.)
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 198, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 218, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_1 = NULL;
     __pyx_t_7 = 0;
@@ -5100,7 +5317,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(C
       PyObject *__pyx_callargs[2] = {__pyx_t_1, __pyx_int_0};
       __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_7, 1+__pyx_t_7);
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 198, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 218, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
@@ -5108,7 +5325,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(C
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "chmengine/utils/__init__.py":196
+    /* "chmengine/utils/__init__.py":216
  *     outcome: Optional[Outcome] = board.outcome(claim_draw=True)
  *     is_terminated: bool = outcome is not None
  *     if is_terminated and is_draw(outcome.winner):             # <<<<<<<<<<<<<<
@@ -5117,17 +5334,17 @@ static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(C
  */
   }
 
-  /* "chmengine/utils/__init__.py":199
+  /* "chmengine/utils/__init__.py":219
  *         # Draws are easy to score: zero
  *         return float64(0)
  *     if is_terminated:             # <<<<<<<<<<<<<<
  *         # Checkmate score is an unrealistically high upperbound in possible moves (all pieces can move to every square.)
  *         return checkmate_score(board, depth)
  */
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_is_terminated); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 199, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_is_terminated); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 219, __pyx_L1_error)
   if (__pyx_t_4) {
 
-    /* "chmengine/utils/__init__.py":201
+    /* "chmengine/utils/__init__.py":221
  *     if is_terminated:
  *         # Checkmate score is an unrealistically high upperbound in possible moves (all pieces can move to every square.)
  *         return checkmate_score(board, depth)             # <<<<<<<<<<<<<<
@@ -5135,7 +5352,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(C
  *     heatmap_transposed: NDArray[float64] = calculate_chess_move_heatmap_with_better_discount(
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_checkmate_score); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 201, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_checkmate_score); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 221, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_1 = NULL;
     __pyx_t_7 = 0;
@@ -5155,7 +5372,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(C
       PyObject *__pyx_callargs[3] = {__pyx_t_1, __pyx_v_board, __pyx_v_depth};
       __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_7, 2+__pyx_t_7);
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 201, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 221, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
@@ -5163,7 +5380,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(C
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "chmengine/utils/__init__.py":199
+    /* "chmengine/utils/__init__.py":219
  *         # Draws are easy to score: zero
  *         return float64(0)
  *     if is_terminated:             # <<<<<<<<<<<<<<
@@ -5172,59 +5389,59 @@ static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(C
  */
   }
 
-  /* "chmengine/utils/__init__.py":203
+  /* "chmengine/utils/__init__.py":223
  *         return checkmate_score(board, depth)
  *     # See docs on time-complexity of calculate_chess_move_heatmap_with_better_discount
  *     heatmap_transposed: NDArray[float64] = calculate_chess_move_heatmap_with_better_discount(             # <<<<<<<<<<<<<<
  *         board=board,
  *         depth=depth
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_calculate_chess_move_heatmap_wit); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_calculate_chess_move_heatmap_wit); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 223, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "chmengine/utils/__init__.py":204
+  /* "chmengine/utils/__init__.py":224
  *     # See docs on time-complexity of calculate_chess_move_heatmap_with_better_discount
  *     heatmap_transposed: NDArray[float64] = calculate_chess_move_heatmap_with_better_discount(
  *         board=board,             # <<<<<<<<<<<<<<
  *         depth=depth
  *     ).data.transpose()
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 224, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 204, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 224, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":205
+  /* "chmengine/utils/__init__.py":225
  *     heatmap_transposed: NDArray[float64] = calculate_chess_move_heatmap_with_better_discount(
  *         board=board,
  *         depth=depth             # <<<<<<<<<<<<<<
  *     ).data.transpose()
  *     transposed_white: NDArray[float64] = heatmap_transposed[0]
  */
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_depth, __pyx_v_depth) < 0) __PYX_ERR(0, 204, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_depth, __pyx_v_depth) < 0) __PYX_ERR(0, 224, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":203
+  /* "chmengine/utils/__init__.py":223
  *         return checkmate_score(board, depth)
  *     # See docs on time-complexity of calculate_chess_move_heatmap_with_better_discount
  *     heatmap_transposed: NDArray[float64] = calculate_chess_move_heatmap_with_better_discount(             # <<<<<<<<<<<<<<
  *         board=board,
  *         depth=depth
  */
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 223, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":206
+  /* "chmengine/utils/__init__.py":226
  *         board=board,
  *         depth=depth
  *     ).data.transpose()             # <<<<<<<<<<<<<<
  *     transposed_white: NDArray[float64] = heatmap_transposed[0]
  *     transposed_black: NDArray[float64] = heatmap_transposed[1]
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_data); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 206, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_data); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 226, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_transpose); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 206, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_transpose); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 226, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = NULL;
@@ -5245,68 +5462,68 @@ static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(C
     PyObject *__pyx_callargs[2] = {__pyx_t_1, NULL};
     __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_7, 0+__pyx_t_7);
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 206, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 226, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
   __pyx_v_heatmap_transposed = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":207
+  /* "chmengine/utils/__init__.py":227
  *         depth=depth
  *     ).data.transpose()
  *     transposed_white: NDArray[float64] = heatmap_transposed[0]             # <<<<<<<<<<<<<<
  *     transposed_black: NDArray[float64] = heatmap_transposed[1]
  *     # General move score is the delta in possible moves for White and Black
  */
-  __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_heatmap_transposed, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_heatmap_transposed, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_v_transposed_white = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":208
+  /* "chmengine/utils/__init__.py":228
  *     ).data.transpose()
  *     transposed_white: NDArray[float64] = heatmap_transposed[0]
  *     transposed_black: NDArray[float64] = heatmap_transposed[1]             # <<<<<<<<<<<<<<
  *     # General move score is the delta in possible moves for White and Black
  *     general_move_score: float64 = sum(transposed_white) - sum(transposed_black)
  */
-  __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_heatmap_transposed, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 208, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_heatmap_transposed, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 228, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_v_transposed_black = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":210
+  /* "chmengine/utils/__init__.py":230
  *     transposed_black: NDArray[float64] = heatmap_transposed[1]
  *     # General move score is the delta in possible moves for White and Black
  *     general_move_score: float64 = sum(transposed_white) - sum(transposed_black)             # <<<<<<<<<<<<<<
  *     # King-box move score is the delta in attacking moves on the squares at and around the kings
  *     king_box_white: List[int]
  */
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_v_transposed_white); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 210, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_v_transposed_white); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 230, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_v_transposed_black); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 210, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_v_transposed_black); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 230, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_1 = PyNumber_Subtract(__pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 210, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Subtract(__pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 230, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_general_move_score = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":214
+  /* "chmengine/utils/__init__.py":234
  *     king_box_white: List[int]
  *     king_box_black: List[int]
  *     king_box_white, king_box_black = get_white_and_black_king_boxes(board=board)             # <<<<<<<<<<<<<<
  *     king_box_score: float64 = sum(transposed_white[king_box_black]) - sum(transposed_black[king_box_white])
  *     # Final score is the sum of both
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_get_white_and_black_king_boxes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 214, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_get_white_and_black_king_boxes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 234, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 234, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 214, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 214, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 234, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 234, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -5316,7 +5533,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(C
     if (unlikely(size != 2)) {
       if (size > 2) __Pyx_RaiseTooManyValuesError(2);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      __PYX_ERR(0, 214, __pyx_L1_error)
+      __PYX_ERR(0, 234, __pyx_L1_error)
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
     if (likely(PyTuple_CheckExact(sequence))) {
@@ -5329,15 +5546,15 @@ static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(C
     __Pyx_INCREF(__pyx_t_6);
     __Pyx_INCREF(__pyx_t_1);
     #else
-    __pyx_t_6 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 214, __pyx_L1_error)
+    __pyx_t_6 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 234, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_1 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 214, __pyx_L1_error)
+    __pyx_t_1 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 234, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     #endif
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
     Py_ssize_t index = -1;
-    __pyx_t_2 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 214, __pyx_L1_error)
+    __pyx_t_2 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 234, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_8 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_2);
@@ -5345,7 +5562,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(C
     __Pyx_GOTREF(__pyx_t_6);
     index = 1; __pyx_t_1 = __pyx_t_8(__pyx_t_2); if (unlikely(!__pyx_t_1)) goto __pyx_L7_unpacking_failed;
     __Pyx_GOTREF(__pyx_t_1);
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_8(__pyx_t_2), 2) < 0) __PYX_ERR(0, 214, __pyx_L1_error)
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_8(__pyx_t_2), 2) < 0) __PYX_ERR(0, 234, __pyx_L1_error)
     __pyx_t_8 = NULL;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     goto __pyx_L8_unpacking_done;
@@ -5353,41 +5570,41 @@ static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(C
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_8 = NULL;
     if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    __PYX_ERR(0, 214, __pyx_L1_error)
+    __PYX_ERR(0, 234, __pyx_L1_error)
     __pyx_L8_unpacking_done:;
   }
-  if (!(likely(PyList_CheckExact(__pyx_t_6))||((__pyx_t_6) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_6))) __PYX_ERR(0, 214, __pyx_L1_error)
-  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_1))) __PYX_ERR(0, 214, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_t_6))||((__pyx_t_6) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_6))) __PYX_ERR(0, 234, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_1))) __PYX_ERR(0, 234, __pyx_L1_error)
   __pyx_v_king_box_white = ((PyObject*)__pyx_t_6);
   __pyx_t_6 = 0;
   __pyx_v_king_box_black = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":215
+  /* "chmengine/utils/__init__.py":235
  *     king_box_black: List[int]
  *     king_box_white, king_box_black = get_white_and_black_king_boxes(board=board)
  *     king_box_score: float64 = sum(transposed_white[king_box_black]) - sum(transposed_black[king_box_white])             # <<<<<<<<<<<<<<
  *     # Final score is the sum of both
  *     return float64(general_move_score + king_box_score)
  */
-  __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_transposed_white, __pyx_v_king_box_black); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 215, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_transposed_white, __pyx_v_king_box_black); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 215, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_transposed_black, __pyx_v_king_box_white); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 215, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_transposed_black, __pyx_v_king_box_white); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 215, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyNumber_Subtract(__pyx_t_1, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 215, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Subtract(__pyx_t_1, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_king_box_score = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":217
+  /* "chmengine/utils/__init__.py":237
  *     king_box_score: float64 = sum(transposed_white[king_box_black]) - sum(transposed_black[king_box_white])
  *     # Final score is the sum of both
  *     return float64(general_move_score + king_box_score)             # <<<<<<<<<<<<<<
@@ -5395,9 +5612,9 @@ static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(C
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 217, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 237, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_1 = PyNumber_Add(__pyx_v_general_move_score, __pyx_v_king_box_score); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 217, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Add(__pyx_v_general_move_score, __pyx_v_king_box_score); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 237, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = NULL;
   __pyx_t_7 = 0;
@@ -5418,7 +5635,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(C
     __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_7, 1+__pyx_t_7);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 217, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 237, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
@@ -5426,7 +5643,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(C
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/utils/__init__.py":141
+  /* "chmengine/utils/__init__.py":161
  * 
  * 
  * def calculate_white_minus_black_score(             # <<<<<<<<<<<<<<
@@ -5457,7 +5674,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(C
   return __pyx_r;
 }
 
-/* "chmengine/utils/__init__.py":236
+/* "chmengine/utils/__init__.py":256
  * 
  * 
  * def get_static_value(piece: Piece) -> int:             # <<<<<<<<<<<<<<
@@ -5466,16 +5683,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_8calculate_white_minus_black_score(C
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_11get_static_value(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_5utils_13get_static_value(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_10get_static_value, "Retrieve the static movement-based value for a given chess piece.\n\n    This function returns a fixed integer value representing the maximum number of\n    moves that the specified piece can make on an empty board. These values serve\n    as a simple heuristic for piece mobility.\n\n    Parameters\n    ----------\n    piece : chess.Piece\n        The chess piece for which to look up the static move value.\n\n    Returns\n    -------\n    int\n        The static movement value for the piece, or 0 if the piece is not in the map.\n    ");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_11get_static_value = {"get_static_value", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_11get_static_value, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_10get_static_value};
-static PyObject *__pyx_pw_9chmengine_5utils_11get_static_value(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_12get_static_value, "Retrieve the static movement-based value for a given chess piece.\n\n    This function returns a fixed integer value representing the maximum number of\n    moves that the specified piece can make on an empty board. These values serve\n    as a simple heuristic for piece mobility.\n\n    Parameters\n    ----------\n    piece : chess.Piece\n        The chess piece for which to look up the static move value.\n\n    Returns\n    -------\n    int\n        The static movement value for the piece, or 0 if the piece is not in the map.\n    ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_13get_static_value = {"get_static_value", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_13get_static_value, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_12get_static_value};
+static PyObject *__pyx_pw_9chmengine_5utils_13get_static_value(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -5519,12 +5736,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 236, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 256, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "get_static_value") < 0)) __PYX_ERR(0, 236, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "get_static_value") < 0)) __PYX_ERR(0, 256, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -5535,7 +5752,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_static_value", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 236, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("get_static_value", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 256, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -5549,7 +5766,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_9chmengine_5utils_10get_static_value(__pyx_self, __pyx_v_piece);
+  __pyx_r = __pyx_pf_9chmengine_5utils_12get_static_value(__pyx_self, __pyx_v_piece);
 
   /* function exit code */
   {
@@ -5562,7 +5779,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_5utils_10get_static_value(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_piece) {
+static PyObject *__pyx_pf_9chmengine_5utils_12get_static_value(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_piece) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -5574,7 +5791,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_10get_static_value(CYTHON_UNUSED PyO
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_static_value", 1);
 
-  /* "chmengine/utils/__init__.py":253
+  /* "chmengine/utils/__init__.py":273
  *         The static movement value for the piece, or 0 if the piece is not in the map.
  *     """
  *     return max_moves_map.get(piece, 0)             # <<<<<<<<<<<<<<
@@ -5582,9 +5799,9 @@ static PyObject *__pyx_pf_9chmengine_5utils_10get_static_value(CYTHON_UNUSED PyO
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_max_moves_map); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 253, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_max_moves_map); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 273, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_get); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 253, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_get); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 273, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -5605,16 +5822,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_10get_static_value(CYTHON_UNUSED PyO
     PyObject *__pyx_callargs[3] = {__pyx_t_2, __pyx_v_piece, __pyx_int_0};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_4, 2+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 253, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 273, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
-  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_1))) __PYX_ERR(0, 253, __pyx_L1_error)
+  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_1))) __PYX_ERR(0, 273, __pyx_L1_error)
   __pyx_r = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/utils/__init__.py":236
+  /* "chmengine/utils/__init__.py":256
  * 
  * 
  * def get_static_value(piece: Piece) -> int:             # <<<<<<<<<<<<<<
@@ -5635,7 +5852,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_10get_static_value(CYTHON_UNUSED PyO
   return __pyx_r;
 }
 
-/* "chmengine/utils/__init__.py":256
+/* "chmengine/utils/__init__.py":276
  * 
  * 
  * def get_static_delta_score(heatmap: ChessMoveHeatmap) -> float64:             # <<<<<<<<<<<<<<
@@ -5644,16 +5861,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_10get_static_value(CYTHON_UNUSED PyO
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_13get_static_delta_score(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_5utils_15get_static_delta_score(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_12get_static_delta_score, "Compute the static piece-based delta score from a ChessMoveHeatmap.\n\n    This function multiplies each piece\342\200\231s move count (from the heatmap\342\200\231s `piece_counts`)\n    by its static movement value (from `get_static_value`) and returns the difference\n    between White\342\200\231s total and Black\342\200\231s total. It serves as a simple material\342\200\223mobility heuristic.\n\n    Parameters\n    ----------\n    heatmap : heatmaps.ChessMoveHeatmap\n        The heatmap object containing per-piece move counts for each square.\n\n    Returns\n    -------\n    numpy.float64\n        The signed delta score: (White\342\200\231s static total) \342\210\222 (Black\342\200\231s static total).\n    ");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_13get_static_delta_score = {"get_static_delta_score", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_13get_static_delta_score, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_12get_static_delta_score};
-static PyObject *__pyx_pw_9chmengine_5utils_13get_static_delta_score(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_14get_static_delta_score, "Compute the static piece-based delta score from a ChessMoveHeatmap.\n\n    This function multiplies each piece\342\200\231s move count (from the heatmap\342\200\231s `piece_counts`)\n    by its static movement value (from `get_static_value`) and returns the difference\n    between White\342\200\231s total and Black\342\200\231s total. It serves as a simple material\342\200\223mobility heuristic.\n\n    Parameters\n    ----------\n    heatmap : heatmaps.ChessMoveHeatmap\n        The heatmap object containing per-piece move counts for each square.\n\n    Returns\n    -------\n    numpy.float64\n        The signed delta score: (White\342\200\231s static total) \342\210\222 (Black\342\200\231s static total).\n    ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_15get_static_delta_score = {"get_static_delta_score", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_15get_static_delta_score, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_14get_static_delta_score};
+static PyObject *__pyx_pw_9chmengine_5utils_15get_static_delta_score(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -5697,12 +5914,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 256, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 276, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "get_static_delta_score") < 0)) __PYX_ERR(0, 256, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "get_static_delta_score") < 0)) __PYX_ERR(0, 276, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -5713,7 +5930,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_static_delta_score", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 256, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("get_static_delta_score", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 276, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -5727,7 +5944,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_9chmengine_5utils_12get_static_delta_score(__pyx_self, __pyx_v_heatmap);
+  __pyx_r = __pyx_pf_9chmengine_5utils_14get_static_delta_score(__pyx_self, __pyx_v_heatmap);
 
   /* function exit code */
   {
@@ -5740,7 +5957,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_5utils_12get_static_delta_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_heatmap) {
+static PyObject *__pyx_pf_9chmengine_5utils_14get_static_delta_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_heatmap) {
   PyObject *__pyx_v_piece_map = NULL;
   PyObject *__pyx_v_white_sum = NULL;
   PyObject *__pyx_v_black_sum = NULL;
@@ -5769,26 +5986,26 @@ static PyObject *__pyx_pf_9chmengine_5utils_12get_static_delta_score(CYTHON_UNUS
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_static_delta_score", 1);
 
-  /* "chmengine/utils/__init__.py":273
+  /* "chmengine/utils/__init__.py":293
  *         The signed delta score: (Whites static total)  (Blacks static total).
  *     """
  *     piece_map: NDArray[Dict[Piece, float64]] = heatmap.piece_counts             # <<<<<<<<<<<<<<
  *     white_sum: float64 = float64(0.0)
  *     black_sum: float64 = float64(0.0)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_heatmap, __pyx_n_s_piece_counts); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 273, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_heatmap, __pyx_n_s_piece_counts); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 293, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_piece_map = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":274
+  /* "chmengine/utils/__init__.py":294
  *     """
  *     piece_map: NDArray[Dict[Piece, float64]] = heatmap.piece_counts
  *     white_sum: float64 = float64(0.0)             # <<<<<<<<<<<<<<
  *     black_sum: float64 = float64(0.0)
  *     piece_dict: Dict[Piece, float64]
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 274, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 294, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -5808,21 +6025,21 @@ static PyObject *__pyx_pf_9chmengine_5utils_12get_static_delta_score(CYTHON_UNUS
     PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_float_0_0};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 274, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 294, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __pyx_v_white_sum = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":275
+  /* "chmengine/utils/__init__.py":295
  *     piece_map: NDArray[Dict[Piece, float64]] = heatmap.piece_counts
  *     white_sum: float64 = float64(0.0)
  *     black_sum: float64 = float64(0.0)             # <<<<<<<<<<<<<<
  *     piece_dict: Dict[Piece, float64]
  *     i: int
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 275, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 295, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -5842,14 +6059,14 @@ static PyObject *__pyx_pf_9chmengine_5utils_12get_static_delta_score(CYTHON_UNUS
     PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_float_0_0};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 275, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 295, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __pyx_v_black_sum = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":278
+  /* "chmengine/utils/__init__.py":298
  *     piece_dict: Dict[Piece, float64]
  *     i: int
  *     for i, piece_dict in enumerate(piece_map):             # <<<<<<<<<<<<<<
@@ -5863,9 +6080,9 @@ static PyObject *__pyx_pf_9chmengine_5utils_12get_static_delta_score(CYTHON_UNUS
     __pyx_t_6 = 0;
     __pyx_t_7 = NULL;
   } else {
-    __pyx_t_6 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_piece_map); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 278, __pyx_L1_error)
+    __pyx_t_6 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_piece_map); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 298, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_7 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 278, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 298, __pyx_L1_error)
   }
   for (;;) {
     if (likely(!__pyx_t_7)) {
@@ -5873,28 +6090,28 @@ static PyObject *__pyx_pf_9chmengine_5utils_12get_static_delta_score(CYTHON_UNUS
         {
           Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
           #if !CYTHON_ASSUME_SAFE_MACROS
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 278, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 298, __pyx_L1_error)
           #endif
           if (__pyx_t_6 >= __pyx_temp) break;
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_2 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_6); __Pyx_INCREF(__pyx_t_2); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 278, __pyx_L1_error)
+        __pyx_t_2 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_6); __Pyx_INCREF(__pyx_t_2); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 298, __pyx_L1_error)
         #else
-        __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 278, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 298, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         #endif
       } else {
         {
           Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_1);
           #if !CYTHON_ASSUME_SAFE_MACROS
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 278, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 298, __pyx_L1_error)
           #endif
           if (__pyx_t_6 >= __pyx_temp) break;
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_6); __Pyx_INCREF(__pyx_t_2); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 278, __pyx_L1_error)
+        __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_6); __Pyx_INCREF(__pyx_t_2); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 298, __pyx_L1_error)
         #else
-        __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 278, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 298, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         #endif
       }
@@ -5904,24 +6121,24 @@ static PyObject *__pyx_pf_9chmengine_5utils_12get_static_delta_score(CYTHON_UNUS
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 278, __pyx_L1_error)
+          else __PYX_ERR(0, 298, __pyx_L1_error)
         }
         break;
       }
       __Pyx_GOTREF(__pyx_t_2);
     }
-    if (!(likely(PyDict_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("dict", __pyx_t_2))) __PYX_ERR(0, 278, __pyx_L1_error)
+    if (!(likely(PyDict_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("dict", __pyx_t_2))) __PYX_ERR(0, 298, __pyx_L1_error)
     __Pyx_XDECREF_SET(__pyx_v_piece_dict, ((PyObject*)__pyx_t_2));
     __pyx_t_2 = 0;
     __Pyx_INCREF(__pyx_t_5);
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_5);
-    __pyx_t_2 = PyNumber_Add(__pyx_t_5, __pyx_int_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 278, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Add(__pyx_t_5, __pyx_int_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 298, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5);
     __pyx_t_5 = ((PyObject*)__pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "chmengine/utils/__init__.py":281
+    /* "chmengine/utils/__init__.py":301
  *         piece: Piece
  *         count: float64
  *         for piece, count in piece_dict.items():             # <<<<<<<<<<<<<<
@@ -5931,9 +6148,9 @@ static PyObject *__pyx_pf_9chmengine_5utils_12get_static_delta_score(CYTHON_UNUS
     __pyx_t_8 = 0;
     if (unlikely(__pyx_v_piece_dict == Py_None)) {
       PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "items");
-      __PYX_ERR(0, 281, __pyx_L1_error)
+      __PYX_ERR(0, 301, __pyx_L1_error)
     }
-    __pyx_t_3 = __Pyx_dict_iterator(__pyx_v_piece_dict, 1, __pyx_n_s_items, (&__pyx_t_9), (&__pyx_t_10)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 281, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_dict_iterator(__pyx_v_piece_dict, 1, __pyx_n_s_items, (&__pyx_t_9), (&__pyx_t_10)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 301, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_XDECREF(__pyx_t_2);
     __pyx_t_2 = __pyx_t_3;
@@ -5941,7 +6158,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_12get_static_delta_score(CYTHON_UNUS
     while (1) {
       __pyx_t_12 = __Pyx_dict_iter_next(__pyx_t_2, __pyx_t_9, &__pyx_t_8, &__pyx_t_3, &__pyx_t_11, NULL, __pyx_t_10);
       if (unlikely(__pyx_t_12 == 0)) break;
-      if (unlikely(__pyx_t_12 == -1)) __PYX_ERR(0, 281, __pyx_L1_error)
+      if (unlikely(__pyx_t_12 == -1)) __PYX_ERR(0, 301, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_GOTREF(__pyx_t_11);
       __Pyx_XDECREF_SET(__pyx_v_piece, __pyx_t_3);
@@ -5949,45 +6166,45 @@ static PyObject *__pyx_pf_9chmengine_5utils_12get_static_delta_score(CYTHON_UNUS
       __Pyx_XDECREF_SET(__pyx_v_count, __pyx_t_11);
       __pyx_t_11 = 0;
 
-      /* "chmengine/utils/__init__.py":282
+      /* "chmengine/utils/__init__.py":302
  *         count: float64
  *         for piece, count in piece_dict.items():
  *             if piece.color:             # <<<<<<<<<<<<<<
  *                 white_sum += count * get_static_value(piece=piece)
  *             else:
  */
-      __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_piece, __pyx_n_s_color); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 282, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_piece, __pyx_n_s_color); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 302, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_11);
-      __pyx_t_13 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely((__pyx_t_13 < 0))) __PYX_ERR(0, 282, __pyx_L1_error)
+      __pyx_t_13 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely((__pyx_t_13 < 0))) __PYX_ERR(0, 302, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       if (__pyx_t_13) {
 
-        /* "chmengine/utils/__init__.py":283
+        /* "chmengine/utils/__init__.py":303
  *         for piece, count in piece_dict.items():
  *             if piece.color:
  *                 white_sum += count * get_static_value(piece=piece)             # <<<<<<<<<<<<<<
  *             else:
  *                 black_sum += count * get_static_value(piece=piece)
  */
-        __Pyx_GetModuleGlobalName(__pyx_t_11, __pyx_n_s_get_static_value); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 283, __pyx_L1_error)
+        __Pyx_GetModuleGlobalName(__pyx_t_11, __pyx_n_s_get_static_value); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 303, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 283, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 303, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_piece, __pyx_v_piece) < 0) __PYX_ERR(0, 283, __pyx_L1_error)
-        __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 283, __pyx_L1_error)
+        if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_piece, __pyx_v_piece) < 0) __PYX_ERR(0, 303, __pyx_L1_error)
+        __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 303, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __pyx_t_3 = PyNumber_Multiply(__pyx_v_count, __pyx_t_14); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 283, __pyx_L1_error)
+        __pyx_t_3 = PyNumber_Multiply(__pyx_v_count, __pyx_t_14); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 303, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-        __pyx_t_14 = PyNumber_InPlaceAdd(__pyx_v_white_sum, __pyx_t_3); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 283, __pyx_L1_error)
+        __pyx_t_14 = PyNumber_InPlaceAdd(__pyx_v_white_sum, __pyx_t_3); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 303, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __Pyx_DECREF_SET(__pyx_v_white_sum, __pyx_t_14);
         __pyx_t_14 = 0;
 
-        /* "chmengine/utils/__init__.py":282
+        /* "chmengine/utils/__init__.py":302
  *         count: float64
  *         for piece, count in piece_dict.items():
  *             if piece.color:             # <<<<<<<<<<<<<<
@@ -5997,7 +6214,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_12get_static_delta_score(CYTHON_UNUS
         goto __pyx_L7;
       }
 
-      /* "chmengine/utils/__init__.py":285
+      /* "chmengine/utils/__init__.py":305
  *                 white_sum += count * get_static_value(piece=piece)
  *             else:
  *                 black_sum += count * get_static_value(piece=piece)             # <<<<<<<<<<<<<<
@@ -6005,19 +6222,19 @@ static PyObject *__pyx_pf_9chmengine_5utils_12get_static_delta_score(CYTHON_UNUS
  * 
  */
       /*else*/ {
-        __Pyx_GetModuleGlobalName(__pyx_t_14, __pyx_n_s_get_static_value); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 285, __pyx_L1_error)
+        __Pyx_GetModuleGlobalName(__pyx_t_14, __pyx_n_s_get_static_value); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 305, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
-        __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 285, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 305, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_piece, __pyx_v_piece) < 0) __PYX_ERR(0, 285, __pyx_L1_error)
-        __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 285, __pyx_L1_error)
+        if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_piece, __pyx_v_piece) < 0) __PYX_ERR(0, 305, __pyx_L1_error)
+        __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 305, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __pyx_t_3 = PyNumber_Multiply(__pyx_v_count, __pyx_t_11); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 285, __pyx_L1_error)
+        __pyx_t_3 = PyNumber_Multiply(__pyx_v_count, __pyx_t_11); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 305, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_11 = PyNumber_InPlaceAdd(__pyx_v_black_sum, __pyx_t_3); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 285, __pyx_L1_error)
+        __pyx_t_11 = PyNumber_InPlaceAdd(__pyx_v_black_sum, __pyx_t_3); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 305, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __Pyx_DECREF_SET(__pyx_v_black_sum, __pyx_t_11);
@@ -6027,7 +6244,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_12get_static_delta_score(CYTHON_UNUS
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "chmengine/utils/__init__.py":278
+    /* "chmengine/utils/__init__.py":298
  *     piece_dict: Dict[Piece, float64]
  *     i: int
  *     for i, piece_dict in enumerate(piece_map):             # <<<<<<<<<<<<<<
@@ -6038,7 +6255,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_12get_static_delta_score(CYTHON_UNUS
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "chmengine/utils/__init__.py":286
+  /* "chmengine/utils/__init__.py":306
  *             else:
  *                 black_sum += count * get_static_value(piece=piece)
  *     return float64(white_sum - black_sum)             # <<<<<<<<<<<<<<
@@ -6046,9 +6263,9 @@ static PyObject *__pyx_pf_9chmengine_5utils_12get_static_delta_score(CYTHON_UNUS
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 286, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 306, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_11 = PyNumber_Subtract(__pyx_v_white_sum, __pyx_v_black_sum); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 286, __pyx_L1_error)
+  __pyx_t_11 = PyNumber_Subtract(__pyx_v_white_sum, __pyx_v_black_sum); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 306, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -6069,7 +6286,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_12get_static_delta_score(CYTHON_UNUS
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 286, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 306, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
@@ -6077,7 +6294,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_12get_static_delta_score(CYTHON_UNUS
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/utils/__init__.py":256
+  /* "chmengine/utils/__init__.py":276
  * 
  * 
  * def get_static_delta_score(heatmap: ChessMoveHeatmap) -> float64:             # <<<<<<<<<<<<<<
@@ -6108,7 +6325,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_12get_static_delta_score(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "chmengine/utils/__init__.py":289
+/* "chmengine/utils/__init__.py":309
  * 
  * 
  * def calculate_better_white_minus_black_score(             # <<<<<<<<<<<<<<
@@ -6116,7 +6333,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_12get_static_delta_score(CYTHON_UNUS
  *         depth: int = 1,
  */
 
-static PyObject *__pyx_pf_9chmengine_5utils_42__defaults__(CYTHON_UNUSED PyObject *__pyx_self) {
+static PyObject *__pyx_pf_9chmengine_5utils_44__defaults__(CYTHON_UNUSED PyObject *__pyx_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -6126,18 +6343,18 @@ static PyObject *__pyx_pf_9chmengine_5utils_42__defaults__(CYTHON_UNUSED PyObjec
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__defaults__", 1);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_self)->__pyx_arg_depth);
   __Pyx_GIVEREF(__Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_self)->__pyx_arg_depth);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_self)->__pyx_arg_depth)) __PYX_ERR(0, 289, __pyx_L1_error);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 289, __pyx_L1_error)
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_self)->__pyx_arg_depth)) __PYX_ERR(0, 309, __pyx_L1_error);
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 289, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 309, __pyx_L1_error);
   __Pyx_INCREF(Py_None);
   __Pyx_GIVEREF(Py_None);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, Py_None)) __PYX_ERR(0, 289, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, Py_None)) __PYX_ERR(0, 309, __pyx_L1_error);
   __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -6156,16 +6373,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_42__defaults__(CYTHON_UNUSED PyObjec
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_15calculate_better_white_minus_black_score(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_5utils_17calculate_better_white_minus_black_score(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_14calculate_better_white_minus_black_score, "Compute an enhanced White-minus-Black evaluation for a given board position.\n\n    This function combines three components into a single signed score:\n\n    1. **Game termination**:\n        - If the position is a draw, returns 0.\n        - If the position is checkmate, returns a high upper-bound value via `checkmate_score()`.\n    2. **Heatmap mobility delta**:\n        Difference in total possible moves between White and Black, computed by\n        `calculate_chess_move_heatmap_with_better_discount()`.\n    3. **King-box mobility delta**:\n        Difference in potential moves targeting the opponent\342\200\231s king region and defending\n        the own king region.\n    4. **Static delta**:\n        Material-mobility delta from `get_static_delta_score()`.\n\n    The final score is the sum of the mobility delta, king-box delta, and static delta,\n    representing White\342\200\231s advantage minus Black\342\200\231s.\n\n    Parameters\n    ----------\n    board : chess.Board\n        The chess board position to evaluate.\n    depth : int, default: 1\n        Recursion depth for the heatmap calculation. Higher values yield more thorough\n        mobility estimates at the cost of increased computation time.\n\n    Returns\n    -------\n    numpy.float64\n        The signed evaluation: positive values favor White, negative values favor Black.\n\n    Notes\n    -----\n    - Time complexity is O(b^d) for the heatmap portion (where b \342\211\210 35 is the branching factor).\n    - Checkmate scores use an upper-bound heuristic: all remaining pieces can move to every square,\n        scaled by (depth + 1).\n    ");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_15calculate_better_white_minus_black_score = {"calculate_better_white_minus_black_score", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_15calculate_better_white_minus_black_score, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_14calculate_better_white_minus_black_score};
-static PyObject *__pyx_pw_9chmengine_5utils_15calculate_better_white_minus_black_score(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_16calculate_better_white_minus_black_score, "Compute an enhanced White-minus-Black evaluation for a given board position.\n\n    This function combines three components into a single signed score:\n\n    1. **Game termination**:\n        - If the position is a draw, returns 0.\n        - If the position is checkmate, returns a high upper-bound value via `checkmate_score()`.\n    2. **Heatmap mobility delta**:\n        Difference in total possible moves between White and Black, computed by\n        `calculate_chess_move_heatmap_with_better_discount()`.\n    3. **King-box mobility delta**:\n        Difference in potential moves targeting the opponent\342\200\231s king region and defending\n        the own king region.\n    4. **Static delta**:\n        Material-mobility delta from `get_static_delta_score()`.\n\n    The final score is the sum of the mobility delta, king-box delta, and static delta,\n    representing White\342\200\231s advantage minus Black\342\200\231s.\n\n    Parameters\n    ----------\n    board : chess.Board\n        The chess board position to evaluate.\n    depth : int, default: 1\n        Recursion depth for the heatmap calculation. Higher values yield more thorough\n        mobility estimates at the cost of increased computation time.\n\n    Returns\n    -------\n    numpy.float64\n        The signed evaluation: positive values favor White, negative values favor Black.\n\n    Notes\n    -----\n    - Time complexity is O(b^d) for the heatmap portion (where b \342\211\210 35 is the branching factor).\n    - Checkmate scores use an upper-bound heuristic: all remaining pieces can move to every square,\n        scaled by (depth + 1).\n    ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_17calculate_better_white_minus_black_score = {"calculate_better_white_minus_black_score", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_17calculate_better_white_minus_black_score, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_16calculate_better_white_minus_black_score};
+static PyObject *__pyx_pw_9chmengine_5utils_17calculate_better_white_minus_black_score(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -6214,19 +6431,19 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 289, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 309, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_depth);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 289, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 309, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "calculate_better_white_minus_black_score") < 0)) __PYX_ERR(0, 289, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "calculate_better_white_minus_black_score") < 0)) __PYX_ERR(0, 309, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -6242,7 +6459,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("calculate_better_white_minus_black_score", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 289, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("calculate_better_white_minus_black_score", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 309, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -6256,8 +6473,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_depth), (&PyInt_Type), 0, "depth", 1))) __PYX_ERR(0, 291, __pyx_L1_error)
-  __pyx_r = __pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black_score(__pyx_self, __pyx_v_board, __pyx_v_depth);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_depth), (&PyInt_Type), 0, "depth", 1))) __PYX_ERR(0, 311, __pyx_L1_error)
+  __pyx_r = __pyx_pf_9chmengine_5utils_16calculate_better_white_minus_black_score(__pyx_self, __pyx_v_board, __pyx_v_depth);
 
   /* function exit code */
   goto __pyx_L0;
@@ -6274,7 +6491,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth) {
+static PyObject *__pyx_pf_9chmengine_5utils_16calculate_better_white_minus_black_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth) {
   PyObject *__pyx_v_outcome = NULL;
   PyObject *__pyx_v_is_terminated = NULL;
   PyObject *__pyx_v_heatmap = NULL;
@@ -6301,26 +6518,26 @@ static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("calculate_better_white_minus_black_score", 1);
 
-  /* "chmengine/utils/__init__.py":332
+  /* "chmengine/utils/__init__.py":352
  *     """
  *     # Early exit if Game Over.
  *     outcome: Optional[Outcome] = board.outcome(claim_draw=True)             # <<<<<<<<<<<<<<
  *     is_terminated: bool = outcome is not None
  *     if is_terminated and is_draw(outcome.winner):
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_board, __pyx_n_s_outcome); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 332, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_board, __pyx_n_s_outcome); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 352, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 332, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 352, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_claim_draw, Py_True) < 0) __PYX_ERR(0, 332, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 332, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_claim_draw, Py_True) < 0) __PYX_ERR(0, 352, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 352, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_outcome = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":333
+  /* "chmengine/utils/__init__.py":353
  *     # Early exit if Game Over.
  *     outcome: Optional[Outcome] = board.outcome(claim_draw=True)
  *     is_terminated: bool = outcome is not None             # <<<<<<<<<<<<<<
@@ -6328,27 +6545,27 @@ static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black
  *         # Draws are easy to score: zero
  */
   __pyx_t_4 = (__pyx_v_outcome != Py_None);
-  __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 333, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 353, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_v_is_terminated = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":334
+  /* "chmengine/utils/__init__.py":354
  *     outcome: Optional[Outcome] = board.outcome(claim_draw=True)
  *     is_terminated: bool = outcome is not None
  *     if is_terminated and is_draw(outcome.winner):             # <<<<<<<<<<<<<<
  *         # Draws are easy to score: zero
  *         return float64(0)
  */
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_v_is_terminated); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 334, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_v_is_terminated); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 354, __pyx_L1_error)
   if (__pyx_t_5) {
   } else {
     __pyx_t_4 = __pyx_t_5;
     goto __pyx_L4_bool_binop_done;
   }
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_is_draw); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 334, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_is_draw); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 354, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_outcome, __pyx_n_s_winner); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 334, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_outcome, __pyx_n_s_winner); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 354, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_6 = NULL;
   __pyx_t_7 = 0;
@@ -6369,17 +6586,17 @@ static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black
     __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_7, 1+__pyx_t_7);
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 334, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 354, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 334, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 354, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_4 = __pyx_t_5;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_4) {
 
-    /* "chmengine/utils/__init__.py":336
+    /* "chmengine/utils/__init__.py":356
  *     if is_terminated and is_draw(outcome.winner):
  *         # Draws are easy to score: zero
  *         return float64(0)             # <<<<<<<<<<<<<<
@@ -6387,7 +6604,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black
  *         # Checkmate score is an unrealistically high upperbound in possible moves (all pieces can move to every square.)
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 336, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 356, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_1 = NULL;
     __pyx_t_7 = 0;
@@ -6407,7 +6624,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black
       PyObject *__pyx_callargs[2] = {__pyx_t_1, __pyx_int_0};
       __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_7, 1+__pyx_t_7);
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 336, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 356, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
@@ -6415,7 +6632,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "chmengine/utils/__init__.py":334
+    /* "chmengine/utils/__init__.py":354
  *     outcome: Optional[Outcome] = board.outcome(claim_draw=True)
  *     is_terminated: bool = outcome is not None
  *     if is_terminated and is_draw(outcome.winner):             # <<<<<<<<<<<<<<
@@ -6424,17 +6641,17 @@ static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black
  */
   }
 
-  /* "chmengine/utils/__init__.py":337
+  /* "chmengine/utils/__init__.py":357
  *         # Draws are easy to score: zero
  *         return float64(0)
  *     if is_terminated:             # <<<<<<<<<<<<<<
  *         # Checkmate score is an unrealistically high upperbound in possible moves (all pieces can move to every square.)
  *         return better_checkmate_score(board, depth)
  */
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_is_terminated); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 337, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_is_terminated); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 357, __pyx_L1_error)
   if (__pyx_t_4) {
 
-    /* "chmengine/utils/__init__.py":339
+    /* "chmengine/utils/__init__.py":359
  *     if is_terminated:
  *         # Checkmate score is an unrealistically high upperbound in possible moves (all pieces can move to every square.)
  *         return better_checkmate_score(board, depth)             # <<<<<<<<<<<<<<
@@ -6442,7 +6659,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black
  *     heatmap: ChessMoveHeatmap = calculate_chess_move_heatmap_with_better_discount(
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_better_checkmate_score); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 339, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_better_checkmate_score); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 359, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_1 = NULL;
     __pyx_t_7 = 0;
@@ -6462,7 +6679,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black
       PyObject *__pyx_callargs[3] = {__pyx_t_1, __pyx_v_board, __pyx_v_depth};
       __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_7, 2+__pyx_t_7);
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 339, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 359, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
@@ -6470,7 +6687,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "chmengine/utils/__init__.py":337
+    /* "chmengine/utils/__init__.py":357
  *         # Draws are easy to score: zero
  *         return float64(0)
  *     if is_terminated:             # <<<<<<<<<<<<<<
@@ -6479,60 +6696,60 @@ static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black
  */
   }
 
-  /* "chmengine/utils/__init__.py":341
+  /* "chmengine/utils/__init__.py":361
  *         return better_checkmate_score(board, depth)
  *     # See docs on time-complexity of calculate_chess_move_heatmap_with_better_discount
  *     heatmap: ChessMoveHeatmap = calculate_chess_move_heatmap_with_better_discount(             # <<<<<<<<<<<<<<
  *         board=board,
  *         depth=depth
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_calculate_chess_move_heatmap_wit); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 341, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_calculate_chess_move_heatmap_wit); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 361, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "chmengine/utils/__init__.py":342
+  /* "chmengine/utils/__init__.py":362
  *     # See docs on time-complexity of calculate_chess_move_heatmap_with_better_discount
  *     heatmap: ChessMoveHeatmap = calculate_chess_move_heatmap_with_better_discount(
  *         board=board,             # <<<<<<<<<<<<<<
  *         depth=depth
  *     )
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 342, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 362, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 342, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 362, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":343
+  /* "chmengine/utils/__init__.py":363
  *     heatmap: ChessMoveHeatmap = calculate_chess_move_heatmap_with_better_discount(
  *         board=board,
  *         depth=depth             # <<<<<<<<<<<<<<
  *     )
  *     heatmap_transposed: NDArray[float64] = heatmap.data.transpose()
  */
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_depth, __pyx_v_depth) < 0) __PYX_ERR(0, 342, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_depth, __pyx_v_depth) < 0) __PYX_ERR(0, 362, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":341
+  /* "chmengine/utils/__init__.py":361
  *         return better_checkmate_score(board, depth)
  *     # See docs on time-complexity of calculate_chess_move_heatmap_with_better_discount
  *     heatmap: ChessMoveHeatmap = calculate_chess_move_heatmap_with_better_discount(             # <<<<<<<<<<<<<<
  *         board=board,
  *         depth=depth
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 341, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 361, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_heatmap = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":345
+  /* "chmengine/utils/__init__.py":365
  *         depth=depth
  *     )
  *     heatmap_transposed: NDArray[float64] = heatmap.data.transpose()             # <<<<<<<<<<<<<<
  *     transposed_white: NDArray[float64] = heatmap_transposed[0]
  *     transposed_black: NDArray[float64] = heatmap_transposed[1]
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_heatmap, __pyx_n_s_data); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 345, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_heatmap, __pyx_n_s_data); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 365, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_transpose); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 345, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_transpose); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 365, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -6553,68 +6770,68 @@ static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black
     PyObject *__pyx_callargs[2] = {__pyx_t_2, NULL};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_7, 0+__pyx_t_7);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 345, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 365, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __pyx_v_heatmap_transposed = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":346
+  /* "chmengine/utils/__init__.py":366
  *     )
  *     heatmap_transposed: NDArray[float64] = heatmap.data.transpose()
  *     transposed_white: NDArray[float64] = heatmap_transposed[0]             # <<<<<<<<<<<<<<
  *     transposed_black: NDArray[float64] = heatmap_transposed[1]
  *     # General move score is the delta in possible moves for White and Black
  */
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_heatmap_transposed, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 346, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_heatmap_transposed, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 366, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_transposed_white = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":347
+  /* "chmengine/utils/__init__.py":367
  *     heatmap_transposed: NDArray[float64] = heatmap.data.transpose()
  *     transposed_white: NDArray[float64] = heatmap_transposed[0]
  *     transposed_black: NDArray[float64] = heatmap_transposed[1]             # <<<<<<<<<<<<<<
  *     # General move score is the delta in possible moves for White and Black
  *     general_move_score: float64 = sum(transposed_white) - sum(transposed_black)
  */
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_heatmap_transposed, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 347, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_heatmap_transposed, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 367, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_transposed_black = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":349
+  /* "chmengine/utils/__init__.py":369
  *     transposed_black: NDArray[float64] = heatmap_transposed[1]
  *     # General move score is the delta in possible moves for White and Black
  *     general_move_score: float64 = sum(transposed_white) - sum(transposed_black)             # <<<<<<<<<<<<<<
  *     # King-box move score is the delta in attacking moves on the squares at and around the kings
  *     king_box_white: List[int]
  */
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_v_transposed_white); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 349, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_v_transposed_white); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 369, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_v_transposed_black); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 349, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_v_transposed_black); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 369, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = PyNumber_Subtract(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 349, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Subtract(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 369, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_general_move_score = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "chmengine/utils/__init__.py":353
+  /* "chmengine/utils/__init__.py":373
  *     king_box_white: List[int]
  *     king_box_black: List[int]
  *     king_box_white, king_box_black = get_white_and_black_king_boxes(board=board)             # <<<<<<<<<<<<<<
  *     king_box_score: float64 = sum(transposed_white[king_box_black]) - sum(transposed_black[king_box_white])
  *     # static piece delta score
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_get_white_and_black_king_boxes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 353, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_get_white_and_black_king_boxes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 373, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 353, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 373, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 353, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 353, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 373, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 373, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -6624,7 +6841,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black
     if (unlikely(size != 2)) {
       if (size > 2) __Pyx_RaiseTooManyValuesError(2);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      __PYX_ERR(0, 353, __pyx_L1_error)
+      __PYX_ERR(0, 373, __pyx_L1_error)
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
     if (likely(PyTuple_CheckExact(sequence))) {
@@ -6637,15 +6854,15 @@ static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black
     __Pyx_INCREF(__pyx_t_3);
     __Pyx_INCREF(__pyx_t_2);
     #else
-    __pyx_t_3 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 353, __pyx_L1_error)
+    __pyx_t_3 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 373, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 353, __pyx_L1_error)
+    __pyx_t_2 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 373, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     #endif
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   } else {
     Py_ssize_t index = -1;
-    __pyx_t_6 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 353, __pyx_L1_error)
+    __pyx_t_6 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 373, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_8 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_6);
@@ -6653,7 +6870,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black
     __Pyx_GOTREF(__pyx_t_3);
     index = 1; __pyx_t_2 = __pyx_t_8(__pyx_t_6); if (unlikely(!__pyx_t_2)) goto __pyx_L7_unpacking_failed;
     __Pyx_GOTREF(__pyx_t_2);
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_8(__pyx_t_6), 2) < 0) __PYX_ERR(0, 353, __pyx_L1_error)
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_8(__pyx_t_6), 2) < 0) __PYX_ERR(0, 373, __pyx_L1_error)
     __pyx_t_8 = NULL;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     goto __pyx_L8_unpacking_done;
@@ -6661,60 +6878,60 @@ static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_t_8 = NULL;
     if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    __PYX_ERR(0, 353, __pyx_L1_error)
+    __PYX_ERR(0, 373, __pyx_L1_error)
     __pyx_L8_unpacking_done:;
   }
-  if (!(likely(PyList_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_3))) __PYX_ERR(0, 353, __pyx_L1_error)
-  if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_2))) __PYX_ERR(0, 353, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_3))) __PYX_ERR(0, 373, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_2))) __PYX_ERR(0, 373, __pyx_L1_error)
   __pyx_v_king_box_white = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
   __pyx_v_king_box_black = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "chmengine/utils/__init__.py":354
+  /* "chmengine/utils/__init__.py":374
  *     king_box_black: List[int]
  *     king_box_white, king_box_black = get_white_and_black_king_boxes(board=board)
  *     king_box_score: float64 = sum(transposed_white[king_box_black]) - sum(transposed_black[king_box_white])             # <<<<<<<<<<<<<<
  *     # static piece delta score
  *     static_delta_score = get_static_delta_score(heatmap=heatmap)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_v_transposed_white, __pyx_v_king_box_black); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 354, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_v_transposed_white, __pyx_v_king_box_black); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 374, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 354, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 374, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_v_transposed_black, __pyx_v_king_box_white); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 354, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_v_transposed_black, __pyx_v_king_box_white); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 374, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 354, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 374, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_Subtract(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 354, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Subtract(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 374, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_king_box_score = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":356
+  /* "chmengine/utils/__init__.py":376
  *     king_box_score: float64 = sum(transposed_white[king_box_black]) - sum(transposed_black[king_box_white])
  *     # static piece delta score
  *     static_delta_score = get_static_delta_score(heatmap=heatmap)             # <<<<<<<<<<<<<<
  *     # Final score is the sum of all
  *     return float64(general_move_score + king_box_score + static_delta_score)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_get_static_delta_score); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 356, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_get_static_delta_score); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 376, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 356, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 376, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_heatmap, __pyx_v_heatmap) < 0) __PYX_ERR(0, 356, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 356, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_heatmap, __pyx_v_heatmap) < 0) __PYX_ERR(0, 376, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 376, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_static_delta_score = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "chmengine/utils/__init__.py":358
+  /* "chmengine/utils/__init__.py":378
  *     static_delta_score = get_static_delta_score(heatmap=heatmap)
  *     # Final score is the sum of all
  *     return float64(general_move_score + king_box_score + static_delta_score)             # <<<<<<<<<<<<<<
@@ -6722,11 +6939,11 @@ static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_float64); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 358, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_float64); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 378, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyNumber_Add(__pyx_v_general_move_score, __pyx_v_king_box_score); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 358, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Add(__pyx_v_general_move_score, __pyx_v_king_box_score); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 378, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = PyNumber_Add(__pyx_t_1, __pyx_v_static_delta_score); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 358, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Add(__pyx_t_1, __pyx_v_static_delta_score); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 378, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = NULL;
@@ -6748,7 +6965,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black
     __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_7, 1+__pyx_t_7);
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 358, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 378, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
@@ -6756,7 +6973,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/utils/__init__.py":289
+  /* "chmengine/utils/__init__.py":309
  * 
  * 
  * def calculate_better_white_minus_black_score(             # <<<<<<<<<<<<<<
@@ -6789,7 +7006,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black
   return __pyx_r;
 }
 
-/* "chmengine/utils/__init__.py":361
+/* "chmengine/utils/__init__.py":381
  * 
  * 
  * def better_checkmate_score(board: Board, depth: int) -> float64:             # <<<<<<<<<<<<<<
@@ -6798,16 +7015,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_14calculate_better_white_minus_black
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_17better_checkmate_score(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_5utils_19better_checkmate_score(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_16better_checkmate_score, "Compute an enhanced checkmate evaluation score.\n\n    This function returns a large-magnitude score to represent a checkmate\n    outcome, scaled by the number of pieces remaining, the search depth, and\n    an additional safety margin multiplier. By multiplying by 64 (squares)\n    and 27 (maximum queen moves), we ensure that non-checkmate positional\n    scores remain bounded in comparison.\n\n    The sign encodes which side is to move:\n    - If it is White\342\200\231s turn (i.e., White has just been checkmated), returns a\n        large negative score (bad for White).\n    - If it is Black\342\200\231s turn (i.e., Black has just been checkmated), returns\n        a large positive score (good for White).\n\n    Parameters\n    ----------\n    board : chess.Board\n        The board position where checkmate has occurred.\n    depth : int\n        The recursion depth used in the evaluation, included to amplify the score\n        further for deeper searches.\n\n    Returns\n    -------\n    numpy.float64\n        A signed checkmate score with large magnitude, where positive values\n        favor White and negative values favor Black.\n    ");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_17better_checkmate_score = {"better_checkmate_score", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_17better_checkmate_score, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_16better_checkmate_score};
-static PyObject *__pyx_pw_9chmengine_5utils_17better_checkmate_score(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_18better_checkmate_score, "Compute an enhanced checkmate evaluation score.\n\n    This function returns a large-magnitude score to represent a checkmate\n    outcome, scaled by the number of pieces remaining, the search depth, and\n    an additional safety margin multiplier. By multiplying by 64 (squares)\n    and 27 (maximum queen moves), we ensure that non-checkmate positional\n    scores remain bounded in comparison.\n\n    The sign encodes which side is to move:\n    - If it is White\342\200\231s turn (i.e., White has just been checkmated), returns a\n        large negative score (bad for White).\n    - If it is Black\342\200\231s turn (i.e., Black has just been checkmated), returns\n        a large positive score (good for White).\n\n    Parameters\n    ----------\n    board : chess.Board\n        The board position where checkmate has occurred.\n    depth : int\n        The recursion depth used in the evaluation, included to amplify the score\n        further for deeper searches.\n\n    Returns\n    -------\n    numpy.float64\n        A signed checkmate score with large magnitude, where positive values\n        favor White and negative values favor Black.\n    ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_19better_checkmate_score = {"better_checkmate_score", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_19better_checkmate_score, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_18better_checkmate_score};
+static PyObject *__pyx_pw_9chmengine_5utils_19better_checkmate_score(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -6854,7 +7071,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 361, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 381, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -6862,14 +7079,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 361, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 381, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("better_checkmate_score", 1, 2, 2, 1); __PYX_ERR(0, 361, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("better_checkmate_score", 1, 2, 2, 1); __PYX_ERR(0, 381, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "better_checkmate_score") < 0)) __PYX_ERR(0, 361, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "better_checkmate_score") < 0)) __PYX_ERR(0, 381, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -6882,7 +7099,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("better_checkmate_score", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 361, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("better_checkmate_score", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 381, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -6896,8 +7113,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_depth), (&PyInt_Type), 0, "depth", 1))) __PYX_ERR(0, 361, __pyx_L1_error)
-  __pyx_r = __pyx_pf_9chmengine_5utils_16better_checkmate_score(__pyx_self, __pyx_v_board, __pyx_v_depth);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_depth), (&PyInt_Type), 0, "depth", 1))) __PYX_ERR(0, 381, __pyx_L1_error)
+  __pyx_r = __pyx_pf_9chmengine_5utils_18better_checkmate_score(__pyx_self, __pyx_v_board, __pyx_v_depth);
 
   /* function exit code */
   goto __pyx_L0;
@@ -6914,7 +7131,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_5utils_16better_checkmate_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth) {
+static PyObject *__pyx_pf_9chmengine_5utils_18better_checkmate_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth) {
   PyObject *__pyx_v_mate_score_abs = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -6930,34 +7147,34 @@ static PyObject *__pyx_pf_9chmengine_5utils_16better_checkmate_score(CYTHON_UNUS
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("better_checkmate_score", 1);
 
-  /* "chmengine/utils/__init__.py":390
+  /* "chmengine/utils/__init__.py":410
  *         favor White and negative values favor Black.
  *     """
  *     mate_score_abs: float64 = float64(pieces_count_from_board(board=board) * (depth + 1) * 64 * 27)             # <<<<<<<<<<<<<<
  *     return float64(-mate_score_abs) if board.turn else mate_score_abs
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 390, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 410, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_pieces_count_from_board); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 390, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_pieces_count_from_board); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 410, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 390, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 410, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 390, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 390, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 410, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 410, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyNumber_Add(__pyx_v_depth, __pyx_int_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 390, __pyx_L1_error)
+  __pyx_t_4 = PyNumber_Add(__pyx_v_depth, __pyx_int_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 410, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = PyNumber_Multiply(__pyx_t_5, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 390, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Multiply(__pyx_t_5, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 410, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyInt_MultiplyObjC(__pyx_t_3, __pyx_int_64, 64, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 390, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_MultiplyObjC(__pyx_t_3, __pyx_int_64, 64, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 410, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyInt_MultiplyObjC(__pyx_t_4, __pyx_int_27, 27, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 390, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_MultiplyObjC(__pyx_t_4, __pyx_int_27, 27, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 410, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_4 = NULL;
@@ -6979,14 +7196,14 @@ static PyObject *__pyx_pf_9chmengine_5utils_16better_checkmate_score(CYTHON_UNUS
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 390, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 410, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __pyx_v_mate_score_abs = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":391
+  /* "chmengine/utils/__init__.py":411
  *     """
  *     mate_score_abs: float64 = float64(pieces_count_from_board(board=board) * (depth + 1) * 64 * 27)
  *     return float64(-mate_score_abs) if board.turn else mate_score_abs             # <<<<<<<<<<<<<<
@@ -6994,14 +7211,14 @@ static PyObject *__pyx_pf_9chmengine_5utils_16better_checkmate_score(CYTHON_UNUS
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_board, __pyx_n_s_turn); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 391, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_board, __pyx_n_s_turn); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 411, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 391, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 411, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_7) {
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_float64); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 391, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_float64); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 411, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = PyNumber_Negative(__pyx_v_mate_score_abs); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 391, __pyx_L1_error)
+    __pyx_t_4 = PyNumber_Negative(__pyx_v_mate_score_abs); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 411, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_5 = NULL;
     __pyx_t_6 = 0;
@@ -7022,7 +7239,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_16better_checkmate_score(CYTHON_UNUS
       __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 391, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 411, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
@@ -7036,7 +7253,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_16better_checkmate_score(CYTHON_UNUS
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/utils/__init__.py":361
+  /* "chmengine/utils/__init__.py":381
  * 
  * 
  * def better_checkmate_score(board: Board, depth: int) -> float64:             # <<<<<<<<<<<<<<
@@ -7060,7 +7277,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_16better_checkmate_score(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "chmengine/utils/__init__.py":394
+/* "chmengine/utils/__init__.py":414
  * 
  * 
  * def checkmate_score(board: Board, depth: int) -> float64:             # <<<<<<<<<<<<<<
@@ -7069,16 +7286,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_16better_checkmate_score(CYTHON_UNUS
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_19checkmate_score(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_5utils_21checkmate_score(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_18checkmate_score, "Return a large signed score for checkmate results.\n\n    The score is scaled by number of remaining pieces and depth.\n    Negative if the current player is mated, positive if they deliver mate.\n\n    Parameters\n    ----------\n    board : chess.Board\n        Board state assumed to be in a terminal position.\n    depth : int\n        Search depth used, for scaling the final score.\n\n    Returns\n    -------\n    numpy.float64\n        Large positive or negative score depending on the outcome.\n\n    Examples\n    --------\n    >>> from chmengine.utils import is_draw\n    >>> from chess import Board\n    >>> blk_win_board = Board('8/2p2p2/4p3/2k5/8/6q1/2K5/1r1q4 w - - 2 59')\n    >>> checkmate_score(board=blk_win_board, depth=1)\n    -1024.0\n    ");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_19checkmate_score = {"checkmate_score", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_19checkmate_score, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_18checkmate_score};
-static PyObject *__pyx_pw_9chmengine_5utils_19checkmate_score(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_20checkmate_score, "Return a large signed score for checkmate results.\n\n    The score is scaled by number of remaining pieces and depth.\n    Negative if the current player is mated, positive if they deliver mate.\n\n    Parameters\n    ----------\n    board : chess.Board\n        Board state assumed to be in a terminal position.\n    depth : int\n        Search depth used, for scaling the final score.\n\n    Returns\n    -------\n    numpy.float64\n        Large positive or negative score depending on the outcome.\n\n    Examples\n    --------\n    >>> from chmengine.utils import is_draw\n    >>> from chess import Board\n    >>> blk_win_board = Board('8/2p2p2/4p3/2k5/8/6q1/2K5/1r1q4 w - - 2 59')\n    >>> checkmate_score(board=blk_win_board, depth=1)\n    -1024.0\n    ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_21checkmate_score = {"checkmate_score", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_21checkmate_score, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_20checkmate_score};
+static PyObject *__pyx_pw_9chmengine_5utils_21checkmate_score(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -7125,7 +7342,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 394, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 414, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -7133,14 +7350,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 394, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 414, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("checkmate_score", 1, 2, 2, 1); __PYX_ERR(0, 394, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("checkmate_score", 1, 2, 2, 1); __PYX_ERR(0, 414, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "checkmate_score") < 0)) __PYX_ERR(0, 394, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "checkmate_score") < 0)) __PYX_ERR(0, 414, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -7153,7 +7370,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("checkmate_score", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 394, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("checkmate_score", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 414, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -7167,8 +7384,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_depth), (&PyInt_Type), 0, "depth", 1))) __PYX_ERR(0, 394, __pyx_L1_error)
-  __pyx_r = __pyx_pf_9chmengine_5utils_18checkmate_score(__pyx_self, __pyx_v_board, __pyx_v_depth);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_depth), (&PyInt_Type), 0, "depth", 1))) __PYX_ERR(0, 414, __pyx_L1_error)
+  __pyx_r = __pyx_pf_9chmengine_5utils_20checkmate_score(__pyx_self, __pyx_v_board, __pyx_v_depth);
 
   /* function exit code */
   goto __pyx_L0;
@@ -7185,7 +7402,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_5utils_18checkmate_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth) {
+static PyObject *__pyx_pf_9chmengine_5utils_20checkmate_score(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth) {
   PyObject *__pyx_v_mate_score_abs = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -7201,31 +7418,31 @@ static PyObject *__pyx_pf_9chmengine_5utils_18checkmate_score(CYTHON_UNUSED PyOb
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("checkmate_score", 1);
 
-  /* "chmengine/utils/__init__.py":420
+  /* "chmengine/utils/__init__.py":440
  *     -1024.0
  *     """
  *     mate_score_abs: float64 = float64(pieces_count_from_board(board=board) * (depth + 1) * 64)             # <<<<<<<<<<<<<<
  *     return float64(-mate_score_abs) if board.turn else mate_score_abs
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 420, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 440, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_pieces_count_from_board); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 420, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_pieces_count_from_board); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 440, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 420, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 440, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 420, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 420, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 440, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 440, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyNumber_Add(__pyx_v_depth, __pyx_int_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 420, __pyx_L1_error)
+  __pyx_t_4 = PyNumber_Add(__pyx_v_depth, __pyx_int_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 440, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = PyNumber_Multiply(__pyx_t_5, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 420, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Multiply(__pyx_t_5, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 440, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyInt_MultiplyObjC(__pyx_t_3, __pyx_int_64, 64, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 420, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_MultiplyObjC(__pyx_t_3, __pyx_int_64, 64, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 440, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -7247,14 +7464,14 @@ static PyObject *__pyx_pf_9chmengine_5utils_18checkmate_score(CYTHON_UNUSED PyOb
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 420, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 440, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __pyx_v_mate_score_abs = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":421
+  /* "chmengine/utils/__init__.py":441
  *     """
  *     mate_score_abs: float64 = float64(pieces_count_from_board(board=board) * (depth + 1) * 64)
  *     return float64(-mate_score_abs) if board.turn else mate_score_abs             # <<<<<<<<<<<<<<
@@ -7262,14 +7479,14 @@ static PyObject *__pyx_pf_9chmengine_5utils_18checkmate_score(CYTHON_UNUSED PyOb
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_board, __pyx_n_s_turn); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 421, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_board, __pyx_n_s_turn); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 441, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 421, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 441, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_7) {
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_float64); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 421, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_float64); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 441, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = PyNumber_Negative(__pyx_v_mate_score_abs); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 421, __pyx_L1_error)
+    __pyx_t_3 = PyNumber_Negative(__pyx_v_mate_score_abs); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 441, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_5 = NULL;
     __pyx_t_6 = 0;
@@ -7290,7 +7507,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_18checkmate_score(CYTHON_UNUSED PyOb
       __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 421, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 441, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
@@ -7304,7 +7521,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_18checkmate_score(CYTHON_UNUSED PyOb
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/utils/__init__.py":394
+  /* "chmengine/utils/__init__.py":414
  * 
  * 
  * def checkmate_score(board: Board, depth: int) -> float64:             # <<<<<<<<<<<<<<
@@ -7328,7 +7545,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_18checkmate_score(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "chmengine/utils/__init__.py":424
+/* "chmengine/utils/__init__.py":444
  * 
  * 
  * def get_white_and_black_king_boxes(board: Board) -> Tuple[List[int], List[int]]:             # <<<<<<<<<<<<<<
@@ -7337,16 +7554,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_18checkmate_score(CYTHON_UNUSED PyOb
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_21get_white_and_black_king_boxes(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_5utils_23get_white_and_black_king_boxes(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_20get_white_and_black_king_boxes, "Compute the list of squares surrounding each king on the board.\n\n    These \"king boxes\" are used for evaluating positional pressure around the kings.\n\n    Parameters\n    ----------\n    board : Board\n        The board from which to extract king square surroundings.\n\n    Returns\n    -------\n    Tuple[List[int], List[int]]\n        Tuple containing white king box and black king box square indices.\n        (white_king_box, black_king_box)\n\n    Examples\n    --------\n    >>> from chmengine.utils import is_draw\n    >>> from chess import Board\n    >>> white_kb, black_kb = get_white_and_black_king_boxes(board=Board())\n    >>> sorted(white_kb), sorted(black_kb)\n    ([3, 4, 5, 11, 12, 13], [51, 52, 53, 59, 60, 61])\n    ");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_21get_white_and_black_king_boxes = {"get_white_and_black_king_boxes", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_21get_white_and_black_king_boxes, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_20get_white_and_black_king_boxes};
-static PyObject *__pyx_pw_9chmengine_5utils_21get_white_and_black_king_boxes(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_22get_white_and_black_king_boxes, "Compute the list of squares surrounding each king on the board.\n\n    These \"king boxes\" are used for evaluating positional pressure around the kings.\n\n    Parameters\n    ----------\n    board : Board\n        The board from which to extract king square surroundings.\n\n    Returns\n    -------\n    Tuple[List[int], List[int]]\n        Tuple containing white king box and black king box square indices.\n        (white_king_box, black_king_box)\n\n    Examples\n    --------\n    >>> from chmengine.utils import is_draw\n    >>> from chess import Board\n    >>> white_kb, black_kb = get_white_and_black_king_boxes(board=Board())\n    >>> sorted(white_kb), sorted(black_kb)\n    ([3, 4, 5, 11, 12, 13], [51, 52, 53, 59, 60, 61])\n    ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_23get_white_and_black_king_boxes = {"get_white_and_black_king_boxes", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_23get_white_and_black_king_boxes, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_22get_white_and_black_king_boxes};
+static PyObject *__pyx_pw_9chmengine_5utils_23get_white_and_black_king_boxes(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -7390,12 +7607,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 424, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 444, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "get_white_and_black_king_boxes") < 0)) __PYX_ERR(0, 424, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "get_white_and_black_king_boxes") < 0)) __PYX_ERR(0, 444, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -7406,7 +7623,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_white_and_black_king_boxes", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 424, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("get_white_and_black_king_boxes", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 444, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -7420,7 +7637,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_9chmengine_5utils_20get_white_and_black_king_boxes(__pyx_self, __pyx_v_board);
+  __pyx_r = __pyx_pf_9chmengine_5utils_22get_white_and_black_king_boxes(__pyx_self, __pyx_v_board);
 
   /* function exit code */
   {
@@ -7433,7 +7650,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_5utils_20get_white_and_black_king_boxes(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board) {
+static PyObject *__pyx_pf_9chmengine_5utils_22get_white_and_black_king_boxes(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board) {
   PyObject *__pyx_v_white_king_square = 0;
   PyObject *__pyx_v_black_king_square = 0;
   PyObject *__pyx_v_white_king_box = 0;
@@ -7459,14 +7676,14 @@ static PyObject *__pyx_pf_9chmengine_5utils_20get_white_and_black_king_boxes(CYT
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_white_and_black_king_boxes", 1);
 
-  /* "chmengine/utils/__init__.py":448
+  /* "chmengine/utils/__init__.py":468
  *     ([3, 4, 5, 11, 12, 13], [51, 52, 53, 59, 60, 61])
  *     """
  *     white_king_square: int = board.king(True)             # <<<<<<<<<<<<<<
  *     black_king_square: int = board.king(False)
  *     white_king_box: List[int] = [white_king_square]
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_board, __pyx_n_s_king); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 448, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_board, __pyx_n_s_king); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 468, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -7486,22 +7703,22 @@ static PyObject *__pyx_pf_9chmengine_5utils_20get_white_and_black_king_boxes(CYT
     PyObject *__pyx_callargs[2] = {__pyx_t_3, Py_True};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 448, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 468, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_1))) __PYX_ERR(0, 448, __pyx_L1_error)
+  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_1))) __PYX_ERR(0, 468, __pyx_L1_error)
   __pyx_v_white_king_square = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":449
+  /* "chmengine/utils/__init__.py":469
  *     """
  *     white_king_square: int = board.king(True)
  *     black_king_square: int = board.king(False)             # <<<<<<<<<<<<<<
  *     white_king_box: List[int] = [white_king_square]
  *     black_king_box: List[int] = [black_king_square]
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_board, __pyx_n_s_king); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 449, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_board, __pyx_n_s_king); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 469, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -7521,45 +7738,45 @@ static PyObject *__pyx_pf_9chmengine_5utils_20get_white_and_black_king_boxes(CYT
     PyObject *__pyx_callargs[2] = {__pyx_t_3, Py_False};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 449, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 469, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_1))) __PYX_ERR(0, 449, __pyx_L1_error)
+  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_1))) __PYX_ERR(0, 469, __pyx_L1_error)
   __pyx_v_black_king_square = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":450
+  /* "chmengine/utils/__init__.py":470
  *     white_king_square: int = board.king(True)
  *     black_king_square: int = board.king(False)
  *     white_king_box: List[int] = [white_king_square]             # <<<<<<<<<<<<<<
  *     black_king_box: List[int] = [black_king_square]
  *     long: int
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 450, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 470, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_white_king_square);
   __Pyx_GIVEREF(__pyx_v_white_king_square);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 0, __pyx_v_white_king_square)) __PYX_ERR(0, 450, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 0, __pyx_v_white_king_square)) __PYX_ERR(0, 470, __pyx_L1_error);
   __pyx_v_white_king_box = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":451
+  /* "chmengine/utils/__init__.py":471
  *     black_king_square: int = board.king(False)
  *     white_king_box: List[int] = [white_king_square]
  *     black_king_box: List[int] = [black_king_square]             # <<<<<<<<<<<<<<
  *     long: int
  *     for long in (-1, 0, 1):
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 451, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 471, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_black_king_square);
   __Pyx_GIVEREF(__pyx_v_black_king_square);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 0, __pyx_v_black_king_square)) __PYX_ERR(0, 451, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 0, __pyx_v_black_king_square)) __PYX_ERR(0, 471, __pyx_L1_error);
   __pyx_v_black_king_box = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":453
+  /* "chmengine/utils/__init__.py":473
  *     black_king_box: List[int] = [black_king_square]
  *     long: int
  *     for long in (-1, 0, 1):             # <<<<<<<<<<<<<<
@@ -7571,16 +7788,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_20get_white_and_black_king_boxes(CYT
   for (;;) {
     if (__pyx_t_5 >= 3) break;
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_5); __Pyx_INCREF(__pyx_t_2); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 453, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_5); __Pyx_INCREF(__pyx_t_2); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 473, __pyx_L1_error)
     #else
-    __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 453, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 473, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     #endif
-    if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_2))) __PYX_ERR(0, 453, __pyx_L1_error)
+    if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_2))) __PYX_ERR(0, 473, __pyx_L1_error)
     __Pyx_XDECREF_SET(__pyx_v_long, ((PyObject*)__pyx_t_2));
     __pyx_t_2 = 0;
 
-    /* "chmengine/utils/__init__.py":455
+    /* "chmengine/utils/__init__.py":475
  *     for long in (-1, 0, 1):
  *         lat: int
  *         for lat in (-8, 0, +8):             # <<<<<<<<<<<<<<
@@ -7592,53 +7809,53 @@ static PyObject *__pyx_pf_9chmengine_5utils_20get_white_and_black_king_boxes(CYT
     for (;;) {
       if (__pyx_t_6 >= 3) break;
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-      __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 455, __pyx_L1_error)
+      __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 475, __pyx_L1_error)
       #else
-      __pyx_t_3 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 455, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 475, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       #endif
-      if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_3))) __PYX_ERR(0, 455, __pyx_L1_error)
+      if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_3))) __PYX_ERR(0, 475, __pyx_L1_error)
       __Pyx_XDECREF_SET(__pyx_v_lat, ((PyObject*)__pyx_t_3));
       __pyx_t_3 = 0;
 
-      /* "chmengine/utils/__init__.py":456
+      /* "chmengine/utils/__init__.py":476
  *         lat: int
  *         for lat in (-8, 0, +8):
  *             wks_box_id: int = white_king_square + long + lat             # <<<<<<<<<<<<<<
  *             bks_box_id: int = black_king_square + long + lat
  *             if is_valid_king_box_square(wks_box_id, white_king_square):
  */
-      __pyx_t_3 = PyNumber_Add(__pyx_v_white_king_square, __pyx_v_long); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 456, __pyx_L1_error)
+      __pyx_t_3 = PyNumber_Add(__pyx_v_white_king_square, __pyx_v_long); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 476, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_7 = PyNumber_Add(__pyx_t_3, __pyx_v_lat); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 456, __pyx_L1_error)
+      __pyx_t_7 = PyNumber_Add(__pyx_t_3, __pyx_v_lat); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 476, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_XDECREF_SET(__pyx_v_wks_box_id, ((PyObject*)__pyx_t_7));
       __pyx_t_7 = 0;
 
-      /* "chmengine/utils/__init__.py":457
+      /* "chmengine/utils/__init__.py":477
  *         for lat in (-8, 0, +8):
  *             wks_box_id: int = white_king_square + long + lat
  *             bks_box_id: int = black_king_square + long + lat             # <<<<<<<<<<<<<<
  *             if is_valid_king_box_square(wks_box_id, white_king_square):
  *                 white_king_box.append(wks_box_id)
  */
-      __pyx_t_7 = PyNumber_Add(__pyx_v_black_king_square, __pyx_v_long); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 457, __pyx_L1_error)
+      __pyx_t_7 = PyNumber_Add(__pyx_v_black_king_square, __pyx_v_long); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 477, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_3 = PyNumber_Add(__pyx_t_7, __pyx_v_lat); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 457, __pyx_L1_error)
+      __pyx_t_3 = PyNumber_Add(__pyx_t_7, __pyx_v_lat); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 477, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_XDECREF_SET(__pyx_v_bks_box_id, ((PyObject*)__pyx_t_3));
       __pyx_t_3 = 0;
 
-      /* "chmengine/utils/__init__.py":458
+      /* "chmengine/utils/__init__.py":478
  *             wks_box_id: int = white_king_square + long + lat
  *             bks_box_id: int = black_king_square + long + lat
  *             if is_valid_king_box_square(wks_box_id, white_king_square):             # <<<<<<<<<<<<<<
  *                 white_king_box.append(wks_box_id)
  *             if is_valid_king_box_square(bks_box_id, black_king_square):
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_is_valid_king_box_square); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 458, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_is_valid_king_box_square); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 478, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __pyx_t_8 = NULL;
       __pyx_t_4 = 0;
@@ -7658,24 +7875,24 @@ static PyObject *__pyx_pf_9chmengine_5utils_20get_white_and_black_king_boxes(CYT
         PyObject *__pyx_callargs[3] = {__pyx_t_8, __pyx_v_wks_box_id, __pyx_v_white_king_square};
         __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_7, __pyx_callargs+1-__pyx_t_4, 2+__pyx_t_4);
         __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 458, __pyx_L1_error)
+        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 478, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       }
-      __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 458, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 478, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       if (__pyx_t_9) {
 
-        /* "chmengine/utils/__init__.py":459
+        /* "chmengine/utils/__init__.py":479
  *             bks_box_id: int = black_king_square + long + lat
  *             if is_valid_king_box_square(wks_box_id, white_king_square):
  *                 white_king_box.append(wks_box_id)             # <<<<<<<<<<<<<<
  *             if is_valid_king_box_square(bks_box_id, black_king_square):
  *                 black_king_box.append(bks_box_id)
  */
-        __pyx_t_10 = __Pyx_PyList_Append(__pyx_v_white_king_box, __pyx_v_wks_box_id); if (unlikely(__pyx_t_10 == ((int)-1))) __PYX_ERR(0, 459, __pyx_L1_error)
+        __pyx_t_10 = __Pyx_PyList_Append(__pyx_v_white_king_box, __pyx_v_wks_box_id); if (unlikely(__pyx_t_10 == ((int)-1))) __PYX_ERR(0, 479, __pyx_L1_error)
 
-        /* "chmengine/utils/__init__.py":458
+        /* "chmengine/utils/__init__.py":478
  *             wks_box_id: int = white_king_square + long + lat
  *             bks_box_id: int = black_king_square + long + lat
  *             if is_valid_king_box_square(wks_box_id, white_king_square):             # <<<<<<<<<<<<<<
@@ -7684,14 +7901,14 @@ static PyObject *__pyx_pf_9chmengine_5utils_20get_white_and_black_king_boxes(CYT
  */
       }
 
-      /* "chmengine/utils/__init__.py":460
+      /* "chmengine/utils/__init__.py":480
  *             if is_valid_king_box_square(wks_box_id, white_king_square):
  *                 white_king_box.append(wks_box_id)
  *             if is_valid_king_box_square(bks_box_id, black_king_square):             # <<<<<<<<<<<<<<
  *                 black_king_box.append(bks_box_id)
  *     return white_king_box, black_king_box
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_is_valid_king_box_square); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 460, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_is_valid_king_box_square); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 480, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __pyx_t_8 = NULL;
       __pyx_t_4 = 0;
@@ -7711,24 +7928,24 @@ static PyObject *__pyx_pf_9chmengine_5utils_20get_white_and_black_king_boxes(CYT
         PyObject *__pyx_callargs[3] = {__pyx_t_8, __pyx_v_bks_box_id, __pyx_v_black_king_square};
         __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_7, __pyx_callargs+1-__pyx_t_4, 2+__pyx_t_4);
         __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 460, __pyx_L1_error)
+        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 480, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       }
-      __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 460, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 480, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       if (__pyx_t_9) {
 
-        /* "chmengine/utils/__init__.py":461
+        /* "chmengine/utils/__init__.py":481
  *                 white_king_box.append(wks_box_id)
  *             if is_valid_king_box_square(bks_box_id, black_king_square):
  *                 black_king_box.append(bks_box_id)             # <<<<<<<<<<<<<<
  *     return white_king_box, black_king_box
  * 
  */
-        __pyx_t_10 = __Pyx_PyList_Append(__pyx_v_black_king_box, __pyx_v_bks_box_id); if (unlikely(__pyx_t_10 == ((int)-1))) __PYX_ERR(0, 461, __pyx_L1_error)
+        __pyx_t_10 = __Pyx_PyList_Append(__pyx_v_black_king_box, __pyx_v_bks_box_id); if (unlikely(__pyx_t_10 == ((int)-1))) __PYX_ERR(0, 481, __pyx_L1_error)
 
-        /* "chmengine/utils/__init__.py":460
+        /* "chmengine/utils/__init__.py":480
  *             if is_valid_king_box_square(wks_box_id, white_king_square):
  *                 white_king_box.append(wks_box_id)
  *             if is_valid_king_box_square(bks_box_id, black_king_square):             # <<<<<<<<<<<<<<
@@ -7737,7 +7954,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_20get_white_and_black_king_boxes(CYT
  */
       }
 
-      /* "chmengine/utils/__init__.py":455
+      /* "chmengine/utils/__init__.py":475
  *     for long in (-1, 0, 1):
  *         lat: int
  *         for lat in (-8, 0, +8):             # <<<<<<<<<<<<<<
@@ -7747,7 +7964,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_20get_white_and_black_king_boxes(CYT
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "chmengine/utils/__init__.py":453
+    /* "chmengine/utils/__init__.py":473
  *     black_king_box: List[int] = [black_king_square]
  *     long: int
  *     for long in (-1, 0, 1):             # <<<<<<<<<<<<<<
@@ -7757,7 +7974,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_20get_white_and_black_king_boxes(CYT
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":462
+  /* "chmengine/utils/__init__.py":482
  *             if is_valid_king_box_square(bks_box_id, black_king_square):
  *                 black_king_box.append(bks_box_id)
  *     return white_king_box, black_king_box             # <<<<<<<<<<<<<<
@@ -7765,19 +7982,19 @@ static PyObject *__pyx_pf_9chmengine_5utils_20get_white_and_black_king_boxes(CYT
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 462, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 482, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_white_king_box);
   __Pyx_GIVEREF(__pyx_v_white_king_box);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_white_king_box)) __PYX_ERR(0, 462, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_white_king_box)) __PYX_ERR(0, 482, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_black_king_box);
   __Pyx_GIVEREF(__pyx_v_black_king_box);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_black_king_box)) __PYX_ERR(0, 462, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_black_king_box)) __PYX_ERR(0, 482, __pyx_L1_error);
   __pyx_r = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/utils/__init__.py":424
+  /* "chmengine/utils/__init__.py":444
  * 
  * 
  * def get_white_and_black_king_boxes(board: Board) -> Tuple[List[int], List[int]]:             # <<<<<<<<<<<<<<
@@ -7808,7 +8025,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_20get_white_and_black_king_boxes(CYT
   return __pyx_r;
 }
 
-/* "chmengine/utils/__init__.py":465
+/* "chmengine/utils/__init__.py":485
  * 
  * 
  * def insert_ordered_worst_to_best(             # <<<<<<<<<<<<<<
@@ -7817,16 +8034,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_20get_white_and_black_king_boxes(CYT
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_23insert_ordered_worst_to_best(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_5utils_25insert_ordered_worst_to_best(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_22insert_ordered_worst_to_best, "Insert a move into a list of moves sorted from worst to best.\n\n    Parameters\n    ----------\n    ordered_picks : List[Pick]\n        Existing list sorted in ascending order of score.\n    pick : Pick\n    ");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_23insert_ordered_worst_to_best = {"insert_ordered_worst_to_best", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_23insert_ordered_worst_to_best, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_22insert_ordered_worst_to_best};
-static PyObject *__pyx_pw_9chmengine_5utils_23insert_ordered_worst_to_best(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_24insert_ordered_worst_to_best, "Insert a move into a list of moves sorted from worst to best.\n\n    Parameters\n    ----------\n    ordered_picks : List[Pick]\n        Existing list sorted in ascending order of score.\n    pick : Pick\n    ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_25insert_ordered_worst_to_best = {"insert_ordered_worst_to_best", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_25insert_ordered_worst_to_best, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_24insert_ordered_worst_to_best};
+static PyObject *__pyx_pw_9chmengine_5utils_25insert_ordered_worst_to_best(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -7873,7 +8090,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 465, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 485, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -7881,14 +8098,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 465, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 485, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("insert_ordered_worst_to_best", 1, 2, 2, 1); __PYX_ERR(0, 465, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("insert_ordered_worst_to_best", 1, 2, 2, 1); __PYX_ERR(0, 485, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "insert_ordered_worst_to_best") < 0)) __PYX_ERR(0, 465, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "insert_ordered_worst_to_best") < 0)) __PYX_ERR(0, 485, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -7901,7 +8118,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("insert_ordered_worst_to_best", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 465, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("insert_ordered_worst_to_best", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 485, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -7915,8 +8132,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_ordered_picks), (&PyList_Type), 0, "ordered_picks", 1))) __PYX_ERR(0, 466, __pyx_L1_error)
-  __pyx_r = __pyx_pf_9chmengine_5utils_22insert_ordered_worst_to_best(__pyx_self, __pyx_v_ordered_picks, __pyx_v_pick);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_ordered_picks), (&PyList_Type), 0, "ordered_picks", 1))) __PYX_ERR(0, 486, __pyx_L1_error)
+  __pyx_r = __pyx_pf_9chmengine_5utils_24insert_ordered_worst_to_best(__pyx_self, __pyx_v_ordered_picks, __pyx_v_pick);
 
   /* function exit code */
   goto __pyx_L0;
@@ -7933,9 +8150,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_5utils_22insert_ordered_worst_to_best(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_ordered_picks, PyObject *__pyx_v_pick) {
+static PyObject *__pyx_pf_9chmengine_5utils_24insert_ordered_worst_to_best(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_ordered_picks, PyObject *__pyx_v_pick) {
   PyObject *__pyx_v_ordered_index = 0;
-  PyObject *__pyx_8genexpr1__pyx_v_p = NULL;
+  PyObject *__pyx_8genexpr2__pyx_v_p = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -7951,17 +8168,17 @@ static PyObject *__pyx_pf_9chmengine_5utils_22insert_ordered_worst_to_best(CYTHO
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("insert_ordered_worst_to_best", 1);
 
-  /* "chmengine/utils/__init__.py":478
+  /* "chmengine/utils/__init__.py":498
  *     """
  *     # response moves are inserted to form worst scores to best order (perspective of current player)
  *     ordered_index: int = bisect_left([p.score for p in ordered_picks], pick.score)             # <<<<<<<<<<<<<<
  *     ordered_picks.insert(ordered_index, pick)
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_bisect_left); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 478, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_bisect_left); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 498, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   { /* enter inner scope */
-    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 478, __pyx_L5_error)
+    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 498, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = __pyx_v_ordered_picks; __Pyx_INCREF(__pyx_t_4);
     __pyx_t_5 = 0;
@@ -7969,32 +8186,32 @@ static PyObject *__pyx_pf_9chmengine_5utils_22insert_ordered_worst_to_best(CYTHO
       {
         Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_4);
         #if !CYTHON_ASSUME_SAFE_MACROS
-        if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 478, __pyx_L5_error)
+        if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 498, __pyx_L5_error)
         #endif
         if (__pyx_t_5 >= __pyx_temp) break;
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-      __pyx_t_6 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_6); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 478, __pyx_L5_error)
+      __pyx_t_6 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_6); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 498, __pyx_L5_error)
       #else
-      __pyx_t_6 = __Pyx_PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 478, __pyx_L5_error)
+      __pyx_t_6 = __Pyx_PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 498, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_6);
       #endif
-      __Pyx_XDECREF_SET(__pyx_8genexpr1__pyx_v_p, __pyx_t_6);
+      __Pyx_XDECREF_SET(__pyx_8genexpr2__pyx_v_p, __pyx_t_6);
       __pyx_t_6 = 0;
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_8genexpr1__pyx_v_p, __pyx_n_s_score); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 478, __pyx_L5_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_8genexpr2__pyx_v_p, __pyx_n_s_score); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 498, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_6);
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_6))) __PYX_ERR(0, 478, __pyx_L5_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_6))) __PYX_ERR(0, 498, __pyx_L5_error)
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     }
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __Pyx_XDECREF(__pyx_8genexpr1__pyx_v_p); __pyx_8genexpr1__pyx_v_p = 0;
+    __Pyx_XDECREF(__pyx_8genexpr2__pyx_v_p); __pyx_8genexpr2__pyx_v_p = 0;
     goto __pyx_L9_exit_scope;
     __pyx_L5_error:;
-    __Pyx_XDECREF(__pyx_8genexpr1__pyx_v_p); __pyx_8genexpr1__pyx_v_p = 0;
+    __Pyx_XDECREF(__pyx_8genexpr2__pyx_v_p); __pyx_8genexpr2__pyx_v_p = 0;
     goto __pyx_L1_error;
     __pyx_L9_exit_scope:;
   } /* exit inner scope */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_pick, __pyx_n_s_score); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 478, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_pick, __pyx_n_s_score); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 498, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_6 = NULL;
   __pyx_t_7 = 0;
@@ -8016,25 +8233,25 @@ static PyObject *__pyx_pf_9chmengine_5utils_22insert_ordered_worst_to_best(CYTHO
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 478, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 498, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_1))) __PYX_ERR(0, 478, __pyx_L1_error)
+  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_1))) __PYX_ERR(0, 498, __pyx_L1_error)
   __pyx_v_ordered_index = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":479
+  /* "chmengine/utils/__init__.py":499
  *     # response moves are inserted to form worst scores to best order (perspective of current player)
  *     ordered_index: int = bisect_left([p.score for p in ordered_picks], pick.score)
  *     ordered_picks.insert(ordered_index, pick)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_5 = __Pyx_PyIndex_AsSsize_t(__pyx_v_ordered_index); if (unlikely((__pyx_t_5 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 479, __pyx_L1_error)
-  __pyx_t_8 = PyList_Insert(__pyx_v_ordered_picks, __pyx_t_5, __pyx_v_pick); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 479, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyIndex_AsSsize_t(__pyx_v_ordered_index); if (unlikely((__pyx_t_5 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 499, __pyx_L1_error)
+  __pyx_t_8 = PyList_Insert(__pyx_v_ordered_picks, __pyx_t_5, __pyx_v_pick); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 499, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":465
+  /* "chmengine/utils/__init__.py":485
  * 
  * 
  * def insert_ordered_worst_to_best(             # <<<<<<<<<<<<<<
@@ -8055,13 +8272,13 @@ static PyObject *__pyx_pf_9chmengine_5utils_22insert_ordered_worst_to_best(CYTHO
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_ordered_index);
-  __Pyx_XDECREF(__pyx_8genexpr1__pyx_v_p);
+  __Pyx_XDECREF(__pyx_8genexpr2__pyx_v_p);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "chmengine/utils/__init__.py":482
+/* "chmengine/utils/__init__.py":502
  * 
  * 
  * def insert_ordered_best_to_worst(             # <<<<<<<<<<<<<<
@@ -8070,16 +8287,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_22insert_ordered_worst_to_best(CYTHO
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_25insert_ordered_best_to_worst(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_5utils_27insert_ordered_best_to_worst(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_24insert_ordered_best_to_worst, "Insert a move into a list of moves sorted from best to worst.\n\n    Parameters\n    ----------\n    ordered_picks : List[Pick]\n        Existing list sorted in descending order of score.\n    pick : Pick\n    ");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_25insert_ordered_best_to_worst = {"insert_ordered_best_to_worst", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_25insert_ordered_best_to_worst, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_24insert_ordered_best_to_worst};
-static PyObject *__pyx_pw_9chmengine_5utils_25insert_ordered_best_to_worst(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_26insert_ordered_best_to_worst, "Insert a move into a list of moves sorted from best to worst.\n\n    Parameters\n    ----------\n    ordered_picks : List[Pick]\n        Existing list sorted in descending order of score.\n    pick : Pick\n    ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_27insert_ordered_best_to_worst = {"insert_ordered_best_to_worst", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_27insert_ordered_best_to_worst, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_26insert_ordered_best_to_worst};
+static PyObject *__pyx_pw_9chmengine_5utils_27insert_ordered_best_to_worst(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -8126,7 +8343,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 482, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 502, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -8134,14 +8351,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 482, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 502, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("insert_ordered_best_to_worst", 1, 2, 2, 1); __PYX_ERR(0, 482, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("insert_ordered_best_to_worst", 1, 2, 2, 1); __PYX_ERR(0, 502, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "insert_ordered_best_to_worst") < 0)) __PYX_ERR(0, 482, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "insert_ordered_best_to_worst") < 0)) __PYX_ERR(0, 502, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -8154,7 +8371,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("insert_ordered_best_to_worst", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 482, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("insert_ordered_best_to_worst", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 502, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -8168,8 +8385,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_ordered_picks), (&PyList_Type), 0, "ordered_picks", 1))) __PYX_ERR(0, 483, __pyx_L1_error)
-  __pyx_r = __pyx_pf_9chmengine_5utils_24insert_ordered_best_to_worst(__pyx_self, __pyx_v_ordered_picks, __pyx_v_pick);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_ordered_picks), (&PyList_Type), 0, "ordered_picks", 1))) __PYX_ERR(0, 503, __pyx_L1_error)
+  __pyx_r = __pyx_pf_9chmengine_5utils_26insert_ordered_best_to_worst(__pyx_self, __pyx_v_ordered_picks, __pyx_v_pick);
 
   /* function exit code */
   goto __pyx_L0;
@@ -8186,9 +8403,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_5utils_24insert_ordered_best_to_worst(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_ordered_picks, PyObject *__pyx_v_pick) {
+static PyObject *__pyx_pf_9chmengine_5utils_26insert_ordered_best_to_worst(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_ordered_picks, PyObject *__pyx_v_pick) {
   PyObject *__pyx_v_ordered_index = 0;
-  PyObject *__pyx_8genexpr2__pyx_v_p = NULL;
+  PyObject *__pyx_8genexpr3__pyx_v_p = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -8205,17 +8422,17 @@ static PyObject *__pyx_pf_9chmengine_5utils_24insert_ordered_best_to_worst(CYTHO
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("insert_ordered_best_to_worst", 1);
 
-  /* "chmengine/utils/__init__.py":495
+  /* "chmengine/utils/__init__.py":515
  *     """
  *     # current moves are inserted into our moves list in order of best scores to worst
  *     ordered_index: int = bisect_left([-p.score for p in ordered_picks], -pick.score)             # <<<<<<<<<<<<<<
  *     ordered_picks.insert(ordered_index, pick)
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_bisect_left); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 495, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_bisect_left); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 515, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   { /* enter inner scope */
-    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 495, __pyx_L5_error)
+    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 515, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = __pyx_v_ordered_picks; __Pyx_INCREF(__pyx_t_4);
     __pyx_t_5 = 0;
@@ -8223,37 +8440,37 @@ static PyObject *__pyx_pf_9chmengine_5utils_24insert_ordered_best_to_worst(CYTHO
       {
         Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_4);
         #if !CYTHON_ASSUME_SAFE_MACROS
-        if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 495, __pyx_L5_error)
+        if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 515, __pyx_L5_error)
         #endif
         if (__pyx_t_5 >= __pyx_temp) break;
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-      __pyx_t_6 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_6); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 495, __pyx_L5_error)
+      __pyx_t_6 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_6); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 515, __pyx_L5_error)
       #else
-      __pyx_t_6 = __Pyx_PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 495, __pyx_L5_error)
+      __pyx_t_6 = __Pyx_PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 515, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_6);
       #endif
-      __Pyx_XDECREF_SET(__pyx_8genexpr2__pyx_v_p, __pyx_t_6);
+      __Pyx_XDECREF_SET(__pyx_8genexpr3__pyx_v_p, __pyx_t_6);
       __pyx_t_6 = 0;
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_8genexpr2__pyx_v_p, __pyx_n_s_score); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 495, __pyx_L5_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_8genexpr3__pyx_v_p, __pyx_n_s_score); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 515, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = PyNumber_Negative(__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 495, __pyx_L5_error)
+      __pyx_t_7 = PyNumber_Negative(__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 515, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_7))) __PYX_ERR(0, 495, __pyx_L5_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_7))) __PYX_ERR(0, 515, __pyx_L5_error)
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     }
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __Pyx_XDECREF(__pyx_8genexpr2__pyx_v_p); __pyx_8genexpr2__pyx_v_p = 0;
+    __Pyx_XDECREF(__pyx_8genexpr3__pyx_v_p); __pyx_8genexpr3__pyx_v_p = 0;
     goto __pyx_L9_exit_scope;
     __pyx_L5_error:;
-    __Pyx_XDECREF(__pyx_8genexpr2__pyx_v_p); __pyx_8genexpr2__pyx_v_p = 0;
+    __Pyx_XDECREF(__pyx_8genexpr3__pyx_v_p); __pyx_8genexpr3__pyx_v_p = 0;
     goto __pyx_L1_error;
     __pyx_L9_exit_scope:;
   } /* exit inner scope */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_pick, __pyx_n_s_score); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 495, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_pick, __pyx_n_s_score); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 515, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_7 = PyNumber_Negative(__pyx_t_4); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 495, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Negative(__pyx_t_4); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 515, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_4 = NULL;
@@ -8276,25 +8493,25 @@ static PyObject *__pyx_pf_9chmengine_5utils_24insert_ordered_best_to_worst(CYTHO
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 495, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 515, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_1))) __PYX_ERR(0, 495, __pyx_L1_error)
+  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_1))) __PYX_ERR(0, 515, __pyx_L1_error)
   __pyx_v_ordered_index = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":496
+  /* "chmengine/utils/__init__.py":516
  *     # current moves are inserted into our moves list in order of best scores to worst
  *     ordered_index: int = bisect_left([-p.score for p in ordered_picks], -pick.score)
  *     ordered_picks.insert(ordered_index, pick)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_5 = __Pyx_PyIndex_AsSsize_t(__pyx_v_ordered_index); if (unlikely((__pyx_t_5 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 496, __pyx_L1_error)
-  __pyx_t_9 = PyList_Insert(__pyx_v_ordered_picks, __pyx_t_5, __pyx_v_pick); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(0, 496, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyIndex_AsSsize_t(__pyx_v_ordered_index); if (unlikely((__pyx_t_5 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 516, __pyx_L1_error)
+  __pyx_t_9 = PyList_Insert(__pyx_v_ordered_picks, __pyx_t_5, __pyx_v_pick); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(0, 516, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":482
+  /* "chmengine/utils/__init__.py":502
  * 
  * 
  * def insert_ordered_best_to_worst(             # <<<<<<<<<<<<<<
@@ -8316,13 +8533,13 @@ static PyObject *__pyx_pf_9chmengine_5utils_24insert_ordered_best_to_worst(CYTHO
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_ordered_index);
-  __Pyx_XDECREF(__pyx_8genexpr2__pyx_v_p);
+  __Pyx_XDECREF(__pyx_8genexpr3__pyx_v_p);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "chmengine/utils/__init__.py":499
+/* "chmengine/utils/__init__.py":519
  * 
  * 
  * def pieces_count_from_fen(fen: str) -> int:             # <<<<<<<<<<<<<<
@@ -8331,16 +8548,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_24insert_ordered_best_to_worst(CYTHO
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_27pieces_count_from_fen(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_5utils_29pieces_count_from_fen(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_26pieces_count_from_fen, "Return the number of pieces on the board represented by `fen`.\n\n    This function converts the FEN string into a `Board` object, then uses the internal\n    bitboard to count occupied squares in O(1) time. On Python \342\211\245 3.8, it calls `int.bit_count()`;\n    on Python 3.7, it falls back to `bin(...).count('1')` for compatibility.\n\n    Notes\n    -----\n    For most use cases, especially when you already have a `Board` object,\n    prefer using `pieces_count_from_board(board)` instead. This avoids the overhead\n    of FEN parsing and achieves the same result more efficiently.\n\n    Parameters\n    ----------\n    fen : str\n        A full FEN string representing a chess position.\n\n    Returns\n    -------\n    int\n        The count of non\342\200\221empty squares (i.e. total pieces) on the board.\n\n    Examples\n    --------\n    >>> from chess import Board\n    >>> pieces_count_from_fen('8/2p2p2/4p3/2k5/8/6q1/2K5/1r1q4 w - - 2 59')\n    8\n    >>> pieces_count_from_fen(Board().fen())\n    32\n    ");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_27pieces_count_from_fen = {"pieces_count_from_fen", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_27pieces_count_from_fen, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_26pieces_count_from_fen};
-static PyObject *__pyx_pw_9chmengine_5utils_27pieces_count_from_fen(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_28pieces_count_from_fen, "Return the number of pieces on the board represented by `fen`.\n\n    This function converts the FEN string into a `Board` object, then uses the internal\n    bitboard to count occupied squares in O(1) time. On Python \342\211\245 3.8, it calls `int.bit_count()`;\n    on Python 3.7, it falls back to `bin(...).count('1')` for compatibility.\n\n    Notes\n    -----\n    For most use cases, especially when you already have a `Board` object,\n    prefer using `pieces_count_from_board(board)` instead. This avoids the overhead\n    of FEN parsing and achieves the same result more efficiently.\n\n    Parameters\n    ----------\n    fen : str\n        A full FEN string representing a chess position.\n\n    Returns\n    -------\n    int\n        The count of non\342\200\221empty squares (i.e. total pieces) on the board.\n\n    Examples\n    --------\n    >>> from chess import Board\n    >>> pieces_count_from_fen('8/2p2p2/4p3/2k5/8/6q1/2K5/1r1q4 w - - 2 59')\n    8\n    >>> pieces_count_from_fen(Board().fen())\n    32\n    ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_29pieces_count_from_fen = {"pieces_count_from_fen", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_29pieces_count_from_fen, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_28pieces_count_from_fen};
+static PyObject *__pyx_pw_9chmengine_5utils_29pieces_count_from_fen(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -8384,12 +8601,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 499, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 519, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "pieces_count_from_fen") < 0)) __PYX_ERR(0, 499, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "pieces_count_from_fen") < 0)) __PYX_ERR(0, 519, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -8400,7 +8617,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("pieces_count_from_fen", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 499, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("pieces_count_from_fen", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 519, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -8414,8 +8631,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_fen), (&PyUnicode_Type), 0, "fen", 1))) __PYX_ERR(0, 499, __pyx_L1_error)
-  __pyx_r = __pyx_pf_9chmengine_5utils_26pieces_count_from_fen(__pyx_self, __pyx_v_fen);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_fen), (&PyUnicode_Type), 0, "fen", 1))) __PYX_ERR(0, 519, __pyx_L1_error)
+  __pyx_r = __pyx_pf_9chmengine_5utils_28pieces_count_from_fen(__pyx_self, __pyx_v_fen);
 
   /* function exit code */
   goto __pyx_L0;
@@ -8432,7 +8649,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_5utils_26pieces_count_from_fen(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fen) {
+static PyObject *__pyx_pf_9chmengine_5utils_28pieces_count_from_fen(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fen) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -8446,7 +8663,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_26pieces_count_from_fen(CYTHON_UNUSE
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("pieces_count_from_fen", 1);
 
-  /* "chmengine/utils/__init__.py":530
+  /* "chmengine/utils/__init__.py":550
  *     32
  *     """
  *     return _bit_count(Board(fen).occupied)             # <<<<<<<<<<<<<<
@@ -8454,9 +8671,9 @@ static PyObject *__pyx_pf_9chmengine_5utils_26pieces_count_from_fen(CYTHON_UNUSE
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_bit_count); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 530, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_bit_count); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 550, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Board); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 530, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Board); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 550, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
@@ -8476,11 +8693,11 @@ static PyObject *__pyx_pf_9chmengine_5utils_26pieces_count_from_fen(CYTHON_UNUSE
     PyObject *__pyx_callargs[2] = {__pyx_t_5, __pyx_v_fen};
     __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 530, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 550, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_occupied); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 530, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_occupied); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 550, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -8502,16 +8719,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_26pieces_count_from_fen(CYTHON_UNUSE
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 530, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 550, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_1))) __PYX_ERR(0, 530, __pyx_L1_error)
+  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_1))) __PYX_ERR(0, 550, __pyx_L1_error)
   __pyx_r = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/utils/__init__.py":499
+  /* "chmengine/utils/__init__.py":519
  * 
  * 
  * def pieces_count_from_fen(fen: str) -> int:             # <<<<<<<<<<<<<<
@@ -8534,7 +8751,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_26pieces_count_from_fen(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "chmengine/utils/__init__.py":533
+/* "chmengine/utils/__init__.py":553
  * 
  * 
  * def pieces_count_from_board(board: Board) -> int:             # <<<<<<<<<<<<<<
@@ -8543,16 +8760,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_26pieces_count_from_fen(CYTHON_UNUSE
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_29pieces_count_from_board(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_5utils_31pieces_count_from_board(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_28pieces_count_from_board, "Return the number of pieces on the board\n\n    This uses the internal bitboard to count occupied squares in O(1) time.\n    On Python \342\211\245 3.8 it calls `int.bit_count()`. On Python 3.7 it falls back\n    to `bin(...).count('1')` for compatibility.\n\n    Parameters\n    ----------\n    board : chess.Board\n        A board object to count pieces from\n\n    Returns\n    -------\n    int\n        Number of pieces on the board.\n\n    Examples\n    --------\n    >>> from chess import Board\n    >>> mate_board = Board('8/2p2p2/4p3/2k5/8/6q1/2K5/1r1q4 w - - 2 59')\n    >>> pieces_count_from_board(mate_board)\n    8\n    >>> pieces_count_from_board(Board())\n    32\n    ");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_29pieces_count_from_board = {"pieces_count_from_board", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_29pieces_count_from_board, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_28pieces_count_from_board};
-static PyObject *__pyx_pw_9chmengine_5utils_29pieces_count_from_board(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_30pieces_count_from_board, "Return the number of pieces on the board\n\n    This uses the internal bitboard to count occupied squares in O(1) time.\n    On Python \342\211\245 3.8 it calls `int.bit_count()`. On Python 3.7 it falls back\n    to `bin(...).count('1')` for compatibility.\n\n    Parameters\n    ----------\n    board : chess.Board\n        A board object to count pieces from\n\n    Returns\n    -------\n    int\n        Number of pieces on the board.\n\n    Examples\n    --------\n    >>> from chess import Board\n    >>> mate_board = Board('8/2p2p2/4p3/2k5/8/6q1/2K5/1r1q4 w - - 2 59')\n    >>> pieces_count_from_board(mate_board)\n    8\n    >>> pieces_count_from_board(Board())\n    32\n    ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_31pieces_count_from_board = {"pieces_count_from_board", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_31pieces_count_from_board, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_30pieces_count_from_board};
+static PyObject *__pyx_pw_9chmengine_5utils_31pieces_count_from_board(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -8596,12 +8813,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 533, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 553, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "pieces_count_from_board") < 0)) __PYX_ERR(0, 533, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "pieces_count_from_board") < 0)) __PYX_ERR(0, 553, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -8612,7 +8829,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("pieces_count_from_board", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 533, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("pieces_count_from_board", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 553, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -8626,7 +8843,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_9chmengine_5utils_28pieces_count_from_board(__pyx_self, __pyx_v_board);
+  __pyx_r = __pyx_pf_9chmengine_5utils_30pieces_count_from_board(__pyx_self, __pyx_v_board);
 
   /* function exit code */
   {
@@ -8639,7 +8856,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_5utils_28pieces_count_from_board(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board) {
+static PyObject *__pyx_pf_9chmengine_5utils_30pieces_count_from_board(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -8652,7 +8869,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_28pieces_count_from_board(CYTHON_UNU
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("pieces_count_from_board", 1);
 
-  /* "chmengine/utils/__init__.py":559
+  /* "chmengine/utils/__init__.py":579
  *     32
  *     """
  *     return _bit_count(board.occupied)             # <<<<<<<<<<<<<<
@@ -8660,9 +8877,9 @@ static PyObject *__pyx_pf_9chmengine_5utils_28pieces_count_from_board(CYTHON_UNU
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_bit_count); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 559, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_bit_count); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 579, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_board, __pyx_n_s_occupied); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 559, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_board, __pyx_n_s_occupied); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 579, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   __pyx_t_5 = 0;
@@ -8683,16 +8900,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_28pieces_count_from_board(CYTHON_UNU
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 559, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 579, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_1))) __PYX_ERR(0, 559, __pyx_L1_error)
+  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_1))) __PYX_ERR(0, 579, __pyx_L1_error)
   __pyx_r = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/utils/__init__.py":533
+  /* "chmengine/utils/__init__.py":553
  * 
  * 
  * def pieces_count_from_board(board: Board) -> int:             # <<<<<<<<<<<<<<
@@ -8714,7 +8931,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_28pieces_count_from_board(CYTHON_UNU
   return __pyx_r;
 }
 
-/* "chmengine/utils/__init__.py":562
+/* "chmengine/utils/__init__.py":582
  * 
  * 
  * def insert_choice_into_current_moves(             # <<<<<<<<<<<<<<
@@ -8723,16 +8940,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_28pieces_count_from_board(CYTHON_UNU
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_31insert_choice_into_current_moves(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_5utils_33insert_choice_into_current_moves(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_30insert_choice_into_current_moves, "Insert a new candidate move into the current player's move list (best to worst).\n\n    Parameters\n    ----------\n    choices_ordered_best_to_worst : List[Pick]\n        Current ordered list of move choices.\n    pick : Pick\n\n    Returns\n    -------\n    List[Pick]\n        Updated list with the move inserted.\n    ");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_31insert_choice_into_current_moves = {"insert_choice_into_current_moves", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_31insert_choice_into_current_moves, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_30insert_choice_into_current_moves};
-static PyObject *__pyx_pw_9chmengine_5utils_31insert_choice_into_current_moves(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_32insert_choice_into_current_moves, "Insert a new candidate move into the current player's move list (best to worst).\n\n    Parameters\n    ----------\n    choices_ordered_best_to_worst : List[Pick]\n        Current ordered list of move choices.\n    pick : Pick\n\n    Returns\n    -------\n    List[Pick]\n        Updated list with the move inserted.\n    ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_33insert_choice_into_current_moves = {"insert_choice_into_current_moves", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_33insert_choice_into_current_moves, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_32insert_choice_into_current_moves};
+static PyObject *__pyx_pw_9chmengine_5utils_33insert_choice_into_current_moves(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -8779,7 +8996,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 562, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 582, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -8787,14 +9004,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 562, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 582, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("insert_choice_into_current_moves", 1, 2, 2, 1); __PYX_ERR(0, 562, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("insert_choice_into_current_moves", 1, 2, 2, 1); __PYX_ERR(0, 582, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "insert_choice_into_current_moves") < 0)) __PYX_ERR(0, 562, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "insert_choice_into_current_moves") < 0)) __PYX_ERR(0, 582, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -8807,7 +9024,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("insert_choice_into_current_moves", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 562, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("insert_choice_into_current_moves", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 582, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -8821,8 +9038,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_choices_ordered_best_to_worst), (&PyList_Type), 0, "choices_ordered_best_to_worst", 1))) __PYX_ERR(0, 563, __pyx_L1_error)
-  __pyx_r = __pyx_pf_9chmengine_5utils_30insert_choice_into_current_moves(__pyx_self, __pyx_v_choices_ordered_best_to_worst, __pyx_v_pick);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_choices_ordered_best_to_worst), (&PyList_Type), 0, "choices_ordered_best_to_worst", 1))) __PYX_ERR(0, 583, __pyx_L1_error)
+  __pyx_r = __pyx_pf_9chmengine_5utils_32insert_choice_into_current_moves(__pyx_self, __pyx_v_choices_ordered_best_to_worst, __pyx_v_pick);
 
   /* function exit code */
   goto __pyx_L0;
@@ -8839,7 +9056,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_5utils_30insert_choice_into_current_moves(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_choices_ordered_best_to_worst, PyObject *__pyx_v_pick) {
+static PyObject *__pyx_pf_9chmengine_5utils_32insert_choice_into_current_moves(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_choices_ordered_best_to_worst, PyObject *__pyx_v_pick) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   Py_ssize_t __pyx_t_1;
@@ -8852,18 +9069,18 @@ static PyObject *__pyx_pf_9chmengine_5utils_30insert_choice_into_current_moves(C
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("insert_choice_into_current_moves", 1);
 
-  /* "chmengine/utils/__init__.py":579
+  /* "chmengine/utils/__init__.py":599
  *         Updated list with the move inserted.
  *     """
  *     if len(choices_ordered_best_to_worst) == 0:             # <<<<<<<<<<<<<<
  *         return [pick]
  *     insert_ordered_best_to_worst(
  */
-  __pyx_t_1 = __Pyx_PyList_GET_SIZE(__pyx_v_choices_ordered_best_to_worst); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 579, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyList_GET_SIZE(__pyx_v_choices_ordered_best_to_worst); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 599, __pyx_L1_error)
   __pyx_t_2 = (__pyx_t_1 == 0);
   if (__pyx_t_2) {
 
-    /* "chmengine/utils/__init__.py":580
+    /* "chmengine/utils/__init__.py":600
  *     """
  *     if len(choices_ordered_best_to_worst) == 0:
  *         return [pick]             # <<<<<<<<<<<<<<
@@ -8871,16 +9088,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_30insert_choice_into_current_moves(C
  *         ordered_picks=choices_ordered_best_to_worst, pick=pick
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 580, __pyx_L1_error)
+    __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 600, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_INCREF(__pyx_v_pick);
     __Pyx_GIVEREF(__pyx_v_pick);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 0, __pyx_v_pick)) __PYX_ERR(0, 580, __pyx_L1_error);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 0, __pyx_v_pick)) __PYX_ERR(0, 600, __pyx_L1_error);
     __pyx_r = ((PyObject*)__pyx_t_3);
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "chmengine/utils/__init__.py":579
+    /* "chmengine/utils/__init__.py":599
  *         Updated list with the move inserted.
  *     """
  *     if len(choices_ordered_best_to_worst) == 0:             # <<<<<<<<<<<<<<
@@ -8889,42 +9106,42 @@ static PyObject *__pyx_pf_9chmengine_5utils_30insert_choice_into_current_moves(C
  */
   }
 
-  /* "chmengine/utils/__init__.py":581
+  /* "chmengine/utils/__init__.py":601
  *     if len(choices_ordered_best_to_worst) == 0:
  *         return [pick]
  *     insert_ordered_best_to_worst(             # <<<<<<<<<<<<<<
  *         ordered_picks=choices_ordered_best_to_worst, pick=pick
  *     )
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_insert_ordered_best_to_worst); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 581, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_insert_ordered_best_to_worst); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 601, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "chmengine/utils/__init__.py":582
+  /* "chmengine/utils/__init__.py":602
  *         return [pick]
  *     insert_ordered_best_to_worst(
  *         ordered_picks=choices_ordered_best_to_worst, pick=pick             # <<<<<<<<<<<<<<
  *     )
  *     return choices_ordered_best_to_worst
  */
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 582, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 602, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_ordered_picks, __pyx_v_choices_ordered_best_to_worst) < 0) __PYX_ERR(0, 582, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_pick, __pyx_v_pick) < 0) __PYX_ERR(0, 582, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_ordered_picks, __pyx_v_choices_ordered_best_to_worst) < 0) __PYX_ERR(0, 602, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_pick, __pyx_v_pick) < 0) __PYX_ERR(0, 602, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":581
+  /* "chmengine/utils/__init__.py":601
  *     if len(choices_ordered_best_to_worst) == 0:
  *         return [pick]
  *     insert_ordered_best_to_worst(             # <<<<<<<<<<<<<<
  *         ordered_picks=choices_ordered_best_to_worst, pick=pick
  *     )
  */
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 581, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 601, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "chmengine/utils/__init__.py":584
+  /* "chmengine/utils/__init__.py":604
  *         ordered_picks=choices_ordered_best_to_worst, pick=pick
  *     )
  *     return choices_ordered_best_to_worst             # <<<<<<<<<<<<<<
@@ -8936,7 +9153,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_30insert_choice_into_current_moves(C
   __pyx_r = __pyx_v_choices_ordered_best_to_worst;
   goto __pyx_L0;
 
-  /* "chmengine/utils/__init__.py":562
+  /* "chmengine/utils/__init__.py":582
  * 
  * 
  * def insert_choice_into_current_moves(             # <<<<<<<<<<<<<<
@@ -8957,7 +9174,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_30insert_choice_into_current_moves(C
   return __pyx_r;
 }
 
-/* "chmengine/utils/__init__.py":587
+/* "chmengine/utils/__init__.py":607
  * 
  * 
  * def insert_choice_into_response_moves(             # <<<<<<<<<<<<<<
@@ -8966,16 +9183,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_30insert_choice_into_current_moves(C
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_33insert_choice_into_response_moves(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_5utils_35insert_choice_into_response_moves(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_32insert_choice_into_response_moves, "Insert a new candidate move into the opponent's response list (worst to best).\n\n    Parameters\n    ----------\n    choices_ordered_worst_to_best : List[Pick]\n        Opponent's candidate responses, sorted from the lowest score to highest.\n    pick : Pick\n\n    Returns\n    -------\n    List[Pick]\n        Updated response list.\n    ");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_33insert_choice_into_response_moves = {"insert_choice_into_response_moves", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_33insert_choice_into_response_moves, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_32insert_choice_into_response_moves};
-static PyObject *__pyx_pw_9chmengine_5utils_33insert_choice_into_response_moves(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_34insert_choice_into_response_moves, "Insert a new candidate move into the opponent's response list (worst to best).\n\n    Parameters\n    ----------\n    choices_ordered_worst_to_best : List[Pick]\n        Opponent's candidate responses, sorted from the lowest score to highest.\n    pick : Pick\n\n    Returns\n    -------\n    List[Pick]\n        Updated response list.\n    ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_35insert_choice_into_response_moves = {"insert_choice_into_response_moves", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_35insert_choice_into_response_moves, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_34insert_choice_into_response_moves};
+static PyObject *__pyx_pw_9chmengine_5utils_35insert_choice_into_response_moves(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -9022,7 +9239,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 587, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 607, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -9030,14 +9247,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 587, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 607, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("insert_choice_into_response_moves", 1, 2, 2, 1); __PYX_ERR(0, 587, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("insert_choice_into_response_moves", 1, 2, 2, 1); __PYX_ERR(0, 607, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "insert_choice_into_response_moves") < 0)) __PYX_ERR(0, 587, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "insert_choice_into_response_moves") < 0)) __PYX_ERR(0, 607, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -9050,7 +9267,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("insert_choice_into_response_moves", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 587, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("insert_choice_into_response_moves", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 607, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -9064,8 +9281,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_choices_ordered_worst_to_best), (&PyList_Type), 0, "choices_ordered_worst_to_best", 1))) __PYX_ERR(0, 588, __pyx_L1_error)
-  __pyx_r = __pyx_pf_9chmengine_5utils_32insert_choice_into_response_moves(__pyx_self, __pyx_v_choices_ordered_worst_to_best, __pyx_v_pick);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_choices_ordered_worst_to_best), (&PyList_Type), 0, "choices_ordered_worst_to_best", 1))) __PYX_ERR(0, 608, __pyx_L1_error)
+  __pyx_r = __pyx_pf_9chmengine_5utils_34insert_choice_into_response_moves(__pyx_self, __pyx_v_choices_ordered_worst_to_best, __pyx_v_pick);
 
   /* function exit code */
   goto __pyx_L0;
@@ -9082,7 +9299,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_5utils_32insert_choice_into_response_moves(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_choices_ordered_worst_to_best, PyObject *__pyx_v_pick) {
+static PyObject *__pyx_pf_9chmengine_5utils_34insert_choice_into_response_moves(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_choices_ordered_worst_to_best, PyObject *__pyx_v_pick) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   Py_ssize_t __pyx_t_1;
@@ -9095,18 +9312,18 @@ static PyObject *__pyx_pf_9chmengine_5utils_32insert_choice_into_response_moves(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("insert_choice_into_response_moves", 1);
 
-  /* "chmengine/utils/__init__.py":604
+  /* "chmengine/utils/__init__.py":624
  *         Updated response list.
  *     """
  *     if len(choices_ordered_worst_to_best) == 0:             # <<<<<<<<<<<<<<
  *         return [pick]
  *     insert_ordered_worst_to_best(
  */
-  __pyx_t_1 = __Pyx_PyList_GET_SIZE(__pyx_v_choices_ordered_worst_to_best); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 604, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyList_GET_SIZE(__pyx_v_choices_ordered_worst_to_best); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 624, __pyx_L1_error)
   __pyx_t_2 = (__pyx_t_1 == 0);
   if (__pyx_t_2) {
 
-    /* "chmengine/utils/__init__.py":605
+    /* "chmengine/utils/__init__.py":625
  *     """
  *     if len(choices_ordered_worst_to_best) == 0:
  *         return [pick]             # <<<<<<<<<<<<<<
@@ -9114,16 +9331,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_32insert_choice_into_response_moves(
  *         ordered_picks=choices_ordered_worst_to_best, pick=pick
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 605, __pyx_L1_error)
+    __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 625, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_INCREF(__pyx_v_pick);
     __Pyx_GIVEREF(__pyx_v_pick);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 0, __pyx_v_pick)) __PYX_ERR(0, 605, __pyx_L1_error);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 0, __pyx_v_pick)) __PYX_ERR(0, 625, __pyx_L1_error);
     __pyx_r = ((PyObject*)__pyx_t_3);
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "chmengine/utils/__init__.py":604
+    /* "chmengine/utils/__init__.py":624
  *         Updated response list.
  *     """
  *     if len(choices_ordered_worst_to_best) == 0:             # <<<<<<<<<<<<<<
@@ -9132,42 +9349,42 @@ static PyObject *__pyx_pf_9chmengine_5utils_32insert_choice_into_response_moves(
  */
   }
 
-  /* "chmengine/utils/__init__.py":606
+  /* "chmengine/utils/__init__.py":626
  *     if len(choices_ordered_worst_to_best) == 0:
  *         return [pick]
  *     insert_ordered_worst_to_best(             # <<<<<<<<<<<<<<
  *         ordered_picks=choices_ordered_worst_to_best, pick=pick
  *     )
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_insert_ordered_worst_to_best); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 606, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_insert_ordered_worst_to_best); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 626, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "chmengine/utils/__init__.py":607
+  /* "chmengine/utils/__init__.py":627
  *         return [pick]
  *     insert_ordered_worst_to_best(
  *         ordered_picks=choices_ordered_worst_to_best, pick=pick             # <<<<<<<<<<<<<<
  *     )
  *     return choices_ordered_worst_to_best
  */
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 607, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 627, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_ordered_picks, __pyx_v_choices_ordered_worst_to_best) < 0) __PYX_ERR(0, 607, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_pick, __pyx_v_pick) < 0) __PYX_ERR(0, 607, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_ordered_picks, __pyx_v_choices_ordered_worst_to_best) < 0) __PYX_ERR(0, 627, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_pick, __pyx_v_pick) < 0) __PYX_ERR(0, 627, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":606
+  /* "chmengine/utils/__init__.py":626
  *     if len(choices_ordered_worst_to_best) == 0:
  *         return [pick]
  *     insert_ordered_worst_to_best(             # <<<<<<<<<<<<<<
  *         ordered_picks=choices_ordered_worst_to_best, pick=pick
  *     )
  */
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 606, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 626, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "chmengine/utils/__init__.py":609
+  /* "chmengine/utils/__init__.py":629
  *         ordered_picks=choices_ordered_worst_to_best, pick=pick
  *     )
  *     return choices_ordered_worst_to_best             # <<<<<<<<<<<<<<
@@ -9179,7 +9396,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_32insert_choice_into_response_moves(
   __pyx_r = __pyx_v_choices_ordered_worst_to_best;
   goto __pyx_L0;
 
-  /* "chmengine/utils/__init__.py":587
+  /* "chmengine/utils/__init__.py":607
  * 
  * 
  * def insert_choice_into_response_moves(             # <<<<<<<<<<<<<<
@@ -9200,7 +9417,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_32insert_choice_into_response_moves(
   return __pyx_r;
 }
 
-/* "chmengine/utils/__init__.py":612
+/* "chmengine/utils/__init__.py":632
  * 
  * 
  * def is_valid_king_box_square(square_id: int, king_square: int) -> bool:             # <<<<<<<<<<<<<<
@@ -9209,16 +9426,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_32insert_choice_into_response_moves(
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_35is_valid_king_box_square(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_5utils_37is_valid_king_box_square(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_34is_valid_king_box_square, "Check if a square is valid for inclusion in a king's bounding box.\n\n    A square is valid if:\n    - It lies on the board (0\342\200\22363)\n    - It is adjacent to the king's square (distance \342\211\244 1)\n\n    Parameters\n    ----------\n    square_id : int\n        Index of the square to evaluate.\n    king_square : int\n        Index of the king's square.\n\n    Returns\n    -------\n    bool\n        True if the square should be included in the king box.\n\n    ");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_35is_valid_king_box_square = {"is_valid_king_box_square", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_35is_valid_king_box_square, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_34is_valid_king_box_square};
-static PyObject *__pyx_pw_9chmengine_5utils_35is_valid_king_box_square(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_36is_valid_king_box_square, "Check if a square is valid for inclusion in a king's bounding box.\n\n    A square is valid if:\n    - It lies on the board (0\342\200\22363)\n    - It is adjacent to the king's square (distance \342\211\244 1)\n\n    Parameters\n    ----------\n    square_id : int\n        Index of the square to evaluate.\n    king_square : int\n        Index of the king's square.\n\n    Returns\n    -------\n    bool\n        True if the square should be included in the king box.\n\n    ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_37is_valid_king_box_square = {"is_valid_king_box_square", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_37is_valid_king_box_square, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_36is_valid_king_box_square};
+static PyObject *__pyx_pw_9chmengine_5utils_37is_valid_king_box_square(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -9265,7 +9482,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 612, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 632, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -9273,14 +9490,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 612, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 632, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("is_valid_king_box_square", 1, 2, 2, 1); __PYX_ERR(0, 612, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("is_valid_king_box_square", 1, 2, 2, 1); __PYX_ERR(0, 632, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "is_valid_king_box_square") < 0)) __PYX_ERR(0, 612, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "is_valid_king_box_square") < 0)) __PYX_ERR(0, 632, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -9293,7 +9510,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("is_valid_king_box_square", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 612, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("is_valid_king_box_square", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 632, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -9307,9 +9524,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_square_id), (&PyInt_Type), 0, "square_id", 1))) __PYX_ERR(0, 612, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_king_square), (&PyInt_Type), 0, "king_square", 1))) __PYX_ERR(0, 612, __pyx_L1_error)
-  __pyx_r = __pyx_pf_9chmengine_5utils_34is_valid_king_box_square(__pyx_self, __pyx_v_square_id, __pyx_v_king_square);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_square_id), (&PyInt_Type), 0, "square_id", 1))) __PYX_ERR(0, 632, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_king_square), (&PyInt_Type), 0, "king_square", 1))) __PYX_ERR(0, 632, __pyx_L1_error)
+  __pyx_r = __pyx_pf_9chmengine_5utils_36is_valid_king_box_square(__pyx_self, __pyx_v_square_id, __pyx_v_king_square);
 
   /* function exit code */
   goto __pyx_L0;
@@ -9326,7 +9543,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_5utils_34is_valid_king_box_square(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_square_id, PyObject *__pyx_v_king_square) {
+static PyObject *__pyx_pf_9chmengine_5utils_36is_valid_king_box_square(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_square_id, PyObject *__pyx_v_king_square) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -9340,7 +9557,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_34is_valid_king_box_square(CYTHON_UN
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_valid_king_box_square", 1);
 
-  /* "chmengine/utils/__init__.py":632
+  /* "chmengine/utils/__init__.py":652
  * 
  *     """
  *     return 0 <= square_id <= 63 and square_distance(king_square, square_id) == 1             # <<<<<<<<<<<<<<
@@ -9348,12 +9565,12 @@ static PyObject *__pyx_pf_9chmengine_5utils_34is_valid_king_box_square(CYTHON_UN
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_int_0, __pyx_v_square_id, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 632, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_int_0, __pyx_v_square_id, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 652, __pyx_L1_error)
   if (__Pyx_PyObject_IsTrue(__pyx_t_2)) {
     __Pyx_DECREF(__pyx_t_2);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_square_id, __pyx_int_63, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 632, __pyx_L1_error)
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_square_id, __pyx_int_63, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 652, __pyx_L1_error)
   }
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 632, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 652, __pyx_L1_error)
   if (__pyx_t_3) {
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   } else {
@@ -9362,7 +9579,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_34is_valid_king_box_square(CYTHON_UN
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     goto __pyx_L3_bool_binop_done;
   }
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_square_distance); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 632, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_square_distance); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 652, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
@@ -9382,11 +9599,11 @@ static PyObject *__pyx_pf_9chmengine_5utils_34is_valid_king_box_square(CYTHON_UN
     PyObject *__pyx_callargs[3] = {__pyx_t_5, __pyx_v_king_square, __pyx_v_square_id};
     __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 2+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 632, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 652, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
-  __pyx_t_4 = __Pyx_PyInt_EqObjC(__pyx_t_2, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 632, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_EqObjC(__pyx_t_2, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 652, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_INCREF(__pyx_t_4);
@@ -9397,7 +9614,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_34is_valid_king_box_square(CYTHON_UN
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/utils/__init__.py":612
+  /* "chmengine/utils/__init__.py":632
  * 
  * 
  * def is_valid_king_box_square(square_id: int, king_square: int) -> bool:             # <<<<<<<<<<<<<<
@@ -9419,7 +9636,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_34is_valid_king_box_square(CYTHON_UN
   return __pyx_r;
 }
 
-/* "chmengine/utils/__init__.py":635
+/* "chmengine/utils/__init__.py":655
  * 
  * 
  * def null_target_moves(             # <<<<<<<<<<<<<<
@@ -9427,7 +9644,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_34is_valid_king_box_square(CYTHON_UN
  * ) -> Tuple[List[Tuple[Optional[Move], Optional[float64]]], ...]:
  */
 
-static PyObject *__pyx_pf_9chmengine_5utils_44__defaults__(CYTHON_UNUSED PyObject *__pyx_self) {
+static PyObject *__pyx_pf_9chmengine_5utils_46__defaults__(CYTHON_UNUSED PyObject *__pyx_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -9437,18 +9654,18 @@ static PyObject *__pyx_pf_9chmengine_5utils_44__defaults__(CYTHON_UNUSED PyObjec
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__defaults__", 1);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 635, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 655, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__Pyx_CyFunction_Defaults(__pyx_defaults1, __pyx_self)->__pyx_arg_number);
   __Pyx_GIVEREF(__Pyx_CyFunction_Defaults(__pyx_defaults1, __pyx_self)->__pyx_arg_number);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __Pyx_CyFunction_Defaults(__pyx_defaults1, __pyx_self)->__pyx_arg_number)) __PYX_ERR(0, 635, __pyx_L1_error);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 635, __pyx_L1_error)
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __Pyx_CyFunction_Defaults(__pyx_defaults1, __pyx_self)->__pyx_arg_number)) __PYX_ERR(0, 655, __pyx_L1_error);
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 655, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 635, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 655, __pyx_L1_error);
   __Pyx_INCREF(Py_None);
   __Pyx_GIVEREF(Py_None);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, Py_None)) __PYX_ERR(0, 635, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, Py_None)) __PYX_ERR(0, 655, __pyx_L1_error);
   __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -9467,16 +9684,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_44__defaults__(CYTHON_UNUSED PyObjec
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_37null_target_moves(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_5utils_39null_target_moves(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_36null_target_moves, "Initialize a tuple of target move lists with null entries.\n\n    This helper method creates a tuple containing 'number' lists, each initialized with a single\n    tuple (None, None). These lists serve as starting placeholders for candidate moves and their scores.\n\n    Parameters\n    ----------\n    number : int, default: 6\n        The number of target move lists to create.\n\n    Returns\n    -------\n    Tuple[List[Tuple[Optional[chess.Move], Optional[numpy.float64]]], ...]\n        A tuple of lists, each initially containing one tuple (None, None).\n    ");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_37null_target_moves = {"null_target_moves", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_37null_target_moves, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_36null_target_moves};
-static PyObject *__pyx_pw_9chmengine_5utils_37null_target_moves(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_38null_target_moves, "Initialize a tuple of target move lists with null entries.\n\n    This helper method creates a tuple containing 'number' lists, each initialized with a single\n    tuple (None, None). These lists serve as starting placeholders for candidate moves and their scores.\n\n    Parameters\n    ----------\n    number : int, default: 6\n        The number of target move lists to create.\n\n    Returns\n    -------\n    Tuple[List[Tuple[Optional[chess.Move], Optional[numpy.float64]]], ...]\n        A tuple of lists, each initially containing one tuple (None, None).\n    ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_39null_target_moves = {"null_target_moves", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_39null_target_moves, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_38null_target_moves};
+static PyObject *__pyx_pw_9chmengine_5utils_39null_target_moves(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -9521,12 +9738,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_number);
           if (value) { values[0] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 635, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 655, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "null_target_moves") < 0)) __PYX_ERR(0, 635, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "null_target_moves") < 0)) __PYX_ERR(0, 655, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -9540,7 +9757,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("null_target_moves", 0, 0, 1, __pyx_nargs); __PYX_ERR(0, 635, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("null_target_moves", 0, 0, 1, __pyx_nargs); __PYX_ERR(0, 655, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -9554,8 +9771,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_number), (&PyInt_Type), 0, "number", 1))) __PYX_ERR(0, 636, __pyx_L1_error)
-  __pyx_r = __pyx_pf_9chmengine_5utils_36null_target_moves(__pyx_self, __pyx_v_number);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_number), (&PyInt_Type), 0, "number", 1))) __PYX_ERR(0, 656, __pyx_L1_error)
+  __pyx_r = __pyx_pf_9chmengine_5utils_38null_target_moves(__pyx_self, __pyx_v_number);
 
   /* function exit code */
   goto __pyx_L0;
@@ -9573,7 +9790,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
 }
 static PyObject *__pyx_gb_9chmengine_5utils_17null_target_moves_2generator(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "chmengine/utils/__init__.py":653
+/* "chmengine/utils/__init__.py":673
  *         A tuple of lists, each initially containing one tuple (None, None).
  *     """
  *     return tuple([(None, None)] for _ in range(number))             # <<<<<<<<<<<<<<
@@ -9593,7 +9810,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_17null_target_moves_genexpr(CYTHON_U
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_9chmengine_5utils___pyx_scope_struct__genexpr *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 653, __pyx_L1_error)
+    __PYX_ERR(0, 673, __pyx_L1_error)
   } else {
     __Pyx_GOTREF((PyObject *)__pyx_cur_scope);
   }
@@ -9601,7 +9818,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_17null_target_moves_genexpr(CYTHON_U
   __Pyx_INCREF(__pyx_cur_scope->__pyx_genexpr_arg_0);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_genexpr_arg_0);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_9chmengine_5utils_17null_target_moves_2generator, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_null_target_moves_locals_genexpr, __pyx_n_s_chmengine_utils); if (unlikely(!gen)) __PYX_ERR(0, 653, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_9chmengine_5utils_17null_target_moves_2generator, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_null_target_moves_locals_genexpr, __pyx_n_s_chmengine_utils); if (unlikely(!gen)) __PYX_ERR(0, 673, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -9638,16 +9855,16 @@ static PyObject *__pyx_gb_9chmengine_5utils_17null_target_moves_2generator(__pyx
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 653, __pyx_L1_error)
-  if (unlikely(!__pyx_cur_scope->__pyx_genexpr_arg_0)) { __Pyx_RaiseUnboundLocalError(".0"); __PYX_ERR(0, 653, __pyx_L1_error) }
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 673, __pyx_L1_error)
+  if (unlikely(!__pyx_cur_scope->__pyx_genexpr_arg_0)) { __Pyx_RaiseUnboundLocalError(".0"); __PYX_ERR(0, 673, __pyx_L1_error) }
   if (likely(PyList_CheckExact(__pyx_cur_scope->__pyx_genexpr_arg_0)) || PyTuple_CheckExact(__pyx_cur_scope->__pyx_genexpr_arg_0)) {
     __pyx_t_1 = __pyx_cur_scope->__pyx_genexpr_arg_0; __Pyx_INCREF(__pyx_t_1);
     __pyx_t_2 = 0;
     __pyx_t_3 = NULL;
   } else {
-    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_cur_scope->__pyx_genexpr_arg_0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 653, __pyx_L1_error)
+    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_cur_scope->__pyx_genexpr_arg_0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 673, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 653, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 673, __pyx_L1_error)
   }
   for (;;) {
     if (likely(!__pyx_t_3)) {
@@ -9655,28 +9872,28 @@ static PyObject *__pyx_gb_9chmengine_5utils_17null_target_moves_2generator(__pyx
         {
           Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
           #if !CYTHON_ASSUME_SAFE_MACROS
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 653, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 673, __pyx_L1_error)
           #endif
           if (__pyx_t_2 >= __pyx_temp) break;
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely((0 < 0))) __PYX_ERR(0, 653, __pyx_L1_error)
+        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely((0 < 0))) __PYX_ERR(0, 673, __pyx_L1_error)
         #else
-        __pyx_t_4 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 653, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 673, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       } else {
         {
           Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_1);
           #if !CYTHON_ASSUME_SAFE_MACROS
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 653, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 673, __pyx_L1_error)
           #endif
           if (__pyx_t_2 >= __pyx_temp) break;
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely((0 < 0))) __PYX_ERR(0, 653, __pyx_L1_error)
+        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely((0 < 0))) __PYX_ERR(0, 673, __pyx_L1_error)
         #else
-        __pyx_t_4 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 653, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 673, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       }
@@ -9686,22 +9903,22 @@ static PyObject *__pyx_gb_9chmengine_5utils_17null_target_moves_2generator(__pyx
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 653, __pyx_L1_error)
+          else __PYX_ERR(0, 673, __pyx_L1_error)
         }
         break;
       }
       __Pyx_GOTREF(__pyx_t_4);
     }
-    if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_4))||((__pyx_t_4) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_4))) __PYX_ERR(0, 653, __pyx_L1_error)
+    if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_t_4))||((__pyx_t_4) == Py_None) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_t_4))) __PYX_ERR(0, 673, __pyx_L1_error)
     __Pyx_XGOTREF(__pyx_cur_scope->__pyx_v__);
     __Pyx_XDECREF_SET(__pyx_cur_scope->__pyx_v__, ((PyObject*)__pyx_t_4));
     __Pyx_GIVEREF(__pyx_t_4);
     __pyx_t_4 = 0;
-    __pyx_t_4 = PyList_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 653, __pyx_L1_error)
+    __pyx_t_4 = PyList_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 673, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_INCREF(__pyx_tuple__3);
     __Pyx_GIVEREF(__pyx_tuple__3);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 0, __pyx_tuple__3)) __PYX_ERR(0, 653, __pyx_L1_error);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 0, __pyx_tuple__3)) __PYX_ERR(0, 673, __pyx_L1_error);
     __pyx_r = __pyx_t_4;
     __pyx_t_4 = 0;
     __Pyx_XGIVEREF(__pyx_t_1);
@@ -9720,7 +9937,7 @@ static PyObject *__pyx_gb_9chmengine_5utils_17null_target_moves_2generator(__pyx
     __Pyx_XGOTREF(__pyx_t_1);
     __pyx_t_2 = __pyx_cur_scope->__pyx_t_1;
     __pyx_t_3 = __pyx_cur_scope->__pyx_t_2;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 653, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 673, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
@@ -9744,7 +9961,7 @@ static PyObject *__pyx_gb_9chmengine_5utils_17null_target_moves_2generator(__pyx
   return __pyx_r;
 }
 
-/* "chmengine/utils/__init__.py":635
+/* "chmengine/utils/__init__.py":655
  * 
  * 
  * def null_target_moves(             # <<<<<<<<<<<<<<
@@ -9752,7 +9969,7 @@ static PyObject *__pyx_gb_9chmengine_5utils_17null_target_moves_2generator(__pyx
  * ) -> Tuple[List[Tuple[Optional[Move], Optional[float64]]], ...]:
  */
 
-static PyObject *__pyx_pf_9chmengine_5utils_36null_target_moves(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_number) {
+static PyObject *__pyx_pf_9chmengine_5utils_38null_target_moves(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_number) {
   PyObject *__pyx_gb_9chmengine_5utils_17null_target_moves_2generator = 0;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -9763,7 +9980,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_36null_target_moves(CYTHON_UNUSED Py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("null_target_moves", 1);
 
-  /* "chmengine/utils/__init__.py":653
+  /* "chmengine/utils/__init__.py":673
  *         A tuple of lists, each initially containing one tuple (None, None).
  *     """
  *     return tuple([(None, None)] for _ in range(number))             # <<<<<<<<<<<<<<
@@ -9771,19 +9988,19 @@ static PyObject *__pyx_pf_9chmengine_5utils_36null_target_moves(CYTHON_UNUSED Py
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_range, __pyx_v_number); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 653, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_range, __pyx_v_number); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 673, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_pf_9chmengine_5utils_17null_target_moves_genexpr(NULL, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 653, __pyx_L1_error)
+  __pyx_t_2 = __pyx_pf_9chmengine_5utils_17null_target_moves_genexpr(NULL, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 673, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PySequence_Tuple(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 653, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PySequence_Tuple(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 673, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/utils/__init__.py":635
+  /* "chmengine/utils/__init__.py":655
  * 
  * 
  * def null_target_moves(             # <<<<<<<<<<<<<<
@@ -9804,7 +10021,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_36null_target_moves(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "chmengine/utils/__init__.py":656
+/* "chmengine/utils/__init__.py":676
  * 
  * 
  * def set_all_datetime_headers(game_heads: pgn.Headers, local_time: datetime) -> None:             # <<<<<<<<<<<<<<
@@ -9813,16 +10030,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_36null_target_moves(CYTHON_UNUSED Py
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_39set_all_datetime_headers(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_5utils_41set_all_datetime_headers(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_38set_all_datetime_headers, "Sets all datetime related game headers for the pgn file.\n\n    Parameters\n    ----------\n    game_heads : chess.pgn.Headers\n    local_time : datetime.datetime\n    ");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_39set_all_datetime_headers = {"set_all_datetime_headers", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_39set_all_datetime_headers, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_38set_all_datetime_headers};
-static PyObject *__pyx_pw_9chmengine_5utils_39set_all_datetime_headers(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_40set_all_datetime_headers, "Sets all datetime related game headers for the pgn file.\n\n    Parameters\n    ----------\n    game_heads : chess.pgn.Headers\n    local_time : datetime.datetime\n    ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_41set_all_datetime_headers = {"set_all_datetime_headers", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_41set_all_datetime_headers, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_40set_all_datetime_headers};
+static PyObject *__pyx_pw_9chmengine_5utils_41set_all_datetime_headers(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -9869,7 +10086,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 656, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 676, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -9877,14 +10094,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 656, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 676, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("set_all_datetime_headers", 1, 2, 2, 1); __PYX_ERR(0, 656, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("set_all_datetime_headers", 1, 2, 2, 1); __PYX_ERR(0, 676, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "set_all_datetime_headers") < 0)) __PYX_ERR(0, 656, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "set_all_datetime_headers") < 0)) __PYX_ERR(0, 676, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -9897,7 +10114,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("set_all_datetime_headers", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 656, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("set_all_datetime_headers", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 676, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -9911,7 +10128,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_9chmengine_5utils_38set_all_datetime_headers(__pyx_self, __pyx_v_game_heads, __pyx_v_local_time);
+  __pyx_r = __pyx_pf_9chmengine_5utils_40set_all_datetime_headers(__pyx_self, __pyx_v_game_heads, __pyx_v_local_time);
 
   /* function exit code */
   {
@@ -9924,7 +10141,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_5utils_38set_all_datetime_headers(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_game_heads, PyObject *__pyx_v_local_time) {
+static PyObject *__pyx_pf_9chmengine_5utils_40set_all_datetime_headers(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_game_heads, PyObject *__pyx_v_local_time) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -9936,14 +10153,14 @@ static PyObject *__pyx_pf_9chmengine_5utils_38set_all_datetime_headers(CYTHON_UN
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_all_datetime_headers", 1);
 
-  /* "chmengine/utils/__init__.py":664
+  /* "chmengine/utils/__init__.py":684
  *     local_time : datetime.datetime
  *     """
  *     game_heads["Date"] = local_time.strftime("%Y.%m.%d")             # <<<<<<<<<<<<<<
  *     game_heads["Timezone"] = str(local_time.tzinfo)
  *     set_utc_headers(game_heads, local_time)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_local_time, __pyx_n_s_strftime); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 664, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_local_time, __pyx_n_s_strftime); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 684, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -9963,36 +10180,36 @@ static PyObject *__pyx_pf_9chmengine_5utils_38set_all_datetime_headers(CYTHON_UN
     PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_kp_u_Y_m_d};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 664, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 684, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  if (unlikely((PyObject_SetItem(__pyx_v_game_heads, __pyx_n_u_Date, __pyx_t_1) < 0))) __PYX_ERR(0, 664, __pyx_L1_error)
+  if (unlikely((PyObject_SetItem(__pyx_v_game_heads, __pyx_n_u_Date, __pyx_t_1) < 0))) __PYX_ERR(0, 684, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":665
+  /* "chmengine/utils/__init__.py":685
  *     """
  *     game_heads["Date"] = local_time.strftime("%Y.%m.%d")
  *     game_heads["Timezone"] = str(local_time.tzinfo)             # <<<<<<<<<<<<<<
  *     set_utc_headers(game_heads, local_time)
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_local_time, __pyx_n_s_tzinfo); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 665, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_local_time, __pyx_n_s_tzinfo); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 685, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_Unicode(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 665, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Unicode(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 685, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (unlikely((PyObject_SetItem(__pyx_v_game_heads, __pyx_n_u_Timezone, __pyx_t_2) < 0))) __PYX_ERR(0, 665, __pyx_L1_error)
+  if (unlikely((PyObject_SetItem(__pyx_v_game_heads, __pyx_n_u_Timezone, __pyx_t_2) < 0))) __PYX_ERR(0, 685, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "chmengine/utils/__init__.py":666
+  /* "chmengine/utils/__init__.py":686
  *     game_heads["Date"] = local_time.strftime("%Y.%m.%d")
  *     game_heads["Timezone"] = str(local_time.tzinfo)
  *     set_utc_headers(game_heads, local_time)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_set_utc_headers); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 666, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_set_utc_headers); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 686, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -10012,13 +10229,13 @@ static PyObject *__pyx_pf_9chmengine_5utils_38set_all_datetime_headers(CYTHON_UN
     PyObject *__pyx_callargs[3] = {__pyx_t_3, __pyx_v_game_heads, __pyx_v_local_time};
     __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_4, 2+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 666, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 686, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "chmengine/utils/__init__.py":656
+  /* "chmengine/utils/__init__.py":676
  * 
  * 
  * def set_all_datetime_headers(game_heads: pgn.Headers, local_time: datetime) -> None:             # <<<<<<<<<<<<<<
@@ -10041,7 +10258,7 @@ static PyObject *__pyx_pf_9chmengine_5utils_38set_all_datetime_headers(CYTHON_UN
   return __pyx_r;
 }
 
-/* "chmengine/utils/__init__.py":669
+/* "chmengine/utils/__init__.py":689
  * 
  * 
  * def set_utc_headers(game_heads: pgn.Headers, local_time: datetime) -> None:             # <<<<<<<<<<<<<<
@@ -10050,16 +10267,16 @@ static PyObject *__pyx_pf_9chmengine_5utils_38set_all_datetime_headers(CYTHON_UN
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_5utils_41set_utc_headers(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_5utils_43set_utc_headers(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_40set_utc_headers, "Sets UTC header info of pgn file data from local timestamp\n\n    Parameters\n    ----------\n    game_heads : chess.pgn.Headers\n    local_time : datetime.datetime\n    ");
-static PyMethodDef __pyx_mdef_9chmengine_5utils_41set_utc_headers = {"set_utc_headers", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_41set_utc_headers, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_40set_utc_headers};
-static PyObject *__pyx_pw_9chmengine_5utils_41set_utc_headers(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_5utils_42set_utc_headers, "Sets UTC header info of pgn file data from local timestamp\n\n    Parameters\n    ----------\n    game_heads : chess.pgn.Headers\n    local_time : datetime.datetime\n    ");
+static PyMethodDef __pyx_mdef_9chmengine_5utils_43set_utc_headers = {"set_utc_headers", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_5utils_43set_utc_headers, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_5utils_42set_utc_headers};
+static PyObject *__pyx_pw_9chmengine_5utils_43set_utc_headers(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -10106,7 +10323,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 669, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 689, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -10114,14 +10331,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 669, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 689, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("set_utc_headers", 1, 2, 2, 1); __PYX_ERR(0, 669, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("set_utc_headers", 1, 2, 2, 1); __PYX_ERR(0, 689, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "set_utc_headers") < 0)) __PYX_ERR(0, 669, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "set_utc_headers") < 0)) __PYX_ERR(0, 689, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -10134,7 +10351,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("set_utc_headers", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 669, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("set_utc_headers", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 689, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -10148,7 +10365,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_9chmengine_5utils_40set_utc_headers(__pyx_self, __pyx_v_game_heads, __pyx_v_local_time);
+  __pyx_r = __pyx_pf_9chmengine_5utils_42set_utc_headers(__pyx_self, __pyx_v_game_heads, __pyx_v_local_time);
 
   /* function exit code */
   {
@@ -10161,7 +10378,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_5utils_40set_utc_headers(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_game_heads, PyObject *__pyx_v_local_time) {
+static PyObject *__pyx_pf_9chmengine_5utils_42set_utc_headers(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_game_heads, PyObject *__pyx_v_local_time) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -10175,17 +10392,17 @@ static PyObject *__pyx_pf_9chmengine_5utils_40set_utc_headers(CYTHON_UNUSED PyOb
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_utc_headers", 1);
 
-  /* "chmengine/utils/__init__.py":677
+  /* "chmengine/utils/__init__.py":697
  *     local_time : datetime.datetime
  *     """
  *     game_heads["UTCDate"] = local_time.astimezone(timezone.utc).strftime("%Y.%m.%d")             # <<<<<<<<<<<<<<
  *     game_heads["UTCTime"] = local_time.astimezone(timezone.utc).strftime("%H:%M:%S")
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_local_time, __pyx_n_s_astimezone); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 677, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_local_time, __pyx_n_s_astimezone); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 697, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_timezone); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 677, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_timezone); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 697, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_utc); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 677, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_utc); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 697, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_4 = NULL;
@@ -10207,11 +10424,11 @@ static PyObject *__pyx_pf_9chmengine_5utils_40set_utc_headers(CYTHON_UNUSED PyOb
     __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 677, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 697, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_strftime); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 677, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_strftime); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 697, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -10232,23 +10449,23 @@ static PyObject *__pyx_pf_9chmengine_5utils_40set_utc_headers(CYTHON_UNUSED PyOb
     PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_kp_u_Y_m_d};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 677, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 697, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
-  if (unlikely((PyObject_SetItem(__pyx_v_game_heads, __pyx_n_u_UTCDate, __pyx_t_1) < 0))) __PYX_ERR(0, 677, __pyx_L1_error)
+  if (unlikely((PyObject_SetItem(__pyx_v_game_heads, __pyx_n_u_UTCDate, __pyx_t_1) < 0))) __PYX_ERR(0, 697, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":678
+  /* "chmengine/utils/__init__.py":698
  *     """
  *     game_heads["UTCDate"] = local_time.astimezone(timezone.utc).strftime("%Y.%m.%d")
  *     game_heads["UTCTime"] = local_time.astimezone(timezone.utc).strftime("%H:%M:%S")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_local_time, __pyx_n_s_astimezone); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 678, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_local_time, __pyx_n_s_astimezone); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 698, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_timezone); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 678, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_timezone); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 698, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_utc); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 678, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_utc); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 698, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_5 = NULL;
@@ -10270,11 +10487,11 @@ static PyObject *__pyx_pf_9chmengine_5utils_40set_utc_headers(CYTHON_UNUSED PyOb
     __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 678, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 698, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_strftime); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 678, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_strftime); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 698, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -10295,14 +10512,14 @@ static PyObject *__pyx_pf_9chmengine_5utils_40set_utc_headers(CYTHON_UNUSED PyOb
     PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_kp_u_H_M_S};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 678, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 698, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  if (unlikely((PyObject_SetItem(__pyx_v_game_heads, __pyx_n_u_UTCTime, __pyx_t_1) < 0))) __PYX_ERR(0, 678, __pyx_L1_error)
+  if (unlikely((PyObject_SetItem(__pyx_v_game_heads, __pyx_n_u_UTCTime, __pyx_t_1) < 0))) __PYX_ERR(0, 698, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "chmengine/utils/__init__.py":669
+  /* "chmengine/utils/__init__.py":689
  * 
  * 
  * def set_utc_headers(game_heads: pgn.Headers, local_time: datetime) -> None:             # <<<<<<<<<<<<<<
@@ -10514,6 +10731,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
   __Pyx_StringTabEntry __pyx_string_tab[] = {
     {&__pyx_kp_u_1, __pyx_k_1, sizeof(__pyx_k_1), 0, 1, 0, 0},
     {&__pyx_kp_u_2f, __pyx_k_2f, sizeof(__pyx_k_2f), 0, 1, 0, 0},
+    {&__pyx_kp_u_2f_2, __pyx_k_2f_2, sizeof(__pyx_k_2f_2), 0, 1, 0, 0},
     {&__pyx_n_s_AttributeError, __pyx_k_AttributeError, sizeof(__pyx_k_AttributeError), 0, 0, 1, 1},
     {&__pyx_n_u_B, __pyx_k_B, sizeof(__pyx_k_B), 0, 1, 0, 1},
     {&__pyx_n_s_Board, __pyx_k_Board, sizeof(__pyx_k_Board), 0, 0, 1, 1},
@@ -10555,7 +10773,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_u_UTCTime, __pyx_k_UTCTime, sizeof(__pyx_k_UTCTime), 0, 1, 0, 1},
     {&__pyx_kp_u_Y_m_d, __pyx_k_Y_m_d, sizeof(__pyx_k_Y_m_d), 0, 1, 0, 0},
     {&__pyx_kp_u__4, __pyx_k__4, sizeof(__pyx_k__4), 0, 1, 0, 0},
-    {&__pyx_n_s__56, __pyx_k__56, sizeof(__pyx_k__56), 0, 0, 1, 1},
+    {&__pyx_n_s__58, __pyx_k__58, sizeof(__pyx_k__58), 0, 0, 1, 1},
     {&__pyx_n_s_all, __pyx_k_all, sizeof(__pyx_k_all), 0, 0, 1, 1},
     {&__pyx_n_s_args, __pyx_k_args, sizeof(__pyx_k_args), 0, 0, 1, 1},
     {&__pyx_n_s_astimezone, __pyx_k_astimezone, sizeof(__pyx_k_astimezone), 0, 0, 1, 1},
@@ -10584,7 +10802,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_u_calculate_white_minus_black_scor_2, __pyx_k_calculate_white_minus_black_scor_2, sizeof(__pyx_k_calculate_white_minus_black_scor_2), 0, 1, 0, 0},
     {&__pyx_n_s_checkmate_score, __pyx_k_checkmate_score, sizeof(__pyx_k_checkmate_score), 0, 0, 1, 1},
     {&__pyx_n_u_checkmate_score, __pyx_k_checkmate_score, sizeof(__pyx_k_checkmate_score), 0, 1, 0, 1},
-    {&__pyx_kp_u_checkmate_score_line_394, __pyx_k_checkmate_score_line_394, sizeof(__pyx_k_checkmate_score_line_394), 0, 1, 0, 0},
+    {&__pyx_kp_u_checkmate_score_line_414, __pyx_k_checkmate_score_line_414, sizeof(__pyx_k_checkmate_score_line_414), 0, 1, 0, 0},
     {&__pyx_n_s_chess, __pyx_k_chess, sizeof(__pyx_k_chess), 0, 0, 1, 1},
     {&__pyx_n_s_chmengine_utils, __pyx_k_chmengine_utils, sizeof(__pyx_k_chmengine_utils), 0, 0, 1, 1},
     {&__pyx_kp_u_chmengine_utils___init, __pyx_k_chmengine_utils___init, sizeof(__pyx_k_chmengine_utils___init), 0, 1, 0, 0},
@@ -10610,6 +10828,8 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_float64, __pyx_k_float64, sizeof(__pyx_k_float64), 0, 0, 1, 1},
     {&__pyx_n_s_format_moves, __pyx_k_format_moves, sizeof(__pyx_k_format_moves), 0, 0, 1, 1},
     {&__pyx_n_u_format_moves, __pyx_k_format_moves, sizeof(__pyx_k_format_moves), 0, 1, 0, 1},
+    {&__pyx_n_s_format_picks, __pyx_k_format_picks, sizeof(__pyx_k_format_picks), 0, 0, 1, 1},
+    {&__pyx_n_u_format_picks, __pyx_k_format_picks, sizeof(__pyx_k_format_picks), 0, 1, 0, 1},
     {&__pyx_n_s_from_symbol, __pyx_k_from_symbol, sizeof(__pyx_k_from_symbol), 0, 0, 1, 1},
     {&__pyx_n_s_game_heads, __pyx_k_game_heads, sizeof(__pyx_k_game_heads), 0, 0, 1, 1},
     {&__pyx_kp_u_gc, __pyx_k_gc, sizeof(__pyx_k_gc), 0, 1, 0, 0},
@@ -10641,7 +10861,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_is_coroutine, __pyx_k_is_coroutine, sizeof(__pyx_k_is_coroutine), 0, 0, 1, 1},
     {&__pyx_n_s_is_draw, __pyx_k_is_draw, sizeof(__pyx_k_is_draw), 0, 0, 1, 1},
     {&__pyx_n_u_is_draw, __pyx_k_is_draw, sizeof(__pyx_k_is_draw), 0, 1, 0, 1},
-    {&__pyx_kp_u_is_draw_line_114, __pyx_k_is_draw_line_114, sizeof(__pyx_k_is_draw_line_114), 0, 1, 0, 0},
+    {&__pyx_kp_u_is_draw_line_134, __pyx_k_is_draw_line_134, sizeof(__pyx_k_is_draw_line_134), 0, 1, 0, 0},
     {&__pyx_n_s_is_terminated, __pyx_k_is_terminated, sizeof(__pyx_k_is_terminated), 0, 0, 1, 1},
     {&__pyx_n_s_is_valid_king_box_square, __pyx_k_is_valid_king_box_square, sizeof(__pyx_k_is_valid_king_box_square), 0, 0, 1, 1},
     {&__pyx_n_u_is_valid_king_box_square, __pyx_k_is_valid_king_box_square, sizeof(__pyx_k_is_valid_king_box_square), 0, 1, 0, 1},
@@ -10691,10 +10911,10 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_piece_map, __pyx_k_piece_map, sizeof(__pyx_k_piece_map), 0, 0, 1, 1},
     {&__pyx_n_s_pieces_count_from_board, __pyx_k_pieces_count_from_board, sizeof(__pyx_k_pieces_count_from_board), 0, 0, 1, 1},
     {&__pyx_n_u_pieces_count_from_board, __pyx_k_pieces_count_from_board, sizeof(__pyx_k_pieces_count_from_board), 0, 1, 0, 1},
-    {&__pyx_kp_u_pieces_count_from_board_line_533, __pyx_k_pieces_count_from_board_line_533, sizeof(__pyx_k_pieces_count_from_board_line_533), 0, 1, 0, 0},
+    {&__pyx_kp_u_pieces_count_from_board_line_553, __pyx_k_pieces_count_from_board_line_553, sizeof(__pyx_k_pieces_count_from_board_line_553), 0, 1, 0, 0},
     {&__pyx_n_s_pieces_count_from_fen, __pyx_k_pieces_count_from_fen, sizeof(__pyx_k_pieces_count_from_fen), 0, 0, 1, 1},
     {&__pyx_n_u_pieces_count_from_fen, __pyx_k_pieces_count_from_fen, sizeof(__pyx_k_pieces_count_from_fen), 0, 1, 0, 1},
-    {&__pyx_kp_u_pieces_count_from_fen_line_499, __pyx_k_pieces_count_from_fen_line_499, sizeof(__pyx_k_pieces_count_from_fen_line_499), 0, 1, 0, 0},
+    {&__pyx_kp_u_pieces_count_from_fen_line_519, __pyx_k_pieces_count_from_fen_line_519, sizeof(__pyx_k_pieces_count_from_fen_line_519), 0, 1, 0, 0},
     {&__pyx_n_u_q, __pyx_k_q, sizeof(__pyx_k_q), 0, 1, 0, 1},
     {&__pyx_n_u_r, __pyx_k_r, sizeof(__pyx_k_r), 0, 1, 0, 1},
     {&__pyx_n_s_range, __pyx_k_range, sizeof(__pyx_k_range), 0, 0, 1, 1},
@@ -10736,9 +10956,9 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_AttributeError = __Pyx_GetBuiltinName(__pyx_n_s_AttributeError); if (!__pyx_builtin_AttributeError) __PYX_ERR(0, 18, __pyx_L1_error)
   __pyx_builtin_bin = __Pyx_GetBuiltinName(__pyx_n_s_bin); if (!__pyx_builtin_bin) __PYX_ERR(0, 20, __pyx_L1_error)
-  __pyx_builtin_sum = __Pyx_GetBuiltinName(__pyx_n_s_sum); if (!__pyx_builtin_sum) __PYX_ERR(0, 100, __pyx_L1_error)
-  __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(0, 278, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 653, __pyx_L1_error)
+  __pyx_builtin_sum = __Pyx_GetBuiltinName(__pyx_n_s_sum); if (!__pyx_builtin_sum) __PYX_ERR(0, 120, __pyx_L1_error)
+  __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(0, 298, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 673, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -10749,36 +10969,36 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "chmengine/utils/__init__.py":453
+  /* "chmengine/utils/__init__.py":473
  *     black_king_box: List[int] = [black_king_square]
  *     long: int
  *     for long in (-1, 0, 1):             # <<<<<<<<<<<<<<
  *         lat: int
  *         for lat in (-8, 0, +8):
  */
-  __pyx_tuple_ = PyTuple_Pack(3, __pyx_int_neg_1, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 453, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(3, __pyx_int_neg_1, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 473, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "chmengine/utils/__init__.py":455
+  /* "chmengine/utils/__init__.py":475
  *     for long in (-1, 0, 1):
  *         lat: int
  *         for lat in (-8, 0, +8):             # <<<<<<<<<<<<<<
  *             wks_box_id: int = white_king_square + long + lat
  *             bks_box_id: int = black_king_square + long + lat
  */
-  __pyx_tuple__2 = PyTuple_Pack(3, __pyx_int_neg_8, __pyx_int_0, __pyx_int_8); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 455, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(3, __pyx_int_neg_8, __pyx_int_0, __pyx_int_8); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 475, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "chmengine/utils/__init__.py":653
+  /* "chmengine/utils/__init__.py":673
  *         A tuple of lists, each initially containing one tuple (None, None).
  *     """
  *     return tuple([(None, None)] for _ in range(number))             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_tuple__3 = PyTuple_Pack(2, Py_None, Py_None); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 653, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(2, Py_None, Py_None); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 673, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
@@ -10794,368 +11014,380 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__5);
   __pyx_codeobj__6 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__5, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_bit_count, 19, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__6)) __PYX_ERR(0, 19, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":52
+  /* "chmengine/utils/__init__.py":53
  * 
  * 
  * def format_moves(picks: List[Pick]) -> List[Tuple[str, str]]:             # <<<<<<<<<<<<<<
  *     """Format a list of (move, score) tuples into UCI strings and formatted scores.
  * 
  */
-  __pyx_tuple__7 = PyTuple_Pack(3, __pyx_n_s_picks, __pyx_n_s_m, __pyx_n_s_s); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(3, __pyx_n_s_picks, __pyx_n_s_m, __pyx_n_s_s); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
-  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_format_moves, 52, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_format_moves, 53, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 53, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":70
+  /* "chmengine/utils/__init__.py":71
+ * 
+ * 
+ * def format_picks(picks: List[Pick]) -> str:             # <<<<<<<<<<<<<<
+ *     """Format a list of Picks into UCI strings and formatted scores.
+ * 
+ */
+  __pyx_tuple__9 = PyTuple_Pack(3, __pyx_n_s_picks, __pyx_n_s_p, __pyx_n_s_p); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__9);
+  __Pyx_GIVEREF(__pyx_tuple__9);
+  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_format_picks, 71, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 71, __pyx_L1_error)
+
+  /* "chmengine/utils/__init__.py":90
  * 
  * 
  * def calculate_score(             # <<<<<<<<<<<<<<
  *         current_index: int,
  *         new_heatmap_transposed: NDArray[float64],
  */
-  __pyx_tuple__9 = PyTuple_Pack(7, __pyx_n_s_current_index, __pyx_n_s_new_heatmap_transposed, __pyx_n_s_new_current_king_box, __pyx_n_s_new_other_king_box, __pyx_n_s_other_index, __pyx_n_s_initial_move_score, __pyx_n_s_initial_king_box_score); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 70, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__9);
-  __Pyx_GIVEREF(__pyx_tuple__9);
-  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_calculate_score, 70, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 70, __pyx_L1_error)
+  __pyx_tuple__11 = PyTuple_Pack(7, __pyx_n_s_current_index, __pyx_n_s_new_heatmap_transposed, __pyx_n_s_new_current_king_box, __pyx_n_s_new_other_king_box, __pyx_n_s_other_index, __pyx_n_s_initial_move_score, __pyx_n_s_initial_king_box_score); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__11);
+  __Pyx_GIVEREF(__pyx_tuple__11);
+  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_calculate_score, 90, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 90, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":114
+  /* "chmengine/utils/__init__.py":134
  * 
  * 
  * def is_draw(winner: Optional[bool]) -> bool:             # <<<<<<<<<<<<<<
  *     """Check if a game result is a draw based on the winner field.
  * 
  */
-  __pyx_tuple__11 = PyTuple_Pack(1, __pyx_n_s_winner); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 114, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__11);
-  __Pyx_GIVEREF(__pyx_tuple__11);
-  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_is_draw, 114, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_n_s_winner); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__13);
+  __Pyx_GIVEREF(__pyx_tuple__13);
+  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_is_draw, 134, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 134, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":141
+  /* "chmengine/utils/__init__.py":161
  * 
  * 
  * def calculate_white_minus_black_score(             # <<<<<<<<<<<<<<
  *         board: Board,
  *         depth: int,
  */
-  __pyx_tuple__13 = PyTuple_Pack(11, __pyx_n_s_board, __pyx_n_s_depth, __pyx_n_s_outcome, __pyx_n_s_is_terminated, __pyx_n_s_heatmap_transposed, __pyx_n_s_transposed_white, __pyx_n_s_transposed_black, __pyx_n_s_general_move_score, __pyx_n_s_king_box_white, __pyx_n_s_king_box_black, __pyx_n_s_king_box_score); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 141, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__13);
-  __Pyx_GIVEREF(__pyx_tuple__13);
-  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_calculate_white_minus_black_scor, 141, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 141, __pyx_L1_error)
+  __pyx_tuple__15 = PyTuple_Pack(11, __pyx_n_s_board, __pyx_n_s_depth, __pyx_n_s_outcome, __pyx_n_s_is_terminated, __pyx_n_s_heatmap_transposed, __pyx_n_s_transposed_white, __pyx_n_s_transposed_black, __pyx_n_s_general_move_score, __pyx_n_s_king_box_white, __pyx_n_s_king_box_black, __pyx_n_s_king_box_score); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 161, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__15);
+  __Pyx_GIVEREF(__pyx_tuple__15);
+  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_calculate_white_minus_black_scor, 161, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 161, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":221
+  /* "chmengine/utils/__init__.py":241
  * 
  * max_moves_map: Dict[Piece, int] = {
  *     Piece.from_symbol('P'): 4,             # <<<<<<<<<<<<<<
  *     Piece.from_symbol('N'): 8,
  *     Piece.from_symbol('B'): 13,
  */
-  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_n_u_P); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 221, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__15);
-  __Pyx_GIVEREF(__pyx_tuple__15);
+  __pyx_tuple__17 = PyTuple_Pack(1, __pyx_n_u_P); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 241, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__17);
+  __Pyx_GIVEREF(__pyx_tuple__17);
 
-  /* "chmengine/utils/__init__.py":222
+  /* "chmengine/utils/__init__.py":242
  * max_moves_map: Dict[Piece, int] = {
  *     Piece.from_symbol('P'): 4,
  *     Piece.from_symbol('N'): 8,             # <<<<<<<<<<<<<<
  *     Piece.from_symbol('B'): 13,
  *     Piece.from_symbol('R'): 14,
  */
-  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_n_u_N); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 222, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__16);
-  __Pyx_GIVEREF(__pyx_tuple__16);
+  __pyx_tuple__18 = PyTuple_Pack(1, __pyx_n_u_N); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 242, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__18);
+  __Pyx_GIVEREF(__pyx_tuple__18);
 
-  /* "chmengine/utils/__init__.py":223
+  /* "chmengine/utils/__init__.py":243
  *     Piece.from_symbol('P'): 4,
  *     Piece.from_symbol('N'): 8,
  *     Piece.from_symbol('B'): 13,             # <<<<<<<<<<<<<<
  *     Piece.from_symbol('R'): 14,
  *     Piece.from_symbol('Q'): 27,
  */
-  __pyx_tuple__17 = PyTuple_Pack(1, __pyx_n_u_B); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 223, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__17);
-  __Pyx_GIVEREF(__pyx_tuple__17);
+  __pyx_tuple__19 = PyTuple_Pack(1, __pyx_n_u_B); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 243, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__19);
+  __Pyx_GIVEREF(__pyx_tuple__19);
 
-  /* "chmengine/utils/__init__.py":224
+  /* "chmengine/utils/__init__.py":244
  *     Piece.from_symbol('N'): 8,
  *     Piece.from_symbol('B'): 13,
  *     Piece.from_symbol('R'): 14,             # <<<<<<<<<<<<<<
  *     Piece.from_symbol('Q'): 27,
  *     Piece.from_symbol('K'): 8,
  */
-  __pyx_tuple__18 = PyTuple_Pack(1, __pyx_n_u_R); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 224, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__18);
-  __Pyx_GIVEREF(__pyx_tuple__18);
+  __pyx_tuple__20 = PyTuple_Pack(1, __pyx_n_u_R); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(0, 244, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__20);
+  __Pyx_GIVEREF(__pyx_tuple__20);
 
-  /* "chmengine/utils/__init__.py":225
+  /* "chmengine/utils/__init__.py":245
  *     Piece.from_symbol('B'): 13,
  *     Piece.from_symbol('R'): 14,
  *     Piece.from_symbol('Q'): 27,             # <<<<<<<<<<<<<<
  *     Piece.from_symbol('K'): 8,
  *     Piece.from_symbol('p'): 4,
  */
-  __pyx_tuple__19 = PyTuple_Pack(1, __pyx_n_u_Q); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 225, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__19);
-  __Pyx_GIVEREF(__pyx_tuple__19);
+  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_n_u_Q); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 245, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__21);
+  __Pyx_GIVEREF(__pyx_tuple__21);
 
-  /* "chmengine/utils/__init__.py":226
+  /* "chmengine/utils/__init__.py":246
  *     Piece.from_symbol('R'): 14,
  *     Piece.from_symbol('Q'): 27,
  *     Piece.from_symbol('K'): 8,             # <<<<<<<<<<<<<<
  *     Piece.from_symbol('p'): 4,
  *     Piece.from_symbol('n'): 8,
  */
-  __pyx_tuple__20 = PyTuple_Pack(1, __pyx_n_u_K); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(0, 226, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__20);
-  __Pyx_GIVEREF(__pyx_tuple__20);
+  __pyx_tuple__22 = PyTuple_Pack(1, __pyx_n_u_K); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 246, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__22);
+  __Pyx_GIVEREF(__pyx_tuple__22);
 
-  /* "chmengine/utils/__init__.py":227
+  /* "chmengine/utils/__init__.py":247
  *     Piece.from_symbol('Q'): 27,
  *     Piece.from_symbol('K'): 8,
  *     Piece.from_symbol('p'): 4,             # <<<<<<<<<<<<<<
  *     Piece.from_symbol('n'): 8,
  *     Piece.from_symbol('b'): 13,
  */
-  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_n_u_p); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 227, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__21);
-  __Pyx_GIVEREF(__pyx_tuple__21);
+  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_n_u_p); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 247, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__23);
+  __Pyx_GIVEREF(__pyx_tuple__23);
 
-  /* "chmengine/utils/__init__.py":228
+  /* "chmengine/utils/__init__.py":248
  *     Piece.from_symbol('K'): 8,
  *     Piece.from_symbol('p'): 4,
  *     Piece.from_symbol('n'): 8,             # <<<<<<<<<<<<<<
  *     Piece.from_symbol('b'): 13,
  *     Piece.from_symbol('r'): 14,
  */
-  __pyx_tuple__22 = PyTuple_Pack(1, __pyx_n_u_n); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 228, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__22);
-  __Pyx_GIVEREF(__pyx_tuple__22);
+  __pyx_tuple__24 = PyTuple_Pack(1, __pyx_n_u_n); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(0, 248, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__24);
+  __Pyx_GIVEREF(__pyx_tuple__24);
 
-  /* "chmengine/utils/__init__.py":229
+  /* "chmengine/utils/__init__.py":249
  *     Piece.from_symbol('p'): 4,
  *     Piece.from_symbol('n'): 8,
  *     Piece.from_symbol('b'): 13,             # <<<<<<<<<<<<<<
  *     Piece.from_symbol('r'): 14,
  *     Piece.from_symbol('q'): 27,
  */
-  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_n_u_b); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 229, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__23);
-  __Pyx_GIVEREF(__pyx_tuple__23);
+  __pyx_tuple__25 = PyTuple_Pack(1, __pyx_n_u_b); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__25);
+  __Pyx_GIVEREF(__pyx_tuple__25);
 
-  /* "chmengine/utils/__init__.py":230
+  /* "chmengine/utils/__init__.py":250
  *     Piece.from_symbol('n'): 8,
  *     Piece.from_symbol('b'): 13,
  *     Piece.from_symbol('r'): 14,             # <<<<<<<<<<<<<<
  *     Piece.from_symbol('q'): 27,
  *     Piece.from_symbol('k'): 8,
  */
-  __pyx_tuple__24 = PyTuple_Pack(1, __pyx_n_u_r); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(0, 230, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__24);
-  __Pyx_GIVEREF(__pyx_tuple__24);
+  __pyx_tuple__26 = PyTuple_Pack(1, __pyx_n_u_r); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 250, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__26);
+  __Pyx_GIVEREF(__pyx_tuple__26);
 
-  /* "chmengine/utils/__init__.py":231
+  /* "chmengine/utils/__init__.py":251
  *     Piece.from_symbol('b'): 13,
  *     Piece.from_symbol('r'): 14,
  *     Piece.from_symbol('q'): 27,             # <<<<<<<<<<<<<<
  *     Piece.from_symbol('k'): 8,
  * }
  */
-  __pyx_tuple__25 = PyTuple_Pack(1, __pyx_n_u_q); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 231, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__25);
-  __Pyx_GIVEREF(__pyx_tuple__25);
+  __pyx_tuple__27 = PyTuple_Pack(1, __pyx_n_u_q); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 251, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__27);
+  __Pyx_GIVEREF(__pyx_tuple__27);
 
-  /* "chmengine/utils/__init__.py":232
+  /* "chmengine/utils/__init__.py":252
  *     Piece.from_symbol('r'): 14,
  *     Piece.from_symbol('q'): 27,
  *     Piece.from_symbol('k'): 8,             # <<<<<<<<<<<<<<
  * }
  * 
  */
-  __pyx_tuple__26 = PyTuple_Pack(1, __pyx_n_u_k); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 232, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__26);
-  __Pyx_GIVEREF(__pyx_tuple__26);
+  __pyx_tuple__28 = PyTuple_Pack(1, __pyx_n_u_k); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 252, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__28);
+  __Pyx_GIVEREF(__pyx_tuple__28);
 
-  /* "chmengine/utils/__init__.py":236
+  /* "chmengine/utils/__init__.py":256
  * 
  * 
  * def get_static_value(piece: Piece) -> int:             # <<<<<<<<<<<<<<
  *     """Retrieve the static movement-based value for a given chess piece.
  * 
  */
-  __pyx_tuple__27 = PyTuple_Pack(1, __pyx_n_s_piece); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 236, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__27);
-  __Pyx_GIVEREF(__pyx_tuple__27);
-  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_get_static_value, 236, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_tuple__29 = PyTuple_Pack(1, __pyx_n_s_piece); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 256, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__29);
+  __Pyx_GIVEREF(__pyx_tuple__29);
+  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_get_static_value, 256, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 256, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":256
+  /* "chmengine/utils/__init__.py":276
  * 
  * 
  * def get_static_delta_score(heatmap: ChessMoveHeatmap) -> float64:             # <<<<<<<<<<<<<<
  *     """Compute the static piece-based delta score from a ChessMoveHeatmap.
  * 
  */
-  __pyx_tuple__29 = PyTuple_Pack(8, __pyx_n_s_heatmap, __pyx_n_s_piece_map, __pyx_n_s_white_sum, __pyx_n_s_black_sum, __pyx_n_s_piece_dict, __pyx_n_s_i, __pyx_n_s_piece, __pyx_n_s_count); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 256, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__29);
-  __Pyx_GIVEREF(__pyx_tuple__29);
-  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_get_static_delta_score, 256, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 256, __pyx_L1_error)
+  __pyx_tuple__31 = PyTuple_Pack(8, __pyx_n_s_heatmap, __pyx_n_s_piece_map, __pyx_n_s_white_sum, __pyx_n_s_black_sum, __pyx_n_s_piece_dict, __pyx_n_s_i, __pyx_n_s_piece, __pyx_n_s_count); if (unlikely(!__pyx_tuple__31)) __PYX_ERR(0, 276, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__31);
+  __Pyx_GIVEREF(__pyx_tuple__31);
+  __pyx_codeobj__32 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__31, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_get_static_delta_score, 276, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__32)) __PYX_ERR(0, 276, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":289
+  /* "chmengine/utils/__init__.py":309
  * 
  * 
  * def calculate_better_white_minus_black_score(             # <<<<<<<<<<<<<<
  *         board: Board,
  *         depth: int = 1,
  */
-  __pyx_tuple__31 = PyTuple_Pack(13, __pyx_n_s_board, __pyx_n_s_depth, __pyx_n_s_outcome, __pyx_n_s_is_terminated, __pyx_n_s_heatmap, __pyx_n_s_heatmap_transposed, __pyx_n_s_transposed_white, __pyx_n_s_transposed_black, __pyx_n_s_general_move_score, __pyx_n_s_king_box_white, __pyx_n_s_king_box_black, __pyx_n_s_king_box_score, __pyx_n_s_static_delta_score); if (unlikely(!__pyx_tuple__31)) __PYX_ERR(0, 289, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__31);
-  __Pyx_GIVEREF(__pyx_tuple__31);
-  __pyx_codeobj__32 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 13, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__31, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_calculate_better_white_minus_bla, 289, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__32)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_tuple__33 = PyTuple_Pack(13, __pyx_n_s_board, __pyx_n_s_depth, __pyx_n_s_outcome, __pyx_n_s_is_terminated, __pyx_n_s_heatmap, __pyx_n_s_heatmap_transposed, __pyx_n_s_transposed_white, __pyx_n_s_transposed_black, __pyx_n_s_general_move_score, __pyx_n_s_king_box_white, __pyx_n_s_king_box_black, __pyx_n_s_king_box_score, __pyx_n_s_static_delta_score); if (unlikely(!__pyx_tuple__33)) __PYX_ERR(0, 309, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__33);
+  __Pyx_GIVEREF(__pyx_tuple__33);
+  __pyx_codeobj__34 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 13, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_calculate_better_white_minus_bla, 309, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__34)) __PYX_ERR(0, 309, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":361
+  /* "chmengine/utils/__init__.py":381
  * 
  * 
  * def better_checkmate_score(board: Board, depth: int) -> float64:             # <<<<<<<<<<<<<<
  *     """Compute an enhanced checkmate evaluation score.
  * 
  */
-  __pyx_tuple__33 = PyTuple_Pack(3, __pyx_n_s_board, __pyx_n_s_depth, __pyx_n_s_mate_score_abs); if (unlikely(!__pyx_tuple__33)) __PYX_ERR(0, 361, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__33);
-  __Pyx_GIVEREF(__pyx_tuple__33);
-  __pyx_codeobj__34 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_better_checkmate_score, 361, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__34)) __PYX_ERR(0, 361, __pyx_L1_error)
+  __pyx_tuple__35 = PyTuple_Pack(3, __pyx_n_s_board, __pyx_n_s_depth, __pyx_n_s_mate_score_abs); if (unlikely(!__pyx_tuple__35)) __PYX_ERR(0, 381, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__35);
+  __Pyx_GIVEREF(__pyx_tuple__35);
+  __pyx_codeobj__36 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__35, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_better_checkmate_score, 381, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__36)) __PYX_ERR(0, 381, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":394
+  /* "chmengine/utils/__init__.py":414
  * 
  * 
  * def checkmate_score(board: Board, depth: int) -> float64:             # <<<<<<<<<<<<<<
  *     """Return a large signed score for checkmate results.
  * 
  */
-  __pyx_codeobj__35 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_checkmate_score, 394, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__35)) __PYX_ERR(0, 394, __pyx_L1_error)
+  __pyx_codeobj__37 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__35, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_checkmate_score, 414, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__37)) __PYX_ERR(0, 414, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":424
+  /* "chmengine/utils/__init__.py":444
  * 
  * 
  * def get_white_and_black_king_boxes(board: Board) -> Tuple[List[int], List[int]]:             # <<<<<<<<<<<<<<
  *     """Compute the list of squares surrounding each king on the board.
  * 
  */
-  __pyx_tuple__36 = PyTuple_Pack(9, __pyx_n_s_board, __pyx_n_s_white_king_square, __pyx_n_s_black_king_square, __pyx_n_s_white_king_box, __pyx_n_s_black_king_box, __pyx_n_s_long, __pyx_n_s_lat, __pyx_n_s_wks_box_id, __pyx_n_s_bks_box_id); if (unlikely(!__pyx_tuple__36)) __PYX_ERR(0, 424, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__36);
-  __Pyx_GIVEREF(__pyx_tuple__36);
-  __pyx_codeobj__37 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__36, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_get_white_and_black_king_boxes, 424, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__37)) __PYX_ERR(0, 424, __pyx_L1_error)
+  __pyx_tuple__38 = PyTuple_Pack(9, __pyx_n_s_board, __pyx_n_s_white_king_square, __pyx_n_s_black_king_square, __pyx_n_s_white_king_box, __pyx_n_s_black_king_box, __pyx_n_s_long, __pyx_n_s_lat, __pyx_n_s_wks_box_id, __pyx_n_s_bks_box_id); if (unlikely(!__pyx_tuple__38)) __PYX_ERR(0, 444, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__38);
+  __Pyx_GIVEREF(__pyx_tuple__38);
+  __pyx_codeobj__39 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__38, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_get_white_and_black_king_boxes, 444, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__39)) __PYX_ERR(0, 444, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":465
+  /* "chmengine/utils/__init__.py":485
  * 
  * 
  * def insert_ordered_worst_to_best(             # <<<<<<<<<<<<<<
  *         ordered_picks: List[Pick],
  *         pick: Pick
  */
-  __pyx_tuple__38 = PyTuple_Pack(4, __pyx_n_s_ordered_picks, __pyx_n_s_pick, __pyx_n_s_ordered_index, __pyx_n_s_p); if (unlikely(!__pyx_tuple__38)) __PYX_ERR(0, 465, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__38);
-  __Pyx_GIVEREF(__pyx_tuple__38);
-  __pyx_codeobj__39 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__38, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_insert_ordered_worst_to_best, 465, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__39)) __PYX_ERR(0, 465, __pyx_L1_error)
+  __pyx_tuple__40 = PyTuple_Pack(4, __pyx_n_s_ordered_picks, __pyx_n_s_pick, __pyx_n_s_ordered_index, __pyx_n_s_p); if (unlikely(!__pyx_tuple__40)) __PYX_ERR(0, 485, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__40);
+  __Pyx_GIVEREF(__pyx_tuple__40);
+  __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_insert_ordered_worst_to_best, 485, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) __PYX_ERR(0, 485, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":482
+  /* "chmengine/utils/__init__.py":502
  * 
  * 
  * def insert_ordered_best_to_worst(             # <<<<<<<<<<<<<<
  *         ordered_picks: List[Pick],
  *         pick: Pick
  */
-  __pyx_codeobj__40 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__38, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_insert_ordered_best_to_worst, 482, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__40)) __PYX_ERR(0, 482, __pyx_L1_error)
+  __pyx_codeobj__42 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_insert_ordered_best_to_worst, 502, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__42)) __PYX_ERR(0, 502, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":499
+  /* "chmengine/utils/__init__.py":519
  * 
  * 
  * def pieces_count_from_fen(fen: str) -> int:             # <<<<<<<<<<<<<<
  *     """Return the number of pieces on the board represented by `fen`.
  * 
  */
-  __pyx_tuple__41 = PyTuple_Pack(1, __pyx_n_s_fen); if (unlikely(!__pyx_tuple__41)) __PYX_ERR(0, 499, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__41);
-  __Pyx_GIVEREF(__pyx_tuple__41);
-  __pyx_codeobj__42 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__41, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_pieces_count_from_fen, 499, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__42)) __PYX_ERR(0, 499, __pyx_L1_error)
+  __pyx_tuple__43 = PyTuple_Pack(1, __pyx_n_s_fen); if (unlikely(!__pyx_tuple__43)) __PYX_ERR(0, 519, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__43);
+  __Pyx_GIVEREF(__pyx_tuple__43);
+  __pyx_codeobj__44 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__43, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_pieces_count_from_fen, 519, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__44)) __PYX_ERR(0, 519, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":533
+  /* "chmengine/utils/__init__.py":553
  * 
  * 
  * def pieces_count_from_board(board: Board) -> int:             # <<<<<<<<<<<<<<
  *     """Return the number of pieces on the board
  * 
  */
-  __pyx_tuple__43 = PyTuple_Pack(1, __pyx_n_s_board); if (unlikely(!__pyx_tuple__43)) __PYX_ERR(0, 533, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__43);
-  __Pyx_GIVEREF(__pyx_tuple__43);
-  __pyx_codeobj__44 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__43, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_pieces_count_from_board, 533, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__44)) __PYX_ERR(0, 533, __pyx_L1_error)
+  __pyx_tuple__45 = PyTuple_Pack(1, __pyx_n_s_board); if (unlikely(!__pyx_tuple__45)) __PYX_ERR(0, 553, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__45);
+  __Pyx_GIVEREF(__pyx_tuple__45);
+  __pyx_codeobj__46 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__45, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_pieces_count_from_board, 553, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__46)) __PYX_ERR(0, 553, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":562
+  /* "chmengine/utils/__init__.py":582
  * 
  * 
  * def insert_choice_into_current_moves(             # <<<<<<<<<<<<<<
  *         choices_ordered_best_to_worst: List[Pick],
  *         pick: Pick
  */
-  __pyx_tuple__45 = PyTuple_Pack(2, __pyx_n_s_choices_ordered_best_to_worst, __pyx_n_s_pick); if (unlikely(!__pyx_tuple__45)) __PYX_ERR(0, 562, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__45);
-  __Pyx_GIVEREF(__pyx_tuple__45);
-  __pyx_codeobj__46 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__45, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_insert_choice_into_current_moves, 562, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__46)) __PYX_ERR(0, 562, __pyx_L1_error)
+  __pyx_tuple__47 = PyTuple_Pack(2, __pyx_n_s_choices_ordered_best_to_worst, __pyx_n_s_pick); if (unlikely(!__pyx_tuple__47)) __PYX_ERR(0, 582, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__47);
+  __Pyx_GIVEREF(__pyx_tuple__47);
+  __pyx_codeobj__48 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__47, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_insert_choice_into_current_moves, 582, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__48)) __PYX_ERR(0, 582, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":587
+  /* "chmengine/utils/__init__.py":607
  * 
  * 
  * def insert_choice_into_response_moves(             # <<<<<<<<<<<<<<
  *         choices_ordered_worst_to_best: List[Pick],
  *         pick: Pick
  */
-  __pyx_tuple__47 = PyTuple_Pack(2, __pyx_n_s_choices_ordered_worst_to_best, __pyx_n_s_pick); if (unlikely(!__pyx_tuple__47)) __PYX_ERR(0, 587, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__47);
-  __Pyx_GIVEREF(__pyx_tuple__47);
-  __pyx_codeobj__48 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__47, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_insert_choice_into_response_move, 587, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__48)) __PYX_ERR(0, 587, __pyx_L1_error)
+  __pyx_tuple__49 = PyTuple_Pack(2, __pyx_n_s_choices_ordered_worst_to_best, __pyx_n_s_pick); if (unlikely(!__pyx_tuple__49)) __PYX_ERR(0, 607, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__49);
+  __Pyx_GIVEREF(__pyx_tuple__49);
+  __pyx_codeobj__50 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__49, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_insert_choice_into_response_move, 607, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__50)) __PYX_ERR(0, 607, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":612
+  /* "chmengine/utils/__init__.py":632
  * 
  * 
  * def is_valid_king_box_square(square_id: int, king_square: int) -> bool:             # <<<<<<<<<<<<<<
  *     """Check if a square is valid for inclusion in a king's bounding box.
  * 
  */
-  __pyx_tuple__49 = PyTuple_Pack(2, __pyx_n_s_square_id, __pyx_n_s_king_square); if (unlikely(!__pyx_tuple__49)) __PYX_ERR(0, 612, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__49);
-  __Pyx_GIVEREF(__pyx_tuple__49);
-  __pyx_codeobj__50 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__49, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_is_valid_king_box_square, 612, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__50)) __PYX_ERR(0, 612, __pyx_L1_error)
+  __pyx_tuple__51 = PyTuple_Pack(2, __pyx_n_s_square_id, __pyx_n_s_king_square); if (unlikely(!__pyx_tuple__51)) __PYX_ERR(0, 632, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__51);
+  __Pyx_GIVEREF(__pyx_tuple__51);
+  __pyx_codeobj__52 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__51, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_is_valid_king_box_square, 632, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__52)) __PYX_ERR(0, 632, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":635
+  /* "chmengine/utils/__init__.py":655
  * 
  * 
  * def null_target_moves(             # <<<<<<<<<<<<<<
  *         number: int = 6
  * ) -> Tuple[List[Tuple[Optional[Move], Optional[float64]]], ...]:
  */
-  __pyx_tuple__51 = PyTuple_Pack(3, __pyx_n_s_number, __pyx_n_s_genexpr, __pyx_n_s_genexpr); if (unlikely(!__pyx_tuple__51)) __PYX_ERR(0, 635, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__51);
-  __Pyx_GIVEREF(__pyx_tuple__51);
-  __pyx_codeobj__52 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__51, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_null_target_moves, 635, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__52)) __PYX_ERR(0, 635, __pyx_L1_error)
+  __pyx_tuple__53 = PyTuple_Pack(3, __pyx_n_s_number, __pyx_n_s_genexpr, __pyx_n_s_genexpr); if (unlikely(!__pyx_tuple__53)) __PYX_ERR(0, 655, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__53);
+  __Pyx_GIVEREF(__pyx_tuple__53);
+  __pyx_codeobj__54 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__53, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_null_target_moves, 655, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__54)) __PYX_ERR(0, 655, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":656
+  /* "chmengine/utils/__init__.py":676
  * 
  * 
  * def set_all_datetime_headers(game_heads: pgn.Headers, local_time: datetime) -> None:             # <<<<<<<<<<<<<<
  *     """Sets all datetime related game headers for the pgn file.
  * 
  */
-  __pyx_tuple__53 = PyTuple_Pack(2, __pyx_n_s_game_heads, __pyx_n_s_local_time); if (unlikely(!__pyx_tuple__53)) __PYX_ERR(0, 656, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__53);
-  __Pyx_GIVEREF(__pyx_tuple__53);
-  __pyx_codeobj__54 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__53, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_set_all_datetime_headers, 656, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__54)) __PYX_ERR(0, 656, __pyx_L1_error)
+  __pyx_tuple__55 = PyTuple_Pack(2, __pyx_n_s_game_heads, __pyx_n_s_local_time); if (unlikely(!__pyx_tuple__55)) __PYX_ERR(0, 676, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__55);
+  __Pyx_GIVEREF(__pyx_tuple__55);
+  __pyx_codeobj__56 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__55, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_set_all_datetime_headers, 676, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__56)) __PYX_ERR(0, 676, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":669
+  /* "chmengine/utils/__init__.py":689
  * 
  * 
  * def set_utc_headers(game_heads: pgn.Headers, local_time: datetime) -> None:             # <<<<<<<<<<<<<<
  *     """Sets UTC header info of pgn file data from local timestamp
  * 
  */
-  __pyx_codeobj__55 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__53, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_set_utc_headers, 669, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__55)) __PYX_ERR(0, 669, __pyx_L1_error)
+  __pyx_codeobj__57 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__55, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_utils___init___py, __pyx_n_s_set_utc_headers, 689, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__57)) __PYX_ERR(0, 689, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -11230,15 +11462,15 @@ static int __Pyx_modinit_type_init_code(void) {
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
   #if CYTHON_USE_TYPE_SPECS
-  __pyx_ptype_9chmengine_5utils___pyx_scope_struct__genexpr = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_9chmengine_5utils___pyx_scope_struct__genexpr_spec, NULL); if (unlikely(!__pyx_ptype_9chmengine_5utils___pyx_scope_struct__genexpr)) __PYX_ERR(0, 653, __pyx_L1_error)
-  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_9chmengine_5utils___pyx_scope_struct__genexpr_spec, __pyx_ptype_9chmengine_5utils___pyx_scope_struct__genexpr) < 0) __PYX_ERR(0, 653, __pyx_L1_error)
+  __pyx_ptype_9chmengine_5utils___pyx_scope_struct__genexpr = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_9chmengine_5utils___pyx_scope_struct__genexpr_spec, NULL); if (unlikely(!__pyx_ptype_9chmengine_5utils___pyx_scope_struct__genexpr)) __PYX_ERR(0, 673, __pyx_L1_error)
+  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_9chmengine_5utils___pyx_scope_struct__genexpr_spec, __pyx_ptype_9chmengine_5utils___pyx_scope_struct__genexpr) < 0) __PYX_ERR(0, 673, __pyx_L1_error)
   #else
   __pyx_ptype_9chmengine_5utils___pyx_scope_struct__genexpr = &__pyx_type_9chmengine_5utils___pyx_scope_struct__genexpr;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
   #endif
   #if !CYTHON_USE_TYPE_SPECS
-  if (__Pyx_PyType_Ready(__pyx_ptype_9chmengine_5utils___pyx_scope_struct__genexpr) < 0) __PYX_ERR(0, 653, __pyx_L1_error)
+  if (__Pyx_PyType_Ready(__pyx_ptype_9chmengine_5utils___pyx_scope_struct__genexpr) < 0) __PYX_ERR(0, 673, __pyx_L1_error)
   #endif
   #if PY_MAJOR_VERSION < 3
   __pyx_ptype_9chmengine_5utils___pyx_scope_struct__genexpr->tp_print = 0;
@@ -11963,7 +12195,7 @@ if (!__Pyx_RefNanny) {
  *     # Mods
  *     'pick',
  */
-  __pyx_t_7 = PyList_New(22); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_t_7 = PyList_New(23); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_INCREF(__pyx_n_u_pick);
   __Pyx_GIVEREF(__pyx_n_u_pick);
@@ -11974,703 +12206,724 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(__pyx_n_u_format_moves);
   __Pyx_GIVEREF(__pyx_n_u_format_moves);
   if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 2, __pyx_n_u_format_moves)) __PYX_ERR(0, 22, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_u_format_picks);
+  __Pyx_GIVEREF(__pyx_n_u_format_picks);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 3, __pyx_n_u_format_picks)) __PYX_ERR(0, 22, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_calculate_score);
   __Pyx_GIVEREF(__pyx_n_u_calculate_score);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 3, __pyx_n_u_calculate_score)) __PYX_ERR(0, 22, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 4, __pyx_n_u_calculate_score)) __PYX_ERR(0, 22, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_is_draw);
   __Pyx_GIVEREF(__pyx_n_u_is_draw);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 4, __pyx_n_u_is_draw)) __PYX_ERR(0, 22, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 5, __pyx_n_u_is_draw)) __PYX_ERR(0, 22, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_calculate_white_minus_black_scor);
   __Pyx_GIVEREF(__pyx_n_u_calculate_white_minus_black_scor);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 5, __pyx_n_u_calculate_white_minus_black_scor)) __PYX_ERR(0, 22, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 6, __pyx_n_u_calculate_white_minus_black_scor)) __PYX_ERR(0, 22, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_calculate_better_white_minus_bla);
   __Pyx_GIVEREF(__pyx_n_u_calculate_better_white_minus_bla);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 6, __pyx_n_u_calculate_better_white_minus_bla)) __PYX_ERR(0, 22, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 7, __pyx_n_u_calculate_better_white_minus_bla)) __PYX_ERR(0, 22, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_get_static_value);
   __Pyx_GIVEREF(__pyx_n_u_get_static_value);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 7, __pyx_n_u_get_static_value)) __PYX_ERR(0, 22, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 8, __pyx_n_u_get_static_value)) __PYX_ERR(0, 22, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_get_static_delta_score);
   __Pyx_GIVEREF(__pyx_n_u_get_static_delta_score);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 8, __pyx_n_u_get_static_delta_score)) __PYX_ERR(0, 22, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 9, __pyx_n_u_get_static_delta_score)) __PYX_ERR(0, 22, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_better_checkmate_score);
   __Pyx_GIVEREF(__pyx_n_u_better_checkmate_score);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 9, __pyx_n_u_better_checkmate_score)) __PYX_ERR(0, 22, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 10, __pyx_n_u_better_checkmate_score)) __PYX_ERR(0, 22, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_checkmate_score);
   __Pyx_GIVEREF(__pyx_n_u_checkmate_score);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 10, __pyx_n_u_checkmate_score)) __PYX_ERR(0, 22, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 11, __pyx_n_u_checkmate_score)) __PYX_ERR(0, 22, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_get_white_and_black_king_boxes);
   __Pyx_GIVEREF(__pyx_n_u_get_white_and_black_king_boxes);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 11, __pyx_n_u_get_white_and_black_king_boxes)) __PYX_ERR(0, 22, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 12, __pyx_n_u_get_white_and_black_king_boxes)) __PYX_ERR(0, 22, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_insert_ordered_worst_to_best);
   __Pyx_GIVEREF(__pyx_n_u_insert_ordered_worst_to_best);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 12, __pyx_n_u_insert_ordered_worst_to_best)) __PYX_ERR(0, 22, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 13, __pyx_n_u_insert_ordered_worst_to_best)) __PYX_ERR(0, 22, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_insert_ordered_best_to_worst);
   __Pyx_GIVEREF(__pyx_n_u_insert_ordered_best_to_worst);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 13, __pyx_n_u_insert_ordered_best_to_worst)) __PYX_ERR(0, 22, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 14, __pyx_n_u_insert_ordered_best_to_worst)) __PYX_ERR(0, 22, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_pieces_count_from_fen);
   __Pyx_GIVEREF(__pyx_n_u_pieces_count_from_fen);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 14, __pyx_n_u_pieces_count_from_fen)) __PYX_ERR(0, 22, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 15, __pyx_n_u_pieces_count_from_fen)) __PYX_ERR(0, 22, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_pieces_count_from_board);
   __Pyx_GIVEREF(__pyx_n_u_pieces_count_from_board);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 15, __pyx_n_u_pieces_count_from_board)) __PYX_ERR(0, 22, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 16, __pyx_n_u_pieces_count_from_board)) __PYX_ERR(0, 22, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_insert_choice_into_current_moves);
   __Pyx_GIVEREF(__pyx_n_u_insert_choice_into_current_moves);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 16, __pyx_n_u_insert_choice_into_current_moves)) __PYX_ERR(0, 22, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 17, __pyx_n_u_insert_choice_into_current_moves)) __PYX_ERR(0, 22, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_null_target_moves);
   __Pyx_GIVEREF(__pyx_n_u_null_target_moves);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 17, __pyx_n_u_null_target_moves)) __PYX_ERR(0, 22, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 18, __pyx_n_u_null_target_moves)) __PYX_ERR(0, 22, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_is_valid_king_box_square);
   __Pyx_GIVEREF(__pyx_n_u_is_valid_king_box_square);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 18, __pyx_n_u_is_valid_king_box_square)) __PYX_ERR(0, 22, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 19, __pyx_n_u_is_valid_king_box_square)) __PYX_ERR(0, 22, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_set_all_datetime_headers);
   __Pyx_GIVEREF(__pyx_n_u_set_all_datetime_headers);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 19, __pyx_n_u_set_all_datetime_headers)) __PYX_ERR(0, 22, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 20, __pyx_n_u_set_all_datetime_headers)) __PYX_ERR(0, 22, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_set_utc_headers);
   __Pyx_GIVEREF(__pyx_n_u_set_utc_headers);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 20, __pyx_n_u_set_utc_headers)) __PYX_ERR(0, 22, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 21, __pyx_n_u_set_utc_headers)) __PYX_ERR(0, 22, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_max_moves_map);
   __Pyx_GIVEREF(__pyx_n_u_max_moves_map);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 21, __pyx_n_u_max_moves_map)) __PYX_ERR(0, 22, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 22, __pyx_n_u_max_moves_map)) __PYX_ERR(0, 22, __pyx_L1_error);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_all, __pyx_t_7) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/utils/__init__.py":52
+  /* "chmengine/utils/__init__.py":53
  * 
  * 
  * def format_moves(picks: List[Pick]) -> List[Tuple[str, str]]:             # <<<<<<<<<<<<<<
  *     """Format a list of (move, score) tuples into UCI strings and formatted scores.
  * 
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_picks, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_kp_s_List_Tuple_str_str) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_3format_moves, 0, __pyx_n_s_format_moves, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__8)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_picks, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_kp_s_List_Tuple_str_str) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_3format_moves, 0, __pyx_n_s_format_moves, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__8)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_7);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_format_moves, __pyx_t_3) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_format_moves, __pyx_t_3) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":70
+  /* "chmengine/utils/__init__.py":71
+ * 
+ * 
+ * def format_picks(picks: List[Pick]) -> str:             # <<<<<<<<<<<<<<
+ *     """Format a list of Picks into UCI strings and formatted scores.
+ * 
+ */
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_picks, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 71, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_str) < 0) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_5format_picks, 0, __pyx_n_s_format_picks, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__10)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_3);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_format_picks, __pyx_t_7) < 0) __PYX_ERR(0, 71, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+
+  /* "chmengine/utils/__init__.py":90
  * 
  * 
  * def calculate_score(             # <<<<<<<<<<<<<<
  *         current_index: int,
  *         new_heatmap_transposed: NDArray[float64],
  */
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 70, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_current_index, __pyx_n_s_int) < 0) __PYX_ERR(0, 70, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_new_heatmap_transposed, __pyx_kp_s_NDArray_float64) < 0) __PYX_ERR(0, 70, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_new_current_king_box, __pyx_kp_s_List_int) < 0) __PYX_ERR(0, 70, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_new_other_king_box, __pyx_kp_s_List_int) < 0) __PYX_ERR(0, 70, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_float64) < 0) __PYX_ERR(0, 70, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_5calculate_score, 0, __pyx_n_s_calculate_score, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__10)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 70, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_3);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_calculate_score, __pyx_t_7) < 0) __PYX_ERR(0, 70, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_current_index, __pyx_n_s_int) < 0) __PYX_ERR(0, 90, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_new_heatmap_transposed, __pyx_kp_s_NDArray_float64) < 0) __PYX_ERR(0, 90, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_new_current_king_box, __pyx_kp_s_List_int) < 0) __PYX_ERR(0, 90, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_new_other_king_box, __pyx_kp_s_List_int) < 0) __PYX_ERR(0, 90, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_float64) < 0) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_7calculate_score, 0, __pyx_n_s_calculate_score, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__12)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_7);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_calculate_score, __pyx_t_3) < 0) __PYX_ERR(0, 90, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":114
+  /* "chmengine/utils/__init__.py":134
  * 
  * 
  * def is_draw(winner: Optional[bool]) -> bool:             # <<<<<<<<<<<<<<
  *     """Check if a game result is a draw based on the winner field.
  * 
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 114, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_winner, __pyx_kp_s_Optional_bool) < 0) __PYX_ERR(0, 114, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_bool) < 0) __PYX_ERR(0, 114, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_7is_draw, 0, __pyx_n_s_is_draw, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__12)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 134, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_7);
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_draw, __pyx_t_3) < 0) __PYX_ERR(0, 114, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_winner, __pyx_kp_s_Optional_bool) < 0) __PYX_ERR(0, 134, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_bool) < 0) __PYX_ERR(0, 134, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_9is_draw, 0, __pyx_n_s_is_draw, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__14)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_draw, __pyx_t_7) < 0) __PYX_ERR(0, 134, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/utils/__init__.py":141
+  /* "chmengine/utils/__init__.py":161
  * 
  * 
  * def calculate_white_minus_black_score(             # <<<<<<<<<<<<<<
  *         board: Board,
  *         depth: int,
  */
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 141, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 141, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_depth, __pyx_n_s_int) < 0) __PYX_ERR(0, 141, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_float64) < 0) __PYX_ERR(0, 141, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_9calculate_white_minus_black_score, 0, __pyx_n_s_calculate_white_minus_black_scor, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__14)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 141, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 161, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_3);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_calculate_white_minus_black_scor, __pyx_t_7) < 0) __PYX_ERR(0, 141, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 161, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_depth, __pyx_n_s_int) < 0) __PYX_ERR(0, 161, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_float64) < 0) __PYX_ERR(0, 161, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_11calculate_white_minus_black_score, 0, __pyx_n_s_calculate_white_minus_black_scor, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__16)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 161, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_7);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_calculate_white_minus_black_scor, __pyx_t_3) < 0) __PYX_ERR(0, 161, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":221
+  /* "chmengine/utils/__init__.py":241
  * 
  * max_moves_map: Dict[Piece, int] = {
  *     Piece.from_symbol('P'): 4,             # <<<<<<<<<<<<<<
  *     Piece.from_symbol('N'): 8,
  *     Piece.from_symbol('B'): 13,
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(12); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 221, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(12); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 241, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_Piece); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 241, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Piece); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 221, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 221, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 241, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 221, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 241, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_7, __pyx_t_3, __pyx_int_4) < 0) __PYX_ERR(0, 221, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_7, __pyx_int_4) < 0) __PYX_ERR(0, 241, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/utils/__init__.py":222
+  /* "chmengine/utils/__init__.py":242
  * max_moves_map: Dict[Piece, int] = {
  *     Piece.from_symbol('P'): 4,
  *     Piece.from_symbol('N'): 8,             # <<<<<<<<<<<<<<
  *     Piece.from_symbol('B'): 13,
  *     Piece.from_symbol('R'): 14,
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Piece); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 222, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 222, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_Piece); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 242, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 242, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__16, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 222, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__18, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 242, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_7, __pyx_t_3, __pyx_int_8) < 0) __PYX_ERR(0, 221, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_7, __pyx_int_8) < 0) __PYX_ERR(0, 241, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/utils/__init__.py":223
+  /* "chmengine/utils/__init__.py":243
  *     Piece.from_symbol('P'): 4,
  *     Piece.from_symbol('N'): 8,
  *     Piece.from_symbol('B'): 13,             # <<<<<<<<<<<<<<
  *     Piece.from_symbol('R'): 14,
  *     Piece.from_symbol('Q'): 27,
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Piece); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 223, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 223, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_Piece); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 243, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 243, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 223, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 243, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_7, __pyx_t_3, __pyx_int_13) < 0) __PYX_ERR(0, 221, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_7, __pyx_int_13) < 0) __PYX_ERR(0, 241, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/utils/__init__.py":224
+  /* "chmengine/utils/__init__.py":244
  *     Piece.from_symbol('N'): 8,
  *     Piece.from_symbol('B'): 13,
  *     Piece.from_symbol('R'): 14,             # <<<<<<<<<<<<<<
  *     Piece.from_symbol('Q'): 27,
  *     Piece.from_symbol('K'): 8,
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Piece); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 224, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 224, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_Piece); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 244, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 244, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__18, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 224, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__20, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 244, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_7, __pyx_t_3, __pyx_int_14) < 0) __PYX_ERR(0, 221, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_7, __pyx_int_14) < 0) __PYX_ERR(0, 241, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/utils/__init__.py":225
+  /* "chmengine/utils/__init__.py":245
  *     Piece.from_symbol('B'): 13,
  *     Piece.from_symbol('R'): 14,
  *     Piece.from_symbol('Q'): 27,             # <<<<<<<<<<<<<<
  *     Piece.from_symbol('K'): 8,
  *     Piece.from_symbol('p'): 4,
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Piece); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 225, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 225, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_Piece); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 245, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 245, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 225, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__21, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 245, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_7, __pyx_t_3, __pyx_int_27) < 0) __PYX_ERR(0, 221, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_7, __pyx_int_27) < 0) __PYX_ERR(0, 241, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/utils/__init__.py":226
+  /* "chmengine/utils/__init__.py":246
  *     Piece.from_symbol('R'): 14,
  *     Piece.from_symbol('Q'): 27,
  *     Piece.from_symbol('K'): 8,             # <<<<<<<<<<<<<<
  *     Piece.from_symbol('p'): 4,
  *     Piece.from_symbol('n'): 8,
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Piece); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 226, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_Piece); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 246, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 246, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__20, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 226, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__22, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 246, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_7, __pyx_t_3, __pyx_int_8) < 0) __PYX_ERR(0, 221, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_7, __pyx_int_8) < 0) __PYX_ERR(0, 241, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/utils/__init__.py":227
+  /* "chmengine/utils/__init__.py":247
  *     Piece.from_symbol('Q'): 27,
  *     Piece.from_symbol('K'): 8,
  *     Piece.from_symbol('p'): 4,             # <<<<<<<<<<<<<<
  *     Piece.from_symbol('n'): 8,
  *     Piece.from_symbol('b'): 13,
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Piece); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 227, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_Piece); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 247, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 247, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__21, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 227, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__23, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 247, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_7, __pyx_t_3, __pyx_int_4) < 0) __PYX_ERR(0, 221, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_7, __pyx_int_4) < 0) __PYX_ERR(0, 241, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/utils/__init__.py":228
+  /* "chmengine/utils/__init__.py":248
  *     Piece.from_symbol('K'): 8,
  *     Piece.from_symbol('p'): 4,
  *     Piece.from_symbol('n'): 8,             # <<<<<<<<<<<<<<
  *     Piece.from_symbol('b'): 13,
  *     Piece.from_symbol('r'): 14,
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Piece); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 228, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 228, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_Piece); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 248, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 248, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__22, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 228, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__24, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 248, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_7, __pyx_t_3, __pyx_int_8) < 0) __PYX_ERR(0, 221, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_7, __pyx_int_8) < 0) __PYX_ERR(0, 241, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/utils/__init__.py":229
+  /* "chmengine/utils/__init__.py":249
  *     Piece.from_symbol('p'): 4,
  *     Piece.from_symbol('n'): 8,
  *     Piece.from_symbol('b'): 13,             # <<<<<<<<<<<<<<
  *     Piece.from_symbol('r'): 14,
  *     Piece.from_symbol('q'): 27,
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Piece); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 229, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 229, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_Piece); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 249, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__23, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 229, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__25, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_7, __pyx_t_3, __pyx_int_13) < 0) __PYX_ERR(0, 221, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_7, __pyx_int_13) < 0) __PYX_ERR(0, 241, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/utils/__init__.py":230
+  /* "chmengine/utils/__init__.py":250
  *     Piece.from_symbol('n'): 8,
  *     Piece.from_symbol('b'): 13,
  *     Piece.from_symbol('r'): 14,             # <<<<<<<<<<<<<<
  *     Piece.from_symbol('q'): 27,
  *     Piece.from_symbol('k'): 8,
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Piece); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 230, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 230, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_Piece); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 250, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 250, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__24, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 230, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__26, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 250, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_7, __pyx_t_3, __pyx_int_14) < 0) __PYX_ERR(0, 221, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_7, __pyx_int_14) < 0) __PYX_ERR(0, 241, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/utils/__init__.py":231
+  /* "chmengine/utils/__init__.py":251
  *     Piece.from_symbol('b'): 13,
  *     Piece.from_symbol('r'): 14,
  *     Piece.from_symbol('q'): 27,             # <<<<<<<<<<<<<<
  *     Piece.from_symbol('k'): 8,
  * }
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Piece); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 231, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 231, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_Piece); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 251, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 251, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__25, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 231, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__27, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 251, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_7, __pyx_t_3, __pyx_int_27) < 0) __PYX_ERR(0, 221, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_7, __pyx_int_27) < 0) __PYX_ERR(0, 241, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/utils/__init__.py":232
+  /* "chmengine/utils/__init__.py":252
  *     Piece.from_symbol('r'): 14,
  *     Piece.from_symbol('q'): 27,
  *     Piece.from_symbol('k'): 8,             # <<<<<<<<<<<<<<
  * }
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Piece); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 232, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 232, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_Piece); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 252, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_from_symbol); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 252, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__26, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 232, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_7, __pyx_t_3, __pyx_int_8) < 0) __PYX_ERR(0, 221, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_max_moves_map, __pyx_t_7) < 0) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__28, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 252, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_7, __pyx_int_8) < 0) __PYX_ERR(0, 241, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_max_moves_map, __pyx_t_3) < 0) __PYX_ERR(0, 240, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":236
+  /* "chmengine/utils/__init__.py":256
  * 
  * 
  * def get_static_value(piece: Piece) -> int:             # <<<<<<<<<<<<<<
  *     """Retrieve the static movement-based value for a given chess piece.
  * 
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 236, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_piece, __pyx_n_s_Piece) < 0) __PYX_ERR(0, 236, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_int) < 0) __PYX_ERR(0, 236, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_11get_static_value, 0, __pyx_n_s_get_static_value, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__28)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 256, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_7);
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_static_value, __pyx_t_3) < 0) __PYX_ERR(0, 236, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_piece, __pyx_n_s_Piece) < 0) __PYX_ERR(0, 256, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_int) < 0) __PYX_ERR(0, 256, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_13get_static_value, 0, __pyx_n_s_get_static_value, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__30)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 256, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_static_value, __pyx_t_7) < 0) __PYX_ERR(0, 256, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/utils/__init__.py":256
+  /* "chmengine/utils/__init__.py":276
  * 
  * 
  * def get_static_delta_score(heatmap: ChessMoveHeatmap) -> float64:             # <<<<<<<<<<<<<<
  *     """Compute the static piece-based delta score from a ChessMoveHeatmap.
  * 
  */
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 256, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_heatmap, __pyx_n_s_ChessMoveHeatmap) < 0) __PYX_ERR(0, 256, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_float64) < 0) __PYX_ERR(0, 256, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_13get_static_delta_score, 0, __pyx_n_s_get_static_delta_score, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__30)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 256, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 276, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_3);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_static_delta_score, __pyx_t_7) < 0) __PYX_ERR(0, 256, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_heatmap, __pyx_n_s_ChessMoveHeatmap) < 0) __PYX_ERR(0, 276, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_float64) < 0) __PYX_ERR(0, 276, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_15get_static_delta_score, 0, __pyx_n_s_get_static_delta_score, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__32)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 276, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_7);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_static_delta_score, __pyx_t_3) < 0) __PYX_ERR(0, 276, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":289
+  /* "chmengine/utils/__init__.py":309
  * 
  * 
  * def calculate_better_white_minus_black_score(             # <<<<<<<<<<<<<<
  *         board: Board,
  *         depth: int = 1,
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 289, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 289, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_depth, __pyx_n_s_int) < 0) __PYX_ERR(0, 289, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_float64) < 0) __PYX_ERR(0, 289, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_15calculate_better_white_minus_black_score, 0, __pyx_n_s_calculate_better_white_minus_bla, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__32)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (!__Pyx_CyFunction_InitDefaults(__pyx_t_3, sizeof(__pyx_defaults), 1)) __PYX_ERR(0, 289, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 309, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_depth, __pyx_n_s_int) < 0) __PYX_ERR(0, 309, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_float64) < 0) __PYX_ERR(0, 309, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_17calculate_better_white_minus_black_score, 0, __pyx_n_s_calculate_better_white_minus_bla, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__34)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 309, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  if (!__Pyx_CyFunction_InitDefaults(__pyx_t_7, sizeof(__pyx_defaults), 1)) __PYX_ERR(0, 309, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":291
+  /* "chmengine/utils/__init__.py":311
  * def calculate_better_white_minus_black_score(
  *         board: Board,
  *         depth: int = 1,             # <<<<<<<<<<<<<<
  * ) -> float64:
  *     """Compute an enhanced White-minus-Black evaluation for a given board position.
  */
-  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_int_1)) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_int_1))) __PYX_ERR(0, 291, __pyx_L1_error)
+  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_int_1)) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_int_1))) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_INCREF(__pyx_int_1);
-  __Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_t_3)->__pyx_arg_depth = ((PyObject*)__pyx_int_1);
+  __Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_t_7)->__pyx_arg_depth = ((PyObject*)__pyx_int_1);
   __Pyx_GIVEREF(__pyx_int_1);
-  __Pyx_CyFunction_SetDefaultsGetter(__pyx_t_3, __pyx_pf_9chmengine_5utils_42__defaults__);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_7);
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_calculate_better_white_minus_bla, __pyx_t_3) < 0) __PYX_ERR(0, 289, __pyx_L1_error)
+  __Pyx_CyFunction_SetDefaultsGetter(__pyx_t_7, __pyx_pf_9chmengine_5utils_44__defaults__);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_calculate_better_white_minus_bla, __pyx_t_7) < 0) __PYX_ERR(0, 309, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/utils/__init__.py":361
+  /* "chmengine/utils/__init__.py":381
  * 
  * 
  * def better_checkmate_score(board: Board, depth: int) -> float64:             # <<<<<<<<<<<<<<
  *     """Compute an enhanced checkmate evaluation score.
  * 
  */
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 361, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 361, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_depth, __pyx_n_s_int) < 0) __PYX_ERR(0, 361, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_float64) < 0) __PYX_ERR(0, 361, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_17better_checkmate_score, 0, __pyx_n_s_better_checkmate_score, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__34)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 361, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 381, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_3);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_better_checkmate_score, __pyx_t_7) < 0) __PYX_ERR(0, 361, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 381, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_depth, __pyx_n_s_int) < 0) __PYX_ERR(0, 381, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_float64) < 0) __PYX_ERR(0, 381, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_19better_checkmate_score, 0, __pyx_n_s_better_checkmate_score, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__36)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 381, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_7);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_better_checkmate_score, __pyx_t_3) < 0) __PYX_ERR(0, 381, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":394
+  /* "chmengine/utils/__init__.py":414
  * 
  * 
  * def checkmate_score(board: Board, depth: int) -> float64:             # <<<<<<<<<<<<<<
  *     """Return a large signed score for checkmate results.
  * 
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 394, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 394, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_depth, __pyx_n_s_int) < 0) __PYX_ERR(0, 394, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_float64) < 0) __PYX_ERR(0, 394, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_19checkmate_score, 0, __pyx_n_s_checkmate_score, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__35)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 394, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 414, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_7);
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_checkmate_score, __pyx_t_3) < 0) __PYX_ERR(0, 394, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 414, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_depth, __pyx_n_s_int) < 0) __PYX_ERR(0, 414, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_float64) < 0) __PYX_ERR(0, 414, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_21checkmate_score, 0, __pyx_n_s_checkmate_score, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__37)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 414, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_checkmate_score, __pyx_t_7) < 0) __PYX_ERR(0, 414, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/utils/__init__.py":424
+  /* "chmengine/utils/__init__.py":444
  * 
  * 
  * def get_white_and_black_king_boxes(board: Board) -> Tuple[List[int], List[int]]:             # <<<<<<<<<<<<<<
  *     """Compute the list of squares surrounding each king on the board.
  * 
  */
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 424, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 424, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_kp_s_Tuple_List_int_List_int) < 0) __PYX_ERR(0, 424, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_21get_white_and_black_king_boxes, 0, __pyx_n_s_get_white_and_black_king_boxes, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__37)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 424, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 444, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_3);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_white_and_black_king_boxes, __pyx_t_7) < 0) __PYX_ERR(0, 424, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 444, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_kp_s_Tuple_List_int_List_int) < 0) __PYX_ERR(0, 444, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_23get_white_and_black_king_boxes, 0, __pyx_n_s_get_white_and_black_king_boxes, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__39)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 444, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_7);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_white_and_black_king_boxes, __pyx_t_3) < 0) __PYX_ERR(0, 444, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":465
+  /* "chmengine/utils/__init__.py":485
  * 
  * 
  * def insert_ordered_worst_to_best(             # <<<<<<<<<<<<<<
  *         ordered_picks: List[Pick],
  *         pick: Pick
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 465, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_ordered_picks, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 465, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_pick, __pyx_n_s_Pick) < 0) __PYX_ERR(0, 465, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 465, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_23insert_ordered_worst_to_best, 0, __pyx_n_s_insert_ordered_worst_to_best, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__39)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 465, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 485, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_7);
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_insert_ordered_worst_to_best, __pyx_t_3) < 0) __PYX_ERR(0, 465, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_ordered_picks, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 485, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_pick, __pyx_n_s_Pick) < 0) __PYX_ERR(0, 485, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 485, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_25insert_ordered_worst_to_best, 0, __pyx_n_s_insert_ordered_worst_to_best, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__41)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 485, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_insert_ordered_worst_to_best, __pyx_t_7) < 0) __PYX_ERR(0, 485, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/utils/__init__.py":482
+  /* "chmengine/utils/__init__.py":502
  * 
  * 
  * def insert_ordered_best_to_worst(             # <<<<<<<<<<<<<<
  *         ordered_picks: List[Pick],
  *         pick: Pick
  */
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 482, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_ordered_picks, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 482, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_pick, __pyx_n_s_Pick) < 0) __PYX_ERR(0, 482, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 482, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_25insert_ordered_best_to_worst, 0, __pyx_n_s_insert_ordered_best_to_worst, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__40)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 482, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 502, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_3);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_insert_ordered_best_to_worst, __pyx_t_7) < 0) __PYX_ERR(0, 482, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_ordered_picks, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 502, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_pick, __pyx_n_s_Pick) < 0) __PYX_ERR(0, 502, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 502, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_27insert_ordered_best_to_worst, 0, __pyx_n_s_insert_ordered_best_to_worst, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__42)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 502, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_7);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_insert_ordered_best_to_worst, __pyx_t_3) < 0) __PYX_ERR(0, 502, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":499
+  /* "chmengine/utils/__init__.py":519
  * 
  * 
  * def pieces_count_from_fen(fen: str) -> int:             # <<<<<<<<<<<<<<
  *     """Return the number of pieces on the board represented by `fen`.
  * 
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 499, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_fen, __pyx_n_s_str) < 0) __PYX_ERR(0, 499, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_int) < 0) __PYX_ERR(0, 499, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_27pieces_count_from_fen, 0, __pyx_n_s_pieces_count_from_fen, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__42)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 499, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 519, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_7);
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pieces_count_from_fen, __pyx_t_3) < 0) __PYX_ERR(0, 499, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_fen, __pyx_n_s_str) < 0) __PYX_ERR(0, 519, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_int) < 0) __PYX_ERR(0, 519, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_29pieces_count_from_fen, 0, __pyx_n_s_pieces_count_from_fen, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__44)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 519, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pieces_count_from_fen, __pyx_t_7) < 0) __PYX_ERR(0, 519, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/utils/__init__.py":533
+  /* "chmengine/utils/__init__.py":553
  * 
  * 
  * def pieces_count_from_board(board: Board) -> int:             # <<<<<<<<<<<<<<
  *     """Return the number of pieces on the board
  * 
  */
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 533, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 533, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_int) < 0) __PYX_ERR(0, 533, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_29pieces_count_from_board, 0, __pyx_n_s_pieces_count_from_board, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__44)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 533, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 553, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_3);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pieces_count_from_board, __pyx_t_7) < 0) __PYX_ERR(0, 533, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 553, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_int) < 0) __PYX_ERR(0, 553, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_31pieces_count_from_board, 0, __pyx_n_s_pieces_count_from_board, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__46)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 553, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_7);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pieces_count_from_board, __pyx_t_3) < 0) __PYX_ERR(0, 553, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":562
+  /* "chmengine/utils/__init__.py":582
  * 
  * 
  * def insert_choice_into_current_moves(             # <<<<<<<<<<<<<<
  *         choices_ordered_best_to_worst: List[Pick],
  *         pick: Pick
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 562, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_choices_ordered_best_to_worst, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 562, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_pick, __pyx_n_s_Pick) < 0) __PYX_ERR(0, 562, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 562, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_31insert_choice_into_current_moves, 0, __pyx_n_s_insert_choice_into_current_moves, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__46)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 562, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 582, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_7);
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_insert_choice_into_current_moves, __pyx_t_3) < 0) __PYX_ERR(0, 562, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_choices_ordered_best_to_worst, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 582, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_pick, __pyx_n_s_Pick) < 0) __PYX_ERR(0, 582, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 582, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_33insert_choice_into_current_moves, 0, __pyx_n_s_insert_choice_into_current_moves, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__48)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 582, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_insert_choice_into_current_moves, __pyx_t_7) < 0) __PYX_ERR(0, 582, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/utils/__init__.py":587
+  /* "chmengine/utils/__init__.py":607
  * 
  * 
  * def insert_choice_into_response_moves(             # <<<<<<<<<<<<<<
  *         choices_ordered_worst_to_best: List[Pick],
  *         pick: Pick
  */
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 587, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_choices_ordered_worst_to_best, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 587, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_pick, __pyx_n_s_Pick) < 0) __PYX_ERR(0, 587, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 587, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_33insert_choice_into_response_moves, 0, __pyx_n_s_insert_choice_into_response_move, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__48)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 587, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 607, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_3);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_insert_choice_into_response_move, __pyx_t_7) < 0) __PYX_ERR(0, 587, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_choices_ordered_worst_to_best, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 607, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_pick, __pyx_n_s_Pick) < 0) __PYX_ERR(0, 607, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 607, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_35insert_choice_into_response_moves, 0, __pyx_n_s_insert_choice_into_response_move, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__50)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 607, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_7);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_insert_choice_into_response_move, __pyx_t_3) < 0) __PYX_ERR(0, 607, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":612
+  /* "chmengine/utils/__init__.py":632
  * 
  * 
  * def is_valid_king_box_square(square_id: int, king_square: int) -> bool:             # <<<<<<<<<<<<<<
  *     """Check if a square is valid for inclusion in a king's bounding box.
  * 
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 612, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_square_id, __pyx_n_s_int) < 0) __PYX_ERR(0, 612, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_king_square, __pyx_n_s_int) < 0) __PYX_ERR(0, 612, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_bool) < 0) __PYX_ERR(0, 612, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_35is_valid_king_box_square, 0, __pyx_n_s_is_valid_king_box_square, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__50)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 612, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 632, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_7);
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_valid_king_box_square, __pyx_t_3) < 0) __PYX_ERR(0, 612, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_square_id, __pyx_n_s_int) < 0) __PYX_ERR(0, 632, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_king_square, __pyx_n_s_int) < 0) __PYX_ERR(0, 632, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_bool) < 0) __PYX_ERR(0, 632, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_37is_valid_king_box_square, 0, __pyx_n_s_is_valid_king_box_square, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__52)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 632, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_valid_king_box_square, __pyx_t_7) < 0) __PYX_ERR(0, 632, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/utils/__init__.py":635
+  /* "chmengine/utils/__init__.py":655
  * 
  * 
  * def null_target_moves(             # <<<<<<<<<<<<<<
  *         number: int = 6
  * ) -> Tuple[List[Tuple[Optional[Move], Optional[float64]]], ...]:
  */
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 635, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_number, __pyx_n_s_int) < 0) __PYX_ERR(0, 635, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_kp_s_Tuple_List_Tuple_Optional_Move_O) < 0) __PYX_ERR(0, 635, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_37null_target_moves, 0, __pyx_n_s_null_target_moves, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__52)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 635, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 655, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (!__Pyx_CyFunction_InitDefaults(__pyx_t_7, sizeof(__pyx_defaults1), 1)) __PYX_ERR(0, 635, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_number, __pyx_n_s_int) < 0) __PYX_ERR(0, 655, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_kp_s_Tuple_List_Tuple_Optional_Move_O) < 0) __PYX_ERR(0, 655, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_39null_target_moves, 0, __pyx_n_s_null_target_moves, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__54)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 655, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (!__Pyx_CyFunction_InitDefaults(__pyx_t_3, sizeof(__pyx_defaults1), 1)) __PYX_ERR(0, 655, __pyx_L1_error)
 
-  /* "chmengine/utils/__init__.py":636
+  /* "chmengine/utils/__init__.py":656
  * 
  * def null_target_moves(
  *         number: int = 6             # <<<<<<<<<<<<<<
  * ) -> Tuple[List[Tuple[Optional[Move], Optional[float64]]], ...]:
  *     """Initialize a tuple of target move lists with null entries.
  */
-  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_int_6)) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_int_6))) __PYX_ERR(0, 636, __pyx_L1_error)
+  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_int_6)) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_int_6))) __PYX_ERR(0, 656, __pyx_L1_error)
   __Pyx_INCREF(__pyx_int_6);
-  __Pyx_CyFunction_Defaults(__pyx_defaults1, __pyx_t_7)->__pyx_arg_number = ((PyObject*)__pyx_int_6);
+  __Pyx_CyFunction_Defaults(__pyx_defaults1, __pyx_t_3)->__pyx_arg_number = ((PyObject*)__pyx_int_6);
   __Pyx_GIVEREF(__pyx_int_6);
-  __Pyx_CyFunction_SetDefaultsGetter(__pyx_t_7, __pyx_pf_9chmengine_5utils_44__defaults__);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_3);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_null_target_moves, __pyx_t_7) < 0) __PYX_ERR(0, 635, __pyx_L1_error)
+  __Pyx_CyFunction_SetDefaultsGetter(__pyx_t_3, __pyx_pf_9chmengine_5utils_46__defaults__);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_7);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_null_target_moves, __pyx_t_3) < 0) __PYX_ERR(0, 655, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/utils/__init__.py":656
+  /* "chmengine/utils/__init__.py":676
  * 
  * 
  * def set_all_datetime_headers(game_heads: pgn.Headers, local_time: datetime) -> None:             # <<<<<<<<<<<<<<
  *     """Sets all datetime related game headers for the pgn file.
  * 
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 656, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_game_heads, __pyx_kp_s_pgn_Headers) < 0) __PYX_ERR(0, 656, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_local_time, __pyx_n_s_datetime) < 0) __PYX_ERR(0, 656, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 656, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_39set_all_datetime_headers, 0, __pyx_n_s_set_all_datetime_headers, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__54)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 656, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 676, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_7);
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_set_all_datetime_headers, __pyx_t_3) < 0) __PYX_ERR(0, 656, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_game_heads, __pyx_kp_s_pgn_Headers) < 0) __PYX_ERR(0, 676, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_local_time, __pyx_n_s_datetime) < 0) __PYX_ERR(0, 676, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 676, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_41set_all_datetime_headers, 0, __pyx_n_s_set_all_datetime_headers, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__56)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 676, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_set_all_datetime_headers, __pyx_t_7) < 0) __PYX_ERR(0, 676, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/utils/__init__.py":669
+  /* "chmengine/utils/__init__.py":689
  * 
  * 
  * def set_utc_headers(game_heads: pgn.Headers, local_time: datetime) -> None:             # <<<<<<<<<<<<<<
  *     """Sets UTC header info of pgn file data from local timestamp
  * 
  */
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 669, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_game_heads, __pyx_kp_s_pgn_Headers) < 0) __PYX_ERR(0, 669, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_local_time, __pyx_n_s_datetime) < 0) __PYX_ERR(0, 669, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 669, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_41set_utc_headers, 0, __pyx_n_s_set_utc_headers, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__55)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 669, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 689, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_3);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_set_utc_headers, __pyx_t_7) < 0) __PYX_ERR(0, 669, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_game_heads, __pyx_kp_s_pgn_Headers) < 0) __PYX_ERR(0, 689, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_local_time, __pyx_n_s_datetime) < 0) __PYX_ERR(0, 689, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 689, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_5utils_43set_utc_headers, 0, __pyx_n_s_set_utc_headers, NULL, __pyx_n_s_chmengine_utils, __pyx_d, ((PyObject *)__pyx_codeobj__57)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 689, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_7);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_set_utc_headers, __pyx_t_3) < 0) __PYX_ERR(0, 689, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "chmengine/utils/__init__.py":1
  * """Utilities for engine evaluation and scoring logic."""             # <<<<<<<<<<<<<<
  * from _bisect import bisect_left
  * from datetime import datetime, timezone
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_kp_u_is_draw_line_114, __pyx_kp_u_Check_if_a_game_result_is_a_draw) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_kp_u_calculate_white_minus_black_scor_2, __pyx_kp_u_Evaluate_the_board_from_a_White) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_kp_u_checkmate_score_line_394, __pyx_kp_u_Return_a_large_signed_score_for) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_kp_u_get_white_and_black_king_boxes_l, __pyx_kp_u_Compute_the_list_of_squares_surr) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_kp_u_pieces_count_from_fen_line_499, __pyx_kp_u_Return_the_number_of_pieces_on_t) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_kp_u_pieces_count_from_board_line_533, __pyx_kp_u_Return_the_number_of_pieces_on_t_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_7) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_3, __pyx_kp_u_is_draw_line_134, __pyx_kp_u_Check_if_a_game_result_is_a_draw) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_kp_u_calculate_white_minus_black_scor_2, __pyx_kp_u_Evaluate_the_board_from_a_White) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_kp_u_checkmate_score_line_414, __pyx_kp_u_Return_a_large_signed_score_for) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_kp_u_get_white_and_black_king_boxes_l, __pyx_kp_u_Compute_the_list_of_squares_surr) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_kp_u_pieces_count_from_fen_line_519, __pyx_kp_u_Return_the_number_of_pieces_on_t) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_kp_u_pieces_count_from_board_line_553, __pyx_kp_u_Return_the_number_of_pieces_on_t_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_3) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /*--- Wrapped vars code ---*/
 
@@ -16657,7 +16910,7 @@ __Pyx_PyType_GetName(PyTypeObject* tp)
     if (unlikely(name == NULL) || unlikely(!PyUnicode_Check(name))) {
         PyErr_Clear();
         Py_XDECREF(name);
-        name = __Pyx_NewRef(__pyx_n_s__56);
+        name = __Pyx_NewRef(__pyx_n_s__58);
     }
     return name;
 }

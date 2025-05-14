@@ -26,6 +26,7 @@ __all__ = [
     'Pick',
     # Functions
     'format_moves',
+    'format_picks',
     'calculate_score',
     'is_draw',
     'calculate_white_minus_black_score',
@@ -65,6 +66,25 @@ def format_moves(picks: List[Pick]) -> List[Tuple[str, str]]:
         Entries with `None` moves are excluded.
     """
     return [(m.uci(), f"{s:.2f}") for m, s in picks if len(picks)]
+
+
+def format_picks(picks: List[Pick]) -> str:
+    """Format a list of Picks into UCI strings and formatted scores.
+
+    Parameters
+    ----------
+    picks : List[Pick]
+        The list of Picks (moves and their evaluation scores.)
+
+    Returns
+    -------
+    str
+        Formatted list where each tuple contains the move in UCI format
+        and the score rounded to two decimal places.
+        Entries with `None` moves are excluded.
+    """
+    p: Pick
+    return str([f"{p:+.2f}" for p in picks])
 
 
 def calculate_score(

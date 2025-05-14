@@ -711,7 +711,26 @@ class CMHMEngine:
         >>> moves[15]
         Move.from_uci('e2e4')
         """
-        return list(self.board.legal_moves) if board is None else list(board.legal_moves)
+        return list(self.board.legal_moves if board is None else board.legal_moves)
+
+    def current_picks_list(self, board: Optional[Board] = None) -> List[Pick]:
+        """Retrieve the list of legal null-scored picks for the current board position.
+
+        Parameters
+        ----------
+        board : Optional[chess.Board], default: None
+            The board for which to get legal moves. If None, the engine's current board is used.
+
+        Returns
+        -------
+        List[Pick]
+            A list of null-scored picks available on the board.
+        """
+        return list(
+            Pick(move=move, score=float64(None)) for move in (
+                self.board.legal_moves if board is None else board.legal_moves
+            )
+        )
 
     def fen(self, board: Optional[Board] = None) -> str:
         """Obtain the FEN string for a given board state.

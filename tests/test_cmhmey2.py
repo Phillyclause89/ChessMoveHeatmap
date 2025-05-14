@@ -6,8 +6,9 @@ from typing import Iterable, Optional
 from unittest import TestCase
 
 from chess import Board, Move, pgn
-from numpy import float64, mean, percentile, testing
+from numpy import float64, isnan, mean, percentile, testing
 
+from chmengine import Pick
 from chmutils import BetterHeatmapCache, HeatmapCache
 from tests.utils import CACHE_DIR, clear_test_cache
 
@@ -34,6 +35,7 @@ class TestCMHMEngine2(TestCase):
     E3 = Move.from_uci('e2e3')
     E4 = Move.from_uci('e2e4')
     E5 = Move.from_uci('e7e5')
+    picks = [Pick(E4, float64(None)), Pick(E3, float64(None)), Pick(E5, float64(None))]
 
     def setUp(self) -> None:
         """Sets ups the engine instance to be tested with"""
@@ -337,13 +339,12 @@ class TestCMHMEngine2(TestCase):
 
     def test__update_current_move_choices_(self) -> None:
         """Tests internal _update_current_move_choices_ method."""
-        e4_board = self.engine.board_copy_pushed(self.E4)
-        # pylint: disable=protected-access
-        move_choices = self.engine._update_current_move_choices_([], e4_board, self.E4)
-        self.assertEqual(move_choices[0][0], self.E4)
-        e3_board = self.engine.board_copy_pushed(self.E3)
-        move_choices = self.engine._update_current_move_choices_(move_choices, e3_board, self.E3)
-        self.assertEqual(move_choices[1][0], self.E4)
+        self.engine._update_current_move_choices_(self.engine.board, self.picks[0])
+        self.assertEqual(self.picks[0][0], self.E4)
+        self.assertFalse(isnan(self.picks[0].score))
+        self.engine._update_current_move_choices_(self.engine.board, self.picks[1])
+        self.assertEqual(self.picks[1][0], self.E3)
+        self.assertFalse(isnan(self.picks[1].score))
 
     def test__get_or_calculate_responses_(self) -> None:
         """Tests internal _get_or_calculate_responses_ method."""
@@ -359,11 +360,10 @@ class TestCMHMEngine2(TestCase):
     def test__get_or_calc_next_move_score_(self) -> None:
         """Tests internal _get_or_calc_response_move_scores_ method."""
         # pylint: disable=protected-access
-        next_move_scores = self.engine._get_or_calc_response_move_scores_(
-            self.E4, [], self.engine.board, True
-        )
-        self.assertEqual(next_move_scores[0][0], self.E4)
-        next_move_scores = self.engine._get_or_calc_response_move_scores_(
-            self.E3, next_move_scores, self.engine.board, True
-        )
-        self.assertEqual(next_move_scores[1][0], self.E3)
+        self.engine._get_or_calc_response_move_scores_(self.picks[0], self.engine.board, True)
+        self.assertEqual(self.picks[0].move, self.E4)
+        self.assertFalse(isnan(self.picks[0].score))
+        self.assertTrue(isnan(self.picks[1].score))
+        self.engine._get_or_calc_response_move_scores_(self.picks[1], self.engine.board, True)
+        self.assertEqual(self.picks[1][0], self.E3)
+        self.assertFalse(isnan(self.picks[1].score))

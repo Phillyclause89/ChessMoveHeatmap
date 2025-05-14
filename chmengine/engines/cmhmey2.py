@@ -7,9 +7,7 @@ from numpy import float64
 
 from chmengine.engines.cmhmey1 import CMHMEngine
 from chmengine.engines.quartney import Quartney
-from chmengine.utils import (
-    Pick, calculate_better_white_minus_black_score, format_moves, insert_choice_into_current_moves
-)
+from chmengine.utils import Pick, calculate_better_white_minus_black_score, format_picks
 
 __all__ = ['CMHMEngine2']
 
@@ -95,14 +93,14 @@ class CMHMEngine2(CMHMEngine, Quartney):
                     f"New Pick & Score: ({new_move.uci()}, {new_score:.2f})\n"
                 )
 
-    # pylint: disable=unused-argument
     def pick_move(
             self,
-            pick_by: str = "",
+            *args,
             board: Optional[Board] = None,
-            debug: bool = False
+            debug: bool = False,
+            **kwargs
     ) -> Pick:
-        """Select a move based on heatmap evaluations and Q-table integration.
+        """Select a Pick based on heatmap evaluations and Q-table integration.
 
         This overridden method combines heatmap evaluations with Q-value updates. It evaluates all
         legal moves by calculating their scores from the perspective of the current player (with positive
@@ -113,8 +111,6 @@ class CMHMEngine2(CMHMEngine, Quartney):
 
         Parameters
         ----------
-        pick_by : str, default: ""
-            Legecy param from parent class pick_move method. Args are ignored by this classe's overide.
         board : Optional[chess.Board], default: None
             Pick from a given board instead of intstance board
         debug : bool, default: False
@@ -123,9 +119,9 @@ class CMHMEngine2(CMHMEngine, Quartney):
         Returns
         -------
         Pick
-            A tuple-like containing the chosen move and its associated evaluation score. The evaluation score is
-            expressed from the perspective of the player making the move—positive values indicate favorable
-            outcomes and negative values indicate unfavorable outcomes.
+            An unpackable tuple-like containing the chosen move and its associated evaluation score.
+            The evaluation score is expressed from the perspective of the player making the move—positive
+            values indicate favorable outcomes and negative values indicate unfavorable outcomes.
 
         Raises
         ------
@@ -139,51 +135,32 @@ class CMHMEngine2(CMHMEngine, Quartney):
         >>> move, score = engine.pick_move()
         """
         board = self.board if board is None else board
-        current_moves: List[Move] = self.current_moves_list(board=board)
+        current_picks: List[Pick] = self.current_picks_list(board=board)
         # PlayCMHMEngine.play() needs a ValueError to detect game termination.
-        if len(current_moves) == 0:
+        if len(current_picks) == 0:
             raise ValueError(f"Current Board has no legal moves: {self.fen(board=board)}")
-        # moves will be current moves ordered by engine's score best to worst (from white's perspective)
-        current_move_choices_ordered: List[Pick] = []
-        current_move: Move
-        for current_move in current_moves:
-            current_move_choices_ordered = self._update_current_move_choices_ordered_(
-                current_move_choices_ordered=current_move_choices_ordered,
-                current_move=current_move,
-                board=board
-            )
+        current_pick: Pick
+        for current_pick in current_picks:
+            self._update_current_move_choices_(current_pick=current_pick, board=board)
+        # noinspection PyTypeChecker,PydanticTypeChecker
+        current_picks = sorted(current_picks, reverse=True)
         # Final pick is a random choice of all moves equal to the highest scoring move
         if debug:
             print(
-                f"All {len(current_move_choices_ordered)} moves ranked:",
-                format_moves(picks=current_move_choices_ordered)
+                f"All {len(current_picks)} moves ranked:",
+                format_picks(picks=current_picks)
             )
-        pick_best: Pick = current_move_choices_ordered[0 if board.turn else -1]
-        chosen_pick: Pick
-        chosen_pick = choice([p for p in current_move_choices_ordered if p == pick_best])
+        chosen_pick: Pick = choice([p for p in current_picks if p == current_picks[0 if board.turn else -1]])
         self.set_q_value(value=chosen_pick.score, board=board)
         return chosen_pick
-
-    def _update_current_move_choices_ordered_(
-            self,
-            current_move_choices_ordered: List[Pick],
-            current_move: Move,
-            board: Board
-    ) -> List[Pick]:
-        new_board: Board = self.board_copy_pushed(move=current_move, board=board)
-        return self._update_current_move_choices_(
-            current_move_choices_ordered=current_move_choices_ordered, new_board=new_board,
-            current_move=current_move
-        )
 
     # pylint: disable=too-many-arguments
     def _update_current_move_choices_(
             self,
-            current_move_choices_ordered: List[Pick],
-            new_board: Board,
-            current_move: Move
-    ) -> List[Pick]:
-        """Evaluate a candidate move and update the list of best move choices.
+            board: Board,
+            current_pick: Pick
+    ) -> None:
+        """Evaluate a candidate Pick and update the list of best Pick choices.
 
         This method evaluates a move by pushing it to a new board, calculating the response moves
         from the opponent, and assigning the move a score based on the worst-case opponent response.
@@ -196,19 +173,16 @@ class CMHMEngine2(CMHMEngine, Quartney):
 
         Parameters
         ----------
-        current_move_choices_ordered : List[Pick]
-            The current list of move candidates and their associated evaluation scores, ordered
-            best to worst from White's perspective.
-        new_board : chess.Board
-            The board state resulting from applying `current_move`.
-        current_move : chess.Move
-            The move being evaluated.
+        board : chess.Board
+            The board to apply the current_pick's move to
+        current_pick : Pick
+            The Pick being evaluated.
 
         Returns
         -------
-        List[Pick]
-            The updated move candidate list with `current_move` inserted in score order.
+        None
         """
+        new_board: Board = self.board_copy_pushed(move=current_pick.move, board=board)
         response_moves: List[Pick]
         response_moves = self._get_or_calculate_responses_(
             new_board=new_board,
@@ -217,24 +191,20 @@ class CMHMEngine2(CMHMEngine, Quartney):
         if len(response_moves) == 0:
             initial_q_val: Optional[float64] = self.get_q_value(board=new_board)
             if initial_q_val is None:
-                final_move_score: float64 = calculate_better_white_minus_black_score(board=new_board, depth=self.depth)
-                self.set_q_value(value=final_move_score, board=new_board)
+                current_pick.score = calculate_better_white_minus_black_score(board=new_board, depth=self.depth)
+                self.set_q_value(value=current_pick.score, board=new_board)
             else:
-                final_move_score = initial_q_val
+                current_pick.score = initial_q_val
         else:
-            final_move_score: float64 = response_moves[0 if new_board.turn else -1].score
-            self.set_q_value(value=final_move_score, board=new_board)
-        return insert_choice_into_current_moves(
-            choices_ordered_best_to_worst=current_move_choices_ordered,
-            pick=Pick(move=current_move, score=final_move_score)
-        )
+            current_pick.score = response_moves[0 if new_board.turn else -1].score
+            self.set_q_value(value=current_pick.score, board=new_board)
 
     def _get_or_calculate_responses_(
             self,
             new_board: Board,
             go_deeper: bool
     ) -> List[Pick]:
-        """Retrieve the opponent's response moves and evaluate them.
+        """Retrieve the opponent's evaluated response picks.
 
         This method computes heatmap-based evaluation scores for each legal response move from the new board
         state (after a candidate move is applied). The scores are ordered from worst to best from the perspective
@@ -245,36 +215,35 @@ class CMHMEngine2(CMHMEngine, Quartney):
         new_board : chess.Board
             The board state after a candidate move is applied.
         go_deeper : bool
+            If True, allows one extra ply of recursive scoring on checks or captures.
 
         Returns
         -------
-        List[Union[Pick, None]]
-            A list of response moves and their evaluation scores.
+        List[Pick]
+            A list of response Picks (moves and their evaluation scores.)
         """
         # However, that is not our Final score,
         # the score after finding the best response to our move should be the final score.
-        next_moves: List[Move] = self.current_moves_list(board=new_board)
-        response_moves: List[Pick] = []
-        next_move: Move
-        for next_move in next_moves:
-            response_moves = self._get_or_calc_response_move_scores_(
-                next_move=next_move,
-                response_moves=response_moves,
+        next_picks: List[Pick] = self.current_picks_list(board=new_board)
+        next_pick: Pick
+        for next_pick in next_picks:
+            self._get_or_calc_response_move_scores_(
+                next_pick=next_pick,
                 new_board=new_board,
                 go_deeper=go_deeper
             )
-        return response_moves
+        # noinspection PyTypeChecker,PydanticTypeChecker
+        return sorted(next_picks, reverse=True)
 
     def _get_or_calc_response_move_scores_(
             self,
-            next_move: Move,
-            response_moves: List[Pick],
+            next_pick: Pick,
             new_board: Board,
             go_deeper: bool
-    ) -> List[Pick]:
-        """Evaluate one opponent response move and insert it into the ordered response list.
+    ) -> None:
+        """Evaluate one opponent response move and update the next_pick score.
 
-        This method simulates `next_move` on `new_board`, then:
+        This method simulates `next_pick.move` on `new_board`, then:
 
             1. **Deepens** one ply (only on checks or captures) if `go_deeper` is True and there are legal replies.
             2. Otherwise, **fetches** the cached Q-value for that position if available.
@@ -284,41 +253,27 @@ class CMHMEngine2(CMHMEngine, Quartney):
 
         Parameters
         ----------
-        next_move : chess.Move
-            The opponent’s move to simulate and evaluate.
-        response_moves : List[Pick]
-            Current ordered list of response candidates (worst→best from current player’s POV).
+        next_pick : Pick
+            The opponent’s Pick to simulate and evaluate.
         new_board : chess.Board
-            Position after the candidate move was applied; it’s now the opponent’s turn.
+            Position after the candidate Pick was applied; it’s now the opponent’s turn.
         go_deeper : bool
             If True, allows one extra ply of recursive scoring on checks or captures.
-
-        Returns
-        -------
-        List[Pick]
-            Updated response list with `(next_move, score)` inserted in order.
         """
-        next_board: Board = self.board_copy_pushed(move=next_move, board=new_board)
+        next_board: Board = self.board_copy_pushed(move=next_pick.move, board=new_board)
         if go_deeper and (
-                next_board.is_check() or new_board.piece_at(next_move.to_square)
+                next_board.is_check() or new_board.piece_at(next_pick.move.to_square)
         ) and next_board.legal_moves.count() > 0:
             next_response_moves: List[Pick] = self._get_or_calculate_responses_(
                 new_board=next_board,
                 go_deeper=False
             )
-            # `[-1 if next_board.turn else 0]` slice here is confusing since
-            # similar slices in the outer scope use: `[0 if new_board.turn else -1]`.
-            # I think the reason we need `[-1 if next_board.turn else 0]` here is that we come out of a recursive call.
-            # This part is confusing as heck, but it is the only way TestCMHMEngine2.test_false_positive_fen passes.
-            next_move_score: float64 = next_response_moves[-1 if next_board.turn else 0].score
-            self.set_q_value(value=next_move_score, board=next_board)
+            next_pick.score = next_response_moves[-1 if next_board.turn else 0].score
+            self.set_q_value(value=next_pick.score, board=next_board)
         else:
             next_q_val: Optional[float64] = self.get_q_value(board=next_board)
             if next_q_val is not None:
-                next_move_score = next_q_val
+                next_pick.score = next_q_val
             else:
-                next_move_score = calculate_better_white_minus_black_score(board=next_board, depth=self.depth)
-                self.set_q_value(value=next_move_score, board=next_board)
-        return insert_choice_into_current_moves(
-            choices_ordered_best_to_worst=response_moves, pick=Pick(move=next_move, score=next_move_score)
-        )
+                next_pick.score = calculate_better_white_minus_black_score(board=next_board, depth=self.depth)
+                self.set_q_value(value=next_pick.score, board=next_board)

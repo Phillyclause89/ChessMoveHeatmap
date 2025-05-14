@@ -1982,6 +1982,15 @@ static CYTHON_INLINE int __Pyx_ListComp_Append(PyObject* list, PyObject* x) {
 #define __Pyx_ListComp_Append(L,x) PyList_Append(L,x)
 #endif
 
+/* PyObjectSetAttrStr.proto */
+#if CYTHON_USE_TYPE_SLOTS
+#define __Pyx_PyObject_DelAttrStr(o,n) __Pyx_PyObject_SetAttrStr(o, n, NULL)
+static CYTHON_INLINE int __Pyx_PyObject_SetAttrStr(PyObject* obj, PyObject* attr_name, PyObject* value);
+#else
+#define __Pyx_PyObject_DelAttrStr(o,n)   PyObject_DelAttr(o,n)
+#define __Pyx_PyObject_SetAttrStr(o,n,v) PyObject_SetAttr(o,n,v)
+#endif
+
 /* Import.proto */
 static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
 
@@ -2263,33 +2272,32 @@ int __pyx_module_is_main_chmengine__engines__cmhmey2 = 0;
 static PyObject *__pyx_builtin_super;
 static PyObject *__pyx_builtin_print;
 static PyObject *__pyx_builtin_ValueError;
+static PyObject *__pyx_builtin_sorted;
 /* #### Code section: string_decls ### */
 static const char __pyx_k_[] = ", ";
 static const char __pyx_k_p[] = "p";
 static const char __pyx_k_2f[] = ".2f";
 static const char __pyx_k__2[] = ")\n";
-static const char __pyx_k__3[] = "";
-static const char __pyx_k__4[] = ".";
+static const char __pyx_k__3[] = ".";
 static const char __pyx_k_All[] = "All ";
-static const char __pyx_k__21[] = "?";
+static const char __pyx_k__17[] = "?";
 static const char __pyx_k_all[] = "__all__";
 static const char __pyx_k_doc[] = "__doc__";
 static const char __pyx_k_fen[] = "fen";
 static const char __pyx_k_int[] = "int";
 static const char __pyx_k_pop[] = "pop";
-static const char __pyx_k_str[] = "str";
 static const char __pyx_k_uci[] = "uci";
 static const char __pyx_k_List[] = "List";
 static const char __pyx_k_Move[] = "Move";
 static const char __pyx_k_None[] = "None";
 static const char __pyx_k_Pick[] = "Pick";
+static const char __pyx_k_args[] = "args";
 static const char __pyx_k_bool[] = "bool";
 static const char __pyx_k_dict[] = "__dict__";
 static const char __pyx_k_init[] = "__init__";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_move[] = "move";
 static const char __pyx_k_name[] = "__name__";
-static const char __pyx_k_pick[] = "pick";
 static const char __pyx_k_self[] = "self";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_turn[] = "turn";
@@ -2307,13 +2315,15 @@ static const char __pyx_k_super[] = "super";
 static const char __pyx_k_value[] = "value";
 static const char __pyx_k_choice[] = "choice";
 static const char __pyx_k_import[] = "__import__";
+static const char __pyx_k_kwargs[] = "kwargs";
 static const char __pyx_k_module[] = "__module__";
 static const char __pyx_k_random[] = "random";
 static const char __pyx_k_return[] = "return";
+static const char __pyx_k_sorted[] = "sorted";
 static const char __pyx_k_typing[] = "typing";
 static const char __pyx_k_float64[] = "float64";
-static const char __pyx_k_pick_by[] = "pick_by";
 static const char __pyx_k_prepare[] = "__prepare__";
+static const char __pyx_k_reverse[] = "reverse";
 static const char __pyx_k_Optional[] = "Optional";
 static const char __pyx_k_Quartney[] = "Quartney";
 static const char __pyx_k_init_qdb[] = "_init_qdb";
@@ -2330,15 +2340,14 @@ static const char __pyx_k_last_move[] = "last_move";
 static const char __pyx_k_metaclass[] = "__metaclass__";
 static const char __pyx_k_new_board[] = "new_board";
 static const char __pyx_k_new_score[] = "new_score";
-static const char __pyx_k_next_move[] = "next_move";
-static const char __pyx_k_pick_best[] = "pick_best";
+static const char __pyx_k_next_pick[] = "next_pick";
 static const char __pyx_k_pick_move[] = "pick_move";
 static const char __pyx_k_to_square[] = "to_square";
 static const char __pyx_k_CMHMEngine[] = "CMHMEngine";
 static const char __pyx_k_ValueError[] = "ValueError";
 static const char __pyx_k_move_stack[] = "move_stack";
 static const char __pyx_k_next_board[] = "next_board";
-static const char __pyx_k_next_moves[] = "next_moves";
+static const char __pyx_k_next_picks[] = "next_picks";
 static const char __pyx_k_next_q_val[] = "next_q_val";
 static const char __pyx_k_CMHMEngine2[] = "CMHMEngine2";
 static const char __pyx_k_chosen_pick[] = "chosen_pick";
@@ -2346,11 +2355,11 @@ static const char __pyx_k_get_q_value[] = "get_q_value";
 static const char __pyx_k_legal_moves[] = "legal_moves";
 static const char __pyx_k_mro_entries[] = "__mro_entries__";
 static const char __pyx_k_set_q_value[] = "set_q_value";
-static const char __pyx_k_current_move[] = "current_move";
-static const char __pyx_k_format_moves[] = "format_moves";
+static const char __pyx_k_current_pick[] = "current_pick";
+static const char __pyx_k_format_picks[] = "format_picks";
 static const char __pyx_k_is_coroutine[] = "_is_coroutine";
 static const char __pyx_k_moves_ranked[] = " moves ranked:";
-static const char __pyx_k_current_moves[] = "current_moves";
+static const char __pyx_k_current_picks[] = "current_picks";
 static const char __pyx_k_init_subclass[] = "__init_subclass__";
 static const char __pyx_k_initial_q_val[] = "initial_q_val";
 static const char __pyx_k_New_Pick_Score[] = ") --> New Pick & Score: (";
@@ -2358,14 +2367,12 @@ static const char __pyx_k_Optional_Board[] = "Optional[Board]";
 static const char __pyx_k_response_moves[] = "response_moves";
 static const char __pyx_k_Game_Pick_Score[] = "Game Pick & Score: (";
 static const char __pyx_k_chmengine_utils[] = "chmengine.utils";
-static const char __pyx_k_next_move_score[] = "next_move_score";
 static const char __pyx_k_update_q_values[] = "update_q_values";
-static const char __pyx_k_final_move_score[] = "final_move_score";
 static const char __pyx_k_board_copy_pushed[] = "board_copy_pushed";
 static const char __pyx_k_CMHMEngine2___init[] = "CMHMEngine2.__init__";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
-static const char __pyx_k_current_moves_list[] = "current_moves_list";
+static const char __pyx_k_current_picks_list[] = "current_picks_list";
 static const char __pyx_k_next_response_moves[] = "next_response_moves";
 static const char __pyx_k_CMHMEngine2_pick_move[] = "CMHMEngine2.pick_move";
 static const char __pyx_k_chmengine_engines_cmhmey1[] = "chmengine.engines.cmhmey1";
@@ -2374,34 +2381,28 @@ static const char __pyx_k_chmengine_engines_quartney[] = "chmengine.engines.quar
 static const char __pyx_k_get_or_calculate_responses[] = "_get_or_calculate_responses_";
 static const char __pyx_k_CMHMEngine2_update_q_values[] = "CMHMEngine2.update_q_values";
 static const char __pyx_k_update_current_move_choices[] = "_update_current_move_choices_";
-static const char __pyx_k_CMHMEngine2___init___line_20[] = "CMHMEngine2.__init__ (line 20)";
+static const char __pyx_k_CMHMEngine2___init___line_18[] = "CMHMEngine2.__init__ (line 18)";
 static const char __pyx_k_chmengine_engines_cmhmey2_py[] = "chmengine\\engines\\cmhmey2.py";
-static const char __pyx_k_current_move_choices_ordered[] = "current_move_choices_ordered";
-static const char __pyx_k_CMHMEngine2_pick_move_line_99[] = "CMHMEngine2.pick_move (line 99)";
-static const char __pyx_k_choices_ordered_best_to_worst[] = "choices_ordered_best_to_worst";
+static const char __pyx_k_CMHMEngine2_pick_move_line_96[] = "CMHMEngine2.pick_move (line 96)";
 static const char __pyx_k_get_or_calc_response_move_score[] = "_get_or_calc_response_move_scores_";
-static const char __pyx_k_update_current_move_choices_ord[] = "_update_current_move_choices_ordered_";
 static const char __pyx_k_Back_propagate_game_outcome_thro[] = "Back-propagate game outcome through the Q-table.\n\n        Pops all moves from the current board history and adjusts each\n        stored Q-value in the database based on the final result\n        (win/lose/draw).\n\n        Parameters\n        ----------\n        debug : bool, default=False\n            If True, print diagnostics for each back-step.\n\n        Notes\n        -----\n        Updates the SQLite Q-table entries for every move in the game.\n\n        Examples\n        --------\n        >>> from io import StringIO\n        >>> from chess import pgn\n        >>> from chmengine import CMHMEngine2\n        >>> pgn_buffer = StringIO(\n        ...    '''\n        ...    1. f3 e5 2. g4 Qh4# 0-1\n        ...\n        ...\n        ...    '''\n        ... )\n        >>> game = pgn.read_game(pgn_buffer)\n        >>> board = game.board()\n        >>> for move in game.mainline_moves():\n        ...     board.push(move)\n        >>> engine = CMHMEngine2(board=board)\n        >>> engine.fen()\n        'rnb1kbnr/pppp1ppp/8/4p3/6Pq/5P2/PPPPP2P/RNBQKBNR w KQkq - 1 3'\n        >>> engine.update_q_values()\n        >>> engine.fen()\n        'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'\n        ";
 static const char __pyx_k_CMHMEngine2__get_or_calc_respons[] = "CMHMEngine2._get_or_calc_response_move_scores_";
 static const char __pyx_k_CMHMEngine2__get_or_calculate_re[] = "CMHMEngine2._get_or_calculate_responses_";
-static const char __pyx_k_CMHMEngine2__update_current_move[] = "CMHMEngine2._update_current_move_choices_ordered_";
-static const char __pyx_k_CMHMEngine2_update_q_values_line[] = "CMHMEngine2.update_q_values (line 46)";
+static const char __pyx_k_CMHMEngine2__update_current_move[] = "CMHMEngine2._update_current_move_choices_";
+static const char __pyx_k_CMHMEngine2_update_q_values_line[] = "CMHMEngine2.update_q_values (line 44)";
 static const char __pyx_k_Cmhmey_Jr_the_love_child_of_CMHM[] = "Cmhmey Jr., the love-child of CMHMEngine and Quartney";
 static const char __pyx_k_Current_Board_has_no_legal_moves[] = "Current Board has no legal moves: ";
 static const char __pyx_k_Initialize_the_CMHMEngine2_insta[] = "Initialize the CMHMEngine2 instance.\n\n        This constructor extends the parent CMHMEngine by initializing the Q-table database.\n        It sets up the engine with an optional initial board and a recursion depth for heatmap\n        calculations. Upon initialization, it creates or verifies the Q-table database structure.\n\n        Parameters\n        ----------\n        board : Optional[chess.Board]\n            The initial board state. If None, a standard starting board is used.\n        depth : int, default: 1\n            The recursion depth for heatmap calculations, which controls the number of future\n            moves considered during evaluation.\n\n        Examples\n        --------\n        >>> import os\n        >>> from chmengine.engines.cmhmey2 import CMHMEngine2\n        >>> engine = CMHMEngine2()\n        >>> len(os.listdir(path=engine.cache_dir))\n        31\n        ";
-static const char __pyx_k_Select_a_move_based_on_heatmap_e[] = "Select a move based on heatmap evaluations and Q-table integration.\n\n        This overridden method combines heatmap evaluations with Q-value updates. It evaluates all\n        legal moves by calculating their scores from the perspective of the current player (with positive\n        scores indicating favorable moves and negative scores indicating unfavorable moves). The evaluation\n        score is always from the mover\342\200\231s perspective. The method then picks one move at random from the\n        top-scoring moves, updates the Q-value for that move, and returns the selected move along with its\n        score.\n\n        Parameters\n        ----------\n        pick_by : str, default: \"\"\n            Legecy param from parent class pick_move method. Args are ignored by this classe's overide.\n        board : Optional[chess.Board], default: None\n            Pick from a given board instead of intstance board\n        debug : bool, default: False\n            Allows for a print call showing the current evals of each move choice during anaylsis.\n\n        Returns\n        -------\n        Pick\n            A tuple-like containing the chosen move and its associated evaluation score. The evaluation score is\n            expressed from the perspective of the player making the move\342\200\224positive values indicate favorable\n            outcomes and negative values indicate unfavorable outcomes.\n\n        Raises\n        ------\n        ValueError\n            If Current Board has no legal moves.\n\n        Examples\n        --------\n        >>> from chmengine.engines.cmhmey2 import CMHMEngine2\n        >>> engine = CMHMEngine2()\n        >>> move, score = engine.pick_move()\n        ";
+static const char __pyx_k_Select_a_Pick_based_on_heatmap_e[] = "Select a Pick based on heatmap evaluations and Q-table integration.\n\n        This overridden method combines heatmap evaluations with Q-value updates. It evaluates all\n        legal moves by calculating their scores from the perspective of the current player (with positive\n        scores indicating favorable moves and negative scores indicating unfavorable moves). The evaluation\n        score is always from the mover\342\200\231s perspective. The method then picks one move at random from the\n        top-scoring moves, updates the Q-value for that move, and returns the selected move along with its\n        score.\n\n        Parameters\n        ----------\n        board : Optional[chess.Board], default: None\n            Pick from a given board instead of intstance board\n        debug : bool, default: False\n            Allows for a print call showing the current evals of each move choice during anaylsis.\n\n        Returns\n        -------\n        Pick\n            An unpackable tuple-like containing the chosen move and its associated evaluation score.\n            The evaluation score is expressed from the perspective of the player making the move\342\200\224positive\n            values indicate favorable outcomes and negative values indicate unfavorable outcomes.\n\n        Raises\n        ------\n        ValueError\n            If Current Board has no legal moves.\n\n        Examples\n        --------\n        >>> from chmengine.engines.cmhmey2 import CMHMEngine2\n        >>> engine = CMHMEngine2()\n        >>> move, score = engine.pick_move()\n        ";
 static const char __pyx_k_calculate_better_white_minus_bla[] = "calculate_better_white_minus_black_score";
-static const char __pyx_k_insert_choice_into_current_moves[] = "insert_choice_into_current_moves";
-static const char __pyx_k_CMHMEngine2__update_current_move_2[] = "CMHMEngine2._update_current_move_choices_";
 /* #### Code section: decls ### */
 static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2___defaults__(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
 static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth); /* proto */
 static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_2update_q_values(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_debug); /* proto */
-static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_4pick_move(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_pick_by, PyObject *__pyx_v_board, PyObject *__pyx_v_debug); /* proto */
-static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_6_update_current_move_choices_ordered_(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_current_move_choices_ordered, PyObject *__pyx_v_current_move, PyObject *__pyx_v_board); /* proto */
-static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_8_update_current_move_choices_(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_current_move_choices_ordered, PyObject *__pyx_v_new_board, PyObject *__pyx_v_current_move); /* proto */
-static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_10_get_or_calculate_responses_(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_new_board, PyObject *__pyx_v_go_deeper); /* proto */
-static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_12_get_or_calc_response_move_scores_(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_next_move, PyObject *__pyx_v_response_moves, PyObject *__pyx_v_new_board, PyObject *__pyx_v_go_deeper); /* proto */
+static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_4pick_move(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_board, PyObject *__pyx_v_debug, CYTHON_UNUSED PyObject *__pyx_v_args, CYTHON_UNUSED PyObject *__pyx_v_kwargs); /* proto */
+static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_6_update_current_move_choices_(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_board, PyObject *__pyx_v_current_pick); /* proto */
+static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_8_get_or_calculate_responses_(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_new_board, PyObject *__pyx_v_go_deeper); /* proto */
+static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_10_get_or_calc_response_move_scores_(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_next_pick, PyObject *__pyx_v_new_board, PyObject *__pyx_v_go_deeper); /* proto */
 static __Pyx_CachedCFunction __pyx_umethod_PyList_Type_pop = {0, 0, 0, 0, 0};
 /* #### Code section: late_includes ### */
 /* #### Code section: module_state ### */
@@ -2441,13 +2442,12 @@ typedef struct {
   PyObject *__pyx_n_s_CMHMEngine2;
   PyObject *__pyx_n_u_CMHMEngine2;
   PyObject *__pyx_n_s_CMHMEngine2___init;
-  PyObject *__pyx_kp_u_CMHMEngine2___init___line_20;
+  PyObject *__pyx_kp_u_CMHMEngine2___init___line_18;
   PyObject *__pyx_n_s_CMHMEngine2__get_or_calc_respons;
   PyObject *__pyx_n_s_CMHMEngine2__get_or_calculate_re;
   PyObject *__pyx_n_s_CMHMEngine2__update_current_move;
-  PyObject *__pyx_n_s_CMHMEngine2__update_current_move_2;
   PyObject *__pyx_n_s_CMHMEngine2_pick_move;
-  PyObject *__pyx_kp_u_CMHMEngine2_pick_move_line_99;
+  PyObject *__pyx_kp_u_CMHMEngine2_pick_move_line_96;
   PyObject *__pyx_n_s_CMHMEngine2_update_q_values;
   PyObject *__pyx_kp_u_CMHMEngine2_update_q_values_line;
   PyObject *__pyx_kp_s_Cmhmey_Jr_the_love_child_of_CMHM;
@@ -2463,13 +2463,13 @@ typedef struct {
   PyObject *__pyx_kp_s_Optional_Board;
   PyObject *__pyx_n_s_Pick;
   PyObject *__pyx_n_s_Quartney;
-  PyObject *__pyx_kp_u_Select_a_move_based_on_heatmap_e;
+  PyObject *__pyx_kp_u_Select_a_Pick_based_on_heatmap_e;
   PyObject *__pyx_n_s_ValueError;
+  PyObject *__pyx_n_s__17;
   PyObject *__pyx_kp_u__2;
-  PyObject *__pyx_n_s__21;
   PyObject *__pyx_kp_u__3;
-  PyObject *__pyx_kp_u__4;
   PyObject *__pyx_n_s_all;
+  PyObject *__pyx_n_s_args;
   PyObject *__pyx_n_s_asyncio_coroutines;
   PyObject *__pyx_n_s_board;
   PyObject *__pyx_n_s_board_copy_pushed;
@@ -2482,23 +2482,20 @@ typedef struct {
   PyObject *__pyx_n_s_chmengine_engines_quartney;
   PyObject *__pyx_n_s_chmengine_utils;
   PyObject *__pyx_n_s_choice;
-  PyObject *__pyx_n_s_choices_ordered_best_to_worst;
   PyObject *__pyx_n_s_chosen_pick;
   PyObject *__pyx_n_s_cline_in_traceback;
   PyObject *__pyx_n_s_count;
-  PyObject *__pyx_n_s_current_move;
-  PyObject *__pyx_n_s_current_move_choices_ordered;
-  PyObject *__pyx_n_s_current_moves;
-  PyObject *__pyx_n_s_current_moves_list;
+  PyObject *__pyx_n_s_current_pick;
+  PyObject *__pyx_n_s_current_picks;
+  PyObject *__pyx_n_s_current_picks_list;
   PyObject *__pyx_n_s_current_q;
   PyObject *__pyx_n_s_debug;
   PyObject *__pyx_n_s_depth;
   PyObject *__pyx_n_s_dict;
   PyObject *__pyx_n_s_doc;
   PyObject *__pyx_n_s_fen;
-  PyObject *__pyx_n_s_final_move_score;
   PyObject *__pyx_n_s_float64;
-  PyObject *__pyx_n_s_format_moves;
+  PyObject *__pyx_n_s_format_picks;
   PyObject *__pyx_n_s_get_or_calc_response_move_score;
   PyObject *__pyx_n_s_get_or_calculate_responses;
   PyObject *__pyx_n_s_get_q_value;
@@ -2508,10 +2505,10 @@ typedef struct {
   PyObject *__pyx_n_s_init_qdb;
   PyObject *__pyx_n_s_init_subclass;
   PyObject *__pyx_n_s_initial_q_val;
-  PyObject *__pyx_n_s_insert_choice_into_current_moves;
   PyObject *__pyx_n_s_int;
   PyObject *__pyx_n_s_is_check;
   PyObject *__pyx_n_s_is_coroutine;
+  PyObject *__pyx_n_s_kwargs;
   PyObject *__pyx_n_s_last_move;
   PyObject *__pyx_n_s_legal_moves;
   PyObject *__pyx_n_s_main;
@@ -2526,16 +2523,12 @@ typedef struct {
   PyObject *__pyx_n_s_new_move;
   PyObject *__pyx_n_s_new_score;
   PyObject *__pyx_n_s_next_board;
-  PyObject *__pyx_n_s_next_move;
-  PyObject *__pyx_n_s_next_move_score;
-  PyObject *__pyx_n_s_next_moves;
+  PyObject *__pyx_n_s_next_pick;
+  PyObject *__pyx_n_s_next_picks;
   PyObject *__pyx_n_s_next_q_val;
   PyObject *__pyx_n_s_next_response_moves;
   PyObject *__pyx_n_s_numpy;
   PyObject *__pyx_n_s_p;
-  PyObject *__pyx_n_s_pick;
-  PyObject *__pyx_n_s_pick_best;
-  PyObject *__pyx_n_s_pick_by;
   PyObject *__pyx_n_s_pick_move;
   PyObject *__pyx_n_s_picks;
   PyObject *__pyx_n_s_piece_at;
@@ -2546,11 +2539,12 @@ typedef struct {
   PyObject *__pyx_n_s_random;
   PyObject *__pyx_n_s_response_moves;
   PyObject *__pyx_n_s_return;
+  PyObject *__pyx_n_s_reverse;
   PyObject *__pyx_n_s_score;
   PyObject *__pyx_n_s_self;
   PyObject *__pyx_n_s_set_name;
   PyObject *__pyx_n_s_set_q_value;
-  PyObject *__pyx_n_s_str;
+  PyObject *__pyx_n_s_sorted;
   PyObject *__pyx_n_s_super;
   PyObject *__pyx_n_s_test;
   PyObject *__pyx_n_s_to_square;
@@ -2558,27 +2552,23 @@ typedef struct {
   PyObject *__pyx_n_s_typing;
   PyObject *__pyx_n_s_uci;
   PyObject *__pyx_n_s_update_current_move_choices;
-  PyObject *__pyx_n_s_update_current_move_choices_ord;
   PyObject *__pyx_n_s_update_q_values;
   PyObject *__pyx_n_s_value;
   PyObject *__pyx_int_0;
   PyObject *__pyx_int_1;
-  PyObject *__pyx_tuple__5;
-  PyObject *__pyx_tuple__7;
+  PyObject *__pyx_tuple__4;
+  PyObject *__pyx_tuple__6;
+  PyObject *__pyx_tuple__8;
   PyObject *__pyx_tuple__9;
-  PyObject *__pyx_tuple__10;
-  PyObject *__pyx_tuple__12;
+  PyObject *__pyx_tuple__11;
   PyObject *__pyx_tuple__13;
   PyObject *__pyx_tuple__15;
-  PyObject *__pyx_tuple__17;
-  PyObject *__pyx_tuple__19;
-  PyObject *__pyx_codeobj__6;
-  PyObject *__pyx_codeobj__8;
-  PyObject *__pyx_codeobj__11;
+  PyObject *__pyx_codeobj__5;
+  PyObject *__pyx_codeobj__7;
+  PyObject *__pyx_codeobj__10;
+  PyObject *__pyx_codeobj__12;
   PyObject *__pyx_codeobj__14;
   PyObject *__pyx_codeobj__16;
-  PyObject *__pyx_codeobj__18;
-  PyObject *__pyx_codeobj__20;
 } __pyx_mstate;
 
 #if CYTHON_USE_MODULE_STATE
@@ -2630,13 +2620,12 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_CMHMEngine2);
   Py_CLEAR(clear_module_state->__pyx_n_u_CMHMEngine2);
   Py_CLEAR(clear_module_state->__pyx_n_s_CMHMEngine2___init);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_CMHMEngine2___init___line_20);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_CMHMEngine2___init___line_18);
   Py_CLEAR(clear_module_state->__pyx_n_s_CMHMEngine2__get_or_calc_respons);
   Py_CLEAR(clear_module_state->__pyx_n_s_CMHMEngine2__get_or_calculate_re);
   Py_CLEAR(clear_module_state->__pyx_n_s_CMHMEngine2__update_current_move);
-  Py_CLEAR(clear_module_state->__pyx_n_s_CMHMEngine2__update_current_move_2);
   Py_CLEAR(clear_module_state->__pyx_n_s_CMHMEngine2_pick_move);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_CMHMEngine2_pick_move_line_99);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_CMHMEngine2_pick_move_line_96);
   Py_CLEAR(clear_module_state->__pyx_n_s_CMHMEngine2_update_q_values);
   Py_CLEAR(clear_module_state->__pyx_kp_u_CMHMEngine2_update_q_values_line);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Cmhmey_Jr_the_love_child_of_CMHM);
@@ -2652,13 +2641,13 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_s_Optional_Board);
   Py_CLEAR(clear_module_state->__pyx_n_s_Pick);
   Py_CLEAR(clear_module_state->__pyx_n_s_Quartney);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_Select_a_move_based_on_heatmap_e);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_Select_a_Pick_based_on_heatmap_e);
   Py_CLEAR(clear_module_state->__pyx_n_s_ValueError);
+  Py_CLEAR(clear_module_state->__pyx_n_s__17);
   Py_CLEAR(clear_module_state->__pyx_kp_u__2);
-  Py_CLEAR(clear_module_state->__pyx_n_s__21);
   Py_CLEAR(clear_module_state->__pyx_kp_u__3);
-  Py_CLEAR(clear_module_state->__pyx_kp_u__4);
   Py_CLEAR(clear_module_state->__pyx_n_s_all);
+  Py_CLEAR(clear_module_state->__pyx_n_s_args);
   Py_CLEAR(clear_module_state->__pyx_n_s_asyncio_coroutines);
   Py_CLEAR(clear_module_state->__pyx_n_s_board);
   Py_CLEAR(clear_module_state->__pyx_n_s_board_copy_pushed);
@@ -2671,23 +2660,20 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_chmengine_engines_quartney);
   Py_CLEAR(clear_module_state->__pyx_n_s_chmengine_utils);
   Py_CLEAR(clear_module_state->__pyx_n_s_choice);
-  Py_CLEAR(clear_module_state->__pyx_n_s_choices_ordered_best_to_worst);
   Py_CLEAR(clear_module_state->__pyx_n_s_chosen_pick);
   Py_CLEAR(clear_module_state->__pyx_n_s_cline_in_traceback);
   Py_CLEAR(clear_module_state->__pyx_n_s_count);
-  Py_CLEAR(clear_module_state->__pyx_n_s_current_move);
-  Py_CLEAR(clear_module_state->__pyx_n_s_current_move_choices_ordered);
-  Py_CLEAR(clear_module_state->__pyx_n_s_current_moves);
-  Py_CLEAR(clear_module_state->__pyx_n_s_current_moves_list);
+  Py_CLEAR(clear_module_state->__pyx_n_s_current_pick);
+  Py_CLEAR(clear_module_state->__pyx_n_s_current_picks);
+  Py_CLEAR(clear_module_state->__pyx_n_s_current_picks_list);
   Py_CLEAR(clear_module_state->__pyx_n_s_current_q);
   Py_CLEAR(clear_module_state->__pyx_n_s_debug);
   Py_CLEAR(clear_module_state->__pyx_n_s_depth);
   Py_CLEAR(clear_module_state->__pyx_n_s_dict);
   Py_CLEAR(clear_module_state->__pyx_n_s_doc);
   Py_CLEAR(clear_module_state->__pyx_n_s_fen);
-  Py_CLEAR(clear_module_state->__pyx_n_s_final_move_score);
   Py_CLEAR(clear_module_state->__pyx_n_s_float64);
-  Py_CLEAR(clear_module_state->__pyx_n_s_format_moves);
+  Py_CLEAR(clear_module_state->__pyx_n_s_format_picks);
   Py_CLEAR(clear_module_state->__pyx_n_s_get_or_calc_response_move_score);
   Py_CLEAR(clear_module_state->__pyx_n_s_get_or_calculate_responses);
   Py_CLEAR(clear_module_state->__pyx_n_s_get_q_value);
@@ -2697,10 +2683,10 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_init_qdb);
   Py_CLEAR(clear_module_state->__pyx_n_s_init_subclass);
   Py_CLEAR(clear_module_state->__pyx_n_s_initial_q_val);
-  Py_CLEAR(clear_module_state->__pyx_n_s_insert_choice_into_current_moves);
   Py_CLEAR(clear_module_state->__pyx_n_s_int);
   Py_CLEAR(clear_module_state->__pyx_n_s_is_check);
   Py_CLEAR(clear_module_state->__pyx_n_s_is_coroutine);
+  Py_CLEAR(clear_module_state->__pyx_n_s_kwargs);
   Py_CLEAR(clear_module_state->__pyx_n_s_last_move);
   Py_CLEAR(clear_module_state->__pyx_n_s_legal_moves);
   Py_CLEAR(clear_module_state->__pyx_n_s_main);
@@ -2715,16 +2701,12 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_new_move);
   Py_CLEAR(clear_module_state->__pyx_n_s_new_score);
   Py_CLEAR(clear_module_state->__pyx_n_s_next_board);
-  Py_CLEAR(clear_module_state->__pyx_n_s_next_move);
-  Py_CLEAR(clear_module_state->__pyx_n_s_next_move_score);
-  Py_CLEAR(clear_module_state->__pyx_n_s_next_moves);
+  Py_CLEAR(clear_module_state->__pyx_n_s_next_pick);
+  Py_CLEAR(clear_module_state->__pyx_n_s_next_picks);
   Py_CLEAR(clear_module_state->__pyx_n_s_next_q_val);
   Py_CLEAR(clear_module_state->__pyx_n_s_next_response_moves);
   Py_CLEAR(clear_module_state->__pyx_n_s_numpy);
   Py_CLEAR(clear_module_state->__pyx_n_s_p);
-  Py_CLEAR(clear_module_state->__pyx_n_s_pick);
-  Py_CLEAR(clear_module_state->__pyx_n_s_pick_best);
-  Py_CLEAR(clear_module_state->__pyx_n_s_pick_by);
   Py_CLEAR(clear_module_state->__pyx_n_s_pick_move);
   Py_CLEAR(clear_module_state->__pyx_n_s_picks);
   Py_CLEAR(clear_module_state->__pyx_n_s_piece_at);
@@ -2735,11 +2717,12 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_random);
   Py_CLEAR(clear_module_state->__pyx_n_s_response_moves);
   Py_CLEAR(clear_module_state->__pyx_n_s_return);
+  Py_CLEAR(clear_module_state->__pyx_n_s_reverse);
   Py_CLEAR(clear_module_state->__pyx_n_s_score);
   Py_CLEAR(clear_module_state->__pyx_n_s_self);
   Py_CLEAR(clear_module_state->__pyx_n_s_set_name);
   Py_CLEAR(clear_module_state->__pyx_n_s_set_q_value);
-  Py_CLEAR(clear_module_state->__pyx_n_s_str);
+  Py_CLEAR(clear_module_state->__pyx_n_s_sorted);
   Py_CLEAR(clear_module_state->__pyx_n_s_super);
   Py_CLEAR(clear_module_state->__pyx_n_s_test);
   Py_CLEAR(clear_module_state->__pyx_n_s_to_square);
@@ -2747,27 +2730,23 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_typing);
   Py_CLEAR(clear_module_state->__pyx_n_s_uci);
   Py_CLEAR(clear_module_state->__pyx_n_s_update_current_move_choices);
-  Py_CLEAR(clear_module_state->__pyx_n_s_update_current_move_choices_ord);
   Py_CLEAR(clear_module_state->__pyx_n_s_update_q_values);
   Py_CLEAR(clear_module_state->__pyx_n_s_value);
   Py_CLEAR(clear_module_state->__pyx_int_0);
   Py_CLEAR(clear_module_state->__pyx_int_1);
-  Py_CLEAR(clear_module_state->__pyx_tuple__5);
-  Py_CLEAR(clear_module_state->__pyx_tuple__7);
+  Py_CLEAR(clear_module_state->__pyx_tuple__4);
+  Py_CLEAR(clear_module_state->__pyx_tuple__6);
+  Py_CLEAR(clear_module_state->__pyx_tuple__8);
   Py_CLEAR(clear_module_state->__pyx_tuple__9);
-  Py_CLEAR(clear_module_state->__pyx_tuple__10);
-  Py_CLEAR(clear_module_state->__pyx_tuple__12);
+  Py_CLEAR(clear_module_state->__pyx_tuple__11);
   Py_CLEAR(clear_module_state->__pyx_tuple__13);
   Py_CLEAR(clear_module_state->__pyx_tuple__15);
-  Py_CLEAR(clear_module_state->__pyx_tuple__17);
-  Py_CLEAR(clear_module_state->__pyx_tuple__19);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__6);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__8);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__11);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__5);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__7);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__10);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__12);
   Py_CLEAR(clear_module_state->__pyx_codeobj__14);
   Py_CLEAR(clear_module_state->__pyx_codeobj__16);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__18);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__20);
   return 0;
 }
 #endif
@@ -2797,13 +2776,12 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_CMHMEngine2);
   Py_VISIT(traverse_module_state->__pyx_n_u_CMHMEngine2);
   Py_VISIT(traverse_module_state->__pyx_n_s_CMHMEngine2___init);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_CMHMEngine2___init___line_20);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_CMHMEngine2___init___line_18);
   Py_VISIT(traverse_module_state->__pyx_n_s_CMHMEngine2__get_or_calc_respons);
   Py_VISIT(traverse_module_state->__pyx_n_s_CMHMEngine2__get_or_calculate_re);
   Py_VISIT(traverse_module_state->__pyx_n_s_CMHMEngine2__update_current_move);
-  Py_VISIT(traverse_module_state->__pyx_n_s_CMHMEngine2__update_current_move_2);
   Py_VISIT(traverse_module_state->__pyx_n_s_CMHMEngine2_pick_move);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_CMHMEngine2_pick_move_line_99);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_CMHMEngine2_pick_move_line_96);
   Py_VISIT(traverse_module_state->__pyx_n_s_CMHMEngine2_update_q_values);
   Py_VISIT(traverse_module_state->__pyx_kp_u_CMHMEngine2_update_q_values_line);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Cmhmey_Jr_the_love_child_of_CMHM);
@@ -2819,13 +2797,13 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_s_Optional_Board);
   Py_VISIT(traverse_module_state->__pyx_n_s_Pick);
   Py_VISIT(traverse_module_state->__pyx_n_s_Quartney);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_Select_a_move_based_on_heatmap_e);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_Select_a_Pick_based_on_heatmap_e);
   Py_VISIT(traverse_module_state->__pyx_n_s_ValueError);
+  Py_VISIT(traverse_module_state->__pyx_n_s__17);
   Py_VISIT(traverse_module_state->__pyx_kp_u__2);
-  Py_VISIT(traverse_module_state->__pyx_n_s__21);
   Py_VISIT(traverse_module_state->__pyx_kp_u__3);
-  Py_VISIT(traverse_module_state->__pyx_kp_u__4);
   Py_VISIT(traverse_module_state->__pyx_n_s_all);
+  Py_VISIT(traverse_module_state->__pyx_n_s_args);
   Py_VISIT(traverse_module_state->__pyx_n_s_asyncio_coroutines);
   Py_VISIT(traverse_module_state->__pyx_n_s_board);
   Py_VISIT(traverse_module_state->__pyx_n_s_board_copy_pushed);
@@ -2838,23 +2816,20 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_chmengine_engines_quartney);
   Py_VISIT(traverse_module_state->__pyx_n_s_chmengine_utils);
   Py_VISIT(traverse_module_state->__pyx_n_s_choice);
-  Py_VISIT(traverse_module_state->__pyx_n_s_choices_ordered_best_to_worst);
   Py_VISIT(traverse_module_state->__pyx_n_s_chosen_pick);
   Py_VISIT(traverse_module_state->__pyx_n_s_cline_in_traceback);
   Py_VISIT(traverse_module_state->__pyx_n_s_count);
-  Py_VISIT(traverse_module_state->__pyx_n_s_current_move);
-  Py_VISIT(traverse_module_state->__pyx_n_s_current_move_choices_ordered);
-  Py_VISIT(traverse_module_state->__pyx_n_s_current_moves);
-  Py_VISIT(traverse_module_state->__pyx_n_s_current_moves_list);
+  Py_VISIT(traverse_module_state->__pyx_n_s_current_pick);
+  Py_VISIT(traverse_module_state->__pyx_n_s_current_picks);
+  Py_VISIT(traverse_module_state->__pyx_n_s_current_picks_list);
   Py_VISIT(traverse_module_state->__pyx_n_s_current_q);
   Py_VISIT(traverse_module_state->__pyx_n_s_debug);
   Py_VISIT(traverse_module_state->__pyx_n_s_depth);
   Py_VISIT(traverse_module_state->__pyx_n_s_dict);
   Py_VISIT(traverse_module_state->__pyx_n_s_doc);
   Py_VISIT(traverse_module_state->__pyx_n_s_fen);
-  Py_VISIT(traverse_module_state->__pyx_n_s_final_move_score);
   Py_VISIT(traverse_module_state->__pyx_n_s_float64);
-  Py_VISIT(traverse_module_state->__pyx_n_s_format_moves);
+  Py_VISIT(traverse_module_state->__pyx_n_s_format_picks);
   Py_VISIT(traverse_module_state->__pyx_n_s_get_or_calc_response_move_score);
   Py_VISIT(traverse_module_state->__pyx_n_s_get_or_calculate_responses);
   Py_VISIT(traverse_module_state->__pyx_n_s_get_q_value);
@@ -2864,10 +2839,10 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_init_qdb);
   Py_VISIT(traverse_module_state->__pyx_n_s_init_subclass);
   Py_VISIT(traverse_module_state->__pyx_n_s_initial_q_val);
-  Py_VISIT(traverse_module_state->__pyx_n_s_insert_choice_into_current_moves);
   Py_VISIT(traverse_module_state->__pyx_n_s_int);
   Py_VISIT(traverse_module_state->__pyx_n_s_is_check);
   Py_VISIT(traverse_module_state->__pyx_n_s_is_coroutine);
+  Py_VISIT(traverse_module_state->__pyx_n_s_kwargs);
   Py_VISIT(traverse_module_state->__pyx_n_s_last_move);
   Py_VISIT(traverse_module_state->__pyx_n_s_legal_moves);
   Py_VISIT(traverse_module_state->__pyx_n_s_main);
@@ -2882,16 +2857,12 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_new_move);
   Py_VISIT(traverse_module_state->__pyx_n_s_new_score);
   Py_VISIT(traverse_module_state->__pyx_n_s_next_board);
-  Py_VISIT(traverse_module_state->__pyx_n_s_next_move);
-  Py_VISIT(traverse_module_state->__pyx_n_s_next_move_score);
-  Py_VISIT(traverse_module_state->__pyx_n_s_next_moves);
+  Py_VISIT(traverse_module_state->__pyx_n_s_next_pick);
+  Py_VISIT(traverse_module_state->__pyx_n_s_next_picks);
   Py_VISIT(traverse_module_state->__pyx_n_s_next_q_val);
   Py_VISIT(traverse_module_state->__pyx_n_s_next_response_moves);
   Py_VISIT(traverse_module_state->__pyx_n_s_numpy);
   Py_VISIT(traverse_module_state->__pyx_n_s_p);
-  Py_VISIT(traverse_module_state->__pyx_n_s_pick);
-  Py_VISIT(traverse_module_state->__pyx_n_s_pick_best);
-  Py_VISIT(traverse_module_state->__pyx_n_s_pick_by);
   Py_VISIT(traverse_module_state->__pyx_n_s_pick_move);
   Py_VISIT(traverse_module_state->__pyx_n_s_picks);
   Py_VISIT(traverse_module_state->__pyx_n_s_piece_at);
@@ -2902,11 +2873,12 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_random);
   Py_VISIT(traverse_module_state->__pyx_n_s_response_moves);
   Py_VISIT(traverse_module_state->__pyx_n_s_return);
+  Py_VISIT(traverse_module_state->__pyx_n_s_reverse);
   Py_VISIT(traverse_module_state->__pyx_n_s_score);
   Py_VISIT(traverse_module_state->__pyx_n_s_self);
   Py_VISIT(traverse_module_state->__pyx_n_s_set_name);
   Py_VISIT(traverse_module_state->__pyx_n_s_set_q_value);
-  Py_VISIT(traverse_module_state->__pyx_n_s_str);
+  Py_VISIT(traverse_module_state->__pyx_n_s_sorted);
   Py_VISIT(traverse_module_state->__pyx_n_s_super);
   Py_VISIT(traverse_module_state->__pyx_n_s_test);
   Py_VISIT(traverse_module_state->__pyx_n_s_to_square);
@@ -2914,27 +2886,23 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_typing);
   Py_VISIT(traverse_module_state->__pyx_n_s_uci);
   Py_VISIT(traverse_module_state->__pyx_n_s_update_current_move_choices);
-  Py_VISIT(traverse_module_state->__pyx_n_s_update_current_move_choices_ord);
   Py_VISIT(traverse_module_state->__pyx_n_s_update_q_values);
   Py_VISIT(traverse_module_state->__pyx_n_s_value);
   Py_VISIT(traverse_module_state->__pyx_int_0);
   Py_VISIT(traverse_module_state->__pyx_int_1);
-  Py_VISIT(traverse_module_state->__pyx_tuple__5);
-  Py_VISIT(traverse_module_state->__pyx_tuple__7);
+  Py_VISIT(traverse_module_state->__pyx_tuple__4);
+  Py_VISIT(traverse_module_state->__pyx_tuple__6);
+  Py_VISIT(traverse_module_state->__pyx_tuple__8);
   Py_VISIT(traverse_module_state->__pyx_tuple__9);
-  Py_VISIT(traverse_module_state->__pyx_tuple__10);
-  Py_VISIT(traverse_module_state->__pyx_tuple__12);
+  Py_VISIT(traverse_module_state->__pyx_tuple__11);
   Py_VISIT(traverse_module_state->__pyx_tuple__13);
   Py_VISIT(traverse_module_state->__pyx_tuple__15);
-  Py_VISIT(traverse_module_state->__pyx_tuple__17);
-  Py_VISIT(traverse_module_state->__pyx_tuple__19);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__6);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__8);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__11);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__5);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__7);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__10);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__12);
   Py_VISIT(traverse_module_state->__pyx_codeobj__14);
   Py_VISIT(traverse_module_state->__pyx_codeobj__16);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__18);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__20);
   return 0;
 }
 #endif
@@ -2974,13 +2942,12 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_CMHMEngine2 __pyx_mstate_global->__pyx_n_s_CMHMEngine2
 #define __pyx_n_u_CMHMEngine2 __pyx_mstate_global->__pyx_n_u_CMHMEngine2
 #define __pyx_n_s_CMHMEngine2___init __pyx_mstate_global->__pyx_n_s_CMHMEngine2___init
-#define __pyx_kp_u_CMHMEngine2___init___line_20 __pyx_mstate_global->__pyx_kp_u_CMHMEngine2___init___line_20
+#define __pyx_kp_u_CMHMEngine2___init___line_18 __pyx_mstate_global->__pyx_kp_u_CMHMEngine2___init___line_18
 #define __pyx_n_s_CMHMEngine2__get_or_calc_respons __pyx_mstate_global->__pyx_n_s_CMHMEngine2__get_or_calc_respons
 #define __pyx_n_s_CMHMEngine2__get_or_calculate_re __pyx_mstate_global->__pyx_n_s_CMHMEngine2__get_or_calculate_re
 #define __pyx_n_s_CMHMEngine2__update_current_move __pyx_mstate_global->__pyx_n_s_CMHMEngine2__update_current_move
-#define __pyx_n_s_CMHMEngine2__update_current_move_2 __pyx_mstate_global->__pyx_n_s_CMHMEngine2__update_current_move_2
 #define __pyx_n_s_CMHMEngine2_pick_move __pyx_mstate_global->__pyx_n_s_CMHMEngine2_pick_move
-#define __pyx_kp_u_CMHMEngine2_pick_move_line_99 __pyx_mstate_global->__pyx_kp_u_CMHMEngine2_pick_move_line_99
+#define __pyx_kp_u_CMHMEngine2_pick_move_line_96 __pyx_mstate_global->__pyx_kp_u_CMHMEngine2_pick_move_line_96
 #define __pyx_n_s_CMHMEngine2_update_q_values __pyx_mstate_global->__pyx_n_s_CMHMEngine2_update_q_values
 #define __pyx_kp_u_CMHMEngine2_update_q_values_line __pyx_mstate_global->__pyx_kp_u_CMHMEngine2_update_q_values_line
 #define __pyx_kp_s_Cmhmey_Jr_the_love_child_of_CMHM __pyx_mstate_global->__pyx_kp_s_Cmhmey_Jr_the_love_child_of_CMHM
@@ -2996,13 +2963,13 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_s_Optional_Board __pyx_mstate_global->__pyx_kp_s_Optional_Board
 #define __pyx_n_s_Pick __pyx_mstate_global->__pyx_n_s_Pick
 #define __pyx_n_s_Quartney __pyx_mstate_global->__pyx_n_s_Quartney
-#define __pyx_kp_u_Select_a_move_based_on_heatmap_e __pyx_mstate_global->__pyx_kp_u_Select_a_move_based_on_heatmap_e
+#define __pyx_kp_u_Select_a_Pick_based_on_heatmap_e __pyx_mstate_global->__pyx_kp_u_Select_a_Pick_based_on_heatmap_e
 #define __pyx_n_s_ValueError __pyx_mstate_global->__pyx_n_s_ValueError
+#define __pyx_n_s__17 __pyx_mstate_global->__pyx_n_s__17
 #define __pyx_kp_u__2 __pyx_mstate_global->__pyx_kp_u__2
-#define __pyx_n_s__21 __pyx_mstate_global->__pyx_n_s__21
 #define __pyx_kp_u__3 __pyx_mstate_global->__pyx_kp_u__3
-#define __pyx_kp_u__4 __pyx_mstate_global->__pyx_kp_u__4
 #define __pyx_n_s_all __pyx_mstate_global->__pyx_n_s_all
+#define __pyx_n_s_args __pyx_mstate_global->__pyx_n_s_args
 #define __pyx_n_s_asyncio_coroutines __pyx_mstate_global->__pyx_n_s_asyncio_coroutines
 #define __pyx_n_s_board __pyx_mstate_global->__pyx_n_s_board
 #define __pyx_n_s_board_copy_pushed __pyx_mstate_global->__pyx_n_s_board_copy_pushed
@@ -3015,23 +2982,20 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_chmengine_engines_quartney __pyx_mstate_global->__pyx_n_s_chmengine_engines_quartney
 #define __pyx_n_s_chmengine_utils __pyx_mstate_global->__pyx_n_s_chmengine_utils
 #define __pyx_n_s_choice __pyx_mstate_global->__pyx_n_s_choice
-#define __pyx_n_s_choices_ordered_best_to_worst __pyx_mstate_global->__pyx_n_s_choices_ordered_best_to_worst
 #define __pyx_n_s_chosen_pick __pyx_mstate_global->__pyx_n_s_chosen_pick
 #define __pyx_n_s_cline_in_traceback __pyx_mstate_global->__pyx_n_s_cline_in_traceback
 #define __pyx_n_s_count __pyx_mstate_global->__pyx_n_s_count
-#define __pyx_n_s_current_move __pyx_mstate_global->__pyx_n_s_current_move
-#define __pyx_n_s_current_move_choices_ordered __pyx_mstate_global->__pyx_n_s_current_move_choices_ordered
-#define __pyx_n_s_current_moves __pyx_mstate_global->__pyx_n_s_current_moves
-#define __pyx_n_s_current_moves_list __pyx_mstate_global->__pyx_n_s_current_moves_list
+#define __pyx_n_s_current_pick __pyx_mstate_global->__pyx_n_s_current_pick
+#define __pyx_n_s_current_picks __pyx_mstate_global->__pyx_n_s_current_picks
+#define __pyx_n_s_current_picks_list __pyx_mstate_global->__pyx_n_s_current_picks_list
 #define __pyx_n_s_current_q __pyx_mstate_global->__pyx_n_s_current_q
 #define __pyx_n_s_debug __pyx_mstate_global->__pyx_n_s_debug
 #define __pyx_n_s_depth __pyx_mstate_global->__pyx_n_s_depth
 #define __pyx_n_s_dict __pyx_mstate_global->__pyx_n_s_dict
 #define __pyx_n_s_doc __pyx_mstate_global->__pyx_n_s_doc
 #define __pyx_n_s_fen __pyx_mstate_global->__pyx_n_s_fen
-#define __pyx_n_s_final_move_score __pyx_mstate_global->__pyx_n_s_final_move_score
 #define __pyx_n_s_float64 __pyx_mstate_global->__pyx_n_s_float64
-#define __pyx_n_s_format_moves __pyx_mstate_global->__pyx_n_s_format_moves
+#define __pyx_n_s_format_picks __pyx_mstate_global->__pyx_n_s_format_picks
 #define __pyx_n_s_get_or_calc_response_move_score __pyx_mstate_global->__pyx_n_s_get_or_calc_response_move_score
 #define __pyx_n_s_get_or_calculate_responses __pyx_mstate_global->__pyx_n_s_get_or_calculate_responses
 #define __pyx_n_s_get_q_value __pyx_mstate_global->__pyx_n_s_get_q_value
@@ -3041,10 +3005,10 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_init_qdb __pyx_mstate_global->__pyx_n_s_init_qdb
 #define __pyx_n_s_init_subclass __pyx_mstate_global->__pyx_n_s_init_subclass
 #define __pyx_n_s_initial_q_val __pyx_mstate_global->__pyx_n_s_initial_q_val
-#define __pyx_n_s_insert_choice_into_current_moves __pyx_mstate_global->__pyx_n_s_insert_choice_into_current_moves
 #define __pyx_n_s_int __pyx_mstate_global->__pyx_n_s_int
 #define __pyx_n_s_is_check __pyx_mstate_global->__pyx_n_s_is_check
 #define __pyx_n_s_is_coroutine __pyx_mstate_global->__pyx_n_s_is_coroutine
+#define __pyx_n_s_kwargs __pyx_mstate_global->__pyx_n_s_kwargs
 #define __pyx_n_s_last_move __pyx_mstate_global->__pyx_n_s_last_move
 #define __pyx_n_s_legal_moves __pyx_mstate_global->__pyx_n_s_legal_moves
 #define __pyx_n_s_main __pyx_mstate_global->__pyx_n_s_main
@@ -3059,16 +3023,12 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_new_move __pyx_mstate_global->__pyx_n_s_new_move
 #define __pyx_n_s_new_score __pyx_mstate_global->__pyx_n_s_new_score
 #define __pyx_n_s_next_board __pyx_mstate_global->__pyx_n_s_next_board
-#define __pyx_n_s_next_move __pyx_mstate_global->__pyx_n_s_next_move
-#define __pyx_n_s_next_move_score __pyx_mstate_global->__pyx_n_s_next_move_score
-#define __pyx_n_s_next_moves __pyx_mstate_global->__pyx_n_s_next_moves
+#define __pyx_n_s_next_pick __pyx_mstate_global->__pyx_n_s_next_pick
+#define __pyx_n_s_next_picks __pyx_mstate_global->__pyx_n_s_next_picks
 #define __pyx_n_s_next_q_val __pyx_mstate_global->__pyx_n_s_next_q_val
 #define __pyx_n_s_next_response_moves __pyx_mstate_global->__pyx_n_s_next_response_moves
 #define __pyx_n_s_numpy __pyx_mstate_global->__pyx_n_s_numpy
 #define __pyx_n_s_p __pyx_mstate_global->__pyx_n_s_p
-#define __pyx_n_s_pick __pyx_mstate_global->__pyx_n_s_pick
-#define __pyx_n_s_pick_best __pyx_mstate_global->__pyx_n_s_pick_best
-#define __pyx_n_s_pick_by __pyx_mstate_global->__pyx_n_s_pick_by
 #define __pyx_n_s_pick_move __pyx_mstate_global->__pyx_n_s_pick_move
 #define __pyx_n_s_picks __pyx_mstate_global->__pyx_n_s_picks
 #define __pyx_n_s_piece_at __pyx_mstate_global->__pyx_n_s_piece_at
@@ -3079,11 +3039,12 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_random __pyx_mstate_global->__pyx_n_s_random
 #define __pyx_n_s_response_moves __pyx_mstate_global->__pyx_n_s_response_moves
 #define __pyx_n_s_return __pyx_mstate_global->__pyx_n_s_return
+#define __pyx_n_s_reverse __pyx_mstate_global->__pyx_n_s_reverse
 #define __pyx_n_s_score __pyx_mstate_global->__pyx_n_s_score
 #define __pyx_n_s_self __pyx_mstate_global->__pyx_n_s_self
 #define __pyx_n_s_set_name __pyx_mstate_global->__pyx_n_s_set_name
 #define __pyx_n_s_set_q_value __pyx_mstate_global->__pyx_n_s_set_q_value
-#define __pyx_n_s_str __pyx_mstate_global->__pyx_n_s_str
+#define __pyx_n_s_sorted __pyx_mstate_global->__pyx_n_s_sorted
 #define __pyx_n_s_super __pyx_mstate_global->__pyx_n_s_super
 #define __pyx_n_s_test __pyx_mstate_global->__pyx_n_s_test
 #define __pyx_n_s_to_square __pyx_mstate_global->__pyx_n_s_to_square
@@ -3091,30 +3052,26 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_typing __pyx_mstate_global->__pyx_n_s_typing
 #define __pyx_n_s_uci __pyx_mstate_global->__pyx_n_s_uci
 #define __pyx_n_s_update_current_move_choices __pyx_mstate_global->__pyx_n_s_update_current_move_choices
-#define __pyx_n_s_update_current_move_choices_ord __pyx_mstate_global->__pyx_n_s_update_current_move_choices_ord
 #define __pyx_n_s_update_q_values __pyx_mstate_global->__pyx_n_s_update_q_values
 #define __pyx_n_s_value __pyx_mstate_global->__pyx_n_s_value
 #define __pyx_int_0 __pyx_mstate_global->__pyx_int_0
 #define __pyx_int_1 __pyx_mstate_global->__pyx_int_1
-#define __pyx_tuple__5 __pyx_mstate_global->__pyx_tuple__5
-#define __pyx_tuple__7 __pyx_mstate_global->__pyx_tuple__7
+#define __pyx_tuple__4 __pyx_mstate_global->__pyx_tuple__4
+#define __pyx_tuple__6 __pyx_mstate_global->__pyx_tuple__6
+#define __pyx_tuple__8 __pyx_mstate_global->__pyx_tuple__8
 #define __pyx_tuple__9 __pyx_mstate_global->__pyx_tuple__9
-#define __pyx_tuple__10 __pyx_mstate_global->__pyx_tuple__10
-#define __pyx_tuple__12 __pyx_mstate_global->__pyx_tuple__12
+#define __pyx_tuple__11 __pyx_mstate_global->__pyx_tuple__11
 #define __pyx_tuple__13 __pyx_mstate_global->__pyx_tuple__13
 #define __pyx_tuple__15 __pyx_mstate_global->__pyx_tuple__15
-#define __pyx_tuple__17 __pyx_mstate_global->__pyx_tuple__17
-#define __pyx_tuple__19 __pyx_mstate_global->__pyx_tuple__19
-#define __pyx_codeobj__6 __pyx_mstate_global->__pyx_codeobj__6
-#define __pyx_codeobj__8 __pyx_mstate_global->__pyx_codeobj__8
-#define __pyx_codeobj__11 __pyx_mstate_global->__pyx_codeobj__11
+#define __pyx_codeobj__5 __pyx_mstate_global->__pyx_codeobj__5
+#define __pyx_codeobj__7 __pyx_mstate_global->__pyx_codeobj__7
+#define __pyx_codeobj__10 __pyx_mstate_global->__pyx_codeobj__10
+#define __pyx_codeobj__12 __pyx_mstate_global->__pyx_codeobj__12
 #define __pyx_codeobj__14 __pyx_mstate_global->__pyx_codeobj__14
 #define __pyx_codeobj__16 __pyx_mstate_global->__pyx_codeobj__16
-#define __pyx_codeobj__18 __pyx_mstate_global->__pyx_codeobj__18
-#define __pyx_codeobj__20 __pyx_mstate_global->__pyx_codeobj__20
 /* #### Code section: module_code ### */
 
-/* "chmengine/engines/cmhmey2.py":20
+/* "chmengine/engines/cmhmey2.py":18
  *     """Cmhmey Jr., the love-child of CMHMEngine and Quartney"""
  * 
  *     def __init__(self, board: Optional[Board] = None, depth: int = 1) -> None:             # <<<<<<<<<<<<<<
@@ -3132,21 +3089,21 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2___defaults__(CYTHON_UNUSE
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__defaults__", 1);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(Py_None);
   __Pyx_GIVEREF(Py_None);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, Py_None)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, Py_None)) __PYX_ERR(0, 18, __pyx_L1_error);
   __Pyx_INCREF(__Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_self)->__pyx_arg_depth);
   __Pyx_GIVEREF(__Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_self)->__pyx_arg_depth);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_self)->__pyx_arg_depth)) __PYX_ERR(0, 20, __pyx_L1_error);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_self)->__pyx_arg_depth)) __PYX_ERR(0, 18, __pyx_L1_error);
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 18, __pyx_L1_error);
   __Pyx_INCREF(Py_None);
   __Pyx_GIVEREF(Py_None);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, Py_None)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, Py_None)) __PYX_ERR(0, 18, __pyx_L1_error);
   __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -3227,26 +3184,26 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 20, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 18, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_board);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 20, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 18, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_depth);
           if (value) { values[2] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 20, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 18, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__init__") < 0)) __PYX_ERR(0, 20, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__init__") < 0)) __PYX_ERR(0, 18, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -3265,7 +3222,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 3, __pyx_nargs); __PYX_ERR(0, 20, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 3, __pyx_nargs); __PYX_ERR(0, 18, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3279,7 +3236,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_depth), (&PyInt_Type), 0, "depth", 1))) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_depth), (&PyInt_Type), 0, "depth", 1))) __PYX_ERR(0, 18, __pyx_L1_error)
   __pyx_r = __pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2___init__(__pyx_self, __pyx_v_self, __pyx_v_board, __pyx_v_depth);
 
   /* function exit code */
@@ -3309,7 +3266,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2___init__(CY
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 1);
 
-  /* "chmengine/engines/cmhmey2.py":43
+  /* "chmengine/engines/cmhmey2.py":41
  *         31
  *         """
  *         super().__init__(board=board, depth=depth)             # <<<<<<<<<<<<<<
@@ -3317,40 +3274,40 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2___init__(CY
  * 
  */
   __pyx_t_1 = __Pyx_CyFunction_GetClassObj(__pyx_self);
-  if (!__pyx_t_1) { PyErr_SetString(PyExc_SystemError, "super(): empty __class__ cell"); __PYX_ERR(0, 43, __pyx_L1_error) }
+  if (!__pyx_t_1) { PyErr_SetString(PyExc_SystemError, "super(): empty __class__ cell"); __PYX_ERR(0, 41, __pyx_L1_error) }
   __Pyx_INCREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_self);
   __Pyx_GIVEREF(__pyx_v_self);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_self)) __PYX_ERR(0, 43, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_self)) __PYX_ERR(0, 41, __pyx_L1_error);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 43, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_depth, __pyx_v_depth) < 0) __PYX_ERR(0, 43, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 43, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 41, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_depth, __pyx_v_depth) < 0) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/engines/cmhmey2.py":44
+  /* "chmengine/engines/cmhmey2.py":42
  *         """
  *         super().__init__(board=board, depth=depth)
  *         self._init_qdb()  # List to store moves made during the game as (fen, move_uci) pairs.             # <<<<<<<<<<<<<<
  * 
  *     def update_q_values(self, debug: bool = False) -> None:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_init_qdb); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_init_qdb); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = NULL;
   __pyx_t_4 = 0;
@@ -3370,13 +3327,13 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2___init__(CY
     PyObject *__pyx_callargs[2] = {__pyx_t_2, NULL};
     __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 44, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 42, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/engines/cmhmey2.py":20
+  /* "chmengine/engines/cmhmey2.py":18
  *     """Cmhmey Jr., the love-child of CMHMEngine and Quartney"""
  * 
  *     def __init__(self, board: Optional[Board] = None, depth: int = 1) -> None:             # <<<<<<<<<<<<<<
@@ -3399,7 +3356,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2___init__(CY
   return __pyx_r;
 }
 
-/* "chmengine/engines/cmhmey2.py":46
+/* "chmengine/engines/cmhmey2.py":44
  *         self._init_qdb()  # List to store moves made during the game as (fen, move_uci) pairs.
  * 
  *     def update_q_values(self, debug: bool = False) -> None:             # <<<<<<<<<<<<<<
@@ -3465,19 +3422,19 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 46, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 44, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_debug);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 46, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 44, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "update_q_values") < 0)) __PYX_ERR(0, 46, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "update_q_values") < 0)) __PYX_ERR(0, 44, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -3493,7 +3450,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("update_q_values", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 46, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("update_q_values", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 44, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3541,7 +3498,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_2update_q_v
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("update_q_values", 1);
 
-  /* "chmengine/engines/cmhmey2.py":85
+  /* "chmengine/engines/cmhmey2.py":83
  *         'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
  *         """
  *         while len(self.board.move_stack) > 0:             # <<<<<<<<<<<<<<
@@ -3549,83 +3506,83 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_2update_q_v
  *             current_q: Optional[float64] = self.get_q_value(board=self.board)
  */
   while (1) {
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_board); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 85, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_board); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_move_stack); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 85, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_move_stack); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 83, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_3 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_3 == ((Py_ssize_t)-1))) __PYX_ERR(0, 85, __pyx_L1_error)
+    __pyx_t_3 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_3 == ((Py_ssize_t)-1))) __PYX_ERR(0, 83, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_4 = (__pyx_t_3 > 0);
     if (!__pyx_t_4) break;
 
-    /* "chmengine/engines/cmhmey2.py":86
+    /* "chmengine/engines/cmhmey2.py":84
  *         """
  *         while len(self.board.move_stack) > 0:
  *             last_move: Move = self.board.move_stack[-1]             # <<<<<<<<<<<<<<
  *             current_q: Optional[float64] = self.get_q_value(board=self.board)
  *             self.board.pop()
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_board); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 86, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_board); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 84, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_move_stack); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_move_stack); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 84, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, -1L, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 86, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, -1L, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 84, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_XDECREF_SET(__pyx_v_last_move, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "chmengine/engines/cmhmey2.py":87
+    /* "chmengine/engines/cmhmey2.py":85
  *         while len(self.board.move_stack) > 0:
  *             last_move: Move = self.board.move_stack[-1]
  *             current_q: Optional[float64] = self.get_q_value(board=self.board)             # <<<<<<<<<<<<<<
  *             self.board.pop()
  *             new_move: Move
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_q_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_q_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 85, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 85, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_board); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_board); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 85, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_board, __pyx_t_5) < 0) __PYX_ERR(0, 87, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_board, __pyx_t_5) < 0) __PYX_ERR(0, 85, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 85, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_XDECREF_SET(__pyx_v_current_q, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "chmengine/engines/cmhmey2.py":88
+    /* "chmengine/engines/cmhmey2.py":86
  *             last_move: Move = self.board.move_stack[-1]
  *             current_q: Optional[float64] = self.get_q_value(board=self.board)
  *             self.board.pop()             # <<<<<<<<<<<<<<
  *             new_move: Move
  *             new_score: float64
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_board); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 88, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_board); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 86, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_1 = __Pyx_PyObject_Pop(__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Pop(__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "chmengine/engines/cmhmey2.py":91
+    /* "chmengine/engines/cmhmey2.py":89
  *             new_move: Move
  *             new_score: float64
  *             new_move, new_score = self.pick_move(debug=debug)  # Call pick_move to back-pop the updated             # <<<<<<<<<<<<<<
  *             if debug:
  *                 print(
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_pick_move); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_pick_move); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 91, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 89, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_debug, __pyx_v_debug) < 0) __PYX_ERR(0, 91, __pyx_L1_error)
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 91, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_debug, __pyx_v_debug) < 0) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 89, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -3635,7 +3592,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_2update_q_v
       if (unlikely(size != 2)) {
         if (size > 2) __Pyx_RaiseTooManyValuesError(2);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 91, __pyx_L1_error)
+        __PYX_ERR(0, 89, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -3648,15 +3605,15 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_2update_q_v
       __Pyx_INCREF(__pyx_t_5);
       __Pyx_INCREF(__pyx_t_1);
       #else
-      __pyx_t_5 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 91, __pyx_L1_error)
+      __pyx_t_5 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 89, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_1 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
+      __pyx_t_1 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       #endif
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_6 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 91, __pyx_L1_error)
+      __pyx_t_6 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 89, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __pyx_t_7 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_6);
@@ -3664,7 +3621,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_2update_q_v
       __Pyx_GOTREF(__pyx_t_5);
       index = 1; __pyx_t_1 = __pyx_t_7(__pyx_t_6); if (unlikely(!__pyx_t_1)) goto __pyx_L5_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_1);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_7(__pyx_t_6), 2) < 0) __PYX_ERR(0, 91, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_7(__pyx_t_6), 2) < 0) __PYX_ERR(0, 89, __pyx_L1_error)
       __pyx_t_7 = NULL;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       goto __pyx_L6_unpacking_done;
@@ -3672,7 +3629,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_2update_q_v
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_7 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 91, __pyx_L1_error)
+      __PYX_ERR(0, 89, __pyx_L1_error)
       __pyx_L6_unpacking_done:;
     }
     __Pyx_XDECREF_SET(__pyx_v_new_move, __pyx_t_5);
@@ -3680,24 +3637,24 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_2update_q_v
     __Pyx_XDECREF_SET(__pyx_v_new_score, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "chmengine/engines/cmhmey2.py":92
+    /* "chmengine/engines/cmhmey2.py":90
  *             new_score: float64
  *             new_move, new_score = self.pick_move(debug=debug)  # Call pick_move to back-pop the updated
  *             if debug:             # <<<<<<<<<<<<<<
  *                 print(
  *                     f"Game Pick & Score: ({last_move.uci()}, {current_q:.2f}) --> "
  */
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_debug); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 92, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_debug); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 90, __pyx_L1_error)
     if (__pyx_t_4) {
 
-      /* "chmengine/engines/cmhmey2.py":94
+      /* "chmengine/engines/cmhmey2.py":92
  *             if debug:
  *                 print(
  *                     f"Game Pick & Score: ({last_move.uci()}, {current_q:.2f}) --> "             # <<<<<<<<<<<<<<
  *                     f"New Pick & Score: ({new_move.uci()}, {new_score:.2f})\n"
  *                 )
  */
-      __pyx_t_2 = PyTuple_New(9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 94, __pyx_L1_error)
+      __pyx_t_2 = PyTuple_New(9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 92, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_t_3 = 0;
       __pyx_t_8 = 127;
@@ -3705,7 +3662,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_2update_q_v
       __pyx_t_3 += 20;
       __Pyx_GIVEREF(__pyx_kp_u_Game_Pick_Score);
       PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_kp_u_Game_Pick_Score);
-      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_last_move, __pyx_n_s_uci); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 94, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_last_move, __pyx_n_s_uci); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 92, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __pyx_t_6 = NULL;
       __pyx_t_9 = 0;
@@ -3725,11 +3682,11 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_2update_q_v
         PyObject *__pyx_callargs[2] = {__pyx_t_6, NULL};
         __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_5, __pyx_callargs+1-__pyx_t_9, 0+__pyx_t_9);
         __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-        if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
+        if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       }
-      __pyx_t_5 = __Pyx_PyObject_FormatSimple(__pyx_t_1, __pyx_empty_unicode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 94, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_FormatSimple(__pyx_t_1, __pyx_empty_unicode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 92, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_8 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) > __pyx_t_8) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) : __pyx_t_8;
@@ -3741,7 +3698,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_2update_q_v
       __pyx_t_3 += 2;
       __Pyx_GIVEREF(__pyx_kp_u_);
       PyTuple_SET_ITEM(__pyx_t_2, 2, __pyx_kp_u_);
-      __pyx_t_5 = __Pyx_PyObject_Format(__pyx_v_current_q, __pyx_kp_u_2f); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 94, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_Format(__pyx_v_current_q, __pyx_kp_u_2f); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 92, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __pyx_t_8 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) > __pyx_t_8) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) : __pyx_t_8;
       __pyx_t_3 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_5);
@@ -3753,14 +3710,14 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_2update_q_v
       __Pyx_GIVEREF(__pyx_kp_u_New_Pick_Score);
       PyTuple_SET_ITEM(__pyx_t_2, 4, __pyx_kp_u_New_Pick_Score);
 
-      /* "chmengine/engines/cmhmey2.py":95
+      /* "chmengine/engines/cmhmey2.py":93
  *                 print(
  *                     f"Game Pick & Score: ({last_move.uci()}, {current_q:.2f}) --> "
  *                     f"New Pick & Score: ({new_move.uci()}, {new_score:.2f})\n"             # <<<<<<<<<<<<<<
  *                 )
  * 
  */
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_new_move, __pyx_n_s_uci); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_new_move, __pyx_n_s_uci); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_t_6 = NULL;
       __pyx_t_9 = 0;
@@ -3780,11 +3737,11 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_2update_q_v
         PyObject *__pyx_callargs[2] = {__pyx_t_6, NULL};
         __pyx_t_5 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_9, 0+__pyx_t_9);
         __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-        if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 95, __pyx_L1_error)
+        if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 93, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       }
-      __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_t_5, __pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_t_5, __pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_8 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) > __pyx_t_8) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) : __pyx_t_8;
@@ -3796,7 +3753,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_2update_q_v
       __pyx_t_3 += 2;
       __Pyx_GIVEREF(__pyx_kp_u_);
       PyTuple_SET_ITEM(__pyx_t_2, 6, __pyx_kp_u_);
-      __pyx_t_1 = __Pyx_PyObject_Format(__pyx_v_new_score, __pyx_kp_u_2f); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Format(__pyx_v_new_score, __pyx_kp_u_2f); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_t_8 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) > __pyx_t_8) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) : __pyx_t_8;
       __pyx_t_3 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_1);
@@ -3808,30 +3765,30 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_2update_q_v
       __Pyx_GIVEREF(__pyx_kp_u__2);
       PyTuple_SET_ITEM(__pyx_t_2, 8, __pyx_kp_u__2);
 
-      /* "chmengine/engines/cmhmey2.py":94
+      /* "chmengine/engines/cmhmey2.py":92
  *             if debug:
  *                 print(
  *                     f"Game Pick & Score: ({last_move.uci()}, {current_q:.2f}) --> "             # <<<<<<<<<<<<<<
  *                     f"New Pick & Score: ({new_move.uci()}, {new_score:.2f})\n"
  *                 )
  */
-      __pyx_t_1 = __Pyx_PyUnicode_Join(__pyx_t_2, 9, __pyx_t_3, __pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyUnicode_Join(__pyx_t_2, 9, __pyx_t_3, __pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-      /* "chmengine/engines/cmhmey2.py":93
+      /* "chmengine/engines/cmhmey2.py":91
  *             new_move, new_score = self.pick_move(debug=debug)  # Call pick_move to back-pop the updated
  *             if debug:
  *                 print(             # <<<<<<<<<<<<<<
  *                     f"Game Pick & Score: ({last_move.uci()}, {current_q:.2f}) --> "
  *                     f"New Pick & Score: ({new_move.uci()}, {new_score:.2f})\n"
  */
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 93, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 91, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-      /* "chmengine/engines/cmhmey2.py":92
+      /* "chmengine/engines/cmhmey2.py":90
  *             new_score: float64
  *             new_move, new_score = self.pick_move(debug=debug)  # Call pick_move to back-pop the updated
  *             if debug:             # <<<<<<<<<<<<<<
@@ -3841,7 +3798,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_2update_q_v
     }
   }
 
-  /* "chmengine/engines/cmhmey2.py":46
+  /* "chmengine/engines/cmhmey2.py":44
  *         self._init_qdb()  # List to store moves made during the game as (fen, move_uci) pairs.
  * 
  *     def update_q_values(self, debug: bool = False) -> None:             # <<<<<<<<<<<<<<
@@ -3869,12 +3826,12 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_2update_q_v
   return __pyx_r;
 }
 
-/* "chmengine/engines/cmhmey2.py":99
+/* "chmengine/engines/cmhmey2.py":96
+ *                 )
  * 
- *     # pylint: disable=unused-argument
  *     def pick_move(             # <<<<<<<<<<<<<<
  *             self,
- *             pick_by: str = "",
+ *             *args,
  */
 
 /* Python wrapper */
@@ -3885,7 +3842,7 @@ PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_7engines_7cmhmey2_11CMHMEngine2_4pick_move, "Select a move based on heatmap evaluations and Q-table integration.\n\n        This overridden method combines heatmap evaluations with Q-value updates. It evaluates all\n        legal moves by calculating their scores from the perspective of the current player (with positive\n        scores indicating favorable moves and negative scores indicating unfavorable moves). The evaluation\n        score is always from the mover\342\200\231s perspective. The method then picks one move at random from the\n        top-scoring moves, updates the Q-value for that move, and returns the selected move along with its\n        score.\n\n        Parameters\n        ----------\n        pick_by : str, default: \"\"\n            Legecy param from parent class pick_move method. Args are ignored by this classe's overide.\n        board : Optional[chess.Board], default: None\n            Pick from a given board instead of intstance board\n        debug : bool, default: False\n            Allows for a print call showing the current evals of each move choice during anaylsis.\n\n        Returns\n        -------\n        Pick\n            A tuple-like containing the chosen move and its associated evaluation score. The evaluation score is\n            expressed from the perspective of the player making the move\342\200\224positive values indicate favorable\n            outcomes and negative values indicate unfavorable outcomes.\n\n        Raises\n        ------\n        ValueError\n            If Current Board has no legal moves.\n\n        Examples\n        --------\n        >>> from chmengine.engines.cmhmey2 import CMHMEngine2\n        >>> engine = CMHMEngine2()\n        >>> move, score = engine.pick_move()\n        ");
+PyDoc_STRVAR(__pyx_doc_9chmengine_7engines_7cmhmey2_11CMHMEngine2_4pick_move, "Select a Pick based on heatmap evaluations and Q-table integration.\n\n        This overridden method combines heatmap evaluations with Q-value updates. It evaluates all\n        legal moves by calculating their scores from the perspective of the current player (with positive\n        scores indicating favorable moves and negative scores indicating unfavorable moves). The evaluation\n        score is always from the mover\342\200\231s perspective. The method then picks one move at random from the\n        top-scoring moves, updates the Q-value for that move, and returns the selected move along with its\n        score.\n\n        Parameters\n        ----------\n        board : Optional[chess.Board], default: None\n            Pick from a given board instead of intstance board\n        debug : bool, default: False\n            Allows for a print call showing the current evals of each move choice during anaylsis.\n\n        Returns\n        -------\n        Pick\n            An unpackable tuple-like containing the chosen move and its associated evaluation score.\n            The evaluation score is expressed from the perspective of the player making the move\342\200\224positive\n            values indicate favorable outcomes and negative values indicate unfavorable outcomes.\n\n        Raises\n        ------\n        ValueError\n            If Current Board has no legal moves.\n\n        Examples\n        --------\n        >>> from chmengine.engines.cmhmey2 import CMHMEngine2\n        >>> engine = CMHMEngine2()\n        >>> move, score = engine.pick_move()\n        ");
 static PyMethodDef __pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_5pick_move = {"pick_move", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_5pick_move, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_7engines_7cmhmey2_11CMHMEngine2_4pick_move};
 static PyObject *__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_5pick_move(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
@@ -3895,14 +3852,15 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ) {
   PyObject *__pyx_v_self = 0;
-  CYTHON_UNUSED PyObject *__pyx_v_pick_by = 0;
   PyObject *__pyx_v_board = 0;
   PyObject *__pyx_v_debug = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_args = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_kwargs = 0;
   #if !CYTHON_METH_FASTCALL
   CYTHON_UNUSED Py_ssize_t __pyx_nargs;
   #endif
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
-  PyObject* values[4] = {0,0,0,0};
+  PyObject* values[3] = {0,0,0};
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -3917,40 +3875,42 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   #endif
   #endif
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  __pyx_v_kwargs = PyDict_New(); if (unlikely(!__pyx_v_kwargs)) return NULL;
+  __Pyx_GOTREF(__pyx_v_kwargs);
+  __pyx_v_args = __Pyx_ArgsSlice_FASTCALL(__pyx_args, 1, __pyx_nargs);
+  if (unlikely(!__pyx_v_args)) {
+    __Pyx_DECREF(__pyx_v_kwargs); __pyx_v_kwargs = 0;
+    __Pyx_RefNannyFinishContext();
+    return NULL;
+  }
+  __Pyx_GOTREF(__pyx_v_args);
   {
-    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_pick_by,&__pyx_n_s_board,&__pyx_n_s_debug,0};
-    values[1] = __Pyx_Arg_NewRef_FASTCALL(((PyObject*)((PyObject*)__pyx_kp_u__3)));
+    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_board,&__pyx_n_s_debug,0};
 
-    /* "chmengine/engines/cmhmey2.py":102
+    /* "chmengine/engines/cmhmey2.py":99
  *             self,
- *             pick_by: str = "",
+ *             *args,
  *             board: Optional[Board] = None,             # <<<<<<<<<<<<<<
- *             debug: bool = False
- *     ) -> Pick:
+ *             debug: bool = False,
+ *             **kwargs
  */
-    values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
+    values[1] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
 
-    /* "chmengine/engines/cmhmey2.py":103
- *             pick_by: str = "",
+    /* "chmengine/engines/cmhmey2.py":100
+ *             *args,
  *             board: Optional[Board] = None,
- *             debug: bool = False             # <<<<<<<<<<<<<<
+ *             debug: bool = False,             # <<<<<<<<<<<<<<
+ *             **kwargs
  *     ) -> Pick:
- *         """Select a move based on heatmap evaluations and Q-table integration.
  */
-    values[3] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject *)Py_False)));
+    values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject *)Py_False)));
     if (__pyx_kwds) {
       Py_ssize_t kw_args;
       switch (__pyx_nargs) {
-        case  4: values[3] = __Pyx_Arg_FASTCALL(__pyx_args, 3);
-        CYTHON_FALLTHROUGH;
-        case  3: values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
-        CYTHON_FALLTHROUGH;
-        case  2: values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
-        CYTHON_FALLTHROUGH;
+        default:
         case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
         CYTHON_FALLTHROUGH;
         case  0: break;
-        default: goto __pyx_L5_argtuple_error;
       }
       kw_args = __Pyx_NumKwargs_FASTCALL(__pyx_kwds);
       switch (__pyx_nargs) {
@@ -3959,55 +3919,34 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 96, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
-        CYTHON_FALLTHROUGH;
-        case  1:
-        if (kw_args > 0) {
-          PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_pick_by);
-          if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L3_error)
-        }
-        CYTHON_FALLTHROUGH;
-        case  2:
-        if (kw_args > 0) {
-          PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_board);
-          if (value) { values[2] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L3_error)
-        }
-        CYTHON_FALLTHROUGH;
-        case  3:
-        if (kw_args > 0) {
-          PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_debug);
-          if (value) { values[3] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L3_error)
+      }
+      if (kw_args > 0 && (kw_args <= 2)) {
+        Py_ssize_t index;
+        for (index = 1; index < 3 && kw_args > 0; index++) {
+          PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, *__pyx_pyargnames[index]);
+          if (value) { values[index] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 96, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "pick_move") < 0)) __PYX_ERR(0, 99, __pyx_L3_error)
+        const Py_ssize_t used_pos_args = (kwd_pos_args < 1) ? kwd_pos_args : 1;
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, __pyx_v_kwargs, values + 0, used_pos_args, "pick_move") < 0)) __PYX_ERR(0, 96, __pyx_L3_error)
       }
+    } else if (unlikely(__pyx_nargs < 1)) {
+      goto __pyx_L5_argtuple_error;
     } else {
-      switch (__pyx_nargs) {
-        case  4: values[3] = __Pyx_Arg_FASTCALL(__pyx_args, 3);
-        CYTHON_FALLTHROUGH;
-        case  3: values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
-        CYTHON_FALLTHROUGH;
-        case  2: values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
-        CYTHON_FALLTHROUGH;
-        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
-        break;
-        default: goto __pyx_L5_argtuple_error;
-      }
+      values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
     }
     __pyx_v_self = values[0];
-    __pyx_v_pick_by = ((PyObject*)values[1]);
-    __pyx_v_board = values[2];
-    __pyx_v_debug = values[3];
+    __pyx_v_board = values[1];
+    __pyx_v_debug = values[2];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("pick_move", 0, 1, 4, __pyx_nargs); __PYX_ERR(0, 99, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("pick_move", 0, 1, 1, __pyx_nargs); __PYX_ERR(0, 96, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4017,26 +3956,25 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
+  __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
+  __Pyx_DECREF(__pyx_v_kwargs); __pyx_v_kwargs = 0;
   __Pyx_AddTraceback("chmengine.engines.cmhmey2.CMHMEngine2.pick_move", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pick_by), (&PyUnicode_Type), 0, "pick_by", 1))) __PYX_ERR(0, 101, __pyx_L1_error)
-  __pyx_r = __pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_4pick_move(__pyx_self, __pyx_v_self, __pyx_v_pick_by, __pyx_v_board, __pyx_v_debug);
+  __pyx_r = __pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_4pick_move(__pyx_self, __pyx_v_self, __pyx_v_board, __pyx_v_debug, __pyx_v_args, __pyx_v_kwargs);
 
-  /* "chmengine/engines/cmhmey2.py":99
+  /* "chmengine/engines/cmhmey2.py":96
+ *                 )
  * 
- *     # pylint: disable=unused-argument
  *     def pick_move(             # <<<<<<<<<<<<<<
  *             self,
- *             pick_by: str = "",
+ *             *args,
  */
 
   /* function exit code */
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __pyx_r = NULL;
-  __pyx_L0:;
+  __Pyx_DECREF(__pyx_v_args);
+  __Pyx_DECREF(__pyx_v_kwargs);
   {
     Py_ssize_t __pyx_temp;
     for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
@@ -4047,12 +3985,10 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_4pick_move(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_pick_by, PyObject *__pyx_v_board, PyObject *__pyx_v_debug) {
-  PyObject *__pyx_v_current_moves = 0;
-  PyObject *__pyx_v_current_move_choices_ordered = 0;
-  PyObject *__pyx_v_current_move = 0;
-  PyObject *__pyx_v_pick_best = NULL;
-  PyObject *__pyx_v_chosen_pick = 0;
+static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_4pick_move(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_board, PyObject *__pyx_v_debug, CYTHON_UNUSED PyObject *__pyx_v_args, CYTHON_UNUSED PyObject *__pyx_v_kwargs) {
+  PyObject *__pyx_v_current_picks = 0;
+  PyObject *__pyx_v_current_pick = 0;
+  PyObject *__pyx_v_chosen_pick = NULL;
   PyObject *__pyx_7genexpr__pyx_v_p = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -4065,23 +4001,24 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_4pick_move(
   Py_UCS4 __pyx_t_7;
   Py_ssize_t __pyx_t_8;
   PyObject *__pyx_t_9 = NULL;
-  unsigned int __pyx_t_10;
+  PyObject *__pyx_t_10 = NULL;
+  unsigned int __pyx_t_11;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("pick_move", 0);
   __Pyx_INCREF(__pyx_v_board);
 
-  /* "chmengine/engines/cmhmey2.py":141
+  /* "chmengine/engines/cmhmey2.py":137
  *         >>> move, score = engine.pick_move()
  *         """
  *         board = self.board if board is None else board             # <<<<<<<<<<<<<<
- *         current_moves: List[Move] = self.current_moves_list(board=board)
+ *         current_picks: List[Pick] = self.current_picks_list(board=board)
  *         # PlayCMHMEngine.play() needs a ValueError to detect game termination.
  */
   __pyx_t_2 = (__pyx_v_board == Py_None);
   if (__pyx_t_2) {
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_board); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 141, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_board); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_1 = __pyx_t_3;
     __pyx_t_3 = 0;
@@ -4092,342 +4029,309 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_4pick_move(
   __Pyx_DECREF_SET(__pyx_v_board, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "chmengine/engines/cmhmey2.py":142
+  /* "chmengine/engines/cmhmey2.py":138
  *         """
  *         board = self.board if board is None else board
- *         current_moves: List[Move] = self.current_moves_list(board=board)             # <<<<<<<<<<<<<<
+ *         current_picks: List[Pick] = self.current_picks_list(board=board)             # <<<<<<<<<<<<<<
  *         # PlayCMHMEngine.play() needs a ValueError to detect game termination.
- *         if len(current_moves) == 0:
+ *         if len(current_picks) == 0:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_current_moves_list); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_current_picks_list); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 142, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 142, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (!(likely(PyList_CheckExact(__pyx_t_4))||((__pyx_t_4) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_4))) __PYX_ERR(0, 142, __pyx_L1_error)
-  __pyx_v_current_moves = ((PyObject*)__pyx_t_4);
+  if (!(likely(PyList_CheckExact(__pyx_t_4))||((__pyx_t_4) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_4))) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_v_current_picks = ((PyObject*)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "chmengine/engines/cmhmey2.py":144
- *         current_moves: List[Move] = self.current_moves_list(board=board)
+  /* "chmengine/engines/cmhmey2.py":140
+ *         current_picks: List[Pick] = self.current_picks_list(board=board)
  *         # PlayCMHMEngine.play() needs a ValueError to detect game termination.
- *         if len(current_moves) == 0:             # <<<<<<<<<<<<<<
+ *         if len(current_picks) == 0:             # <<<<<<<<<<<<<<
  *             raise ValueError(f"Current Board has no legal moves: {self.fen(board=board)}")
- *         # moves will be current moves ordered by engine's score best to worst (from white's perspective)
+ *         current_pick: Pick
  */
-  if (unlikely(__pyx_v_current_moves == Py_None)) {
+  if (unlikely(__pyx_v_current_picks == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 144, __pyx_L1_error)
+    __PYX_ERR(0, 140, __pyx_L1_error)
   }
-  __pyx_t_5 = __Pyx_PyList_GET_SIZE(__pyx_v_current_moves); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 144, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyList_GET_SIZE(__pyx_v_current_picks); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 140, __pyx_L1_error)
   __pyx_t_2 = (__pyx_t_5 == 0);
   if (unlikely(__pyx_t_2)) {
 
-    /* "chmengine/engines/cmhmey2.py":145
+    /* "chmengine/engines/cmhmey2.py":141
  *         # PlayCMHMEngine.play() needs a ValueError to detect game termination.
- *         if len(current_moves) == 0:
+ *         if len(current_picks) == 0:
  *             raise ValueError(f"Current Board has no legal moves: {self.fen(board=board)}")             # <<<<<<<<<<<<<<
- *         # moves will be current moves ordered by engine's score best to worst (from white's perspective)
- *         current_move_choices_ordered: List[Pick] = []
+ *         current_pick: Pick
+ *         for current_pick in current_picks:
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fen); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 145, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fen); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 141, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 145, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 141, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 145, __pyx_L1_error)
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 145, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 141, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 141, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_FormatSimple(__pyx_t_1, __pyx_empty_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 145, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_FormatSimple(__pyx_t_1, __pyx_empty_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 141, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyUnicode_Concat(__pyx_kp_u_Current_Board_has_no_legal_moves, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 145, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyUnicode_Concat(__pyx_kp_u_Current_Board_has_no_legal_moves, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 141, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_ValueError, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 145, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_ValueError, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 141, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 145, __pyx_L1_error)
+    __PYX_ERR(0, 141, __pyx_L1_error)
 
-    /* "chmengine/engines/cmhmey2.py":144
- *         current_moves: List[Move] = self.current_moves_list(board=board)
+    /* "chmengine/engines/cmhmey2.py":140
+ *         current_picks: List[Pick] = self.current_picks_list(board=board)
  *         # PlayCMHMEngine.play() needs a ValueError to detect game termination.
- *         if len(current_moves) == 0:             # <<<<<<<<<<<<<<
+ *         if len(current_picks) == 0:             # <<<<<<<<<<<<<<
  *             raise ValueError(f"Current Board has no legal moves: {self.fen(board=board)}")
- *         # moves will be current moves ordered by engine's score best to worst (from white's perspective)
+ *         current_pick: Pick
  */
   }
 
-  /* "chmengine/engines/cmhmey2.py":147
+  /* "chmengine/engines/cmhmey2.py":143
  *             raise ValueError(f"Current Board has no legal moves: {self.fen(board=board)}")
- *         # moves will be current moves ordered by engine's score best to worst (from white's perspective)
- *         current_move_choices_ordered: List[Pick] = []             # <<<<<<<<<<<<<<
- *         current_move: Move
- *         for current_move in current_moves:
+ *         current_pick: Pick
+ *         for current_pick in current_picks:             # <<<<<<<<<<<<<<
+ *             self._update_current_move_choices_(current_pick=current_pick, board=board)
+ *         # noinspection PyTypeChecker,PydanticTypeChecker
  */
-  __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 147, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_v_current_move_choices_ordered = ((PyObject*)__pyx_t_3);
-  __pyx_t_3 = 0;
-
-  /* "chmengine/engines/cmhmey2.py":149
- *         current_move_choices_ordered: List[Pick] = []
- *         current_move: Move
- *         for current_move in current_moves:             # <<<<<<<<<<<<<<
- *             current_move_choices_ordered = self._update_current_move_choices_ordered_(
- *                 current_move_choices_ordered=current_move_choices_ordered,
- */
-  if (unlikely(__pyx_v_current_moves == Py_None)) {
+  if (unlikely(__pyx_v_current_picks == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 149, __pyx_L1_error)
+    __PYX_ERR(0, 143, __pyx_L1_error)
   }
-  __pyx_t_3 = __pyx_v_current_moves; __Pyx_INCREF(__pyx_t_3);
+  __pyx_t_3 = __pyx_v_current_picks; __Pyx_INCREF(__pyx_t_3);
   __pyx_t_5 = 0;
   for (;;) {
     {
       Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_3);
       #if !CYTHON_ASSUME_SAFE_MACROS
-      if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 149, __pyx_L1_error)
+      if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 143, __pyx_L1_error)
       #endif
       if (__pyx_t_5 >= __pyx_temp) break;
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    __pyx_t_1 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 149, __pyx_L1_error)
+    __pyx_t_1 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 143, __pyx_L1_error)
     #else
-    __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 149, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     #endif
-    __Pyx_XDECREF_SET(__pyx_v_current_move, __pyx_t_1);
+    __Pyx_XDECREF_SET(__pyx_v_current_pick, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "chmengine/engines/cmhmey2.py":150
- *         current_move: Move
- *         for current_move in current_moves:
- *             current_move_choices_ordered = self._update_current_move_choices_ordered_(             # <<<<<<<<<<<<<<
- *                 current_move_choices_ordered=current_move_choices_ordered,
- *                 current_move=current_move,
+    /* "chmengine/engines/cmhmey2.py":144
+ *         current_pick: Pick
+ *         for current_pick in current_picks:
+ *             self._update_current_move_choices_(current_pick=current_pick, board=board)             # <<<<<<<<<<<<<<
+ *         # noinspection PyTypeChecker,PydanticTypeChecker
+ *         current_picks = sorted(current_picks, reverse=True)
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_update_current_move_choices_ord); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 150, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_update_current_move_choices); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 144, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-
-    /* "chmengine/engines/cmhmey2.py":151
- *         for current_move in current_moves:
- *             current_move_choices_ordered = self._update_current_move_choices_ordered_(
- *                 current_move_choices_ordered=current_move_choices_ordered,             # <<<<<<<<<<<<<<
- *                 current_move=current_move,
- *                 board=board
- */
-    __pyx_t_4 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 151, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 144, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_current_move_choices_ordered, __pyx_v_current_move_choices_ordered) < 0) __PYX_ERR(0, 151, __pyx_L1_error)
-
-    /* "chmengine/engines/cmhmey2.py":152
- *             current_move_choices_ordered = self._update_current_move_choices_ordered_(
- *                 current_move_choices_ordered=current_move_choices_ordered,
- *                 current_move=current_move,             # <<<<<<<<<<<<<<
- *                 board=board
- *             )
- */
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_current_move, __pyx_v_current_move) < 0) __PYX_ERR(0, 151, __pyx_L1_error)
-
-    /* "chmengine/engines/cmhmey2.py":153
- *                 current_move_choices_ordered=current_move_choices_ordered,
- *                 current_move=current_move,
- *                 board=board             # <<<<<<<<<<<<<<
- *             )
- *         # Final pick is a random choice of all moves equal to the highest scoring move
- */
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 151, __pyx_L1_error)
-
-    /* "chmengine/engines/cmhmey2.py":150
- *         current_move: Move
- *         for current_move in current_moves:
- *             current_move_choices_ordered = self._update_current_move_choices_ordered_(             # <<<<<<<<<<<<<<
- *                 current_move_choices_ordered=current_move_choices_ordered,
- *                 current_move=current_move,
- */
-    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 150, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_current_pick, __pyx_v_current_pick) < 0) __PYX_ERR(0, 144, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 144, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 144, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (!(likely(PyList_CheckExact(__pyx_t_6))||((__pyx_t_6) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_6))) __PYX_ERR(0, 150, __pyx_L1_error)
-    __Pyx_DECREF_SET(__pyx_v_current_move_choices_ordered, ((PyObject*)__pyx_t_6));
-    __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "chmengine/engines/cmhmey2.py":149
- *         current_move_choices_ordered: List[Pick] = []
- *         current_move: Move
- *         for current_move in current_moves:             # <<<<<<<<<<<<<<
- *             current_move_choices_ordered = self._update_current_move_choices_ordered_(
- *                 current_move_choices_ordered=current_move_choices_ordered,
+    /* "chmengine/engines/cmhmey2.py":143
+ *             raise ValueError(f"Current Board has no legal moves: {self.fen(board=board)}")
+ *         current_pick: Pick
+ *         for current_pick in current_picks:             # <<<<<<<<<<<<<<
+ *             self._update_current_move_choices_(current_pick=current_pick, board=board)
+ *         # noinspection PyTypeChecker,PydanticTypeChecker
  */
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/engines/cmhmey2.py":156
- *             )
+  /* "chmengine/engines/cmhmey2.py":146
+ *             self._update_current_move_choices_(current_pick=current_pick, board=board)
+ *         # noinspection PyTypeChecker,PydanticTypeChecker
+ *         current_picks = sorted(current_picks, reverse=True)             # <<<<<<<<<<<<<<
+ *         # Final pick is a random choice of all moves equal to the highest scoring move
+ *         if debug:
+ */
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_INCREF(__pyx_v_current_picks);
+  __Pyx_GIVEREF(__pyx_v_current_picks);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_v_current_picks)) __PYX_ERR(0, 146, __pyx_L1_error);
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_reverse, Py_True) < 0) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_sorted, __pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  if (!(likely(PyList_CheckExact(__pyx_t_4))||((__pyx_t_4) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_4))) __PYX_ERR(0, 146, __pyx_L1_error)
+  __Pyx_DECREF_SET(__pyx_v_current_picks, ((PyObject*)__pyx_t_4));
+  __pyx_t_4 = 0;
+
+  /* "chmengine/engines/cmhmey2.py":148
+ *         current_picks = sorted(current_picks, reverse=True)
  *         # Final pick is a random choice of all moves equal to the highest scoring move
  *         if debug:             # <<<<<<<<<<<<<<
  *             print(
- *                 f"All {len(current_move_choices_ordered)} moves ranked:",
+ *                 f"All {len(current_picks)} moves ranked:",
  */
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_debug); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 156, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_debug); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 148, __pyx_L1_error)
   if (__pyx_t_2) {
 
-    /* "chmengine/engines/cmhmey2.py":158
+    /* "chmengine/engines/cmhmey2.py":150
  *         if debug:
  *             print(
- *                 f"All {len(current_move_choices_ordered)} moves ranked:",             # <<<<<<<<<<<<<<
- *                 format_moves(picks=current_move_choices_ordered)
+ *                 f"All {len(current_picks)} moves ranked:",             # <<<<<<<<<<<<<<
+ *                 format_picks(picks=current_picks)
  *             )
  */
-    __pyx_t_3 = PyTuple_New(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 158, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 150, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_5 = 0;
     __pyx_t_7 = 127;
     __Pyx_INCREF(__pyx_kp_u_All);
     __pyx_t_5 += 4;
     __Pyx_GIVEREF(__pyx_kp_u_All);
-    PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_kp_u_All);
-    if (unlikely(__pyx_v_current_move_choices_ordered == Py_None)) {
+    PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_kp_u_All);
+    if (unlikely(__pyx_v_current_picks == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-      __PYX_ERR(0, 158, __pyx_L1_error)
+      __PYX_ERR(0, 150, __pyx_L1_error)
     }
-    __pyx_t_8 = __Pyx_PyList_GET_SIZE(__pyx_v_current_move_choices_ordered); if (unlikely(__pyx_t_8 == ((Py_ssize_t)-1))) __PYX_ERR(0, 158, __pyx_L1_error)
-    __pyx_t_6 = __Pyx_PyUnicode_From_Py_ssize_t(__pyx_t_8, 0, ' ', 'd'); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyList_GET_SIZE(__pyx_v_current_picks); if (unlikely(__pyx_t_8 == ((Py_ssize_t)-1))) __PYX_ERR(0, 150, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyUnicode_From_Py_ssize_t(__pyx_t_8, 0, ' ', 'd'); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 150, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_5 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_6);
     __Pyx_GIVEREF(__pyx_t_6);
-    PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_6);
+    PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_6);
     __pyx_t_6 = 0;
     __Pyx_INCREF(__pyx_kp_u_moves_ranked);
     __pyx_t_5 += 14;
     __Pyx_GIVEREF(__pyx_kp_u_moves_ranked);
-    PyTuple_SET_ITEM(__pyx_t_3, 2, __pyx_kp_u_moves_ranked);
-    __pyx_t_6 = __Pyx_PyUnicode_Join(__pyx_t_3, 3, __pyx_t_5, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 158, __pyx_L1_error)
+    PyTuple_SET_ITEM(__pyx_t_4, 2, __pyx_kp_u_moves_ranked);
+    __pyx_t_6 = __Pyx_PyUnicode_Join(__pyx_t_4, 3, __pyx_t_5, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 150, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-
-    /* "chmengine/engines/cmhmey2.py":159
- *             print(
- *                 f"All {len(current_move_choices_ordered)} moves ranked:",
- *                 format_moves(picks=current_move_choices_ordered)             # <<<<<<<<<<<<<<
- *             )
- *         pick_best: Pick = current_move_choices_ordered[0 if board.turn else -1]
- */
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_format_moves); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 159, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 159, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_picks, __pyx_v_current_move_choices_ordered) < 0) __PYX_ERR(0, 159, __pyx_L1_error)
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "chmengine/engines/cmhmey2.py":157
+    /* "chmengine/engines/cmhmey2.py":151
+ *             print(
+ *                 f"All {len(current_picks)} moves ranked:",
+ *                 format_picks(picks=current_picks)             # <<<<<<<<<<<<<<
+ *             )
+ *         chosen_pick: Pick = choice([p for p in current_picks if p == current_picks[0 if board.turn else -1]])
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_format_picks); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 151, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 151, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_picks, __pyx_v_current_picks) < 0) __PYX_ERR(0, 151, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 151, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+    /* "chmengine/engines/cmhmey2.py":149
  *         # Final pick is a random choice of all moves equal to the highest scoring move
  *         if debug:
  *             print(             # <<<<<<<<<<<<<<
- *                 f"All {len(current_move_choices_ordered)} moves ranked:",
- *                 format_moves(picks=current_move_choices_ordered)
+ *                 f"All {len(current_picks)} moves ranked:",
+ *                 format_picks(picks=current_picks)
  */
-    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 157, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 149, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
     __Pyx_GIVEREF(__pyx_t_6);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_6)) __PYX_ERR(0, 157, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_6)) __PYX_ERR(0, 149, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_1);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_1)) __PYX_ERR(0, 149, __pyx_L1_error);
     __pyx_t_6 = 0;
     __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 149, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "chmengine/engines/cmhmey2.py":156
- *             )
+    /* "chmengine/engines/cmhmey2.py":148
+ *         current_picks = sorted(current_picks, reverse=True)
  *         # Final pick is a random choice of all moves equal to the highest scoring move
  *         if debug:             # <<<<<<<<<<<<<<
  *             print(
- *                 f"All {len(current_move_choices_ordered)} moves ranked:",
+ *                 f"All {len(current_picks)} moves ranked:",
  */
   }
 
-  /* "chmengine/engines/cmhmey2.py":161
- *                 format_moves(picks=current_move_choices_ordered)
+  /* "chmengine/engines/cmhmey2.py":153
+ *                 format_picks(picks=current_picks)
  *             )
- *         pick_best: Pick = current_move_choices_ordered[0 if board.turn else -1]             # <<<<<<<<<<<<<<
- *         chosen_pick: Pick
- *         chosen_pick = choice([p for p in current_move_choices_ordered if p == pick_best])
- */
-  if (unlikely(__pyx_v_current_move_choices_ordered == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 161, __pyx_L1_error)
-  }
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_board, __pyx_n_s_turn); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 161, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (__pyx_t_2) {
-    __pyx_t_5 = 0;
-  } else {
-    __pyx_t_5 = -1L;
-  }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_current_move_choices_ordered, __pyx_t_5, long, 1, __Pyx_PyInt_From_long, 1, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_v_pick_best = __pyx_t_1;
-  __pyx_t_1 = 0;
-
-  /* "chmengine/engines/cmhmey2.py":163
- *         pick_best: Pick = current_move_choices_ordered[0 if board.turn else -1]
- *         chosen_pick: Pick
- *         chosen_pick = choice([p for p in current_move_choices_ordered if p == pick_best])             # <<<<<<<<<<<<<<
+ *         chosen_pick: Pick = choice([p for p in current_picks if p == current_picks[0 if board.turn else -1]])             # <<<<<<<<<<<<<<
  *         self.set_q_value(value=chosen_pick.score, board=board)
  *         return chosen_pick
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_choice); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 163, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_choice); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 153, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
   { /* enter inner scope */
-    __pyx_t_6 = PyList_New(0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 163, __pyx_L10_error)
+    __pyx_t_6 = PyList_New(0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 153, __pyx_L10_error)
     __Pyx_GOTREF(__pyx_t_6);
-    if (unlikely(__pyx_v_current_move_choices_ordered == Py_None)) {
+    if (unlikely(__pyx_v_current_picks == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-      __PYX_ERR(0, 163, __pyx_L10_error)
+      __PYX_ERR(0, 153, __pyx_L10_error)
     }
-    __pyx_t_3 = __pyx_v_current_move_choices_ordered; __Pyx_INCREF(__pyx_t_3);
+    __pyx_t_4 = __pyx_v_current_picks; __Pyx_INCREF(__pyx_t_4);
     __pyx_t_5 = 0;
     for (;;) {
       {
-        Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_3);
+        Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_4);
         #if !CYTHON_ASSUME_SAFE_MACROS
-        if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 163, __pyx_L10_error)
+        if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 153, __pyx_L10_error)
         #endif
         if (__pyx_t_5 >= __pyx_temp) break;
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-      __pyx_t_9 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_9); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 163, __pyx_L10_error)
+      __pyx_t_9 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_9); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 153, __pyx_L10_error)
       #else
-      __pyx_t_9 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 163, __pyx_L10_error)
+      __pyx_t_9 = __Pyx_PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 153, __pyx_L10_error)
       __Pyx_GOTREF(__pyx_t_9);
       #endif
       __Pyx_XDECREF_SET(__pyx_7genexpr__pyx_v_p, __pyx_t_9);
       __pyx_t_9 = 0;
-      __pyx_t_9 = PyObject_RichCompare(__pyx_7genexpr__pyx_v_p, __pyx_v_pick_best, Py_EQ); __Pyx_XGOTREF(__pyx_t_9); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 163, __pyx_L10_error)
-      __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_9); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 163, __pyx_L10_error)
+      if (unlikely(__pyx_v_current_picks == Py_None)) {
+        PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+        __PYX_ERR(0, 153, __pyx_L10_error)
+      }
+      __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_board, __pyx_n_s_turn); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 153, __pyx_L10_error)
+      __Pyx_GOTREF(__pyx_t_9);
+      __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_9); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 153, __pyx_L10_error)
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       if (__pyx_t_2) {
-        if (unlikely(__Pyx_ListComp_Append(__pyx_t_6, (PyObject*)__pyx_7genexpr__pyx_v_p))) __PYX_ERR(0, 163, __pyx_L10_error)
+        __pyx_t_8 = 0;
+      } else {
+        __pyx_t_8 = -1L;
+      }
+      __pyx_t_9 = __Pyx_GetItemInt_List(__pyx_v_current_picks, __pyx_t_8, long, 1, __Pyx_PyInt_From_long, 1, 1, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 153, __pyx_L10_error)
+      __Pyx_GOTREF(__pyx_t_9);
+      __pyx_t_10 = PyObject_RichCompare(__pyx_7genexpr__pyx_v_p, __pyx_t_9, Py_EQ); __Pyx_XGOTREF(__pyx_t_10); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 153, __pyx_L10_error)
+      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+      __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 153, __pyx_L10_error)
+      __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+      if (__pyx_t_2) {
+        if (unlikely(__Pyx_ListComp_Append(__pyx_t_6, (PyObject*)__pyx_7genexpr__pyx_v_p))) __PYX_ERR(0, 153, __pyx_L10_error)
       }
     }
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_XDECREF(__pyx_7genexpr__pyx_v_p); __pyx_7genexpr__pyx_v_p = 0;
     goto __pyx_L15_exit_scope;
     __pyx_L10_error:;
@@ -4435,72 +4339,72 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_4pick_move(
     goto __pyx_L1_error;
     __pyx_L15_exit_scope:;
   } /* exit inner scope */
-  __pyx_t_3 = NULL;
-  __pyx_t_10 = 0;
+  __pyx_t_4 = NULL;
+  __pyx_t_11 = 0;
   #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_4))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_4);
-    if (likely(__pyx_t_3)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-      __Pyx_INCREF(__pyx_t_3);
+  if (unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_4)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_4);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_4, function);
-      __pyx_t_10 = 1;
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+      __pyx_t_11 = 1;
     }
   }
   #endif
   {
-    PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_t_6};
-    __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_10, 1+__pyx_t_10);
-    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+    PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_t_6};
+    __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_11, 1+__pyx_t_11);
+    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 153, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __pyx_v_chosen_pick = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "chmengine/engines/cmhmey2.py":164
- *         chosen_pick: Pick
- *         chosen_pick = choice([p for p in current_move_choices_ordered if p == pick_best])
+  /* "chmengine/engines/cmhmey2.py":154
+ *             )
+ *         chosen_pick: Pick = choice([p for p in current_picks if p == current_picks[0 if board.turn else -1]])
  *         self.set_q_value(value=chosen_pick.score, board=board)             # <<<<<<<<<<<<<<
  *         return chosen_pick
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_set_q_value); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 164, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_set_q_value); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 164, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_chosen_pick, __pyx_n_s_score); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 164, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 154, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_chosen_pick, __pyx_n_s_score); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_value, __pyx_t_6) < 0) __PYX_ERR(0, 164, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_value, __pyx_t_6) < 0) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 164, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 164, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 154, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "chmengine/engines/cmhmey2.py":165
- *         chosen_pick = choice([p for p in current_move_choices_ordered if p == pick_best])
+  /* "chmengine/engines/cmhmey2.py":155
+ *         chosen_pick: Pick = choice([p for p in current_picks if p == current_picks[0 if board.turn else -1]])
  *         self.set_q_value(value=chosen_pick.score, board=board)
  *         return chosen_pick             # <<<<<<<<<<<<<<
  * 
- *     def _update_current_move_choices_ordered_(
+ *     # pylint: disable=too-many-arguments
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_chosen_pick);
   __pyx_r = __pyx_v_chosen_pick;
   goto __pyx_L0;
 
-  /* "chmengine/engines/cmhmey2.py":99
+  /* "chmengine/engines/cmhmey2.py":96
+ *                 )
  * 
- *     # pylint: disable=unused-argument
  *     def pick_move(             # <<<<<<<<<<<<<<
  *             self,
- *             pick_by: str = "",
+ *             *args,
  */
 
   /* function exit code */
@@ -4510,13 +4414,12 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_4pick_move(
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_9);
+  __Pyx_XDECREF(__pyx_t_10);
   __Pyx_AddTraceback("chmengine.engines.cmhmey2.CMHMEngine2.pick_move", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
-  __Pyx_XDECREF(__pyx_v_current_moves);
-  __Pyx_XDECREF(__pyx_v_current_move_choices_ordered);
-  __Pyx_XDECREF(__pyx_v_current_move);
-  __Pyx_XDECREF(__pyx_v_pick_best);
+  __Pyx_XDECREF(__pyx_v_current_picks);
+  __Pyx_XDECREF(__pyx_v_current_pick);
   __Pyx_XDECREF(__pyx_v_chosen_pick);
   __Pyx_XDECREF(__pyx_7genexpr__pyx_v_p);
   __Pyx_XDECREF(__pyx_v_board);
@@ -4525,281 +4428,25 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_4pick_move(
   return __pyx_r;
 }
 
-/* "chmengine/engines/cmhmey2.py":167
- *         return chosen_pick
- * 
- *     def _update_current_move_choices_ordered_(             # <<<<<<<<<<<<<<
- *             self,
- *             current_move_choices_ordered: List[Pick],
- */
-
-/* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_7_update_current_move_choices_ordered_(PyObject *__pyx_self, 
-#if CYTHON_METH_FASTCALL
-PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
-#else
-PyObject *__pyx_args, PyObject *__pyx_kwds
-#endif
-); /*proto*/
-static PyMethodDef __pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_7_update_current_move_choices_ordered_ = {"_update_current_move_choices_ordered_", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_7_update_current_move_choices_ordered_, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_7_update_current_move_choices_ordered_(PyObject *__pyx_self, 
-#if CYTHON_METH_FASTCALL
-PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
-#else
-PyObject *__pyx_args, PyObject *__pyx_kwds
-#endif
-) {
-  PyObject *__pyx_v_self = 0;
-  PyObject *__pyx_v_current_move_choices_ordered = 0;
-  PyObject *__pyx_v_current_move = 0;
-  PyObject *__pyx_v_board = 0;
-  #if !CYTHON_METH_FASTCALL
-  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
-  #endif
-  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
-  PyObject* values[4] = {0,0,0,0};
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  PyObject *__pyx_r = 0;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("_update_current_move_choices_ordered_ (wrapper)", 0);
-  #if !CYTHON_METH_FASTCALL
-  #if CYTHON_ASSUME_SAFE_MACROS
-  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
-  #else
-  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
-  #endif
-  #endif
-  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
-  {
-    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_current_move_choices_ordered,&__pyx_n_s_current_move,&__pyx_n_s_board,0};
-    if (__pyx_kwds) {
-      Py_ssize_t kw_args;
-      switch (__pyx_nargs) {
-        case  4: values[3] = __Pyx_Arg_FASTCALL(__pyx_args, 3);
-        CYTHON_FALLTHROUGH;
-        case  3: values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
-        CYTHON_FALLTHROUGH;
-        case  2: values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
-        CYTHON_FALLTHROUGH;
-        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
-        CYTHON_FALLTHROUGH;
-        case  0: break;
-        default: goto __pyx_L5_argtuple_error;
-      }
-      kw_args = __Pyx_NumKwargs_FASTCALL(__pyx_kwds);
-      switch (__pyx_nargs) {
-        case  0:
-        if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_self)) != 0)) {
-          (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
-          kw_args--;
-        }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 167, __pyx_L3_error)
-        else goto __pyx_L5_argtuple_error;
-        CYTHON_FALLTHROUGH;
-        case  1:
-        if (likely((values[1] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_current_move_choices_ordered)) != 0)) {
-          (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
-          kw_args--;
-        }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 167, __pyx_L3_error)
-        else {
-          __Pyx_RaiseArgtupleInvalid("_update_current_move_choices_ordered_", 1, 4, 4, 1); __PYX_ERR(0, 167, __pyx_L3_error)
-        }
-        CYTHON_FALLTHROUGH;
-        case  2:
-        if (likely((values[2] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_current_move)) != 0)) {
-          (void)__Pyx_Arg_NewRef_FASTCALL(values[2]);
-          kw_args--;
-        }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 167, __pyx_L3_error)
-        else {
-          __Pyx_RaiseArgtupleInvalid("_update_current_move_choices_ordered_", 1, 4, 4, 2); __PYX_ERR(0, 167, __pyx_L3_error)
-        }
-        CYTHON_FALLTHROUGH;
-        case  3:
-        if (likely((values[3] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_board)) != 0)) {
-          (void)__Pyx_Arg_NewRef_FASTCALL(values[3]);
-          kw_args--;
-        }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 167, __pyx_L3_error)
-        else {
-          __Pyx_RaiseArgtupleInvalid("_update_current_move_choices_ordered_", 1, 4, 4, 3); __PYX_ERR(0, 167, __pyx_L3_error)
-        }
-      }
-      if (unlikely(kw_args > 0)) {
-        const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_update_current_move_choices_ordered_") < 0)) __PYX_ERR(0, 167, __pyx_L3_error)
-      }
-    } else if (unlikely(__pyx_nargs != 4)) {
-      goto __pyx_L5_argtuple_error;
-    } else {
-      values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
-      values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
-      values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
-      values[3] = __Pyx_Arg_FASTCALL(__pyx_args, 3);
-    }
-    __pyx_v_self = values[0];
-    __pyx_v_current_move_choices_ordered = ((PyObject*)values[1]);
-    __pyx_v_current_move = values[2];
-    __pyx_v_board = values[3];
-  }
-  goto __pyx_L6_skip;
-  __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_update_current_move_choices_ordered_", 1, 4, 4, __pyx_nargs); __PYX_ERR(0, 167, __pyx_L3_error)
-  __pyx_L6_skip:;
-  goto __pyx_L4_argument_unpacking_done;
-  __pyx_L3_error:;
-  {
-    Py_ssize_t __pyx_temp;
-    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
-      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
-    }
-  }
-  __Pyx_AddTraceback("chmengine.engines.cmhmey2.CMHMEngine2._update_current_move_choices_ordered_", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __Pyx_RefNannyFinishContext();
-  return NULL;
-  __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_current_move_choices_ordered), (&PyList_Type), 0, "current_move_choices_ordered", 1))) __PYX_ERR(0, 169, __pyx_L1_error)
-  __pyx_r = __pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_6_update_current_move_choices_ordered_(__pyx_self, __pyx_v_self, __pyx_v_current_move_choices_ordered, __pyx_v_current_move, __pyx_v_board);
-
-  /* function exit code */
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __pyx_r = NULL;
-  __pyx_L0:;
-  {
-    Py_ssize_t __pyx_temp;
-    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
-      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
-    }
-  }
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_6_update_current_move_choices_ordered_(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_current_move_choices_ordered, PyObject *__pyx_v_current_move, PyObject *__pyx_v_board) {
-  PyObject *__pyx_v_new_board = NULL;
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
-  PyObject *__pyx_t_3 = NULL;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("_update_current_move_choices_ordered_", 1);
-
-  /* "chmengine/engines/cmhmey2.py":173
- *             board: Board
- *     ) -> List[Pick]:
- *         new_board: Board = self.board_copy_pushed(move=current_move, board=board)             # <<<<<<<<<<<<<<
- *         return self._update_current_move_choices_(
- *             current_move_choices_ordered=current_move_choices_ordered, new_board=new_board,
- */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_board_copy_pushed); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 173, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 173, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_move, __pyx_v_current_move) < 0) __PYX_ERR(0, 173, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 173, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 173, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_new_board = __pyx_t_3;
-  __pyx_t_3 = 0;
-
-  /* "chmengine/engines/cmhmey2.py":174
- *     ) -> List[Pick]:
- *         new_board: Board = self.board_copy_pushed(move=current_move, board=board)
- *         return self._update_current_move_choices_(             # <<<<<<<<<<<<<<
- *             current_move_choices_ordered=current_move_choices_ordered, new_board=new_board,
- *             current_move=current_move
- */
-  __Pyx_XDECREF(__pyx_r);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_update_current_move_choices); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 174, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-
-  /* "chmengine/engines/cmhmey2.py":175
- *         new_board: Board = self.board_copy_pushed(move=current_move, board=board)
- *         return self._update_current_move_choices_(
- *             current_move_choices_ordered=current_move_choices_ordered, new_board=new_board,             # <<<<<<<<<<<<<<
- *             current_move=current_move
- *         )
- */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 175, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_current_move_choices_ordered, __pyx_v_current_move_choices_ordered) < 0) __PYX_ERR(0, 175, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_new_board, __pyx_v_new_board) < 0) __PYX_ERR(0, 175, __pyx_L1_error)
-
-  /* "chmengine/engines/cmhmey2.py":176
- *         return self._update_current_move_choices_(
- *             current_move_choices_ordered=current_move_choices_ordered, new_board=new_board,
- *             current_move=current_move             # <<<<<<<<<<<<<<
- *         )
- * 
- */
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_current_move, __pyx_v_current_move) < 0) __PYX_ERR(0, 175, __pyx_L1_error)
-
-  /* "chmengine/engines/cmhmey2.py":174
- *     ) -> List[Pick]:
- *         new_board: Board = self.board_copy_pushed(move=current_move, board=board)
- *         return self._update_current_move_choices_(             # <<<<<<<<<<<<<<
- *             current_move_choices_ordered=current_move_choices_ordered, new_board=new_board,
- *             current_move=current_move
- */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 174, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_1))) __PYX_ERR(0, 174, __pyx_L1_error)
-  __pyx_r = ((PyObject*)__pyx_t_1);
-  __pyx_t_1 = 0;
-  goto __pyx_L0;
-
-  /* "chmengine/engines/cmhmey2.py":167
- *         return chosen_pick
- * 
- *     def _update_current_move_choices_ordered_(             # <<<<<<<<<<<<<<
- *             self,
- *             current_move_choices_ordered: List[Pick],
- */
-
-  /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("chmengine.engines.cmhmey2.CMHMEngine2._update_current_move_choices_ordered_", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = NULL;
-  __pyx_L0:;
-  __Pyx_XDECREF(__pyx_v_new_board);
-  __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "chmengine/engines/cmhmey2.py":180
+/* "chmengine/engines/cmhmey2.py":158
  * 
  *     # pylint: disable=too-many-arguments
  *     def _update_current_move_choices_(             # <<<<<<<<<<<<<<
  *             self,
- *             current_move_choices_ordered: List[Pick],
+ *             board: Board,
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_9_update_current_move_choices_(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_7_update_current_move_choices_(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_7engines_7cmhmey2_11CMHMEngine2_8_update_current_move_choices_, "Evaluate a candidate move and update the list of best move choices.\n\n        This method evaluates a move by pushing it to a new board, calculating the response moves\n        from the opponent, and assigning the move a score based on the worst-case opponent response.\n        If no responses are available (e.g., checkmate or stalemate), it falls back to Q-table values\n        or a static evaluation.\n\n        Scores follow the classical convention:\n        - Positive values favor White.\n        - Negative values favor Black.\n\n        Parameters\n        ----------\n        current_move_choices_ordered : List[Pick]\n            The current list of move candidates and their associated evaluation scores, ordered\n            best to worst from White's perspective.\n        new_board : chess.Board\n            The board state resulting from applying `current_move`.\n        current_move : chess.Move\n            The move being evaluated.\n\n        Returns\n        -------\n        List[Pick]\n            The updated move candidate list with `current_move` inserted in score order.\n        ");
-static PyMethodDef __pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_9_update_current_move_choices_ = {"_update_current_move_choices_", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_9_update_current_move_choices_, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_7engines_7cmhmey2_11CMHMEngine2_8_update_current_move_choices_};
-static PyObject *__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_9_update_current_move_choices_(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_7engines_7cmhmey2_11CMHMEngine2_6_update_current_move_choices_, "Evaluate a candidate Pick and update the list of best Pick choices.\n\n        This method evaluates a move by pushing it to a new board, calculating the response moves\n        from the opponent, and assigning the move a score based on the worst-case opponent response.\n        If no responses are available (e.g., checkmate or stalemate), it falls back to Q-table values\n        or a static evaluation.\n\n        Scores follow the classical convention:\n        - Positive values favor White.\n        - Negative values favor Black.\n\n        Parameters\n        ----------\n        board : chess.Board\n            The board to apply the current_pick's move to\n        current_pick : Pick\n            The Pick being evaluated.\n\n        Returns\n        -------\n        None\n        ");
+static PyMethodDef __pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_7_update_current_move_choices_ = {"_update_current_move_choices_", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_7_update_current_move_choices_, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_7engines_7cmhmey2_11CMHMEngine2_6_update_current_move_choices_};
+static PyObject *__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_7_update_current_move_choices_(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -4807,14 +4454,13 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ) {
   PyObject *__pyx_v_self = 0;
-  PyObject *__pyx_v_current_move_choices_ordered = 0;
-  PyObject *__pyx_v_new_board = 0;
-  PyObject *__pyx_v_current_move = 0;
+  PyObject *__pyx_v_board = 0;
+  PyObject *__pyx_v_current_pick = 0;
   #if !CYTHON_METH_FASTCALL
   CYTHON_UNUSED Py_ssize_t __pyx_nargs;
   #endif
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
-  PyObject* values[4] = {0,0,0,0};
+  PyObject* values[3] = {0,0,0};
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -4830,12 +4476,10 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   #endif
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
-    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_current_move_choices_ordered,&__pyx_n_s_new_board,&__pyx_n_s_current_move,0};
+    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_board,&__pyx_n_s_current_pick,0};
     if (__pyx_kwds) {
       Py_ssize_t kw_args;
       switch (__pyx_nargs) {
-        case  4: values[3] = __Pyx_Arg_FASTCALL(__pyx_args, 3);
-        CYTHON_FALLTHROUGH;
         case  3: values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
         CYTHON_FALLTHROUGH;
         case  2: values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
@@ -4852,59 +4496,47 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 180, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 158, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
-        if (likely((values[1] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_current_move_choices_ordered)) != 0)) {
+        if (likely((values[1] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_board)) != 0)) {
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 180, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 158, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("_update_current_move_choices_", 1, 4, 4, 1); __PYX_ERR(0, 180, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_update_current_move_choices_", 1, 3, 3, 1); __PYX_ERR(0, 158, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
-        if (likely((values[2] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_new_board)) != 0)) {
+        if (likely((values[2] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_current_pick)) != 0)) {
           (void)__Pyx_Arg_NewRef_FASTCALL(values[2]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 180, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 158, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("_update_current_move_choices_", 1, 4, 4, 2); __PYX_ERR(0, 180, __pyx_L3_error)
-        }
-        CYTHON_FALLTHROUGH;
-        case  3:
-        if (likely((values[3] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_current_move)) != 0)) {
-          (void)__Pyx_Arg_NewRef_FASTCALL(values[3]);
-          kw_args--;
-        }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 180, __pyx_L3_error)
-        else {
-          __Pyx_RaiseArgtupleInvalid("_update_current_move_choices_", 1, 4, 4, 3); __PYX_ERR(0, 180, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_update_current_move_choices_", 1, 3, 3, 2); __PYX_ERR(0, 158, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_update_current_move_choices_") < 0)) __PYX_ERR(0, 180, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_update_current_move_choices_") < 0)) __PYX_ERR(0, 158, __pyx_L3_error)
       }
-    } else if (unlikely(__pyx_nargs != 4)) {
+    } else if (unlikely(__pyx_nargs != 3)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
       values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
       values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
-      values[3] = __Pyx_Arg_FASTCALL(__pyx_args, 3);
     }
     __pyx_v_self = values[0];
-    __pyx_v_current_move_choices_ordered = ((PyObject*)values[1]);
-    __pyx_v_new_board = values[2];
-    __pyx_v_current_move = values[3];
+    __pyx_v_board = values[1];
+    __pyx_v_current_pick = values[2];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_update_current_move_choices_", 1, 4, 4, __pyx_nargs); __PYX_ERR(0, 180, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_update_current_move_choices_", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 158, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4918,14 +4550,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_current_move_choices_ordered), (&PyList_Type), 0, "current_move_choices_ordered", 1))) __PYX_ERR(0, 182, __pyx_L1_error)
-  __pyx_r = __pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_8_update_current_move_choices_(__pyx_self, __pyx_v_self, __pyx_v_current_move_choices_ordered, __pyx_v_new_board, __pyx_v_current_move);
+  __pyx_r = __pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_6_update_current_move_choices_(__pyx_self, __pyx_v_self, __pyx_v_board, __pyx_v_current_pick);
 
   /* function exit code */
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __pyx_r = NULL;
-  __pyx_L0:;
   {
     Py_ssize_t __pyx_temp;
     for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
@@ -4936,10 +4563,10 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_8_update_current_move_choices_(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_current_move_choices_ordered, PyObject *__pyx_v_new_board, PyObject *__pyx_v_current_move) {
+static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_6_update_current_move_choices_(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_board, PyObject *__pyx_v_current_pick) {
+  PyObject *__pyx_v_new_board = NULL;
   PyObject *__pyx_v_response_moves = 0;
   PyObject *__pyx_v_initial_q_val = NULL;
-  PyObject *__pyx_v_final_move_score = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4947,59 +4574,80 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_8_update_cu
   PyObject *__pyx_t_3 = NULL;
   Py_ssize_t __pyx_t_4;
   int __pyx_t_5;
-  PyObject *__pyx_t_6 = NULL;
-  PyObject *__pyx_t_7 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_update_current_move_choices_", 1);
 
-  /* "chmengine/engines/cmhmey2.py":213
+  /* "chmengine/engines/cmhmey2.py":185
+ *         None
  *         """
+ *         new_board: Board = self.board_copy_pushed(move=current_pick.move, board=board)             # <<<<<<<<<<<<<<
+ *         response_moves: List[Pick]
+ *         response_moves = self._get_or_calculate_responses_(
+ */
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_board_copy_pushed); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_current_pick, __pyx_n_s_move); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_move, __pyx_t_3) < 0) __PYX_ERR(0, 185, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 185, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_new_board = __pyx_t_3;
+  __pyx_t_3 = 0;
+
+  /* "chmengine/engines/cmhmey2.py":187
+ *         new_board: Board = self.board_copy_pushed(move=current_pick.move, board=board)
  *         response_moves: List[Pick]
  *         response_moves = self._get_or_calculate_responses_(             # <<<<<<<<<<<<<<
  *             new_board=new_board,
  *             go_deeper=True
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_or_calculate_responses); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 213, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_or_calculate_responses); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
 
-  /* "chmengine/engines/cmhmey2.py":214
+  /* "chmengine/engines/cmhmey2.py":188
  *         response_moves: List[Pick]
  *         response_moves = self._get_or_calculate_responses_(
  *             new_board=new_board,             # <<<<<<<<<<<<<<
  *             go_deeper=True
  *         )
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_new_board, __pyx_v_new_board) < 0) __PYX_ERR(0, 214, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_new_board, __pyx_v_new_board) < 0) __PYX_ERR(0, 188, __pyx_L1_error)
 
-  /* "chmengine/engines/cmhmey2.py":215
+  /* "chmengine/engines/cmhmey2.py":189
  *         response_moves = self._get_or_calculate_responses_(
  *             new_board=new_board,
  *             go_deeper=True             # <<<<<<<<<<<<<<
  *         )
  *         if len(response_moves) == 0:
  */
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_go_deeper, Py_True) < 0) __PYX_ERR(0, 214, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_go_deeper, Py_True) < 0) __PYX_ERR(0, 188, __pyx_L1_error)
 
-  /* "chmengine/engines/cmhmey2.py":213
- *         """
+  /* "chmengine/engines/cmhmey2.py":187
+ *         new_board: Board = self.board_copy_pushed(move=current_pick.move, board=board)
  *         response_moves: List[Pick]
  *         response_moves = self._get_or_calculate_responses_(             # <<<<<<<<<<<<<<
  *             new_board=new_board,
  *             go_deeper=True
  */
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 213, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(PyList_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_3))) __PYX_ERR(0, 213, __pyx_L1_error)
-  __pyx_v_response_moves = ((PyObject*)__pyx_t_3);
-  __pyx_t_3 = 0;
+  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_1))) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_v_response_moves = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
 
-  /* "chmengine/engines/cmhmey2.py":217
+  /* "chmengine/engines/cmhmey2.py":191
  *             go_deeper=True
  *         )
  *         if len(response_moves) == 0:             # <<<<<<<<<<<<<<
@@ -5008,107 +4656,109 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_8_update_cu
  */
   if (unlikely(__pyx_v_response_moves == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 217, __pyx_L1_error)
+    __PYX_ERR(0, 191, __pyx_L1_error)
   }
-  __pyx_t_4 = __Pyx_PyList_GET_SIZE(__pyx_v_response_moves); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 217, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyList_GET_SIZE(__pyx_v_response_moves); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 191, __pyx_L1_error)
   __pyx_t_5 = (__pyx_t_4 == 0);
   if (__pyx_t_5) {
 
-    /* "chmengine/engines/cmhmey2.py":218
+    /* "chmengine/engines/cmhmey2.py":192
  *         )
  *         if len(response_moves) == 0:
  *             initial_q_val: Optional[float64] = self.get_q_value(board=new_board)             # <<<<<<<<<<<<<<
  *             if initial_q_val is None:
- *                 final_move_score: float64 = calculate_better_white_minus_black_score(board=new_board, depth=self.depth)
+ *                 current_pick.score = calculate_better_white_minus_black_score(board=new_board, depth=self.depth)
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_q_value); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 218, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 218, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_v_new_board) < 0) __PYX_ERR(0, 218, __pyx_L1_error)
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 218, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_q_value); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 192, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 192, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_v_new_board) < 0) __PYX_ERR(0, 192, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 192, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_v_initial_q_val = __pyx_t_1;
-    __pyx_t_1 = 0;
+    __pyx_v_initial_q_val = __pyx_t_3;
+    __pyx_t_3 = 0;
 
-    /* "chmengine/engines/cmhmey2.py":219
+    /* "chmengine/engines/cmhmey2.py":193
  *         if len(response_moves) == 0:
  *             initial_q_val: Optional[float64] = self.get_q_value(board=new_board)
  *             if initial_q_val is None:             # <<<<<<<<<<<<<<
- *                 final_move_score: float64 = calculate_better_white_minus_black_score(board=new_board, depth=self.depth)
- *                 self.set_q_value(value=final_move_score, board=new_board)
+ *                 current_pick.score = calculate_better_white_minus_black_score(board=new_board, depth=self.depth)
+ *                 self.set_q_value(value=current_pick.score, board=new_board)
  */
     __pyx_t_5 = (__pyx_v_initial_q_val == Py_None);
     if (__pyx_t_5) {
 
-      /* "chmengine/engines/cmhmey2.py":220
+      /* "chmengine/engines/cmhmey2.py":194
  *             initial_q_val: Optional[float64] = self.get_q_value(board=new_board)
  *             if initial_q_val is None:
- *                 final_move_score: float64 = calculate_better_white_minus_black_score(board=new_board, depth=self.depth)             # <<<<<<<<<<<<<<
- *                 self.set_q_value(value=final_move_score, board=new_board)
+ *                 current_pick.score = calculate_better_white_minus_black_score(board=new_board, depth=self.depth)             # <<<<<<<<<<<<<<
+ *                 self.set_q_value(value=current_pick.score, board=new_board)
  *             else:
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_calculate_better_white_minus_bla); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 220, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 220, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_calculate_better_white_minus_bla); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 194, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 194, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_v_new_board) < 0) __PYX_ERR(0, 220, __pyx_L1_error)
-      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_depth); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 220, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_depth, __pyx_t_3) < 0) __PYX_ERR(0, 220, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 220, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
+      if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_v_new_board) < 0) __PYX_ERR(0, 194, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_depth); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 194, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_depth, __pyx_t_1) < 0) __PYX_ERR(0, 194, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 194, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_v_final_move_score = __pyx_t_3;
-      __pyx_t_3 = 0;
+      if (__Pyx_PyObject_SetAttrStr(__pyx_v_current_pick, __pyx_n_s_score, __pyx_t_1) < 0) __PYX_ERR(0, 194, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "chmengine/engines/cmhmey2.py":221
+      /* "chmengine/engines/cmhmey2.py":195
  *             if initial_q_val is None:
- *                 final_move_score: float64 = calculate_better_white_minus_black_score(board=new_board, depth=self.depth)
- *                 self.set_q_value(value=final_move_score, board=new_board)             # <<<<<<<<<<<<<<
+ *                 current_pick.score = calculate_better_white_minus_black_score(board=new_board, depth=self.depth)
+ *                 self.set_q_value(value=current_pick.score, board=new_board)             # <<<<<<<<<<<<<<
  *             else:
- *                 final_move_score = initial_q_val
+ *                 current_pick.score = initial_q_val
  */
-      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_set_q_value); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 221, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 221, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_2);
-      if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_value, __pyx_v_final_move_score) < 0) __PYX_ERR(0, 221, __pyx_L1_error)
-      if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_v_new_board) < 0) __PYX_ERR(0, 221, __pyx_L1_error)
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 221, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_set_q_value); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 195, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
+      __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 195, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_current_pick, __pyx_n_s_score); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 195, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_value, __pyx_t_3) < 0) __PYX_ERR(0, 195, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_v_new_board) < 0) __PYX_ERR(0, 195, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 195, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-      /* "chmengine/engines/cmhmey2.py":219
+      /* "chmengine/engines/cmhmey2.py":193
  *         if len(response_moves) == 0:
  *             initial_q_val: Optional[float64] = self.get_q_value(board=new_board)
  *             if initial_q_val is None:             # <<<<<<<<<<<<<<
- *                 final_move_score: float64 = calculate_better_white_minus_black_score(board=new_board, depth=self.depth)
- *                 self.set_q_value(value=final_move_score, board=new_board)
+ *                 current_pick.score = calculate_better_white_minus_black_score(board=new_board, depth=self.depth)
+ *                 self.set_q_value(value=current_pick.score, board=new_board)
  */
       goto __pyx_L4;
     }
 
-    /* "chmengine/engines/cmhmey2.py":223
- *                 self.set_q_value(value=final_move_score, board=new_board)
+    /* "chmengine/engines/cmhmey2.py":197
+ *                 self.set_q_value(value=current_pick.score, board=new_board)
  *             else:
- *                 final_move_score = initial_q_val             # <<<<<<<<<<<<<<
+ *                 current_pick.score = initial_q_val             # <<<<<<<<<<<<<<
  *         else:
- *             final_move_score: float64 = response_moves[0 if new_board.turn else -1].score
+ *             current_pick.score = response_moves[0 if new_board.turn else -1].score
  */
     /*else*/ {
-      __Pyx_INCREF(__pyx_v_initial_q_val);
-      __pyx_v_final_move_score = __pyx_v_initial_q_val;
+      if (__Pyx_PyObject_SetAttrStr(__pyx_v_current_pick, __pyx_n_s_score, __pyx_v_initial_q_val) < 0) __PYX_ERR(0, 197, __pyx_L1_error)
     }
     __pyx_L4:;
 
-    /* "chmengine/engines/cmhmey2.py":217
+    /* "chmengine/engines/cmhmey2.py":191
  *             go_deeper=True
  *         )
  *         if len(response_moves) == 0:             # <<<<<<<<<<<<<<
@@ -5118,142 +4768,87 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_8_update_cu
     goto __pyx_L3;
   }
 
-  /* "chmengine/engines/cmhmey2.py":225
- *                 final_move_score = initial_q_val
+  /* "chmengine/engines/cmhmey2.py":199
+ *                 current_pick.score = initial_q_val
  *         else:
- *             final_move_score: float64 = response_moves[0 if new_board.turn else -1].score             # <<<<<<<<<<<<<<
- *             self.set_q_value(value=final_move_score, board=new_board)
- *         return insert_choice_into_current_moves(
+ *             current_pick.score = response_moves[0 if new_board.turn else -1].score             # <<<<<<<<<<<<<<
+ *             self.set_q_value(value=current_pick.score, board=new_board)
+ * 
  */
   /*else*/ {
     if (unlikely(__pyx_v_response_moves == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 225, __pyx_L1_error)
+      __PYX_ERR(0, 199, __pyx_L1_error)
     }
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_new_board, __pyx_n_s_turn); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 225, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 225, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_new_board, __pyx_n_s_turn); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 199, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 199, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (__pyx_t_5) {
       __pyx_t_4 = 0;
     } else {
       __pyx_t_4 = -1L;
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_response_moves, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 1, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 225, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_score); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 225, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_v_final_move_score = __pyx_t_2;
-    __pyx_t_2 = 0;
-
-    /* "chmengine/engines/cmhmey2.py":226
- *         else:
- *             final_move_score: float64 = response_moves[0 if new_board.turn else -1].score
- *             self.set_q_value(value=final_move_score, board=new_board)             # <<<<<<<<<<<<<<
- *         return insert_choice_into_current_moves(
- *             choices_ordered_best_to_worst=current_move_choices_ordered,
- */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_set_q_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 226, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 226, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_value, __pyx_v_final_move_score) < 0) __PYX_ERR(0, 226, __pyx_L1_error)
-    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_board, __pyx_v_new_board) < 0) __PYX_ERR(0, 226, __pyx_L1_error)
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 226, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_GetItemInt_List(__pyx_v_response_moves, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 1, 1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 199, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_score); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 199, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_current_pick, __pyx_n_s_score, __pyx_t_2) < 0) __PYX_ERR(0, 199, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+    /* "chmengine/engines/cmhmey2.py":200
+ *         else:
+ *             current_pick.score = response_moves[0 if new_board.turn else -1].score
+ *             self.set_q_value(value=current_pick.score, board=new_board)             # <<<<<<<<<<<<<<
+ * 
+ *     def _get_or_calculate_responses_(
+ */
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_set_q_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 200, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 200, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_current_pick, __pyx_n_s_score); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 200, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_value, __pyx_t_1) < 0) __PYX_ERR(0, 200, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_board, __pyx_v_new_board) < 0) __PYX_ERR(0, 200, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 200, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
   __pyx_L3:;
 
-  /* "chmengine/engines/cmhmey2.py":227
- *             final_move_score: float64 = response_moves[0 if new_board.turn else -1].score
- *             self.set_q_value(value=final_move_score, board=new_board)
- *         return insert_choice_into_current_moves(             # <<<<<<<<<<<<<<
- *             choices_ordered_best_to_worst=current_move_choices_ordered,
- *             pick=Pick(move=current_move, score=final_move_score)
- */
-  __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_insert_choice_into_current_moves); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 227, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-
-  /* "chmengine/engines/cmhmey2.py":228
- *             self.set_q_value(value=final_move_score, board=new_board)
- *         return insert_choice_into_current_moves(
- *             choices_ordered_best_to_worst=current_move_choices_ordered,             # <<<<<<<<<<<<<<
- *             pick=Pick(move=current_move, score=final_move_score)
- *         )
- */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 228, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_choices_ordered_best_to_worst, __pyx_v_current_move_choices_ordered) < 0) __PYX_ERR(0, 228, __pyx_L1_error)
-
-  /* "chmengine/engines/cmhmey2.py":229
- *         return insert_choice_into_current_moves(
- *             choices_ordered_best_to_worst=current_move_choices_ordered,
- *             pick=Pick(move=current_move, score=final_move_score)             # <<<<<<<<<<<<<<
- *         )
- * 
- */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Pick); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 229, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 229, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_move, __pyx_v_current_move) < 0) __PYX_ERR(0, 229, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_score, __pyx_v_final_move_score) < 0) __PYX_ERR(0, 229, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 229, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_pick, __pyx_t_7) < 0) __PYX_ERR(0, 228, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-
-  /* "chmengine/engines/cmhmey2.py":227
- *             final_move_score: float64 = response_moves[0 if new_board.turn else -1].score
- *             self.set_q_value(value=final_move_score, board=new_board)
- *         return insert_choice_into_current_moves(             # <<<<<<<<<<<<<<
- *             choices_ordered_best_to_worst=current_move_choices_ordered,
- *             pick=Pick(move=current_move, score=final_move_score)
- */
-  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 227, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (!(likely(PyList_CheckExact(__pyx_t_7))||((__pyx_t_7) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_7))) __PYX_ERR(0, 227, __pyx_L1_error)
-  __pyx_r = ((PyObject*)__pyx_t_7);
-  __pyx_t_7 = 0;
-  goto __pyx_L0;
-
-  /* "chmengine/engines/cmhmey2.py":180
+  /* "chmengine/engines/cmhmey2.py":158
  * 
  *     # pylint: disable=too-many-arguments
  *     def _update_current_move_choices_(             # <<<<<<<<<<<<<<
  *             self,
- *             current_move_choices_ordered: List[Pick],
+ *             board: Board,
  */
 
   /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_XDECREF(__pyx_t_7);
   __Pyx_AddTraceback("chmengine.engines.cmhmey2.CMHMEngine2._update_current_move_choices_", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_new_board);
   __Pyx_XDECREF(__pyx_v_response_moves);
   __Pyx_XDECREF(__pyx_v_initial_q_val);
-  __Pyx_XDECREF(__pyx_v_final_move_score);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "chmengine/engines/cmhmey2.py":232
- *         )
+/* "chmengine/engines/cmhmey2.py":202
+ *             self.set_q_value(value=current_pick.score, board=new_board)
  * 
  *     def _get_or_calculate_responses_(             # <<<<<<<<<<<<<<
  *             self,
@@ -5261,16 +4856,16 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_8_update_cu
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_11_get_or_calculate_responses_(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_9_get_or_calculate_responses_(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_7engines_7cmhmey2_11CMHMEngine2_10_get_or_calculate_responses_, "Retrieve the opponent's response moves and evaluate them.\n\n        This method computes heatmap-based evaluation scores for each legal response move from the new board\n        state (after a candidate move is applied). The scores are ordered from worst to best from the perspective\n        of the current player.\n\n        Parameters\n        ----------\n        new_board : chess.Board\n            The board state after a candidate move is applied.\n        go_deeper : bool\n\n        Returns\n        -------\n        List[Union[Pick, None]]\n            A list of response moves and their evaluation scores.\n        ");
-static PyMethodDef __pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_11_get_or_calculate_responses_ = {"_get_or_calculate_responses_", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_11_get_or_calculate_responses_, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_7engines_7cmhmey2_11CMHMEngine2_10_get_or_calculate_responses_};
-static PyObject *__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_11_get_or_calculate_responses_(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_7engines_7cmhmey2_11CMHMEngine2_8_get_or_calculate_responses_, "Retrieve the opponent's evaluated response picks.\n\n        This method computes heatmap-based evaluation scores for each legal response move from the new board\n        state (after a candidate move is applied). The scores are ordered from worst to best from the perspective\n        of the current player.\n\n        Parameters\n        ----------\n        new_board : chess.Board\n            The board state after a candidate move is applied.\n        go_deeper : bool\n            If True, allows one extra ply of recursive scoring on checks or captures.\n\n        Returns\n        -------\n        List[Pick]\n            A list of response Picks (moves and their evaluation scores.)\n        ");
+static PyMethodDef __pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_9_get_or_calculate_responses_ = {"_get_or_calculate_responses_", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_9_get_or_calculate_responses_, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_7engines_7cmhmey2_11CMHMEngine2_8_get_or_calculate_responses_};
+static PyObject *__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_9_get_or_calculate_responses_(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -5320,7 +4915,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 232, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 202, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -5328,9 +4923,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 232, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 202, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("_get_or_calculate_responses_", 1, 3, 3, 1); __PYX_ERR(0, 232, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_get_or_calculate_responses_", 1, 3, 3, 1); __PYX_ERR(0, 202, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -5338,14 +4933,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[2]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 232, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 202, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("_get_or_calculate_responses_", 1, 3, 3, 2); __PYX_ERR(0, 232, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_get_or_calculate_responses_", 1, 3, 3, 2); __PYX_ERR(0, 202, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_get_or_calculate_responses_") < 0)) __PYX_ERR(0, 232, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_get_or_calculate_responses_") < 0)) __PYX_ERR(0, 202, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 3)) {
       goto __pyx_L5_argtuple_error;
@@ -5360,7 +4955,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_get_or_calculate_responses_", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 232, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_get_or_calculate_responses_", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 202, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -5374,7 +4969,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_10_get_or_calculate_responses_(__pyx_self, __pyx_v_self, __pyx_v_new_board, __pyx_v_go_deeper);
+  __pyx_r = __pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_8_get_or_calculate_responses_(__pyx_self, __pyx_v_self, __pyx_v_new_board, __pyx_v_go_deeper);
 
   /* function exit code */
   {
@@ -5387,10 +4982,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_10_get_or_calculate_responses_(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_new_board, PyObject *__pyx_v_go_deeper) {
-  PyObject *__pyx_v_next_moves = 0;
-  PyObject *__pyx_v_response_moves = 0;
-  PyObject *__pyx_v_next_move = 0;
+static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_8_get_or_calculate_responses_(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_new_board, PyObject *__pyx_v_go_deeper) {
+  PyObject *__pyx_v_next_picks = 0;
+  PyObject *__pyx_v_next_pick = 0;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -5403,155 +4997,145 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_10_get_or_c
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_get_or_calculate_responses_", 1);
 
-  /* "chmengine/engines/cmhmey2.py":256
+  /* "chmengine/engines/cmhmey2.py":227
  *         # However, that is not our Final score,
  *         # the score after finding the best response to our move should be the final score.
- *         next_moves: List[Move] = self.current_moves_list(board=new_board)             # <<<<<<<<<<<<<<
- *         response_moves: List[Pick] = []
- *         next_move: Move
+ *         next_picks: List[Pick] = self.current_picks_list(board=new_board)             # <<<<<<<<<<<<<<
+ *         next_pick: Pick
+ *         for next_pick in next_picks:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_current_moves_list); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 256, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_current_picks_list); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 256, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_v_new_board) < 0) __PYX_ERR(0, 256, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 256, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_v_new_board) < 0) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(PyList_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_3))) __PYX_ERR(0, 256, __pyx_L1_error)
-  __pyx_v_next_moves = ((PyObject*)__pyx_t_3);
+  if (!(likely(PyList_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_3))) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_v_next_picks = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "chmengine/engines/cmhmey2.py":257
- *         # the score after finding the best response to our move should be the final score.
- *         next_moves: List[Move] = self.current_moves_list(board=new_board)
- *         response_moves: List[Pick] = []             # <<<<<<<<<<<<<<
- *         next_move: Move
- *         for next_move in next_moves:
+  /* "chmengine/engines/cmhmey2.py":229
+ *         next_picks: List[Pick] = self.current_picks_list(board=new_board)
+ *         next_pick: Pick
+ *         for next_pick in next_picks:             # <<<<<<<<<<<<<<
+ *             self._get_or_calc_response_move_scores_(
+ *                 next_pick=next_pick,
  */
-  __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 257, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_v_response_moves = ((PyObject*)__pyx_t_3);
-  __pyx_t_3 = 0;
-
-  /* "chmengine/engines/cmhmey2.py":259
- *         response_moves: List[Pick] = []
- *         next_move: Move
- *         for next_move in next_moves:             # <<<<<<<<<<<<<<
- *             response_moves = self._get_or_calc_response_move_scores_(
- *                 next_move=next_move,
- */
-  if (unlikely(__pyx_v_next_moves == Py_None)) {
+  if (unlikely(__pyx_v_next_picks == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 259, __pyx_L1_error)
+    __PYX_ERR(0, 229, __pyx_L1_error)
   }
-  __pyx_t_3 = __pyx_v_next_moves; __Pyx_INCREF(__pyx_t_3);
+  __pyx_t_3 = __pyx_v_next_picks; __Pyx_INCREF(__pyx_t_3);
   __pyx_t_4 = 0;
   for (;;) {
     {
       Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_3);
       #if !CYTHON_ASSUME_SAFE_MACROS
-      if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 259, __pyx_L1_error)
+      if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 229, __pyx_L1_error)
       #endif
       if (__pyx_t_4 >= __pyx_temp) break;
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    __pyx_t_2 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_2); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 259, __pyx_L1_error)
+    __pyx_t_2 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_2); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 229, __pyx_L1_error)
     #else
-    __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 259, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 229, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     #endif
-    __Pyx_XDECREF_SET(__pyx_v_next_move, __pyx_t_2);
+    __Pyx_XDECREF_SET(__pyx_v_next_pick, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "chmengine/engines/cmhmey2.py":260
- *         next_move: Move
- *         for next_move in next_moves:
- *             response_moves = self._get_or_calc_response_move_scores_(             # <<<<<<<<<<<<<<
- *                 next_move=next_move,
- *                 response_moves=response_moves,
- */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_or_calc_response_move_score); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 260, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-
-    /* "chmengine/engines/cmhmey2.py":261
- *         for next_move in next_moves:
- *             response_moves = self._get_or_calc_response_move_scores_(
- *                 next_move=next_move,             # <<<<<<<<<<<<<<
- *                 response_moves=response_moves,
+    /* "chmengine/engines/cmhmey2.py":230
+ *         next_pick: Pick
+ *         for next_pick in next_picks:
+ *             self._get_or_calc_response_move_scores_(             # <<<<<<<<<<<<<<
+ *                 next_pick=next_pick,
  *                 new_board=new_board,
  */
-    __pyx_t_1 = __Pyx_PyDict_NewPresized(4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 261, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_next_move, __pyx_v_next_move) < 0) __PYX_ERR(0, 261, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_or_calc_response_move_score); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 230, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
 
-    /* "chmengine/engines/cmhmey2.py":262
- *             response_moves = self._get_or_calc_response_move_scores_(
- *                 next_move=next_move,
- *                 response_moves=response_moves,             # <<<<<<<<<<<<<<
+    /* "chmengine/engines/cmhmey2.py":231
+ *         for next_pick in next_picks:
+ *             self._get_or_calc_response_move_scores_(
+ *                 next_pick=next_pick,             # <<<<<<<<<<<<<<
  *                 new_board=new_board,
  *                 go_deeper=go_deeper
  */
-    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_response_moves, __pyx_v_response_moves) < 0) __PYX_ERR(0, 261, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 231, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_next_pick, __pyx_v_next_pick) < 0) __PYX_ERR(0, 231, __pyx_L1_error)
 
-    /* "chmengine/engines/cmhmey2.py":263
- *                 next_move=next_move,
- *                 response_moves=response_moves,
+    /* "chmengine/engines/cmhmey2.py":232
+ *             self._get_or_calc_response_move_scores_(
+ *                 next_pick=next_pick,
  *                 new_board=new_board,             # <<<<<<<<<<<<<<
  *                 go_deeper=go_deeper
  *             )
  */
-    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_new_board, __pyx_v_new_board) < 0) __PYX_ERR(0, 261, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_new_board, __pyx_v_new_board) < 0) __PYX_ERR(0, 231, __pyx_L1_error)
 
-    /* "chmengine/engines/cmhmey2.py":264
- *                 response_moves=response_moves,
+    /* "chmengine/engines/cmhmey2.py":233
+ *                 next_pick=next_pick,
  *                 new_board=new_board,
  *                 go_deeper=go_deeper             # <<<<<<<<<<<<<<
  *             )
- *         return response_moves
+ *         # noinspection PyTypeChecker,PydanticTypeChecker
  */
-    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_go_deeper, __pyx_v_go_deeper) < 0) __PYX_ERR(0, 261, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_go_deeper, __pyx_v_go_deeper) < 0) __PYX_ERR(0, 231, __pyx_L1_error)
 
-    /* "chmengine/engines/cmhmey2.py":260
- *         next_move: Move
- *         for next_move in next_moves:
- *             response_moves = self._get_or_calc_response_move_scores_(             # <<<<<<<<<<<<<<
- *                 next_move=next_move,
- *                 response_moves=response_moves,
+    /* "chmengine/engines/cmhmey2.py":230
+ *         next_pick: Pick
+ *         for next_pick in next_picks:
+ *             self._get_or_calc_response_move_scores_(             # <<<<<<<<<<<<<<
+ *                 next_pick=next_pick,
+ *                 new_board=new_board,
  */
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 260, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 230, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (!(likely(PyList_CheckExact(__pyx_t_5))||((__pyx_t_5) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_5))) __PYX_ERR(0, 260, __pyx_L1_error)
-    __Pyx_DECREF_SET(__pyx_v_response_moves, ((PyObject*)__pyx_t_5));
-    __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "chmengine/engines/cmhmey2.py":259
- *         response_moves: List[Pick] = []
- *         next_move: Move
- *         for next_move in next_moves:             # <<<<<<<<<<<<<<
- *             response_moves = self._get_or_calc_response_move_scores_(
- *                 next_move=next_move,
+    /* "chmengine/engines/cmhmey2.py":229
+ *         next_picks: List[Pick] = self.current_picks_list(board=new_board)
+ *         next_pick: Pick
+ *         for next_pick in next_picks:             # <<<<<<<<<<<<<<
+ *             self._get_or_calc_response_move_scores_(
+ *                 next_pick=next_pick,
  */
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/engines/cmhmey2.py":266
- *                 go_deeper=go_deeper
+  /* "chmengine/engines/cmhmey2.py":236
  *             )
- *         return response_moves             # <<<<<<<<<<<<<<
+ *         # noinspection PyTypeChecker,PydanticTypeChecker
+ *         return sorted(next_picks, reverse=True)             # <<<<<<<<<<<<<<
  * 
  *     def _get_or_calc_response_move_scores_(
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_INCREF(__pyx_v_response_moves);
-  __pyx_r = __pyx_v_response_moves;
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_INCREF(__pyx_v_next_picks);
+  __Pyx_GIVEREF(__pyx_v_next_picks);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_v_next_picks)) __PYX_ERR(0, 236, __pyx_L1_error);
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_reverse, Py_True) < 0) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_sorted, __pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_1))) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_r = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/engines/cmhmey2.py":232
- *         )
+  /* "chmengine/engines/cmhmey2.py":202
+ *             self.set_q_value(value=current_pick.score, board=new_board)
  * 
  *     def _get_or_calculate_responses_(             # <<<<<<<<<<<<<<
  *             self,
@@ -5567,33 +5151,32 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_10_get_or_c
   __Pyx_AddTraceback("chmengine.engines.cmhmey2.CMHMEngine2._get_or_calculate_responses_", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
-  __Pyx_XDECREF(__pyx_v_next_moves);
-  __Pyx_XDECREF(__pyx_v_response_moves);
-  __Pyx_XDECREF(__pyx_v_next_move);
+  __Pyx_XDECREF(__pyx_v_next_picks);
+  __Pyx_XDECREF(__pyx_v_next_pick);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "chmengine/engines/cmhmey2.py":268
- *         return response_moves
+/* "chmengine/engines/cmhmey2.py":238
+ *         return sorted(next_picks, reverse=True)
  * 
  *     def _get_or_calc_response_move_scores_(             # <<<<<<<<<<<<<<
  *             self,
- *             next_move: Move,
+ *             next_pick: Pick,
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_13_get_or_calc_response_move_scores_(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_11_get_or_calc_response_move_scores_(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9chmengine_7engines_7cmhmey2_11CMHMEngine2_12_get_or_calc_response_move_scores_, "Evaluate one opponent response move and insert it into the ordered response list.\n\n        This method simulates `next_move` on `new_board`, then:\n\n            1. **Deepens** one ply (only on checks or captures) if `go_deeper` is True and there are legal replies.\n            2. Otherwise, **fetches** the cached Q-value for that position if available.\n            3. Otherwise, **falls back** to a static heatmap-based evaluation.\n\n        The score is always from White-positive/Black-negative perspective.\n\n        Parameters\n        ----------\n        next_move : chess.Move\n            The opponent\342\200\231s move to simulate and evaluate.\n        response_moves : List[Pick]\n            Current ordered list of response candidates (worst\342\206\222best from current player\342\200\231s POV).\n        new_board : chess.Board\n            Position after the candidate move was applied; it\342\200\231s now the opponent\342\200\231s turn.\n        go_deeper : bool\n            If True, allows one extra ply of recursive scoring on checks or captures.\n\n        Returns\n        -------\n        List[Pick]\n            Updated response list with `(next_move, score)` inserted in order.\n        ");
-static PyMethodDef __pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_13_get_or_calc_response_move_scores_ = {"_get_or_calc_response_move_scores_", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_13_get_or_calc_response_move_scores_, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_7engines_7cmhmey2_11CMHMEngine2_12_get_or_calc_response_move_scores_};
-static PyObject *__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_13_get_or_calc_response_move_scores_(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9chmengine_7engines_7cmhmey2_11CMHMEngine2_10_get_or_calc_response_move_scores_, "Evaluate one opponent response move and update the next_pick score.\n\n        This method simulates `next_pick.move` on `new_board`, then:\n\n            1. **Deepens** one ply (only on checks or captures) if `go_deeper` is True and there are legal replies.\n            2. Otherwise, **fetches** the cached Q-value for that position if available.\n            3. Otherwise, **falls back** to a static heatmap-based evaluation.\n\n        The score is always from White-positive/Black-negative perspective.\n\n        Parameters\n        ----------\n        next_pick : Pick\n            The opponent\342\200\231s Pick to simulate and evaluate.\n        new_board : chess.Board\n            Position after the candidate Pick was applied; it\342\200\231s now the opponent\342\200\231s turn.\n        go_deeper : bool\n            If True, allows one extra ply of recursive scoring on checks or captures.\n        ");
+static PyMethodDef __pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_11_get_or_calc_response_move_scores_ = {"_get_or_calc_response_move_scores_", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_11_get_or_calc_response_move_scores_, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_7engines_7cmhmey2_11CMHMEngine2_10_get_or_calc_response_move_scores_};
+static PyObject *__pyx_pw_9chmengine_7engines_7cmhmey2_11CMHMEngine2_11_get_or_calc_response_move_scores_(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -5601,15 +5184,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ) {
   PyObject *__pyx_v_self = 0;
-  PyObject *__pyx_v_next_move = 0;
-  PyObject *__pyx_v_response_moves = 0;
+  PyObject *__pyx_v_next_pick = 0;
   PyObject *__pyx_v_new_board = 0;
   PyObject *__pyx_v_go_deeper = 0;
   #if !CYTHON_METH_FASTCALL
   CYTHON_UNUSED Py_ssize_t __pyx_nargs;
   #endif
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
-  PyObject* values[5] = {0,0,0,0,0};
+  PyObject* values[4] = {0,0,0,0};
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -5625,12 +5207,10 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   #endif
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
-    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_next_move,&__pyx_n_s_response_moves,&__pyx_n_s_new_board,&__pyx_n_s_go_deeper,0};
+    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_next_pick,&__pyx_n_s_new_board,&__pyx_n_s_go_deeper,0};
     if (__pyx_kwds) {
       Py_ssize_t kw_args;
       switch (__pyx_nargs) {
-        case  5: values[4] = __Pyx_Arg_FASTCALL(__pyx_args, 4);
-        CYTHON_FALLTHROUGH;
         case  4: values[3] = __Pyx_Arg_FASTCALL(__pyx_args, 3);
         CYTHON_FALLTHROUGH;
         case  3: values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
@@ -5649,71 +5229,59 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 268, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 238, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
-        if (likely((values[1] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_next_move)) != 0)) {
+        if (likely((values[1] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_next_pick)) != 0)) {
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 268, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 238, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("_get_or_calc_response_move_scores_", 1, 5, 5, 1); __PYX_ERR(0, 268, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_get_or_calc_response_move_scores_", 1, 4, 4, 1); __PYX_ERR(0, 238, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
-        if (likely((values[2] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_response_moves)) != 0)) {
+        if (likely((values[2] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_new_board)) != 0)) {
           (void)__Pyx_Arg_NewRef_FASTCALL(values[2]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 268, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 238, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("_get_or_calc_response_move_scores_", 1, 5, 5, 2); __PYX_ERR(0, 268, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_get_or_calc_response_move_scores_", 1, 4, 4, 2); __PYX_ERR(0, 238, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
-        if (likely((values[3] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_new_board)) != 0)) {
+        if (likely((values[3] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_go_deeper)) != 0)) {
           (void)__Pyx_Arg_NewRef_FASTCALL(values[3]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 268, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 238, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("_get_or_calc_response_move_scores_", 1, 5, 5, 3); __PYX_ERR(0, 268, __pyx_L3_error)
-        }
-        CYTHON_FALLTHROUGH;
-        case  4:
-        if (likely((values[4] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_go_deeper)) != 0)) {
-          (void)__Pyx_Arg_NewRef_FASTCALL(values[4]);
-          kw_args--;
-        }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 268, __pyx_L3_error)
-        else {
-          __Pyx_RaiseArgtupleInvalid("_get_or_calc_response_move_scores_", 1, 5, 5, 4); __PYX_ERR(0, 268, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_get_or_calc_response_move_scores_", 1, 4, 4, 3); __PYX_ERR(0, 238, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_get_or_calc_response_move_scores_") < 0)) __PYX_ERR(0, 268, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_get_or_calc_response_move_scores_") < 0)) __PYX_ERR(0, 238, __pyx_L3_error)
       }
-    } else if (unlikely(__pyx_nargs != 5)) {
+    } else if (unlikely(__pyx_nargs != 4)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
       values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
       values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
       values[3] = __Pyx_Arg_FASTCALL(__pyx_args, 3);
-      values[4] = __Pyx_Arg_FASTCALL(__pyx_args, 4);
     }
     __pyx_v_self = values[0];
-    __pyx_v_next_move = values[1];
-    __pyx_v_response_moves = ((PyObject*)values[2]);
-    __pyx_v_new_board = values[3];
-    __pyx_v_go_deeper = values[4];
+    __pyx_v_next_pick = values[1];
+    __pyx_v_new_board = values[2];
+    __pyx_v_go_deeper = values[3];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_get_or_calc_response_move_scores_", 1, 5, 5, __pyx_nargs); __PYX_ERR(0, 268, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_get_or_calc_response_move_scores_", 1, 4, 4, __pyx_nargs); __PYX_ERR(0, 238, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -5727,14 +5295,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_response_moves), (&PyList_Type), 0, "response_moves", 1))) __PYX_ERR(0, 271, __pyx_L1_error)
-  __pyx_r = __pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_12_get_or_calc_response_move_scores_(__pyx_self, __pyx_v_self, __pyx_v_next_move, __pyx_v_response_moves, __pyx_v_new_board, __pyx_v_go_deeper);
+  __pyx_r = __pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_10_get_or_calc_response_move_scores_(__pyx_self, __pyx_v_self, __pyx_v_next_pick, __pyx_v_new_board, __pyx_v_go_deeper);
 
   /* function exit code */
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __pyx_r = NULL;
-  __pyx_L0:;
   {
     Py_ssize_t __pyx_temp;
     for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
@@ -5745,10 +5308,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_12_get_or_calc_response_move_scores_(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_next_move, PyObject *__pyx_v_response_moves, PyObject *__pyx_v_new_board, PyObject *__pyx_v_go_deeper) {
+static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_10_get_or_calc_response_move_scores_(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_next_pick, PyObject *__pyx_v_new_board, PyObject *__pyx_v_go_deeper) {
   PyObject *__pyx_v_next_board = NULL;
   PyObject *__pyx_v_next_response_moves = 0;
-  PyObject *__pyx_v_next_move_score = NULL;
   PyObject *__pyx_v_next_q_val = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -5760,54 +5322,56 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_12_get_or_c
   unsigned int __pyx_t_6;
   PyObject *__pyx_t_7 = NULL;
   Py_ssize_t __pyx_t_8;
-  PyObject *__pyx_t_9 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_get_or_calc_response_move_scores_", 1);
 
-  /* "chmengine/engines/cmhmey2.py":301
- *             Updated response list with `(next_move, score)` inserted in order.
+  /* "chmengine/engines/cmhmey2.py":263
+ *             If True, allows one extra ply of recursive scoring on checks or captures.
  *         """
- *         next_board: Board = self.board_copy_pushed(move=next_move, board=new_board)             # <<<<<<<<<<<<<<
+ *         next_board: Board = self.board_copy_pushed(move=next_pick.move, board=new_board)             # <<<<<<<<<<<<<<
  *         if go_deeper and (
- *                 next_board.is_check() or new_board.piece_at(next_move.to_square)
+ *                 next_board.is_check() or new_board.piece_at(next_pick.move.to_square)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_board_copy_pushed); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 301, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_board_copy_pushed); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 301, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_move, __pyx_v_next_move) < 0) __PYX_ERR(0, 301, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_v_new_board) < 0) __PYX_ERR(0, 301, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 301, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_next_pick, __pyx_n_s_move); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 263, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_move, __pyx_t_3) < 0) __PYX_ERR(0, 263, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_v_new_board) < 0) __PYX_ERR(0, 263, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_next_board = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "chmengine/engines/cmhmey2.py":302
+  /* "chmengine/engines/cmhmey2.py":264
  *         """
- *         next_board: Board = self.board_copy_pushed(move=next_move, board=new_board)
+ *         next_board: Board = self.board_copy_pushed(move=next_pick.move, board=new_board)
  *         if go_deeper and (             # <<<<<<<<<<<<<<
- *                 next_board.is_check() or new_board.piece_at(next_move.to_square)
+ *                 next_board.is_check() or new_board.piece_at(next_pick.move.to_square)
  *         ) and next_board.legal_moves.count() > 0:
  */
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_v_go_deeper); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 302, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_v_go_deeper); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 264, __pyx_L1_error)
   if (__pyx_t_5) {
   } else {
     __pyx_t_4 = __pyx_t_5;
     goto __pyx_L4_bool_binop_done;
   }
 
-  /* "chmengine/engines/cmhmey2.py":303
- *         next_board: Board = self.board_copy_pushed(move=next_move, board=new_board)
+  /* "chmengine/engines/cmhmey2.py":265
+ *         next_board: Board = self.board_copy_pushed(move=next_pick.move, board=new_board)
  *         if go_deeper and (
- *                 next_board.is_check() or new_board.piece_at(next_move.to_square)             # <<<<<<<<<<<<<<
+ *                 next_board.is_check() or new_board.piece_at(next_pick.move.to_square)             # <<<<<<<<<<<<<<
  *         ) and next_board.legal_moves.count() > 0:
  *             next_response_moves: List[Pick] = self._get_or_calculate_responses_(
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_next_board, __pyx_n_s_is_check); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 303, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_next_board, __pyx_n_s_is_check); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 265, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_1 = NULL;
   __pyx_t_6 = 0;
@@ -5827,28 +5391,31 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_12_get_or_c
     PyObject *__pyx_callargs[2] = {__pyx_t_1, NULL};
     __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_6, 0+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 303, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 265, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 303, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 265, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (!__pyx_t_5) {
   } else {
     goto __pyx_L6_next_and;
   }
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_new_board, __pyx_n_s_piece_at); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 303, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_new_board, __pyx_n_s_piece_at); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 265, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_next_move, __pyx_n_s_to_square); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 303, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_next_pick, __pyx_n_s_move); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 265, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_7 = NULL;
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_to_square); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 265, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = NULL;
   __pyx_t_6 = 0;
   #if CYTHON_UNPACK_METHODS
   if (likely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_7)) {
+    __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_1)) {
       PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_7);
+      __Pyx_INCREF(__pyx_t_1);
       __Pyx_INCREF(function);
       __Pyx_DECREF_SET(__pyx_t_2, function);
       __pyx_t_6 = 1;
@@ -5856,15 +5423,15 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_12_get_or_c
   }
   #endif
   {
-    PyObject *__pyx_callargs[2] = {__pyx_t_7, __pyx_t_1};
+    PyObject *__pyx_callargs[2] = {__pyx_t_1, __pyx_t_7};
     __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
-    __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 303, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 265, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 303, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 265, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (__pyx_t_5) {
   } else {
@@ -5873,248 +5440,250 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_12_get_or_c
   }
   __pyx_L6_next_and:;
 
-  /* "chmengine/engines/cmhmey2.py":304
+  /* "chmengine/engines/cmhmey2.py":266
  *         if go_deeper and (
- *                 next_board.is_check() or new_board.piece_at(next_move.to_square)
+ *                 next_board.is_check() or new_board.piece_at(next_pick.move.to_square)
  *         ) and next_board.legal_moves.count() > 0:             # <<<<<<<<<<<<<<
  *             next_response_moves: List[Pick] = self._get_or_calculate_responses_(
  *                 new_board=next_board,
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_next_board, __pyx_n_s_legal_moves); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 304, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_next_board, __pyx_n_s_legal_moves); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 266, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_count); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 304, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_count); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 266, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
   __pyx_t_6 = 0;
   #if CYTHON_UNPACK_METHODS
-  if (likely(PyMethod_Check(__pyx_t_1))) {
-    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_1);
+  if (likely(PyMethod_Check(__pyx_t_7))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_7);
     if (likely(__pyx_t_2)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_7);
       __Pyx_INCREF(__pyx_t_2);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_1, function);
+      __Pyx_DECREF_SET(__pyx_t_7, function);
       __pyx_t_6 = 1;
     }
   }
   #endif
   {
     PyObject *__pyx_callargs[2] = {__pyx_t_2, NULL};
-    __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_6, 0+__pyx_t_6);
+    __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_7, __pyx_callargs+1-__pyx_t_6, 0+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 304, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 266, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
-  __pyx_t_1 = PyObject_RichCompare(__pyx_t_3, __pyx_int_0, Py_GT); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 304, __pyx_L1_error)
+  __pyx_t_7 = PyObject_RichCompare(__pyx_t_3, __pyx_int_0, Py_GT); __Pyx_XGOTREF(__pyx_t_7); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 266, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 304, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 266, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_t_4 = __pyx_t_5;
   __pyx_L4_bool_binop_done:;
 
-  /* "chmengine/engines/cmhmey2.py":302
+  /* "chmengine/engines/cmhmey2.py":264
  *         """
- *         next_board: Board = self.board_copy_pushed(move=next_move, board=new_board)
+ *         next_board: Board = self.board_copy_pushed(move=next_pick.move, board=new_board)
  *         if go_deeper and (             # <<<<<<<<<<<<<<
- *                 next_board.is_check() or new_board.piece_at(next_move.to_square)
+ *                 next_board.is_check() or new_board.piece_at(next_pick.move.to_square)
  *         ) and next_board.legal_moves.count() > 0:
  */
   if (__pyx_t_4) {
 
-    /* "chmengine/engines/cmhmey2.py":305
- *                 next_board.is_check() or new_board.piece_at(next_move.to_square)
+    /* "chmengine/engines/cmhmey2.py":267
+ *                 next_board.is_check() or new_board.piece_at(next_pick.move.to_square)
  *         ) and next_board.legal_moves.count() > 0:
  *             next_response_moves: List[Pick] = self._get_or_calculate_responses_(             # <<<<<<<<<<<<<<
  *                 new_board=next_board,
  *                 go_deeper=False
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_or_calculate_responses); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 305, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_or_calculate_responses); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 267, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
 
-    /* "chmengine/engines/cmhmey2.py":306
+    /* "chmengine/engines/cmhmey2.py":268
  *         ) and next_board.legal_moves.count() > 0:
  *             next_response_moves: List[Pick] = self._get_or_calculate_responses_(
  *                 new_board=next_board,             # <<<<<<<<<<<<<<
  *                 go_deeper=False
  *             )
  */
-    __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 306, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 268, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_new_board, __pyx_v_next_board) < 0) __PYX_ERR(0, 306, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_new_board, __pyx_v_next_board) < 0) __PYX_ERR(0, 268, __pyx_L1_error)
 
-    /* "chmengine/engines/cmhmey2.py":307
+    /* "chmengine/engines/cmhmey2.py":269
  *             next_response_moves: List[Pick] = self._get_or_calculate_responses_(
  *                 new_board=next_board,
  *                 go_deeper=False             # <<<<<<<<<<<<<<
  *             )
- *             # `[-1 if next_board.turn else 0]` slice here is confusing since
+ *             next_pick.score = next_response_moves[-1 if next_board.turn else 0].score
  */
-    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_go_deeper, Py_False) < 0) __PYX_ERR(0, 306, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_go_deeper, Py_False) < 0) __PYX_ERR(0, 268, __pyx_L1_error)
 
-    /* "chmengine/engines/cmhmey2.py":305
- *                 next_board.is_check() or new_board.piece_at(next_move.to_square)
+    /* "chmengine/engines/cmhmey2.py":267
+ *                 next_board.is_check() or new_board.piece_at(next_pick.move.to_square)
  *         ) and next_board.legal_moves.count() > 0:
  *             next_response_moves: List[Pick] = self._get_or_calculate_responses_(             # <<<<<<<<<<<<<<
  *                 new_board=next_board,
  *                 go_deeper=False
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 305, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 267, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_2))) __PYX_ERR(0, 305, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_2))) __PYX_ERR(0, 267, __pyx_L1_error)
     __pyx_v_next_response_moves = ((PyObject*)__pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "chmengine/engines/cmhmey2.py":313
- *             # I think the reason we need `[-1 if next_board.turn else 0]` here is that we come out of a recursive call.
- *             # This part is confusing as heck, but it is the only way TestCMHMEngine2.test_false_positive_fen passes.
- *             next_move_score: float64 = next_response_moves[-1 if next_board.turn else 0].score             # <<<<<<<<<<<<<<
- *             self.set_q_value(value=next_move_score, board=next_board)
+    /* "chmengine/engines/cmhmey2.py":271
+ *                 go_deeper=False
+ *             )
+ *             next_pick.score = next_response_moves[-1 if next_board.turn else 0].score             # <<<<<<<<<<<<<<
+ *             self.set_q_value(value=next_pick.score, board=next_board)
  *         else:
  */
     if (unlikely(__pyx_v_next_response_moves == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 313, __pyx_L1_error)
+      __PYX_ERR(0, 271, __pyx_L1_error)
     }
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_next_board, __pyx_n_s_turn); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 313, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_next_board, __pyx_n_s_turn); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 271, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 313, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 271, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_4) {
       __pyx_t_8 = -1L;
     } else {
       __pyx_t_8 = 0;
     }
-    __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_next_response_moves, __pyx_t_8, long, 1, __Pyx_PyInt_From_long, 1, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 313, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_next_response_moves, __pyx_t_8, long, 1, __Pyx_PyInt_From_long, 1, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 271, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_score); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 313, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_score); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 271, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_v_next_move_score = __pyx_t_3;
-    __pyx_t_3 = 0;
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_next_pick, __pyx_n_s_score, __pyx_t_3) < 0) __PYX_ERR(0, 271, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "chmengine/engines/cmhmey2.py":314
- *             # This part is confusing as heck, but it is the only way TestCMHMEngine2.test_false_positive_fen passes.
- *             next_move_score: float64 = next_response_moves[-1 if next_board.turn else 0].score
- *             self.set_q_value(value=next_move_score, board=next_board)             # <<<<<<<<<<<<<<
+    /* "chmengine/engines/cmhmey2.py":272
+ *             )
+ *             next_pick.score = next_response_moves[-1 if next_board.turn else 0].score
+ *             self.set_q_value(value=next_pick.score, board=next_board)             # <<<<<<<<<<<<<<
  *         else:
  *             next_q_val: Optional[float64] = self.get_q_value(board=next_board)
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_set_q_value); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 314, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_set_q_value); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 272, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 314, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 272, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_value, __pyx_v_next_move_score) < 0) __PYX_ERR(0, 314, __pyx_L1_error)
-    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_v_next_board) < 0) __PYX_ERR(0, 314, __pyx_L1_error)
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 314, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_next_pick, __pyx_n_s_score); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 272, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
+    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_value, __pyx_t_7) < 0) __PYX_ERR(0, 272, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_v_next_board) < 0) __PYX_ERR(0, 272, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 272, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "chmengine/engines/cmhmey2.py":302
+    /* "chmengine/engines/cmhmey2.py":264
  *         """
- *         next_board: Board = self.board_copy_pushed(move=next_move, board=new_board)
+ *         next_board: Board = self.board_copy_pushed(move=next_pick.move, board=new_board)
  *         if go_deeper and (             # <<<<<<<<<<<<<<
- *                 next_board.is_check() or new_board.piece_at(next_move.to_square)
+ *                 next_board.is_check() or new_board.piece_at(next_pick.move.to_square)
  *         ) and next_board.legal_moves.count() > 0:
  */
     goto __pyx_L3;
   }
 
-  /* "chmengine/engines/cmhmey2.py":316
- *             self.set_q_value(value=next_move_score, board=next_board)
+  /* "chmengine/engines/cmhmey2.py":274
+ *             self.set_q_value(value=next_pick.score, board=next_board)
  *         else:
  *             next_q_val: Optional[float64] = self.get_q_value(board=next_board)             # <<<<<<<<<<<<<<
  *             if next_q_val is not None:
- *                 next_move_score = next_q_val
+ *                 next_pick.score = next_q_val
  */
   /*else*/ {
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_q_value); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 316, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 316, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_q_value); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 274, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
+    __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 274, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_v_next_board) < 0) __PYX_ERR(0, 316, __pyx_L1_error)
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 316, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_v_next_board) < 0) __PYX_ERR(0, 274, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 274, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_next_q_val = __pyx_t_3;
     __pyx_t_3 = 0;
 
-    /* "chmengine/engines/cmhmey2.py":317
+    /* "chmengine/engines/cmhmey2.py":275
  *         else:
  *             next_q_val: Optional[float64] = self.get_q_value(board=next_board)
  *             if next_q_val is not None:             # <<<<<<<<<<<<<<
- *                 next_move_score = next_q_val
+ *                 next_pick.score = next_q_val
  *             else:
  */
     __pyx_t_4 = (__pyx_v_next_q_val != Py_None);
     if (__pyx_t_4) {
 
-      /* "chmengine/engines/cmhmey2.py":318
+      /* "chmengine/engines/cmhmey2.py":276
  *             next_q_val: Optional[float64] = self.get_q_value(board=next_board)
  *             if next_q_val is not None:
- *                 next_move_score = next_q_val             # <<<<<<<<<<<<<<
+ *                 next_pick.score = next_q_val             # <<<<<<<<<<<<<<
  *             else:
- *                 next_move_score = calculate_better_white_minus_black_score(board=next_board, depth=self.depth)
+ *                 next_pick.score = calculate_better_white_minus_black_score(board=next_board, depth=self.depth)
  */
-      __Pyx_INCREF(__pyx_v_next_q_val);
-      __pyx_v_next_move_score = __pyx_v_next_q_val;
+      if (__Pyx_PyObject_SetAttrStr(__pyx_v_next_pick, __pyx_n_s_score, __pyx_v_next_q_val) < 0) __PYX_ERR(0, 276, __pyx_L1_error)
 
-      /* "chmengine/engines/cmhmey2.py":317
+      /* "chmengine/engines/cmhmey2.py":275
  *         else:
  *             next_q_val: Optional[float64] = self.get_q_value(board=next_board)
  *             if next_q_val is not None:             # <<<<<<<<<<<<<<
- *                 next_move_score = next_q_val
+ *                 next_pick.score = next_q_val
  *             else:
  */
       goto __pyx_L8;
     }
 
-    /* "chmengine/engines/cmhmey2.py":320
- *                 next_move_score = next_q_val
+    /* "chmengine/engines/cmhmey2.py":278
+ *                 next_pick.score = next_q_val
  *             else:
- *                 next_move_score = calculate_better_white_minus_black_score(board=next_board, depth=self.depth)             # <<<<<<<<<<<<<<
- *                 self.set_q_value(value=next_move_score, board=next_board)
- *         return insert_choice_into_current_moves(
+ *                 next_pick.score = calculate_better_white_minus_black_score(board=next_board, depth=self.depth)             # <<<<<<<<<<<<<<
+ *                 self.set_q_value(value=next_pick.score, board=next_board)
  */
     /*else*/ {
-      __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_calculate_better_white_minus_bla); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 320, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_calculate_better_white_minus_bla); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 278, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 320, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 278, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_v_next_board) < 0) __PYX_ERR(0, 320, __pyx_L1_error)
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_depth); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 320, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_depth, __pyx_t_1) < 0) __PYX_ERR(0, 320, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 320, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
+      if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_v_next_board) < 0) __PYX_ERR(0, 278, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_depth); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 278, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_7);
+      if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_depth, __pyx_t_7) < 0) __PYX_ERR(0, 278, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 278, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_v_next_move_score = __pyx_t_1;
-      __pyx_t_1 = 0;
+      if (__Pyx_PyObject_SetAttrStr(__pyx_v_next_pick, __pyx_n_s_score, __pyx_t_7) < 0) __PYX_ERR(0, 278, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-      /* "chmengine/engines/cmhmey2.py":321
+      /* "chmengine/engines/cmhmey2.py":279
  *             else:
- *                 next_move_score = calculate_better_white_minus_black_score(board=next_board, depth=self.depth)
- *                 self.set_q_value(value=next_move_score, board=next_board)             # <<<<<<<<<<<<<<
- *         return insert_choice_into_current_moves(
- *             choices_ordered_best_to_worst=response_moves, pick=Pick(move=next_move, score=next_move_score)
+ *                 next_pick.score = calculate_better_white_minus_black_score(board=next_board, depth=self.depth)
+ *                 self.set_q_value(value=next_pick.score, board=next_board)             # <<<<<<<<<<<<<<
  */
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_set_q_value); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 321, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 321, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_set_q_value); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 279, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_7);
+      __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 279, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_value, __pyx_v_next_move_score) < 0) __PYX_ERR(0, 321, __pyx_L1_error)
-      if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_v_next_board) < 0) __PYX_ERR(0, 321, __pyx_L1_error)
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 321, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_next_pick, __pyx_n_s_score); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 279, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_value, __pyx_t_3) < 0) __PYX_ERR(0, 279, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_v_next_board) < 0) __PYX_ERR(0, 279, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 279, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
@@ -6122,76 +5691,27 @@ static PyObject *__pyx_pf_9chmengine_7engines_7cmhmey2_11CMHMEngine2_12_get_or_c
   }
   __pyx_L3:;
 
-  /* "chmengine/engines/cmhmey2.py":322
- *                 next_move_score = calculate_better_white_minus_black_score(board=next_board, depth=self.depth)
- *                 self.set_q_value(value=next_move_score, board=next_board)
- *         return insert_choice_into_current_moves(             # <<<<<<<<<<<<<<
- *             choices_ordered_best_to_worst=response_moves, pick=Pick(move=next_move, score=next_move_score)
- *         )
- */
-  __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_insert_choice_into_current_moves); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 322, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-
-  /* "chmengine/engines/cmhmey2.py":323
- *                 self.set_q_value(value=next_move_score, board=next_board)
- *         return insert_choice_into_current_moves(
- *             choices_ordered_best_to_worst=response_moves, pick=Pick(move=next_move, score=next_move_score)             # <<<<<<<<<<<<<<
- *         )
- */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 323, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_choices_ordered_best_to_worst, __pyx_v_response_moves) < 0) __PYX_ERR(0, 323, __pyx_L1_error)
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Pick); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 323, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 323, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_move, __pyx_v_next_move) < 0) __PYX_ERR(0, 323, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_score, __pyx_v_next_move_score) < 0) __PYX_ERR(0, 323, __pyx_L1_error)
-  __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 323, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_9);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_pick, __pyx_t_9) < 0) __PYX_ERR(0, 323, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-
-  /* "chmengine/engines/cmhmey2.py":322
- *                 next_move_score = calculate_better_white_minus_black_score(board=next_board, depth=self.depth)
- *                 self.set_q_value(value=next_move_score, board=next_board)
- *         return insert_choice_into_current_moves(             # <<<<<<<<<<<<<<
- *             choices_ordered_best_to_worst=response_moves, pick=Pick(move=next_move, score=next_move_score)
- *         )
- */
-  __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 322, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_9);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(PyList_CheckExact(__pyx_t_9))||((__pyx_t_9) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_9))) __PYX_ERR(0, 322, __pyx_L1_error)
-  __pyx_r = ((PyObject*)__pyx_t_9);
-  __pyx_t_9 = 0;
-  goto __pyx_L0;
-
-  /* "chmengine/engines/cmhmey2.py":268
- *         return response_moves
+  /* "chmengine/engines/cmhmey2.py":238
+ *         return sorted(next_picks, reverse=True)
  * 
  *     def _get_or_calc_response_move_scores_(             # <<<<<<<<<<<<<<
  *             self,
- *             next_move: Move,
+ *             next_pick: Pick,
  */
 
   /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_XDECREF(__pyx_t_9);
   __Pyx_AddTraceback("chmengine.engines.cmhmey2.CMHMEngine2._get_or_calc_response_move_scores_", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_next_board);
   __Pyx_XDECREF(__pyx_v_next_response_moves);
-  __Pyx_XDECREF(__pyx_v_next_move_score);
   __Pyx_XDECREF(__pyx_v_next_q_val);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -6223,13 +5743,12 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_CMHMEngine2, __pyx_k_CMHMEngine2, sizeof(__pyx_k_CMHMEngine2), 0, 0, 1, 1},
     {&__pyx_n_u_CMHMEngine2, __pyx_k_CMHMEngine2, sizeof(__pyx_k_CMHMEngine2), 0, 1, 0, 1},
     {&__pyx_n_s_CMHMEngine2___init, __pyx_k_CMHMEngine2___init, sizeof(__pyx_k_CMHMEngine2___init), 0, 0, 1, 1},
-    {&__pyx_kp_u_CMHMEngine2___init___line_20, __pyx_k_CMHMEngine2___init___line_20, sizeof(__pyx_k_CMHMEngine2___init___line_20), 0, 1, 0, 0},
+    {&__pyx_kp_u_CMHMEngine2___init___line_18, __pyx_k_CMHMEngine2___init___line_18, sizeof(__pyx_k_CMHMEngine2___init___line_18), 0, 1, 0, 0},
     {&__pyx_n_s_CMHMEngine2__get_or_calc_respons, __pyx_k_CMHMEngine2__get_or_calc_respons, sizeof(__pyx_k_CMHMEngine2__get_or_calc_respons), 0, 0, 1, 1},
     {&__pyx_n_s_CMHMEngine2__get_or_calculate_re, __pyx_k_CMHMEngine2__get_or_calculate_re, sizeof(__pyx_k_CMHMEngine2__get_or_calculate_re), 0, 0, 1, 1},
     {&__pyx_n_s_CMHMEngine2__update_current_move, __pyx_k_CMHMEngine2__update_current_move, sizeof(__pyx_k_CMHMEngine2__update_current_move), 0, 0, 1, 1},
-    {&__pyx_n_s_CMHMEngine2__update_current_move_2, __pyx_k_CMHMEngine2__update_current_move_2, sizeof(__pyx_k_CMHMEngine2__update_current_move_2), 0, 0, 1, 1},
     {&__pyx_n_s_CMHMEngine2_pick_move, __pyx_k_CMHMEngine2_pick_move, sizeof(__pyx_k_CMHMEngine2_pick_move), 0, 0, 1, 1},
-    {&__pyx_kp_u_CMHMEngine2_pick_move_line_99, __pyx_k_CMHMEngine2_pick_move_line_99, sizeof(__pyx_k_CMHMEngine2_pick_move_line_99), 0, 1, 0, 0},
+    {&__pyx_kp_u_CMHMEngine2_pick_move_line_96, __pyx_k_CMHMEngine2_pick_move_line_96, sizeof(__pyx_k_CMHMEngine2_pick_move_line_96), 0, 1, 0, 0},
     {&__pyx_n_s_CMHMEngine2_update_q_values, __pyx_k_CMHMEngine2_update_q_values, sizeof(__pyx_k_CMHMEngine2_update_q_values), 0, 0, 1, 1},
     {&__pyx_kp_u_CMHMEngine2_update_q_values_line, __pyx_k_CMHMEngine2_update_q_values_line, sizeof(__pyx_k_CMHMEngine2_update_q_values_line), 0, 1, 0, 0},
     {&__pyx_kp_s_Cmhmey_Jr_the_love_child_of_CMHM, __pyx_k_Cmhmey_Jr_the_love_child_of_CMHM, sizeof(__pyx_k_Cmhmey_Jr_the_love_child_of_CMHM), 0, 0, 1, 0},
@@ -6245,13 +5764,13 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_s_Optional_Board, __pyx_k_Optional_Board, sizeof(__pyx_k_Optional_Board), 0, 0, 1, 0},
     {&__pyx_n_s_Pick, __pyx_k_Pick, sizeof(__pyx_k_Pick), 0, 0, 1, 1},
     {&__pyx_n_s_Quartney, __pyx_k_Quartney, sizeof(__pyx_k_Quartney), 0, 0, 1, 1},
-    {&__pyx_kp_u_Select_a_move_based_on_heatmap_e, __pyx_k_Select_a_move_based_on_heatmap_e, sizeof(__pyx_k_Select_a_move_based_on_heatmap_e), 0, 1, 0, 0},
+    {&__pyx_kp_u_Select_a_Pick_based_on_heatmap_e, __pyx_k_Select_a_Pick_based_on_heatmap_e, sizeof(__pyx_k_Select_a_Pick_based_on_heatmap_e), 0, 1, 0, 0},
     {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
+    {&__pyx_n_s__17, __pyx_k__17, sizeof(__pyx_k__17), 0, 0, 1, 1},
     {&__pyx_kp_u__2, __pyx_k__2, sizeof(__pyx_k__2), 0, 1, 0, 0},
-    {&__pyx_n_s__21, __pyx_k__21, sizeof(__pyx_k__21), 0, 0, 1, 1},
     {&__pyx_kp_u__3, __pyx_k__3, sizeof(__pyx_k__3), 0, 1, 0, 0},
-    {&__pyx_kp_u__4, __pyx_k__4, sizeof(__pyx_k__4), 0, 1, 0, 0},
     {&__pyx_n_s_all, __pyx_k_all, sizeof(__pyx_k_all), 0, 0, 1, 1},
+    {&__pyx_n_s_args, __pyx_k_args, sizeof(__pyx_k_args), 0, 0, 1, 1},
     {&__pyx_n_s_asyncio_coroutines, __pyx_k_asyncio_coroutines, sizeof(__pyx_k_asyncio_coroutines), 0, 0, 1, 1},
     {&__pyx_n_s_board, __pyx_k_board, sizeof(__pyx_k_board), 0, 0, 1, 1},
     {&__pyx_n_s_board_copy_pushed, __pyx_k_board_copy_pushed, sizeof(__pyx_k_board_copy_pushed), 0, 0, 1, 1},
@@ -6264,23 +5783,20 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_chmengine_engines_quartney, __pyx_k_chmengine_engines_quartney, sizeof(__pyx_k_chmengine_engines_quartney), 0, 0, 1, 1},
     {&__pyx_n_s_chmengine_utils, __pyx_k_chmengine_utils, sizeof(__pyx_k_chmengine_utils), 0, 0, 1, 1},
     {&__pyx_n_s_choice, __pyx_k_choice, sizeof(__pyx_k_choice), 0, 0, 1, 1},
-    {&__pyx_n_s_choices_ordered_best_to_worst, __pyx_k_choices_ordered_best_to_worst, sizeof(__pyx_k_choices_ordered_best_to_worst), 0, 0, 1, 1},
     {&__pyx_n_s_chosen_pick, __pyx_k_chosen_pick, sizeof(__pyx_k_chosen_pick), 0, 0, 1, 1},
     {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
     {&__pyx_n_s_count, __pyx_k_count, sizeof(__pyx_k_count), 0, 0, 1, 1},
-    {&__pyx_n_s_current_move, __pyx_k_current_move, sizeof(__pyx_k_current_move), 0, 0, 1, 1},
-    {&__pyx_n_s_current_move_choices_ordered, __pyx_k_current_move_choices_ordered, sizeof(__pyx_k_current_move_choices_ordered), 0, 0, 1, 1},
-    {&__pyx_n_s_current_moves, __pyx_k_current_moves, sizeof(__pyx_k_current_moves), 0, 0, 1, 1},
-    {&__pyx_n_s_current_moves_list, __pyx_k_current_moves_list, sizeof(__pyx_k_current_moves_list), 0, 0, 1, 1},
+    {&__pyx_n_s_current_pick, __pyx_k_current_pick, sizeof(__pyx_k_current_pick), 0, 0, 1, 1},
+    {&__pyx_n_s_current_picks, __pyx_k_current_picks, sizeof(__pyx_k_current_picks), 0, 0, 1, 1},
+    {&__pyx_n_s_current_picks_list, __pyx_k_current_picks_list, sizeof(__pyx_k_current_picks_list), 0, 0, 1, 1},
     {&__pyx_n_s_current_q, __pyx_k_current_q, sizeof(__pyx_k_current_q), 0, 0, 1, 1},
     {&__pyx_n_s_debug, __pyx_k_debug, sizeof(__pyx_k_debug), 0, 0, 1, 1},
     {&__pyx_n_s_depth, __pyx_k_depth, sizeof(__pyx_k_depth), 0, 0, 1, 1},
     {&__pyx_n_s_dict, __pyx_k_dict, sizeof(__pyx_k_dict), 0, 0, 1, 1},
     {&__pyx_n_s_doc, __pyx_k_doc, sizeof(__pyx_k_doc), 0, 0, 1, 1},
     {&__pyx_n_s_fen, __pyx_k_fen, sizeof(__pyx_k_fen), 0, 0, 1, 1},
-    {&__pyx_n_s_final_move_score, __pyx_k_final_move_score, sizeof(__pyx_k_final_move_score), 0, 0, 1, 1},
     {&__pyx_n_s_float64, __pyx_k_float64, sizeof(__pyx_k_float64), 0, 0, 1, 1},
-    {&__pyx_n_s_format_moves, __pyx_k_format_moves, sizeof(__pyx_k_format_moves), 0, 0, 1, 1},
+    {&__pyx_n_s_format_picks, __pyx_k_format_picks, sizeof(__pyx_k_format_picks), 0, 0, 1, 1},
     {&__pyx_n_s_get_or_calc_response_move_score, __pyx_k_get_or_calc_response_move_score, sizeof(__pyx_k_get_or_calc_response_move_score), 0, 0, 1, 1},
     {&__pyx_n_s_get_or_calculate_responses, __pyx_k_get_or_calculate_responses, sizeof(__pyx_k_get_or_calculate_responses), 0, 0, 1, 1},
     {&__pyx_n_s_get_q_value, __pyx_k_get_q_value, sizeof(__pyx_k_get_q_value), 0, 0, 1, 1},
@@ -6290,10 +5806,10 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_init_qdb, __pyx_k_init_qdb, sizeof(__pyx_k_init_qdb), 0, 0, 1, 1},
     {&__pyx_n_s_init_subclass, __pyx_k_init_subclass, sizeof(__pyx_k_init_subclass), 0, 0, 1, 1},
     {&__pyx_n_s_initial_q_val, __pyx_k_initial_q_val, sizeof(__pyx_k_initial_q_val), 0, 0, 1, 1},
-    {&__pyx_n_s_insert_choice_into_current_moves, __pyx_k_insert_choice_into_current_moves, sizeof(__pyx_k_insert_choice_into_current_moves), 0, 0, 1, 1},
     {&__pyx_n_s_int, __pyx_k_int, sizeof(__pyx_k_int), 0, 0, 1, 1},
     {&__pyx_n_s_is_check, __pyx_k_is_check, sizeof(__pyx_k_is_check), 0, 0, 1, 1},
     {&__pyx_n_s_is_coroutine, __pyx_k_is_coroutine, sizeof(__pyx_k_is_coroutine), 0, 0, 1, 1},
+    {&__pyx_n_s_kwargs, __pyx_k_kwargs, sizeof(__pyx_k_kwargs), 0, 0, 1, 1},
     {&__pyx_n_s_last_move, __pyx_k_last_move, sizeof(__pyx_k_last_move), 0, 0, 1, 1},
     {&__pyx_n_s_legal_moves, __pyx_k_legal_moves, sizeof(__pyx_k_legal_moves), 0, 0, 1, 1},
     {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
@@ -6308,16 +5824,12 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_new_move, __pyx_k_new_move, sizeof(__pyx_k_new_move), 0, 0, 1, 1},
     {&__pyx_n_s_new_score, __pyx_k_new_score, sizeof(__pyx_k_new_score), 0, 0, 1, 1},
     {&__pyx_n_s_next_board, __pyx_k_next_board, sizeof(__pyx_k_next_board), 0, 0, 1, 1},
-    {&__pyx_n_s_next_move, __pyx_k_next_move, sizeof(__pyx_k_next_move), 0, 0, 1, 1},
-    {&__pyx_n_s_next_move_score, __pyx_k_next_move_score, sizeof(__pyx_k_next_move_score), 0, 0, 1, 1},
-    {&__pyx_n_s_next_moves, __pyx_k_next_moves, sizeof(__pyx_k_next_moves), 0, 0, 1, 1},
+    {&__pyx_n_s_next_pick, __pyx_k_next_pick, sizeof(__pyx_k_next_pick), 0, 0, 1, 1},
+    {&__pyx_n_s_next_picks, __pyx_k_next_picks, sizeof(__pyx_k_next_picks), 0, 0, 1, 1},
     {&__pyx_n_s_next_q_val, __pyx_k_next_q_val, sizeof(__pyx_k_next_q_val), 0, 0, 1, 1},
     {&__pyx_n_s_next_response_moves, __pyx_k_next_response_moves, sizeof(__pyx_k_next_response_moves), 0, 0, 1, 1},
     {&__pyx_n_s_numpy, __pyx_k_numpy, sizeof(__pyx_k_numpy), 0, 0, 1, 1},
     {&__pyx_n_s_p, __pyx_k_p, sizeof(__pyx_k_p), 0, 0, 1, 1},
-    {&__pyx_n_s_pick, __pyx_k_pick, sizeof(__pyx_k_pick), 0, 0, 1, 1},
-    {&__pyx_n_s_pick_best, __pyx_k_pick_best, sizeof(__pyx_k_pick_best), 0, 0, 1, 1},
-    {&__pyx_n_s_pick_by, __pyx_k_pick_by, sizeof(__pyx_k_pick_by), 0, 0, 1, 1},
     {&__pyx_n_s_pick_move, __pyx_k_pick_move, sizeof(__pyx_k_pick_move), 0, 0, 1, 1},
     {&__pyx_n_s_picks, __pyx_k_picks, sizeof(__pyx_k_picks), 0, 0, 1, 1},
     {&__pyx_n_s_piece_at, __pyx_k_piece_at, sizeof(__pyx_k_piece_at), 0, 0, 1, 1},
@@ -6328,11 +5840,12 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_random, __pyx_k_random, sizeof(__pyx_k_random), 0, 0, 1, 1},
     {&__pyx_n_s_response_moves, __pyx_k_response_moves, sizeof(__pyx_k_response_moves), 0, 0, 1, 1},
     {&__pyx_n_s_return, __pyx_k_return, sizeof(__pyx_k_return), 0, 0, 1, 1},
+    {&__pyx_n_s_reverse, __pyx_k_reverse, sizeof(__pyx_k_reverse), 0, 0, 1, 1},
     {&__pyx_n_s_score, __pyx_k_score, sizeof(__pyx_k_score), 0, 0, 1, 1},
     {&__pyx_n_s_self, __pyx_k_self, sizeof(__pyx_k_self), 0, 0, 1, 1},
     {&__pyx_n_s_set_name, __pyx_k_set_name, sizeof(__pyx_k_set_name), 0, 0, 1, 1},
     {&__pyx_n_s_set_q_value, __pyx_k_set_q_value, sizeof(__pyx_k_set_q_value), 0, 0, 1, 1},
-    {&__pyx_n_s_str, __pyx_k_str, sizeof(__pyx_k_str), 0, 0, 1, 1},
+    {&__pyx_n_s_sorted, __pyx_k_sorted, sizeof(__pyx_k_sorted), 0, 0, 1, 1},
     {&__pyx_n_s_super, __pyx_k_super, sizeof(__pyx_k_super), 0, 0, 1, 1},
     {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
     {&__pyx_n_s_to_square, __pyx_k_to_square, sizeof(__pyx_k_to_square), 0, 0, 1, 1},
@@ -6340,7 +5853,6 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_typing, __pyx_k_typing, sizeof(__pyx_k_typing), 0, 0, 1, 1},
     {&__pyx_n_s_uci, __pyx_k_uci, sizeof(__pyx_k_uci), 0, 0, 1, 1},
     {&__pyx_n_s_update_current_move_choices, __pyx_k_update_current_move_choices, sizeof(__pyx_k_update_current_move_choices), 0, 0, 1, 1},
-    {&__pyx_n_s_update_current_move_choices_ord, __pyx_k_update_current_move_choices_ord, sizeof(__pyx_k_update_current_move_choices_ord), 0, 0, 1, 1},
     {&__pyx_n_s_update_q_values, __pyx_k_update_q_values, sizeof(__pyx_k_update_q_values), 0, 0, 1, 1},
     {&__pyx_n_s_value, __pyx_k_value, sizeof(__pyx_k_value), 0, 0, 1, 1},
     {0, 0, 0, 0, 0, 0, 0}
@@ -6349,9 +5861,10 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
 }
 /* #### Code section: cached_builtins ### */
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_n_s_super); if (!__pyx_builtin_super) __PYX_ERR(0, 43, __pyx_L1_error)
-  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 93, __pyx_L1_error)
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_n_s_super); if (!__pyx_builtin_super) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 141, __pyx_L1_error)
+  __pyx_builtin_sorted = __Pyx_GetBuiltinName(__pyx_n_s_sorted); if (!__pyx_builtin_sorted) __PYX_ERR(0, 146, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -6362,95 +5875,80 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "chmengine/engines/cmhmey2.py":20
+  /* "chmengine/engines/cmhmey2.py":18
  *     """Cmhmey Jr., the love-child of CMHMEngine and Quartney"""
  * 
  *     def __init__(self, board: Optional[Board] = None, depth: int = 1) -> None:             # <<<<<<<<<<<<<<
  *         """Initialize the CMHMEngine2 instance.
  * 
  */
-  __pyx_tuple__5 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_board, __pyx_n_s_depth); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 20, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__5);
-  __Pyx_GIVEREF(__pyx_tuple__5);
-  __pyx_codeobj__6 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__5, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_py, __pyx_n_s_init, 20, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__6)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_board, __pyx_n_s_depth); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 18, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__4);
+  __Pyx_GIVEREF(__pyx_tuple__4);
+  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_py, __pyx_n_s_init, 18, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 18, __pyx_L1_error)
 
-  /* "chmengine/engines/cmhmey2.py":46
+  /* "chmengine/engines/cmhmey2.py":44
  *         self._init_qdb()  # List to store moves made during the game as (fen, move_uci) pairs.
  * 
  *     def update_q_values(self, debug: bool = False) -> None:             # <<<<<<<<<<<<<<
  *         """Back-propagate game outcome through the Q-table.
  * 
  */
-  __pyx_tuple__7 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_debug, __pyx_n_s_last_move, __pyx_n_s_current_q, __pyx_n_s_new_move, __pyx_n_s_new_score); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 46, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__7);
-  __Pyx_GIVEREF(__pyx_tuple__7);
-  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_py, __pyx_n_s_update_q_values, 46, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 46, __pyx_L1_error)
-  __pyx_tuple__9 = PyTuple_Pack(1, ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 46, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__9);
-  __Pyx_GIVEREF(__pyx_tuple__9);
+  __pyx_tuple__6 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_debug, __pyx_n_s_last_move, __pyx_n_s_current_q, __pyx_n_s_new_move, __pyx_n_s_new_score); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__6);
+  __Pyx_GIVEREF(__pyx_tuple__6);
+  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_py, __pyx_n_s_update_q_values, 44, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_tuple__8 = PyTuple_Pack(1, ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__8);
+  __Pyx_GIVEREF(__pyx_tuple__8);
 
-  /* "chmengine/engines/cmhmey2.py":99
+  /* "chmengine/engines/cmhmey2.py":96
+ *                 )
  * 
- *     # pylint: disable=unused-argument
  *     def pick_move(             # <<<<<<<<<<<<<<
  *             self,
- *             pick_by: str = "",
+ *             *args,
  */
-  __pyx_tuple__10 = PyTuple_Pack(10, __pyx_n_s_self, __pyx_n_s_pick_by, __pyx_n_s_board, __pyx_n_s_debug, __pyx_n_s_current_moves, __pyx_n_s_current_move_choices_ordered, __pyx_n_s_current_move, __pyx_n_s_pick_best, __pyx_n_s_chosen_pick, __pyx_n_s_p); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 99, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__10);
-  __Pyx_GIVEREF(__pyx_tuple__10);
-  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_py, __pyx_n_s_pick_move, 99, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(0, 99, __pyx_L1_error)
-  __pyx_tuple__12 = PyTuple_Pack(3, ((PyObject*)__pyx_kp_u__3), Py_None, ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 99, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__12);
-  __Pyx_GIVEREF(__pyx_tuple__12);
+  __pyx_tuple__9 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_board, __pyx_n_s_debug, __pyx_n_s_args, __pyx_n_s_kwargs, __pyx_n_s_current_picks, __pyx_n_s_current_pick, __pyx_n_s_chosen_pick, __pyx_n_s_p); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 96, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__9);
+  __Pyx_GIVEREF(__pyx_tuple__9);
+  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_py, __pyx_n_s_pick_move, 96, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 96, __pyx_L1_error)
 
-  /* "chmengine/engines/cmhmey2.py":167
- *         return chosen_pick
- * 
- *     def _update_current_move_choices_ordered_(             # <<<<<<<<<<<<<<
- *             self,
- *             current_move_choices_ordered: List[Pick],
- */
-  __pyx_tuple__13 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_current_move_choices_ordered, __pyx_n_s_current_move, __pyx_n_s_board, __pyx_n_s_new_board); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 167, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__13);
-  __Pyx_GIVEREF(__pyx_tuple__13);
-  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_py, __pyx_n_s_update_current_move_choices_ord, 167, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 167, __pyx_L1_error)
-
-  /* "chmengine/engines/cmhmey2.py":180
+  /* "chmengine/engines/cmhmey2.py":158
  * 
  *     # pylint: disable=too-many-arguments
  *     def _update_current_move_choices_(             # <<<<<<<<<<<<<<
  *             self,
- *             current_move_choices_ordered: List[Pick],
+ *             board: Board,
  */
-  __pyx_tuple__15 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_current_move_choices_ordered, __pyx_n_s_new_board, __pyx_n_s_current_move, __pyx_n_s_response_moves, __pyx_n_s_initial_q_val, __pyx_n_s_final_move_score); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 180, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__15);
-  __Pyx_GIVEREF(__pyx_tuple__15);
-  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_py, __pyx_n_s_update_current_move_choices, 180, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __pyx_tuple__11 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_board, __pyx_n_s_current_pick, __pyx_n_s_new_board, __pyx_n_s_response_moves, __pyx_n_s_initial_q_val); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__11);
+  __Pyx_GIVEREF(__pyx_tuple__11);
+  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_py, __pyx_n_s_update_current_move_choices, 158, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 158, __pyx_L1_error)
 
-  /* "chmengine/engines/cmhmey2.py":232
- *         )
+  /* "chmengine/engines/cmhmey2.py":202
+ *             self.set_q_value(value=current_pick.score, board=new_board)
  * 
  *     def _get_or_calculate_responses_(             # <<<<<<<<<<<<<<
  *             self,
  *             new_board: Board,
  */
-  __pyx_tuple__17 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_new_board, __pyx_n_s_go_deeper, __pyx_n_s_next_moves, __pyx_n_s_response_moves, __pyx_n_s_next_move); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 232, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__17);
-  __Pyx_GIVEREF(__pyx_tuple__17);
-  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__17, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_py, __pyx_n_s_get_or_calculate_responses, 232, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(0, 232, __pyx_L1_error)
+  __pyx_tuple__13 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_new_board, __pyx_n_s_go_deeper, __pyx_n_s_next_picks, __pyx_n_s_next_pick); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 202, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__13);
+  __Pyx_GIVEREF(__pyx_tuple__13);
+  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_py, __pyx_n_s_get_or_calculate_responses, 202, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 202, __pyx_L1_error)
 
-  /* "chmengine/engines/cmhmey2.py":268
- *         return response_moves
+  /* "chmengine/engines/cmhmey2.py":238
+ *         return sorted(next_picks, reverse=True)
  * 
  *     def _get_or_calc_response_move_scores_(             # <<<<<<<<<<<<<<
  *             self,
- *             next_move: Move,
+ *             next_pick: Pick,
  */
-  __pyx_tuple__19 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_next_move, __pyx_n_s_response_moves, __pyx_n_s_new_board, __pyx_n_s_go_deeper, __pyx_n_s_next_board, __pyx_n_s_next_response_moves, __pyx_n_s_next_move_score, __pyx_n_s_next_q_val); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 268, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__19);
-  __Pyx_GIVEREF(__pyx_tuple__19);
-  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(5, 0, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_py, __pyx_n_s_get_or_calc_response_move_score, 268, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 268, __pyx_L1_error)
+  __pyx_tuple__15 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_next_pick, __pyx_n_s_new_board, __pyx_n_s_go_deeper, __pyx_n_s_next_board, __pyx_n_s_next_response_moves, __pyx_n_s_next_q_val); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 238, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__15);
+  __Pyx_GIVEREF(__pyx_tuple__15);
+  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_py, __pyx_n_s_get_or_calc_response_move_score, 238, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -6708,6 +6206,7 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_cmhmey2(PyObject *__pyx_pyinit_mod
   PyObject *__pyx_t_5 = NULL;
   PyObject *__pyx_t_6 = NULL;
   PyObject *__pyx_t_7 = NULL;
+  PyObject *__pyx_t_8 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -6925,7 +6424,7 @@ if (!__Pyx_RefNanny) {
  * 
  * from chmengine.engines.cmhmey1 import CMHMEngine             # <<<<<<<<<<<<<<
  * from chmengine.engines.quartney import Quartney
- * from chmengine.utils import (
+ * from chmengine.utils import Pick, calculate_better_white_minus_black_score, format_picks
  */
   __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -6945,8 +6444,8 @@ if (!__Pyx_RefNanny) {
  * 
  * from chmengine.engines.cmhmey1 import CMHMEngine
  * from chmengine.engines.quartney import Quartney             # <<<<<<<<<<<<<<
- * from chmengine.utils import (
- *     Pick, calculate_better_white_minus_black_score, format_moves, insert_choice_into_current_moves
+ * from chmengine.utils import Pick, calculate_better_white_minus_black_score, format_picks
+ * 
  */
   __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -6962,263 +6461,246 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "chmengine/engines/cmhmey2.py":11
- * from chmengine.engines.quartney import Quartney
- * from chmengine.utils import (
- *     Pick, calculate_better_white_minus_black_score, format_moves, insert_choice_into_current_moves             # <<<<<<<<<<<<<<
- * )
- * 
- */
-  __pyx_t_2 = PyList_New(4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_INCREF(__pyx_n_s_Pick);
-  __Pyx_GIVEREF(__pyx_n_s_Pick);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_Pick)) __PYX_ERR(0, 11, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_s_calculate_better_white_minus_bla);
-  __Pyx_GIVEREF(__pyx_n_s_calculate_better_white_minus_bla);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_s_calculate_better_white_minus_bla)) __PYX_ERR(0, 11, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_s_format_moves);
-  __Pyx_GIVEREF(__pyx_n_s_format_moves);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 2, __pyx_n_s_format_moves)) __PYX_ERR(0, 11, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_s_insert_choice_into_current_moves);
-  __Pyx_GIVEREF(__pyx_n_s_insert_choice_into_current_moves);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 3, __pyx_n_s_insert_choice_into_current_moves)) __PYX_ERR(0, 11, __pyx_L1_error);
-
   /* "chmengine/engines/cmhmey2.py":10
  * from chmengine.engines.cmhmey1 import CMHMEngine
  * from chmengine.engines.quartney import Quartney
- * from chmengine.utils import (             # <<<<<<<<<<<<<<
- *     Pick, calculate_better_white_minus_black_score, format_moves, insert_choice_into_current_moves
- * )
+ * from chmengine.utils import Pick, calculate_better_white_minus_black_score, format_picks             # <<<<<<<<<<<<<<
+ * 
+ * __all__ = ['CMHMEngine2']
  */
+  __pyx_t_2 = PyList_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_INCREF(__pyx_n_s_Pick);
+  __Pyx_GIVEREF(__pyx_n_s_Pick);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_Pick)) __PYX_ERR(0, 10, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_calculate_better_white_minus_bla);
+  __Pyx_GIVEREF(__pyx_n_s_calculate_better_white_minus_bla);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_s_calculate_better_white_minus_bla)) __PYX_ERR(0, 10, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_format_picks);
+  __Pyx_GIVEREF(__pyx_n_s_format_picks);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 2, __pyx_n_s_format_picks)) __PYX_ERR(0, 10, __pyx_L1_error);
   __pyx_t_3 = __Pyx_Import(__pyx_n_s_chmengine_utils, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_Pick); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Pick, __pyx_t_2) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Pick, __pyx_t_2) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_calculate_better_white_minus_bla); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_calculate_better_white_minus_bla, __pyx_t_2) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_calculate_better_white_minus_bla, __pyx_t_2) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_format_moves); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_format_picks); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_format_moves, __pyx_t_2) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_insert_choice_into_current_moves); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_insert_choice_into_current_moves, __pyx_t_2) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_format_picks, __pyx_t_2) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/engines/cmhmey2.py":14
- * )
+  /* "chmengine/engines/cmhmey2.py":12
+ * from chmengine.utils import Pick, calculate_better_white_minus_black_score, format_picks
  * 
  * __all__ = ['CMHMEngine2']             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(__pyx_n_u_CMHMEngine2);
   __Pyx_GIVEREF(__pyx_n_u_CMHMEngine2);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 0, __pyx_n_u_CMHMEngine2)) __PYX_ERR(0, 14, __pyx_L1_error);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_all, __pyx_t_3) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 0, __pyx_n_u_CMHMEngine2)) __PYX_ERR(0, 12, __pyx_L1_error);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_all, __pyx_t_3) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/engines/cmhmey2.py":17
+  /* "chmengine/engines/cmhmey2.py":15
  * 
  * 
  * class CMHMEngine2(CMHMEngine, Quartney):             # <<<<<<<<<<<<<<
  *     """Cmhmey Jr., the love-child of CMHMEngine and Quartney"""
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_CMHMEngine); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_CMHMEngine); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Quartney); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Quartney); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_3);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3)) __PYX_ERR(0, 17, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3)) __PYX_ERR(0, 15, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_2)) __PYX_ERR(0, 15, __pyx_L1_error);
   __pyx_t_3 = 0;
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PEP560_update_bases(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PEP560_update_bases(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_CalculateMetaclass(NULL, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CalculateMetaclass(NULL, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_Py3MetaclassPrepare(__pyx_t_3, __pyx_t_2, __pyx_n_s_CMHMEngine2, __pyx_n_s_CMHMEngine2, (PyObject *) NULL, __pyx_n_s_chmengine_engines_cmhmey2, __pyx_kp_s_Cmhmey_Jr_the_love_child_of_CMHM); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_Py3MetaclassPrepare(__pyx_t_3, __pyx_t_2, __pyx_n_s_CMHMEngine2, __pyx_n_s_CMHMEngine2, (PyObject *) NULL, __pyx_n_s_chmengine_engines_cmhmey2, __pyx_kp_s_Cmhmey_Jr_the_love_child_of_CMHM); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   if (__pyx_t_2 != __pyx_t_4) {
-    if (unlikely((PyDict_SetItemString(__pyx_t_5, "__orig_bases__", __pyx_t_4) < 0))) __PYX_ERR(0, 17, __pyx_L1_error)
+    if (unlikely((PyDict_SetItemString(__pyx_t_5, "__orig_bases__", __pyx_t_4) < 0))) __PYX_ERR(0, 15, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "chmengine/engines/cmhmey2.py":20
+  /* "chmengine/engines/cmhmey2.py":18
  *     """Cmhmey Jr., the love-child of CMHMEngine and Quartney"""
  * 
  *     def __init__(self, board: Optional[Board] = None, depth: int = 1) -> None:             # <<<<<<<<<<<<<<
  *         """Initialize the CMHMEngine2 instance.
  * 
  */
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_depth, __pyx_n_s_int) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_1__init__, 0, __pyx_n_s_CMHMEngine2___init, NULL, __pyx_n_s_chmengine_engines_cmhmey2, __pyx_d, ((PyObject *)__pyx_codeobj__6)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_depth, __pyx_n_s_int) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_1__init__, 0, __pyx_n_s_CMHMEngine2___init, NULL, __pyx_n_s_chmengine_engines_cmhmey2, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_INCREF(__pyx_t_7);
   PyList_Append(__pyx_t_4, __pyx_t_7);
   __Pyx_GIVEREF(__pyx_t_7);
-  if (!__Pyx_CyFunction_InitDefaults(__pyx_t_7, sizeof(__pyx_defaults), 1)) __PYX_ERR(0, 20, __pyx_L1_error)
-  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_int_1)) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_int_1))) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (!__Pyx_CyFunction_InitDefaults(__pyx_t_7, sizeof(__pyx_defaults), 1)) __PYX_ERR(0, 18, __pyx_L1_error)
+  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_int_1)) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_int_1))) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_INCREF(__pyx_int_1);
   __Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_t_7)->__pyx_arg_depth = ((PyObject*)__pyx_int_1);
   __Pyx_GIVEREF(__pyx_int_1);
   __Pyx_CyFunction_SetDefaultsGetter(__pyx_t_7, __pyx_pf_9chmengine_7engines_7cmhmey2___defaults__);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_6);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_init, __pyx_t_7) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_init, __pyx_t_7) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/engines/cmhmey2.py":46
+  /* "chmengine/engines/cmhmey2.py":44
  *         self._init_qdb()  # List to store moves made during the game as (fen, move_uci) pairs.
  * 
  *     def update_q_values(self, debug: bool = False) -> None:             # <<<<<<<<<<<<<<
  *         """Back-propagate game outcome through the Q-table.
  * 
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_debug, __pyx_n_s_bool) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_3update_q_values, 0, __pyx_n_s_CMHMEngine2_update_q_values, NULL, __pyx_n_s_chmengine_engines_cmhmey2, __pyx_d, ((PyObject *)__pyx_codeobj__8)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 46, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_debug, __pyx_n_s_bool) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_3update_q_values, 0, __pyx_n_s_CMHMEngine2_update_q_values, NULL, __pyx_n_s_chmengine_engines_cmhmey2, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_6, __pyx_tuple__9);
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_6, __pyx_tuple__8);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_7);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_update_q_values, __pyx_t_6) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_update_q_values, __pyx_t_6) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "chmengine/engines/cmhmey2.py":99
+  /* "chmengine/engines/cmhmey2.py":96
+ *                 )
  * 
- *     # pylint: disable=unused-argument
  *     def pick_move(             # <<<<<<<<<<<<<<
  *             self,
- *             pick_by: str = "",
+ *             *args,
  */
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 99, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 96, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_pick_by, __pyx_n_s_str) < 0) __PYX_ERR(0, 99, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 99, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_debug, __pyx_n_s_bool) < 0) __PYX_ERR(0, 99, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_return, __pyx_n_s_Pick) < 0) __PYX_ERR(0, 99, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_5pick_move, 0, __pyx_n_s_CMHMEngine2_pick_move, NULL, __pyx_n_s_chmengine_engines_cmhmey2, __pyx_d, ((PyObject *)__pyx_codeobj__11)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 99, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_7, __pyx_tuple__12);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_6);
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_pick_move, __pyx_t_7) < 0) __PYX_ERR(0, 99, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/engines/cmhmey2.py":167
- *         return chosen_pick
- * 
- *     def _update_current_move_choices_ordered_(             # <<<<<<<<<<<<<<
+  /* "chmengine/engines/cmhmey2.py":99
  *             self,
- *             current_move_choices_ordered: List[Pick],
+ *             *args,
+ *             board: Optional[Board] = None,             # <<<<<<<<<<<<<<
+ *             debug: bool = False,
+ *             **kwargs
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(4); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 167, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_current_move_choices_ordered, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 167, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_current_move, __pyx_n_s_Move) < 0) __PYX_ERR(0, 167, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 167, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 167, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_7_update_current_move_choices_ordered_, 0, __pyx_n_s_CMHMEngine2__update_current_move, NULL, __pyx_n_s_chmengine_engines_cmhmey2, __pyx_d, ((PyObject *)__pyx_codeobj__14)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 167, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_7);
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_update_current_move_choices_ord, __pyx_t_6) < 0) __PYX_ERR(0, 167, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_board, Py_None) < 0) __PYX_ERR(0, 96, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_debug, ((PyObject *)Py_False)) < 0) __PYX_ERR(0, 96, __pyx_L1_error)
 
-  /* "chmengine/engines/cmhmey2.py":180
+  /* "chmengine/engines/cmhmey2.py":96
+ *                 )
+ * 
+ *     def pick_move(             # <<<<<<<<<<<<<<
+ *             self,
+ *             *args,
+ */
+  __pyx_t_7 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 96, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 96, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_debug, __pyx_n_s_bool) < 0) __PYX_ERR(0, 96, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_Pick) < 0) __PYX_ERR(0, 96, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_5pick_move, 0, __pyx_n_s_CMHMEngine2_pick_move, NULL, __pyx_n_s_chmengine_engines_cmhmey2, __pyx_d, ((PyObject *)__pyx_codeobj__10)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 96, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_8);
+  __Pyx_CyFunction_SetDefaultsKwDict(__pyx_t_8, __pyx_t_6);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_8, __pyx_t_7);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_pick_move, __pyx_t_8) < 0) __PYX_ERR(0, 96, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+
+  /* "chmengine/engines/cmhmey2.py":158
  * 
  *     # pylint: disable=too-many-arguments
  *     def _update_current_move_choices_(             # <<<<<<<<<<<<<<
  *             self,
- *             current_move_choices_ordered: List[Pick],
+ *             board: Board,
  */
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 180, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_current_move_choices_ordered, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 180, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_new_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 180, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_current_move, __pyx_n_s_Move) < 0) __PYX_ERR(0, 180, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_return, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 180, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_9_update_current_move_choices_, 0, __pyx_n_s_CMHMEngine2__update_current_move_2, NULL, __pyx_n_s_chmengine_engines_cmhmey2, __pyx_d, ((PyObject *)__pyx_codeobj__16)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_8);
+  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 158, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_current_pick, __pyx_n_s_Pick) < 0) __PYX_ERR(0, 158, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_7_update_current_move_choices_, 0, __pyx_n_s_CMHMEngine2__update_current_move, NULL, __pyx_n_s_chmengine_engines_cmhmey2, __pyx_d, ((PyObject *)__pyx_codeobj__12)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 158, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_6);
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_update_current_move_choices, __pyx_t_7) < 0) __PYX_ERR(0, 180, __pyx_L1_error)
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_8);
+  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_update_current_move_choices, __pyx_t_7) < 0) __PYX_ERR(0, 158, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/engines/cmhmey2.py":232
- *         )
+  /* "chmengine/engines/cmhmey2.py":202
+ *             self.set_q_value(value=current_pick.score, board=new_board)
  * 
  *     def _get_or_calculate_responses_(             # <<<<<<<<<<<<<<
  *             self,
  *             new_board: Board,
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 232, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 202, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_new_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 232, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_go_deeper, __pyx_n_s_bool) < 0) __PYX_ERR(0, 232, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 232, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_11_get_or_calculate_responses_, 0, __pyx_n_s_CMHMEngine2__get_or_calculate_re, NULL, __pyx_n_s_chmengine_engines_cmhmey2, __pyx_d, ((PyObject *)__pyx_codeobj__18)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 232, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_7);
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_new_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 202, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_go_deeper, __pyx_n_s_bool) < 0) __PYX_ERR(0, 202, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 202, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_9_get_or_calculate_responses_, 0, __pyx_n_s_CMHMEngine2__get_or_calculate_re, NULL, __pyx_n_s_chmengine_engines_cmhmey2, __pyx_d, ((PyObject *)__pyx_codeobj__14)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 202, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_8);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_8, __pyx_t_7);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_get_or_calculate_responses, __pyx_t_6) < 0) __PYX_ERR(0, 232, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_get_or_calculate_responses, __pyx_t_8) < 0) __PYX_ERR(0, 202, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-  /* "chmengine/engines/cmhmey2.py":268
- *         return response_moves
+  /* "chmengine/engines/cmhmey2.py":238
+ *         return sorted(next_picks, reverse=True)
  * 
  *     def _get_or_calc_response_move_scores_(             # <<<<<<<<<<<<<<
  *             self,
- *             next_move: Move,
+ *             next_pick: Pick,
  */
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 268, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_next_move, __pyx_n_s_Move) < 0) __PYX_ERR(0, 268, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_response_moves, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 268, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_new_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 268, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_go_deeper, __pyx_n_s_bool) < 0) __PYX_ERR(0, 268, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_return, __pyx_kp_s_List_Pick) < 0) __PYX_ERR(0, 268, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_13_get_or_calc_response_move_scores_, 0, __pyx_n_s_CMHMEngine2__get_or_calc_respons, NULL, __pyx_n_s_chmengine_engines_cmhmey2, __pyx_d, ((PyObject *)__pyx_codeobj__20)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 268, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyDict_NewPresized(4); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 238, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_8);
+  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_next_pick, __pyx_n_s_Pick) < 0) __PYX_ERR(0, 238, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_new_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 238, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_go_deeper, __pyx_n_s_bool) < 0) __PYX_ERR(0, 238, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 238, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_7cmhmey2_11CMHMEngine2_11_get_or_calc_response_move_scores_, 0, __pyx_n_s_CMHMEngine2__get_or_calc_respons, NULL, __pyx_n_s_chmengine_engines_cmhmey2, __pyx_d, ((PyObject *)__pyx_codeobj__16)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_6);
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_get_or_calc_response_move_score, __pyx_t_7) < 0) __PYX_ERR(0, 268, __pyx_L1_error)
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_8);
+  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_get_or_calc_response_move_score, __pyx_t_7) < 0) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "chmengine/engines/cmhmey2.py":17
+  /* "chmengine/engines/cmhmey2.py":15
  * 
  * 
  * class CMHMEngine2(CMHMEngine, Quartney):             # <<<<<<<<<<<<<<
  *     """Cmhmey Jr., the love-child of CMHMEngine and Quartney"""
  * 
  */
-  __pyx_t_7 = __Pyx_Py3ClassCreate(__pyx_t_3, __pyx_n_s_CMHMEngine2, __pyx_t_2, __pyx_t_5, NULL, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_Py3ClassCreate(__pyx_t_3, __pyx_n_s_CMHMEngine2, __pyx_t_2, __pyx_t_5, NULL, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_CyFunction_InitClassCell(__pyx_t_4, __pyx_t_7) < 0) __PYX_ERR(0, 17, __pyx_L1_error)
+  if (__Pyx_CyFunction_InitClassCell(__pyx_t_4, __pyx_t_7) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_CMHMEngine2, __pyx_t_7) < 0) __PYX_ERR(0, 17, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_CMHMEngine2, __pyx_t_7) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -7231,9 +6713,9 @@ if (!__Pyx_RefNanny) {
  */
   __pyx_t_2 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_CMHMEngine2___init___line_20, __pyx_kp_u_Initialize_the_CMHMEngine2_insta) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_CMHMEngine2___init___line_18, __pyx_kp_u_Initialize_the_CMHMEngine2_insta) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_CMHMEngine2_update_q_values_line, __pyx_kp_u_Back_propagate_game_outcome_thro) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_CMHMEngine2_pick_move_line_99, __pyx_kp_u_Select_a_move_based_on_heatmap_e) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_kp_u_CMHMEngine2_pick_move_line_96, __pyx_kp_u_Select_a_Pick_based_on_heatmap_e) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
@@ -7247,6 +6729,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_8);
   if (__pyx_m) {
     if (__pyx_d && stringtab_initialized) {
       __Pyx_AddTraceback("init chmengine.engines.cmhmey2", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -9049,6 +8532,20 @@ static CYTHON_INLINE PyObject *__Pyx__GetModuleGlobalName(PyObject *name)
     return __Pyx_GetBuiltinName(name);
 }
 
+/* PyObjectSetAttrStr */
+#if CYTHON_USE_TYPE_SLOTS
+static CYTHON_INLINE int __Pyx_PyObject_SetAttrStr(PyObject* obj, PyObject* attr_name, PyObject* value) {
+    PyTypeObject* tp = Py_TYPE(obj);
+    if (likely(tp->tp_setattro))
+        return tp->tp_setattro(obj, attr_name, value);
+#if PY_MAJOR_VERSION < 3
+    if (likely(tp->tp_setattr))
+        return tp->tp_setattr(obj, PyString_AS_STRING(attr_name), value);
+#endif
+    return PyObject_SetAttr(obj, attr_name, value);
+}
+#endif
+
 /* Import */
 static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level) {
     PyObject *module = 0;
@@ -9120,7 +8617,7 @@ static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name) {
         if (unlikely(!module_name_str)) { goto modbad; }
         module_name = PyUnicode_FromString(module_name_str);
         if (unlikely(!module_name)) { goto modbad; }
-        module_dot = PyUnicode_Concat(module_name, __pyx_kp_u__4);
+        module_dot = PyUnicode_Concat(module_name, __pyx_kp_u__3);
         if (unlikely(!module_dot)) { goto modbad; }
         full_name = PyUnicode_Concat(module_dot, name);
         if (unlikely(!full_name)) { goto modbad; }
@@ -11176,7 +10673,7 @@ __Pyx_PyType_GetName(PyTypeObject* tp)
     if (unlikely(name == NULL) || unlikely(!PyUnicode_Check(name))) {
         PyErr_Clear();
         Py_XDECREF(name);
-        name = __Pyx_NewRef(__pyx_n_s__21);
+        name = __Pyx_NewRef(__pyx_n_s__17);
     }
     return name;
 }

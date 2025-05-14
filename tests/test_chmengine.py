@@ -15,6 +15,7 @@ class TestCMHEngineImports(TestCase):
     _pick = ['Pick']
     _modules = ['engines', 'play', 'utils']
     _functions = [
+        'format_picks',
         'format_moves',
         'calculate_white_minus_black_score',
         'checkmate_score',
