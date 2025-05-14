@@ -44,7 +44,7 @@ For each legal move, the algorithm:
         - **Q-Table Lookup**: At the final stack frame of the recursion, the algorithm checks if a Q-value exists for the resulting position. If a Q-value is available, it is used as the evaluation score.  
         - **Static Heatmap Evaluation**: If no Q-value is available for the final position in the recursion path, the algorithm calculates a score using a static heatmap evaluation via the `calculate_white_minus_black_score` function.
 
-This process is handled by the `_update_current_move_choices_` and `_get_or_calculate_responses_` methods.
+This process is handled by the `_update_current_pick_score_` and `_get_or_calculate_responses_` methods.
 
 #### **Step 3: Rank Moves**
 

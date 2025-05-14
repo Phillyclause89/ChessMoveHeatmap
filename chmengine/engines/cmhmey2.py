@@ -39,7 +39,7 @@ class CMHMEngine2(CMHMEngine, Quartney):
         31
         """
         super().__init__(board=board, depth=depth)
-        self._init_qdb()  # List to store moves made during the game as (fen, move_uci) pairs.
+        self._init_qdb()
 
     def update_q_values(self, debug: bool = False) -> None:
         """Back-propagate game outcome through the Q-table.
@@ -86,7 +86,7 @@ class CMHMEngine2(CMHMEngine, Quartney):
             self.board.pop()
             new_move: Move
             new_score: float64
-            new_move, new_score = self.pick_move(debug=debug)  # Call pick_move to back-pop the updated
+            new_move, new_score = self.pick_move(debug=debug)
             if debug:
                 print(
                     f"Game Pick & Score: ({last_move.uci()}, {current_q:.2f}) --> "
@@ -136,26 +136,22 @@ class CMHMEngine2(CMHMEngine, Quartney):
         """
         board = self.board if board is None else board
         current_picks: List[Pick] = self.current_picks_list(board=board)
-        # PlayCMHMEngine.play() needs a ValueError to detect game termination.
         if len(current_picks) == 0:
             raise ValueError(f"Current Board has no legal moves: {self.fen(board=board)}")
         current_pick: Pick
         for current_pick in current_picks:
-            self._update_current_move_choices_(current_pick=current_pick, board=board)
+            self._update_current_pick_score_(board=board, current_pick=current_pick)
         # noinspection PyTypeChecker,PydanticTypeChecker
         current_picks = sorted(current_picks, reverse=True)
-        # Final pick is a random choice of all moves equal to the highest scoring move
         if debug:
-            print(
-                f"All {len(current_picks)} moves ranked:",
-                format_picks(picks=current_picks)
-            )
+            print(f"All {len(current_picks)} picks ranked:", format_picks(picks=current_picks))
+        # Our best scoring pick should be at [0] if `board.turn` is white (True) to move, [-1] if black to move.
         chosen_pick: Pick = choice([p for p in current_picks if p == current_picks[0 if board.turn else -1]])
         self.set_q_value(value=chosen_pick.score, board=board)
         return chosen_pick
 
     # pylint: disable=too-many-arguments
-    def _update_current_move_choices_(
+    def _update_current_pick_score_(
             self,
             board: Board,
             current_pick: Pick
@@ -183,8 +179,8 @@ class CMHMEngine2(CMHMEngine, Quartney):
         None
         """
         new_board: Board = self.board_copy_pushed(move=current_pick.move, board=board)
-        response_moves: List[Pick]
-        response_moves = self._get_or_calculate_responses_(
+        # Max if black, Min if white
+        response_moves: List[Pick] = self._get_or_calculate_responses_(
             new_board=new_board,
             go_deeper=True
         )
@@ -196,6 +192,7 @@ class CMHMEngine2(CMHMEngine, Quartney):
             else:
                 current_pick.score = initial_q_val
         else:
+            # Our best scoring pick should be at [0] if `new_board.turn` is white (True) to move, [-1] if black to move.
             current_pick.score = response_moves[0 if new_board.turn else -1].score
             self.set_q_value(value=current_pick.score, board=new_board)
 
@@ -222,8 +219,6 @@ class CMHMEngine2(CMHMEngine, Quartney):
         List[Pick]
             A list of response Picks (moves and their evaluation scores.)
         """
-        # However, that is not our Final score,
-        # the score after finding the best response to our move should be the final score.
         next_picks: List[Pick] = self.current_picks_list(board=new_board)
         next_pick: Pick
         for next_pick in next_picks:
@@ -268,7 +263,8 @@ class CMHMEngine2(CMHMEngine, Quartney):
                 new_board=next_board,
                 go_deeper=False
             )
-            next_pick.score = next_response_moves[-1 if next_board.turn else 0].score
+            # Best scoring pick should be at [0] if `next_board.turn` is white (True) to move, [-1] if black to move.
+            next_pick.score = next_response_moves[0 if next_board.turn else -1].score
             self.set_q_value(value=next_pick.score, board=next_board)
         else:
             next_q_val: Optional[float64] = self.get_q_value(board=next_board)

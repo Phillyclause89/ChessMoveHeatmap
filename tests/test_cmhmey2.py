@@ -338,11 +338,11 @@ class TestCMHMEngine2(TestCase):
         self.print_board()
 
     def test__update_current_move_choices_(self) -> None:
-        """Tests internal _update_current_move_choices_ method."""
-        self.engine._update_current_move_choices_(self.engine.board, self.picks[0])
+        """Tests internal _update_current_pick_score_ method."""
+        self.engine._update_current_pick_score_(self.engine.board, self.picks[0])
         self.assertEqual(self.picks[0][0], self.E4)
         self.assertFalse(isnan(self.picks[0].score))
-        self.engine._update_current_move_choices_(self.engine.board, self.picks[1])
+        self.engine._update_current_pick_score_(self.engine.board, self.picks[1])
         self.assertEqual(self.picks[1][0], self.E3)
         self.assertFalse(isnan(self.picks[1].score))
 
