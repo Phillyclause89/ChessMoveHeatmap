@@ -26,6 +26,11 @@ class TestCMHEngineImports(TestCase):
         'pieces_count_from_board',
         'set_all_datetime_headers',
         'set_utc_headers',
+        'better_checkmate_score',
+        'calculate_better_white_minus_black_score',
+        'get_static_delta_score',
+        'get_static_value',
+        'max_moves_map',
     ]
     _engines = _engine1 + _engine2 + _engine3
     _all = _engines + _engine_manager + _pick + _functions + _modules
