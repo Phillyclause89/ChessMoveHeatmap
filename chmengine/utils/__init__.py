@@ -1,15 +1,16 @@
 """Utilities for engine evaluation and scoring logic."""
 from _bisect import bisect_left
 from datetime import datetime, timezone
-from typing import Callable, List, Optional, Tuple
+from typing import Callable, Dict, List, Optional, Tuple
 
-from chess import Board, Move, Outcome, pgn, square_distance
+from chess import Board, Move, Outcome, Piece, pgn, square_distance
 from numpy import float64
 from numpy.typing import NDArray
 
 from chmengine.utils import pick
 from chmengine.utils.pick import Pick
 from chmutils import calculate_chess_move_heatmap_with_better_discount
+from heatmaps import ChessMoveHeatmap
 
 # Python 3.8+ has bit_count(); otherwise count the '1's in the binary repr
 try:
@@ -28,6 +29,10 @@ __all__ = [
     'calculate_score',
     'is_draw',
     'calculate_white_minus_black_score',
+    'calculate_better_white_minus_black_score',
+    'get_static_value',
+    'get_static_delta_score',
+    'better_checkmate_score',
     'checkmate_score',
     'get_white_and_black_king_boxes',
     'insert_ordered_worst_to_best',
@@ -38,7 +43,9 @@ __all__ = [
     'null_target_moves',
     'is_valid_king_box_square',
     'set_all_datetime_headers',
-    'set_utc_headers'
+    'set_utc_headers',
+    # Mappings
+    'max_moves_map',
 ]
 
 
@@ -210,6 +217,180 @@ def calculate_white_minus_black_score(
     return float64(general_move_score + king_box_score)
 
 
+max_moves_map: Dict[Piece, int] = {
+    Piece.from_symbol('P'): 4,
+    Piece.from_symbol('N'): 8,
+    Piece.from_symbol('B'): 13,
+    Piece.from_symbol('R'): 14,
+    Piece.from_symbol('Q'): 27,
+    Piece.from_symbol('K'): 8,
+    Piece.from_symbol('p'): 4,
+    Piece.from_symbol('n'): 8,
+    Piece.from_symbol('b'): 13,
+    Piece.from_symbol('r'): 14,
+    Piece.from_symbol('q'): 27,
+    Piece.from_symbol('k'): 8,
+}
+
+
+def get_static_value(piece: Piece) -> int:
+    """Retrieve the static movement-based value for a given chess piece.
+
+    This function returns a fixed integer value representing the maximum number of
+    moves that the specified piece can make on an empty board. These values serve
+    as a simple heuristic for piece mobility.
+
+    Parameters
+    ----------
+    piece : chess.Piece
+        The chess piece for which to look up the static move value.
+
+    Returns
+    -------
+    int
+        The static movement value for the piece, or 0 if the piece is not in the map.
+    """
+    return max_moves_map.get(piece, 0)
+
+
+def get_static_delta_score(heatmap: ChessMoveHeatmap) -> float64:
+    """Compute the static piece-based delta score from a ChessMoveHeatmap.
+
+    This function multiplies each piece’s move count (from the heatmap’s `piece_counts`)
+    by its static movement value (from `get_static_value`) and returns the difference
+    between White’s total and Black’s total. It serves as a simple material–mobility heuristic.
+
+    Parameters
+    ----------
+    heatmap : heatmaps.ChessMoveHeatmap
+        The heatmap object containing per-piece move counts for each square.
+
+    Returns
+    -------
+    numpy.float64
+        The signed delta score: (White’s static total) − (Black’s static total).
+    """
+    piece_map: NDArray[Dict[Piece, float64]] = heatmap.piece_counts
+    white_sum: float64 = float64(0.0)
+    black_sum: float64 = float64(0.0)
+    piece_dict: Dict[Piece, float64]
+    i: int
+    for i, piece_dict in enumerate(piece_map):
+        piece: Piece
+        count: float64
+        for piece, count in piece_dict.items():
+            if piece.color:
+                white_sum += count * get_static_value(piece=piece)
+            else:
+                black_sum += count * get_static_value(piece=piece)
+    return float64(white_sum - black_sum)
+
+
+def calculate_better_white_minus_black_score(
+        board: Board,
+        depth: int = 1,
+) -> float64:
+    """Compute an enhanced White-minus-Black evaluation for a given board position.
+
+    This function combines three components into a single signed score:
+
+    1. **Game termination**:
+        - If the position is a draw, returns 0.
+        - If the position is checkmate, returns a high upper-bound value via `checkmate_score()`.
+    2. **Heatmap mobility delta**:
+        Difference in total possible moves between White and Black, computed by
+        `calculate_chess_move_heatmap_with_better_discount()`.
+    3. **King-box mobility delta**:
+        Difference in potential moves targeting the opponent’s king region and defending
+        the own king region.
+    4. **Static delta**:
+        Material-mobility delta from `get_static_delta_score()`.
+
+    The final score is the sum of the mobility delta, king-box delta, and static delta,
+    representing White’s advantage minus Black’s.
+
+    Parameters
+    ----------
+    board : chess.Board
+        The chess board position to evaluate.
+    depth : int, default: 1
+        Recursion depth for the heatmap calculation. Higher values yield more thorough
+        mobility estimates at the cost of increased computation time.
+
+    Returns
+    -------
+    numpy.float64
+        The signed evaluation: positive values favor White, negative values favor Black.
+
+    Notes
+    -----
+    - Time complexity is O(b^d) for the heatmap portion (where b ≈ 35 is the branching factor).
+    - Checkmate scores use an upper-bound heuristic: all remaining pieces can move to every square,
+        scaled by (depth + 1).
+    """
+    # Early exit if Game Over.
+    outcome: Optional[Outcome] = board.outcome(claim_draw=True)
+    is_terminated: bool = outcome is not None
+    if is_terminated and is_draw(outcome.winner):
+        # Draws are easy to score: zero
+        return float64(0)
+    if is_terminated:
+        # Checkmate score is an unrealistically high upperbound in possible moves (all pieces can move to every square.)
+        return better_checkmate_score(board, depth)
+    # See docs on time-complexity of calculate_chess_move_heatmap_with_better_discount
+    heatmap: ChessMoveHeatmap = calculate_chess_move_heatmap_with_better_discount(
+        board=board,
+        depth=depth
+    )
+    heatmap_transposed: NDArray[float64] = heatmap.data.transpose()
+    transposed_white: NDArray[float64] = heatmap_transposed[0]
+    transposed_black: NDArray[float64] = heatmap_transposed[1]
+    # General move score is the delta in possible moves for White and Black
+    general_move_score: float64 = sum(transposed_white) - sum(transposed_black)
+    # King-box move score is the delta in attacking moves on the squares at and around the kings
+    king_box_white: List[int]
+    king_box_black: List[int]
+    king_box_white, king_box_black = get_white_and_black_king_boxes(board=board)
+    king_box_score: float64 = sum(transposed_white[king_box_black]) - sum(transposed_black[king_box_white])
+    # static piece delta score
+    static_delta_score = get_static_delta_score(heatmap=heatmap)
+    # Final score is the sum of all
+    return float64(general_move_score + king_box_score + static_delta_score)
+
+
+def better_checkmate_score(board: Board, depth: int) -> float64:
+    """Compute an enhanced checkmate evaluation score.
+
+    This function returns a large-magnitude score to represent a checkmate
+    outcome, scaled by the number of pieces remaining, the search depth, and
+    an additional safety margin multiplier. By multiplying by 64 (squares)
+    and 27 (maximum queen moves), we ensure that non-checkmate positional
+    scores remain bounded in comparison.
+
+    The sign encodes which side is to move:
+    - If it is White’s turn (i.e., White has just been checkmated), returns a
+        large negative score (bad for White).
+    - If it is Black’s turn (i.e., Black has just been checkmated), returns
+        a large positive score (good for White).
+
+    Parameters
+    ----------
+    board : chess.Board
+        The board position where checkmate has occurred.
+    depth : int
+        The recursion depth used in the evaluation, included to amplify the score
+        further for deeper searches.
+
+    Returns
+    -------
+    numpy.float64
+        A signed checkmate score with large magnitude, where positive values
+        favor White and negative values favor Black.
+    """
+    mate_score_abs: float64 = float64(pieces_count_from_board(board=board) * (depth + 1) * 64 * 27)
+    return float64(-mate_score_abs) if board.turn else mate_score_abs
+
+
 def checkmate_score(board: Board, depth: int) -> float64:
     """Return a large signed score for checkmate results.
 
@@ -247,12 +428,12 @@ def get_white_and_black_king_boxes(board: Board) -> Tuple[List[int], List[int]]:
 
     Parameters
     ----------
-    board : chess.Board
+    board : Board
         The board from which to extract king square surroundings.
 
     Returns
     -------
-    tuple of (list of int, list of int)
+    Tuple[List[int], List[int]]
         Tuple containing white king box and black king box square indices.
         (white_king_box, black_king_box)
 

@@ -1780,21 +1780,26 @@ static const char __pyx_k_chmengine[] = "chmengine";
 static const char __pyx_k_CMHMEngine[] = "CMHMEngine";
 static const char __pyx_k_CMHMEngine2[] = "CMHMEngine2";
 static const char __pyx_k_format_moves[] = "format_moves";
+static const char __pyx_k_max_moves_map[] = "max_moves_map";
 static const char __pyx_k_PlayCMHMEngine[] = "PlayCMHMEngine";
 static const char __pyx_k_chmengine_play[] = "chmengine.play";
 static const char __pyx_k_checkmate_score[] = "checkmate_score";
 static const char __pyx_k_chmengine_utils[] = "chmengine.utils";
 static const char __pyx_k_set_utc_headers[] = "set_utc_headers";
 static const char __pyx_k_chmengine___init[] = "chmengine.__init__";
+static const char __pyx_k_get_static_value[] = "get_static_value";
 static const char __pyx_k_chmengine_engines[] = "chmengine.engines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_pieces_count_from_fen[] = "pieces_count_from_fen";
+static const char __pyx_k_better_checkmate_score[] = "better_checkmate_score";
+static const char __pyx_k_get_static_delta_score[] = "get_static_delta_score";
 static const char __pyx_k_pieces_count_from_board[] = "pieces_count_from_board";
 static const char __pyx_k_set_all_datetime_headers[] = "set_all_datetime_headers";
 static const char __pyx_k_insert_ordered_best_to_worst[] = "insert_ordered_best_to_worst";
 static const char __pyx_k_insert_ordered_worst_to_best[] = "insert_ordered_worst_to_best";
 static const char __pyx_k_get_white_and_black_king_boxes[] = "get_white_and_black_king_boxes";
 static const char __pyx_k_A_silly_chess_engine_that_picks[] = "A silly chess engine that picks moves using heatmaps";
+static const char __pyx_k_calculate_better_white_minus_bla[] = "calculate_better_white_minus_black_score";
 static const char __pyx_k_calculate_white_minus_black_scor[] = "calculate_white_minus_black_score";
 /* #### Code section: decls ### */
 /* #### Code section: late_includes ### */
@@ -1839,6 +1844,10 @@ typedef struct {
   PyObject *__pyx_n_u_Quartney;
   PyObject *__pyx_n_s__2;
   PyObject *__pyx_n_s_all;
+  PyObject *__pyx_n_s_better_checkmate_score;
+  PyObject *__pyx_n_u_better_checkmate_score;
+  PyObject *__pyx_n_s_calculate_better_white_minus_bla;
+  PyObject *__pyx_n_u_calculate_better_white_minus_bla;
   PyObject *__pyx_n_s_calculate_white_minus_black_scor;
   PyObject *__pyx_n_u_calculate_white_minus_black_scor;
   PyObject *__pyx_n_s_checkmate_score;
@@ -1853,6 +1862,10 @@ typedef struct {
   PyObject *__pyx_n_u_engines;
   PyObject *__pyx_n_s_format_moves;
   PyObject *__pyx_n_u_format_moves;
+  PyObject *__pyx_n_s_get_static_delta_score;
+  PyObject *__pyx_n_u_get_static_delta_score;
+  PyObject *__pyx_n_s_get_static_value;
+  PyObject *__pyx_n_u_get_static_value;
   PyObject *__pyx_n_s_get_white_and_black_king_boxes;
   PyObject *__pyx_n_u_get_white_and_black_king_boxes;
   PyObject *__pyx_n_s_import;
@@ -1863,6 +1876,8 @@ typedef struct {
   PyObject *__pyx_n_s_is_draw;
   PyObject *__pyx_n_u_is_draw;
   PyObject *__pyx_n_s_main;
+  PyObject *__pyx_n_s_max_moves_map;
+  PyObject *__pyx_n_u_max_moves_map;
   PyObject *__pyx_n_s_name;
   PyObject *__pyx_n_s_pieces_count_from_board;
   PyObject *__pyx_n_u_pieces_count_from_board;
@@ -1932,6 +1947,10 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_u_Quartney);
   Py_CLEAR(clear_module_state->__pyx_n_s__2);
   Py_CLEAR(clear_module_state->__pyx_n_s_all);
+  Py_CLEAR(clear_module_state->__pyx_n_s_better_checkmate_score);
+  Py_CLEAR(clear_module_state->__pyx_n_u_better_checkmate_score);
+  Py_CLEAR(clear_module_state->__pyx_n_s_calculate_better_white_minus_bla);
+  Py_CLEAR(clear_module_state->__pyx_n_u_calculate_better_white_minus_bla);
   Py_CLEAR(clear_module_state->__pyx_n_s_calculate_white_minus_black_scor);
   Py_CLEAR(clear_module_state->__pyx_n_u_calculate_white_minus_black_scor);
   Py_CLEAR(clear_module_state->__pyx_n_s_checkmate_score);
@@ -1946,6 +1965,10 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_u_engines);
   Py_CLEAR(clear_module_state->__pyx_n_s_format_moves);
   Py_CLEAR(clear_module_state->__pyx_n_u_format_moves);
+  Py_CLEAR(clear_module_state->__pyx_n_s_get_static_delta_score);
+  Py_CLEAR(clear_module_state->__pyx_n_u_get_static_delta_score);
+  Py_CLEAR(clear_module_state->__pyx_n_s_get_static_value);
+  Py_CLEAR(clear_module_state->__pyx_n_u_get_static_value);
   Py_CLEAR(clear_module_state->__pyx_n_s_get_white_and_black_king_boxes);
   Py_CLEAR(clear_module_state->__pyx_n_u_get_white_and_black_king_boxes);
   Py_CLEAR(clear_module_state->__pyx_n_s_import);
@@ -1956,6 +1979,8 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_is_draw);
   Py_CLEAR(clear_module_state->__pyx_n_u_is_draw);
   Py_CLEAR(clear_module_state->__pyx_n_s_main);
+  Py_CLEAR(clear_module_state->__pyx_n_s_max_moves_map);
+  Py_CLEAR(clear_module_state->__pyx_n_u_max_moves_map);
   Py_CLEAR(clear_module_state->__pyx_n_s_name);
   Py_CLEAR(clear_module_state->__pyx_n_s_pieces_count_from_board);
   Py_CLEAR(clear_module_state->__pyx_n_u_pieces_count_from_board);
@@ -2003,6 +2028,10 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_u_Quartney);
   Py_VISIT(traverse_module_state->__pyx_n_s__2);
   Py_VISIT(traverse_module_state->__pyx_n_s_all);
+  Py_VISIT(traverse_module_state->__pyx_n_s_better_checkmate_score);
+  Py_VISIT(traverse_module_state->__pyx_n_u_better_checkmate_score);
+  Py_VISIT(traverse_module_state->__pyx_n_s_calculate_better_white_minus_bla);
+  Py_VISIT(traverse_module_state->__pyx_n_u_calculate_better_white_minus_bla);
   Py_VISIT(traverse_module_state->__pyx_n_s_calculate_white_minus_black_scor);
   Py_VISIT(traverse_module_state->__pyx_n_u_calculate_white_minus_black_scor);
   Py_VISIT(traverse_module_state->__pyx_n_s_checkmate_score);
@@ -2017,6 +2046,10 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_u_engines);
   Py_VISIT(traverse_module_state->__pyx_n_s_format_moves);
   Py_VISIT(traverse_module_state->__pyx_n_u_format_moves);
+  Py_VISIT(traverse_module_state->__pyx_n_s_get_static_delta_score);
+  Py_VISIT(traverse_module_state->__pyx_n_u_get_static_delta_score);
+  Py_VISIT(traverse_module_state->__pyx_n_s_get_static_value);
+  Py_VISIT(traverse_module_state->__pyx_n_u_get_static_value);
   Py_VISIT(traverse_module_state->__pyx_n_s_get_white_and_black_king_boxes);
   Py_VISIT(traverse_module_state->__pyx_n_u_get_white_and_black_king_boxes);
   Py_VISIT(traverse_module_state->__pyx_n_s_import);
@@ -2027,6 +2060,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_is_draw);
   Py_VISIT(traverse_module_state->__pyx_n_u_is_draw);
   Py_VISIT(traverse_module_state->__pyx_n_s_main);
+  Py_VISIT(traverse_module_state->__pyx_n_s_max_moves_map);
+  Py_VISIT(traverse_module_state->__pyx_n_u_max_moves_map);
   Py_VISIT(traverse_module_state->__pyx_n_s_name);
   Py_VISIT(traverse_module_state->__pyx_n_s_pieces_count_from_board);
   Py_VISIT(traverse_module_state->__pyx_n_u_pieces_count_from_board);
@@ -2084,6 +2119,10 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_u_Quartney __pyx_mstate_global->__pyx_n_u_Quartney
 #define __pyx_n_s__2 __pyx_mstate_global->__pyx_n_s__2
 #define __pyx_n_s_all __pyx_mstate_global->__pyx_n_s_all
+#define __pyx_n_s_better_checkmate_score __pyx_mstate_global->__pyx_n_s_better_checkmate_score
+#define __pyx_n_u_better_checkmate_score __pyx_mstate_global->__pyx_n_u_better_checkmate_score
+#define __pyx_n_s_calculate_better_white_minus_bla __pyx_mstate_global->__pyx_n_s_calculate_better_white_minus_bla
+#define __pyx_n_u_calculate_better_white_minus_bla __pyx_mstate_global->__pyx_n_u_calculate_better_white_minus_bla
 #define __pyx_n_s_calculate_white_minus_black_scor __pyx_mstate_global->__pyx_n_s_calculate_white_minus_black_scor
 #define __pyx_n_u_calculate_white_minus_black_scor __pyx_mstate_global->__pyx_n_u_calculate_white_minus_black_scor
 #define __pyx_n_s_checkmate_score __pyx_mstate_global->__pyx_n_s_checkmate_score
@@ -2098,6 +2137,10 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_u_engines __pyx_mstate_global->__pyx_n_u_engines
 #define __pyx_n_s_format_moves __pyx_mstate_global->__pyx_n_s_format_moves
 #define __pyx_n_u_format_moves __pyx_mstate_global->__pyx_n_u_format_moves
+#define __pyx_n_s_get_static_delta_score __pyx_mstate_global->__pyx_n_s_get_static_delta_score
+#define __pyx_n_u_get_static_delta_score __pyx_mstate_global->__pyx_n_u_get_static_delta_score
+#define __pyx_n_s_get_static_value __pyx_mstate_global->__pyx_n_s_get_static_value
+#define __pyx_n_u_get_static_value __pyx_mstate_global->__pyx_n_u_get_static_value
 #define __pyx_n_s_get_white_and_black_king_boxes __pyx_mstate_global->__pyx_n_s_get_white_and_black_king_boxes
 #define __pyx_n_u_get_white_and_black_king_boxes __pyx_mstate_global->__pyx_n_u_get_white_and_black_king_boxes
 #define __pyx_n_s_import __pyx_mstate_global->__pyx_n_s_import
@@ -2108,6 +2151,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_is_draw __pyx_mstate_global->__pyx_n_s_is_draw
 #define __pyx_n_u_is_draw __pyx_mstate_global->__pyx_n_u_is_draw
 #define __pyx_n_s_main __pyx_mstate_global->__pyx_n_s_main
+#define __pyx_n_s_max_moves_map __pyx_mstate_global->__pyx_n_s_max_moves_map
+#define __pyx_n_u_max_moves_map __pyx_mstate_global->__pyx_n_u_max_moves_map
 #define __pyx_n_s_name __pyx_mstate_global->__pyx_n_s_name
 #define __pyx_n_s_pieces_count_from_board __pyx_mstate_global->__pyx_n_s_pieces_count_from_board
 #define __pyx_n_u_pieces_count_from_board __pyx_mstate_global->__pyx_n_u_pieces_count_from_board
@@ -2153,6 +2198,10 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_u_Quartney, __pyx_k_Quartney, sizeof(__pyx_k_Quartney), 0, 1, 0, 1},
     {&__pyx_n_s__2, __pyx_k__2, sizeof(__pyx_k__2), 0, 0, 1, 1},
     {&__pyx_n_s_all, __pyx_k_all, sizeof(__pyx_k_all), 0, 0, 1, 1},
+    {&__pyx_n_s_better_checkmate_score, __pyx_k_better_checkmate_score, sizeof(__pyx_k_better_checkmate_score), 0, 0, 1, 1},
+    {&__pyx_n_u_better_checkmate_score, __pyx_k_better_checkmate_score, sizeof(__pyx_k_better_checkmate_score), 0, 1, 0, 1},
+    {&__pyx_n_s_calculate_better_white_minus_bla, __pyx_k_calculate_better_white_minus_bla, sizeof(__pyx_k_calculate_better_white_minus_bla), 0, 0, 1, 1},
+    {&__pyx_n_u_calculate_better_white_minus_bla, __pyx_k_calculate_better_white_minus_bla, sizeof(__pyx_k_calculate_better_white_minus_bla), 0, 1, 0, 1},
     {&__pyx_n_s_calculate_white_minus_black_scor, __pyx_k_calculate_white_minus_black_scor, sizeof(__pyx_k_calculate_white_minus_black_scor), 0, 0, 1, 1},
     {&__pyx_n_u_calculate_white_minus_black_scor, __pyx_k_calculate_white_minus_black_scor, sizeof(__pyx_k_calculate_white_minus_black_scor), 0, 1, 0, 1},
     {&__pyx_n_s_checkmate_score, __pyx_k_checkmate_score, sizeof(__pyx_k_checkmate_score), 0, 0, 1, 1},
@@ -2167,6 +2216,10 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_u_engines, __pyx_k_engines, sizeof(__pyx_k_engines), 0, 1, 0, 1},
     {&__pyx_n_s_format_moves, __pyx_k_format_moves, sizeof(__pyx_k_format_moves), 0, 0, 1, 1},
     {&__pyx_n_u_format_moves, __pyx_k_format_moves, sizeof(__pyx_k_format_moves), 0, 1, 0, 1},
+    {&__pyx_n_s_get_static_delta_score, __pyx_k_get_static_delta_score, sizeof(__pyx_k_get_static_delta_score), 0, 0, 1, 1},
+    {&__pyx_n_u_get_static_delta_score, __pyx_k_get_static_delta_score, sizeof(__pyx_k_get_static_delta_score), 0, 1, 0, 1},
+    {&__pyx_n_s_get_static_value, __pyx_k_get_static_value, sizeof(__pyx_k_get_static_value), 0, 0, 1, 1},
+    {&__pyx_n_u_get_static_value, __pyx_k_get_static_value, sizeof(__pyx_k_get_static_value), 0, 1, 0, 1},
     {&__pyx_n_s_get_white_and_black_king_boxes, __pyx_k_get_white_and_black_king_boxes, sizeof(__pyx_k_get_white_and_black_king_boxes), 0, 0, 1, 1},
     {&__pyx_n_u_get_white_and_black_king_boxes, __pyx_k_get_white_and_black_king_boxes, sizeof(__pyx_k_get_white_and_black_king_boxes), 0, 1, 0, 1},
     {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
@@ -2177,6 +2230,8 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_is_draw, __pyx_k_is_draw, sizeof(__pyx_k_is_draw), 0, 0, 1, 1},
     {&__pyx_n_u_is_draw, __pyx_k_is_draw, sizeof(__pyx_k_is_draw), 0, 1, 0, 1},
     {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
+    {&__pyx_n_s_max_moves_map, __pyx_k_max_moves_map, sizeof(__pyx_k_max_moves_map), 0, 0, 1, 1},
+    {&__pyx_n_u_max_moves_map, __pyx_k_max_moves_map, sizeof(__pyx_k_max_moves_map), 0, 1, 0, 1},
     {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
     {&__pyx_n_s_pieces_count_from_board, __pyx_k_pieces_count_from_board, sizeof(__pyx_k_pieces_count_from_board), 0, 0, 1, 1},
     {&__pyx_n_u_pieces_count_from_board, __pyx_k_pieces_count_from_board, sizeof(__pyx_k_pieces_count_from_board), 0, 1, 0, 1},
@@ -2613,7 +2668,7 @@ if (!__Pyx_RefNanny) {
  * from chmengine import engines, play, utils
  * from chmengine.engines import CMHMEngine, CMHMEngine2, Quartney             # <<<<<<<<<<<<<<
  * from chmengine.play import PlayCMHMEngine
- * from chmengine.utils import (
+ * from chmengine.utils import (Pick, better_checkmate_score, calculate_better_white_minus_black_score,
  */
   __pyx_t_3 = PyList_New(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -2647,8 +2702,8 @@ if (!__Pyx_RefNanny) {
  * from chmengine import engines, play, utils
  * from chmengine.engines import CMHMEngine, CMHMEngine2, Quartney
  * from chmengine.play import PlayCMHMEngine             # <<<<<<<<<<<<<<
- * from chmengine.utils import (
- *     Pick,
+ * from chmengine.utils import (Pick, better_checkmate_score, calculate_better_white_minus_black_score,
+ *                              calculate_white_minus_black_score, checkmate_score, format_moves, get_static_delta_score,
  */
   __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -2664,179 +2719,221 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/__init__.py":6
- * from chmengine.play import PlayCMHMEngine
- * from chmengine.utils import (
- *     Pick,             # <<<<<<<<<<<<<<
- *     calculate_white_minus_black_score,
- *     checkmate_score,
- */
-  __pyx_t_3 = PyList_New(12); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 6, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_INCREF(__pyx_n_s_Pick);
-  __Pyx_GIVEREF(__pyx_n_s_Pick);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 0, __pyx_n_s_Pick)) __PYX_ERR(0, 6, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_s_calculate_white_minus_black_scor);
-  __Pyx_GIVEREF(__pyx_n_s_calculate_white_minus_black_scor);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 1, __pyx_n_s_calculate_white_minus_black_scor)) __PYX_ERR(0, 6, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_s_checkmate_score);
-  __Pyx_GIVEREF(__pyx_n_s_checkmate_score);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 2, __pyx_n_s_checkmate_score)) __PYX_ERR(0, 6, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_s_format_moves);
-  __Pyx_GIVEREF(__pyx_n_s_format_moves);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 3, __pyx_n_s_format_moves)) __PYX_ERR(0, 6, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_s_get_white_and_black_king_boxes);
-  __Pyx_GIVEREF(__pyx_n_s_get_white_and_black_king_boxes);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 4, __pyx_n_s_get_white_and_black_king_boxes)) __PYX_ERR(0, 6, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_s_insert_ordered_best_to_worst);
-  __Pyx_GIVEREF(__pyx_n_s_insert_ordered_best_to_worst);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 5, __pyx_n_s_insert_ordered_best_to_worst)) __PYX_ERR(0, 6, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_s_insert_ordered_worst_to_best);
-  __Pyx_GIVEREF(__pyx_n_s_insert_ordered_worst_to_best);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 6, __pyx_n_s_insert_ordered_worst_to_best)) __PYX_ERR(0, 6, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_s_is_draw);
-  __Pyx_GIVEREF(__pyx_n_s_is_draw);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 7, __pyx_n_s_is_draw)) __PYX_ERR(0, 6, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_s_pieces_count_from_board);
-  __Pyx_GIVEREF(__pyx_n_s_pieces_count_from_board);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 8, __pyx_n_s_pieces_count_from_board)) __PYX_ERR(0, 6, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_s_pieces_count_from_fen);
-  __Pyx_GIVEREF(__pyx_n_s_pieces_count_from_fen);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 9, __pyx_n_s_pieces_count_from_fen)) __PYX_ERR(0, 6, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_s_set_all_datetime_headers);
-  __Pyx_GIVEREF(__pyx_n_s_set_all_datetime_headers);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 10, __pyx_n_s_set_all_datetime_headers)) __PYX_ERR(0, 6, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_s_set_utc_headers);
-  __Pyx_GIVEREF(__pyx_n_s_set_utc_headers);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 11, __pyx_n_s_set_utc_headers)) __PYX_ERR(0, 6, __pyx_L1_error);
-
   /* "chmengine/__init__.py":5
  * from chmengine.engines import CMHMEngine, CMHMEngine2, Quartney
  * from chmengine.play import PlayCMHMEngine
- * from chmengine.utils import (             # <<<<<<<<<<<<<<
- *     Pick,
- *     calculate_white_minus_black_score,
+ * from chmengine.utils import (Pick, better_checkmate_score, calculate_better_white_minus_black_score,             # <<<<<<<<<<<<<<
+ *                              calculate_white_minus_black_score, checkmate_score, format_moves, get_static_delta_score,
+ *                              get_static_value, get_white_and_black_king_boxes, insert_ordered_best_to_worst,
  */
+  __pyx_t_3 = PyList_New(17); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_INCREF(__pyx_n_s_Pick);
+  __Pyx_GIVEREF(__pyx_n_s_Pick);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 0, __pyx_n_s_Pick)) __PYX_ERR(0, 5, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_better_checkmate_score);
+  __Pyx_GIVEREF(__pyx_n_s_better_checkmate_score);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 1, __pyx_n_s_better_checkmate_score)) __PYX_ERR(0, 5, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_calculate_better_white_minus_bla);
+  __Pyx_GIVEREF(__pyx_n_s_calculate_better_white_minus_bla);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 2, __pyx_n_s_calculate_better_white_minus_bla)) __PYX_ERR(0, 5, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_calculate_white_minus_black_scor);
+  __Pyx_GIVEREF(__pyx_n_s_calculate_white_minus_black_scor);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 3, __pyx_n_s_calculate_white_minus_black_scor)) __PYX_ERR(0, 5, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_checkmate_score);
+  __Pyx_GIVEREF(__pyx_n_s_checkmate_score);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 4, __pyx_n_s_checkmate_score)) __PYX_ERR(0, 5, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_format_moves);
+  __Pyx_GIVEREF(__pyx_n_s_format_moves);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 5, __pyx_n_s_format_moves)) __PYX_ERR(0, 5, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_get_static_delta_score);
+  __Pyx_GIVEREF(__pyx_n_s_get_static_delta_score);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 6, __pyx_n_s_get_static_delta_score)) __PYX_ERR(0, 5, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_get_static_value);
+  __Pyx_GIVEREF(__pyx_n_s_get_static_value);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 7, __pyx_n_s_get_static_value)) __PYX_ERR(0, 5, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_get_white_and_black_king_boxes);
+  __Pyx_GIVEREF(__pyx_n_s_get_white_and_black_king_boxes);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 8, __pyx_n_s_get_white_and_black_king_boxes)) __PYX_ERR(0, 5, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_insert_ordered_best_to_worst);
+  __Pyx_GIVEREF(__pyx_n_s_insert_ordered_best_to_worst);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 9, __pyx_n_s_insert_ordered_best_to_worst)) __PYX_ERR(0, 5, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_insert_ordered_worst_to_best);
+  __Pyx_GIVEREF(__pyx_n_s_insert_ordered_worst_to_best);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 10, __pyx_n_s_insert_ordered_worst_to_best)) __PYX_ERR(0, 5, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_is_draw);
+  __Pyx_GIVEREF(__pyx_n_s_is_draw);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 11, __pyx_n_s_is_draw)) __PYX_ERR(0, 5, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_max_moves_map);
+  __Pyx_GIVEREF(__pyx_n_s_max_moves_map);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 12, __pyx_n_s_max_moves_map)) __PYX_ERR(0, 5, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_pieces_count_from_board);
+  __Pyx_GIVEREF(__pyx_n_s_pieces_count_from_board);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 13, __pyx_n_s_pieces_count_from_board)) __PYX_ERR(0, 5, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_pieces_count_from_fen);
+  __Pyx_GIVEREF(__pyx_n_s_pieces_count_from_fen);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 14, __pyx_n_s_pieces_count_from_fen)) __PYX_ERR(0, 5, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_set_all_datetime_headers);
+  __Pyx_GIVEREF(__pyx_n_s_set_all_datetime_headers);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 15, __pyx_n_s_set_all_datetime_headers)) __PYX_ERR(0, 5, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_set_utc_headers);
+  __Pyx_GIVEREF(__pyx_n_s_set_utc_headers);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 16, __pyx_n_s_set_utc_headers)) __PYX_ERR(0, 5, __pyx_L1_error);
   __pyx_t_2 = __Pyx_Import(__pyx_n_s_chmengine_utils, __pyx_t_3, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_Pick); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Pick, __pyx_t_3) < 0) __PYX_ERR(0, 6, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Pick, __pyx_t_3) < 0) __PYX_ERR(0, 5, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_better_checkmate_score); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_better_checkmate_score, __pyx_t_3) < 0) __PYX_ERR(0, 5, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_calculate_better_white_minus_bla); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_calculate_better_white_minus_bla, __pyx_t_3) < 0) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_calculate_white_minus_black_scor); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_calculate_white_minus_black_scor, __pyx_t_3) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_calculate_white_minus_black_scor, __pyx_t_3) < 0) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_checkmate_score); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_checkmate_score, __pyx_t_3) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_checkmate_score, __pyx_t_3) < 0) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_format_moves); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_format_moves, __pyx_t_3) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_format_moves, __pyx_t_3) < 0) __PYX_ERR(0, 6, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_get_static_delta_score); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_static_delta_score, __pyx_t_3) < 0) __PYX_ERR(0, 6, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_get_static_value); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_static_value, __pyx_t_3) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_get_white_and_black_king_boxes); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_white_and_black_king_boxes, __pyx_t_3) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_white_and_black_king_boxes, __pyx_t_3) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_insert_ordered_best_to_worst); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_insert_ordered_best_to_worst, __pyx_t_3) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_insert_ordered_best_to_worst, __pyx_t_3) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_insert_ordered_worst_to_best); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_insert_ordered_worst_to_best, __pyx_t_3) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_insert_ordered_worst_to_best, __pyx_t_3) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_is_draw); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_draw, __pyx_t_3) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_draw, __pyx_t_3) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_max_moves_map); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_max_moves_map, __pyx_t_3) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_pieces_count_from_board); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pieces_count_from_board, __pyx_t_3) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pieces_count_from_board, __pyx_t_3) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_pieces_count_from_fen); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pieces_count_from_fen, __pyx_t_3) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pieces_count_from_fen, __pyx_t_3) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_set_all_datetime_headers); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_set_all_datetime_headers, __pyx_t_3) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_set_all_datetime_headers, __pyx_t_3) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_set_utc_headers); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_set_utc_headers, __pyx_t_3) < 0) __PYX_ERR(0, 17, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_set_utc_headers, __pyx_t_3) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "chmengine/__init__.py":20
- * )
+  /* "chmengine/__init__.py":11
+ *                              pieces_count_from_fen, set_all_datetime_headers, set_utc_headers)
  * 
  * __all__ = [             # <<<<<<<<<<<<<<
  *     # Mods
  *     'engines',
  */
-  __pyx_t_2 = PyList_New(19); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_2 = PyList_New(24); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_n_u_engines);
   __Pyx_GIVEREF(__pyx_n_u_engines);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_u_engines)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_u_engines)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_play);
   __Pyx_GIVEREF(__pyx_n_u_play);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_u_play)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_u_play)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_utils);
   __Pyx_GIVEREF(__pyx_n_u_utils);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 2, __pyx_n_u_utils)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 2, __pyx_n_u_utils)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_CMHMEngine);
   __Pyx_GIVEREF(__pyx_n_u_CMHMEngine);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 3, __pyx_n_u_CMHMEngine)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 3, __pyx_n_u_CMHMEngine)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_CMHMEngine2);
   __Pyx_GIVEREF(__pyx_n_u_CMHMEngine2);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 4, __pyx_n_u_CMHMEngine2)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 4, __pyx_n_u_CMHMEngine2)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_Quartney);
   __Pyx_GIVEREF(__pyx_n_u_Quartney);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 5, __pyx_n_u_Quartney)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 5, __pyx_n_u_Quartney)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_PlayCMHMEngine);
   __Pyx_GIVEREF(__pyx_n_u_PlayCMHMEngine);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 6, __pyx_n_u_PlayCMHMEngine)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 6, __pyx_n_u_PlayCMHMEngine)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_Pick);
   __Pyx_GIVEREF(__pyx_n_u_Pick);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 7, __pyx_n_u_Pick)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 7, __pyx_n_u_Pick)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_format_moves);
   __Pyx_GIVEREF(__pyx_n_u_format_moves);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 8, __pyx_n_u_format_moves)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 8, __pyx_n_u_format_moves)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_calculate_white_minus_black_scor);
   __Pyx_GIVEREF(__pyx_n_u_calculate_white_minus_black_scor);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 9, __pyx_n_u_calculate_white_minus_black_scor)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 9, __pyx_n_u_calculate_white_minus_black_scor)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_checkmate_score);
   __Pyx_GIVEREF(__pyx_n_u_checkmate_score);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 10, __pyx_n_u_checkmate_score)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 10, __pyx_n_u_checkmate_score)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_is_draw);
   __Pyx_GIVEREF(__pyx_n_u_is_draw);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 11, __pyx_n_u_is_draw)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 11, __pyx_n_u_is_draw)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_get_white_and_black_king_boxes);
   __Pyx_GIVEREF(__pyx_n_u_get_white_and_black_king_boxes);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 12, __pyx_n_u_get_white_and_black_king_boxes)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 12, __pyx_n_u_get_white_and_black_king_boxes)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_insert_ordered_worst_to_best);
   __Pyx_GIVEREF(__pyx_n_u_insert_ordered_worst_to_best);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 13, __pyx_n_u_insert_ordered_worst_to_best)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 13, __pyx_n_u_insert_ordered_worst_to_best)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_insert_ordered_best_to_worst);
   __Pyx_GIVEREF(__pyx_n_u_insert_ordered_best_to_worst);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 14, __pyx_n_u_insert_ordered_best_to_worst)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 14, __pyx_n_u_insert_ordered_best_to_worst)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_pieces_count_from_fen);
   __Pyx_GIVEREF(__pyx_n_u_pieces_count_from_fen);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 15, __pyx_n_u_pieces_count_from_fen)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 15, __pyx_n_u_pieces_count_from_fen)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_pieces_count_from_board);
   __Pyx_GIVEREF(__pyx_n_u_pieces_count_from_board);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 16, __pyx_n_u_pieces_count_from_board)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 16, __pyx_n_u_pieces_count_from_board)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_set_all_datetime_headers);
   __Pyx_GIVEREF(__pyx_n_u_set_all_datetime_headers);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 17, __pyx_n_u_set_all_datetime_headers)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 17, __pyx_n_u_set_all_datetime_headers)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_set_utc_headers);
   __Pyx_GIVEREF(__pyx_n_u_set_utc_headers);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 18, __pyx_n_u_set_utc_headers)) __PYX_ERR(0, 20, __pyx_L1_error);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_all, __pyx_t_2) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 18, __pyx_n_u_set_utc_headers)) __PYX_ERR(0, 11, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_u_calculate_better_white_minus_bla);
+  __Pyx_GIVEREF(__pyx_n_u_calculate_better_white_minus_bla);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 19, __pyx_n_u_calculate_better_white_minus_bla)) __PYX_ERR(0, 11, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_u_get_static_value);
+  __Pyx_GIVEREF(__pyx_n_u_get_static_value);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 20, __pyx_n_u_get_static_value)) __PYX_ERR(0, 11, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_u_get_static_delta_score);
+  __Pyx_GIVEREF(__pyx_n_u_get_static_delta_score);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 21, __pyx_n_u_get_static_delta_score)) __PYX_ERR(0, 11, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_u_better_checkmate_score);
+  __Pyx_GIVEREF(__pyx_n_u_better_checkmate_score);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 22, __pyx_n_u_better_checkmate_score)) __PYX_ERR(0, 11, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_u_max_moves_map);
+  __Pyx_GIVEREF(__pyx_n_u_max_moves_map);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 23, __pyx_n_u_max_moves_map)) __PYX_ERR(0, 11, __pyx_L1_error);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_all, __pyx_t_2) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "chmengine/__init__.py":1
