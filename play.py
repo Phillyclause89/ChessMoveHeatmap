@@ -295,6 +295,7 @@ class EngineContainer:
 
 class PlayChessApp(Tk, BaseChessTkApp):
     """Play against the CMHMEngine in a GUI."""
+    _move_executor: ThreadPoolExecutor
     training: bool
     rewarding: bool
     site: str
