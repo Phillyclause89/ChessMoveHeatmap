@@ -569,8 +569,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
                             self.engines.white.pick_move
                         ) if board.turn else self._move_executor.submit(self.engines.black.pick_move)
                     self.updating = True
-                    width: int = self.winfo_width()
-                    self.square_size = width // 8
+                    self.square_size = min(self.canvas.winfo_width(), self.canvas.winfo_height()) // 8
                     self.update_board()
                     self.updating = False
                 outcome: Outcome = board.outcome(claim_draw=True)
@@ -987,8 +986,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         ) if self.engines.board.turn else self._move_executor.submit(self.engines.black.pick_move)
         while not future.done():
             self.updating = True
-            width: int = self.winfo_width()
-            self.square_size = width // 8
+            self.square_size = min(self.canvas.winfo_width(), self.canvas.winfo_height()) // 8
             self.update_board()
             self.updating = False
         return future.result()
