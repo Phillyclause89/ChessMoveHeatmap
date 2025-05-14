@@ -137,6 +137,26 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.cmhmey2.CMHMEngine2.current_picks_list">
+<span class="sig-name descname"><span class="pre">current_picks_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.engines.cmhmey2.CMHMEngine2.current_picks_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the list of legal null-scored picks for the current board position.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">Optional[chess.Board], default: None</span></dt><dd><p>The board for which to get legal moves. If None, the engine’s current board is used.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>List[Pick]</dt><dd><p>A list of null-scored picks available on the board.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="chmengine.engines.cmhmey2.CMHMEngine2.current_player_heatmap_index">
 <span class="sig-name descname"><span class="pre">current_player_heatmap_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#chmengine.engines.cmhmey2.CMHMEngine2.current_player_heatmap_index" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the heatmap index corresponding to the active (current) player.</p>
@@ -381,8 +401,8 @@ this returns 1, and vice versa.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="chmengine.engines.cmhmey2.CMHMEngine2.pick_move">
-<span class="sig-name descname"><span class="pre">pick_move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pick_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a></span></span><a class="headerlink" href="#chmengine.engines.cmhmey2.CMHMEngine2.pick_move" title="Permalink to this definition">¶</a></dt>
-<dd><p>Select a move based on heatmap evaluations and Q-table integration.</p>
+<span class="sig-name descname"><span class="pre">pick_move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a></span></span><a class="headerlink" href="#chmengine.engines.cmhmey2.CMHMEngine2.pick_move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select a Pick based on heatmap evaluations and Q-table integration.</p>
 <p>This overridden method combines heatmap evaluations with Q-value updates. It evaluates all
 legal moves by calculating their scores from the perspective of the current player (with positive
 scores indicating favorable moves and negative scores indicating unfavorable moves). The evaluation
@@ -392,8 +412,6 @@ score.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>pick_by</strong><span class="classifier">str, default: “”</span></dt><dd><p>Legecy param from parent class pick_move method. Args are ignored by this classe’s overide.</p>
-</dd>
 <dt><strong>board</strong><span class="classifier">Optional[chess.Board], default: None</span></dt><dd><p>Pick from a given board instead of intstance board</p>
 </dd>
 <dt><strong>debug</strong><span class="classifier">bool, default: False</span></dt><dd><p>Allows for a print call showing the current evals of each move choice during anaylsis.</p>
@@ -402,9 +420,9 @@ score.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>Pick</dt><dd><p>A tuple-like containing the chosen move and its associated evaluation score. The evaluation score is
-expressed from the perspective of the player making the move—positive values indicate favorable
-outcomes and negative values indicate unfavorable outcomes.</p>
+<dt>Pick</dt><dd><p>An unpackable tuple-like containing the chosen move and its associated evaluation score.
+The evaluation score is expressed from the perspective of the player making the move—positive
+values indicate favorable outcomes and negative values indicate unfavorable outcomes.</p>
 </dd>
 </dl>
 </dd>

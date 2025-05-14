@@ -59,46 +59,49 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#chmengine.utils.format_moves" title="chmengine.utils.format_moves"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_moves</span></code></a>(picks)</p></td>
 <td><p>Format a list of (move, score) tuples into UCI strings and formatted scores.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#chmengine.utils.get_static_delta_score" title="chmengine.utils.get_static_delta_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_static_delta_score</span></code></a>(heatmap)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chmengine.utils.format_picks" title="chmengine.utils.format_picks"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_picks</span></code></a>(picks)</p></td>
+<td><p>Format a list of Picks into UCI strings and formatted scores.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chmengine.utils.get_static_delta_score" title="chmengine.utils.get_static_delta_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_static_delta_score</span></code></a>(heatmap)</p></td>
 <td><p>Compute the static piece-based delta score from a ChessMoveHeatmap.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#chmengine.utils.get_static_value" title="chmengine.utils.get_static_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_static_value</span></code></a>(piece)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chmengine.utils.get_static_value" title="chmengine.utils.get_static_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_static_value</span></code></a>(piece)</p></td>
 <td><p>Retrieve the static movement-based value for a given chess piece.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#chmengine.utils.get_white_and_black_king_boxes" title="chmengine.utils.get_white_and_black_king_boxes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_white_and_black_king_boxes</span></code></a>(board)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#chmengine.utils.get_white_and_black_king_boxes" title="chmengine.utils.get_white_and_black_king_boxes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_white_and_black_king_boxes</span></code></a>(board)</p></td>
 <td><p>Compute the list of squares surrounding each king on the board.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#chmengine.utils.insert_choice_into_current_moves" title="chmengine.utils.insert_choice_into_current_moves"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_choice_into_current_moves</span></code></a>(...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chmengine.utils.insert_choice_into_current_moves" title="chmengine.utils.insert_choice_into_current_moves"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_choice_into_current_moves</span></code></a>(...)</p></td>
 <td><p>Insert a new candidate move into the current player's move list (best to worst).</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_choice_into_response_moves</span></code>(...)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_choice_into_response_moves</span></code>(...)</p></td>
 <td><p>Insert a new candidate move into the opponent's response list (worst to best).</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#chmengine.utils.insert_ordered_best_to_worst" title="chmengine.utils.insert_ordered_best_to_worst"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_ordered_best_to_worst</span></code></a>(ordered_picks, pick)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chmengine.utils.insert_ordered_best_to_worst" title="chmengine.utils.insert_ordered_best_to_worst"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_ordered_best_to_worst</span></code></a>(ordered_picks, pick)</p></td>
 <td><p>Insert a move into a list of moves sorted from best to worst.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#chmengine.utils.insert_ordered_worst_to_best" title="chmengine.utils.insert_ordered_worst_to_best"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_ordered_worst_to_best</span></code></a>(ordered_picks, pick)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#chmengine.utils.insert_ordered_worst_to_best" title="chmengine.utils.insert_ordered_worst_to_best"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_ordered_worst_to_best</span></code></a>(ordered_picks, pick)</p></td>
 <td><p>Insert a move into a list of moves sorted from worst to best.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#chmengine.utils.is_draw" title="chmengine.utils.is_draw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_draw</span></code></a>(winner)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chmengine.utils.is_draw" title="chmengine.utils.is_draw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_draw</span></code></a>(winner)</p></td>
 <td><p>Check if a game result is a draw based on the winner field.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#chmengine.utils.is_valid_king_box_square" title="chmengine.utils.is_valid_king_box_square"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_valid_king_box_square</span></code></a>(square_id, king_square)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#chmengine.utils.is_valid_king_box_square" title="chmengine.utils.is_valid_king_box_square"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_valid_king_box_square</span></code></a>(square_id, king_square)</p></td>
 <td><p>Check if a square is valid for inclusion in a king's bounding box.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#chmengine.utils.null_target_moves" title="chmengine.utils.null_target_moves"><code class="xref py py-obj docutils literal notranslate"><span class="pre">null_target_moves</span></code></a>([number])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chmengine.utils.null_target_moves" title="chmengine.utils.null_target_moves"><code class="xref py py-obj docutils literal notranslate"><span class="pre">null_target_moves</span></code></a>([number])</p></td>
 <td><p>Initialize a tuple of target move lists with null entries.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#chmengine.utils.pieces_count_from_board" title="chmengine.utils.pieces_count_from_board"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pieces_count_from_board</span></code></a>(board)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#chmengine.utils.pieces_count_from_board" title="chmengine.utils.pieces_count_from_board"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pieces_count_from_board</span></code></a>(board)</p></td>
 <td><p>Return the number of pieces on the board</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#chmengine.utils.pieces_count_from_fen" title="chmengine.utils.pieces_count_from_fen"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pieces_count_from_fen</span></code></a>(fen)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chmengine.utils.pieces_count_from_fen" title="chmengine.utils.pieces_count_from_fen"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pieces_count_from_fen</span></code></a>(fen)</p></td>
 <td><p>Return the number of pieces on the board represented by <cite>fen</cite>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#chmengine.utils.set_all_datetime_headers" title="chmengine.utils.set_all_datetime_headers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_all_datetime_headers</span></code></a>(game_heads, local_time)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#chmengine.utils.set_all_datetime_headers" title="chmengine.utils.set_all_datetime_headers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_all_datetime_headers</span></code></a>(game_heads, local_time)</p></td>
 <td><p>Sets all datetime related game headers for the pgn file.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#chmengine.utils.set_utc_headers" title="chmengine.utils.set_utc_headers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_utc_headers</span></code></a>(game_heads, local_time)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#chmengine.utils.set_utc_headers" title="chmengine.utils.set_utc_headers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_utc_headers</span></code></a>(game_heads, local_time)</p></td>
 <td><p>Sets UTC header info of pgn file data from local timestamp</p></td>
 </tr>
 </tbody>
@@ -405,6 +408,28 @@ Negative if the current player is mated, positive if they deliver mate.</p>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt>List[Tuple[str, str]</dt><dd><p>Formatted list where each tuple contains the move in UCI format
+and the score rounded to two decimal places.
+Entries with <cite>None</cite> moves are excluded.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmengine.utils.format_picks">
+<span class="sig-prename descclassname"><span class="pre">chmengine.utils.</span></span><span class="sig-name descname"><span class="pre">format_picks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">picks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#chmengine.utils.format_picks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format a list of Picks into UCI strings and formatted scores.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>picks</strong><span class="classifier">List[Pick]</span></dt><dd><p>The list of Picks (moves and their evaluation scores.)</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>str</dt><dd><p>Formatted list where each tuple contains the move in UCI format
 and the score rounded to two decimal places.
 Entries with <cite>None</cite> moves are excluded.</p>
 </dd>

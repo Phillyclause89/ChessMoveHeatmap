@@ -19,6 +19,7 @@
       calculate_white_minus_black_score
       checkmate_score
       format_moves
+      format_picks
       get_static_delta_score
       get_static_value
       get_white_and_black_king_boxes
