@@ -1,0 +1,15 @@
+[Event "Unknown vs CMHMEngine2"]
+[Site "Unknown's place"]
+[Date "2025.05.14"]
+[Round "56"]
+[White "Unknown"]
+[Black "CMHMEngine2"]
+[Result "1-0"]
+[Timezone "Pacific Daylight Time"]
+[UTCDate "2025.05.14"]
+[UTCTime "18:09:16"]
+[Termination "CHECKMATE"]
+[CMHMEngineDepth "1"]
+
+1. e4 { eval=? } 1... e5 { eval=+62.51 } 2. Nf3 { eval=+62.51 } 2... Qe7 { eval=+62.51 } 3. Nc3 { eval=+62.51 } 3... Qb4 { eval=-0.68 } 4. a3 { eval=-0.68 } 4... d5 { eval=+159.57 } 5. axb4 { eval=+159.57 } 5... a5 { eval=+227.60 } 6. bxa5 { eval=+227.60 } 6... Bg4 { eval=+147.02 } 7. Nxd5 { eval=+147.02 } 7... Bb4 { eval=+140.76 } 8. Nxc7+ { eval=+140.76 } 8... Kd7 { eval=+81.53 } 9. Nxa8 { eval=+81.53 } 9... Nc6 { eval=+42.84 } 10. Bb5 { eval=+42.84 } 10... Nf6 { eval=+75.11 } 11. Bxc6+ { eval=+75.11 } 11... Kxc6 { eval=-19.22 } 12. Nxe5+ { eval=-19.22 } 12... Kb5 { eval=+508.28 } 13. Nxg4 { eval=+508.28 } 13... Rd8 { eval=+140.74 } 14. Nxf6 { eval=+140.74 } 14... g5 { eval=+276.11 } 15. Qe2+ { eval=+276.11 } 15... Kc6 { eval=+563.55 } 16. Qc4+ { eval=+563.55 } 16... Bc5 { eval=+582.22 } 17. b4 { eval=+582.22 } 17... b5 { eval=+587.55 } 18. Qxc5+ { eval=+587.55 } 18... Kb7 { eval=+651.65 } 19. a6+ { eval=+651.65 } 19... Kxa8 { eval=+666.94 } 20. Qc6+ { eval=+666.94 } 20... Ka7 { eval=+69120.00 } 21. Qb7# { eval=+69120.00 } 1-0
+

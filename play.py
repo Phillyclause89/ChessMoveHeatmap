@@ -296,6 +296,7 @@ class EngineContainer:
 class PlayChessApp(Tk, BaseChessTkApp):
     """Play against the CMHMEngine in a GUI."""
     training: bool
+    rewarding: bool
     site: str
     face: str
     game_line: List[Pick]
@@ -345,6 +346,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         """
         self.updating = True
         self.training = False
+        self.rewarding = False
         super().__init__()
         screen_height: int = self.winfo_screenheight()
         screen_width: int = int(screen_height * 0.75)
@@ -403,7 +405,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         If idle and not training, calls `ask_depth()`, updates both engines’ `.depth`,
         and updates the window title. Shows an error if a training session is active.
         """
-        if not self.updating and not self.training:
+        if not self.updating and not self.training and not self.rewarding:
             self.updating = True
             new_depth: Optional[int] = self.ask_depth()
             if new_depth is not None and new_depth != self.depth:
@@ -413,6 +415,10 @@ class PlayChessApp(Tk, BaseChessTkApp):
             self.updating = False
         elif self.training:
             messagebox.showerror("Error", "Changing depth is not permitted while the engine is training.")
+        elif self.rewarding:
+            messagebox.showerror(
+                "Error", "Changing depth is not permitted while the engine is applying its rewards function."
+            )
         else:
             self.after(100, self.set_depth)
 
@@ -450,6 +456,8 @@ class PlayChessApp(Tk, BaseChessTkApp):
             - "<PlayerName> vs <EngineName>" (if player_index==0)
             - "<EngineName> vs <PlayerName>" (if player_index==1)
         """
+        if self.rewarding:
+            return f"Applying Rewards Function"
         if self.training:
             return f"{self.engines.white_name} vs {self.engines.black_name}"
         if self.player.index:
@@ -462,7 +470,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         If idle, asks “Are you sure?”, resets engines’ boards, and updates the display.
         Displays an error if a training session is running.
         """
-        if not self.updating and not self.training:
+        if not self.updating and not self.training and not self.rewarding:
             self.updating = True
             if messagebox.askyesno("New Game", "Are you sure you want to start a new game?"):
                 if messagebox.askyesno(
@@ -478,6 +486,10 @@ class PlayChessApp(Tk, BaseChessTkApp):
             self.updating = False
         elif self.training:
             messagebox.showerror("Error", "Starting a new game is not permitted while the engine is training.")
+        elif self.rewarding:
+            messagebox.showerror(
+                "Error", "Starting a new game is not while the engine is applying its rewards function."
+            )
         else:
             self.after(100, self.new_game)
 
@@ -525,7 +537,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         ------
         Raises an error dialog if called while already training.
         """
-        if not self.updating and not self.training:
+        if not self.updating and not self.training and not self.rewarding:
             self.training = True
             illegal_pick: Pick = self.game_line[0]
             start_game_index: Optional[int]
@@ -580,14 +592,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
                 )
                 self.save_to_pgn(file_name=file_name, game=game)
                 self.highlight_squares = set()
-                for engine in self.engines:
-                    if isinstance(engine, CMHMEngine2):
-                        # This is going to pop all the moves out of the shared board...
-                        update_future: Future = self._move_executor.submit(engine.update_q_values)
-                        while not update_future.done():
-                            self.updating = True
-                            self.update_board()
-                            self.updating = False
+                self.apply_rewards()
                 self.reset_engines_board()
                 self.engines.flip()
                 self.updating = True
@@ -596,6 +601,8 @@ class PlayChessApp(Tk, BaseChessTkApp):
             self.training = False
         elif self.training:
             messagebox.showerror("Error", "The engine is already training.")
+        elif self.rewarding:
+            messagebox.showerror("Error", "The engine is currently applying its rewards function.")
         else:
             self.after(100, self.train_engine)
 
@@ -716,15 +723,23 @@ class PlayChessApp(Tk, BaseChessTkApp):
         )
         self.save_to_pgn(file_name=file_name, game=game)
         self.highlight_squares = set()
+        self.apply_rewards()
+        self.reset_engines_board()
+
+    def apply_rewards(self) -> None:
+        """Apply rewards function to supported Engine types"""
         for engine in self.engines:
             if isinstance(engine, CMHMEngine2):
-                # This is going to pop all the moves out of the shared board...
+                self.rewarding = True
                 update_future: Future = self._move_executor.submit(engine.update_q_values)
                 while not update_future.done():
+                    while len(self.game_line) != len(self.engines.board.move_stack) + 1:
+                        self.game_line.pop()
+                        self.fullmove_number = self.engines.board.fullmove_number
                     self.updating = True
                     self.update_board()
                     self.updating = False
-        self.reset_engines_board()
+                self.rewarding = False
 
     def update_board(self) -> None:
         """Refresh the chessboard GUI.
@@ -752,9 +767,9 @@ class PlayChessApp(Tk, BaseChessTkApp):
         last_score: float64 = self.game_line[-1].score
         turn: bool = self.engines.board.turn
         key: str = 'draw'
-        if (last_score > 17 and turn) or (last_score < -17 and not turn):
+        if (last_score > 127 and turn) or (last_score < -127 and not turn):
             key = 'winning'
-        if (last_score < -17 and turn) or (last_score > 17 and not turn):
+        if (last_score < -127 and turn) or (last_score > 127 and not turn):
             key = 'losing'
         return choice(self.faces[key])
 
@@ -778,31 +793,36 @@ class PlayChessApp(Tk, BaseChessTkApp):
         game_line_font: Tuple[str, int] = (self.font, font_size // 5)
         at_ply_name: str
         at_ply_color: str
-        if self.training:
-            at_ply_name, at_ply_color = (
-                self.engines.white_name, 'White'
-            ) if board.turn else (
-                self.engines.black_name, 'Black'
-            )
-        elif self.player.index:
-            at_ply_name, at_ply_color = (
-                self.engines.white_name, 'White'
-            ) if board.turn else (
-                self.player.name, 'Black'
-            )
+
+        if self.rewarding:
+            top_text: str = f"{self.face} Applying Rewards Function{next(self.dot_dot)}"
         else:
-            at_ply_name, at_ply_color = (
-                self.player.name, 'White'
-            ) if board.turn else (
-                self.engines.black_name, 'Black'
+            if self.training:
+                at_ply_name, at_ply_color = (
+                    self.engines.white_name, 'White'
+                ) if board.turn else (
+                    self.engines.black_name, 'Black'
+                )
+            elif self.player.index:
+                at_ply_name, at_ply_color = (
+                    self.engines.white_name, 'White'
+                ) if board.turn else (
+                    self.player.name, 'Black'
+                )
+            else:
+                at_ply_name, at_ply_color = (
+                    self.player.name, 'White'
+                ) if board.turn else (
+                    self.engines.black_name, 'Black'
+                )
+            top_text = (
+                f"{self.face} {at_ply_name} ({at_ply_color}) is picking Move #{self.fullmove_number}"
+                f" (Pick #{len(self.game_line)}){next(self.dot_dot)}"
             )
         self.canvas.create_text(
             half_square_size // 8, (half_square_size // 4),
             anchor='w',
-            text=(
-                f"{self.face} {at_ply_name} ({at_ply_color}) is picking Move #{self.fullmove_number}"
-                f" (Pick #{len(self.game_line)}){next(self.dot_dot)}"
-            ),
+            text=top_text,
             font=game_line_font
         )
         game_line_text: str = ' ⬅ '.join([f"{p:+.2f}" for p in self.game_line[-1:0:-1]])
@@ -882,7 +902,9 @@ class PlayChessApp(Tk, BaseChessTkApp):
         ----------
         event : Event
         """
-        if not self.updating and not self.training and self.engines.board.turn == bool(self.player):
+        if not self.updating and not self.training and not self.rewarding and self.engines.board.turn == bool(
+                self.player
+        ):
             if self.selected_square is None:
                 square: Optional[int] = self.coord_to_square(event.x, event.y)
                 legal_moves: List[Move] = list(self.engines.board.legal_moves)
