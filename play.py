@@ -483,6 +483,13 @@ class PlayChessApp(Tk, BaseChessTkApp):
                 if bool(self.player.index) == self.engines.board.turn:
                     pick = self.await_engine_pick()
                     self.engines.push(pick)
+                    outcome: Outcome = self.engines.board.outcome(claim_draw=True)
+                    if outcome is not None:
+                        return self.show_game_over(outcome=outcome)
+                    self.fullmove_number = self.engines.board.fullmove_number
+                    self.game_line.append(pick)
+                    self.face = self.get_smily_face()
+                    self.highlight_squares = {pick.move.from_square, pick.move.to_square}
                 self.update_board()
             self.updating = False
         elif self.training:
@@ -733,9 +740,6 @@ class PlayChessApp(Tk, BaseChessTkApp):
                 self.rewarding = True
                 update_future: Future = self._move_executor.submit(engine.update_q_values)
                 while not update_future.done():
-                    while len(self.game_line) != len(self.engines.board.move_stack) + 1:
-                        self.game_line.pop()
-                        self.fullmove_number = self.engines.board.fullmove_number
                     self.updating = True
                     self.update_board()
                     self.updating = False
