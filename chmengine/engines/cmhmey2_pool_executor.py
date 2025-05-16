@@ -1,6 +1,7 @@
 """Cmhmey Jr.'s Mad Scientist Uncle Who Likes to make clones of Cmhmey Jr."""
 
 from concurrent.futures import Future, ProcessPoolExecutor, as_completed
+from os import path
 from typing import Dict, List, Optional, Union
 
 from chess import Board, Move
@@ -8,6 +9,7 @@ from numpy import float64, isnan
 
 from chmengine.engines.cmhmey2 import CMHMEngine2
 from chmengine.utils.pick import Pick
+from chmutils import CACHE_DIR
 
 NAN64 = float64(None)
 
@@ -16,7 +18,7 @@ BoardCache = Dict[Move, BoardCacheEntry]
 
 
 # TODO: Move this helper to `chmengine.utils.__init__.py` (if we can, might have circular import errors?)
-def evaluate_move(board: Board, depth: int = 1, debug: bool = False) -> Pick:
+def evaluate_move(board: Board, depth: int = 1, debug: bool = False, cache_dir: str = CMHMEngine2.cache_dir) -> Pick:
     """Offloads eval calculations to another CMHMEngine2 instance.
 
     Parameters
@@ -24,11 +26,13 @@ def evaluate_move(board: Board, depth: int = 1, debug: bool = False) -> Pick:
     board : Board
     depth : int
     debug : bool
+    cache_dir : str
 
     Returns
     -------
     Pick
     """
+    CMHMEngine2.cache_dir = cache_dir
     return CMHMEngine2(board=board, depth=depth).pick_move(debug=debug)
 
 
@@ -37,8 +41,9 @@ class CMHMEngine2PoolExecutor:
     # TODO: Property-afy these fields as we finalize them
     depth: int
     board: Board
+    cache_dir: str = path.join(".", CACHE_DIR, "QTables")
     engine: CMHMEngine2
-    # TODO: Refactor `max_workers` into a dict of options to be passed to `concurrent.futures` things as needed
+    # TODO: Refactor `max_workers` into a dict of options to be passed to `concurrent.futures` things as needed.
     max_workers: Optional[int]
 
     def __init__(self, board: Optional[Board] = None, depth: int = 1, max_workers: Optional[int] = None) -> None:
@@ -56,6 +61,7 @@ class CMHMEngine2PoolExecutor:
         self.board = board if board else Board()
         self.depth = depth
         self.max_workers = max_workers
+        CMHMEngine2.cache_dir = self.cache_dir
         self.engine = CMHMEngine2(board=self.board, depth=self.depth)
 
     def pick_move(self, debug: bool = False) -> Pick:
@@ -82,9 +88,13 @@ class CMHMEngine2PoolExecutor:
         }
         # Throw ValueError if there are no moves to evaluate.
         if len(board_cache) == 0:
-            raise ValueError(
-                f"No legal moves available from board: {self.board.fen()}"
-            ) from self.engine.pick_move(debug=True)
+            # Try/Catch root value error that would have happened had we made it to the end of the method call.
+            try:
+                return self.engine.pick_move(debug=True)
+            except ValueError as root_error:
+                raise ValueError(
+                    f"No legal moves available from board: {self.board.fen()}"
+                ) from root_error
 
         # Populate cached_score from the Q-Table
         uncached_moves: List[Move] = []
@@ -125,7 +135,8 @@ class CMHMEngine2PoolExecutor:
             with ProcessPoolExecutor(max_workers=self.max_workers) as executor:
                 future_to_move: Dict[Future, Move] = {
                     executor.submit(
-                        evaluate_move, board=board_cache[_move]['board'], depth=self.depth, debug=debug
+                        evaluate_move,
+                        board=board_cache[_move]['board'], depth=self.depth, debug=debug, cache_dir=self.cache_dir
                     ): _move for _move in uncached_moves
                 }
                 _future: Future[Pick]

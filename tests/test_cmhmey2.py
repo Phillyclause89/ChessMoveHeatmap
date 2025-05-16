@@ -6,7 +6,7 @@ from typing import Iterable, Optional
 from unittest import TestCase
 
 from chess import Board, Move, pgn
-from numpy import float64, isnan, mean, percentile, testing
+from numpy import float64, isnan, mean, percentile
 
 from chmengine import Pick
 from chmutils import BetterHeatmapCache, HeatmapCache
