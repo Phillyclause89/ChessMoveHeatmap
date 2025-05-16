@@ -22,7 +22,7 @@ from chmutils import (
 )
 
 __all__ = [
-    'PlayChessApp',
+    'PlayDeeperChessApp',
     'EnginePoolContainer'
 ]
 
@@ -293,7 +293,7 @@ class EnginePoolContainer:
         return {self._white, self._black}
 
 
-class PlayChessApp(Tk, BaseChessTkApp):
+class PlayDeeperChessApp(Tk, BaseChessTkApp):
     """Play against the CMHMEngine in a GUI."""
     _move_executor: ThreadPoolExecutor
     training: bool
@@ -1047,5 +1047,5 @@ class PlayChessApp(Tk, BaseChessTkApp):
 
 
 if __name__ == "__main__":
-    app = PlayChessApp(engine_type=CMHMEngine2PoolExecutor)
+    app = PlayDeeperChessApp(engine_type=CMHMEngine2PoolExecutor)
     app.mainloop()
