@@ -11,6 +11,7 @@ class TestCMHEngineImports(TestCase):
     _engine1 = ['CMHMEngine']
     _engine2 = ['CMHMEngine2']
     _engine3 = ['Quartney']
+    _poole = ['CMHMEngine2PoolExecutor']
     _engine_manager = ['PlayCMHMEngine']
     _pick = ['Pick']
     _modules = ['engines', 'play', 'utils']
@@ -33,7 +34,8 @@ class TestCMHEngineImports(TestCase):
         'get_static_value',
         'max_moves_map',
     ]
-    _engines = _engine1 + _engine2 + _engine3
+    _engine_mods = ['cmhmey1', 'cmhmey2', 'quartney', 'cmhmey2_pool_executor']
+    _engines = _engine1 + _engine2 + _engine3 + _poole
     _all = _engines + _engine_manager + _pick + _functions + _modules
 
     def setUp(self) -> None:
@@ -48,7 +50,7 @@ class TestCMHEngineImports(TestCase):
         _dir_1 = dir()
         self.assertEqual(sorted(_dir_1), sorted(self._name + self._dir))
         self.assertEqual(sorted(chmengine.__all__), sorted(self._all))
-        self.assertEqual(sorted(chmengine.engines.__all__), sorted(self._engines + ['cmhmey1', 'cmhmey2', 'quartney']))
+        self.assertEqual(sorted(chmengine.engines.__all__), sorted(self._engines + self._engine_mods))
         self.assertEqual(sorted(chmengine.play.__all__), sorted(self._engine_manager))
         self.assertTrue(callable(getattr(chmengine, "CMHMEngine")))
 
