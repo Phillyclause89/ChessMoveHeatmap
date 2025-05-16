@@ -142,7 +142,8 @@ class CMHMEngine2PoolExecutor:
 
     def shutdown(self) -> None:
         """Shut down the ProcessPoolExecutor."""
-        self.executor.shutdown()
+        if hasattr(self, 'executor') and self.executor:
+            self.executor.shutdown()
 
     def __del__(self):
         """Ensure the ProcessPoolExecutor is shut down when the instance is deleted."""

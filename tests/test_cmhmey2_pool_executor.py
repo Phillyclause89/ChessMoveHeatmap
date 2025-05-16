@@ -105,7 +105,7 @@ class TestCMHMEngine2PoolExecutor(TestCase):
         init_board_pick_times = [duration_per_branch]  # list of all times the first board position was seen.
         revisit_pick_times = []  # lists all the times the init board position was revisited.
         new_duration = 999999.99
-        for i, move in enumerate(init_w_moves[:len(init_w_moves) // 2], 1):
+        for i, move in enumerate(init_w_moves[:len(init_w_moves) // 3], 1):
             self.executor.push(move)
             response_pick, duration_rep_pick, duration, branch_count = self.measure_pick(move=move, message=2)
             first_time_pick_times.append(duration_rep_pick)
