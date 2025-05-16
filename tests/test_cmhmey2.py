@@ -2,7 +2,7 @@
 from io import StringIO
 from os import path
 from time import perf_counter
-from typing import Iterable, Optional
+from typing import Iterable, List, Optional, Tuple
 from unittest import TestCase
 
 from chess import Board, Move, pgn
@@ -150,37 +150,26 @@ class TestCMHMEngine2(TestCase):
 
     def test_pick_move(self) -> None:
         """Tests pick_move method."""
-        start = perf_counter()
-        pick = self.engine.pick_move()
-        duration_first = (perf_counter() - start) / self.engine.board.legal_moves.count()
-        print(f"{self.engine.fen()} pick_move call: ({pick[0].uci()}, {pick[1]:.2f}) {duration_first:.3f}s/branch")
-        init_w_moves = list(self.engine.board.legal_moves)
+        pick: Pick
+        duration_per_branch: float
+        duration: float
+        branch_count: int
+        pick, duration_per_branch, duration, branch_count = self.measure_pick(message=1)
+        init_w_moves: List[Move] = list(self.engine.board.legal_moves)
         move: Move
-        first_time_pick_times = [duration_first]
-        init_board_pick_times = [duration_first]
-        revisit_pick_times = []
+        first_time_pick_times = [duration_per_branch]  # list of all times a position was seen for the first time.
+        init_board_pick_times = [duration_per_branch]  # list of all times the first board position was seen.
+        revisit_pick_times = []  # lists all the times the init board position was revisited.
         new_duration = 999999.99
-        for i, move in enumerate(init_w_moves[:len(init_w_moves) // 2], 2):
+        for i, move in enumerate(init_w_moves[:len(init_w_moves) // 2], 1):
             self.engine.board.push(move)
-            start = perf_counter()
-            response_pick = self.engine.pick_move()
-            duration_rep_pick = (perf_counter() - start) / self.engine.board.legal_moves.count()
+            response_pick, duration_rep_pick, duration, branch_count = self.measure_pick(move=move, message=2)
             first_time_pick_times.append(duration_rep_pick)
-            print(
-                f"'{move.uci()}' -> '{self.engine.fen()}' pick_move call: "
-                f"({response_pick[0].uci()}, {response_pick[1]:.2f}) {duration_rep_pick:.3f}s/branch"
-            )
             self.engine.board.pop()
-            start = perf_counter()
-            new_pick = self.engine.pick_move()
-            new_duration = (perf_counter() - start) / self.engine.board.legal_moves.count()
+            new_pick, new_duration, duration, branch_count = self.measure_pick(i=i, message=3)
             init_board_pick_times.append(new_duration)
             revisit_pick_times.append(new_duration)
-            print(
-                f"{self.engine.fen()} pick_move call {i}: ({new_pick[0].uci()},"
-                f" {new_pick[1]:.2f}) {new_duration:.3f}s/branch"
-            )
-        self.assertLess(new_duration, duration_first)
+        self.assertLess(new_duration, duration_per_branch)
         avg_duration = mean(init_board_pick_times)
         avg_response = mean(first_time_pick_times)
         avg_revisit = mean(revisit_pick_times)
@@ -195,6 +184,52 @@ class TestCMHMEngine2(TestCase):
         print(
             f"mean revisit time: {avg_revisit:.3f}s\npercentiles (0, 1, 10, 25, 50, 75, 90, 99, 100):\n{pre_revisit}"
         )
+
+    def measure_pick(
+            self,
+            i: Optional[int] = None,
+            move: Optional[Move] = None,
+            message: int = 0
+    ) -> Tuple[Pick, float, float, int]:
+        """
+
+        Parameters
+        ----------
+        i : Optional[int]
+        move : Optional[Move]
+        message : int
+
+        Returns
+        -------
+        Tuple[Pick, float]
+        """
+        branch_count: int = self.engine.board.legal_moves.count()
+        start: float = perf_counter()
+        pick: Pick = self.engine.pick_move()
+        end: float = perf_counter()
+        duration: float = (end - start)
+        duration_per_branch: float = duration / branch_count
+        if message == 1:
+            print(
+                f"{self.engine.fen()} initial pick_move call: "
+                f"({pick[0].uci()}, {pick[1]:.2f}) {duration_per_branch:.3f}s/branch"
+                f" (branch_count={branch_count}, duration={duration:.3f}s)"
+            )
+        elif message == 2:
+            if move is not None:
+                print(
+                    f"{move} -> {self.engine.fen()} initial pick_move call: "
+                    f"({pick[0].uci()}, {pick[1]:.2f}) {duration_per_branch:.3f}s/branch"
+                    f" (branch_count={branch_count}, duration={duration:.3f}s)"
+                )
+        elif message == 3:
+            if i is not None:
+                print(
+                    f"{self.engine.fen()} revisit {i} pick_move call: "
+                    f"({pick[0].uci()}, {pick[1]:.2f}) {duration_per_branch:.3f}s/branch"
+                    f" (branch_count={branch_count}, duration={duration:.3f}s)"
+                )
+        return pick, duration_per_branch, duration, branch_count
 
     def test_false_positive_fen(self) -> None:
         """Tests a regression position where a queen was sac-ed to by playing 'e7c5' to defend against a check:

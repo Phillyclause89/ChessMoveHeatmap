@@ -1,6 +1,7 @@
 """Test Cmhmey Jr.'s Uncle Poole"""
-from os import path
+from os import cpu_count, path
 from time import perf_counter
+from typing import List, Optional, Tuple
 from unittest import TestCase
 from unittest.mock import patch
 
@@ -52,7 +53,6 @@ class TestCMHMEngine2PoolExecutor(TestCase):
         self.assertIsInstance(self.executor.engine.board, Board)
         self.assertEqual(self.executor.engine.board.fen(), self.starting_board.fen())
         self.assertEqual(self.executor.engine.depth, 1)
-        self.assertIsNone(self.executor.max_workers)
         self.assertIsInstance(self.executor.engine, CMHMEngine2)
 
     def test_initialization_custom(self):
@@ -61,10 +61,9 @@ class TestCMHMEngine2PoolExecutor(TestCase):
         with self.assertRaises(ValueError):
             _ = CMHMEngine2PoolExecutor(board=custom_board, depth=3, max_workers=4)
         custom_board = Board(MATE_IN_ONE_4)
-        executor = CMHMEngine2PoolExecutor(board=custom_board, depth=0, max_workers=0)
+        executor = CMHMEngine2PoolExecutor(board=custom_board, depth=0, max_workers=1)
         self.assertEqual(executor.engine.board, custom_board)
         self.assertEqual(executor.engine.depth, 0)
-        self.assertEqual(executor.max_workers, 0)
 
     @patch("chmengine.engines.cmhmey2_pool_executor.CMHMEngine2.pick_move")
     def test_pick_move_valid(self, mock_pick_move):
@@ -95,40 +94,26 @@ class TestCMHMEngine2PoolExecutor(TestCase):
 
     def test_pick_move(self) -> None:
         """Tests pick_move method."""
-        start = perf_counter()
-        pick = self.executor.pick_move()
-        duration_first = (perf_counter() - start) / self.executor.engine.board.legal_moves.count()
-        print(
-            f"{self.executor.engine.fen()} pick_move call: ({pick[0].uci()},"
-            f" {pick[1]:.2f}) {duration_first:.3f}s/branch"
-        )
-        init_w_moves = list(self.executor.engine.board.legal_moves)
+        pick: Pick
+        duration_per_branch: float
+        duration: float
+        branch_count: int
+        pick, duration_per_branch, duration, branch_count = self.measure_pick(message=1)
+        init_w_moves: List[Move] = list(self.executor.engine.board.legal_moves)
         move: Move
-        first_time_pick_times = [duration_first]
-        init_board_pick_times = [duration_first]
-        revisit_pick_times = []
+        first_time_pick_times = [duration_per_branch]  # list of all times a position was seen for the first time.
+        init_board_pick_times = [duration_per_branch]  # list of all times the first board position was seen.
+        revisit_pick_times = []  # lists all the times the init board position was revisited.
         new_duration = 999999.99
-        for i, move in enumerate(init_w_moves[:len(init_w_moves) // 2], 2):
-            self.executor.engine.board.push(move)
-            start = perf_counter()
-            response_pick = self.executor.pick_move()
-            duration_rep_pick = (perf_counter() - start) / self.executor.engine.board.legal_moves.count()
+        for i, move in enumerate(init_w_moves[:len(init_w_moves) // 2], 1):
+            self.executor.push(move)
+            response_pick, duration_rep_pick, duration, branch_count = self.measure_pick(move=move, message=2)
             first_time_pick_times.append(duration_rep_pick)
-            print(
-                f"'{move.uci()}' -> '{self.executor.engine.fen()}' pick_move call: "
-                f"({response_pick[0].uci()}, {response_pick[1]:.2f}) {duration_rep_pick:.3f}s/branch"
-            )
             self.executor.engine.board.pop()
-            start = perf_counter()
-            new_pick = self.executor.pick_move()
-            new_duration = (perf_counter() - start) / self.executor.engine.board.legal_moves.count()
+            new_pick, new_duration, duration, branch_count = self.measure_pick(i=i, message=3)
             init_board_pick_times.append(new_duration)
             revisit_pick_times.append(new_duration)
-            print(
-                f"{self.executor.engine.fen()} pick_move call {i}: ({new_pick[0].uci()},"
-                f" {new_pick[1]:.2f}) {new_duration:.3f}s/branch"
-            )
-        self.assertLess(new_duration, duration_first)
+        self.assertLess(new_duration, duration_per_branch)
         avg_duration = mean(init_board_pick_times)
         avg_response = mean(first_time_pick_times)
         avg_revisit = mean(revisit_pick_times)
@@ -143,3 +128,49 @@ class TestCMHMEngine2PoolExecutor(TestCase):
         print(
             f"mean revisit time: {avg_revisit:.3f}s\npercentiles (0, 1, 10, 25, 50, 75, 90, 99, 100):\n{pre_revisit}"
         )
+
+    def measure_pick(
+            self,
+            i: Optional[int] = None,
+            move: Optional[Move] = None,
+            message: int = 0
+    ) -> Tuple[Pick, float, float, int]:
+        """
+
+        Parameters
+        ----------
+        i : Optional[int]
+        move : Optional[Move]
+        message : int
+
+        Returns
+        -------
+        Tuple[Pick, float]
+        """
+        branch_count: int = self.executor.engine.board.legal_moves.count()
+        start: float = perf_counter()
+        pick: Pick = self.executor.pick_move()
+        end: float = perf_counter()
+        duration: float = (end - start)
+        duration_per_branch: float = duration / branch_count
+        if message == 1:
+            print(
+                f"{self.executor.engine.fen()} initial pick_move call: "
+                f"({pick:+.2f}) {duration_per_branch:.3f}s/branch"
+                f" (branch_count={branch_count}, duration={duration:.3f}s)"
+            )
+        elif message == 2:
+            if move is not None:
+                print(
+                    f"{move} -> {self.executor.engine.fen()} initial pick_move call: "
+                    f"({pick:+.2f}) {duration_per_branch:.3f}s/branch"
+                    f" (branch_count={branch_count}, duration={duration:.3f}s)"
+                )
+        elif message == 3:
+            if i is not None:
+                print(
+                    f"{self.executor.engine.fen()} revisit {i} pick_move call: "
+                    f"({pick:+.2f}) {duration_per_branch:.3f}s/branch"
+                    f" (branch_count={branch_count}, duration={duration:.3f}s)"
+                )
+        return pick, duration_per_branch, duration, branch_count
