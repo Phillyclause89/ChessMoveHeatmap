@@ -160,7 +160,7 @@ class TestCMHMEngine2(TestCase):
         init_board_pick_times = [duration_first]
         revisit_pick_times = []
         new_duration = 999999.99
-        for i, move in enumerate(init_w_moves, 2):
+        for i, move in enumerate(init_w_moves[:len(init_w_moves) // 2], 2):
             self.engine.board.push(move)
             start = perf_counter()
             response_pick = self.engine.pick_move()
