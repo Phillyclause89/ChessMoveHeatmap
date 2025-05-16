@@ -10,13 +10,13 @@ from tkinter import (
     Button, Canvas, Entry, Event, Frame, IntVar, Label, Menu, Radiobutton, StringVar, Tk, Toplevel, messagebox,
     simpledialog
 )
-from typing import Callable, Dict, Generator, Iterator, List, Optional, Set, Tuple
+from typing import Callable, Dict, Generator, Iterator, List, Optional, Set, Tuple, Union
 
 from chess import Board, Move, Outcome, Piece, SQUARES
 from chess.pgn import ChildNode, Game
 from numpy import float64, isnan
 
-from chmengine import CMHMEngine2PoolExecutor, CMHMEngine2, Pick, set_all_datetime_headers
+from chmengine import CMHMEngine2PoolExecutor, Pick, set_all_datetime_headers
 from chmutils import (
     BaseChessTkApp, DEFAULT_COLORS, DEFAULT_FONT, Player, get_local_time, get_promotion_choice, state_faces_within_bmp
 )
@@ -113,7 +113,7 @@ class EnginePoolContainer:
 
         Returns
         -------
-        CMHMEngine
+        CMHMEngine2PoolExecutor
         """
         return self._black
 
@@ -123,7 +123,7 @@ class EnginePoolContainer:
 
         Parameters
         ----------
-        new_engine : CMHMEngine
+        new_engine : CMHMEngine2PoolExecutor
         """
         if isinstance(new_engine, CMHMEngine2PoolExecutor):
             self._black = new_engine
@@ -236,12 +236,12 @@ class EnginePoolContainer:
         """
         return self._white if chess_lib_index else self._black
 
-    def __setitem__(self, chess_lib_index: object, new_engine: CMHMEngine2PoolExecutor) -> None:
+    def __setitem__(self, chess_lib_index: Union[bool, int], new_engine: CMHMEngine2PoolExecutor) -> None:
         """Sets the engine corresponding to the python-chess lib COLOR_NAMES index
 
         Parameters
         ----------
-        chess_lib_index : object
+        chess_lib_index : Union[bool, int]
         new_engine : CMHMEngine
         """
         if chess_lib_index:
@@ -301,7 +301,7 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
     site: str
     face: str
     game_line: List[Pick]
-    engines: EnginePoolContainer
+    engine_pools: EnginePoolContainer
     player: Player = Player()
     training_dir: str = "trainings"
     pgn_dir: str = "pgns"
@@ -360,8 +360,8 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
         if player_color_is_black:
             self.player.index = 1
         self.onboard_player()
-        self.engines = EnginePoolContainer(engine_type, depth, engine_type_2, depth_2)
-        self.depth = self.engines.depth
+        self.engine_pools = EnginePoolContainer(engine_type, depth, engine_type_2, depth_2)
+        self.depth = self.engine_pools.depth
         self.set_title()
         self.create_menu()
         self.canvas = Canvas(self)
@@ -378,9 +378,9 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
         self.focus_force()
         self.start_time = get_local_time()
         self.set_title()
-        if bool(self.player.index) == self.engines.board.turn:
+        if bool(self.player.index) == self.engine_pools.board.turn:
             pick = self.await_engine_pick()
-            self.engines.push(pick)
+            self.engine_pools.push(pick)
             self.update_board()
         self.updating = False
 
@@ -410,7 +410,7 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
             self.updating = True
             new_depth: Optional[int] = self.ask_depth()
             if new_depth is not None and new_depth != self.depth:
-                self.engines.depths = new_depth, new_depth
+                self.engine_pools.depths = new_depth, new_depth
                 self.depth = new_depth
                 self.set_title()
             self.updating = False
@@ -460,10 +460,10 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
         if self.rewarding:
             return f"Applying Rewards Function"
         if self.training:
-            return f"{self.engines.white_name} vs {self.engines.black_name}"
+            return f"{self.engine_pools.white_name} vs {self.engine_pools.black_name}"
         if self.player.index:
-            return f"{self.engines.white_name} vs {self.player.name}"
-        return f"{self.player.name} vs {self.engines.black_name}"
+            return f"{self.engine_pools.white_name} vs {self.player.name}"
+        return f"{self.player.name} vs {self.engine_pools.black_name}"
 
     def new_game(self) -> None:
         """Start a brand‐new game after user confirmation.
@@ -480,13 +480,13 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
                 ):
                     self.player.index = int(not self.player.index)
                 self.reset_engines_board()
-                if bool(self.player.index) == self.engines.board.turn:
+                if bool(self.player.index) == self.engine_pools.board.turn:
                     pick = self.await_engine_pick()
-                    self.engines.push(pick)
-                    outcome: Outcome = self.engines.board.outcome(claim_draw=True)
+                    self.engine_pools.push(pick)
+                    outcome: Outcome = self.engine_pools.board.outcome(claim_draw=True)
                     if outcome is not None:
                         return self.show_game_over(outcome=outcome)
-                    self.fullmove_number = self.engines.board.fullmove_number
+                    self.fullmove_number = self.engine_pools.board.fullmove_number
                     self.game_line.append(pick)
                     self.face = self.get_smily_face()
                     self.highlight_squares = {pick.move.from_square, pick.move.to_square}
@@ -514,7 +514,7 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
         Ensures both `.engine.board` references point to the same object.
         """
         new_board = Board() if new_board is None else new_board
-        self.engines.board = new_board
+        self.engine_pools.board = new_board
         self.game_line = self.game_line[0:1] + [Pick(move=m, score=float64(None)) for m in new_board.move_stack]
         self.selected_square = None
         self.highlight_squares = {
@@ -559,7 +559,7 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
                 self.start_time = get_local_time()
                 self.set_title()
                 # We go out of our way to make sure both engines point to the same board object
-                board: Board = self.engines.board
+                board: Board = self.engine_pools.board
                 future: Future = Future()
                 # Kick off loop with a done future containing an illegal pick result
                 future.set_result(illegal_pick)
@@ -574,8 +574,8 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
                             self.face = self.get_smily_face()
                             self.highlight_squares = {move.from_square, move.to_square}
                         future: Future = self._move_executor.submit(
-                            self.engines.white.pick_move
-                        ) if board.turn else self._move_executor.submit(self.engines.black.pick_move)
+                            self.engine_pools.white.pick_move
+                        ) if board.turn else self._move_executor.submit(self.engine_pools.black.pick_move)
                     self.updating = True
                     self.square_size = min(self.canvas.winfo_width(), self.canvas.winfo_height()) // 8
                     self.update_board()
@@ -588,8 +588,8 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
                 game_heads["Site"] = self.site
                 game_heads["Round"] = str(game_id)
                 set_all_datetime_headers(game_heads=game_heads, local_time=self.start_time)
-                game_heads["White"] = self.engines.white_name
-                game_heads["Black"] = self.engines.black_name
+                game_heads["White"] = self.engine_pools.white_name
+                game_heads["Black"] = self.engine_pools.black_name
                 game_heads["Termination"] = outcome.termination.name
                 game_heads["CMHMEngineDepth"] = str(self.depth)
                 file_name: str = path.join(
@@ -601,7 +601,7 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
                 self.highlight_squares = set()
                 self.apply_rewards()
                 self.reset_engines_board()
-                self.engines.flip()
+                self.engine_pools.flip()
                 self.updating = True
                 self.update_board()
                 self.updating = False
@@ -705,7 +705,7 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
             The start time of the game in local timezone.
         """
         local_start_time = self.start_time if local_start_time is None else local_start_time
-        outcome: Optional[Outcome] = self.engines.board.outcome(
+        outcome: Optional[Outcome] = self.engine_pools.board.outcome(
             claim_draw=True
         ) if outcome is None else outcome
         messagebox.showinfo("Game Over", f"Game Over: {outcome}")
@@ -713,15 +713,15 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
         round_number: int = 1
         if path.isdir(pgn_dir):
             round_number = len([item for item in Path(pgn_dir).iterdir() if item.is_file()]) + 1
-        game: Game = Game.from_board(self.engines.board)
+        game: Game = Game.from_board(self.engine_pools.board)
         self.add_eval_comments_to_mainline(game=game)
         game_heads = game.headers
         game_heads["Event"] = self.get_mode()
         game_heads["Site"] = self.site
         game_heads["Round"] = str(round_number)
         set_all_datetime_headers(game_heads=game_heads, local_time=local_start_time)
-        game_heads["White"] = self.engines.white_name if self.player.index else self.player.name
-        game_heads["Black"] = self.player.name if self.player.index else self.engines.black_name
+        game_heads["White"] = self.engine_pools.white_name if self.player.index else self.player.name
+        game_heads["Black"] = self.player.name if self.player.index else self.engine_pools.black_name
         game_heads["Termination"] = outcome.termination.name
         game_heads["CMHMEngineDepth"] = str(self.depth)
         file_name: str = path.join(
@@ -735,10 +735,10 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
 
     def apply_rewards(self) -> None:
         """Apply rewards function to supported Engine types"""
-        for engine in self.engines:
-            if isinstance(engine, CMHMEngine2):
+        for engine in self.engine_pools:
+            if isinstance(engine, CMHMEngine2PoolExecutor):
                 self.rewarding = True
-                update_future: Future = self._move_executor.submit(engine.update_q_values)
+                update_future: Future = self._move_executor.submit(engine.engine.update_q_values)
                 while not update_future.done():
                     self.updating = True
                     self.update_board()
@@ -769,7 +769,7 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
         str
         """
         last_score: float64 = self.game_line[-1].score
-        turn: bool = self.engines.board.turn
+        turn: bool = self.engine_pools.board.turn
         key: str = 'draw'
         if (last_score > 127 and turn) or (last_score < -127 and not turn):
             key = 'winning'
@@ -788,7 +788,7 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
         - Uses `self.square_size`, `self.colors`, and `self.font` for layout.
         - Flips rank ordering so that white’s back rank appears at the bottom.
         """
-        board: Board = self.engines.board
+        board: Board = self.engine_pools.board
         square: int
         half_square_size: int = self.square_size // 2
         piece_bg: str = "⬤"
@@ -803,13 +803,13 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
         else:
             if self.training:
                 at_ply_name, at_ply_color = (
-                    self.engines.white_name, 'White'
+                    self.engine_pools.white_name, 'White'
                 ) if board.turn else (
-                    self.engines.black_name, 'Black'
+                    self.engine_pools.black_name, 'Black'
                 )
             elif self.player.index:
                 at_ply_name, at_ply_color = (
-                    self.engines.white_name, 'White'
+                    self.engine_pools.white_name, 'White'
                 ) if board.turn else (
                     self.player.name, 'Black'
                 )
@@ -817,7 +817,7 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
                 at_ply_name, at_ply_color = (
                     self.player.name, 'White'
                 ) if board.turn else (
-                    self.engines.black_name, 'Black'
+                    self.engine_pools.black_name, 'Black'
                 )
             top_text = (
                 f"{self.face} {at_ply_name} ({at_ply_color}) is picking Move #{self.fullmove_number}"
@@ -906,12 +906,12 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
         ----------
         event : Event
         """
-        if not self.updating and not self.training and not self.rewarding and self.engines.board.turn == bool(
+        if not self.updating and not self.training and not self.rewarding and self.engine_pools.board.turn == bool(
                 self.player
         ):
             if self.selected_square is None:
                 square: Optional[int] = self.coord_to_square(event.x, event.y)
-                legal_moves: List[Move] = list(self.engines.board.legal_moves)
+                legal_moves: List[Move] = list(self.engine_pools.board.legal_moves)
                 from_to_map: Dict[int:Tuple[int, ...]] = {
                     m.from_square: tuple(
                         mt.to_square for mt in legal_moves if mt.from_square == m.from_square
@@ -933,16 +933,16 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
                 if square is None or square not in self.possible_squares:
                     return
                 player_move: Move = Move(from_square=self.selected_square, to_square=square)
-                if not self.engines.board.is_legal(move=player_move):
+                if not self.engine_pools.board.is_legal(move=player_move):
                     # The only way end up here is by pawn promotions.
                     promotions: List[Move] = [
-                        m for m in self.engines.board.legal_moves if
+                        m for m in self.engine_pools.board.legal_moves if
                         m.promotion is not None and m.to_square == player_move.to_square
                     ]
                     # Prompt player to pick the promotion move from promotions
                     promotion_move: Optional[Move] = get_promotion_choice(
                         promotions=promotions,
-                        board=self.engines.board
+                        board=self.engine_pools.board
                     )
                     if player_move is None:
                         return
@@ -952,25 +952,25 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
                     # Since we don't run the pick_move method on human moves, we default to the line's last pick score.
                     score=self.game_line[-1].score
                 )
-                self.engines.push(pick)
+                self.engine_pools.push(pick)
                 self.game_line.append(pick)
                 self.face = self.get_smily_face()
                 self.highlight_squares = {pick.move.from_square, pick.move.to_square}
                 self.selected_square = None
                 self.possible_squares = tuple()
-                outcome: Outcome = self.engines.board.outcome(claim_draw=True)
+                outcome: Outcome = self.engine_pools.board.outcome(claim_draw=True)
                 if outcome is not None:
                     return self.show_game_over(outcome=outcome)
-                self.fullmove_number = self.engines.board.fullmove_number
+                self.fullmove_number = self.engine_pools.board.fullmove_number
                 self.updating = True
                 self.update_board()
                 self.updating = False
                 pick = self.await_engine_pick()
-                self.engines.push(pick)
-                outcome: Outcome = self.engines.board.outcome(claim_draw=True)
+                self.engine_pools.push(pick)
+                outcome: Outcome = self.engine_pools.board.outcome(claim_draw=True)
                 if outcome is not None:
                     return self.show_game_over(outcome=outcome)
-                self.fullmove_number = self.engines.board.fullmove_number
+                self.fullmove_number = self.engine_pools.board.fullmove_number
                 self.game_line.append(pick)
                 self.face = self.get_smily_face()
                 self.highlight_squares = {pick.move.from_square, pick.move.to_square}
@@ -987,8 +987,8 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
         Pick
         """
         future: Future = self._move_executor.submit(
-            self.engines.white.pick_move
-        ) if self.engines.board.turn else self._move_executor.submit(self.engines.black.pick_move)
+            self.engine_pools.white.pick_move
+        ) if self.engine_pools.board.turn else self._move_executor.submit(self.engine_pools.black.pick_move)
         while not future.done():
             self.updating = True
             self.square_size = min(self.canvas.winfo_width(), self.canvas.winfo_height()) // 8

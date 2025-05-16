@@ -1309,6 +1309,66 @@ the candidate list if the new sum is lower than the current best.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="chmengine.CMHMEngine2PoolExecutor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chmengine.</span></span><span class="sig-name descname"><span class="pre">CMHMEngine2PoolExecutor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_workers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chmengine.CMHMEngine2PoolExecutor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chmengine.CMHMEngine2PoolExecutor.cache_dir">
+<span class="sig-name descname"><span class="pre">cache_dir</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'.\\SQLite3Caches\\QTables'</span></em><a class="headerlink" href="#chmengine.CMHMEngine2PoolExecutor.cache_dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chmengine.CMHMEngine2PoolExecutor.engine">
+<span class="sig-name descname"><span class="pre">engine</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="chmengine.engines.cmhmey2.html#chmengine.engines.cmhmey2.CMHMEngine2" title="chmengine.engines.cmhmey2.CMHMEngine2"><span class="pre">CMHMEngine2</span></a></em><a class="headerlink" href="#chmengine.CMHMEngine2PoolExecutor.engine" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chmengine.CMHMEngine2PoolExecutor.executor">
+<span class="sig-name descname"><span class="pre">executor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ProcessPoolExecutor</span></em><a class="headerlink" href="#chmengine.CMHMEngine2PoolExecutor.executor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.CMHMEngine2PoolExecutor.pick_move">
+<span class="sig-name descname"><span class="pre">pick_move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a></span></span><a class="headerlink" href="#chmengine.CMHMEngine2PoolExecutor.pick_move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select the best move using conditional multithreaded evaluations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>debug</strong><span class="classifier">bool, default: False</span></dt><dd><p>If True, prints debug information about the evaluations.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Pick</dt><dd><p>The best move and its associated evaluation score.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.CMHMEngine2PoolExecutor.push">
+<span class="sig-name descname"><span class="pre">push</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">move</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Move</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmengine.CMHMEngine2PoolExecutor.push" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper method to update the internal board state with a pushed move.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>move</strong><span class="classifier">Move</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.CMHMEngine2PoolExecutor.shutdown">
+<span class="sig-name descname"><span class="pre">shutdown</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmengine.CMHMEngine2PoolExecutor.shutdown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shut down the ProcessPoolExecutor.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="chmengine.Pick">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chmengine.</span></span><span class="sig-name descname"><span class="pre">Pick</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">move</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Move</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Number</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chmengine.Pick" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PickT</span></code></p>
@@ -2279,6 +2339,7 @@ of FEN parsing and achieves the same result more efficiently.</p>
 <li class="toctree-l2"><a class="reference internal" href="setup.html">setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="main.html">main</a></li>
 <li class="toctree-l2"><a class="reference internal" href="play.html">play</a></li>
+<li class="toctree-l2"><a class="reference internal" href="play_deeper.html">play_deeper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="standalone_color_legend.html">standalone_color_legend</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">chmengine</a></li>
 <li class="toctree-l2"><a class="reference internal" href="chmutils.html">chmutils</a></li>

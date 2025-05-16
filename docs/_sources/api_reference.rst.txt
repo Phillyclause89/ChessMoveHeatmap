@@ -10,6 +10,7 @@ This section contains the API documentation for the ChessMoveHeatmap project, au
     setup
     main
     play
+    play_deeper
     standalone_color_legend
     chmengine
     chmutils

@@ -1,4 +1,4 @@
-chmengine.engines
+﻿chmengine.engines
 =================
 
 .. automodule:: chmengine.engines
@@ -29,5 +29,6 @@ chmengine.engines
 
    chmengine.engines.cmhmey1
    chmengine.engines.cmhmey2
+   chmengine.engines.cmhmey2_pool_executor
    chmengine.engines.quartney
 
