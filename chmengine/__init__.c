@@ -1794,6 +1794,7 @@ static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_pieces_count_from_fen[] = "pieces_count_from_fen";
 static const char __pyx_k_better_checkmate_score[] = "better_checkmate_score";
 static const char __pyx_k_get_static_delta_score[] = "get_static_delta_score";
+static const char __pyx_k_CMHMEngine2PoolExecutor[] = "CMHMEngine2PoolExecutor";
 static const char __pyx_k_pieces_count_from_board[] = "pieces_count_from_board";
 static const char __pyx_k_set_all_datetime_headers[] = "set_all_datetime_headers";
 static const char __pyx_k_insert_ordered_best_to_worst[] = "insert_ordered_best_to_worst";
@@ -1837,6 +1838,8 @@ typedef struct {
   PyObject *__pyx_n_u_CMHMEngine;
   PyObject *__pyx_n_s_CMHMEngine2;
   PyObject *__pyx_n_u_CMHMEngine2;
+  PyObject *__pyx_n_s_CMHMEngine2PoolExecutor;
+  PyObject *__pyx_n_u_CMHMEngine2PoolExecutor;
   PyObject *__pyx_n_s_Pick;
   PyObject *__pyx_n_u_Pick;
   PyObject *__pyx_n_s_PlayCMHMEngine;
@@ -1942,6 +1945,8 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_u_CMHMEngine);
   Py_CLEAR(clear_module_state->__pyx_n_s_CMHMEngine2);
   Py_CLEAR(clear_module_state->__pyx_n_u_CMHMEngine2);
+  Py_CLEAR(clear_module_state->__pyx_n_s_CMHMEngine2PoolExecutor);
+  Py_CLEAR(clear_module_state->__pyx_n_u_CMHMEngine2PoolExecutor);
   Py_CLEAR(clear_module_state->__pyx_n_s_Pick);
   Py_CLEAR(clear_module_state->__pyx_n_u_Pick);
   Py_CLEAR(clear_module_state->__pyx_n_s_PlayCMHMEngine);
@@ -2025,6 +2030,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_u_CMHMEngine);
   Py_VISIT(traverse_module_state->__pyx_n_s_CMHMEngine2);
   Py_VISIT(traverse_module_state->__pyx_n_u_CMHMEngine2);
+  Py_VISIT(traverse_module_state->__pyx_n_s_CMHMEngine2PoolExecutor);
+  Py_VISIT(traverse_module_state->__pyx_n_u_CMHMEngine2PoolExecutor);
   Py_VISIT(traverse_module_state->__pyx_n_s_Pick);
   Py_VISIT(traverse_module_state->__pyx_n_u_Pick);
   Py_VISIT(traverse_module_state->__pyx_n_s_PlayCMHMEngine);
@@ -2118,6 +2125,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_u_CMHMEngine __pyx_mstate_global->__pyx_n_u_CMHMEngine
 #define __pyx_n_s_CMHMEngine2 __pyx_mstate_global->__pyx_n_s_CMHMEngine2
 #define __pyx_n_u_CMHMEngine2 __pyx_mstate_global->__pyx_n_u_CMHMEngine2
+#define __pyx_n_s_CMHMEngine2PoolExecutor __pyx_mstate_global->__pyx_n_s_CMHMEngine2PoolExecutor
+#define __pyx_n_u_CMHMEngine2PoolExecutor __pyx_mstate_global->__pyx_n_u_CMHMEngine2PoolExecutor
 #define __pyx_n_s_Pick __pyx_mstate_global->__pyx_n_s_Pick
 #define __pyx_n_u_Pick __pyx_mstate_global->__pyx_n_u_Pick
 #define __pyx_n_s_PlayCMHMEngine __pyx_mstate_global->__pyx_n_s_PlayCMHMEngine
@@ -2199,6 +2208,8 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_u_CMHMEngine, __pyx_k_CMHMEngine, sizeof(__pyx_k_CMHMEngine), 0, 1, 0, 1},
     {&__pyx_n_s_CMHMEngine2, __pyx_k_CMHMEngine2, sizeof(__pyx_k_CMHMEngine2), 0, 0, 1, 1},
     {&__pyx_n_u_CMHMEngine2, __pyx_k_CMHMEngine2, sizeof(__pyx_k_CMHMEngine2), 0, 1, 0, 1},
+    {&__pyx_n_s_CMHMEngine2PoolExecutor, __pyx_k_CMHMEngine2PoolExecutor, sizeof(__pyx_k_CMHMEngine2PoolExecutor), 0, 0, 1, 1},
+    {&__pyx_n_u_CMHMEngine2PoolExecutor, __pyx_k_CMHMEngine2PoolExecutor, sizeof(__pyx_k_CMHMEngine2PoolExecutor), 0, 1, 0, 1},
     {&__pyx_n_s_Pick, __pyx_k_Pick, sizeof(__pyx_k_Pick), 0, 0, 1, 1},
     {&__pyx_n_u_Pick, __pyx_k_Pick, sizeof(__pyx_k_Pick), 0, 1, 0, 1},
     {&__pyx_n_s_PlayCMHMEngine, __pyx_k_PlayCMHMEngine, sizeof(__pyx_k_PlayCMHMEngine), 0, 0, 1, 1},
@@ -2643,7 +2654,7 @@ if (!__Pyx_RefNanny) {
   /* "chmengine/__init__.py":2
  * """A silly chess engine that picks moves using heatmaps"""
  * from chmengine import engines, play, utils             # <<<<<<<<<<<<<<
- * from chmengine.engines import CMHMEngine, CMHMEngine2, Quartney
+ * from chmengine.engines import CMHMEngine, CMHMEngine2, Quartney, CMHMEngine2PoolExecutor
  * from chmengine.play import PlayCMHMEngine
  */
   __pyx_t_2 = PyList_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2, __pyx_L1_error)
@@ -2677,11 +2688,11 @@ if (!__Pyx_RefNanny) {
   /* "chmengine/__init__.py":3
  * """A silly chess engine that picks moves using heatmaps"""
  * from chmengine import engines, play, utils
- * from chmengine.engines import CMHMEngine, CMHMEngine2, Quartney             # <<<<<<<<<<<<<<
+ * from chmengine.engines import CMHMEngine, CMHMEngine2, Quartney, CMHMEngine2PoolExecutor             # <<<<<<<<<<<<<<
  * from chmengine.play import PlayCMHMEngine
  * from chmengine.utils import (Pick, better_checkmate_score, calculate_better_white_minus_black_score,
  */
-  __pyx_t_3 = PyList_New(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 3, __pyx_L1_error)
+  __pyx_t_3 = PyList_New(4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(__pyx_n_s_CMHMEngine);
   __Pyx_GIVEREF(__pyx_n_s_CMHMEngine);
@@ -2692,6 +2703,9 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(__pyx_n_s_Quartney);
   __Pyx_GIVEREF(__pyx_n_s_Quartney);
   if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 2, __pyx_n_s_Quartney)) __PYX_ERR(0, 3, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_CMHMEngine2PoolExecutor);
+  __Pyx_GIVEREF(__pyx_n_s_CMHMEngine2PoolExecutor);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 3, __pyx_n_s_CMHMEngine2PoolExecutor)) __PYX_ERR(0, 3, __pyx_L1_error);
   __pyx_t_2 = __Pyx_Import(__pyx_n_s_chmengine_engines, __pyx_t_3, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -2707,11 +2721,15 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_3);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_Quartney, __pyx_t_3) < 0) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_CMHMEngine2PoolExecutor); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 3, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_CMHMEngine2PoolExecutor, __pyx_t_3) < 0) __PYX_ERR(0, 3, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "chmengine/__init__.py":4
  * from chmengine import engines, play, utils
- * from chmengine.engines import CMHMEngine, CMHMEngine2, Quartney
+ * from chmengine.engines import CMHMEngine, CMHMEngine2, Quartney, CMHMEngine2PoolExecutor
  * from chmengine.play import PlayCMHMEngine             # <<<<<<<<<<<<<<
  * from chmengine.utils import (Pick, better_checkmate_score, calculate_better_white_minus_black_score,
  *                              calculate_white_minus_black_score, checkmate_score, format_moves, format_picks,
@@ -2731,7 +2749,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "chmengine/__init__.py":5
- * from chmengine.engines import CMHMEngine, CMHMEngine2, Quartney
+ * from chmengine.engines import CMHMEngine, CMHMEngine2, Quartney, CMHMEngine2PoolExecutor
  * from chmengine.play import PlayCMHMEngine
  * from chmengine.utils import (Pick, better_checkmate_score, calculate_better_white_minus_black_score,             # <<<<<<<<<<<<<<
  *                              calculate_white_minus_black_score, checkmate_score, format_moves, format_picks,
@@ -2877,7 +2895,7 @@ if (!__Pyx_RefNanny) {
  *     # Mods
  *     'engines',
  */
-  __pyx_t_2 = PyList_New(25); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __pyx_t_2 = PyList_New(26); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_n_u_engines);
   __Pyx_GIVEREF(__pyx_n_u_engines);
@@ -2903,64 +2921,67 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(__pyx_n_u_Pick);
   __Pyx_GIVEREF(__pyx_n_u_Pick);
   if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 7, __pyx_n_u_Pick)) __PYX_ERR(0, 11, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_u_CMHMEngine2PoolExecutor);
+  __Pyx_GIVEREF(__pyx_n_u_CMHMEngine2PoolExecutor);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 8, __pyx_n_u_CMHMEngine2PoolExecutor)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_format_moves);
   __Pyx_GIVEREF(__pyx_n_u_format_moves);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 8, __pyx_n_u_format_moves)) __PYX_ERR(0, 11, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 9, __pyx_n_u_format_moves)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_format_picks);
   __Pyx_GIVEREF(__pyx_n_u_format_picks);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 9, __pyx_n_u_format_picks)) __PYX_ERR(0, 11, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 10, __pyx_n_u_format_picks)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_calculate_white_minus_black_scor);
   __Pyx_GIVEREF(__pyx_n_u_calculate_white_minus_black_scor);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 10, __pyx_n_u_calculate_white_minus_black_scor)) __PYX_ERR(0, 11, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 11, __pyx_n_u_calculate_white_minus_black_scor)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_checkmate_score);
   __Pyx_GIVEREF(__pyx_n_u_checkmate_score);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 11, __pyx_n_u_checkmate_score)) __PYX_ERR(0, 11, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 12, __pyx_n_u_checkmate_score)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_is_draw);
   __Pyx_GIVEREF(__pyx_n_u_is_draw);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 12, __pyx_n_u_is_draw)) __PYX_ERR(0, 11, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 13, __pyx_n_u_is_draw)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_get_white_and_black_king_boxes);
   __Pyx_GIVEREF(__pyx_n_u_get_white_and_black_king_boxes);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 13, __pyx_n_u_get_white_and_black_king_boxes)) __PYX_ERR(0, 11, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 14, __pyx_n_u_get_white_and_black_king_boxes)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_insert_ordered_worst_to_best);
   __Pyx_GIVEREF(__pyx_n_u_insert_ordered_worst_to_best);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 14, __pyx_n_u_insert_ordered_worst_to_best)) __PYX_ERR(0, 11, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 15, __pyx_n_u_insert_ordered_worst_to_best)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_insert_ordered_best_to_worst);
   __Pyx_GIVEREF(__pyx_n_u_insert_ordered_best_to_worst);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 15, __pyx_n_u_insert_ordered_best_to_worst)) __PYX_ERR(0, 11, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 16, __pyx_n_u_insert_ordered_best_to_worst)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_pieces_count_from_fen);
   __Pyx_GIVEREF(__pyx_n_u_pieces_count_from_fen);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 16, __pyx_n_u_pieces_count_from_fen)) __PYX_ERR(0, 11, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 17, __pyx_n_u_pieces_count_from_fen)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_pieces_count_from_board);
   __Pyx_GIVEREF(__pyx_n_u_pieces_count_from_board);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 17, __pyx_n_u_pieces_count_from_board)) __PYX_ERR(0, 11, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 18, __pyx_n_u_pieces_count_from_board)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_set_all_datetime_headers);
   __Pyx_GIVEREF(__pyx_n_u_set_all_datetime_headers);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 18, __pyx_n_u_set_all_datetime_headers)) __PYX_ERR(0, 11, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 19, __pyx_n_u_set_all_datetime_headers)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_set_utc_headers);
   __Pyx_GIVEREF(__pyx_n_u_set_utc_headers);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 19, __pyx_n_u_set_utc_headers)) __PYX_ERR(0, 11, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 20, __pyx_n_u_set_utc_headers)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_calculate_better_white_minus_bla);
   __Pyx_GIVEREF(__pyx_n_u_calculate_better_white_minus_bla);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 20, __pyx_n_u_calculate_better_white_minus_bla)) __PYX_ERR(0, 11, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 21, __pyx_n_u_calculate_better_white_minus_bla)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_get_static_value);
   __Pyx_GIVEREF(__pyx_n_u_get_static_value);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 21, __pyx_n_u_get_static_value)) __PYX_ERR(0, 11, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 22, __pyx_n_u_get_static_value)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_get_static_delta_score);
   __Pyx_GIVEREF(__pyx_n_u_get_static_delta_score);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 22, __pyx_n_u_get_static_delta_score)) __PYX_ERR(0, 11, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 23, __pyx_n_u_get_static_delta_score)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_better_checkmate_score);
   __Pyx_GIVEREF(__pyx_n_u_better_checkmate_score);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 23, __pyx_n_u_better_checkmate_score)) __PYX_ERR(0, 11, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 24, __pyx_n_u_better_checkmate_score)) __PYX_ERR(0, 11, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_max_moves_map);
   __Pyx_GIVEREF(__pyx_n_u_max_moves_map);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 24, __pyx_n_u_max_moves_map)) __PYX_ERR(0, 11, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 25, __pyx_n_u_max_moves_map)) __PYX_ERR(0, 11, __pyx_L1_error);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_all, __pyx_t_2) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "chmengine/__init__.py":1
  * """A silly chess engine that picks moves using heatmaps"""             # <<<<<<<<<<<<<<
  * from chmengine import engines, play, utils
- * from chmengine.engines import CMHMEngine, CMHMEngine2, Quartney
+ * from chmengine.engines import CMHMEngine, CMHMEngine2, Quartney, CMHMEngine2PoolExecutor
  */
   __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);

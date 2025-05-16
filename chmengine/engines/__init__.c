@@ -1779,10 +1779,13 @@ static const char __pyx_k_CMHMEngine[] = "CMHMEngine";
 static const char __pyx_k_CMHMEngine2[] = "CMHMEngine2";
 static const char __pyx_k_chmengine_engines[] = "chmengine.engines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
+static const char __pyx_k_cmhmey2_pool_executor[] = "cmhmey2_pool_executor";
+static const char __pyx_k_CMHMEngine2PoolExecutor[] = "CMHMEngine2PoolExecutor";
 static const char __pyx_k_chmengine_engines___init[] = "chmengine.engines.__init__";
 static const char __pyx_k_chmengine_engines_cmhmey1[] = "chmengine.engines.cmhmey1";
 static const char __pyx_k_chmengine_engines_cmhmey2[] = "chmengine.engines.cmhmey2";
 static const char __pyx_k_chmengine_engines_quartney[] = "chmengine.engines.quartney";
+static const char __pyx_k_chmengine_engines_cmhmey2_pool_e[] = "chmengine.engines.cmhmey2_pool_executor";
 /* #### Code section: decls ### */
 /* #### Code section: late_includes ### */
 /* #### Code section: module_state ### */
@@ -1818,6 +1821,8 @@ typedef struct {
   PyObject *__pyx_n_u_CMHMEngine;
   PyObject *__pyx_n_s_CMHMEngine2;
   PyObject *__pyx_n_u_CMHMEngine2;
+  PyObject *__pyx_n_s_CMHMEngine2PoolExecutor;
+  PyObject *__pyx_n_u_CMHMEngine2PoolExecutor;
   PyObject *__pyx_n_s_Quartney;
   PyObject *__pyx_n_u_Quartney;
   PyObject *__pyx_n_s__2;
@@ -1826,12 +1831,15 @@ typedef struct {
   PyObject *__pyx_kp_u_chmengine_engines___init;
   PyObject *__pyx_n_s_chmengine_engines_cmhmey1;
   PyObject *__pyx_n_s_chmengine_engines_cmhmey2;
+  PyObject *__pyx_n_s_chmengine_engines_cmhmey2_pool_e;
   PyObject *__pyx_n_s_chmengine_engines_quartney;
   PyObject *__pyx_n_s_cline_in_traceback;
   PyObject *__pyx_n_s_cmhmey1;
   PyObject *__pyx_n_u_cmhmey1;
   PyObject *__pyx_n_s_cmhmey2;
   PyObject *__pyx_n_u_cmhmey2;
+  PyObject *__pyx_n_s_cmhmey2_pool_executor;
+  PyObject *__pyx_n_u_cmhmey2_pool_executor;
   PyObject *__pyx_n_s_import;
   PyObject *__pyx_n_s_main;
   PyObject *__pyx_n_s_name;
@@ -1885,6 +1893,8 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_u_CMHMEngine);
   Py_CLEAR(clear_module_state->__pyx_n_s_CMHMEngine2);
   Py_CLEAR(clear_module_state->__pyx_n_u_CMHMEngine2);
+  Py_CLEAR(clear_module_state->__pyx_n_s_CMHMEngine2PoolExecutor);
+  Py_CLEAR(clear_module_state->__pyx_n_u_CMHMEngine2PoolExecutor);
   Py_CLEAR(clear_module_state->__pyx_n_s_Quartney);
   Py_CLEAR(clear_module_state->__pyx_n_u_Quartney);
   Py_CLEAR(clear_module_state->__pyx_n_s__2);
@@ -1893,12 +1903,15 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_u_chmengine_engines___init);
   Py_CLEAR(clear_module_state->__pyx_n_s_chmengine_engines_cmhmey1);
   Py_CLEAR(clear_module_state->__pyx_n_s_chmengine_engines_cmhmey2);
+  Py_CLEAR(clear_module_state->__pyx_n_s_chmengine_engines_cmhmey2_pool_e);
   Py_CLEAR(clear_module_state->__pyx_n_s_chmengine_engines_quartney);
   Py_CLEAR(clear_module_state->__pyx_n_s_cline_in_traceback);
   Py_CLEAR(clear_module_state->__pyx_n_s_cmhmey1);
   Py_CLEAR(clear_module_state->__pyx_n_u_cmhmey1);
   Py_CLEAR(clear_module_state->__pyx_n_s_cmhmey2);
   Py_CLEAR(clear_module_state->__pyx_n_u_cmhmey2);
+  Py_CLEAR(clear_module_state->__pyx_n_s_cmhmey2_pool_executor);
+  Py_CLEAR(clear_module_state->__pyx_n_u_cmhmey2_pool_executor);
   Py_CLEAR(clear_module_state->__pyx_n_s_import);
   Py_CLEAR(clear_module_state->__pyx_n_s_main);
   Py_CLEAR(clear_module_state->__pyx_n_s_name);
@@ -1930,6 +1943,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_u_CMHMEngine);
   Py_VISIT(traverse_module_state->__pyx_n_s_CMHMEngine2);
   Py_VISIT(traverse_module_state->__pyx_n_u_CMHMEngine2);
+  Py_VISIT(traverse_module_state->__pyx_n_s_CMHMEngine2PoolExecutor);
+  Py_VISIT(traverse_module_state->__pyx_n_u_CMHMEngine2PoolExecutor);
   Py_VISIT(traverse_module_state->__pyx_n_s_Quartney);
   Py_VISIT(traverse_module_state->__pyx_n_u_Quartney);
   Py_VISIT(traverse_module_state->__pyx_n_s__2);
@@ -1938,12 +1953,15 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_u_chmengine_engines___init);
   Py_VISIT(traverse_module_state->__pyx_n_s_chmengine_engines_cmhmey1);
   Py_VISIT(traverse_module_state->__pyx_n_s_chmengine_engines_cmhmey2);
+  Py_VISIT(traverse_module_state->__pyx_n_s_chmengine_engines_cmhmey2_pool_e);
   Py_VISIT(traverse_module_state->__pyx_n_s_chmengine_engines_quartney);
   Py_VISIT(traverse_module_state->__pyx_n_s_cline_in_traceback);
   Py_VISIT(traverse_module_state->__pyx_n_s_cmhmey1);
   Py_VISIT(traverse_module_state->__pyx_n_u_cmhmey1);
   Py_VISIT(traverse_module_state->__pyx_n_s_cmhmey2);
   Py_VISIT(traverse_module_state->__pyx_n_u_cmhmey2);
+  Py_VISIT(traverse_module_state->__pyx_n_s_cmhmey2_pool_executor);
+  Py_VISIT(traverse_module_state->__pyx_n_u_cmhmey2_pool_executor);
   Py_VISIT(traverse_module_state->__pyx_n_s_import);
   Py_VISIT(traverse_module_state->__pyx_n_s_main);
   Py_VISIT(traverse_module_state->__pyx_n_s_name);
@@ -1985,6 +2003,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_u_CMHMEngine __pyx_mstate_global->__pyx_n_u_CMHMEngine
 #define __pyx_n_s_CMHMEngine2 __pyx_mstate_global->__pyx_n_s_CMHMEngine2
 #define __pyx_n_u_CMHMEngine2 __pyx_mstate_global->__pyx_n_u_CMHMEngine2
+#define __pyx_n_s_CMHMEngine2PoolExecutor __pyx_mstate_global->__pyx_n_s_CMHMEngine2PoolExecutor
+#define __pyx_n_u_CMHMEngine2PoolExecutor __pyx_mstate_global->__pyx_n_u_CMHMEngine2PoolExecutor
 #define __pyx_n_s_Quartney __pyx_mstate_global->__pyx_n_s_Quartney
 #define __pyx_n_u_Quartney __pyx_mstate_global->__pyx_n_u_Quartney
 #define __pyx_n_s__2 __pyx_mstate_global->__pyx_n_s__2
@@ -1993,12 +2013,15 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_u_chmengine_engines___init __pyx_mstate_global->__pyx_kp_u_chmengine_engines___init
 #define __pyx_n_s_chmengine_engines_cmhmey1 __pyx_mstate_global->__pyx_n_s_chmengine_engines_cmhmey1
 #define __pyx_n_s_chmengine_engines_cmhmey2 __pyx_mstate_global->__pyx_n_s_chmengine_engines_cmhmey2
+#define __pyx_n_s_chmengine_engines_cmhmey2_pool_e __pyx_mstate_global->__pyx_n_s_chmengine_engines_cmhmey2_pool_e
 #define __pyx_n_s_chmengine_engines_quartney __pyx_mstate_global->__pyx_n_s_chmengine_engines_quartney
 #define __pyx_n_s_cline_in_traceback __pyx_mstate_global->__pyx_n_s_cline_in_traceback
 #define __pyx_n_s_cmhmey1 __pyx_mstate_global->__pyx_n_s_cmhmey1
 #define __pyx_n_u_cmhmey1 __pyx_mstate_global->__pyx_n_u_cmhmey1
 #define __pyx_n_s_cmhmey2 __pyx_mstate_global->__pyx_n_s_cmhmey2
 #define __pyx_n_u_cmhmey2 __pyx_mstate_global->__pyx_n_u_cmhmey2
+#define __pyx_n_s_cmhmey2_pool_executor __pyx_mstate_global->__pyx_n_s_cmhmey2_pool_executor
+#define __pyx_n_u_cmhmey2_pool_executor __pyx_mstate_global->__pyx_n_u_cmhmey2_pool_executor
 #define __pyx_n_s_import __pyx_mstate_global->__pyx_n_s_import
 #define __pyx_n_s_main __pyx_mstate_global->__pyx_n_s_main
 #define __pyx_n_s_name __pyx_mstate_global->__pyx_n_s_name
@@ -2028,6 +2051,8 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_u_CMHMEngine, __pyx_k_CMHMEngine, sizeof(__pyx_k_CMHMEngine), 0, 1, 0, 1},
     {&__pyx_n_s_CMHMEngine2, __pyx_k_CMHMEngine2, sizeof(__pyx_k_CMHMEngine2), 0, 0, 1, 1},
     {&__pyx_n_u_CMHMEngine2, __pyx_k_CMHMEngine2, sizeof(__pyx_k_CMHMEngine2), 0, 1, 0, 1},
+    {&__pyx_n_s_CMHMEngine2PoolExecutor, __pyx_k_CMHMEngine2PoolExecutor, sizeof(__pyx_k_CMHMEngine2PoolExecutor), 0, 0, 1, 1},
+    {&__pyx_n_u_CMHMEngine2PoolExecutor, __pyx_k_CMHMEngine2PoolExecutor, sizeof(__pyx_k_CMHMEngine2PoolExecutor), 0, 1, 0, 1},
     {&__pyx_n_s_Quartney, __pyx_k_Quartney, sizeof(__pyx_k_Quartney), 0, 0, 1, 1},
     {&__pyx_n_u_Quartney, __pyx_k_Quartney, sizeof(__pyx_k_Quartney), 0, 1, 0, 1},
     {&__pyx_n_s__2, __pyx_k__2, sizeof(__pyx_k__2), 0, 0, 1, 1},
@@ -2036,12 +2061,15 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_u_chmengine_engines___init, __pyx_k_chmengine_engines___init, sizeof(__pyx_k_chmengine_engines___init), 0, 1, 0, 0},
     {&__pyx_n_s_chmengine_engines_cmhmey1, __pyx_k_chmengine_engines_cmhmey1, sizeof(__pyx_k_chmengine_engines_cmhmey1), 0, 0, 1, 1},
     {&__pyx_n_s_chmengine_engines_cmhmey2, __pyx_k_chmengine_engines_cmhmey2, sizeof(__pyx_k_chmengine_engines_cmhmey2), 0, 0, 1, 1},
+    {&__pyx_n_s_chmengine_engines_cmhmey2_pool_e, __pyx_k_chmengine_engines_cmhmey2_pool_e, sizeof(__pyx_k_chmengine_engines_cmhmey2_pool_e), 0, 0, 1, 1},
     {&__pyx_n_s_chmengine_engines_quartney, __pyx_k_chmengine_engines_quartney, sizeof(__pyx_k_chmengine_engines_quartney), 0, 0, 1, 1},
     {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
     {&__pyx_n_s_cmhmey1, __pyx_k_cmhmey1, sizeof(__pyx_k_cmhmey1), 0, 0, 1, 1},
     {&__pyx_n_u_cmhmey1, __pyx_k_cmhmey1, sizeof(__pyx_k_cmhmey1), 0, 1, 0, 1},
     {&__pyx_n_s_cmhmey2, __pyx_k_cmhmey2, sizeof(__pyx_k_cmhmey2), 0, 0, 1, 1},
     {&__pyx_n_u_cmhmey2, __pyx_k_cmhmey2, sizeof(__pyx_k_cmhmey2), 0, 1, 0, 1},
+    {&__pyx_n_s_cmhmey2_pool_executor, __pyx_k_cmhmey2_pool_executor, sizeof(__pyx_k_cmhmey2_pool_executor), 0, 0, 1, 1},
+    {&__pyx_n_u_cmhmey2_pool_executor, __pyx_k_cmhmey2_pool_executor, sizeof(__pyx_k_cmhmey2_pool_executor), 0, 1, 0, 1},
     {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
     {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
     {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
@@ -2433,11 +2461,11 @@ if (!__Pyx_RefNanny) {
 
   /* "chmengine/engines/__init__.py":2
  * """Engines"""
- * from chmengine.engines import cmhmey1, cmhmey2, quartney             # <<<<<<<<<<<<<<
+ * from chmengine.engines import cmhmey1, cmhmey2, quartney, cmhmey2_pool_executor             # <<<<<<<<<<<<<<
  * from chmengine.engines.cmhmey1 import CMHMEngine
  * from chmengine.engines.cmhmey2 import CMHMEngine2
  */
-  __pyx_t_2 = PyList_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_t_2 = PyList_New(4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_n_s_cmhmey1);
   __Pyx_GIVEREF(__pyx_n_s_cmhmey1);
@@ -2448,6 +2476,9 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(__pyx_n_s_quartney);
   __Pyx_GIVEREF(__pyx_n_s_quartney);
   if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 2, __pyx_n_s_quartney)) __PYX_ERR(0, 2, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_s_cmhmey2_pool_executor);
+  __Pyx_GIVEREF(__pyx_n_s_cmhmey2_pool_executor);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 3, __pyx_n_s_cmhmey2_pool_executor)) __PYX_ERR(0, 2, __pyx_L1_error);
   __pyx_t_3 = __Pyx_Import(__pyx_n_s_chmengine_engines, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -2463,11 +2494,15 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_quartney, __pyx_t_2) < 0) __PYX_ERR(0, 2, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_cmhmey2_pool_executor); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_cmhmey2_pool_executor, __pyx_t_2) < 0) __PYX_ERR(0, 2, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "chmengine/engines/__init__.py":3
  * """Engines"""
- * from chmengine.engines import cmhmey1, cmhmey2, quartney
+ * from chmengine.engines import cmhmey1, cmhmey2, quartney, cmhmey2_pool_executor
  * from chmengine.engines.cmhmey1 import CMHMEngine             # <<<<<<<<<<<<<<
  * from chmengine.engines.cmhmey2 import CMHMEngine2
  * from chmengine.engines.quartney import Quartney
@@ -2487,11 +2522,11 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "chmengine/engines/__init__.py":4
- * from chmengine.engines import cmhmey1, cmhmey2, quartney
+ * from chmengine.engines import cmhmey1, cmhmey2, quartney, cmhmey2_pool_executor
  * from chmengine.engines.cmhmey1 import CMHMEngine
  * from chmengine.engines.cmhmey2 import CMHMEngine2             # <<<<<<<<<<<<<<
  * from chmengine.engines.quartney import Quartney
- * 
+ * from chmengine.engines.cmhmey2_pool_executor import CMHMEngine2PoolExecutor
  */
   __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -2511,8 +2546,8 @@ if (!__Pyx_RefNanny) {
  * from chmengine.engines.cmhmey1 import CMHMEngine
  * from chmengine.engines.cmhmey2 import CMHMEngine2
  * from chmengine.engines.quartney import Quartney             # <<<<<<<<<<<<<<
+ * from chmengine.engines.cmhmey2_pool_executor import CMHMEngine2PoolExecutor
  * 
- * __all__ = [
  */
   __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -2528,45 +2563,72 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "chmengine/engines/__init__.py":7
+  /* "chmengine/engines/__init__.py":6
+ * from chmengine.engines.cmhmey2 import CMHMEngine2
  * from chmengine.engines.quartney import Quartney
+ * from chmengine.engines.cmhmey2_pool_executor import CMHMEngine2PoolExecutor             # <<<<<<<<<<<<<<
+ * 
+ * __all__ = [
+ */
+  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_INCREF(__pyx_n_s_CMHMEngine2PoolExecutor);
+  __Pyx_GIVEREF(__pyx_n_s_CMHMEngine2PoolExecutor);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_CMHMEngine2PoolExecutor)) __PYX_ERR(0, 6, __pyx_L1_error);
+  __pyx_t_3 = __Pyx_Import(__pyx_n_s_chmengine_engines_cmhmey2_pool_e, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_CMHMEngine2PoolExecutor); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_CMHMEngine2PoolExecutor, __pyx_t_2) < 0) __PYX_ERR(0, 6, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "chmengine/engines/__init__.py":8
+ * from chmengine.engines.cmhmey2_pool_executor import CMHMEngine2PoolExecutor
  * 
  * __all__ = [             # <<<<<<<<<<<<<<
  *     # Mods
  *     'cmhmey1',
  */
-  __pyx_t_2 = PyList_New(6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 7, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = PyList_New(8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(__pyx_n_u_cmhmey1);
   __Pyx_GIVEREF(__pyx_n_u_cmhmey1);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_u_cmhmey1)) __PYX_ERR(0, 7, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 0, __pyx_n_u_cmhmey1)) __PYX_ERR(0, 8, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_cmhmey2);
   __Pyx_GIVEREF(__pyx_n_u_cmhmey2);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_u_cmhmey2)) __PYX_ERR(0, 7, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 1, __pyx_n_u_cmhmey2)) __PYX_ERR(0, 8, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_quartney);
   __Pyx_GIVEREF(__pyx_n_u_quartney);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 2, __pyx_n_u_quartney)) __PYX_ERR(0, 7, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 2, __pyx_n_u_quartney)) __PYX_ERR(0, 8, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_u_cmhmey2_pool_executor);
+  __Pyx_GIVEREF(__pyx_n_u_cmhmey2_pool_executor);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 3, __pyx_n_u_cmhmey2_pool_executor)) __PYX_ERR(0, 8, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_CMHMEngine);
   __Pyx_GIVEREF(__pyx_n_u_CMHMEngine);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 3, __pyx_n_u_CMHMEngine)) __PYX_ERR(0, 7, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 4, __pyx_n_u_CMHMEngine)) __PYX_ERR(0, 8, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_CMHMEngine2);
   __Pyx_GIVEREF(__pyx_n_u_CMHMEngine2);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 4, __pyx_n_u_CMHMEngine2)) __PYX_ERR(0, 7, __pyx_L1_error);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 5, __pyx_n_u_CMHMEngine2)) __PYX_ERR(0, 8, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_Quartney);
   __Pyx_GIVEREF(__pyx_n_u_Quartney);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 5, __pyx_n_u_Quartney)) __PYX_ERR(0, 7, __pyx_L1_error);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_all, __pyx_t_2) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 6, __pyx_n_u_Quartney)) __PYX_ERR(0, 8, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_n_u_CMHMEngine2PoolExecutor);
+  __Pyx_GIVEREF(__pyx_n_u_CMHMEngine2PoolExecutor);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 7, __pyx_n_u_CMHMEngine2PoolExecutor)) __PYX_ERR(0, 8, __pyx_L1_error);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_all, __pyx_t_3) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "chmengine/engines/__init__.py":1
  * """Engines"""             # <<<<<<<<<<<<<<
- * from chmengine.engines import cmhmey1, cmhmey2, quartney
+ * from chmengine.engines import cmhmey1, cmhmey2, quartney, cmhmey2_pool_executor
  * from chmengine.engines.cmhmey1 import CMHMEngine
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_3) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /*--- Wrapped vars code ---*/
 
