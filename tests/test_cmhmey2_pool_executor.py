@@ -1,15 +1,13 @@
 """Test Cmhmey Jr.'s Uncle Poole"""
-from io import StringIO
 from os import path
 from time import perf_counter
-from typing import Iterable, Optional, Union
 from unittest import TestCase
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
-from chess import Board, Move, pgn
-from numpy import float64, isnan, mean, percentile
+from chess import Board, Move
+from numpy import mean, percentile
 
-from chmengine import Pick, CMHMEngine2, Quartney
+from chmengine import CMHMEngine2, Pick, Quartney
 from chmengine.engines.cmhmey2_pool_executor import CMHMEngine2PoolExecutor
 from chmutils import BetterHeatmapCache, HeatmapCache
 from tests.utils import CACHE_DIR, clear_test_cache
@@ -30,12 +28,12 @@ CMHMEngine2PoolExecutor.cache_dir = CACHE_DIR
 
 
 class TestCMHMEngine2PoolExecutor(TestCase):
-    """Tests Cmhmey Jr."""
+    """Tests Cmhmey Jr.'s Uncle Poole"""
     starting_board: Board
     executor: CMHMEngine2PoolExecutor
 
     def setUp(self) -> None:
-        """Sets ups the engine instance to be tested with"""
+        """Sets up the engine instance and test environment."""
         clear_test_cache()
         self.assertFalse(path.exists(CACHE_DIR))
         self.executor = CMHMEngine2PoolExecutor()
@@ -45,27 +43,27 @@ class TestCMHMEngine2PoolExecutor(TestCase):
         self.starting_board = Board()
 
     def tearDown(self) -> None:
-        """clear any leftover test cache"""
+        """Cleans up the test environment."""
         clear_test_cache()
         self.assertFalse(path.exists(CACHE_DIR))
 
     def test_initialization_default(self):
         """Test initialization with default parameters."""
-        self.assertIsInstance(self.executor.board, Board)
-        self.assertEqual(self.executor.board.fen(), self.starting_board.fen())
-        self.assertEqual(self.executor.depth, 1)
+        self.assertIsInstance(self.executor.engine.board, Board)
+        self.assertEqual(self.executor.engine.board.fen(), self.starting_board.fen())
+        self.assertEqual(self.executor.engine.depth, 1)
         self.assertIsNone(self.executor.max_workers)
         self.assertIsInstance(self.executor.engine, CMHMEngine2)
 
     def test_initialization_custom(self):
-        """Test initialization with custom parameters."""
+        """Test initialization with custom parameters, good and bad."""
         custom_board = Board("8/8/8/8/8/8/8/8 w - - 0 1")
         with self.assertRaises(ValueError):
             _ = CMHMEngine2PoolExecutor(board=custom_board, depth=3, max_workers=4)
         custom_board = Board(MATE_IN_ONE_4)
         executor = CMHMEngine2PoolExecutor(board=custom_board, depth=0, max_workers=0)
-        self.assertEqual(executor.board, custom_board)
-        self.assertEqual(executor.depth, 0)
+        self.assertEqual(executor.engine.board, custom_board)
+        self.assertEqual(executor.engine.depth, 0)
         self.assertEqual(executor.max_workers, 0)
 
     @patch("chmengine.engines.cmhmey2_pool_executor.CMHMEngine2.pick_move")
@@ -80,7 +78,6 @@ class TestCMHMEngine2PoolExecutor(TestCase):
     def test_no_legal_moves(self):
         """Test pick_move when no legal moves are available (stalemate or checkmate)."""
         checkmate_board = Board("7K/8/8/8/8/8/7Q/k6Q b - - 15 99")  # Black king is checkmated
-        print(checkmate_board)
         self.assertTrue(checkmate_board.is_checkmate())
         self.assertEqual(checkmate_board.legal_moves.count(), 0)
         # CMHMEngine2.@board.setter won't let us set an invalid board, so we must cheat...
@@ -90,26 +87,59 @@ class TestCMHMEngine2PoolExecutor(TestCase):
         with self.assertRaises(ValueError):
             self.executor.pick_move()
 
-    # TODO: These tests seems too slow for a GitHub action test. I had to terminate every local attempt to run
-    # @patch("chmengine.engines.cmhmey2_pool_executor.evaluate_move")
-    # def test_uncached_moves_evaluation(self, mock_evaluate_move):
-    #     """Test that uncached moves are evaluated in parallel."""
-    #     mock_evaluate_move.return_value = Pick(move=next(iter(self.starting_board.legal_moves)), score=5.0)
-    #     pick = self.executor.pick_move()
-    #     self.assertIsInstance(pick, Pick)
-    #     self.assertGreaterEqual(pick.score, -float("inf"))
-    #     self.assertLessEqual(pick.score, float("inf"))
-    #     mock_evaluate_move.assert_called()
-
-    # @patch("chmengine.engines.cmhmey2_pool_executor.ProcessPoolExecutor")
-    # def test_max_workers(self, mock_executor):
-    #     """Test that the ProcessPoolExecutor respects the max_workers parameter."""
-    #     self.executor.max_workers = 2
-    #     self.executor.pick_move()
-    #     mock_executor.assert_called_with(max_workers=2)
-
     def test_debug_output(self):
         """Test debug output when debug=True."""
         with patch("sys.stdout") as mock_stdout:
             self.executor.pick_move(debug=True)
             self.assertTrue(mock_stdout.write.called)
+
+    def test_pick_move(self) -> None:
+        """Tests pick_move method."""
+        start = perf_counter()
+        pick = self.executor.pick_move(debug=True)
+        duration_first = (perf_counter() - start) / self.executor.engine.board.legal_moves.count()
+        print(
+            f"{self.executor.engine.fen()} pick_move call: ({pick[0].uci()},"
+            f" {pick[1]:.2f}) {duration_first:.3f}s/branch"
+        )
+        init_w_moves = list(self.executor.engine.board.legal_moves)
+        move: Move
+        first_time_pick_times = [duration_first]
+        init_board_pick_times = [duration_first]
+        revisit_pick_times = []
+        new_duration = 999999.99
+        for i, move in enumerate(init_w_moves, 2):
+            self.executor.engine.board.push(move)
+            start = perf_counter()
+            response_pick = self.executor.pick_move(debug=True)
+            duration_rep_pick = (perf_counter() - start) / self.executor.engine.board.legal_moves.count()
+            first_time_pick_times.append(duration_rep_pick)
+            print(
+                f"'{move.uci()}' -> '{self.executor.engine.fen()}' pick_move call: "
+                f"({response_pick[0].uci()}, {response_pick[1]:.2f}) {duration_rep_pick:.3f}s/branch"
+            )
+            self.executor.engine.board.pop()
+            start = perf_counter()
+            new_pick = self.executor.pick_move(debug=True)
+            new_duration = (perf_counter() - start) / self.executor.engine.board.legal_moves.count()
+            init_board_pick_times.append(new_duration)
+            revisit_pick_times.append(new_duration)
+            print(
+                f"{self.executor.engine.fen()} pick_move call {i}: ({new_pick[0].uci()},"
+                f" {new_pick[1]:.2f}) {new_duration:.3f}s/branch"
+            )
+        self.assertLess(new_duration, duration_first)
+        avg_duration = mean(init_board_pick_times)
+        avg_response = mean(first_time_pick_times)
+        avg_revisit = mean(revisit_pick_times)
+        self.assertLess(avg_duration, avg_response)
+        pre_durations = percentile(init_board_pick_times, [0, 1, 10, 25, 50, 75, 90, 99, 100])
+        pre_response = percentile(first_time_pick_times, [0, 1, 10, 25, 50, 75, 90, 99, 100])
+        pre_revisit = percentile(revisit_pick_times, [0, 1, 10, 25, 50, 75, 90, 99, 100])
+        print(f"mean pick time: {avg_duration:.3f}s\npercentiles (0, 1, 10, 25, 50, 75, 90, 99, 100):\n{pre_durations}")
+        print(
+            f"mean response time: {avg_response:.3f}s\npercentiles (0, 1, 10, 25, 50, 75, 90, 99, 100):\n{pre_response}"
+        )
+        print(
+            f"mean revisit time: {avg_revisit:.3f}s\npercentiles (0, 1, 10, 25, 50, 75, 90, 99, 100):\n{pre_revisit}"
+        )

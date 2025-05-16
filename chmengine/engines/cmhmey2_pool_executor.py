@@ -1,15 +1,13 @@
 """Cmhmey Jr.'s Mad Scientist Uncle Who Likes to make clones of Cmhmey Jr."""
 
 from concurrent.futures import Future, ProcessPoolExecutor, as_completed
-from os import path
-from typing import Dict, List, Optional, Union
+from typing import Dict, Optional, Union
 
 from chess import Board, Move
-from numpy import float64, isnan
+from numpy import float64
 
 from chmengine.engines.cmhmey2 import CMHMEngine2
 from chmengine.utils.pick import Pick
-from chmutils import CACHE_DIR
 
 NAN64 = float64(None)
 
@@ -38,13 +36,10 @@ def evaluate_move(board: Board, depth: int = 1, debug: bool = False, cache_dir: 
 
 class CMHMEngine2PoolExecutor:
     """CMHMEngine2PoolExecutor"""
-    # TODO: Property-afy these fields as we finalize them
-    depth: int
-    board: Board
-    cache_dir: str = path.join(".", CACHE_DIR, "QTables")
+    cache_dir: str = CMHMEngine2.cache_dir
     engine: CMHMEngine2
     # TODO: Refactor `max_workers` into a dict of options to be passed to `concurrent.futures` things as needed.
-    max_workers: Optional[int]
+    executor: ProcessPoolExecutor
 
     def __init__(self, board: Optional[Board] = None, depth: int = 1, max_workers: Optional[int] = None) -> None:
         """Initialize the CMHMEngine2PoolExecutor.
@@ -58,11 +53,9 @@ class CMHMEngine2PoolExecutor:
         max_workers : Optional[int], default: None
             The maximum number of worker threads for parallel execution.
         """
-        self.board = board if board else Board()
-        self.depth = depth
-        self.max_workers = max_workers
         CMHMEngine2.cache_dir = self.cache_dir
-        self.engine = CMHMEngine2(board=self.board, depth=self.depth)
+        self.engine = CMHMEngine2(board=board if board else Board(), depth=depth)
+        self.executor = ProcessPoolExecutor(max_workers=max_workers)
 
     def pick_move(self, debug: bool = False) -> Pick:
         """
@@ -82,9 +75,8 @@ class CMHMEngine2PoolExecutor:
         _move: Move
         board_cache: BoardCache = {
             _move: {
-                'board': self.engine.board_copy_pushed(move=_move, board=self.board),
-                'cached_score': NAN64,  # Initialize cached_score as NaN
-            } for _move in self.engine.current_moves_list(board=self.board)
+                'board': self.engine.board_copy_pushed(move=_move),
+            } for _move in self.engine.current_moves_list()
         }
         # Throw ValueError if there are no moves to evaluate.
         if len(board_cache) == 0:
@@ -93,64 +85,29 @@ class CMHMEngine2PoolExecutor:
                 return self.engine.pick_move(debug=True)
             except ValueError as root_error:
                 raise ValueError(
-                    f"No legal moves available from board: {self.board.fen()}"
+                    f"No legal moves available from board: {self.engine.fen()}"
                 ) from root_error
-
-        # Populate cached_score from the Q-Table
-        uncached_moves: List[Move] = []
-        _cache: BoardCacheEntry
-        # TODO: A-B test if this is actually better or if we should just offload all calls of `pick_move`.
-        for _move, _cache in board_cache.items():
-            # Since CMHMEngine2 writes preliminary scores for deeper positions it has yet to fully explore,
-            # we must actually check the game tree nodes 1-2 half-moves deeper for a Q-Score.
-            cache_board: Board = _cache['board']
-            check_move: Move = next(iter(cache_board.legal_moves))
-            check_board: Board = self.engine.board_copy_pushed(
-                move=check_move, board=cache_board
-            )
-            # 2 half-moves deeper in the event there is check or a capture at the first half-move position.
-            if (
-                    check_board.is_check() or check_board.piece_at(check_move.to_square)
-            ) and check_board.legal_moves.count() > 0:
-                check_move: Move = next(iter(check_board.legal_moves))
-                check_board: Board = self.engine.board_copy_pushed(
-                    move=check_move, board=check_board
-                )
-            # If this deeper Q-Score turns up null then we know we got a new position on our hands
-            if isnan(float64(self.engine.get_q_value(board=check_board))):
-                uncached_moves.append(_move)
-            # Else we just call `pick_move` on the main thread/proc
-            # as it will just be fast lookups and a few back-pop updates.
-            else:
-                self.engine.board = cache_board
+        future_to_move: Dict[Future, Move] = {
+            self.executor.submit(
+                evaluate_move,
+                board=board_cache[_move]['board'],
+                depth=self.engine.depth,
+                debug=debug,
+                cache_dir=self.cache_dir
+            ): _move for _move in board_cache
+        }
+        _future: Future[Pick]
+        for _future in as_completed(future_to_move):
+            _move = future_to_move[_future]
+            try:
+                _cache = board_cache[_move]
                 # We just need the deeper calls to update the q-table, don't actually need their pick here: `_`.
-                _ = self.engine.pick_move(debug=debug)
+                _ = _future.result().score
                 if debug:
-                    print(f"Evaluated on Main Thread: {_cache}")
-        # Just reset the self.engine.board in case hit our else condition in the loop above.
-        self.engine.board = self.board
-        # If there are any unexplored positions then we offload those to ProcessPoolExecutor
-        if len(uncached_moves) > 0:
-            executor: ProcessPoolExecutor
-            with ProcessPoolExecutor(max_workers=self.max_workers) as executor:
-                future_to_move: Dict[Future, Move] = {
-                    executor.submit(
-                        evaluate_move,
-                        board=board_cache[_move]['board'], depth=self.depth, debug=debug, cache_dir=self.cache_dir
-                    ): _move for _move in uncached_moves
-                }
-                _future: Future[Pick]
-                for _future in as_completed(future_to_move):
-                    _move = future_to_move[_future]
-                    try:
-                        _cache = board_cache[_move]
-                        # We just need the deeper calls to update the q-table, don't actually need their pick here: `_`.
-                        _ = _future.result().score
-                        if debug:
-                            print(f"Evaluated in Process Pool: {_cache}")
-                    except Exception as e:
-                        if debug:
-                            print(f"Error evaluating move in Process Pool:{_move}: {e}")
+                    print(f"Evaluated in Process Pool: {_cache}")
+            except Exception as e:
+                if debug:
+                    print(f"Error evaluating move in Process Pool:{_move}: {e}")
         # The final self.engine.pick_move call will be superfast now
         # as the previous `pick_move` calls ensured all our positions have scores.
         return self.engine.pick_move(debug=debug)
@@ -163,21 +120,27 @@ class CMHMEngine2PoolExecutor:
         move : Move
         """
         self.engine.board.push(move=move)
-        # self.board could be the same instance, but we reassign just to be safe.
-        self.board = self.engine.board
+
+    def shutdown(self) -> None:
+        """Shut down the ProcessPoolExecutor."""
+        self.executor.shutdown()
+
+    def __del__(self):
+        """Ensure the ProcessPoolExecutor is shut down when the instance is deleted."""
+        self.shutdown()
 
 
 if __name__ == '__main__':
     cmhmey2_executor: CMHMEngine2PoolExecutor = CMHMEngine2PoolExecutor()
-    print(cmhmey2_executor.board)
+    print(cmhmey2_executor.engine.board)
     # On first visit both `pick_move` calls below will take a while...
     pick: Pick = cmhmey2_executor.pick_move(debug=True)
     print(f'{pick:+.2f}')
     cmhmey2_executor.push(pick.move)
-    print(cmhmey2_executor.board)
+    print(cmhmey2_executor.engine.board)
     #  On revisits, only the second `pick_move` call can take a while
     #  should the back population change the outcome of the first call to lead to an unseen position.
     pick = cmhmey2_executor.pick_move(debug=True)
     print(f'{pick:+.2f}')
     cmhmey2_executor.push(pick.move)
-    print(cmhmey2_executor.board)
+    print(cmhmey2_executor.engine.board)
