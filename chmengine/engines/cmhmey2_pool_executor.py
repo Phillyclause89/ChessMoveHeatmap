@@ -1,6 +1,7 @@
 """Cmhmey Jr.'s Mad Scientist Uncle Who Likes to make clones of Cmhmey Jr."""
 
 from concurrent.futures import Future, ProcessPoolExecutor, as_completed
+from sqlite3 import OperationalError
 from typing import Dict, Optional, Union
 
 from chess import Board, Move
@@ -22,16 +23,34 @@ def evaluate_move(board: Board, depth: int = 1, debug: bool = False, cache_dir: 
     Parameters
     ----------
     board : Board
+        The chess board state to evaluate.
     depth : int
+        The search depth for the evaluation.
     debug : bool
+        Whether to enable debug output.
     cache_dir : str
+        The cache directory for the engine.
 
     Returns
     -------
     Pick
+        The best move and its associated evaluation score.
+
+    Raises
+    ------
+    OperationalError
+        If the database remains locked after exhausting retries or for unexpected operational errors.
     """
     CMHMEngine2.cache_dir = cache_dir
-    return CMHMEngine2(board=board, depth=depth).pick_move(debug=debug)
+    try:
+        return CMHMEngine2(board=board, depth=depth).pick_move(debug=debug)
+    except OperationalError as error_o:
+        if "database is locked" in str(error_o):
+            try:
+                return evaluate_move(board=board, depth=depth, debug=debug, cache_dir=cache_dir)
+            except RecursionError:
+                pass
+        raise OperationalError('Unexpected Operational Error: {str(error_o)}') from error_o
 
 
 class CMHMEngine2PoolExecutor:

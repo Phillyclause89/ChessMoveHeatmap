@@ -96,7 +96,7 @@ class TestCMHMEngine2PoolExecutor(TestCase):
     def test_pick_move(self) -> None:
         """Tests pick_move method."""
         start = perf_counter()
-        pick = self.executor.pick_move(debug=True)
+        pick = self.executor.pick_move()
         duration_first = (perf_counter() - start) / self.executor.engine.board.legal_moves.count()
         print(
             f"{self.executor.engine.fen()} pick_move call: ({pick[0].uci()},"
@@ -111,7 +111,7 @@ class TestCMHMEngine2PoolExecutor(TestCase):
         for i, move in enumerate(init_w_moves, 2):
             self.executor.engine.board.push(move)
             start = perf_counter()
-            response_pick = self.executor.pick_move(debug=True)
+            response_pick = self.executor.pick_move()
             duration_rep_pick = (perf_counter() - start) / self.executor.engine.board.legal_moves.count()
             first_time_pick_times.append(duration_rep_pick)
             print(
@@ -120,7 +120,7 @@ class TestCMHMEngine2PoolExecutor(TestCase):
             )
             self.executor.engine.board.pop()
             start = perf_counter()
-            new_pick = self.executor.pick_move(debug=True)
+            new_pick = self.executor.pick_move()
             new_duration = (perf_counter() - start) / self.executor.engine.board.legal_moves.count()
             init_board_pick_times.append(new_duration)
             revisit_pick_times.append(new_duration)
