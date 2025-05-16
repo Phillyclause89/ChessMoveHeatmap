@@ -16,7 +16,7 @@ ENGINES: str = 'engines'
 CHESS_PACKAGE: Optional[str] = path.dirname(chess.__file__)
 CHESS_SCRIPTS: str = path.join(CHESS_PACKAGE, '*.py')
 
-MAIN_MODULES: Tuple[str, str, str, str, str, str, str, str, str, str, str, str, str, str] = (
+MAIN_MODULES: Tuple[str, str, str, str, str, str, str, str, str, str, str, str, str, str, str] = (
     path.join('heatmaps', INIT_PY),
     path.join(CHMUTILS, 'concurrent.py'),
     path.join(CHMUTILS, 'game_builder.py'),
@@ -29,6 +29,7 @@ MAIN_MODULES: Tuple[str, str, str, str, str, str, str, str, str, str, str, str, 
     path.join(CHMENGINE, ENGINES, 'cmhmey1.py'),
     path.join(CHMENGINE, ENGINES, 'quartney.py'),
     path.join(CHMENGINE, ENGINES, 'cmhmey2.py'),
+    path.join(CHMENGINE, ENGINES, 'cmhmey2_pool_executor.py'),
     path.join(CHMENGINE, ENGINES, INIT_PY),
     path.join(CHMENGINE, INIT_PY),
 )
