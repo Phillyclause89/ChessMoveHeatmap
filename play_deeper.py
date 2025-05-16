@@ -16,31 +16,31 @@ from chess import Board, Move, Outcome, Piece, SQUARES
 from chess.pgn import ChildNode, Game
 from numpy import float64, isnan
 
-from chmengine import CMHMEngine, CMHMEngine2, Pick, set_all_datetime_headers
+from chmengine import CMHMEngine2PoolExecutor, CMHMEngine2, Pick, set_all_datetime_headers
 from chmutils import (
     BaseChessTkApp, DEFAULT_COLORS, DEFAULT_FONT, Player, get_local_time, get_promotion_choice, state_faces_within_bmp
 )
 
 __all__ = [
     'PlayChessApp',
-    'EngineContainer'
+    'EnginePoolContainer'
 ]
 
 
 @dataclass
-class EngineContainer:
-    """Container for the engine(s)."""
-    _white: CMHMEngine
-    _black: CMHMEngine
+class EnginePoolContainer:
+    """Container for the engine pool(s)."""
+    _white: CMHMEngine2PoolExecutor
+    _black: CMHMEngine2PoolExecutor
 
     def __init__(
             self,
-            engine_type: Callable = CMHMEngine,
+            engine_type: Callable = CMHMEngine2PoolExecutor,
             depth: int = 1,
             engine_type_2: Optional[Callable] = None,
             depth_2: Optional[int] = None
     ) -> None:
-        """Initialize the EngineContainer
+        """Initialize the EnginePoolContainer
 
         Parameters
         ----------
@@ -55,7 +55,7 @@ class EngineContainer:
             depth=depth if depth_2 is None else depth_2
         )
         # CMHMEngine.board.setter sets a copy thus we need to bypass the method to set the same object instance
-        self._black._board = self._white.board
+        self._black.engine._board = self._white.engine.board
 
     @property
     def board(self) -> Board:
@@ -65,7 +65,7 @@ class EngineContainer:
         -------
         Board
         """
-        return self._white.board
+        return self._white.engine.board
 
     @board.setter
     def board(self, new_board: Board) -> None:
@@ -79,36 +79,36 @@ class EngineContainer:
             if not new_board.is_valid():
                 raise ValueError(f"new_board is not valid: {new_board}")
             self._white._board = new_board
-            self._black._board = self._white.board
+            self._black._board = self._white.engine.board
         except AttributeError as error:
             raise TypeError(f"new_board must be type `chess.Board`, got `{type(new_board)}`") from error
 
     @property
-    def white(self) -> CMHMEngine:
+    def white(self) -> CMHMEngine2PoolExecutor:
         """Gets the engine playing as white
 
         Returns
         -------
-        CMHMEngine
+        CMHMEngine2PoolExecutor
         """
         return self._white
 
     @white.setter
-    def white(self, new_engine: CMHMEngine) -> None:
+    def white(self, new_engine: CMHMEngine2PoolExecutor) -> None:
         """Sets the engine playing as white
 
         Parameters
         ----------
-        new_engine : CMHMEngine
+        new_engine : CMHMEngine2PoolExecutor
         """
-        if isinstance(new_engine, CMHMEngine):
+        if isinstance(new_engine, CMHMEngine2PoolExecutor):
             self._white = new_engine
-            self._white._board = self._black.board
+            self._white._board = self._black.engine.board
         else:
             raise TypeError(f"new_engine must be type CMHMEngine, got {type(new_engine)}")
 
     @property
-    def black(self) -> CMHMEngine:
+    def black(self) -> CMHMEngine2PoolExecutor:
         """Gets the engine playing as white
 
         Returns
@@ -118,16 +118,16 @@ class EngineContainer:
         return self._black
 
     @black.setter
-    def black(self, new_engine: CMHMEngine) -> None:
+    def black(self, new_engine: CMHMEngine2PoolExecutor) -> None:
         """Sets the engine playing as white
 
         Parameters
         ----------
         new_engine : CMHMEngine
         """
-        if isinstance(new_engine, CMHMEngine):
+        if isinstance(new_engine, CMHMEngine2PoolExecutor):
             self._black = new_engine
-            self._black._board = self._white.board
+            self._black._board = self._white.engine.board
         else:
             raise TypeError(f"new_engine must be type CMHMEngine, got {type(new_engine)}")
 
@@ -149,7 +149,7 @@ class EngineContainer:
         ----------
         new_name : Callable
         """
-        self.white = new_name(depth=self._white.depth)
+        self.white = new_name(depth=self._white.engine.depth)
 
     @property
     def black_name(self) -> str:
@@ -169,7 +169,7 @@ class EngineContainer:
         ----------
         new_name : Callable
         """
-        self.black = new_name(depth=self._white.depth)
+        self.black = new_name(depth=self._white.engine.depth)
 
     @property
     def depths(self) -> Tuple[int, int]:
@@ -179,7 +179,7 @@ class EngineContainer:
         -------
         Tuple[int, int]
         """
-        return self._white.depth, self._black.depth
+        return self._white.engine.depth, self._black.engine.depth
 
     @depths.setter
     def depths(self, new_depths: Tuple[int, int]) -> None:
@@ -199,7 +199,7 @@ class EngineContainer:
         -------
         int
         """
-        return self._white.depth if self._white.board.turn else self._black.depth
+        return self._white.engine.depth if self._white.engine.board.turn else self._black.engine.depth
 
     @depth.setter
     def depth(self, new_depth: int) -> None:
@@ -209,7 +209,7 @@ class EngineContainer:
         ----------
         new_depth : int
         """
-        if self._white.board.turn:
+        if self._white.engine.board.turn:
             self._white.depth = int(new_depth)
         else:
             self._black.depth = int(new_depth)
@@ -225,9 +225,9 @@ class EngineContainer:
         ----------
         pick : Pick
         """
-        self._white.board.push(move=pick.move)
+        self._white.push(move=pick.move)
 
-    def __getitem__(self, chess_lib_index: object) -> CMHMEngine:
+    def __getitem__(self, chess_lib_index: object) -> CMHMEngine2PoolExecutor:
         """Gets the engine corresponding to the python-chess lib COLOR_NAMES index
 
         Parameters
@@ -236,7 +236,7 @@ class EngineContainer:
         """
         return self._white if chess_lib_index else self._black
 
-    def __setitem__(self, chess_lib_index: object, new_engine: CMHMEngine) -> None:
+    def __setitem__(self, chess_lib_index: object, new_engine: CMHMEngine2PoolExecutor) -> None:
         """Sets the engine corresponding to the python-chess lib COLOR_NAMES index
 
         Parameters
@@ -272,18 +272,18 @@ class EngineContainer:
         """
         return item is self._white or item is self._black
 
-    def __iter__(self) -> Iterator[CMHMEngine]:
+    def __iter__(self) -> Iterator[CMHMEngine2PoolExecutor]:
         """
         Returns
         -------
         Iterator[CMHMEngine]
 
         """
-        engine: CMHMEngine
+        engine: CMHMEngine2PoolExecutor
         for engine in self.to_set():
             yield engine
 
-    def to_set(self) -> Set[CMHMEngine]:
+    def to_set(self) -> Set[CMHMEngine2PoolExecutor]:
         """
 
         Returns
@@ -301,7 +301,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
     site: str
     face: str
     game_line: List[Pick]
-    engines: EngineContainer
+    engines: EnginePoolContainer
     player: Player = Player()
     training_dir: str = "trainings"
     pgn_dir: str = "pgns"
@@ -315,7 +315,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
 
     def __init__(
             self,
-            engine_type: Callable = CMHMEngine,
+            engine_type: Callable = EnginePoolContainer,
             depth: int = depth,
             player_name: str = player.name,
             player_color_is_black: bool = False,
@@ -360,7 +360,7 @@ class PlayChessApp(Tk, BaseChessTkApp):
         if player_color_is_black:
             self.player.index = 1
         self.onboard_player()
-        self.engines = EngineContainer(engine_type, depth, engine_type_2, depth_2)
+        self.engines = EnginePoolContainer(engine_type, depth, engine_type_2, depth_2)
         self.depth = self.engines.depth
         self.set_title()
         self.create_menu()
@@ -1047,5 +1047,5 @@ class PlayChessApp(Tk, BaseChessTkApp):
 
 
 if __name__ == "__main__":
-    app = PlayChessApp(engine_type=CMHMEngine2)
+    app = PlayChessApp(engine_type=CMHMEngine2PoolExecutor)
     app.mainloop()
