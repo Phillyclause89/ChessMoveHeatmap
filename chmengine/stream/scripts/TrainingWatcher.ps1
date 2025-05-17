@@ -430,9 +430,9 @@ function Watch-TrainingGames {
         }
 
         # Monitor Q-table size
-        $script:lastSize = Write-QTableSize -sizeMB (
+        $script:lastSize = Write-QTableSize -SizeMB (
             Get-QTableSize -QTableDirectory $QTableDirectory
-        ) -lastSize $script:lastSize -PollIntervalSeconds $PollIntervalSeconds
+        ) -LastSize $script:lastSize -PollIntervalSeconds $PollIntervalSeconds
 
         Start-Sleep -Seconds $PollIntervalSeconds
     }
@@ -444,40 +444,57 @@ function Write-QTableSize {
     .SYNOPSIS
         Write the Q-table size to the host.
     .DESCRIPTION
-        This function writes the Q-table size to the host, including the growth rate.
-        It uses a color gradient to indicate the size of the Q-table.
-    .PARAMETER sizeMB
-        The size of the Q-table in MB. Default is the size of the Q-table in the specified directory.
-    .PARAMETER lastSize
-        The last size of the Q-table in MB. Default is `$script:lastSize`.
+        This function writes the Q-table size to the host, including the growth rate and optionally the estimated positions per second.
+    .PARAMETER SizeMB
+        The size of the Q-table in MB.
+    .PARAMETER LastSize
+        The last size of the Q-table in MB.
     .PARAMETER QTableDirectory
-        The directory where the Q-table is located. Default is `$script:QTableDirectory`.
+        The directory where the Q-table is located.
     .PARAMETER PollIntervalSeconds
-        The interval in seconds to poll the directories. Default is `$script:PollIntervalSeconds`.
+        The interval in seconds to poll the directories.
+    .PARAMETER AveragePositionSize
+        (Optional) The estimated average size in bytes of a single Q-table entry (default 84).
+    .PARAMETER DbOverheadMB
+        (Optional) The estimated overhead size in MB for the SQLite3 database (default 0.363MB).
     .OUTPUTS
         A double representing the last size of the Q-table in MB.
     #>
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $false, Position = 0)]
-        [double]$sizeMB = (Get-QTableSize -QTableDirectory $script:QTableDirectory),
+        [double]$SizeMB = (Get-QTableSize -QTableDirectory $script:QTableDirectory),
         [Parameter(Mandatory = $false, Position = 1)]
-        [double]$lastSize = $script:lastSize,
+        [double]$LastSizeMB = $script:lastSize,
         [Parameter(Mandatory = $false, Position = 2)]
         [string]$QTableDirectory = $script:QTableDirectory,
         [Parameter(Mandatory = $false, Position = 3)]
-        [int]$PollIntervalSeconds = $script:PollIntervalSeconds
+        [int]$PollIntervalSeconds = $script:PollIntervalSeconds,
+        [Parameter(Mandatory = $false, Position = 4)]
+        [int]$AveragePositionSize = 84,
+        [Parameter(Mandatory = $false, Position = 5)]
+        [double]$DbOverheadMB = 0.363MB
     )
-    if (($sizeMB -ne $lastSize) -or ($script:_init_)) {
+    if (($SizeMB -ne $LastSizeMB) -or ($script:_init_)) {        
         $script:_init_ = $false
-        $growthRate = ($sizeMB - $lastSize) / $PollIntervalSeconds
+        $growthRate = ($SizeMB - $LastSizeMB) / $PollIntervalSeconds
         $growthRateMB = [math]::Round($growthRate, 3)
-        $lastSize = $sizeMB
-        Write-Host "`rQ Table Size: $sizeMB MB ($($growthRateMB.ToString('+#.000;-#.000;0.000')) MB/s)   " -ForegroundColor (
-            Get-QTableColor -sizeMB $sizeMB -QTableDirectory $QTableDirectory
+        # Calculate estimated positions/s if growth rate is positive and AveragePositionSize is set
+        if ($AveragePositionSize -gt 0) {
+            $estTotalPositions = if ($SizeMB -gt $DbOverheadMB) {[math]::Round((($SizeMB - $DbOverheadMB)) / $AveragePositionSize, 0)} else { 0 }
+            $growthRateBytes = $growthRate * 1MB
+            $positionsPerSec = [math]::Round($growthRateBytes / $AveragePositionSize, 0)
+            $posRateString = " | $estTotalPositions Positions (+$positionsPerSec Positions/s) est."
+        } else {
+            $posRateString = ""
+        }
+        $LastSizeMB = $SizeMB
+        $outText = "Q Table Size: $SizeMB MB ($($growthRateMB.ToString('+#.000;-#.000;0.000')) MB/s)$posRateString"
+        Write-Host "`r$($outText)$(' '*(127 - $outText.Length))" -ForegroundColor (
+            Get-QTableColor -sizeMB $SizeMB -QTableDirectory $QTableDirectory
         ) -NoNewline
     }
-    return $lastSize
+    return $LastSizeMB
 }
 
 # This simulates: `if __name__ == "__main__":` from python. kinda...
