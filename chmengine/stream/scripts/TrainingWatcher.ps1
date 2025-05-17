@@ -2,13 +2,11 @@
 .SYNOPSIS
     A simple PowerShell script to watch the .\pgns\trainings\ and .\SQLite3Caches\QTables\ dirs during engine training.
 .DESCRIPTION
-    Used for the training YouTube stream here: https://www.youtube.com/live/Fh1I9DALeEc
+    Used for the training YouTube stream here: https://www.youtube.com/watch?v=_-JySFYZhjU
 .PARAMETER TrainingDirectory
     Relative path to the Dir that the training files to watch are saved to. By default this is pgns\trainings from repo root.
 .PARAMETER QTableDirectory
     Relative path to the Dir that the q-table .db files to watch are saved to. By default this is SQLite3Caches\QTables from repo root.
-.PARAMETER MaxGames
-    Governs the exit logic for the script. By default, this script will continue to watch until 1000 pgn files are detected.
 .PARAMETER PollIntervalSeconds
     Sleep time between pulls of the output dirs. By default this is 2 seconds.
 .PARAMETER InitialElo
@@ -18,8 +16,13 @@
     If a player is not found in the hashtable, the PoolAvg value will be used instead.
 .PARAMETER PoolAvg
     The average Elo of the pool of players. This is used to calculate the predicted Elo of each player. By default this is 1500.
+.PARAMETER MaxGames
+    Governs the exit logic for the script. By default, this is set to 0 meaing the script will run indefinitely.
+    If this is set to a positive integer, the script will exit after that many games have been processed.
 .PARAMETER Infinite
     If this switch is set, the script will run indefinitely, even if the MaxGames limit is reached. This is useful for long-running training sessions.
+    By default, this is set to $true as MaxGames default value is 0.
+
 .INPUTS
     None - No pipeline input accepted.
 .OUTPUTS
@@ -39,23 +42,61 @@
 #>
 [CmdletBinding()]
 param(
+    [Parameter(
+        Mandatory = $false,
+        Position = 0
+    )]
     [string]$TrainingDirectory = '.\pgns\trainings\',
+    [Parameter(
+        Mandatory = $false,
+        Position = 1
+    )]
     [string]$QTableDirectory = '.\SQLite3Caches\QTables\',
-    [int]$MaxGames = 1000,
-    [int]$PollIntervalSeconds = 2,    
+    [Parameter(
+        Mandatory = $false,
+        Position = 2
+    )]
+    [int]$PollIntervalSeconds = 2,
+    [Parameter(
+        Mandatory = $false,
+        Position = 3
+    )]    
     [hashtable]$InitialElo = @{
         'CMHMEngine'     = @{ White = 100; Black = 50 }
         'CMHMEngine2'    = @{ White = 350; Black = 300 }
         'PhillyClause89' = @{ White = 1600; Black = 1550 }
     },
-    [int]$PoolAvg = (
+    [Parameter(
+        Mandatory = $false,
+        Position = 4
+    )]
+    [double]$PoolAvg = (
         & {
-            if ($InitialElo.Count -eq 0) { 1500 }
+            if ($InitialElo.Count -eq 0) { 1500.0 }
             else { [math]::Round(($InitialElo.Values | Measure-Object -Property White -Sum).Sum / $InitialElo.Count, 0) }
         }
     ),
-    [switch]$Infinite
+    [Parameter(
+        Mandatory = $false,
+        Position = 5
+    )]
+    [int]$MaxGames = 0,
+    [Parameter(
+        Mandatory = $false
+    )]
+    [switch]$Infinite = (& { if ($MaxGames -lt 1) { $true } else { $false } })
 )
+# Set default values for script variables
+[bool]$script:_init_ = $true
+[double]$script:lastSize = 0.0
+[string]$script:lastLine = ''
+[string]$script:TrainingDirectory = $TrainingDirectory
+[string]$script:QTableDirectory = $QTableDirectory
+[int]$script:MaxGames = $MaxGames
+[int]$script:PollIntervalSeconds = $PollIntervalSeconds
+[hashtable]$script:InitialElo = $InitialElo
+[double]$script:PoolAvg = $PoolAvg
+[bool]$script:Infinite = $Infinite
 
 function Get-PredictedEloPerSide {
     <#
@@ -75,7 +116,8 @@ function Get-PredictedEloPerSide {
     #>
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory)][hashtable]$Stats,
+        [Parameter(Mandatory)]
+        [hashtable]$Stats,
         [int]$PoolAvg = $script:PoolAvg,
         [hashtable]$InitialElo = $script:InitialElo
     )
@@ -144,8 +186,9 @@ function Get-PredictedEloPerSide {
 }
 
 function Get-QTableColor {
+    [CmdletBinding()]
     param (
-        [double]$sizeMB,
+        [double]$sizeMB = (Get-QTableSize -QTableDirectory $script:QTableDirectory),
         [string]$QTableDirectory = $script:QTableDirectory
     )
 
@@ -195,12 +238,12 @@ function Watch-TrainingGames {
         [int]$PoolAvg = $script:PoolAvg,
         [hashtable]$InitialElo = $script:InitialElo
     )
-    $script:init = $true
+    $script:_init_ = $true
     $script:lastSize = Get-QTableSize -QTableDirectory $QTableDirectory
     $lastCount = -1
     $color = 'White'
 
-    while (((Get-ChildItem -Path $TrainingDirectory -File).Count -le $MaxGames) -or ($Infinite)) {
+    while (((Get-ChildItem -Path $TrainingDirectory -File).Count -le $MaxGames) -or ($Infinite) -or ($script:_init_)) {
         $trainings = Get-ChildItem -Path $TrainingDirectory -File
         if ($lastCount -ne $trainings.Count) {
             Clear-Host
@@ -312,18 +355,19 @@ function Watch-TrainingGames {
 
         Start-Sleep -Seconds $PollIntervalSeconds
     }
+    Write-Host
 }
 
 function Write-QTableSize {
     [CmdletBinding()]
     param (
         [double]$sizeMB = (Get-QTableSize -QTableDirectory $script:QTableDirectory),
-        [double]$lastSize = 0.0,
+        [double]$lastSize = $script:lastSize,
         [string]$QTableDirectory = $script:QTableDirectory,
         [int]$PollIntervalSeconds = $script:PollIntervalSeconds
     )
-    if (($sizeMB -ne $lastSize) -or ($script:init)) {
-        $script:init = $false
+    if (($sizeMB -ne $lastSize) -or ($script:_init_)) {
+        $script:_init_ = $false
         $growthRate = ($sizeMB - $lastSize) / $PollIntervalSeconds
         $growthRateMB = [math]::Round($growthRate, 3)
         $lastSize = $sizeMB

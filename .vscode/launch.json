@@ -14,10 +14,34 @@
         },
         // Stupid PS Extension wants to run scripts with `. <script>` instead of just `<script>`.
         {
-            "name": "PowerShell: Run TrainingWatcher.ps1",
+            "name": "PowerShell: Run TrainingWatcher.ps1 (default args)",
             "type": "PowerShell",
             "request": "launch",
             "script": "&{./chmengine/stream/scripts/TrainingWatcher.ps1}",
+            "cwd": "${workspaceFolder}",
+            "args": []
+        },
+        {
+            "name": "PowerShell: Run TrainingWatcher.ps1 (-Infinite)",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "&{./chmengine/stream/scripts/TrainingWatcher.ps1 -Infinite}",
+            "cwd": "${workspaceFolder}",
+            "args": []
+        },
+        {
+            "name": "PowerShell: Run TrainingWatcher.ps1 (-MaxGames 1)",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "&{./chmengine/stream/scripts/TrainingWatcher.ps1 -MaxGames 1}",
+            "cwd": "${workspaceFolder}",
+            "args": []
+        },
+        {
+            "name": "PowerShell: Run TrainingWatcher.ps1 (-TrainingDirectory '.\\..\\StreamChessMoveHeatmap\\...)",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "&{./chmengine/stream/scripts/TrainingWatcher.ps1 -TrainingDirectory '.\\..\\StreamChessMoveHeatmap\\pgns\\trainings\\' -QTableDirectory '.\\..\\StreamChessMoveHeatmap\\SQLite3Caches\\QTables\\'}",
             "cwd": "${workspaceFolder}",
             "args": []
         }
