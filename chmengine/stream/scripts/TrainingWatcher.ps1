@@ -18,6 +18,8 @@
     If a player is not found in the hashtable, the PoolAvg value will be used instead.
 .PARAMETER PoolAvg
     The average Elo of the pool of players. This is used to calculate the predicted Elo of each player. By default this is 1500.
+.PARAMETER Infinite
+    If this switch is set, the script will run indefinitely, even if the MaxGames limit is reached. This is useful for long-running training sessions.
 .INPUTS
     None - No pipeline input accepted.
 .OUTPUTS
@@ -46,14 +48,13 @@ param(
         'CMHMEngine2'    = @{ White = 350; Black = 300 }
         'PhillyClause89' = @{ White = 1600; Black = 1550 }
     },
-    [int]$PoolAvg = (& {
-            if ($InitialElo.Count -eq 0) {
-                1500
-            }
-            else {
-                [math]::Round(($InitialElo.Values | Measure-Object -Property White -Sum).Sum / $InitialElo.Count, 0)
-            }
-        })
+    [int]$PoolAvg = (
+        & {
+            if ($InitialElo.Count -eq 0) { 1500 }
+            else { [math]::Round(($InitialElo.Values | Measure-Object -Property White -Sum).Sum / $InitialElo.Count, 0) }
+        }
+    ),
+    [switch]$Infinite
 )
 
 function Get-PredictedEloPerSide {
@@ -75,8 +76,8 @@ function Get-PredictedEloPerSide {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)][hashtable]$Stats,
-        [int]$PoolAvg = $PoolAvg,
-        [hashtable]$InitialElo = $InitialElo
+        [int]$PoolAvg = $script:PoolAvg,
+        [hashtable]$InitialElo = $script:InitialElo
     )
 
     $elos = @{}
@@ -145,7 +146,7 @@ function Get-PredictedEloPerSide {
 function Get-QTableColor {
     param (
         [double]$sizeMB,
-        [string]$QTableDirectory
+        [string]$QTableDirectory=$script:QTableDirectory
     )
 
     # Resolve drive letter or root path
@@ -168,13 +169,17 @@ function Get-QTableColor {
     # Gradient logic (adjust thresholds as needed)
     if ($usageRatio -lt 0.1) {
         return 'Green'
-    } elseif ($usageRatio -lt 0.3) {
+    }
+    elseif ($usageRatio -lt 0.3) {
         return 'Yellow'
-    } elseif ($usageRatio -lt 0.5) {
+    }
+    elseif ($usageRatio -lt 0.5) {
         return 'DarkYellow'
-    } elseif ($usageRatio -lt 0.75) {
+    }
+    elseif ($usageRatio -lt 0.75) {
         return 'Magenta'
-    } else {
+    }
+    else {
         return 'Red'
     }
 }
@@ -182,19 +187,20 @@ function Get-QTableColor {
 function Watch-TrainingGames {
     [CmdletBinding()]
     param (
-        [string]$TrainingDirectory = $TrainingDirectory,
-        [string]$QTableDirectory = $QTableDirectory,
-        [int]$MaxGames = $MaxGames,
-        [int]$PollIntervalSeconds = $PollIntervalSeconds,
-        [int]$PoolAvg = $PoolAvg,
-        [hashtable]$InitialElo = $InitialElo
+        [string]$TrainingDirectory = $script:TrainingDirectory,
+        [string]$QTableDirectory = $script:QTableDirectory,
+        [int]$MaxGames = $script:MaxGames,
+        [bool]$Infinite = $script:Infinite,
+        [int]$PollIntervalSeconds = $script:PollIntervalSeconds,
+        [int]$PoolAvg = $script:PoolAvg,
+        [hashtable]$InitialElo = $script:InitialElo
     )
-
-    $lastSize = 0
+    $script:init = $true
+    $script:lastSize = Get-QTableSize -QTableDirectory $QTableDirectory
     $lastCount = -1
     $color = 'White'
 
-    while ((Get-ChildItem -Path $TrainingDirectory -File).Count -le $MaxGames) {
+    while (((Get-ChildItem -Path $TrainingDirectory -File).Count -le $MaxGames) -or ($Infinite)) {
         $trainings = Get-ChildItem -Path $TrainingDirectory -File
         if ($lastCount -ne $trainings.Count) {
             Clear-Host
@@ -258,7 +264,13 @@ function Watch-TrainingGames {
             $elos = Get-PredictedEloPerSide -Stats $stats -PoolAvg $PoolAvg -InitialElo $InitialElo
 
             Write-Host 'Training Games Completed: ' -ForegroundColor 'DarkGreen' -NoNewline
-            Write-Host "$lastCount of $MaxGames" -ForegroundColor 'Green'
+            if ($Infinite) {
+                Write-Host "$lastCount" -ForegroundColor 'Green'
+            } else {
+                Write-Host "$lastCount of $MaxGames" -ForegroundColor 'Green'
+            }
+            
+            
 
             foreach ($player in $stats.Keys | Sort-Object) {
                 $ww = $stats[$player].White.Wins
@@ -293,27 +305,55 @@ function Watch-TrainingGames {
         }
 
         # Monitor Q-table size
-        $fileSize = (Get-ChildItem -Path $QTableDirectory -File | Measure-Object -Property Length -Sum).Sum
-        $sizeMB = [math]::Round($fileSize / 1MB, 3)
-
-        if ($sizeMB -gt $lastSize) {
-            $lastSize = $sizeMB
-            Write-Host "`rQ Table Size: $sizeMB MB   " -NoNewline -ForegroundColor (Get-QTableColor -sizeMB $sizeMB -QTableDirectory $QTableDirectory)
-        }
+        $script:lastSize = Write-QTableSize -sizeMB (
+            Get-QTableSize -QTableDirectory $QTableDirectory
+        ) -lastSize $script:lastSize -PollIntervalSeconds $PollIntervalSeconds
 
         Start-Sleep -Seconds $PollIntervalSeconds
     }
 }
 
+function Write-QTableSize {
+    [CmdletBinding()]
+    param (
+        [double]$sizeMB = (Get-QTableSize -QTableDirectory $script:QTableDirectory),
+        [double]$lastSize = 0.0,
+        [string]$QTableDirectory = $script:QTableDirectory,
+        [int]$PollIntervalSeconds = $script:PollIntervalSeconds
+    )
+    if (($sizeMB -ne $lastSize) -or ($script:init)) {
+        $script:init = $false
+        $growthRate = ($sizeMB - $lastSize) / $PollIntervalSeconds
+        $growthRateMB = [math]::Round($growthRate, 3)
+        $lastSize = $sizeMB
+        Write-Host "`rQ Table Size: $sizeMB MB ($($growthRateMB.ToString('+#.000;-#.000;0.000')) MB/s)   " -ForegroundColor (
+            Get-QTableColor -sizeMB $sizeMB -QTableDirectory $QTableDirectory
+        ) -NoNewline
+    }
+    return $lastSize
+}
+
+function Get-QTableSize {
+    [CmdletBinding()]
+    param (
+        [string]$QTableDirectory = $script:QTableDirectory,
+        [int]$SizeSpec = 1MB,
+        [int]$SizeDecimal = 3
+    )
+    $fileSize = (Get-ChildItem -Path $QTableDirectory -File | Measure-Object -Property Length -Sum).Sum
+    return [math]::Round($fileSize / $SizeSpec, $SizeDecimal)
+}
+
 # This simulates: `if __name__ == "__main__":` from python. kinda...
 if ($MyInvocation.InvocationName -ne '.') {
     $WTGArgs = @{
-        TrainingDirectory   = $TrainingDirectory
-        QTableDirectory     = $QTableDirectory
-        MaxGames            = $MaxGames
-        PollIntervalSeconds = $PollIntervalSeconds
-        InitialElo          = $InitialElo
-        PoolAvg             = $PoolAvg
+        TrainingDirectory   = $script:TrainingDirectory
+        QTableDirectory     = $script:QTableDirectory
+        MaxGames            = $script:MaxGames
+        PollIntervalSeconds = $script:PollIntervalSeconds
+        InitialElo          = $script:InitialElo
+        PoolAvg             = $script:PoolAvg
+        Infinite            = $script:Infinite
     }
     Watch-TrainingGames @WTGArgs
 }
