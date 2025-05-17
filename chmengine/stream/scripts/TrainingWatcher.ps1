@@ -146,7 +146,7 @@ function Get-PredictedEloPerSide {
 function Get-QTableColor {
     param (
         [double]$sizeMB,
-        [string]$QTableDirectory=$script:QTableDirectory
+        [string]$QTableDirectory = $script:QTableDirectory
     )
 
     # Resolve drive letter or root path
@@ -266,7 +266,8 @@ function Watch-TrainingGames {
             Write-Host 'Training Games Completed: ' -ForegroundColor 'DarkGreen' -NoNewline
             if ($Infinite) {
                 Write-Host "$lastCount" -ForegroundColor 'Green'
-            } else {
+            }
+            else {
                 Write-Host "$lastCount of $MaxGames" -ForegroundColor 'Green'
             }
             
