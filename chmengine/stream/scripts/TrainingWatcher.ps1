@@ -473,7 +473,7 @@ function Write-QTableSize {
         [Parameter(Mandatory = $false, Position = 4)]
         [int]$AveragePositionSize = 84,
         [Parameter(Mandatory = $false, Position = 5)]
-        [double]$DbOverheadMB = 0.363MB
+        [double]$DbOverheadMB = 0.363
     )
     if (($SizeMB -ne $LastSizeMB) -or ($script:_init_)) {        
         $script:_init_ = $false
@@ -481,10 +481,10 @@ function Write-QTableSize {
         $growthRateMB = [math]::Round($growthRate, 3)
         # Calculate estimated positions/s if growth rate is positive and AveragePositionSize is set
         if ($AveragePositionSize -gt 0) {
-            $estTotalPositions = if ($SizeMB -gt $DbOverheadMB) {[math]::Round((($SizeMB - $DbOverheadMB)) / $AveragePositionSize, 0)} else { 0 }
+            $estTotalPositions = [math]::Round((($SizeMB - $DbOverheadMB)*1MB / $AveragePositionSize), 0)
             $growthRateBytes = $growthRate * 1MB
             $positionsPerSec = [math]::Round($growthRateBytes / $AveragePositionSize, 0)
-            $posRateString = " | $estTotalPositions Positions (+$positionsPerSec Positions/s) est."
+            $posRateString = " | $($estTotalPositions.ToString("N0")) Positions (+$positionsPerSec Positions/s) est."
         } else {
             $posRateString = ""
         }
