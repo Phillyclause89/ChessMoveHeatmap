@@ -81,16 +81,19 @@ param(
     [Parameter(Mandatory = $false)]
     [switch]$Infinite = (& { if ($MaxGames -lt 1) { $true } else { $false } })
 )
+
 # Set default values for script variables
-[bool]$script:_init_ = $true
-[double]$script:lastSize = 0.0
-[string]$script:lastLine = ''
+[bool]$script:_init_ = $true # Used in Write-QTableSize to determine if this is the first call of the function during the scripts runtime.
+[double]$script:lastSize = 0.0 # Used in Write-QTableSize to determine if the Q-table size has changed.
+[string]$script:lastLine = '' # Used in Watch-TrainingGames to store the last line of the game.
+
+# Redundant $script: variable assignments to make the script more readable.
 [string]$script:TrainingDirectory = $TrainingDirectory
 [string]$script:QTableDirectory = $QTableDirectory
-[int]$script:MaxGames = $MaxGames
 [int]$script:PollIntervalSeconds = $PollIntervalSeconds
 [hashtable]$script:InitialElo = $InitialElo
 [double]$script:PoolAvg = $PoolAvg
+[int]$script:MaxGames = $MaxGames
 [bool]$script:Infinite = $Infinite
 
 function Get-PredictedEloPerSide {
@@ -106,22 +109,25 @@ function Get-PredictedEloPerSide {
         $stats = @{
             'Phillyclause89' = @{ White = @{ Wins = 2554; Losses = 2439; Draws = 144 }; Black = @{ Wins = 2427; Losses = 2575; Draws = 143 } }
         }
-    .PARAMETER PoolAvg
-        Fallback "field average" Elo if no InitialElo is provided for a player/side. 
-        Default is `$script:PoolAvg`.
     .PARAMETER InitialElo
         OPTIONAL hashtable of player → @{ White=[int]; Black=[int] }.
         Default is `$script:InitialElo`.  
         Missing entries fall back to using `-PoolAvg`.
+    .PARAMETER PoolAvg
+        Fallback "field average" Elo if no InitialElo is provided for a player/side. 
+        Default is `$script:PoolAvg`.
     .OUTPUTS
         Hashtable of player → @{ White=[double]; Black=[double] }.
     #>
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory)]
+        [Parameter(Mandatory, Position = 0, ValueFromPipeline = $true)]
         [hashtable]$Stats,
-        [int]$PoolAvg = $script:PoolAvg,
-        [hashtable]$InitialElo = $script:InitialElo
+        [Parameter(Mandatory = $false, Position = 1)]
+        [hashtable]$InitialElo = $script:InitialElo,
+        [Parameter(Mandatory = $false, Position = 0)]
+        [double]$PoolAvg = $script:PoolAvg
+        
     )
 
     $elos = @{}
@@ -188,9 +194,24 @@ function Get-PredictedEloPerSide {
 }
 
 function Get-QTableColor {
+    <#
+    .SYNOPSIS
+        Get the color for the Q-table size based on the remaining free space on the drive.
+    .DESCRIPTION
+        This function calculates the color to be used for displaying the Q-table size based on the remaining free space on the drive.
+        It uses a gradient from green (low usage) to red (high usage).
+    .PARAMETER sizeMB
+        The size of the Q-table in MB. Default is the size of the Q-table in the specified directory.
+    .PARAMETER QTableDirectory
+        The directory where the Q-table is located. Default is `$script:QTableDirectory`.
+    .OUTPUTS
+        A string representing the color to be used for displaying the Q-table size.
+    #>
     [CmdletBinding()]
     param (
+        [Parameter(Mandatory = $false, Position = 0)]
         [double]$sizeMB = (Get-QTableSize -QTableDirectory $script:QTableDirectory),
+        [Parameter(Mandatory = $false, Position = 1)]
         [string]$QTableDirectory = $script:QTableDirectory
     )
 
@@ -230,10 +251,27 @@ function Get-QTableColor {
 }
 
 function Get-QTableSize {
+    <#
+    .SYNOPSIS
+        Get the size of the Q-table in MB.
+    .DESCRIPTION
+        This function calculates the size of the Q-table in MB by summing the sizes of all files in the specified directory.
+    .PARAMETER QTableDirectory
+        The directory where the Q-table is located. Default is `$script:QTableDirectory`.
+    .PARAMETER SizeSpec
+        The size specification for the calculation. Default is 1MB.
+    .PARAMETER SizeDecimal
+        The number of decimal places to round the size to. Default is 3.
+    .OUTPUTS
+        A double representing the size of the Q-table in MB.
+    #>
     [CmdletBinding()]
     param (
+        [Parameter(Mandatory = $false, Position = 0)]
         [string]$QTableDirectory = $script:QTableDirectory,
+        [Parameter(Mandatory = $false, Position = 1)]
         [int]$SizeSpec = 1MB,
+        [Parameter(Mandatory = $false, Position = 2)]
         [int]$SizeDecimal = 3
     )
     $fileSize = (Get-ChildItem -Path $QTableDirectory -File | Measure-Object -Property Length -Sum).Sum
@@ -241,15 +279,45 @@ function Get-QTableSize {
 }
 
 function Watch-TrainingGames {
+    <#
+    .SYNOPSIS
+        Watch the training games and print statistics to the host.
+    .DESCRIPTION
+        This function monitors the training directory for new games and prints statistics about the players and their performance.
+        It also monitors the Q-table size and prints it to the host.
+    .PARAMETER TrainingDirectory
+        The directory where the training games are located. Default is `$script:TrainingDirectory`.
+    .PARAMETER QTableDirectory
+        The directory where the Q-table is located. Default is `$script:QTableDirectory`.
+    .PARAMETER PollIntervalSeconds
+        The interval in seconds to poll the directories. Default is `$script:PollIntervalSeconds`.
+    .PARAMETER InitialElo
+        A hashtable of player names to their initial Elo ratings. Default is `$script:InitialElo`.
+    .PARAMETER PoolAvg
+        The expected average Elo of the pool of players. Default is `$script:PoolAvg`.
+    .PARAMETER MaxGames
+        The maximum number of games to monitor. Default is `$script:MaxGames`.
+    .PARAMETER Infinite
+        If this switch is set, the script will run indefinitely. Default is `$script:Infinite`.
+    .OUTPUTS
+        None - Prints statistics to the host.
+    #>
     [CmdletBinding()]
     param (
+        [Parameter(Mandatory = $false, Position = 0)]
         [string]$TrainingDirectory = $script:TrainingDirectory,
-        [string]$QTableDirectory = $script:QTableDirectory,
-        [int]$MaxGames = $script:MaxGames,
-        [bool]$Infinite = $script:Infinite,
+        [Parameter(Mandatory = $false, Position = 1)]
+        [string]$QTableDirectory = $script:QTableDirectory,        
+        [Parameter(Mandatory = $false, Position = 2)]
         [int]$PollIntervalSeconds = $script:PollIntervalSeconds,
-        [int]$PoolAvg = $script:PoolAvg,
-        [hashtable]$InitialElo = $script:InitialElo
+        [Parameter(Mandatory = $false, Position = 3)]
+        [hashtable]$InitialElo = $script:InitialElo,
+        [Parameter(Mandatory = $false, Position = 4)]
+        [int]$PoolAvg = $script:PoolAvg,        
+        [Parameter(Mandatory = $false, Position = 5)]
+        [int]$MaxGames = $script:MaxGames,
+        [Parameter(Mandatory = $false, Position = 6)]
+        [bool]$Infinite = $script:Infinite
     )
     $script:_init_ = $true
     $script:lastSize = Get-QTableSize -QTableDirectory $QTableDirectory
@@ -372,11 +440,32 @@ function Watch-TrainingGames {
 }
 
 function Write-QTableSize {
+    <#
+    .SYNOPSIS
+        Write the Q-table size to the host.
+    .DESCRIPTION
+        This function writes the Q-table size to the host, including the growth rate.
+        It uses a color gradient to indicate the size of the Q-table.
+    .PARAMETER sizeMB
+        The size of the Q-table in MB. Default is the size of the Q-table in the specified directory.
+    .PARAMETER lastSize
+        The last size of the Q-table in MB. Default is `$script:lastSize`.
+    .PARAMETER QTableDirectory
+        The directory where the Q-table is located. Default is `$script:QTableDirectory`.
+    .PARAMETER PollIntervalSeconds
+        The interval in seconds to poll the directories. Default is `$script:PollIntervalSeconds`.
+    .OUTPUTS
+        A double representing the last size of the Q-table in MB.
+    #>
     [CmdletBinding()]
     param (
+        [Parameter(Mandatory = $false, Position = 0)]
         [double]$sizeMB = (Get-QTableSize -QTableDirectory $script:QTableDirectory),
+        [Parameter(Mandatory = $false, Position = 1)]
         [double]$lastSize = $script:lastSize,
+        [Parameter(Mandatory = $false, Position = 2)]
         [string]$QTableDirectory = $script:QTableDirectory,
+        [Parameter(Mandatory = $false, Position = 3)]
         [int]$PollIntervalSeconds = $script:PollIntervalSeconds
     )
     if (($sizeMB -ne $lastSize) -or ($script:_init_)) {
@@ -405,5 +494,3 @@ if ($MyInvocation.InvocationName -ne '.') {
     Watch-TrainingGames @WTGArgs
 }
 # P.s. I think PowerShell is a terrible scripting language and the guy who created it is certainly not Dutch.
-
-
