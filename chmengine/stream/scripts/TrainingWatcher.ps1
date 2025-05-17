@@ -4,24 +4,39 @@
 .DESCRIPTION
     Used for the training YouTube stream here: https://www.youtube.com/watch?v=_-JySFYZhjU
 .PARAMETER TrainingDirectory
-    Relative path to the Dir that the training files to watch are saved to. By default this is pgns\trainings from repo root.
+    Relative path to the Dir that the training files to watch are saved to. 
+    By default this is `'.\pgns\trainings\'` from repo root.
 .PARAMETER QTableDirectory
-    Relative path to the Dir that the q-table .db files to watch are saved to. By default this is SQLite3Caches\QTables from repo root.
+    Relative path to the Dir that the q-table .db files to watch are saved to. 
+    By default this is `'.\SQLite3Caches\QTables\'` from repo root.
 .PARAMETER PollIntervalSeconds
-    Sleep time between pulls of the output dirs. By default this is 2 seconds.
+    Sleep time between pulls of the output dirs in seconds. By default this is `2`.
 .PARAMETER InitialElo
-    A hashtable of player names to their initial Elo ratings. This is used to calculate the predicted Elo of each player.
-    The hashtable should be in the format:
-        $InitialElo['Alice'] = @{ White=1600; Black=1580 }
-    If a player is not found in the hashtable, the PoolAvg value will be used instead.
+    A hashtable of player names to their initial Elo ratings. 
+    This is used to calculate the predicted Elo of each player.    
+    By default this is set to:
+        @{
+            'CMHMEngine'     = @{ White = 100; Black = 50 }
+            'CMHMEngine2'    = @{ White = 350; Black = 300 }
+            'PhillyClause89' = @{ White = 1600; Black = 1550 }
+        }
+    If a player name from a PGN in the `-TrainingDirectory` is not found in the `-InitialElo` hashtable, 
+    then the `-PoolAvg` value will be used instead.
 .PARAMETER PoolAvg
-    The average Elo of the pool of players. This is used to calculate the predicted Elo of each player. By default this is 1500.
+    The expected average Elo of the pool of players in the `-TrainingDirectory`. 
+    This fallback variable is used to calculate the predicted Elo of a player. 
+    By default this is 1500.
 .PARAMETER MaxGames
-    Governs the exit logic for the script. By default, this is set to 0 meaing the script will run indefinitely.
+    Governs the exit logic for the script. 
+    By default, this is set to 0 meaning the script will run indefinitely.
     If this is set to a positive integer, the script will exit after that many games have been processed.
 .PARAMETER Infinite
-    If this switch is set, the script will run indefinitely, even if the MaxGames limit is reached. This is useful for long-running training sessions.
-    By default, this is set to $true as MaxGames default value is 0.
+    If this switch is set, the script will run indefinitely, even if the MaxGames limit is reached. 
+    This is useful for long-running training sessions.
+    By default, this is set to $true as MaxGames default value is 0 by default. (
+        Thus intentionally violating the principle: "Don't set a default value for a switch parameter. Switch parameter always default to false."
+        See: https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_advanced_parameters?view=powershell-7.5#switch-parameter-design-considerations
+    )
 
 .INPUTS
     None - No pipeline input accepted.
@@ -42,48 +57,28 @@
 #>
 [CmdletBinding()]
 param(
-    [Parameter(
-        Mandatory = $false,
-        Position = 0
-    )]
+    [Parameter(Mandatory = $false, Position = 0)]
     [string]$TrainingDirectory = '.\pgns\trainings\',
-    [Parameter(
-        Mandatory = $false,
-        Position = 1
-    )]
+    [Parameter(Mandatory = $false, Position = 1)]
     [string]$QTableDirectory = '.\SQLite3Caches\QTables\',
-    [Parameter(
-        Mandatory = $false,
-        Position = 2
-    )]
+    [Parameter(Mandatory = $false, Position = 2)]
     [int]$PollIntervalSeconds = 2,
-    [Parameter(
-        Mandatory = $false,
-        Position = 3
-    )]    
+    [Parameter(Mandatory = $false, Position = 3)]    
     [hashtable]$InitialElo = @{
         'CMHMEngine'     = @{ White = 100; Black = 50 }
         'CMHMEngine2'    = @{ White = 350; Black = 300 }
         'PhillyClause89' = @{ White = 1600; Black = 1550 }
     },
-    [Parameter(
-        Mandatory = $false,
-        Position = 4
-    )]
+    [Parameter(Mandatory = $false, Position = 4)]
     [double]$PoolAvg = (
         & {
             if ($InitialElo.Count -eq 0) { 1500.0 }
             else { [math]::Round(($InitialElo.Values | Measure-Object -Property White -Sum).Sum / $InitialElo.Count, 0) }
         }
     ),
-    [Parameter(
-        Mandatory = $false,
-        Position = 5
-    )]
+    [Parameter(Mandatory = $false, Position = 5)]
     [int]$MaxGames = 0,
-    [Parameter(
-        Mandatory = $false
-    )]
+    [Parameter(Mandatory = $false)]
     [switch]$Infinite = (& { if ($MaxGames -lt 1) { $true } else { $false } })
 )
 # Set default values for script variables
@@ -101,16 +96,23 @@ param(
 function Get-PredictedEloPerSide {
     <#
     .SYNOPSIS
-        Estimate White- and Black-side Elo for each player, with optional per-player initial Elos.
+        Estimate White- and Black-side Elo for each player, with optional per-player initial Elo.
     .DESCRIPTION
         This function estimates the Elo rating for each player based on their win/loss/draw statistics.
         It can also take an initial Elo rating for each player, which will be used as a base for the calculations.
     .PARAMETER Stats
         Hashtable of player → @{ White = @{Wins,Losses,Draws}; Black = @{...} }.
+        The keys are the player names, and the values are hashtables with the number of wins, losses, and draws for each side.
+        $stats = @{
+            'Phillyclause89' = @{ White = @{ Wins = 2554; Losses = 2439; Draws = 144 }; Black = @{ Wins = 2427; Losses = 2575; Draws = 143 } }
+        }
     .PARAMETER PoolAvg
-        Fallback “field average” Elo if no InitialElo is provided for a player/side. Default 1500.
+        Fallback "field average" Elo if no InitialElo is provided for a player/side. 
+        Default is `$script:PoolAvg`.
     .PARAMETER InitialElo
-        OPTIONAL hashtable of player → @{ White=[int]; Black=[int] }.  Missing entries fall back to PoolAvg.
+        OPTIONAL hashtable of player → @{ White=[int]; Black=[int] }.
+        Default is `$script:InitialElo`.  
+        Missing entries fall back to using `-PoolAvg`.
     .OUTPUTS
         Hashtable of player → @{ White=[double]; Black=[double] }.
     #>
@@ -225,6 +227,17 @@ function Get-QTableColor {
     else {
         return 'Red'
     }
+}
+
+function Get-QTableSize {
+    [CmdletBinding()]
+    param (
+        [string]$QTableDirectory = $script:QTableDirectory,
+        [int]$SizeSpec = 1MB,
+        [int]$SizeDecimal = 3
+    )
+    $fileSize = (Get-ChildItem -Path $QTableDirectory -File | Measure-Object -Property Length -Sum).Sum
+    return [math]::Round($fileSize / $SizeSpec, $SizeDecimal)
 }
 
 function Watch-TrainingGames {
@@ -376,17 +389,6 @@ function Write-QTableSize {
         ) -NoNewline
     }
     return $lastSize
-}
-
-function Get-QTableSize {
-    [CmdletBinding()]
-    param (
-        [string]$QTableDirectory = $script:QTableDirectory,
-        [int]$SizeSpec = 1MB,
-        [int]$SizeDecimal = 3
-    )
-    $fileSize = (Get-ChildItem -Path $QTableDirectory -File | Measure-Object -Property Length -Sum).Sum
-    return [math]::Round($fileSize / $SizeSpec, $SizeDecimal)
 }
 
 # This simulates: `if __name__ == "__main__":` from python. kinda...
