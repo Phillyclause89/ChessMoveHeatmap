@@ -8,6 +8,7 @@ from chess import Board, Move
 from numpy import float64
 
 from chmengine.engines.cmhmey2 import CMHMEngine2
+from chmengine.engines.cmhmey3 import CMHMEngine3
 from chmengine.utils.pick import Pick
 
 NAN64 = float64(None)
@@ -53,6 +54,49 @@ def evaluate_move(board: Board, depth: int = 1, debug: bool = False, cache_dir: 
         raise OperationalError('Unexpected Operational Error: {str(error_o)}') from error_o
 
 
+def evaluate_move_until(
+        time_limit: float64,
+        board: Board,
+        depth: int = 1,
+        debug: bool = False,
+        cache_dir: str = CMHMEngine3.cache_dir) -> Pick:
+    """Offloads eval calculations to another CMHMEngine3 instance.
+
+    Parameters
+    ----------
+    time_limit : float
+        Time to spend on the evaluation.
+    board : Board
+        The chess board state to evaluate.
+    depth : int
+        The search depth for the evaluation.
+    debug : bool
+        Whether to enable debug output.
+    cache_dir : str
+        The cache directory for the engine.
+
+    Returns
+    -------
+    Pick
+        The best move and its associated evaluation score.
+
+    Raises
+    ------
+    OperationalError
+        If the database remains locked after exhausting retries or for unexpected operational errors.
+    """
+    CMHMEngine3.cache_dir = cache_dir
+    try:
+        return CMHMEngine3(board=board, depth=depth, time_limit=time_limit).pick_move(debug=debug)
+    except OperationalError as error_o:
+        if "database is locked" in str(error_o):
+            try:
+                return evaluate_move(board=board, depth=depth, debug=debug, cache_dir=cache_dir)
+            except RecursionError:
+                pass
+        raise OperationalError('Unexpected Operational Error: {str(error_o)}') from error_o
+
+
 class CMHMEngine2PoolExecutor:
     """CMHMEngine2PoolExecutor"""
     cache_dir: str = CMHMEngine2.cache_dir
@@ -60,7 +104,13 @@ class CMHMEngine2PoolExecutor:
     # TODO: Refactor `max_workers` into a dict of options to be passed to `concurrent.futures` things as needed.
     executor: ProcessPoolExecutor
 
-    def __init__(self, board: Optional[Board] = None, depth: int = 1, max_workers: Optional[int] = None) -> None:
+    def __init__(
+            self,
+            board: Optional[Board] = None,
+            depth: int = 1,
+            max_workers: Optional[int] = None,
+            time_limit: Optional[float64] = None,
+    ) -> None:
         """Initialize the CMHMEngine2PoolExecutor.
 
         Parameters
@@ -72,8 +122,12 @@ class CMHMEngine2PoolExecutor:
         max_workers : Optional[int], default: None
             The maximum number of worker threads for parallel execution.
         """
-        CMHMEngine2.cache_dir = self.cache_dir
-        self.engine = CMHMEngine2(board=board if board else Board(), depth=depth)
+        if time_limit is None:
+            self.engine = CMHMEngine2(board=board if board else Board(), depth=depth)
+            CMHMEngine2.cache_dir = self.cache_dir
+        else:
+            self.engine = CMHMEngine3(board=board if board else Board(), depth=depth, time_limit=time_limit)
+            CMHMEngine3.cache_dir = self.cache_dir
         self.executor = ProcessPoolExecutor(max_workers=max_workers)
 
     def pick_move(self, debug: bool = False) -> Pick:
@@ -106,15 +160,27 @@ class CMHMEngine2PoolExecutor:
                 raise ValueError(
                     f"No legal moves available from board: {self.engine.fen()}"
                 ) from root_error
-        future_to_move: Dict[Future, Move] = {
-            self.executor.submit(
-                evaluate_move,
-                board=board_cache[_move]['board'],
-                depth=self.engine.depth,
-                debug=debug,
-                cache_dir=self.cache_dir
-            ): _move for _move in board_cache
-        }
+        if isinstance(self.engine, CMHMEngine3):
+            future_to_move: Dict[Future, Move] = {
+                self.executor.submit(
+                    evaluate_move_until,
+                    board=board_cache[_move]['board'],
+                    depth=self.engine.depth,
+                    debug=debug,
+                    cache_dir=self.cache_dir,
+                    time_limit=self.engine.time_limit
+                ): _move for _move in board_cache
+            }
+        else:
+            future_to_move: Dict[Future, Move] = {
+                self.executor.submit(
+                    evaluate_move,
+                    board=board_cache[_move]['board'],
+                    depth=self.engine.depth,
+                    debug=debug,
+                    cache_dir=self.cache_dir
+                ): _move for _move in board_cache
+            }
         _future: Future[Pick]
         for _future in as_completed(future_to_move):
             _move = future_to_move[_future]
@@ -129,7 +195,9 @@ class CMHMEngine2PoolExecutor:
                     print(f"Error evaluating move in Process Pool:{_move}: {e}")
         # The final self.engine.pick_move call will be superfast now
         # as the previous `pick_move` calls ensured all our positions have scores.
-        return self.engine.pick_move(debug=debug)
+        return self.engine.pick_move(
+            debug=debug, time_limit=self.engine.overhead
+        ) if hasattr(self.engine, 'time_limit') else self.engine.pick_move(debug=debug)
 
     def push(self, move: Move) -> None:
         """Helper method to update the internal board state with a pushed move.

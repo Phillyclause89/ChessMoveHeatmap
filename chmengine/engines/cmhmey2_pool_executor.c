@@ -1496,11 +1496,17 @@ struct __pyx_defaults;
 typedef struct __pyx_defaults __pyx_defaults;
 struct __pyx_defaults1;
 typedef struct __pyx_defaults1 __pyx_defaults1;
+struct __pyx_defaults2;
+typedef struct __pyx_defaults2 __pyx_defaults2;
 struct __pyx_defaults {
   PyObject *__pyx_arg_depth;
   PyObject *__pyx_arg_cache_dir;
 };
 struct __pyx_defaults1 {
+  PyObject *__pyx_arg_depth;
+  PyObject *__pyx_arg_cache_dir;
+};
+struct __pyx_defaults2 {
   PyObject *__pyx_arg_depth;
 };
 /* #### Code section: utility_code_proto ### */
@@ -2303,8 +2309,8 @@ static const char __pyx_k_[] = ": ";
 static const char __pyx_k_e[] = "e";
 static const char __pyx_k_2f[] = "+.2f";
 static const char __pyx_k__2[] = ".";
-static const char __pyx_k__8[] = "_";
-static const char __pyx_k__17[] = "?";
+static const char __pyx_k__10[] = "_";
+static const char __pyx_k__19[] = "?";
 static const char __pyx_k_del[] = "__del__";
 static const char __pyx_k_doc[] = "__doc__";
 static const char __pyx_k_fen[] = "fen";
@@ -2352,6 +2358,7 @@ static const char __pyx_k_prepare[] = "__prepare__";
 static const char __pyx_k_sqlite3[] = "sqlite3";
 static const char __pyx_k_Optional[] = "Optional";
 static const char __pyx_k_executor[] = "executor";
+static const char __pyx_k_overhead[] = "overhead";
 static const char __pyx_k_qualname[] = "__qualname__";
 static const char __pyx_k_set_name[] = "__set_name__";
 static const char __pyx_k_shutdown[] = "shutdown";
@@ -2361,7 +2368,9 @@ static const char __pyx_k_pick_move[] = "pick_move";
 static const char __pyx_k_BoardCache[] = "BoardCache";
 static const char __pyx_k_ValueError[] = "ValueError";
 static const char __pyx_k_root_error[] = "root_error";
+static const char __pyx_k_time_limit[] = "time_limit";
 static const char __pyx_k_CMHMEngine2[] = "CMHMEngine2";
+static const char __pyx_k_CMHMEngine3[] = "CMHMEngine3";
 static const char __pyx_k_annotations[] = "__annotations__";
 static const char __pyx_k_board_cache[] = "board_cache";
 static const char __pyx_k_max_workers[] = "max_workers";
@@ -2376,6 +2385,7 @@ static const char __pyx_k_RecursionError[] = "RecursionError";
 static const char __pyx_k_future_to_move[] = "future_to_move";
 static const char __pyx_k_BoardCacheEntry[] = "BoardCacheEntry";
 static const char __pyx_k_OperationalError[] = "OperationalError";
+static const char __pyx_k_Optional_float64[] = "Optional[float64]";
 static const char __pyx_k_cmhmey2_executor[] = "cmhmey2_executor";
 static const char __pyx_k_board_copy_pushed[] = "board_copy_pushed";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
@@ -2384,10 +2394,12 @@ static const char __pyx_k_concurrent_futures[] = "concurrent.futures";
 static const char __pyx_k_current_moves_list[] = "current_moves_list";
 static const char __pyx_k_database_is_locked[] = "database is locked";
 static const char __pyx_k_ProcessPoolExecutor[] = "ProcessPoolExecutor";
+static const char __pyx_k_evaluate_move_until[] = "evaluate_move_until";
 static const char __pyx_k_chmengine_utils_pick[] = "chmengine.utils.pick";
 static const char __pyx_k_CMHMEngine2PoolExecutor[] = "CMHMEngine2PoolExecutor";
 static const char __pyx_k_Evaluated_in_Process_Pool[] = "Evaluated in Process Pool: ";
 static const char __pyx_k_chmengine_engines_cmhmey2[] = "chmengine.engines.cmhmey2";
+static const char __pyx_k_chmengine_engines_cmhmey3[] = "chmengine.engines.cmhmey3";
 static const char __pyx_k_CMHMEngine2PoolExecutor_push[] = "CMHMEngine2PoolExecutor.push";
 static const char __pyx_k_CMHMEngine2PoolExecutor___del[] = "CMHMEngine2PoolExecutor.__del__";
 static const char __pyx_k_CMHMEngine2PoolExecutor___init[] = "CMHMEngine2PoolExecutor.__init__";
@@ -2400,10 +2412,12 @@ static const char __pyx_k_Unexpected_Operational_Error_str[] = "Unexpected Opera
 static const char __pyx_k_chmengine_engines_cmhmey2_pool_e[] = "chmengine\\engines\\cmhmey2_pool_executor.py";
 static const char __pyx_k_chmengine_engines_cmhmey2_pool_e_2[] = "chmengine.engines.cmhmey2_pool_executor";
 /* #### Code section: decls ### */
-static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_2__defaults__(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
-static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_move(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth, PyObject *__pyx_v_debug, PyObject *__pyx_v_cache_dir); /* proto */
 static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_4__defaults__(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
-static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngine2PoolExecutor___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth, PyObject *__pyx_v_max_workers); /* proto */
+static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_move(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth, PyObject *__pyx_v_debug, PyObject *__pyx_v_cache_dir); /* proto */
+static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_6__defaults__(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
+static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_2evaluate_move_until(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_time_limit, PyObject *__pyx_v_board, PyObject *__pyx_v_depth, PyObject *__pyx_v_debug, PyObject *__pyx_v_cache_dir); /* proto */
+static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_8__defaults__(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
+static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngine2PoolExecutor___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth, PyObject *__pyx_v_max_workers, PyObject *__pyx_v_time_limit); /* proto */
 static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngine2PoolExecutor_2pick_move(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_debug); /* proto */
 static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngine2PoolExecutor_4push(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_move); /* proto */
 static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngine2PoolExecutor_6shutdown(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
@@ -2449,6 +2463,7 @@ typedef struct {
   PyObject *__pyx_n_s_CMHMEngine2PoolExecutor_pick_mov;
   PyObject *__pyx_n_s_CMHMEngine2PoolExecutor_push;
   PyObject *__pyx_n_s_CMHMEngine2PoolExecutor_shutdown;
+  PyObject *__pyx_n_s_CMHMEngine3;
   PyObject *__pyx_n_s_Dict;
   PyObject *__pyx_kp_u_Error_evaluating_move_in_Process;
   PyObject *__pyx_kp_u_Evaluated_in_Process_Pool;
@@ -2460,6 +2475,7 @@ typedef struct {
   PyObject *__pyx_n_s_OperationalError;
   PyObject *__pyx_n_s_Optional;
   PyObject *__pyx_kp_s_Optional_Board;
+  PyObject *__pyx_kp_s_Optional_float64;
   PyObject *__pyx_kp_s_Optional_int;
   PyObject *__pyx_n_s_Pick;
   PyObject *__pyx_n_s_ProcessPoolExecutor;
@@ -2467,9 +2483,9 @@ typedef struct {
   PyObject *__pyx_kp_u_Unexpected_Operational_Error_str;
   PyObject *__pyx_n_s_Union;
   PyObject *__pyx_n_s_ValueError;
-  PyObject *__pyx_n_s__17;
+  PyObject *__pyx_n_s__10;
+  PyObject *__pyx_n_s__19;
   PyObject *__pyx_kp_u__2;
-  PyObject *__pyx_n_s__8;
   PyObject *__pyx_n_s_annotations;
   PyObject *__pyx_n_s_as_completed;
   PyObject *__pyx_n_s_asyncio_coroutines;
@@ -2484,6 +2500,7 @@ typedef struct {
   PyObject *__pyx_n_s_chmengine_engines_cmhmey2;
   PyObject *__pyx_kp_s_chmengine_engines_cmhmey2_pool_e;
   PyObject *__pyx_n_s_chmengine_engines_cmhmey2_pool_e_2;
+  PyObject *__pyx_n_s_chmengine_engines_cmhmey3;
   PyObject *__pyx_n_s_chmengine_utils_pick;
   PyObject *__pyx_n_s_class_getitem;
   PyObject *__pyx_n_s_cline_in_traceback;
@@ -2500,6 +2517,7 @@ typedef struct {
   PyObject *__pyx_n_s_engine;
   PyObject *__pyx_n_s_error_o;
   PyObject *__pyx_n_s_evaluate_move;
+  PyObject *__pyx_n_s_evaluate_move_until;
   PyObject *__pyx_n_s_executor;
   PyObject *__pyx_n_u_executor;
   PyObject *__pyx_n_s_fen;
@@ -2520,6 +2538,7 @@ typedef struct {
   PyObject *__pyx_n_s_move_2;
   PyObject *__pyx_n_s_name;
   PyObject *__pyx_n_s_numpy;
+  PyObject *__pyx_n_s_overhead;
   PyObject *__pyx_n_s_pick;
   PyObject *__pyx_n_s_pick_move;
   PyObject *__pyx_n_s_prepare;
@@ -2538,21 +2557,25 @@ typedef struct {
   PyObject *__pyx_n_s_submit;
   PyObject *__pyx_n_s_super;
   PyObject *__pyx_n_s_test;
+  PyObject *__pyx_n_s_time_limit;
+  PyObject *__pyx_n_u_time_limit;
   PyObject *__pyx_n_s_typing;
   PyObject *__pyx_int_1;
   PyObject *__pyx_tuple__3;
   PyObject *__pyx_tuple__4;
   PyObject *__pyx_tuple__6;
-  PyObject *__pyx_tuple__9;
+  PyObject *__pyx_tuple__8;
   PyObject *__pyx_tuple__11;
-  PyObject *__pyx_tuple__12;
+  PyObject *__pyx_tuple__13;
   PyObject *__pyx_tuple__14;
+  PyObject *__pyx_tuple__16;
   PyObject *__pyx_codeobj__5;
   PyObject *__pyx_codeobj__7;
-  PyObject *__pyx_codeobj__10;
-  PyObject *__pyx_codeobj__13;
+  PyObject *__pyx_codeobj__9;
+  PyObject *__pyx_codeobj__12;
   PyObject *__pyx_codeobj__15;
-  PyObject *__pyx_codeobj__16;
+  PyObject *__pyx_codeobj__17;
+  PyObject *__pyx_codeobj__18;
 } __pyx_mstate;
 
 #if CYTHON_USE_MODULE_STATE
@@ -2607,6 +2630,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_CMHMEngine2PoolExecutor_pick_mov);
   Py_CLEAR(clear_module_state->__pyx_n_s_CMHMEngine2PoolExecutor_push);
   Py_CLEAR(clear_module_state->__pyx_n_s_CMHMEngine2PoolExecutor_shutdown);
+  Py_CLEAR(clear_module_state->__pyx_n_s_CMHMEngine3);
   Py_CLEAR(clear_module_state->__pyx_n_s_Dict);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Error_evaluating_move_in_Process);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Evaluated_in_Process_Pool);
@@ -2618,6 +2642,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_OperationalError);
   Py_CLEAR(clear_module_state->__pyx_n_s_Optional);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Optional_Board);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_Optional_float64);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Optional_int);
   Py_CLEAR(clear_module_state->__pyx_n_s_Pick);
   Py_CLEAR(clear_module_state->__pyx_n_s_ProcessPoolExecutor);
@@ -2625,9 +2650,9 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_u_Unexpected_Operational_Error_str);
   Py_CLEAR(clear_module_state->__pyx_n_s_Union);
   Py_CLEAR(clear_module_state->__pyx_n_s_ValueError);
-  Py_CLEAR(clear_module_state->__pyx_n_s__17);
+  Py_CLEAR(clear_module_state->__pyx_n_s__10);
+  Py_CLEAR(clear_module_state->__pyx_n_s__19);
   Py_CLEAR(clear_module_state->__pyx_kp_u__2);
-  Py_CLEAR(clear_module_state->__pyx_n_s__8);
   Py_CLEAR(clear_module_state->__pyx_n_s_annotations);
   Py_CLEAR(clear_module_state->__pyx_n_s_as_completed);
   Py_CLEAR(clear_module_state->__pyx_n_s_asyncio_coroutines);
@@ -2642,6 +2667,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_chmengine_engines_cmhmey2);
   Py_CLEAR(clear_module_state->__pyx_kp_s_chmengine_engines_cmhmey2_pool_e);
   Py_CLEAR(clear_module_state->__pyx_n_s_chmengine_engines_cmhmey2_pool_e_2);
+  Py_CLEAR(clear_module_state->__pyx_n_s_chmengine_engines_cmhmey3);
   Py_CLEAR(clear_module_state->__pyx_n_s_chmengine_utils_pick);
   Py_CLEAR(clear_module_state->__pyx_n_s_class_getitem);
   Py_CLEAR(clear_module_state->__pyx_n_s_cline_in_traceback);
@@ -2658,6 +2684,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_engine);
   Py_CLEAR(clear_module_state->__pyx_n_s_error_o);
   Py_CLEAR(clear_module_state->__pyx_n_s_evaluate_move);
+  Py_CLEAR(clear_module_state->__pyx_n_s_evaluate_move_until);
   Py_CLEAR(clear_module_state->__pyx_n_s_executor);
   Py_CLEAR(clear_module_state->__pyx_n_u_executor);
   Py_CLEAR(clear_module_state->__pyx_n_s_fen);
@@ -2678,6 +2705,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_move_2);
   Py_CLEAR(clear_module_state->__pyx_n_s_name);
   Py_CLEAR(clear_module_state->__pyx_n_s_numpy);
+  Py_CLEAR(clear_module_state->__pyx_n_s_overhead);
   Py_CLEAR(clear_module_state->__pyx_n_s_pick);
   Py_CLEAR(clear_module_state->__pyx_n_s_pick_move);
   Py_CLEAR(clear_module_state->__pyx_n_s_prepare);
@@ -2696,21 +2724,25 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_submit);
   Py_CLEAR(clear_module_state->__pyx_n_s_super);
   Py_CLEAR(clear_module_state->__pyx_n_s_test);
+  Py_CLEAR(clear_module_state->__pyx_n_s_time_limit);
+  Py_CLEAR(clear_module_state->__pyx_n_u_time_limit);
   Py_CLEAR(clear_module_state->__pyx_n_s_typing);
   Py_CLEAR(clear_module_state->__pyx_int_1);
   Py_CLEAR(clear_module_state->__pyx_tuple__3);
   Py_CLEAR(clear_module_state->__pyx_tuple__4);
   Py_CLEAR(clear_module_state->__pyx_tuple__6);
-  Py_CLEAR(clear_module_state->__pyx_tuple__9);
+  Py_CLEAR(clear_module_state->__pyx_tuple__8);
   Py_CLEAR(clear_module_state->__pyx_tuple__11);
-  Py_CLEAR(clear_module_state->__pyx_tuple__12);
+  Py_CLEAR(clear_module_state->__pyx_tuple__13);
   Py_CLEAR(clear_module_state->__pyx_tuple__14);
+  Py_CLEAR(clear_module_state->__pyx_tuple__16);
   Py_CLEAR(clear_module_state->__pyx_codeobj__5);
   Py_CLEAR(clear_module_state->__pyx_codeobj__7);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__10);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__13);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__9);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__12);
   Py_CLEAR(clear_module_state->__pyx_codeobj__15);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__16);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__17);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__18);
   return 0;
 }
 #endif
@@ -2743,6 +2775,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_CMHMEngine2PoolExecutor_pick_mov);
   Py_VISIT(traverse_module_state->__pyx_n_s_CMHMEngine2PoolExecutor_push);
   Py_VISIT(traverse_module_state->__pyx_n_s_CMHMEngine2PoolExecutor_shutdown);
+  Py_VISIT(traverse_module_state->__pyx_n_s_CMHMEngine3);
   Py_VISIT(traverse_module_state->__pyx_n_s_Dict);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Error_evaluating_move_in_Process);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Evaluated_in_Process_Pool);
@@ -2754,6 +2787,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_OperationalError);
   Py_VISIT(traverse_module_state->__pyx_n_s_Optional);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Optional_Board);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_Optional_float64);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Optional_int);
   Py_VISIT(traverse_module_state->__pyx_n_s_Pick);
   Py_VISIT(traverse_module_state->__pyx_n_s_ProcessPoolExecutor);
@@ -2761,9 +2795,9 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_u_Unexpected_Operational_Error_str);
   Py_VISIT(traverse_module_state->__pyx_n_s_Union);
   Py_VISIT(traverse_module_state->__pyx_n_s_ValueError);
-  Py_VISIT(traverse_module_state->__pyx_n_s__17);
+  Py_VISIT(traverse_module_state->__pyx_n_s__10);
+  Py_VISIT(traverse_module_state->__pyx_n_s__19);
   Py_VISIT(traverse_module_state->__pyx_kp_u__2);
-  Py_VISIT(traverse_module_state->__pyx_n_s__8);
   Py_VISIT(traverse_module_state->__pyx_n_s_annotations);
   Py_VISIT(traverse_module_state->__pyx_n_s_as_completed);
   Py_VISIT(traverse_module_state->__pyx_n_s_asyncio_coroutines);
@@ -2778,6 +2812,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_chmengine_engines_cmhmey2);
   Py_VISIT(traverse_module_state->__pyx_kp_s_chmengine_engines_cmhmey2_pool_e);
   Py_VISIT(traverse_module_state->__pyx_n_s_chmengine_engines_cmhmey2_pool_e_2);
+  Py_VISIT(traverse_module_state->__pyx_n_s_chmengine_engines_cmhmey3);
   Py_VISIT(traverse_module_state->__pyx_n_s_chmengine_utils_pick);
   Py_VISIT(traverse_module_state->__pyx_n_s_class_getitem);
   Py_VISIT(traverse_module_state->__pyx_n_s_cline_in_traceback);
@@ -2794,6 +2829,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_engine);
   Py_VISIT(traverse_module_state->__pyx_n_s_error_o);
   Py_VISIT(traverse_module_state->__pyx_n_s_evaluate_move);
+  Py_VISIT(traverse_module_state->__pyx_n_s_evaluate_move_until);
   Py_VISIT(traverse_module_state->__pyx_n_s_executor);
   Py_VISIT(traverse_module_state->__pyx_n_u_executor);
   Py_VISIT(traverse_module_state->__pyx_n_s_fen);
@@ -2814,6 +2850,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_move_2);
   Py_VISIT(traverse_module_state->__pyx_n_s_name);
   Py_VISIT(traverse_module_state->__pyx_n_s_numpy);
+  Py_VISIT(traverse_module_state->__pyx_n_s_overhead);
   Py_VISIT(traverse_module_state->__pyx_n_s_pick);
   Py_VISIT(traverse_module_state->__pyx_n_s_pick_move);
   Py_VISIT(traverse_module_state->__pyx_n_s_prepare);
@@ -2832,21 +2869,25 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_submit);
   Py_VISIT(traverse_module_state->__pyx_n_s_super);
   Py_VISIT(traverse_module_state->__pyx_n_s_test);
+  Py_VISIT(traverse_module_state->__pyx_n_s_time_limit);
+  Py_VISIT(traverse_module_state->__pyx_n_u_time_limit);
   Py_VISIT(traverse_module_state->__pyx_n_s_typing);
   Py_VISIT(traverse_module_state->__pyx_int_1);
   Py_VISIT(traverse_module_state->__pyx_tuple__3);
   Py_VISIT(traverse_module_state->__pyx_tuple__4);
   Py_VISIT(traverse_module_state->__pyx_tuple__6);
-  Py_VISIT(traverse_module_state->__pyx_tuple__9);
+  Py_VISIT(traverse_module_state->__pyx_tuple__8);
   Py_VISIT(traverse_module_state->__pyx_tuple__11);
-  Py_VISIT(traverse_module_state->__pyx_tuple__12);
+  Py_VISIT(traverse_module_state->__pyx_tuple__13);
   Py_VISIT(traverse_module_state->__pyx_tuple__14);
+  Py_VISIT(traverse_module_state->__pyx_tuple__16);
   Py_VISIT(traverse_module_state->__pyx_codeobj__5);
   Py_VISIT(traverse_module_state->__pyx_codeobj__7);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__10);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__13);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__9);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__12);
   Py_VISIT(traverse_module_state->__pyx_codeobj__15);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__16);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__17);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__18);
   return 0;
 }
 #endif
@@ -2889,6 +2930,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_CMHMEngine2PoolExecutor_pick_mov __pyx_mstate_global->__pyx_n_s_CMHMEngine2PoolExecutor_pick_mov
 #define __pyx_n_s_CMHMEngine2PoolExecutor_push __pyx_mstate_global->__pyx_n_s_CMHMEngine2PoolExecutor_push
 #define __pyx_n_s_CMHMEngine2PoolExecutor_shutdown __pyx_mstate_global->__pyx_n_s_CMHMEngine2PoolExecutor_shutdown
+#define __pyx_n_s_CMHMEngine3 __pyx_mstate_global->__pyx_n_s_CMHMEngine3
 #define __pyx_n_s_Dict __pyx_mstate_global->__pyx_n_s_Dict
 #define __pyx_kp_u_Error_evaluating_move_in_Process __pyx_mstate_global->__pyx_kp_u_Error_evaluating_move_in_Process
 #define __pyx_kp_u_Evaluated_in_Process_Pool __pyx_mstate_global->__pyx_kp_u_Evaluated_in_Process_Pool
@@ -2900,6 +2942,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_OperationalError __pyx_mstate_global->__pyx_n_s_OperationalError
 #define __pyx_n_s_Optional __pyx_mstate_global->__pyx_n_s_Optional
 #define __pyx_kp_s_Optional_Board __pyx_mstate_global->__pyx_kp_s_Optional_Board
+#define __pyx_kp_s_Optional_float64 __pyx_mstate_global->__pyx_kp_s_Optional_float64
 #define __pyx_kp_s_Optional_int __pyx_mstate_global->__pyx_kp_s_Optional_int
 #define __pyx_n_s_Pick __pyx_mstate_global->__pyx_n_s_Pick
 #define __pyx_n_s_ProcessPoolExecutor __pyx_mstate_global->__pyx_n_s_ProcessPoolExecutor
@@ -2907,9 +2950,9 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_u_Unexpected_Operational_Error_str __pyx_mstate_global->__pyx_kp_u_Unexpected_Operational_Error_str
 #define __pyx_n_s_Union __pyx_mstate_global->__pyx_n_s_Union
 #define __pyx_n_s_ValueError __pyx_mstate_global->__pyx_n_s_ValueError
-#define __pyx_n_s__17 __pyx_mstate_global->__pyx_n_s__17
+#define __pyx_n_s__10 __pyx_mstate_global->__pyx_n_s__10
+#define __pyx_n_s__19 __pyx_mstate_global->__pyx_n_s__19
 #define __pyx_kp_u__2 __pyx_mstate_global->__pyx_kp_u__2
-#define __pyx_n_s__8 __pyx_mstate_global->__pyx_n_s__8
 #define __pyx_n_s_annotations __pyx_mstate_global->__pyx_n_s_annotations
 #define __pyx_n_s_as_completed __pyx_mstate_global->__pyx_n_s_as_completed
 #define __pyx_n_s_asyncio_coroutines __pyx_mstate_global->__pyx_n_s_asyncio_coroutines
@@ -2924,6 +2967,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_chmengine_engines_cmhmey2 __pyx_mstate_global->__pyx_n_s_chmengine_engines_cmhmey2
 #define __pyx_kp_s_chmengine_engines_cmhmey2_pool_e __pyx_mstate_global->__pyx_kp_s_chmengine_engines_cmhmey2_pool_e
 #define __pyx_n_s_chmengine_engines_cmhmey2_pool_e_2 __pyx_mstate_global->__pyx_n_s_chmengine_engines_cmhmey2_pool_e_2
+#define __pyx_n_s_chmengine_engines_cmhmey3 __pyx_mstate_global->__pyx_n_s_chmengine_engines_cmhmey3
 #define __pyx_n_s_chmengine_utils_pick __pyx_mstate_global->__pyx_n_s_chmengine_utils_pick
 #define __pyx_n_s_class_getitem __pyx_mstate_global->__pyx_n_s_class_getitem
 #define __pyx_n_s_cline_in_traceback __pyx_mstate_global->__pyx_n_s_cline_in_traceback
@@ -2940,6 +2984,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_engine __pyx_mstate_global->__pyx_n_s_engine
 #define __pyx_n_s_error_o __pyx_mstate_global->__pyx_n_s_error_o
 #define __pyx_n_s_evaluate_move __pyx_mstate_global->__pyx_n_s_evaluate_move
+#define __pyx_n_s_evaluate_move_until __pyx_mstate_global->__pyx_n_s_evaluate_move_until
 #define __pyx_n_s_executor __pyx_mstate_global->__pyx_n_s_executor
 #define __pyx_n_u_executor __pyx_mstate_global->__pyx_n_u_executor
 #define __pyx_n_s_fen __pyx_mstate_global->__pyx_n_s_fen
@@ -2960,6 +3005,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_move_2 __pyx_mstate_global->__pyx_n_s_move_2
 #define __pyx_n_s_name __pyx_mstate_global->__pyx_n_s_name
 #define __pyx_n_s_numpy __pyx_mstate_global->__pyx_n_s_numpy
+#define __pyx_n_s_overhead __pyx_mstate_global->__pyx_n_s_overhead
 #define __pyx_n_s_pick __pyx_mstate_global->__pyx_n_s_pick
 #define __pyx_n_s_pick_move __pyx_mstate_global->__pyx_n_s_pick_move
 #define __pyx_n_s_prepare __pyx_mstate_global->__pyx_n_s_prepare
@@ -2978,24 +3024,28 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_submit __pyx_mstate_global->__pyx_n_s_submit
 #define __pyx_n_s_super __pyx_mstate_global->__pyx_n_s_super
 #define __pyx_n_s_test __pyx_mstate_global->__pyx_n_s_test
+#define __pyx_n_s_time_limit __pyx_mstate_global->__pyx_n_s_time_limit
+#define __pyx_n_u_time_limit __pyx_mstate_global->__pyx_n_u_time_limit
 #define __pyx_n_s_typing __pyx_mstate_global->__pyx_n_s_typing
 #define __pyx_int_1 __pyx_mstate_global->__pyx_int_1
 #define __pyx_tuple__3 __pyx_mstate_global->__pyx_tuple__3
 #define __pyx_tuple__4 __pyx_mstate_global->__pyx_tuple__4
 #define __pyx_tuple__6 __pyx_mstate_global->__pyx_tuple__6
-#define __pyx_tuple__9 __pyx_mstate_global->__pyx_tuple__9
+#define __pyx_tuple__8 __pyx_mstate_global->__pyx_tuple__8
 #define __pyx_tuple__11 __pyx_mstate_global->__pyx_tuple__11
-#define __pyx_tuple__12 __pyx_mstate_global->__pyx_tuple__12
+#define __pyx_tuple__13 __pyx_mstate_global->__pyx_tuple__13
 #define __pyx_tuple__14 __pyx_mstate_global->__pyx_tuple__14
+#define __pyx_tuple__16 __pyx_mstate_global->__pyx_tuple__16
 #define __pyx_codeobj__5 __pyx_mstate_global->__pyx_codeobj__5
 #define __pyx_codeobj__7 __pyx_mstate_global->__pyx_codeobj__7
-#define __pyx_codeobj__10 __pyx_mstate_global->__pyx_codeobj__10
-#define __pyx_codeobj__13 __pyx_mstate_global->__pyx_codeobj__13
+#define __pyx_codeobj__9 __pyx_mstate_global->__pyx_codeobj__9
+#define __pyx_codeobj__12 __pyx_mstate_global->__pyx_codeobj__12
 #define __pyx_codeobj__15 __pyx_mstate_global->__pyx_codeobj__15
-#define __pyx_codeobj__16 __pyx_mstate_global->__pyx_codeobj__16
+#define __pyx_codeobj__17 __pyx_mstate_global->__pyx_codeobj__17
+#define __pyx_codeobj__18 __pyx_mstate_global->__pyx_codeobj__18
 /* #### Code section: module_code ### */
 
-/* "chmengine/engines/cmhmey2_pool_executor.py":20
+/* "chmengine/engines/cmhmey2_pool_executor.py":21
  * 
  * # TODO: Move this helper to `chmengine.utils.__init__.py` (if we can, might have circular import errors?)
  * def evaluate_move(board: Board, depth: int = 1, debug: bool = False, cache_dir: str = CMHMEngine2.cache_dir) -> Pick:             # <<<<<<<<<<<<<<
@@ -3003,7 +3053,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
  * 
  */
 
-static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_2__defaults__(CYTHON_UNUSED PyObject *__pyx_self) {
+static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_4__defaults__(CYTHON_UNUSED PyObject *__pyx_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3013,24 +3063,24 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_2__default
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__defaults__", 1);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_self)->__pyx_arg_depth);
   __Pyx_GIVEREF(__Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_self)->__pyx_arg_depth);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_self)->__pyx_arg_depth)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_self)->__pyx_arg_depth)) __PYX_ERR(0, 21, __pyx_L1_error);
   __Pyx_INCREF(((PyObject *)Py_False));
   __Pyx_GIVEREF(((PyObject *)Py_False));
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, ((PyObject *)Py_False))) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, ((PyObject *)Py_False))) __PYX_ERR(0, 21, __pyx_L1_error);
   __Pyx_INCREF(__Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_self)->__pyx_arg_cache_dir);
   __Pyx_GIVEREF(__Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_self)->__pyx_arg_cache_dir);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, __Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_self)->__pyx_arg_cache_dir)) __PYX_ERR(0, 20, __pyx_L1_error);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, __Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_self)->__pyx_arg_cache_dir)) __PYX_ERR(0, 21, __pyx_L1_error);
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error);
   __Pyx_INCREF(Py_None);
   __Pyx_GIVEREF(Py_None);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, Py_None)) __PYX_ERR(0, 20, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, Py_None)) __PYX_ERR(0, 21, __pyx_L1_error);
   __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -3115,33 +3165,33 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 20, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 21, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_depth);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 20, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 21, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_debug);
           if (value) { values[2] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 20, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 21, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_cache_dir);
           if (value) { values[3] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 20, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 21, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "evaluate_move") < 0)) __PYX_ERR(0, 20, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "evaluate_move") < 0)) __PYX_ERR(0, 21, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -3163,7 +3213,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("evaluate_move", 0, 1, 4, __pyx_nargs); __PYX_ERR(0, 20, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("evaluate_move", 0, 1, 4, __pyx_nargs); __PYX_ERR(0, 21, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3177,8 +3227,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_depth), (&PyInt_Type), 0, "depth", 1))) __PYX_ERR(0, 20, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_cache_dir), (&PyUnicode_Type), 0, "cache_dir", 1))) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_depth), (&PyInt_Type), 0, "depth", 1))) __PYX_ERR(0, 21, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_cache_dir), (&PyUnicode_Type), 0, "cache_dir", 1))) __PYX_ERR(0, 21, __pyx_L1_error)
   __pyx_r = __pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_move(__pyx_self, __pyx_v_board, __pyx_v_depth, __pyx_v_debug, __pyx_v_cache_dir);
 
   /* function exit code */
@@ -3226,19 +3276,19 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_m
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("evaluate_move", 1);
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":44
+  /* "chmengine/engines/cmhmey2_pool_executor.py":45
  *         If the database remains locked after exhausting retries or for unexpected operational errors.
  *     """
  *     CMHMEngine2.cache_dir = cache_dir             # <<<<<<<<<<<<<<
  *     try:
  *         return CMHMEngine2(board=board, depth=depth).pick_move(debug=debug)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_CMHMEngine2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_CMHMEngine2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_t_1, __pyx_n_s_cache_dir, __pyx_v_cache_dir) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_t_1, __pyx_n_s_cache_dir, __pyx_v_cache_dir) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":45
+  /* "chmengine/engines/cmhmey2_pool_executor.py":46
  *     """
  *     CMHMEngine2.cache_dir = cache_dir
  *     try:             # <<<<<<<<<<<<<<
@@ -3254,7 +3304,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_m
     __Pyx_XGOTREF(__pyx_t_4);
     /*try:*/ {
 
-      /* "chmengine/engines/cmhmey2_pool_executor.py":46
+      /* "chmengine/engines/cmhmey2_pool_executor.py":47
  *     CMHMEngine2.cache_dir = cache_dir
  *     try:
  *         return CMHMEngine2(board=board, depth=depth).pick_move(debug=debug)             # <<<<<<<<<<<<<<
@@ -3262,23 +3312,23 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_m
  *         if "database is locked" in str(error_o):
  */
       __Pyx_XDECREF(__pyx_r);
-      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_CMHMEngine2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L3_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_CMHMEngine2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 46, __pyx_L3_error)
+      __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 47, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_5);
-      if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 46, __pyx_L3_error)
-      if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_depth, __pyx_v_depth) < 0) __PYX_ERR(0, 46, __pyx_L3_error)
-      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 46, __pyx_L3_error)
+      if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 47, __pyx_L3_error)
+      if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_depth, __pyx_v_depth) < 0) __PYX_ERR(0, 47, __pyx_L3_error)
+      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 47, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_pick_move); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 46, __pyx_L3_error)
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_pick_move); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 47, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 46, __pyx_L3_error)
+      __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 47, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_6);
-      if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_debug, __pyx_v_debug) < 0) __PYX_ERR(0, 46, __pyx_L3_error)
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L3_error)
+      if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_debug, __pyx_v_debug) < 0) __PYX_ERR(0, 47, __pyx_L3_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -3286,7 +3336,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_m
       __pyx_t_1 = 0;
       goto __pyx_L7_try_return;
 
-      /* "chmengine/engines/cmhmey2_pool_executor.py":45
+      /* "chmengine/engines/cmhmey2_pool_executor.py":46
  *     """
  *     CMHMEngine2.cache_dir = cache_dir
  *     try:             # <<<<<<<<<<<<<<
@@ -3299,7 +3349,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_m
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "chmengine/engines/cmhmey2_pool_executor.py":47
+    /* "chmengine/engines/cmhmey2_pool_executor.py":48
  *     try:
  *         return CMHMEngine2(board=board, depth=depth).pick_move(debug=debug)
  *     except OperationalError as error_o:             # <<<<<<<<<<<<<<
@@ -3307,7 +3357,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_m
  *             try:
  */
     __Pyx_ErrFetch(&__pyx_t_1, &__pyx_t_6, &__pyx_t_5);
-    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_OperationalError); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 47, __pyx_L5_except_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_OperationalError); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 48, __pyx_L5_except_error)
     __Pyx_GOTREF(__pyx_t_7);
     __pyx_t_8 = __Pyx_PyErr_GivenExceptionMatches(__pyx_t_1, __pyx_t_7);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -3315,7 +3365,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_m
     __pyx_t_1 = 0; __pyx_t_6 = 0; __pyx_t_5 = 0;
     if (__pyx_t_8) {
       __Pyx_AddTraceback("chmengine.engines.cmhmey2_pool_executor.evaluate_move", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_6, &__pyx_t_1) < 0) __PYX_ERR(0, 47, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_6, &__pyx_t_1) < 0) __PYX_ERR(0, 48, __pyx_L5_except_error)
       __Pyx_XGOTREF(__pyx_t_5);
       __Pyx_XGOTREF(__pyx_t_6);
       __Pyx_XGOTREF(__pyx_t_1);
@@ -3323,20 +3373,20 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_m
       __pyx_v_error_o = __pyx_t_6;
       /*try:*/ {
 
-        /* "chmengine/engines/cmhmey2_pool_executor.py":48
+        /* "chmengine/engines/cmhmey2_pool_executor.py":49
  *         return CMHMEngine2(board=board, depth=depth).pick_move(debug=debug)
  *     except OperationalError as error_o:
  *         if "database is locked" in str(error_o):             # <<<<<<<<<<<<<<
  *             try:
  *                 return evaluate_move(board=board, depth=depth, debug=debug, cache_dir=cache_dir)
  */
-        __pyx_t_7 = __Pyx_PyObject_Unicode(__pyx_v_error_o); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 48, __pyx_L14_error)
+        __pyx_t_7 = __Pyx_PyObject_Unicode(__pyx_v_error_o); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 49, __pyx_L14_error)
         __Pyx_GOTREF(__pyx_t_7);
-        __pyx_t_9 = (__Pyx_PyUnicode_ContainsTF(__pyx_kp_u_database_is_locked, __pyx_t_7, Py_EQ)); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 48, __pyx_L14_error)
+        __pyx_t_9 = (__Pyx_PyUnicode_ContainsTF(__pyx_kp_u_database_is_locked, __pyx_t_7, Py_EQ)); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 49, __pyx_L14_error)
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         if (__pyx_t_9) {
 
-          /* "chmengine/engines/cmhmey2_pool_executor.py":49
+          /* "chmengine/engines/cmhmey2_pool_executor.py":50
  *     except OperationalError as error_o:
  *         if "database is locked" in str(error_o):
  *             try:             # <<<<<<<<<<<<<<
@@ -3352,7 +3402,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_m
             __Pyx_XGOTREF(__pyx_t_12);
             /*try:*/ {
 
-              /* "chmengine/engines/cmhmey2_pool_executor.py":50
+              /* "chmengine/engines/cmhmey2_pool_executor.py":51
  *         if "database is locked" in str(error_o):
  *             try:
  *                 return evaluate_move(board=board, depth=depth, debug=debug, cache_dir=cache_dir)             # <<<<<<<<<<<<<<
@@ -3360,15 +3410,15 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_m
  *                 pass
  */
               __Pyx_XDECREF(__pyx_r);
-              __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_evaluate_move); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 50, __pyx_L17_error)
+              __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_evaluate_move); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 51, __pyx_L17_error)
               __Pyx_GOTREF(__pyx_t_7);
-              __pyx_t_13 = __Pyx_PyDict_NewPresized(4); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 50, __pyx_L17_error)
+              __pyx_t_13 = __Pyx_PyDict_NewPresized(4); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 51, __pyx_L17_error)
               __Pyx_GOTREF(__pyx_t_13);
-              if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 50, __pyx_L17_error)
-              if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_depth, __pyx_v_depth) < 0) __PYX_ERR(0, 50, __pyx_L17_error)
-              if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_debug, __pyx_v_debug) < 0) __PYX_ERR(0, 50, __pyx_L17_error)
-              if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_cache_dir, __pyx_v_cache_dir) < 0) __PYX_ERR(0, 50, __pyx_L17_error)
-              __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_empty_tuple, __pyx_t_13); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 50, __pyx_L17_error)
+              if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 51, __pyx_L17_error)
+              if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_depth, __pyx_v_depth) < 0) __PYX_ERR(0, 51, __pyx_L17_error)
+              if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_debug, __pyx_v_debug) < 0) __PYX_ERR(0, 51, __pyx_L17_error)
+              if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_cache_dir, __pyx_v_cache_dir) < 0) __PYX_ERR(0, 51, __pyx_L17_error)
+              __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_empty_tuple, __pyx_t_13); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 51, __pyx_L17_error)
               __Pyx_GOTREF(__pyx_t_14);
               __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
               __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
@@ -3379,7 +3429,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_m
               __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
               goto __pyx_L21_try_return;
 
-              /* "chmengine/engines/cmhmey2_pool_executor.py":49
+              /* "chmengine/engines/cmhmey2_pool_executor.py":50
  *     except OperationalError as error_o:
  *         if "database is locked" in str(error_o):
  *             try:             # <<<<<<<<<<<<<<
@@ -3392,7 +3442,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_m
             __Pyx_XDECREF(__pyx_t_14); __pyx_t_14 = 0;
             __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-            /* "chmengine/engines/cmhmey2_pool_executor.py":51
+            /* "chmengine/engines/cmhmey2_pool_executor.py":52
  *             try:
  *                 return evaluate_move(board=board, depth=depth, debug=debug, cache_dir=cache_dir)
  *             except RecursionError:             # <<<<<<<<<<<<<<
@@ -3400,7 +3450,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_m
  *         raise OperationalError('Unexpected Operational Error: {str(error_o)}') from error_o
  */
             __Pyx_ErrFetch(&__pyx_t_14, &__pyx_t_13, &__pyx_t_7);
-            __Pyx_GetModuleGlobalName(__pyx_t_15, __pyx_n_s_RecursionError); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 51, __pyx_L19_except_error)
+            __Pyx_GetModuleGlobalName(__pyx_t_15, __pyx_n_s_RecursionError); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 52, __pyx_L19_except_error)
             __Pyx_GOTREF(__pyx_t_15);
             __pyx_t_8 = __Pyx_PyErr_GivenExceptionMatches(__pyx_t_14, __pyx_t_15);
             __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
@@ -3412,7 +3462,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_m
             }
             goto __pyx_L19_except_error;
 
-            /* "chmengine/engines/cmhmey2_pool_executor.py":49
+            /* "chmengine/engines/cmhmey2_pool_executor.py":50
  *     except OperationalError as error_o:
  *         if "database is locked" in str(error_o):
  *             try:             # <<<<<<<<<<<<<<
@@ -3438,7 +3488,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_m
             __Pyx_ExceptionReset(__pyx_t_10, __pyx_t_11, __pyx_t_12);
           }
 
-          /* "chmengine/engines/cmhmey2_pool_executor.py":48
+          /* "chmengine/engines/cmhmey2_pool_executor.py":49
  *         return CMHMEngine2(board=board, depth=depth).pick_move(debug=debug)
  *     except OperationalError as error_o:
  *         if "database is locked" in str(error_o):             # <<<<<<<<<<<<<<
@@ -3447,14 +3497,14 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_m
  */
         }
 
-        /* "chmengine/engines/cmhmey2_pool_executor.py":53
+        /* "chmengine/engines/cmhmey2_pool_executor.py":54
  *             except RecursionError:
  *                 pass
  *         raise OperationalError('Unexpected Operational Error: {str(error_o)}') from error_o             # <<<<<<<<<<<<<<
  * 
  * 
  */
-        __Pyx_GetModuleGlobalName(__pyx_t_13, __pyx_n_s_OperationalError); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 53, __pyx_L14_error)
+        __Pyx_GetModuleGlobalName(__pyx_t_13, __pyx_n_s_OperationalError); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 54, __pyx_L14_error)
         __Pyx_GOTREF(__pyx_t_13);
         __pyx_t_14 = NULL;
         __pyx_t_16 = 0;
@@ -3474,16 +3524,16 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_m
           PyObject *__pyx_callargs[2] = {__pyx_t_14, __pyx_kp_u_Unexpected_Operational_Error_str};
           __pyx_t_7 = __Pyx_PyObject_FastCall(__pyx_t_13, __pyx_callargs+1-__pyx_t_16, 1+__pyx_t_16);
           __Pyx_XDECREF(__pyx_t_14); __pyx_t_14 = 0;
-          if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 53, __pyx_L14_error)
+          if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 54, __pyx_L14_error)
           __Pyx_GOTREF(__pyx_t_7);
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
         }
         __Pyx_Raise(__pyx_t_7, 0, 0, __pyx_v_error_o);
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-        __PYX_ERR(0, 53, __pyx_L14_error)
+        __PYX_ERR(0, 54, __pyx_L14_error)
       }
 
-      /* "chmengine/engines/cmhmey2_pool_executor.py":47
+      /* "chmengine/engines/cmhmey2_pool_executor.py":48
  *     try:
  *         return CMHMEngine2(board=board, depth=depth).pick_move(debug=debug)
  *     except OperationalError as error_o:             # <<<<<<<<<<<<<<
@@ -3538,7 +3588,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_m
     }
     goto __pyx_L5_except_error;
 
-    /* "chmengine/engines/cmhmey2_pool_executor.py":45
+    /* "chmengine/engines/cmhmey2_pool_executor.py":46
  *     """
  *     CMHMEngine2.cache_dir = cache_dir
  *     try:             # <<<<<<<<<<<<<<
@@ -3565,7 +3615,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_m
     goto __pyx_L0;
   }
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":20
+  /* "chmengine/engines/cmhmey2_pool_executor.py":21
  * 
  * # TODO: Move this helper to `chmengine.utils.__init__.py` (if we can, might have circular import errors?)
  * def evaluate_move(board: Board, depth: int = 1, debug: bool = False, cache_dir: str = CMHMEngine2.cache_dir) -> Pick:             # <<<<<<<<<<<<<<
@@ -3591,15 +3641,15 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_evaluate_m
   return __pyx_r;
 }
 
-/* "chmengine/engines/cmhmey2_pool_executor.py":63
- *     executor: ProcessPoolExecutor
+/* "chmengine/engines/cmhmey2_pool_executor.py":57
  * 
- *     def __init__(self, board: Optional[Board] = None, depth: int = 1, max_workers: Optional[int] = None) -> None:             # <<<<<<<<<<<<<<
- *         """Initialize the CMHMEngine2PoolExecutor.
  * 
+ * def evaluate_move_until(             # <<<<<<<<<<<<<<
+ *         time_limit: float64,
+ *         board: Board,
  */
 
-static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_4__defaults__(CYTHON_UNUSED PyObject *__pyx_self) {
+static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_6__defaults__(CYTHON_UNUSED PyObject *__pyx_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3609,24 +3659,671 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_4__default
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__defaults__", 1);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
+
+  /* "chmengine/engines/cmhmey2_pool_executor.py":61
+ *         board: Board,
+ *         depth: int = 1,
+ *         debug: bool = False,             # <<<<<<<<<<<<<<
+ *         cache_dir: str = CMHMEngine3.cache_dir) -> Pick:
+ *     """Offloads eval calculations to another CMHMEngine3 instance.
+ */
+  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_INCREF(__Pyx_CyFunction_Defaults(__pyx_defaults1, __pyx_self)->__pyx_arg_depth);
+  __Pyx_GIVEREF(__Pyx_CyFunction_Defaults(__pyx_defaults1, __pyx_self)->__pyx_arg_depth);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __Pyx_CyFunction_Defaults(__pyx_defaults1, __pyx_self)->__pyx_arg_depth)) __PYX_ERR(0, 57, __pyx_L1_error);
+  __Pyx_INCREF(((PyObject *)Py_False));
+  __Pyx_GIVEREF(((PyObject *)Py_False));
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, ((PyObject *)Py_False))) __PYX_ERR(0, 57, __pyx_L1_error);
+  __Pyx_INCREF(__Pyx_CyFunction_Defaults(__pyx_defaults1, __pyx_self)->__pyx_arg_cache_dir);
+  __Pyx_GIVEREF(__Pyx_CyFunction_Defaults(__pyx_defaults1, __pyx_self)->__pyx_arg_cache_dir);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, __Pyx_CyFunction_Defaults(__pyx_defaults1, __pyx_self)->__pyx_arg_cache_dir)) __PYX_ERR(0, 57, __pyx_L1_error);
+
+  /* "chmengine/engines/cmhmey2_pool_executor.py":57
+ * 
+ * 
+ * def evaluate_move_until(             # <<<<<<<<<<<<<<
+ *         time_limit: float64,
+ *         board: Board,
+ */
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_1);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 57, __pyx_L1_error);
+  __Pyx_INCREF(Py_None);
+  __Pyx_GIVEREF(Py_None);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, Py_None)) __PYX_ERR(0, 57, __pyx_L1_error);
+  __pyx_t_1 = 0;
+  __pyx_r = __pyx_t_2;
+  __pyx_t_2 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_AddTraceback("chmengine.engines.cmhmey2_pool_executor.__defaults__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_9chmengine_7engines_21cmhmey2_pool_executor_3evaluate_move_until(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_9chmengine_7engines_21cmhmey2_pool_executor_2evaluate_move_until, "Offloads eval calculations to another CMHMEngine3 instance.\n\n    Parameters\n    ----------\n    time_limit : float\n        Time to spend on the evaluation.\n    board : Board\n        The chess board state to evaluate.\n    depth : int\n        The search depth for the evaluation.\n    debug : bool\n        Whether to enable debug output.\n    cache_dir : str\n        The cache directory for the engine.\n\n    Returns\n    -------\n    Pick\n        The best move and its associated evaluation score.\n\n    Raises\n    ------\n    OperationalError\n        If the database remains locked after exhausting retries or for unexpected operational errors.\n    ");
+static PyMethodDef __pyx_mdef_9chmengine_7engines_21cmhmey2_pool_executor_3evaluate_move_until = {"evaluate_move_until", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9chmengine_7engines_21cmhmey2_pool_executor_3evaluate_move_until, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9chmengine_7engines_21cmhmey2_pool_executor_2evaluate_move_until};
+static PyObject *__pyx_pw_9chmengine_7engines_21cmhmey2_pool_executor_3evaluate_move_until(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  PyObject *__pyx_v_time_limit = 0;
+  PyObject *__pyx_v_board = 0;
+  PyObject *__pyx_v_depth = 0;
+  PyObject *__pyx_v_debug = 0;
+  PyObject *__pyx_v_cache_dir = 0;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[5] = {0,0,0,0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("evaluate_move_until (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_MACROS
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_time_limit,&__pyx_n_s_board,&__pyx_n_s_depth,&__pyx_n_s_debug,&__pyx_n_s_cache_dir,0};
+    __pyx_defaults1 *__pyx_dynamic_args = __Pyx_CyFunction_Defaults(__pyx_defaults1, __pyx_self);
+    values[2] = __Pyx_Arg_NewRef_FASTCALL(__pyx_dynamic_args->__pyx_arg_depth);
+    values[3] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject *)Py_False)));
+    values[4] = __Pyx_Arg_NewRef_FASTCALL(__pyx_dynamic_args->__pyx_arg_cache_dir);
+    if (__pyx_kwds) {
+      Py_ssize_t kw_args;
+      switch (__pyx_nargs) {
+        case  5: values[4] = __Pyx_Arg_FASTCALL(__pyx_args, 4);
+        CYTHON_FALLTHROUGH;
+        case  4: values[3] = __Pyx_Arg_FASTCALL(__pyx_args, 3);
+        CYTHON_FALLTHROUGH;
+        case  3: values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = __Pyx_NumKwargs_FASTCALL(__pyx_kwds);
+      switch (__pyx_nargs) {
+        case  0:
+        if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_time_limit)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 57, __pyx_L3_error)
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_board)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 57, __pyx_L3_error)
+        else {
+          __Pyx_RaiseArgtupleInvalid("evaluate_move_until", 0, 2, 5, 1); __PYX_ERR(0, 57, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_depth);
+          if (value) { values[2] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 57, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  3:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_debug);
+          if (value) { values[3] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 57, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  4:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_cache_dir);
+          if (value) { values[4] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 57, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        const Py_ssize_t kwd_pos_args = __pyx_nargs;
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "evaluate_move_until") < 0)) __PYX_ERR(0, 57, __pyx_L3_error)
+      }
+    } else {
+      switch (__pyx_nargs) {
+        case  5: values[4] = __Pyx_Arg_FASTCALL(__pyx_args, 4);
+        CYTHON_FALLTHROUGH;
+        case  4: values[3] = __Pyx_Arg_FASTCALL(__pyx_args, 3);
+        CYTHON_FALLTHROUGH;
+        case  3: values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
+        values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+        break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+    }
+    __pyx_v_time_limit = values[0];
+    __pyx_v_board = values[1];
+    __pyx_v_depth = ((PyObject*)values[2]);
+    __pyx_v_debug = values[3];
+    __pyx_v_cache_dir = ((PyObject*)values[4]);
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("evaluate_move_until", 0, 2, 5, __pyx_nargs); __PYX_ERR(0, 57, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_AddTraceback("chmengine.engines.cmhmey2_pool_executor.evaluate_move_until", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_depth), (&PyInt_Type), 0, "depth", 1))) __PYX_ERR(0, 60, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_cache_dir), (&PyUnicode_Type), 0, "cache_dir", 1))) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_r = __pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_2evaluate_move_until(__pyx_self, __pyx_v_time_limit, __pyx_v_board, __pyx_v_depth, __pyx_v_debug, __pyx_v_cache_dir);
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __pyx_r = NULL;
+  __pyx_L0:;
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_2evaluate_move_until(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_time_limit, PyObject *__pyx_v_board, PyObject *__pyx_v_depth, PyObject *__pyx_v_debug, PyObject *__pyx_v_cache_dir) {
+  PyObject *__pyx_v_error_o = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  PyObject *__pyx_t_7 = NULL;
+  int __pyx_t_8;
+  int __pyx_t_9;
+  PyObject *__pyx_t_10 = NULL;
+  PyObject *__pyx_t_11 = NULL;
+  PyObject *__pyx_t_12 = NULL;
+  PyObject *__pyx_t_13 = NULL;
+  PyObject *__pyx_t_14 = NULL;
+  PyObject *__pyx_t_15 = NULL;
+  unsigned int __pyx_t_16;
+  int __pyx_t_17;
+  char const *__pyx_t_18;
+  PyObject *__pyx_t_19 = NULL;
+  PyObject *__pyx_t_20 = NULL;
+  PyObject *__pyx_t_21 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("evaluate_move_until", 1);
+
+  /* "chmengine/engines/cmhmey2_pool_executor.py":88
+ *         If the database remains locked after exhausting retries or for unexpected operational errors.
+ *     """
+ *     CMHMEngine3.cache_dir = cache_dir             # <<<<<<<<<<<<<<
+ *     try:
+ *         return CMHMEngine3(board=board, depth=depth, time_limit=time_limit).pick_move(debug=debug)
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_CMHMEngine3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (__Pyx_PyObject_SetAttrStr(__pyx_t_1, __pyx_n_s_cache_dir, __pyx_v_cache_dir) < 0) __PYX_ERR(0, 88, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "chmengine/engines/cmhmey2_pool_executor.py":89
+ *     """
+ *     CMHMEngine3.cache_dir = cache_dir
+ *     try:             # <<<<<<<<<<<<<<
+ *         return CMHMEngine3(board=board, depth=depth, time_limit=time_limit).pick_move(debug=debug)
+ *     except OperationalError as error_o:
+ */
+  {
+    __Pyx_PyThreadState_declare
+    __Pyx_PyThreadState_assign
+    __Pyx_ExceptionSave(&__pyx_t_2, &__pyx_t_3, &__pyx_t_4);
+    __Pyx_XGOTREF(__pyx_t_2);
+    __Pyx_XGOTREF(__pyx_t_3);
+    __Pyx_XGOTREF(__pyx_t_4);
+    /*try:*/ {
+
+      /* "chmengine/engines/cmhmey2_pool_executor.py":90
+ *     CMHMEngine3.cache_dir = cache_dir
+ *     try:
+ *         return CMHMEngine3(board=board, depth=depth, time_limit=time_limit).pick_move(debug=debug)             # <<<<<<<<<<<<<<
+ *     except OperationalError as error_o:
+ *         if "database is locked" in str(error_o):
+ */
+      __Pyx_XDECREF(__pyx_r);
+      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_CMHMEngine3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L3_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __pyx_t_5 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 90, __pyx_L3_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 90, __pyx_L3_error)
+      if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_depth, __pyx_v_depth) < 0) __PYX_ERR(0, 90, __pyx_L3_error)
+      if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_time_limit, __pyx_v_time_limit) < 0) __PYX_ERR(0, 90, __pyx_L3_error)
+      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 90, __pyx_L3_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_pick_move); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 90, __pyx_L3_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 90, __pyx_L3_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_debug, __pyx_v_debug) < 0) __PYX_ERR(0, 90, __pyx_L3_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L3_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __pyx_r = __pyx_t_1;
+      __pyx_t_1 = 0;
+      goto __pyx_L7_try_return;
+
+      /* "chmengine/engines/cmhmey2_pool_executor.py":89
+ *     """
+ *     CMHMEngine3.cache_dir = cache_dir
+ *     try:             # <<<<<<<<<<<<<<
+ *         return CMHMEngine3(board=board, depth=depth, time_limit=time_limit).pick_move(debug=debug)
+ *     except OperationalError as error_o:
+ */
+    }
+    __pyx_L3_error:;
+    __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+    /* "chmengine/engines/cmhmey2_pool_executor.py":91
+ *     try:
+ *         return CMHMEngine3(board=board, depth=depth, time_limit=time_limit).pick_move(debug=debug)
+ *     except OperationalError as error_o:             # <<<<<<<<<<<<<<
+ *         if "database is locked" in str(error_o):
+ *             try:
+ */
+    __Pyx_ErrFetch(&__pyx_t_1, &__pyx_t_6, &__pyx_t_5);
+    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_OperationalError); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 91, __pyx_L5_except_error)
+    __Pyx_GOTREF(__pyx_t_7);
+    __pyx_t_8 = __Pyx_PyErr_GivenExceptionMatches(__pyx_t_1, __pyx_t_7);
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __Pyx_ErrRestore(__pyx_t_1, __pyx_t_6, __pyx_t_5);
+    __pyx_t_1 = 0; __pyx_t_6 = 0; __pyx_t_5 = 0;
+    if (__pyx_t_8) {
+      __Pyx_AddTraceback("chmengine.engines.cmhmey2_pool_executor.evaluate_move_until", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_6, &__pyx_t_1) < 0) __PYX_ERR(0, 91, __pyx_L5_except_error)
+      __Pyx_XGOTREF(__pyx_t_5);
+      __Pyx_XGOTREF(__pyx_t_6);
+      __Pyx_XGOTREF(__pyx_t_1);
+      __Pyx_INCREF(__pyx_t_6);
+      __pyx_v_error_o = __pyx_t_6;
+      /*try:*/ {
+
+        /* "chmengine/engines/cmhmey2_pool_executor.py":92
+ *         return CMHMEngine3(board=board, depth=depth, time_limit=time_limit).pick_move(debug=debug)
+ *     except OperationalError as error_o:
+ *         if "database is locked" in str(error_o):             # <<<<<<<<<<<<<<
+ *             try:
+ *                 return evaluate_move(board=board, depth=depth, debug=debug, cache_dir=cache_dir)
+ */
+        __pyx_t_7 = __Pyx_PyObject_Unicode(__pyx_v_error_o); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 92, __pyx_L14_error)
+        __Pyx_GOTREF(__pyx_t_7);
+        __pyx_t_9 = (__Pyx_PyUnicode_ContainsTF(__pyx_kp_u_database_is_locked, __pyx_t_7, Py_EQ)); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 92, __pyx_L14_error)
+        __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+        if (__pyx_t_9) {
+
+          /* "chmengine/engines/cmhmey2_pool_executor.py":93
+ *     except OperationalError as error_o:
+ *         if "database is locked" in str(error_o):
+ *             try:             # <<<<<<<<<<<<<<
+ *                 return evaluate_move(board=board, depth=depth, debug=debug, cache_dir=cache_dir)
+ *             except RecursionError:
+ */
+          {
+            __Pyx_PyThreadState_declare
+            __Pyx_PyThreadState_assign
+            __Pyx_ExceptionSave(&__pyx_t_10, &__pyx_t_11, &__pyx_t_12);
+            __Pyx_XGOTREF(__pyx_t_10);
+            __Pyx_XGOTREF(__pyx_t_11);
+            __Pyx_XGOTREF(__pyx_t_12);
+            /*try:*/ {
+
+              /* "chmengine/engines/cmhmey2_pool_executor.py":94
+ *         if "database is locked" in str(error_o):
+ *             try:
+ *                 return evaluate_move(board=board, depth=depth, debug=debug, cache_dir=cache_dir)             # <<<<<<<<<<<<<<
+ *             except RecursionError:
+ *                 pass
+ */
+              __Pyx_XDECREF(__pyx_r);
+              __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_evaluate_move); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 94, __pyx_L17_error)
+              __Pyx_GOTREF(__pyx_t_7);
+              __pyx_t_13 = __Pyx_PyDict_NewPresized(4); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 94, __pyx_L17_error)
+              __Pyx_GOTREF(__pyx_t_13);
+              if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_board, __pyx_v_board) < 0) __PYX_ERR(0, 94, __pyx_L17_error)
+              if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_depth, __pyx_v_depth) < 0) __PYX_ERR(0, 94, __pyx_L17_error)
+              if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_debug, __pyx_v_debug) < 0) __PYX_ERR(0, 94, __pyx_L17_error)
+              if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_cache_dir, __pyx_v_cache_dir) < 0) __PYX_ERR(0, 94, __pyx_L17_error)
+              __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_empty_tuple, __pyx_t_13); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 94, __pyx_L17_error)
+              __Pyx_GOTREF(__pyx_t_14);
+              __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+              __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+              __pyx_r = __pyx_t_14;
+              __pyx_t_14 = 0;
+              __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+              __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+              __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+              goto __pyx_L21_try_return;
+
+              /* "chmengine/engines/cmhmey2_pool_executor.py":93
+ *     except OperationalError as error_o:
+ *         if "database is locked" in str(error_o):
+ *             try:             # <<<<<<<<<<<<<<
+ *                 return evaluate_move(board=board, depth=depth, debug=debug, cache_dir=cache_dir)
+ *             except RecursionError:
+ */
+            }
+            __pyx_L17_error:;
+            __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
+            __Pyx_XDECREF(__pyx_t_14); __pyx_t_14 = 0;
+            __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
+
+            /* "chmengine/engines/cmhmey2_pool_executor.py":95
+ *             try:
+ *                 return evaluate_move(board=board, depth=depth, debug=debug, cache_dir=cache_dir)
+ *             except RecursionError:             # <<<<<<<<<<<<<<
+ *                 pass
+ *         raise OperationalError('Unexpected Operational Error: {str(error_o)}') from error_o
+ */
+            __Pyx_ErrFetch(&__pyx_t_14, &__pyx_t_13, &__pyx_t_7);
+            __Pyx_GetModuleGlobalName(__pyx_t_15, __pyx_n_s_RecursionError); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 95, __pyx_L19_except_error)
+            __Pyx_GOTREF(__pyx_t_15);
+            __pyx_t_8 = __Pyx_PyErr_GivenExceptionMatches(__pyx_t_14, __pyx_t_15);
+            __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
+            __Pyx_ErrRestore(__pyx_t_14, __pyx_t_13, __pyx_t_7);
+            __pyx_t_14 = 0; __pyx_t_13 = 0; __pyx_t_7 = 0;
+            if (__pyx_t_8) {
+              __Pyx_ErrRestore(0,0,0);
+              goto __pyx_L18_exception_handled;
+            }
+            goto __pyx_L19_except_error;
+
+            /* "chmengine/engines/cmhmey2_pool_executor.py":93
+ *     except OperationalError as error_o:
+ *         if "database is locked" in str(error_o):
+ *             try:             # <<<<<<<<<<<<<<
+ *                 return evaluate_move(board=board, depth=depth, debug=debug, cache_dir=cache_dir)
+ *             except RecursionError:
+ */
+            __pyx_L19_except_error:;
+            __Pyx_XGIVEREF(__pyx_t_10);
+            __Pyx_XGIVEREF(__pyx_t_11);
+            __Pyx_XGIVEREF(__pyx_t_12);
+            __Pyx_ExceptionReset(__pyx_t_10, __pyx_t_11, __pyx_t_12);
+            goto __pyx_L14_error;
+            __pyx_L21_try_return:;
+            __Pyx_XGIVEREF(__pyx_t_10);
+            __Pyx_XGIVEREF(__pyx_t_11);
+            __Pyx_XGIVEREF(__pyx_t_12);
+            __Pyx_ExceptionReset(__pyx_t_10, __pyx_t_11, __pyx_t_12);
+            goto __pyx_L13_return;
+            __pyx_L18_exception_handled:;
+            __Pyx_XGIVEREF(__pyx_t_10);
+            __Pyx_XGIVEREF(__pyx_t_11);
+            __Pyx_XGIVEREF(__pyx_t_12);
+            __Pyx_ExceptionReset(__pyx_t_10, __pyx_t_11, __pyx_t_12);
+          }
+
+          /* "chmengine/engines/cmhmey2_pool_executor.py":92
+ *         return CMHMEngine3(board=board, depth=depth, time_limit=time_limit).pick_move(debug=debug)
+ *     except OperationalError as error_o:
+ *         if "database is locked" in str(error_o):             # <<<<<<<<<<<<<<
+ *             try:
+ *                 return evaluate_move(board=board, depth=depth, debug=debug, cache_dir=cache_dir)
+ */
+        }
+
+        /* "chmengine/engines/cmhmey2_pool_executor.py":97
+ *             except RecursionError:
+ *                 pass
+ *         raise OperationalError('Unexpected Operational Error: {str(error_o)}') from error_o             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+        __Pyx_GetModuleGlobalName(__pyx_t_13, __pyx_n_s_OperationalError); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 97, __pyx_L14_error)
+        __Pyx_GOTREF(__pyx_t_13);
+        __pyx_t_14 = NULL;
+        __pyx_t_16 = 0;
+        #if CYTHON_UNPACK_METHODS
+        if (unlikely(PyMethod_Check(__pyx_t_13))) {
+          __pyx_t_14 = PyMethod_GET_SELF(__pyx_t_13);
+          if (likely(__pyx_t_14)) {
+            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_13);
+            __Pyx_INCREF(__pyx_t_14);
+            __Pyx_INCREF(function);
+            __Pyx_DECREF_SET(__pyx_t_13, function);
+            __pyx_t_16 = 1;
+          }
+        }
+        #endif
+        {
+          PyObject *__pyx_callargs[2] = {__pyx_t_14, __pyx_kp_u_Unexpected_Operational_Error_str};
+          __pyx_t_7 = __Pyx_PyObject_FastCall(__pyx_t_13, __pyx_callargs+1-__pyx_t_16, 1+__pyx_t_16);
+          __Pyx_XDECREF(__pyx_t_14); __pyx_t_14 = 0;
+          if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 97, __pyx_L14_error)
+          __Pyx_GOTREF(__pyx_t_7);
+          __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+        }
+        __Pyx_Raise(__pyx_t_7, 0, 0, __pyx_v_error_o);
+        __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+        __PYX_ERR(0, 97, __pyx_L14_error)
+      }
+
+      /* "chmengine/engines/cmhmey2_pool_executor.py":91
+ *     try:
+ *         return CMHMEngine3(board=board, depth=depth, time_limit=time_limit).pick_move(debug=debug)
+ *     except OperationalError as error_o:             # <<<<<<<<<<<<<<
+ *         if "database is locked" in str(error_o):
+ *             try:
+ */
+      /*finally:*/ {
+        __pyx_L14_error:;
+        /*exception exit:*/{
+          __Pyx_PyThreadState_declare
+          __Pyx_PyThreadState_assign
+          __pyx_t_12 = 0; __pyx_t_11 = 0; __pyx_t_10 = 0; __pyx_t_19 = 0; __pyx_t_20 = 0; __pyx_t_21 = 0;
+          __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
+          __Pyx_XDECREF(__pyx_t_14); __pyx_t_14 = 0;
+          __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
+          __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
+          if (PY_MAJOR_VERSION >= 3) __Pyx_ExceptionSwap(&__pyx_t_19, &__pyx_t_20, &__pyx_t_21);
+          if ((PY_MAJOR_VERSION < 3) || unlikely(__Pyx_GetException(&__pyx_t_12, &__pyx_t_11, &__pyx_t_10) < 0)) __Pyx_ErrFetch(&__pyx_t_12, &__pyx_t_11, &__pyx_t_10);
+          __Pyx_XGOTREF(__pyx_t_12);
+          __Pyx_XGOTREF(__pyx_t_11);
+          __Pyx_XGOTREF(__pyx_t_10);
+          __Pyx_XGOTREF(__pyx_t_19);
+          __Pyx_XGOTREF(__pyx_t_20);
+          __Pyx_XGOTREF(__pyx_t_21);
+          __pyx_t_8 = __pyx_lineno; __pyx_t_17 = __pyx_clineno; __pyx_t_18 = __pyx_filename;
+          {
+            __Pyx_DECREF(__pyx_v_error_o); __pyx_v_error_o = 0;
+          }
+          if (PY_MAJOR_VERSION >= 3) {
+            __Pyx_XGIVEREF(__pyx_t_19);
+            __Pyx_XGIVEREF(__pyx_t_20);
+            __Pyx_XGIVEREF(__pyx_t_21);
+            __Pyx_ExceptionReset(__pyx_t_19, __pyx_t_20, __pyx_t_21);
+          }
+          __Pyx_XGIVEREF(__pyx_t_12);
+          __Pyx_XGIVEREF(__pyx_t_11);
+          __Pyx_XGIVEREF(__pyx_t_10);
+          __Pyx_ErrRestore(__pyx_t_12, __pyx_t_11, __pyx_t_10);
+          __pyx_t_12 = 0; __pyx_t_11 = 0; __pyx_t_10 = 0; __pyx_t_19 = 0; __pyx_t_20 = 0; __pyx_t_21 = 0;
+          __pyx_lineno = __pyx_t_8; __pyx_clineno = __pyx_t_17; __pyx_filename = __pyx_t_18;
+          goto __pyx_L5_except_error;
+        }
+        __pyx_L13_return: {
+          __pyx_t_21 = __pyx_r;
+          __pyx_r = 0;
+          __Pyx_DECREF(__pyx_v_error_o); __pyx_v_error_o = 0;
+          __pyx_r = __pyx_t_21;
+          __pyx_t_21 = 0;
+          goto __pyx_L6_except_return;
+        }
+      }
+    }
+    goto __pyx_L5_except_error;
+
+    /* "chmengine/engines/cmhmey2_pool_executor.py":89
+ *     """
+ *     CMHMEngine3.cache_dir = cache_dir
+ *     try:             # <<<<<<<<<<<<<<
+ *         return CMHMEngine3(board=board, depth=depth, time_limit=time_limit).pick_move(debug=debug)
+ *     except OperationalError as error_o:
+ */
+    __pyx_L5_except_error:;
+    __Pyx_XGIVEREF(__pyx_t_2);
+    __Pyx_XGIVEREF(__pyx_t_3);
+    __Pyx_XGIVEREF(__pyx_t_4);
+    __Pyx_ExceptionReset(__pyx_t_2, __pyx_t_3, __pyx_t_4);
+    goto __pyx_L1_error;
+    __pyx_L7_try_return:;
+    __Pyx_XGIVEREF(__pyx_t_2);
+    __Pyx_XGIVEREF(__pyx_t_3);
+    __Pyx_XGIVEREF(__pyx_t_4);
+    __Pyx_ExceptionReset(__pyx_t_2, __pyx_t_3, __pyx_t_4);
+    goto __pyx_L0;
+    __pyx_L6_except_return:;
+    __Pyx_XGIVEREF(__pyx_t_2);
+    __Pyx_XGIVEREF(__pyx_t_3);
+    __Pyx_XGIVEREF(__pyx_t_4);
+    __Pyx_ExceptionReset(__pyx_t_2, __pyx_t_3, __pyx_t_4);
+    goto __pyx_L0;
+  }
+
+  /* "chmengine/engines/cmhmey2_pool_executor.py":57
+ * 
+ * 
+ * def evaluate_move_until(             # <<<<<<<<<<<<<<
+ *         time_limit: float64,
+ *         board: Board,
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_13);
+  __Pyx_XDECREF(__pyx_t_14);
+  __Pyx_XDECREF(__pyx_t_15);
+  __Pyx_AddTraceback("chmengine.engines.cmhmey2_pool_executor.evaluate_move_until", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_error_o);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "chmengine/engines/cmhmey2_pool_executor.py":107
+ *     executor: ProcessPoolExecutor
+ * 
+ *     def __init__(             # <<<<<<<<<<<<<<
+ *             self,
+ *             board: Optional[Board] = None,
+ */
+
+static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_8__defaults__(CYTHON_UNUSED PyObject *__pyx_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__defaults__", 1);
+  __Pyx_XDECREF(__pyx_r);
+
+  /* "chmengine/engines/cmhmey2_pool_executor.py":112
+ *             depth: int = 1,
+ *             max_workers: Optional[int] = None,
+ *             time_limit: Optional[float64] = None,             # <<<<<<<<<<<<<<
+ *     ) -> None:
+ *         """Initialize the CMHMEngine2PoolExecutor.
+ */
+  __pyx_t_1 = PyTuple_New(4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(Py_None);
   __Pyx_GIVEREF(Py_None);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, Py_None)) __PYX_ERR(0, 63, __pyx_L1_error);
-  __Pyx_INCREF(__Pyx_CyFunction_Defaults(__pyx_defaults1, __pyx_self)->__pyx_arg_depth);
-  __Pyx_GIVEREF(__Pyx_CyFunction_Defaults(__pyx_defaults1, __pyx_self)->__pyx_arg_depth);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __Pyx_CyFunction_Defaults(__pyx_defaults1, __pyx_self)->__pyx_arg_depth)) __PYX_ERR(0, 63, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, Py_None)) __PYX_ERR(0, 107, __pyx_L1_error);
+  __Pyx_INCREF(__Pyx_CyFunction_Defaults(__pyx_defaults2, __pyx_self)->__pyx_arg_depth);
+  __Pyx_GIVEREF(__Pyx_CyFunction_Defaults(__pyx_defaults2, __pyx_self)->__pyx_arg_depth);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __Pyx_CyFunction_Defaults(__pyx_defaults2, __pyx_self)->__pyx_arg_depth)) __PYX_ERR(0, 107, __pyx_L1_error);
   __Pyx_INCREF(Py_None);
   __Pyx_GIVEREF(Py_None);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, Py_None)) __PYX_ERR(0, 63, __pyx_L1_error);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 63, __pyx_L1_error)
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, Py_None)) __PYX_ERR(0, 107, __pyx_L1_error);
+  __Pyx_INCREF(Py_None);
+  __Pyx_GIVEREF(Py_None);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 3, Py_None)) __PYX_ERR(0, 107, __pyx_L1_error);
+
+  /* "chmengine/engines/cmhmey2_pool_executor.py":107
+ *     executor: ProcessPoolExecutor
+ * 
+ *     def __init__(             # <<<<<<<<<<<<<<
+ *             self,
+ *             board: Optional[Board] = None,
+ */
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 107, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error);
   __Pyx_INCREF(Py_None);
   __Pyx_GIVEREF(Py_None);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, Py_None)) __PYX_ERR(0, 63, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, Py_None)) __PYX_ERR(0, 107, __pyx_L1_error);
   __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -3665,11 +4362,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   PyObject *__pyx_v_board = 0;
   PyObject *__pyx_v_depth = 0;
   PyObject *__pyx_v_max_workers = 0;
+  PyObject *__pyx_v_time_limit = 0;
   #if !CYTHON_METH_FASTCALL
   CYTHON_UNUSED Py_ssize_t __pyx_nargs;
   #endif
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
-  PyObject* values[4] = {0,0,0,0};
+  PyObject* values[5] = {0,0,0,0,0};
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -3685,14 +4383,41 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   #endif
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
-    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_board,&__pyx_n_s_depth,&__pyx_n_s_max_workers,0};
-    __pyx_defaults1 *__pyx_dynamic_args = __Pyx_CyFunction_Defaults(__pyx_defaults1, __pyx_self);
+    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_board,&__pyx_n_s_depth,&__pyx_n_s_max_workers,&__pyx_n_s_time_limit,0};
+    __pyx_defaults2 *__pyx_dynamic_args = __Pyx_CyFunction_Defaults(__pyx_defaults2, __pyx_self);
+
+    /* "chmengine/engines/cmhmey2_pool_executor.py":109
+ *     def __init__(
+ *             self,
+ *             board: Optional[Board] = None,             # <<<<<<<<<<<<<<
+ *             depth: int = 1,
+ *             max_workers: Optional[int] = None,
+ */
     values[1] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
     values[2] = __Pyx_Arg_NewRef_FASTCALL(__pyx_dynamic_args->__pyx_arg_depth);
+
+    /* "chmengine/engines/cmhmey2_pool_executor.py":111
+ *             board: Optional[Board] = None,
+ *             depth: int = 1,
+ *             max_workers: Optional[int] = None,             # <<<<<<<<<<<<<<
+ *             time_limit: Optional[float64] = None,
+ *     ) -> None:
+ */
     values[3] = __Pyx_Arg_NewRef_FASTCALL(((PyObject*)Py_None));
+
+    /* "chmengine/engines/cmhmey2_pool_executor.py":112
+ *             depth: int = 1,
+ *             max_workers: Optional[int] = None,
+ *             time_limit: Optional[float64] = None,             # <<<<<<<<<<<<<<
+ *     ) -> None:
+ *         """Initialize the CMHMEngine2PoolExecutor.
+ */
+    values[4] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
     if (__pyx_kwds) {
       Py_ssize_t kw_args;
       switch (__pyx_nargs) {
+        case  5: values[4] = __Pyx_Arg_FASTCALL(__pyx_args, 4);
+        CYTHON_FALLTHROUGH;
         case  4: values[3] = __Pyx_Arg_FASTCALL(__pyx_args, 3);
         CYTHON_FALLTHROUGH;
         case  3: values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
@@ -3711,36 +4436,45 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 63, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 107, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_board);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 63, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 107, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_depth);
           if (value) { values[2] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 63, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 107, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_max_workers);
           if (value) { values[3] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 63, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 107, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  4:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_time_limit);
+          if (value) { values[4] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 107, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__init__") < 0)) __PYX_ERR(0, 63, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__init__") < 0)) __PYX_ERR(0, 107, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
+        case  5: values[4] = __Pyx_Arg_FASTCALL(__pyx_args, 4);
+        CYTHON_FALLTHROUGH;
         case  4: values[3] = __Pyx_Arg_FASTCALL(__pyx_args, 3);
         CYTHON_FALLTHROUGH;
         case  3: values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
@@ -3756,10 +4490,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     __pyx_v_board = values[1];
     __pyx_v_depth = ((PyObject*)values[2]);
     __pyx_v_max_workers = ((PyObject*)values[3]);
+    __pyx_v_time_limit = values[4];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 4, __pyx_nargs); __PYX_ERR(0, 63, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 5, __pyx_nargs); __PYX_ERR(0, 107, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3773,9 +4508,17 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_depth), (&PyInt_Type), 0, "depth", 1))) __PYX_ERR(0, 63, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_max_workers), (&PyInt_Type), 1, "max_workers", 1))) __PYX_ERR(0, 63, __pyx_L1_error)
-  __pyx_r = __pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngine2PoolExecutor___init__(__pyx_self, __pyx_v_self, __pyx_v_board, __pyx_v_depth, __pyx_v_max_workers);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_depth), (&PyInt_Type), 0, "depth", 1))) __PYX_ERR(0, 110, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_max_workers), (&PyInt_Type), 1, "max_workers", 1))) __PYX_ERR(0, 111, __pyx_L1_error)
+  __pyx_r = __pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngine2PoolExecutor___init__(__pyx_self, __pyx_v_self, __pyx_v_board, __pyx_v_depth, __pyx_v_max_workers, __pyx_v_time_limit);
+
+  /* "chmengine/engines/cmhmey2_pool_executor.py":107
+ *     executor: ProcessPoolExecutor
+ * 
+ *     def __init__(             # <<<<<<<<<<<<<<
+ *             self,
+ *             board: Optional[Board] = None,
+ */
 
   /* function exit code */
   goto __pyx_L0;
@@ -3792,13 +4535,13 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngine2PoolExecutor___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth, PyObject *__pyx_v_max_workers) {
+static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngine2PoolExecutor___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_board, PyObject *__pyx_v_depth, PyObject *__pyx_v_max_workers, PyObject *__pyx_v_time_limit) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
+  int __pyx_t_1;
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
-  int __pyx_t_4;
+  PyObject *__pyx_t_4 = NULL;
   PyObject *__pyx_t_5 = NULL;
   PyObject *__pyx_t_6 = NULL;
   PyObject *__pyx_t_7 = NULL;
@@ -3808,108 +4551,200 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 1);
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":75
+  /* "chmengine/engines/cmhmey2_pool_executor.py":125
  *             The maximum number of worker threads for parallel execution.
  *         """
- *         CMHMEngine2.cache_dir = self.cache_dir             # <<<<<<<<<<<<<<
- *         self.engine = CMHMEngine2(board=board if board else Board(), depth=depth)
+ *         if time_limit is None:             # <<<<<<<<<<<<<<
+ *             self.engine = CMHMEngine2(board=board if board else Board(), depth=depth)
+ *             CMHMEngine2.cache_dir = self.cache_dir
+ */
+  __pyx_t_1 = (__pyx_v_time_limit == Py_None);
+  if (__pyx_t_1) {
+
+    /* "chmengine/engines/cmhmey2_pool_executor.py":126
+ *         """
+ *         if time_limit is None:
+ *             self.engine = CMHMEngine2(board=board if board else Board(), depth=depth)             # <<<<<<<<<<<<<<
+ *             CMHMEngine2.cache_dir = self.cache_dir
+ *         else:
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_CMHMEngine2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_board); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 126, __pyx_L1_error)
+    if (__pyx_t_1) {
+      __Pyx_INCREF(__pyx_v_board);
+      __pyx_t_4 = __pyx_v_board;
+    } else {
+      __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Board); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 126, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      __pyx_t_7 = NULL;
+      __pyx_t_8 = 0;
+      #if CYTHON_UNPACK_METHODS
+      if (unlikely(PyMethod_Check(__pyx_t_6))) {
+        __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_6);
+        if (likely(__pyx_t_7)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
+          __Pyx_INCREF(__pyx_t_7);
+          __Pyx_INCREF(function);
+          __Pyx_DECREF_SET(__pyx_t_6, function);
+          __pyx_t_8 = 1;
+        }
+      }
+      #endif
+      {
+        PyObject *__pyx_callargs[2] = {__pyx_t_7, NULL};
+        __pyx_t_5 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_8, 0+__pyx_t_8);
+        __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
+        if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 126, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_5);
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      }
+      __pyx_t_4 = __pyx_t_5;
+      __pyx_t_5 = 0;
+    }
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_board, __pyx_t_4) < 0) __PYX_ERR(0, 126, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_depth, __pyx_v_depth) < 0) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_engine, __pyx_t_4) < 0) __PYX_ERR(0, 126, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+    /* "chmengine/engines/cmhmey2_pool_executor.py":127
+ *         if time_limit is None:
+ *             self.engine = CMHMEngine2(board=board if board else Board(), depth=depth)
+ *             CMHMEngine2.cache_dir = self.cache_dir             # <<<<<<<<<<<<<<
+ *         else:
+ *             self.engine = CMHMEngine3(board=board if board else Board(), depth=depth, time_limit=time_limit)
+ */
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_cache_dir); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 127, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_CMHMEngine2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 127, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    if (__Pyx_PyObject_SetAttrStr(__pyx_t_3, __pyx_n_s_cache_dir, __pyx_t_4) < 0) __PYX_ERR(0, 127, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+    /* "chmengine/engines/cmhmey2_pool_executor.py":125
+ *             The maximum number of worker threads for parallel execution.
+ *         """
+ *         if time_limit is None:             # <<<<<<<<<<<<<<
+ *             self.engine = CMHMEngine2(board=board if board else Board(), depth=depth)
+ *             CMHMEngine2.cache_dir = self.cache_dir
+ */
+    goto __pyx_L3;
+  }
+
+  /* "chmengine/engines/cmhmey2_pool_executor.py":129
+ *             CMHMEngine2.cache_dir = self.cache_dir
+ *         else:
+ *             self.engine = CMHMEngine3(board=board if board else Board(), depth=depth, time_limit=time_limit)             # <<<<<<<<<<<<<<
+ *             CMHMEngine3.cache_dir = self.cache_dir
  *         self.executor = ProcessPoolExecutor(max_workers=max_workers)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_cache_dir); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_CMHMEngine2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_t_2, __pyx_n_s_cache_dir, __pyx_t_1) < 0) __PYX_ERR(0, 75, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  /*else*/ {
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_CMHMEngine3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_4 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_board); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 129, __pyx_L1_error)
+    if (__pyx_t_1) {
+      __Pyx_INCREF(__pyx_v_board);
+      __pyx_t_2 = __pyx_v_board;
+    } else {
+      __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Board); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 129, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      __pyx_t_7 = NULL;
+      __pyx_t_8 = 0;
+      #if CYTHON_UNPACK_METHODS
+      if (unlikely(PyMethod_Check(__pyx_t_6))) {
+        __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_6);
+        if (likely(__pyx_t_7)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
+          __Pyx_INCREF(__pyx_t_7);
+          __Pyx_INCREF(function);
+          __Pyx_DECREF_SET(__pyx_t_6, function);
+          __pyx_t_8 = 1;
+        }
+      }
+      #endif
+      {
+        PyObject *__pyx_callargs[2] = {__pyx_t_7, NULL};
+        __pyx_t_5 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_8, 0+__pyx_t_8);
+        __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
+        if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 129, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_5);
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      }
+      __pyx_t_2 = __pyx_t_5;
+      __pyx_t_5 = 0;
+    }
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_board, __pyx_t_2) < 0) __PYX_ERR(0, 129, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_depth, __pyx_v_depth) < 0) __PYX_ERR(0, 129, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_time_limit, __pyx_v_time_limit) < 0) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_engine, __pyx_t_2) < 0) __PYX_ERR(0, 129, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":76
- *         """
- *         CMHMEngine2.cache_dir = self.cache_dir
- *         self.engine = CMHMEngine2(board=board if board else Board(), depth=depth)             # <<<<<<<<<<<<<<
+    /* "chmengine/engines/cmhmey2_pool_executor.py":130
+ *         else:
+ *             self.engine = CMHMEngine3(board=board if board else Board(), depth=depth, time_limit=time_limit)
+ *             CMHMEngine3.cache_dir = self.cache_dir             # <<<<<<<<<<<<<<
  *         self.executor = ProcessPoolExecutor(max_workers=max_workers)
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_CMHMEngine2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_board); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 76, __pyx_L1_error)
-  if (__pyx_t_4) {
-    __Pyx_INCREF(__pyx_v_board);
-    __pyx_t_3 = __pyx_v_board;
-  } else {
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Board); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 76, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_7 = NULL;
-    __pyx_t_8 = 0;
-    #if CYTHON_UNPACK_METHODS
-    if (unlikely(PyMethod_Check(__pyx_t_6))) {
-      __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_6);
-      if (likely(__pyx_t_7)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
-        __Pyx_INCREF(__pyx_t_7);
-        __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_6, function);
-        __pyx_t_8 = 1;
-      }
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[2] = {__pyx_t_7, NULL};
-      __pyx_t_5 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_8, 0+__pyx_t_8);
-      __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 76, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_5);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    }
-    __pyx_t_3 = __pyx_t_5;
-    __pyx_t_5 = 0;
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_cache_dir); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 130, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_CMHMEngine3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 130, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    if (__Pyx_PyObject_SetAttrStr(__pyx_t_4, __pyx_n_s_cache_dir, __pyx_t_2) < 0) __PYX_ERR(0, 130, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_board, __pyx_t_3) < 0) __PYX_ERR(0, 76, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_depth, __pyx_v_depth) < 0) __PYX_ERR(0, 76, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 76, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_engine, __pyx_t_3) < 0) __PYX_ERR(0, 76, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_L3:;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":77
- *         CMHMEngine2.cache_dir = self.cache_dir
- *         self.engine = CMHMEngine2(board=board if board else Board(), depth=depth)
+  /* "chmengine/engines/cmhmey2_pool_executor.py":131
+ *             self.engine = CMHMEngine3(board=board if board else Board(), depth=depth, time_limit=time_limit)
+ *             CMHMEngine3.cache_dir = self.cache_dir
  *         self.executor = ProcessPoolExecutor(max_workers=max_workers)             # <<<<<<<<<<<<<<
  * 
  *     def pick_move(self, debug: bool = False) -> Pick:
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_ProcessPoolExecutor); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 77, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_max_workers, __pyx_v_max_workers) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_ProcessPoolExecutor); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_executor, __pyx_t_2) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_max_workers, __pyx_v_max_workers) < 0) __PYX_ERR(0, 131, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_executor, __pyx_t_3) < 0) __PYX_ERR(0, 131, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":63
+  /* "chmengine/engines/cmhmey2_pool_executor.py":107
  *     executor: ProcessPoolExecutor
  * 
- *     def __init__(self, board: Optional[Board] = None, depth: int = 1, max_workers: Optional[int] = None) -> None:             # <<<<<<<<<<<<<<
- *         """Initialize the CMHMEngine2PoolExecutor.
- * 
+ *     def __init__(             # <<<<<<<<<<<<<<
+ *             self,
+ *             board: Optional[Board] = None,
  */
 
   /* function exit code */
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
@@ -3921,7 +4756,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
   return __pyx_r;
 }
 
-/* "chmengine/engines/cmhmey2_pool_executor.py":79
+/* "chmengine/engines/cmhmey2_pool_executor.py":133
  *         self.executor = ProcessPoolExecutor(max_workers=max_workers)
  * 
  *     def pick_move(self, debug: bool = False) -> Pick:             # <<<<<<<<<<<<<<
@@ -3987,19 +4822,19 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 79, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 133, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_debug);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 79, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 133, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "pick_move") < 0)) __PYX_ERR(0, 79, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "pick_move") < 0)) __PYX_ERR(0, 133, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -4015,7 +4850,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("pick_move", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 79, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("pick_move", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 133, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4053,6 +4888,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
   PyObject *__pyx_v_e = NULL;
   PyObject *__pyx_7genexpr__pyx_v__move = NULL;
   PyObject *__pyx_8genexpr1__pyx_v__move = NULL;
+  PyObject *__pyx_8genexpr2__pyx_v__move = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4086,7 +4922,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("pick_move", 1);
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":95
+  /* "chmengine/engines/cmhmey2_pool_executor.py":149
  *         # Initialize board_cache
  *         _move: Move
  *         board_cache: BoardCache = {             # <<<<<<<<<<<<<<
@@ -4094,19 +4930,19 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
  *                 'board': self.engine.board_copy_pushed(move=_move),
  */
   { /* enter inner scope */
-    __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L5_error)
+    __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 149, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_1);
 
-    /* "chmengine/engines/cmhmey2_pool_executor.py":98
+    /* "chmengine/engines/cmhmey2_pool_executor.py":152
  *             _move: {
  *                 'board': self.engine.board_copy_pushed(move=_move),
  *             } for _move in self.engine.current_moves_list()             # <<<<<<<<<<<<<<
  *         }
  *         # Throw ValueError if there are no moves to evaluate.
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_engine); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L5_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_engine); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 152, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_current_moves_list); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 98, __pyx_L5_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_current_moves_list); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 152, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_3 = NULL;
@@ -4127,7 +4963,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
       PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
       __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_5, 0+__pyx_t_5);
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 98, __pyx_L5_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 152, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
@@ -4136,9 +4972,9 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
       __pyx_t_6 = 0;
       __pyx_t_7 = NULL;
     } else {
-      __pyx_t_6 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 98, __pyx_L5_error)
+      __pyx_t_6 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 152, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_7 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_4); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 98, __pyx_L5_error)
+      __pyx_t_7 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_4); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 152, __pyx_L5_error)
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     for (;;) {
@@ -4147,28 +4983,28 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
           {
             Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_4);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 98, __pyx_L5_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 152, __pyx_L5_error)
             #endif
             if (__pyx_t_6 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_2 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_6); __Pyx_INCREF(__pyx_t_2); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 98, __pyx_L5_error)
+          __pyx_t_2 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_6); __Pyx_INCREF(__pyx_t_2); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 152, __pyx_L5_error)
           #else
-          __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_4, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 98, __pyx_L5_error)
+          __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_4, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 152, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_2);
           #endif
         } else {
           {
             Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_4);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 98, __pyx_L5_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 152, __pyx_L5_error)
             #endif
             if (__pyx_t_6 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_6); __Pyx_INCREF(__pyx_t_2); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 98, __pyx_L5_error)
+          __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_6); __Pyx_INCREF(__pyx_t_2); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 152, __pyx_L5_error)
           #else
-          __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_4, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 98, __pyx_L5_error)
+          __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_4, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 152, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_2);
           #endif
         }
@@ -4178,7 +5014,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 98, __pyx_L5_error)
+            else __PYX_ERR(0, 152, __pyx_L5_error)
           }
           break;
         }
@@ -4187,33 +5023,33 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
       __Pyx_XDECREF_SET(__pyx_7genexpr__pyx_v__move, __pyx_t_2);
       __pyx_t_2 = 0;
 
-      /* "chmengine/engines/cmhmey2_pool_executor.py":97
+      /* "chmengine/engines/cmhmey2_pool_executor.py":151
  *         board_cache: BoardCache = {
  *             _move: {
  *                 'board': self.engine.board_copy_pushed(move=_move),             # <<<<<<<<<<<<<<
  *             } for _move in self.engine.current_moves_list()
  *         }
  */
-      __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 97, __pyx_L5_error)
+      __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 151, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_engine); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 97, __pyx_L5_error)
+      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_engine); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 151, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_board_copy_pushed); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 97, __pyx_L5_error)
+      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_board_copy_pushed); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 151, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 97, __pyx_L5_error)
+      __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 151, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_3);
-      if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_move, __pyx_7genexpr__pyx_v__move) < 0) __PYX_ERR(0, 97, __pyx_L5_error)
-      __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 97, __pyx_L5_error)
+      if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_move, __pyx_7genexpr__pyx_v__move) < 0) __PYX_ERR(0, 151, __pyx_L5_error)
+      __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 151, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (PyDict_SetItem(__pyx_t_2, __pyx_n_u_board, __pyx_t_9) < 0) __PYX_ERR(0, 97, __pyx_L5_error)
+      if (PyDict_SetItem(__pyx_t_2, __pyx_n_u_board, __pyx_t_9) < 0) __PYX_ERR(0, 151, __pyx_L5_error)
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      if (unlikely(PyDict_SetItem(__pyx_t_1, (PyObject*)__pyx_7genexpr__pyx_v__move, (PyObject*)__pyx_t_2))) __PYX_ERR(0, 96, __pyx_L5_error)
+      if (unlikely(PyDict_SetItem(__pyx_t_1, (PyObject*)__pyx_7genexpr__pyx_v__move, (PyObject*)__pyx_t_2))) __PYX_ERR(0, 150, __pyx_L5_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-      /* "chmengine/engines/cmhmey2_pool_executor.py":98
+      /* "chmengine/engines/cmhmey2_pool_executor.py":152
  *             _move: {
  *                 'board': self.engine.board_copy_pushed(move=_move),
  *             } for _move in self.engine.current_moves_list()             # <<<<<<<<<<<<<<
@@ -4232,18 +5068,18 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
   __pyx_v_board_cache = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":101
+  /* "chmengine/engines/cmhmey2_pool_executor.py":155
  *         }
  *         # Throw ValueError if there are no moves to evaluate.
  *         if len(board_cache) == 0:             # <<<<<<<<<<<<<<
  *             # Try/Catch root value error that would have happened had we made it to the end of the method call.
  *             try:
  */
-  __pyx_t_6 = PyDict_Size(__pyx_v_board_cache); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 101, __pyx_L1_error)
+  __pyx_t_6 = PyDict_Size(__pyx_v_board_cache); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 155, __pyx_L1_error)
   __pyx_t_10 = (__pyx_t_6 == 0);
   if (__pyx_t_10) {
 
-    /* "chmengine/engines/cmhmey2_pool_executor.py":103
+    /* "chmengine/engines/cmhmey2_pool_executor.py":157
  *         if len(board_cache) == 0:
  *             # Try/Catch root value error that would have happened had we made it to the end of the method call.
  *             try:             # <<<<<<<<<<<<<<
@@ -4259,7 +5095,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
       __Pyx_XGOTREF(__pyx_t_13);
       /*try:*/ {
 
-        /* "chmengine/engines/cmhmey2_pool_executor.py":104
+        /* "chmengine/engines/cmhmey2_pool_executor.py":158
  *             # Try/Catch root value error that would have happened had we made it to the end of the method call.
  *             try:
  *                 return self.engine.pick_move(debug=True)             # <<<<<<<<<<<<<<
@@ -4267,15 +5103,15 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
  *                 raise ValueError(
  */
         __Pyx_XDECREF(__pyx_r);
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_engine); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 104, __pyx_L11_error)
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_engine); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 158, __pyx_L11_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_pick_move); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 104, __pyx_L11_error)
+        __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_pick_move); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 158, __pyx_L11_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 104, __pyx_L11_error)
+        __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 158, __pyx_L11_error)
         __Pyx_GOTREF(__pyx_t_1);
-        if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_debug, Py_True) < 0) __PYX_ERR(0, 104, __pyx_L11_error)
-        __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 104, __pyx_L11_error)
+        if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_debug, Py_True) < 0) __PYX_ERR(0, 158, __pyx_L11_error)
+        __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 158, __pyx_L11_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -4283,7 +5119,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
         __pyx_t_2 = 0;
         goto __pyx_L15_try_return;
 
-        /* "chmengine/engines/cmhmey2_pool_executor.py":103
+        /* "chmengine/engines/cmhmey2_pool_executor.py":157
  *         if len(board_cache) == 0:
  *             # Try/Catch root value error that would have happened had we made it to the end of the method call.
  *             try:             # <<<<<<<<<<<<<<
@@ -4299,7 +5135,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
       __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-      /* "chmengine/engines/cmhmey2_pool_executor.py":105
+      /* "chmengine/engines/cmhmey2_pool_executor.py":159
  *             try:
  *                 return self.engine.pick_move(debug=True)
  *             except ValueError as root_error:             # <<<<<<<<<<<<<<
@@ -4309,7 +5145,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
       __pyx_t_14 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_ValueError);
       if (__pyx_t_14) {
         __Pyx_AddTraceback("chmengine.engines.cmhmey2_pool_executor.CMHMEngine2PoolExecutor.pick_move", __pyx_clineno, __pyx_lineno, __pyx_filename);
-        if (__Pyx_GetException(&__pyx_t_2, &__pyx_t_1, &__pyx_t_4) < 0) __PYX_ERR(0, 105, __pyx_L13_except_error)
+        if (__Pyx_GetException(&__pyx_t_2, &__pyx_t_1, &__pyx_t_4) < 0) __PYX_ERR(0, 159, __pyx_L13_except_error)
         __Pyx_XGOTREF(__pyx_t_2);
         __Pyx_XGOTREF(__pyx_t_1);
         __Pyx_XGOTREF(__pyx_t_4);
@@ -4317,16 +5153,16 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
         __pyx_v_root_error = __pyx_t_1;
         /*try:*/ {
 
-          /* "chmengine/engines/cmhmey2_pool_executor.py":107
+          /* "chmengine/engines/cmhmey2_pool_executor.py":161
  *             except ValueError as root_error:
  *                 raise ValueError(
  *                     f"No legal moves available from board: {self.engine.fen()}"             # <<<<<<<<<<<<<<
  *                 ) from root_error
- *         future_to_move: Dict[Future, Move] = {
+ *         if isinstance(self.engine, CMHMEngine3):
  */
-          __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_engine); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 107, __pyx_L22_error)
+          __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_engine); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 161, __pyx_L22_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_fen); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 107, __pyx_L22_error)
+          __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_fen); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 161, __pyx_L22_error)
           __Pyx_GOTREF(__pyx_t_8);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           __pyx_t_3 = NULL;
@@ -4347,41 +5183,41 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
             PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
             __pyx_t_9 = __Pyx_PyObject_FastCall(__pyx_t_8, __pyx_callargs+1-__pyx_t_5, 0+__pyx_t_5);
             __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-            if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 107, __pyx_L22_error)
+            if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 161, __pyx_L22_error)
             __Pyx_GOTREF(__pyx_t_9);
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
           }
-          __pyx_t_8 = __Pyx_PyObject_FormatSimple(__pyx_t_9, __pyx_empty_unicode); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 107, __pyx_L22_error)
+          __pyx_t_8 = __Pyx_PyObject_FormatSimple(__pyx_t_9, __pyx_empty_unicode); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 161, __pyx_L22_error)
           __Pyx_GOTREF(__pyx_t_8);
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-          __pyx_t_9 = __Pyx_PyUnicode_Concat(__pyx_kp_u_No_legal_moves_available_from_bo, __pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 107, __pyx_L22_error)
+          __pyx_t_9 = __Pyx_PyUnicode_Concat(__pyx_kp_u_No_legal_moves_available_from_bo, __pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 161, __pyx_L22_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-          /* "chmengine/engines/cmhmey2_pool_executor.py":106
+          /* "chmengine/engines/cmhmey2_pool_executor.py":160
  *                 return self.engine.pick_move(debug=True)
  *             except ValueError as root_error:
  *                 raise ValueError(             # <<<<<<<<<<<<<<
  *                     f"No legal moves available from board: {self.engine.fen()}"
  *                 ) from root_error
  */
-          __pyx_t_8 = __Pyx_PyObject_CallOneArg(__pyx_builtin_ValueError, __pyx_t_9); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 106, __pyx_L22_error)
+          __pyx_t_8 = __Pyx_PyObject_CallOneArg(__pyx_builtin_ValueError, __pyx_t_9); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 160, __pyx_L22_error)
           __Pyx_GOTREF(__pyx_t_8);
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-          /* "chmengine/engines/cmhmey2_pool_executor.py":108
+          /* "chmengine/engines/cmhmey2_pool_executor.py":162
  *                 raise ValueError(
  *                     f"No legal moves available from board: {self.engine.fen()}"
  *                 ) from root_error             # <<<<<<<<<<<<<<
- *         future_to_move: Dict[Future, Move] = {
- *             self.executor.submit(
+ *         if isinstance(self.engine, CMHMEngine3):
+ *             future_to_move: Dict[Future, Move] = {
  */
           __Pyx_Raise(__pyx_t_8, 0, 0, __pyx_v_root_error);
           __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-          __PYX_ERR(0, 106, __pyx_L22_error)
+          __PYX_ERR(0, 160, __pyx_L22_error)
         }
 
-        /* "chmengine/engines/cmhmey2_pool_executor.py":105
+        /* "chmengine/engines/cmhmey2_pool_executor.py":159
  *             try:
  *                 return self.engine.pick_move(debug=True)
  *             except ValueError as root_error:             # <<<<<<<<<<<<<<
@@ -4427,7 +5263,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
       }
       goto __pyx_L13_except_error;
 
-      /* "chmengine/engines/cmhmey2_pool_executor.py":103
+      /* "chmengine/engines/cmhmey2_pool_executor.py":157
  *         if len(board_cache) == 0:
  *             # Try/Catch root value error that would have happened had we made it to the end of the method call.
  *             try:             # <<<<<<<<<<<<<<
@@ -4448,7 +5284,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
       goto __pyx_L0;
     }
 
-    /* "chmengine/engines/cmhmey2_pool_executor.py":101
+    /* "chmengine/engines/cmhmey2_pool_executor.py":155
  *         }
  *         # Throw ValueError if there are no moves to evaluate.
  *         if len(board_cache) == 0:             # <<<<<<<<<<<<<<
@@ -4457,261 +5293,460 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
  */
   }
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":109
+  /* "chmengine/engines/cmhmey2_pool_executor.py":163
  *                     f"No legal moves available from board: {self.engine.fen()}"
  *                 ) from root_error
- *         future_to_move: Dict[Future, Move] = {             # <<<<<<<<<<<<<<
- *             self.executor.submit(
- *                 evaluate_move,
+ *         if isinstance(self.engine, CMHMEngine3):             # <<<<<<<<<<<<<<
+ *             future_to_move: Dict[Future, Move] = {
+ *                 self.executor.submit(
  */
-  { /* enter inner scope */
-    __pyx_t_4 = PyDict_New(); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 109, __pyx_L30_error)
-    __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_engine); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 163, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_CMHMEngine3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_10 = PyObject_IsInstance(__pyx_t_4, __pyx_t_1); if (unlikely(__pyx_t_10 == ((int)-1))) __PYX_ERR(0, 163, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (__pyx_t_10) {
 
-    /* "chmengine/engines/cmhmey2_pool_executor.py":116
- *                 debug=debug,
- *                 cache_dir=self.cache_dir
- *             ): _move for _move in board_cache             # <<<<<<<<<<<<<<
- *         }
+    /* "chmengine/engines/cmhmey2_pool_executor.py":164
+ *                 ) from root_error
+ *         if isinstance(self.engine, CMHMEngine3):
+ *             future_to_move: Dict[Future, Move] = {             # <<<<<<<<<<<<<<
+ *                 self.executor.submit(
+ *                     evaluate_move_until,
+ */
+    { /* enter inner scope */
+      __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 164, __pyx_L31_error)
+      __Pyx_GOTREF(__pyx_t_1);
+
+      /* "chmengine/engines/cmhmey2_pool_executor.py":172
+ *                     cache_dir=self.cache_dir,
+ *                     time_limit=self.engine.time_limit
+ *                 ): _move for _move in board_cache             # <<<<<<<<<<<<<<
+ *             }
+ *         else:
+ */
+      __pyx_t_6 = 0;
+      __pyx_t_2 = __Pyx_dict_iterator(__pyx_v_board_cache, 1, ((PyObject *)NULL), (&__pyx_t_23), (&__pyx_t_15)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L31_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_XDECREF(__pyx_t_4);
+      __pyx_t_4 = __pyx_t_2;
+      __pyx_t_2 = 0;
+      while (1) {
+        __pyx_t_14 = __Pyx_dict_iter_next(__pyx_t_4, __pyx_t_23, &__pyx_t_6, &__pyx_t_2, NULL, NULL, __pyx_t_15);
+        if (unlikely(__pyx_t_14 == 0)) break;
+        if (unlikely(__pyx_t_14 == -1)) __PYX_ERR(0, 172, __pyx_L31_error)
+        __Pyx_GOTREF(__pyx_t_2);
+        __Pyx_XDECREF_SET(__pyx_8genexpr1__pyx_v__move, __pyx_t_2);
+        __pyx_t_2 = 0;
+
+        /* "chmengine/engines/cmhmey2_pool_executor.py":165
+ *         if isinstance(self.engine, CMHMEngine3):
+ *             future_to_move: Dict[Future, Move] = {
+ *                 self.executor.submit(             # <<<<<<<<<<<<<<
+ *                     evaluate_move_until,
+ *                     board=board_cache[_move]['board'],
+ */
+        __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_executor); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 165, __pyx_L31_error)
+        __Pyx_GOTREF(__pyx_t_2);
+        __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_submit); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 165, __pyx_L31_error)
+        __Pyx_GOTREF(__pyx_t_8);
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+        /* "chmengine/engines/cmhmey2_pool_executor.py":166
+ *             future_to_move: Dict[Future, Move] = {
+ *                 self.executor.submit(
+ *                     evaluate_move_until,             # <<<<<<<<<<<<<<
+ *                     board=board_cache[_move]['board'],
+ *                     depth=self.engine.depth,
+ */
+        __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_evaluate_move_until); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 166, __pyx_L31_error)
+        __Pyx_GOTREF(__pyx_t_2);
+
+        /* "chmengine/engines/cmhmey2_pool_executor.py":165
+ *         if isinstance(self.engine, CMHMEngine3):
+ *             future_to_move: Dict[Future, Move] = {
+ *                 self.executor.submit(             # <<<<<<<<<<<<<<
+ *                     evaluate_move_until,
+ *                     board=board_cache[_move]['board'],
+ */
+        __pyx_t_9 = PyTuple_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 165, __pyx_L31_error)
+        __Pyx_GOTREF(__pyx_t_9);
+        __Pyx_GIVEREF(__pyx_t_2);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_2)) __PYX_ERR(0, 165, __pyx_L31_error);
+        __pyx_t_2 = 0;
+
+        /* "chmengine/engines/cmhmey2_pool_executor.py":167
+ *                 self.executor.submit(
+ *                     evaluate_move_until,
+ *                     board=board_cache[_move]['board'],             # <<<<<<<<<<<<<<
+ *                     depth=self.engine.depth,
+ *                     debug=debug,
+ */
+        __pyx_t_2 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 167, __pyx_L31_error)
+        __Pyx_GOTREF(__pyx_t_2);
+        __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_board_cache, __pyx_8genexpr1__pyx_v__move); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 167, __pyx_L31_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        __pyx_t_24 = __Pyx_PyObject_Dict_GetItem(__pyx_t_3, __pyx_n_u_board); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 167, __pyx_L31_error)
+        __Pyx_GOTREF(__pyx_t_24);
+        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+        if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_t_24) < 0) __PYX_ERR(0, 167, __pyx_L31_error)
+        __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
+
+        /* "chmengine/engines/cmhmey2_pool_executor.py":168
+ *                     evaluate_move_until,
+ *                     board=board_cache[_move]['board'],
+ *                     depth=self.engine.depth,             # <<<<<<<<<<<<<<
+ *                     debug=debug,
+ *                     cache_dir=self.cache_dir,
+ */
+        __pyx_t_24 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_engine); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 168, __pyx_L31_error)
+        __Pyx_GOTREF(__pyx_t_24);
+        __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_24, __pyx_n_s_depth); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 168, __pyx_L31_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
+        if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_depth, __pyx_t_3) < 0) __PYX_ERR(0, 167, __pyx_L31_error)
+        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+        /* "chmengine/engines/cmhmey2_pool_executor.py":169
+ *                     board=board_cache[_move]['board'],
+ *                     depth=self.engine.depth,
+ *                     debug=debug,             # <<<<<<<<<<<<<<
+ *                     cache_dir=self.cache_dir,
+ *                     time_limit=self.engine.time_limit
+ */
+        if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_debug, __pyx_v_debug) < 0) __PYX_ERR(0, 167, __pyx_L31_error)
+
+        /* "chmengine/engines/cmhmey2_pool_executor.py":170
+ *                     depth=self.engine.depth,
+ *                     debug=debug,
+ *                     cache_dir=self.cache_dir,             # <<<<<<<<<<<<<<
+ *                     time_limit=self.engine.time_limit
+ *                 ): _move for _move in board_cache
+ */
+        __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_cache_dir); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 170, __pyx_L31_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_cache_dir, __pyx_t_3) < 0) __PYX_ERR(0, 167, __pyx_L31_error)
+        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+        /* "chmengine/engines/cmhmey2_pool_executor.py":171
+ *                     debug=debug,
+ *                     cache_dir=self.cache_dir,
+ *                     time_limit=self.engine.time_limit             # <<<<<<<<<<<<<<
+ *                 ): _move for _move in board_cache
+ *             }
+ */
+        __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_engine); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 171, __pyx_L31_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        __pyx_t_24 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_time_limit); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 171, __pyx_L31_error)
+        __Pyx_GOTREF(__pyx_t_24);
+        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+        if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_time_limit, __pyx_t_24) < 0) __PYX_ERR(0, 167, __pyx_L31_error)
+        __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
+
+        /* "chmengine/engines/cmhmey2_pool_executor.py":165
+ *         if isinstance(self.engine, CMHMEngine3):
+ *             future_to_move: Dict[Future, Move] = {
+ *                 self.executor.submit(             # <<<<<<<<<<<<<<
+ *                     evaluate_move_until,
+ *                     board=board_cache[_move]['board'],
+ */
+        __pyx_t_24 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_9, __pyx_t_2); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 165, __pyx_L31_error)
+        __Pyx_GOTREF(__pyx_t_24);
+        __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+        __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+        /* "chmengine/engines/cmhmey2_pool_executor.py":172
+ *                     cache_dir=self.cache_dir,
+ *                     time_limit=self.engine.time_limit
+ *                 ): _move for _move in board_cache             # <<<<<<<<<<<<<<
+ *             }
+ *         else:
+ */
+        if (unlikely(PyDict_SetItem(__pyx_t_1, (PyObject*)__pyx_t_24, (PyObject*)__pyx_8genexpr1__pyx_v__move))) __PYX_ERR(0, 165, __pyx_L31_error)
+        __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
+      }
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __Pyx_XDECREF(__pyx_8genexpr1__pyx_v__move); __pyx_8genexpr1__pyx_v__move = 0;
+      goto __pyx_L34_exit_scope;
+      __pyx_L31_error:;
+      __Pyx_XDECREF(__pyx_8genexpr1__pyx_v__move); __pyx_8genexpr1__pyx_v__move = 0;
+      goto __pyx_L1_error;
+      __pyx_L34_exit_scope:;
+    } /* exit inner scope */
+    __pyx_v_future_to_move = ((PyObject*)__pyx_t_1);
+    __pyx_t_1 = 0;
+
+    /* "chmengine/engines/cmhmey2_pool_executor.py":163
+ *                     f"No legal moves available from board: {self.engine.fen()}"
+ *                 ) from root_error
+ *         if isinstance(self.engine, CMHMEngine3):             # <<<<<<<<<<<<<<
+ *             future_to_move: Dict[Future, Move] = {
+ *                 self.executor.submit(
+ */
+    goto __pyx_L28;
+  }
+
+  /* "chmengine/engines/cmhmey2_pool_executor.py":175
+ *             }
+ *         else:
+ *             future_to_move: Dict[Future, Move] = {             # <<<<<<<<<<<<<<
+ *                 self.executor.submit(
+ *                     evaluate_move,
+ */
+  /*else*/ {
+    { /* enter inner scope */
+      __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L37_error)
+      __Pyx_GOTREF(__pyx_t_1);
+
+      /* "chmengine/engines/cmhmey2_pool_executor.py":182
+ *                     debug=debug,
+ *                     cache_dir=self.cache_dir
+ *                 ): _move for _move in board_cache             # <<<<<<<<<<<<<<
+ *             }
  *         _future: Future[Pick]
  */
-    __pyx_t_6 = 0;
-    __pyx_t_2 = __Pyx_dict_iterator(__pyx_v_board_cache, 1, ((PyObject *)NULL), (&__pyx_t_23), (&__pyx_t_15)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 116, __pyx_L30_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_XDECREF(__pyx_t_1);
-    __pyx_t_1 = __pyx_t_2;
-    __pyx_t_2 = 0;
-    while (1) {
-      __pyx_t_14 = __Pyx_dict_iter_next(__pyx_t_1, __pyx_t_23, &__pyx_t_6, &__pyx_t_2, NULL, NULL, __pyx_t_15);
-      if (unlikely(__pyx_t_14 == 0)) break;
-      if (unlikely(__pyx_t_14 == -1)) __PYX_ERR(0, 116, __pyx_L30_error)
-      __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_XDECREF_SET(__pyx_8genexpr1__pyx_v__move, __pyx_t_2);
-      __pyx_t_2 = 0;
-
-      /* "chmengine/engines/cmhmey2_pool_executor.py":110
- *                 ) from root_error
- *         future_to_move: Dict[Future, Move] = {
- *             self.executor.submit(             # <<<<<<<<<<<<<<
- *                 evaluate_move,
- *                 board=board_cache[_move]['board'],
- */
-      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_executor); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 110, __pyx_L30_error)
-      __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_submit); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 110, __pyx_L30_error)
-      __Pyx_GOTREF(__pyx_t_8);
-      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-      /* "chmengine/engines/cmhmey2_pool_executor.py":111
- *         future_to_move: Dict[Future, Move] = {
- *             self.executor.submit(
- *                 evaluate_move,             # <<<<<<<<<<<<<<
- *                 board=board_cache[_move]['board'],
- *                 depth=self.engine.depth,
- */
-      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_evaluate_move); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 111, __pyx_L30_error)
-      __Pyx_GOTREF(__pyx_t_2);
-
-      /* "chmengine/engines/cmhmey2_pool_executor.py":110
- *                 ) from root_error
- *         future_to_move: Dict[Future, Move] = {
- *             self.executor.submit(             # <<<<<<<<<<<<<<
- *                 evaluate_move,
- *                 board=board_cache[_move]['board'],
- */
-      __pyx_t_9 = PyTuple_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 110, __pyx_L30_error)
-      __Pyx_GOTREF(__pyx_t_9);
-      __Pyx_GIVEREF(__pyx_t_2);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_2)) __PYX_ERR(0, 110, __pyx_L30_error);
-      __pyx_t_2 = 0;
-
-      /* "chmengine/engines/cmhmey2_pool_executor.py":112
- *             self.executor.submit(
- *                 evaluate_move,
- *                 board=board_cache[_move]['board'],             # <<<<<<<<<<<<<<
- *                 depth=self.engine.depth,
- *                 debug=debug,
- */
-      __pyx_t_2 = __Pyx_PyDict_NewPresized(4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 112, __pyx_L30_error)
-      __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_board_cache, __pyx_8genexpr1__pyx_v__move); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 112, __pyx_L30_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_24 = __Pyx_PyObject_Dict_GetItem(__pyx_t_3, __pyx_n_u_board); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 112, __pyx_L30_error)
+      __pyx_t_23 = 0;
+      __pyx_t_24 = __Pyx_dict_iterator(__pyx_v_board_cache, 1, ((PyObject *)NULL), (&__pyx_t_6), (&__pyx_t_15)); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 182, __pyx_L37_error)
       __Pyx_GOTREF(__pyx_t_24);
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_t_24) < 0) __PYX_ERR(0, 112, __pyx_L30_error)
-      __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
+      __Pyx_XDECREF(__pyx_t_4);
+      __pyx_t_4 = __pyx_t_24;
+      __pyx_t_24 = 0;
+      while (1) {
+        __pyx_t_14 = __Pyx_dict_iter_next(__pyx_t_4, __pyx_t_6, &__pyx_t_23, &__pyx_t_24, NULL, NULL, __pyx_t_15);
+        if (unlikely(__pyx_t_14 == 0)) break;
+        if (unlikely(__pyx_t_14 == -1)) __PYX_ERR(0, 182, __pyx_L37_error)
+        __Pyx_GOTREF(__pyx_t_24);
+        __Pyx_XDECREF_SET(__pyx_8genexpr2__pyx_v__move, __pyx_t_24);
+        __pyx_t_24 = 0;
 
-      /* "chmengine/engines/cmhmey2_pool_executor.py":113
- *                 evaluate_move,
- *                 board=board_cache[_move]['board'],
- *                 depth=self.engine.depth,             # <<<<<<<<<<<<<<
- *                 debug=debug,
- *                 cache_dir=self.cache_dir
+        /* "chmengine/engines/cmhmey2_pool_executor.py":176
+ *         else:
+ *             future_to_move: Dict[Future, Move] = {
+ *                 self.executor.submit(             # <<<<<<<<<<<<<<
+ *                     evaluate_move,
+ *                     board=board_cache[_move]['board'],
  */
-      __pyx_t_24 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_engine); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 113, __pyx_L30_error)
-      __Pyx_GOTREF(__pyx_t_24);
-      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_24, __pyx_n_s_depth); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 113, __pyx_L30_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
-      if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_depth, __pyx_t_3) < 0) __PYX_ERR(0, 112, __pyx_L30_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+        __pyx_t_24 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_executor); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 176, __pyx_L37_error)
+        __Pyx_GOTREF(__pyx_t_24);
+        __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_24, __pyx_n_s_submit); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 176, __pyx_L37_error)
+        __Pyx_GOTREF(__pyx_t_2);
+        __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
 
-      /* "chmengine/engines/cmhmey2_pool_executor.py":114
- *                 board=board_cache[_move]['board'],
- *                 depth=self.engine.depth,
- *                 debug=debug,             # <<<<<<<<<<<<<<
- *                 cache_dir=self.cache_dir
- *             ): _move for _move in board_cache
+        /* "chmengine/engines/cmhmey2_pool_executor.py":177
+ *             future_to_move: Dict[Future, Move] = {
+ *                 self.executor.submit(
+ *                     evaluate_move,             # <<<<<<<<<<<<<<
+ *                     board=board_cache[_move]['board'],
+ *                     depth=self.engine.depth,
  */
-      if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_debug, __pyx_v_debug) < 0) __PYX_ERR(0, 112, __pyx_L30_error)
+        __Pyx_GetModuleGlobalName(__pyx_t_24, __pyx_n_s_evaluate_move); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 177, __pyx_L37_error)
+        __Pyx_GOTREF(__pyx_t_24);
 
-      /* "chmengine/engines/cmhmey2_pool_executor.py":115
- *                 depth=self.engine.depth,
- *                 debug=debug,
- *                 cache_dir=self.cache_dir             # <<<<<<<<<<<<<<
- *             ): _move for _move in board_cache
- *         }
+        /* "chmengine/engines/cmhmey2_pool_executor.py":176
+ *         else:
+ *             future_to_move: Dict[Future, Move] = {
+ *                 self.executor.submit(             # <<<<<<<<<<<<<<
+ *                     evaluate_move,
+ *                     board=board_cache[_move]['board'],
  */
-      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_cache_dir); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 115, __pyx_L30_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_cache_dir, __pyx_t_3) < 0) __PYX_ERR(0, 112, __pyx_L30_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+        __pyx_t_9 = PyTuple_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 176, __pyx_L37_error)
+        __Pyx_GOTREF(__pyx_t_9);
+        __Pyx_GIVEREF(__pyx_t_24);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_24)) __PYX_ERR(0, 176, __pyx_L37_error);
+        __pyx_t_24 = 0;
 
-      /* "chmengine/engines/cmhmey2_pool_executor.py":110
- *                 ) from root_error
- *         future_to_move: Dict[Future, Move] = {
- *             self.executor.submit(             # <<<<<<<<<<<<<<
- *                 evaluate_move,
- *                 board=board_cache[_move]['board'],
+        /* "chmengine/engines/cmhmey2_pool_executor.py":178
+ *                 self.executor.submit(
+ *                     evaluate_move,
+ *                     board=board_cache[_move]['board'],             # <<<<<<<<<<<<<<
+ *                     depth=self.engine.depth,
+ *                     debug=debug,
  */
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_9, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 110, __pyx_L30_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __pyx_t_24 = __Pyx_PyDict_NewPresized(4); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 178, __pyx_L37_error)
+        __Pyx_GOTREF(__pyx_t_24);
+        __pyx_t_8 = __Pyx_PyDict_GetItem(__pyx_v_board_cache, __pyx_8genexpr2__pyx_v__move); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 178, __pyx_L37_error)
+        __Pyx_GOTREF(__pyx_t_8);
+        __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_t_8, __pyx_n_u_board); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 178, __pyx_L37_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+        if (PyDict_SetItem(__pyx_t_24, __pyx_n_s_board, __pyx_t_3) < 0) __PYX_ERR(0, 178, __pyx_L37_error)
+        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-      /* "chmengine/engines/cmhmey2_pool_executor.py":116
- *                 debug=debug,
- *                 cache_dir=self.cache_dir
- *             ): _move for _move in board_cache             # <<<<<<<<<<<<<<
- *         }
+        /* "chmengine/engines/cmhmey2_pool_executor.py":179
+ *                     evaluate_move,
+ *                     board=board_cache[_move]['board'],
+ *                     depth=self.engine.depth,             # <<<<<<<<<<<<<<
+ *                     debug=debug,
+ *                     cache_dir=self.cache_dir
+ */
+        __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_engine); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 179, __pyx_L37_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_depth); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 179, __pyx_L37_error)
+        __Pyx_GOTREF(__pyx_t_8);
+        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+        if (PyDict_SetItem(__pyx_t_24, __pyx_n_s_depth, __pyx_t_8) < 0) __PYX_ERR(0, 178, __pyx_L37_error)
+        __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+
+        /* "chmengine/engines/cmhmey2_pool_executor.py":180
+ *                     board=board_cache[_move]['board'],
+ *                     depth=self.engine.depth,
+ *                     debug=debug,             # <<<<<<<<<<<<<<
+ *                     cache_dir=self.cache_dir
+ *                 ): _move for _move in board_cache
+ */
+        if (PyDict_SetItem(__pyx_t_24, __pyx_n_s_debug, __pyx_v_debug) < 0) __PYX_ERR(0, 178, __pyx_L37_error)
+
+        /* "chmengine/engines/cmhmey2_pool_executor.py":181
+ *                     depth=self.engine.depth,
+ *                     debug=debug,
+ *                     cache_dir=self.cache_dir             # <<<<<<<<<<<<<<
+ *                 ): _move for _move in board_cache
+ *             }
+ */
+        __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_cache_dir); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 181, __pyx_L37_error)
+        __Pyx_GOTREF(__pyx_t_8);
+        if (PyDict_SetItem(__pyx_t_24, __pyx_n_s_cache_dir, __pyx_t_8) < 0) __PYX_ERR(0, 178, __pyx_L37_error)
+        __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+
+        /* "chmengine/engines/cmhmey2_pool_executor.py":176
+ *         else:
+ *             future_to_move: Dict[Future, Move] = {
+ *                 self.executor.submit(             # <<<<<<<<<<<<<<
+ *                     evaluate_move,
+ *                     board=board_cache[_move]['board'],
+ */
+        __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_9, __pyx_t_24); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 176, __pyx_L37_error)
+        __Pyx_GOTREF(__pyx_t_8);
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+        __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
+
+        /* "chmengine/engines/cmhmey2_pool_executor.py":182
+ *                     debug=debug,
+ *                     cache_dir=self.cache_dir
+ *                 ): _move for _move in board_cache             # <<<<<<<<<<<<<<
+ *             }
  *         _future: Future[Pick]
  */
-      if (unlikely(PyDict_SetItem(__pyx_t_4, (PyObject*)__pyx_t_3, (PyObject*)__pyx_8genexpr1__pyx_v__move))) __PYX_ERR(0, 110, __pyx_L30_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    }
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_XDECREF(__pyx_8genexpr1__pyx_v__move); __pyx_8genexpr1__pyx_v__move = 0;
-    goto __pyx_L33_exit_scope;
-    __pyx_L30_error:;
-    __Pyx_XDECREF(__pyx_8genexpr1__pyx_v__move); __pyx_8genexpr1__pyx_v__move = 0;
-    goto __pyx_L1_error;
-    __pyx_L33_exit_scope:;
-  } /* exit inner scope */
-  __pyx_v_future_to_move = ((PyObject*)__pyx_t_4);
-  __pyx_t_4 = 0;
+        if (unlikely(PyDict_SetItem(__pyx_t_1, (PyObject*)__pyx_t_8, (PyObject*)__pyx_8genexpr2__pyx_v__move))) __PYX_ERR(0, 176, __pyx_L37_error)
+        __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+      }
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __Pyx_XDECREF(__pyx_8genexpr2__pyx_v__move); __pyx_8genexpr2__pyx_v__move = 0;
+      goto __pyx_L40_exit_scope;
+      __pyx_L37_error:;
+      __Pyx_XDECREF(__pyx_8genexpr2__pyx_v__move); __pyx_8genexpr2__pyx_v__move = 0;
+      goto __pyx_L1_error;
+      __pyx_L40_exit_scope:;
+    } /* exit inner scope */
+    __pyx_v_future_to_move = ((PyObject*)__pyx_t_1);
+    __pyx_t_1 = 0;
+  }
+  __pyx_L28:;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":119
- *         }
+  /* "chmengine/engines/cmhmey2_pool_executor.py":185
+ *             }
  *         _future: Future[Pick]
  *         for _future in as_completed(future_to_move):             # <<<<<<<<<<<<<<
  *             _move = future_to_move[_future]
  *             try:
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_as_completed); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 119, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_as_completed); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_8 = NULL;
   __pyx_t_5 = 0;
   #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_1))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_1);
-    if (likely(__pyx_t_3)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
-      __Pyx_INCREF(__pyx_t_3);
+  if (unlikely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_4);
+    if (likely(__pyx_t_8)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      __Pyx_INCREF(__pyx_t_8);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_1, function);
+      __Pyx_DECREF_SET(__pyx_t_4, function);
       __pyx_t_5 = 1;
     }
   }
   #endif
   {
-    PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_v_future_to_move};
-    __pyx_t_4 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
-    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 119, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    PyObject *__pyx_callargs[2] = {__pyx_t_8, __pyx_v_future_to_move};
+    __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 185, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
-  if (likely(PyList_CheckExact(__pyx_t_4)) || PyTuple_CheckExact(__pyx_t_4)) {
-    __pyx_t_1 = __pyx_t_4; __Pyx_INCREF(__pyx_t_1);
-    __pyx_t_23 = 0;
+  if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
+    __pyx_t_4 = __pyx_t_1; __Pyx_INCREF(__pyx_t_4);
+    __pyx_t_6 = 0;
     __pyx_t_7 = NULL;
   } else {
-    __pyx_t_23 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 119, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_7 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 119, __pyx_L1_error)
+    __pyx_t_6 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 185, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_7 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_4); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 185, __pyx_L1_error)
   }
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
     if (likely(!__pyx_t_7)) {
-      if (likely(PyList_CheckExact(__pyx_t_1))) {
+      if (likely(PyList_CheckExact(__pyx_t_4))) {
         {
-          Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
+          Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_4);
           #if !CYTHON_ASSUME_SAFE_MACROS
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 119, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 185, __pyx_L1_error)
           #endif
-          if (__pyx_t_23 >= __pyx_temp) break;
+          if (__pyx_t_6 >= __pyx_temp) break;
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_23); __Pyx_INCREF(__pyx_t_4); __pyx_t_23++; if (unlikely((0 < 0))) __PYX_ERR(0, 119, __pyx_L1_error)
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 185, __pyx_L1_error)
         #else
-        __pyx_t_4 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_23); __pyx_t_23++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 119, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_4);
+        __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_4, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 185, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_1);
         #endif
       } else {
         {
-          Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_1);
+          Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_4);
           #if !CYTHON_ASSUME_SAFE_MACROS
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 119, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 185, __pyx_L1_error)
           #endif
-          if (__pyx_t_23 >= __pyx_temp) break;
+          if (__pyx_t_6 >= __pyx_temp) break;
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_23); __Pyx_INCREF(__pyx_t_4); __pyx_t_23++; if (unlikely((0 < 0))) __PYX_ERR(0, 119, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 185, __pyx_L1_error)
         #else
-        __pyx_t_4 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_23); __pyx_t_23++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 119, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_4);
+        __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_4, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 185, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_1);
         #endif
       }
     } else {
-      __pyx_t_4 = __pyx_t_7(__pyx_t_1);
-      if (unlikely(!__pyx_t_4)) {
+      __pyx_t_1 = __pyx_t_7(__pyx_t_4);
+      if (unlikely(!__pyx_t_1)) {
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 119, __pyx_L1_error)
+          else __PYX_ERR(0, 185, __pyx_L1_error)
         }
         break;
       }
-      __Pyx_GOTREF(__pyx_t_4);
+      __Pyx_GOTREF(__pyx_t_1);
     }
-    __Pyx_XDECREF_SET(__pyx_v__future, __pyx_t_4);
-    __pyx_t_4 = 0;
+    __Pyx_XDECREF_SET(__pyx_v__future, __pyx_t_1);
+    __pyx_t_1 = 0;
 
-    /* "chmengine/engines/cmhmey2_pool_executor.py":120
+    /* "chmengine/engines/cmhmey2_pool_executor.py":186
  *         _future: Future[Pick]
  *         for _future in as_completed(future_to_move):
  *             _move = future_to_move[_future]             # <<<<<<<<<<<<<<
  *             try:
  *                 _cache = board_cache[_move]
  */
-    __pyx_t_4 = __Pyx_PyDict_GetItem(__pyx_v_future_to_move, __pyx_v__future); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 120, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __Pyx_XDECREF_SET(__pyx_v__move, __pyx_t_4);
-    __pyx_t_4 = 0;
+    __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_future_to_move, __pyx_v__future); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 186, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_XDECREF_SET(__pyx_v__move, __pyx_t_1);
+    __pyx_t_1 = 0;
 
-    /* "chmengine/engines/cmhmey2_pool_executor.py":121
+    /* "chmengine/engines/cmhmey2_pool_executor.py":187
  *         for _future in as_completed(future_to_move):
  *             _move = future_to_move[_future]
  *             try:             # <<<<<<<<<<<<<<
@@ -4727,83 +5762,83 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
       __Pyx_XGOTREF(__pyx_t_11);
       /*try:*/ {
 
-        /* "chmengine/engines/cmhmey2_pool_executor.py":122
+        /* "chmengine/engines/cmhmey2_pool_executor.py":188
  *             _move = future_to_move[_future]
  *             try:
  *                 _cache = board_cache[_move]             # <<<<<<<<<<<<<<
  *                 # We just need the deeper calls to update the q-table, don't actually need their pick here: `_`.
  *                 _ = _future.result().score
  */
-        __pyx_t_4 = __Pyx_PyDict_GetItem(__pyx_v_board_cache, __pyx_v__move); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 122, __pyx_L36_error)
-        __Pyx_GOTREF(__pyx_t_4);
-        __Pyx_XDECREF_SET(__pyx_v__cache, __pyx_t_4);
-        __pyx_t_4 = 0;
+        __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_board_cache, __pyx_v__move); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 188, __pyx_L43_error)
+        __Pyx_GOTREF(__pyx_t_1);
+        __Pyx_XDECREF_SET(__pyx_v__cache, __pyx_t_1);
+        __pyx_t_1 = 0;
 
-        /* "chmengine/engines/cmhmey2_pool_executor.py":124
+        /* "chmengine/engines/cmhmey2_pool_executor.py":190
  *                 _cache = board_cache[_move]
  *                 # We just need the deeper calls to update the q-table, don't actually need their pick here: `_`.
  *                 _ = _future.result().score             # <<<<<<<<<<<<<<
  *                 if debug:
  *                     print(f"Evaluated in Process Pool: {_cache}")
  */
-        __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v__future, __pyx_n_s_result); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 124, __pyx_L36_error)
-        __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_2 = NULL;
+        __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v__future, __pyx_n_s_result); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 190, __pyx_L43_error)
+        __Pyx_GOTREF(__pyx_t_8);
+        __pyx_t_24 = NULL;
         __pyx_t_5 = 0;
         #if CYTHON_UNPACK_METHODS
-        if (likely(PyMethod_Check(__pyx_t_3))) {
-          __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_3);
-          if (likely(__pyx_t_2)) {
-            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-            __Pyx_INCREF(__pyx_t_2);
+        if (likely(PyMethod_Check(__pyx_t_8))) {
+          __pyx_t_24 = PyMethod_GET_SELF(__pyx_t_8);
+          if (likely(__pyx_t_24)) {
+            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_8);
+            __Pyx_INCREF(__pyx_t_24);
             __Pyx_INCREF(function);
-            __Pyx_DECREF_SET(__pyx_t_3, function);
+            __Pyx_DECREF_SET(__pyx_t_8, function);
             __pyx_t_5 = 1;
           }
         }
         #endif
         {
-          PyObject *__pyx_callargs[2] = {__pyx_t_2, NULL};
-          __pyx_t_4 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 0+__pyx_t_5);
-          __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-          if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 124, __pyx_L36_error)
-          __Pyx_GOTREF(__pyx_t_4);
-          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+          PyObject *__pyx_callargs[2] = {__pyx_t_24, NULL};
+          __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_8, __pyx_callargs+1-__pyx_t_5, 0+__pyx_t_5);
+          __Pyx_XDECREF(__pyx_t_24); __pyx_t_24 = 0;
+          if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L43_error)
+          __Pyx_GOTREF(__pyx_t_1);
+          __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
         }
-        __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_score); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 124, __pyx_L36_error)
-        __Pyx_GOTREF(__pyx_t_3);
-        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __Pyx_XDECREF_SET(__pyx_v__, __pyx_t_3);
-        __pyx_t_3 = 0;
+        __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_score); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 190, __pyx_L43_error)
+        __Pyx_GOTREF(__pyx_t_8);
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+        __Pyx_XDECREF_SET(__pyx_v__, __pyx_t_8);
+        __pyx_t_8 = 0;
 
-        /* "chmengine/engines/cmhmey2_pool_executor.py":125
+        /* "chmengine/engines/cmhmey2_pool_executor.py":191
  *                 # We just need the deeper calls to update the q-table, don't actually need their pick here: `_`.
  *                 _ = _future.result().score
  *                 if debug:             # <<<<<<<<<<<<<<
  *                     print(f"Evaluated in Process Pool: {_cache}")
  *             except Exception as e:
  */
-        __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_v_debug); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 125, __pyx_L36_error)
+        __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_v_debug); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 191, __pyx_L43_error)
         if (__pyx_t_10) {
 
-          /* "chmengine/engines/cmhmey2_pool_executor.py":126
+          /* "chmengine/engines/cmhmey2_pool_executor.py":192
  *                 _ = _future.result().score
  *                 if debug:
  *                     print(f"Evaluated in Process Pool: {_cache}")             # <<<<<<<<<<<<<<
  *             except Exception as e:
  *                 if debug:
  */
-          __pyx_t_3 = __Pyx_PyObject_FormatSimple(__pyx_v__cache, __pyx_empty_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L36_error)
-          __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_4 = __Pyx_PyUnicode_Concat(__pyx_kp_u_Evaluated_in_Process_Pool, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 126, __pyx_L36_error)
-          __Pyx_GOTREF(__pyx_t_4);
-          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-          __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L36_error)
-          __Pyx_GOTREF(__pyx_t_3);
-          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+          __pyx_t_8 = __Pyx_PyObject_FormatSimple(__pyx_v__cache, __pyx_empty_unicode); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 192, __pyx_L43_error)
+          __Pyx_GOTREF(__pyx_t_8);
+          __pyx_t_1 = __Pyx_PyUnicode_Concat(__pyx_kp_u_Evaluated_in_Process_Pool, __pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 192, __pyx_L43_error)
+          __Pyx_GOTREF(__pyx_t_1);
+          __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+          __pyx_t_8 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 192, __pyx_L43_error)
+          __Pyx_GOTREF(__pyx_t_8);
+          __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+          __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-          /* "chmengine/engines/cmhmey2_pool_executor.py":125
+          /* "chmengine/engines/cmhmey2_pool_executor.py":191
  *                 # We just need the deeper calls to update the q-table, don't actually need their pick here: `_`.
  *                 _ = _future.result().score
  *                 if debug:             # <<<<<<<<<<<<<<
@@ -4812,7 +5847,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
  */
         }
 
-        /* "chmengine/engines/cmhmey2_pool_executor.py":121
+        /* "chmengine/engines/cmhmey2_pool_executor.py":187
  *         for _future in as_completed(future_to_move):
  *             _move = future_to_move[_future]
  *             try:             # <<<<<<<<<<<<<<
@@ -4823,16 +5858,16 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
       __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
       __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
       __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
-      goto __pyx_L43_try_end;
-      __pyx_L36_error:;
+      goto __pyx_L50_try_end;
+      __pyx_L43_error:;
+      __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_XDECREF(__pyx_t_24); __pyx_t_24 = 0;
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-      /* "chmengine/engines/cmhmey2_pool_executor.py":127
+      /* "chmengine/engines/cmhmey2_pool_executor.py":193
  *                 if debug:
  *                     print(f"Evaluated in Process Pool: {_cache}")
  *             except Exception as e:             # <<<<<<<<<<<<<<
@@ -4842,66 +5877,66 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
       __pyx_t_15 = __Pyx_PyErr_ExceptionMatches(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
       if (__pyx_t_15) {
         __Pyx_AddTraceback("chmengine.engines.cmhmey2_pool_executor.CMHMEngine2PoolExecutor.pick_move", __pyx_clineno, __pyx_lineno, __pyx_filename);
-        if (__Pyx_GetException(&__pyx_t_3, &__pyx_t_4, &__pyx_t_2) < 0) __PYX_ERR(0, 127, __pyx_L38_except_error)
-        __Pyx_XGOTREF(__pyx_t_3);
-        __Pyx_XGOTREF(__pyx_t_4);
-        __Pyx_XGOTREF(__pyx_t_2);
-        __Pyx_INCREF(__pyx_t_4);
-        __pyx_v_e = __pyx_t_4;
+        if (__Pyx_GetException(&__pyx_t_8, &__pyx_t_1, &__pyx_t_24) < 0) __PYX_ERR(0, 193, __pyx_L45_except_error)
+        __Pyx_XGOTREF(__pyx_t_8);
+        __Pyx_XGOTREF(__pyx_t_1);
+        __Pyx_XGOTREF(__pyx_t_24);
+        __Pyx_INCREF(__pyx_t_1);
+        __pyx_v_e = __pyx_t_1;
         /*try:*/ {
 
-          /* "chmengine/engines/cmhmey2_pool_executor.py":128
+          /* "chmengine/engines/cmhmey2_pool_executor.py":194
  *                     print(f"Evaluated in Process Pool: {_cache}")
  *             except Exception as e:
  *                 if debug:             # <<<<<<<<<<<<<<
  *                     print(f"Error evaluating move in Process Pool:{_move}: {e}")
  *         # The final self.engine.pick_move call will be superfast now
  */
-          __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_v_debug); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 128, __pyx_L50_error)
+          __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_v_debug); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 194, __pyx_L57_error)
           if (__pyx_t_10) {
 
-            /* "chmengine/engines/cmhmey2_pool_executor.py":129
+            /* "chmengine/engines/cmhmey2_pool_executor.py":195
  *             except Exception as e:
  *                 if debug:
  *                     print(f"Error evaluating move in Process Pool:{_move}: {e}")             # <<<<<<<<<<<<<<
  *         # The final self.engine.pick_move call will be superfast now
  *         # as the previous `pick_move` calls ensured all our positions have scores.
  */
-            __pyx_t_9 = PyTuple_New(4); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 129, __pyx_L50_error)
+            __pyx_t_9 = PyTuple_New(4); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 195, __pyx_L57_error)
             __Pyx_GOTREF(__pyx_t_9);
-            __pyx_t_6 = 0;
+            __pyx_t_23 = 0;
             __pyx_t_25 = 127;
             __Pyx_INCREF(__pyx_kp_u_Error_evaluating_move_in_Process);
-            __pyx_t_6 += 38;
+            __pyx_t_23 += 38;
             __Pyx_GIVEREF(__pyx_kp_u_Error_evaluating_move_in_Process);
             PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_kp_u_Error_evaluating_move_in_Process);
-            __pyx_t_8 = __Pyx_PyObject_FormatSimple(__pyx_v__move, __pyx_empty_unicode); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 129, __pyx_L50_error)
-            __Pyx_GOTREF(__pyx_t_8);
-            __pyx_t_25 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_8) > __pyx_t_25) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_8) : __pyx_t_25;
-            __pyx_t_6 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_8);
-            __Pyx_GIVEREF(__pyx_t_8);
-            PyTuple_SET_ITEM(__pyx_t_9, 1, __pyx_t_8);
-            __pyx_t_8 = 0;
+            __pyx_t_2 = __Pyx_PyObject_FormatSimple(__pyx_v__move, __pyx_empty_unicode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 195, __pyx_L57_error)
+            __Pyx_GOTREF(__pyx_t_2);
+            __pyx_t_25 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) > __pyx_t_25) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) : __pyx_t_25;
+            __pyx_t_23 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_2);
+            __Pyx_GIVEREF(__pyx_t_2);
+            PyTuple_SET_ITEM(__pyx_t_9, 1, __pyx_t_2);
+            __pyx_t_2 = 0;
             __Pyx_INCREF(__pyx_kp_u_);
-            __pyx_t_6 += 2;
+            __pyx_t_23 += 2;
             __Pyx_GIVEREF(__pyx_kp_u_);
             PyTuple_SET_ITEM(__pyx_t_9, 2, __pyx_kp_u_);
-            __pyx_t_8 = __Pyx_PyObject_FormatSimple(__pyx_v_e, __pyx_empty_unicode); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 129, __pyx_L50_error)
-            __Pyx_GOTREF(__pyx_t_8);
-            __pyx_t_25 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_8) > __pyx_t_25) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_8) : __pyx_t_25;
-            __pyx_t_6 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_8);
-            __Pyx_GIVEREF(__pyx_t_8);
-            PyTuple_SET_ITEM(__pyx_t_9, 3, __pyx_t_8);
-            __pyx_t_8 = 0;
-            __pyx_t_8 = __Pyx_PyUnicode_Join(__pyx_t_9, 4, __pyx_t_6, __pyx_t_25); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 129, __pyx_L50_error)
-            __Pyx_GOTREF(__pyx_t_8);
+            __pyx_t_2 = __Pyx_PyObject_FormatSimple(__pyx_v_e, __pyx_empty_unicode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 195, __pyx_L57_error)
+            __Pyx_GOTREF(__pyx_t_2);
+            __pyx_t_25 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) > __pyx_t_25) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) : __pyx_t_25;
+            __pyx_t_23 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_2);
+            __Pyx_GIVEREF(__pyx_t_2);
+            PyTuple_SET_ITEM(__pyx_t_9, 3, __pyx_t_2);
+            __pyx_t_2 = 0;
+            __pyx_t_2 = __Pyx_PyUnicode_Join(__pyx_t_9, 4, __pyx_t_23, __pyx_t_25); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 195, __pyx_L57_error)
+            __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-            __pyx_t_9 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 129, __pyx_L50_error)
+            __pyx_t_9 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 195, __pyx_L57_error)
             __Pyx_GOTREF(__pyx_t_9);
-            __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-            /* "chmengine/engines/cmhmey2_pool_executor.py":128
+            /* "chmengine/engines/cmhmey2_pool_executor.py":194
  *                     print(f"Evaluated in Process Pool: {_cache}")
  *             except Exception as e:
  *                 if debug:             # <<<<<<<<<<<<<<
@@ -4911,7 +5946,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
           }
         }
 
-        /* "chmengine/engines/cmhmey2_pool_executor.py":127
+        /* "chmengine/engines/cmhmey2_pool_executor.py":193
  *                 if debug:
  *                     print(f"Evaluated in Process Pool: {_cache}")
  *             except Exception as e:             # <<<<<<<<<<<<<<
@@ -4921,15 +5956,15 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
         /*finally:*/ {
           /*normal exit:*/{
             __Pyx_DECREF(__pyx_v_e); __pyx_v_e = 0;
-            goto __pyx_L51;
+            goto __pyx_L58;
           }
-          __pyx_L50_error:;
+          __pyx_L57_error:;
           /*exception exit:*/{
             __Pyx_PyThreadState_declare
             __Pyx_PyThreadState_assign
             __pyx_t_22 = 0; __pyx_t_21 = 0; __pyx_t_20 = 0; __pyx_t_19 = 0; __pyx_t_18 = 0; __pyx_t_17 = 0;
-            __Pyx_XDECREF(__pyx_t_24); __pyx_t_24 = 0;
-            __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+            __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+            __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
             __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
             if (PY_MAJOR_VERSION >= 3) __Pyx_ExceptionSwap(&__pyx_t_19, &__pyx_t_18, &__pyx_t_17);
             if ((PY_MAJOR_VERSION < 3) || unlikely(__Pyx_GetException(&__pyx_t_22, &__pyx_t_21, &__pyx_t_20) < 0)) __Pyx_ErrFetch(&__pyx_t_22, &__pyx_t_21, &__pyx_t_20);
@@ -4955,73 +5990,143 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
             __Pyx_ErrRestore(__pyx_t_22, __pyx_t_21, __pyx_t_20);
             __pyx_t_22 = 0; __pyx_t_21 = 0; __pyx_t_20 = 0; __pyx_t_19 = 0; __pyx_t_18 = 0; __pyx_t_17 = 0;
             __pyx_lineno = __pyx_t_15; __pyx_clineno = __pyx_t_14; __pyx_filename = __pyx_t_26;
-            goto __pyx_L38_except_error;
+            goto __pyx_L45_except_error;
           }
-          __pyx_L51:;
+          __pyx_L58:;
         }
-        __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-        goto __pyx_L37_exception_handled;
+        __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+        __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
+        __Pyx_XDECREF(__pyx_t_24); __pyx_t_24 = 0;
+        goto __pyx_L44_exception_handled;
       }
-      goto __pyx_L38_except_error;
+      goto __pyx_L45_except_error;
 
-      /* "chmengine/engines/cmhmey2_pool_executor.py":121
+      /* "chmengine/engines/cmhmey2_pool_executor.py":187
  *         for _future in as_completed(future_to_move):
  *             _move = future_to_move[_future]
  *             try:             # <<<<<<<<<<<<<<
  *                 _cache = board_cache[_move]
  *                 # We just need the deeper calls to update the q-table, don't actually need their pick here: `_`.
  */
-      __pyx_L38_except_error:;
+      __pyx_L45_except_error:;
       __Pyx_XGIVEREF(__pyx_t_13);
       __Pyx_XGIVEREF(__pyx_t_12);
       __Pyx_XGIVEREF(__pyx_t_11);
       __Pyx_ExceptionReset(__pyx_t_13, __pyx_t_12, __pyx_t_11);
       goto __pyx_L1_error;
-      __pyx_L37_exception_handled:;
+      __pyx_L44_exception_handled:;
       __Pyx_XGIVEREF(__pyx_t_13);
       __Pyx_XGIVEREF(__pyx_t_12);
       __Pyx_XGIVEREF(__pyx_t_11);
       __Pyx_ExceptionReset(__pyx_t_13, __pyx_t_12, __pyx_t_11);
-      __pyx_L43_try_end:;
+      __pyx_L50_try_end:;
     }
 
-    /* "chmengine/engines/cmhmey2_pool_executor.py":119
- *         }
+    /* "chmengine/engines/cmhmey2_pool_executor.py":185
+ *             }
  *         _future: Future[Pick]
  *         for _future in as_completed(future_to_move):             # <<<<<<<<<<<<<<
  *             _move = future_to_move[_future]
  *             try:
  */
   }
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":132
+  /* "chmengine/engines/cmhmey2_pool_executor.py":198
  *         # The final self.engine.pick_move call will be superfast now
  *         # as the previous `pick_move` calls ensured all our positions have scores.
- *         return self.engine.pick_move(debug=debug)             # <<<<<<<<<<<<<<
+ *         return self.engine.pick_move(             # <<<<<<<<<<<<<<
+ *             debug=debug, time_limit=self.engine.overhead
+ *         ) if hasattr(self.engine, 'time_limit') else self.engine.pick_move(debug=debug)
+ */
+  __Pyx_XDECREF(__pyx_r);
+
+  /* "chmengine/engines/cmhmey2_pool_executor.py":200
+ *         return self.engine.pick_move(
+ *             debug=debug, time_limit=self.engine.overhead
+ *         ) if hasattr(self.engine, 'time_limit') else self.engine.pick_move(debug=debug)             # <<<<<<<<<<<<<<
  * 
  *     def push(self, move: Move) -> None:
  */
-  __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_engine); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 132, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_pick_move); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 132, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_debug, __pyx_v_debug) < 0) __PYX_ERR(0, 132, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 132, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_24 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_engine); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 200, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_24);
+  __pyx_t_10 = __Pyx_HasAttr(__pyx_t_24, __pyx_n_u_time_limit); if (unlikely(__pyx_t_10 == ((int)-1))) __PYX_ERR(0, 200, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
+  if (__pyx_t_10) {
+
+    /* "chmengine/engines/cmhmey2_pool_executor.py":198
+ *         # The final self.engine.pick_move call will be superfast now
+ *         # as the previous `pick_move` calls ensured all our positions have scores.
+ *         return self.engine.pick_move(             # <<<<<<<<<<<<<<
+ *             debug=debug, time_limit=self.engine.overhead
+ *         ) if hasattr(self.engine, 'time_limit') else self.engine.pick_move(debug=debug)
+ */
+    __pyx_t_24 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_engine); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 198, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_24);
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_24, __pyx_n_s_pick_move); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 198, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
+
+    /* "chmengine/engines/cmhmey2_pool_executor.py":199
+ *         # as the previous `pick_move` calls ensured all our positions have scores.
+ *         return self.engine.pick_move(
+ *             debug=debug, time_limit=self.engine.overhead             # <<<<<<<<<<<<<<
+ *         ) if hasattr(self.engine, 'time_limit') else self.engine.pick_move(debug=debug)
+ * 
+ */
+    __pyx_t_24 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 199, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_24);
+    if (PyDict_SetItem(__pyx_t_24, __pyx_n_s_debug, __pyx_v_debug) < 0) __PYX_ERR(0, 199, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_engine); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 199, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_8);
+    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_overhead); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 199, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_9);
+    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+    if (PyDict_SetItem(__pyx_t_24, __pyx_n_s_time_limit, __pyx_t_9) < 0) __PYX_ERR(0, 199, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+
+    /* "chmengine/engines/cmhmey2_pool_executor.py":198
+ *         # The final self.engine.pick_move call will be superfast now
+ *         # as the previous `pick_move` calls ensured all our positions have scores.
+ *         return self.engine.pick_move(             # <<<<<<<<<<<<<<
+ *             debug=debug, time_limit=self.engine.overhead
+ *         ) if hasattr(self.engine, 'time_limit') else self.engine.pick_move(debug=debug)
+ */
+    __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_24); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 198, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_9);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
+    __pyx_t_4 = __pyx_t_9;
+    __pyx_t_9 = 0;
+  } else {
+
+    /* "chmengine/engines/cmhmey2_pool_executor.py":200
+ *         return self.engine.pick_move(
+ *             debug=debug, time_limit=self.engine.overhead
+ *         ) if hasattr(self.engine, 'time_limit') else self.engine.pick_move(debug=debug)             # <<<<<<<<<<<<<<
+ * 
+ *     def push(self, move: Move) -> None:
+ */
+    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_engine); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 200, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_9);
+    __pyx_t_24 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_pick_move); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 200, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_24);
+    __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+    __pyx_t_9 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 200, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_9);
+    if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_debug, __pyx_v_debug) < 0) __PYX_ERR(0, 200, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_24, __pyx_empty_tuple, __pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 200, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
+    __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+    __pyx_t_4 = __pyx_t_1;
+    __pyx_t_1 = 0;
+  }
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":79
+  /* "chmengine/engines/cmhmey2_pool_executor.py":133
  *         self.executor = ProcessPoolExecutor(max_workers=max_workers)
  * 
  *     def pick_move(self, debug: bool = False) -> Pick:             # <<<<<<<<<<<<<<
@@ -5051,13 +6156,14 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
   __Pyx_XDECREF(__pyx_v_e);
   __Pyx_XDECREF(__pyx_7genexpr__pyx_v__move);
   __Pyx_XDECREF(__pyx_8genexpr1__pyx_v__move);
+  __Pyx_XDECREF(__pyx_8genexpr2__pyx_v__move);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "chmengine/engines/cmhmey2_pool_executor.py":134
- *         return self.engine.pick_move(debug=debug)
+/* "chmengine/engines/cmhmey2_pool_executor.py":202
+ *         ) if hasattr(self.engine, 'time_limit') else self.engine.pick_move(debug=debug)
  * 
  *     def push(self, move: Move) -> None:             # <<<<<<<<<<<<<<
  *         """Helper method to update the internal board state with a pushed move.
@@ -5121,7 +6227,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 134, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 202, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -5129,14 +6235,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 134, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 202, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("push", 1, 2, 2, 1); __PYX_ERR(0, 134, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("push", 1, 2, 2, 1); __PYX_ERR(0, 202, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "push") < 0)) __PYX_ERR(0, 134, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "push") < 0)) __PYX_ERR(0, 202, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -5149,7 +6255,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("push", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 134, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("push", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 202, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -5187,32 +6293,32 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("push", 1);
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":141
+  /* "chmengine/engines/cmhmey2_pool_executor.py":209
  *         move : Move
  *         """
  *         self.engine.board.push(move=move)             # <<<<<<<<<<<<<<
  * 
  *     def shutdown(self) -> None:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_engine); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 141, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_engine); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 209, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_board); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 141, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_board); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 209, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_push); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 141, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_push); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 209, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 141, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 209, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_move, __pyx_v_move) < 0) __PYX_ERR(0, 141, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 141, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_move, __pyx_v_move) < 0) __PYX_ERR(0, 209, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 209, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":134
- *         return self.engine.pick_move(debug=debug)
+  /* "chmengine/engines/cmhmey2_pool_executor.py":202
+ *         ) if hasattr(self.engine, 'time_limit') else self.engine.pick_move(debug=debug)
  * 
  *     def push(self, move: Move) -> None:             # <<<<<<<<<<<<<<
  *         """Helper method to update the internal board state with a pushed move.
@@ -5234,7 +6340,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
   return __pyx_r;
 }
 
-/* "chmengine/engines/cmhmey2_pool_executor.py":143
+/* "chmengine/engines/cmhmey2_pool_executor.py":211
  *         self.engine.board.push(move=move)
  * 
  *     def shutdown(self) -> None:             # <<<<<<<<<<<<<<
@@ -5296,12 +6402,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 143, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 211, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "shutdown") < 0)) __PYX_ERR(0, 143, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "shutdown") < 0)) __PYX_ERR(0, 211, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -5312,7 +6418,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("shutdown", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 143, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("shutdown", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 211, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -5353,37 +6459,37 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("shutdown", 1);
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":145
+  /* "chmengine/engines/cmhmey2_pool_executor.py":213
  *     def shutdown(self) -> None:
  *         """Shut down the ProcessPoolExecutor."""
  *         if hasattr(self, 'executor') and self.executor:             # <<<<<<<<<<<<<<
  *             self.executor.shutdown()
  * 
  */
-  __pyx_t_2 = __Pyx_HasAttr(__pyx_v_self, __pyx_n_u_executor); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_HasAttr(__pyx_v_self, __pyx_n_u_executor); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 213, __pyx_L1_error)
   if (__pyx_t_2) {
   } else {
     __pyx_t_1 = __pyx_t_2;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_executor); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_executor); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 213, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 213, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_1 = __pyx_t_2;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "chmengine/engines/cmhmey2_pool_executor.py":146
+    /* "chmengine/engines/cmhmey2_pool_executor.py":214
  *         """Shut down the ProcessPoolExecutor."""
  *         if hasattr(self, 'executor') and self.executor:
  *             self.executor.shutdown()             # <<<<<<<<<<<<<<
  * 
  *     def __del__(self):
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_executor); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 146, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_executor); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 214, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_shutdown); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 146, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_shutdown); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 214, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -5404,13 +6510,13 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
       PyObject *__pyx_callargs[2] = {__pyx_t_4, NULL};
       __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_5, __pyx_callargs+1-__pyx_t_6, 0+__pyx_t_6);
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 146, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 214, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "chmengine/engines/cmhmey2_pool_executor.py":145
+    /* "chmengine/engines/cmhmey2_pool_executor.py":213
  *     def shutdown(self) -> None:
  *         """Shut down the ProcessPoolExecutor."""
  *         if hasattr(self, 'executor') and self.executor:             # <<<<<<<<<<<<<<
@@ -5419,7 +6525,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
  */
   }
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":143
+  /* "chmengine/engines/cmhmey2_pool_executor.py":211
  *         self.engine.board.push(move=move)
  * 
  *     def shutdown(self) -> None:             # <<<<<<<<<<<<<<
@@ -5442,7 +6548,7 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
   return __pyx_r;
 }
 
-/* "chmengine/engines/cmhmey2_pool_executor.py":148
+/* "chmengine/engines/cmhmey2_pool_executor.py":216
  *             self.executor.shutdown()
  * 
  *     def __del__(self):             # <<<<<<<<<<<<<<
@@ -5504,12 +6610,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 148, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 216, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__del__") < 0)) __PYX_ERR(0, 148, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__del__") < 0)) __PYX_ERR(0, 216, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -5520,7 +6626,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__del__", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 148, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__del__", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 216, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -5559,14 +6665,14 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__del__", 1);
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":150
+  /* "chmengine/engines/cmhmey2_pool_executor.py":218
  *     def __del__(self):
  *         """Ensure the ProcessPoolExecutor is shut down when the instance is deleted."""
  *         self.shutdown()             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shutdown); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_shutdown); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 218, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -5586,13 +6692,13 @@ static PyObject *__pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngi
     PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 150, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 218, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":148
+  /* "chmengine/engines/cmhmey2_pool_executor.py":216
  *             self.executor.shutdown()
  * 
  *     def __del__(self):             # <<<<<<<<<<<<<<
@@ -5643,6 +6749,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_CMHMEngine2PoolExecutor_pick_mov, __pyx_k_CMHMEngine2PoolExecutor_pick_mov, sizeof(__pyx_k_CMHMEngine2PoolExecutor_pick_mov), 0, 0, 1, 1},
     {&__pyx_n_s_CMHMEngine2PoolExecutor_push, __pyx_k_CMHMEngine2PoolExecutor_push, sizeof(__pyx_k_CMHMEngine2PoolExecutor_push), 0, 0, 1, 1},
     {&__pyx_n_s_CMHMEngine2PoolExecutor_shutdown, __pyx_k_CMHMEngine2PoolExecutor_shutdown, sizeof(__pyx_k_CMHMEngine2PoolExecutor_shutdown), 0, 0, 1, 1},
+    {&__pyx_n_s_CMHMEngine3, __pyx_k_CMHMEngine3, sizeof(__pyx_k_CMHMEngine3), 0, 0, 1, 1},
     {&__pyx_n_s_Dict, __pyx_k_Dict, sizeof(__pyx_k_Dict), 0, 0, 1, 1},
     {&__pyx_kp_u_Error_evaluating_move_in_Process, __pyx_k_Error_evaluating_move_in_Process, sizeof(__pyx_k_Error_evaluating_move_in_Process), 0, 1, 0, 0},
     {&__pyx_kp_u_Evaluated_in_Process_Pool, __pyx_k_Evaluated_in_Process_Pool, sizeof(__pyx_k_Evaluated_in_Process_Pool), 0, 1, 0, 0},
@@ -5654,6 +6761,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_OperationalError, __pyx_k_OperationalError, sizeof(__pyx_k_OperationalError), 0, 0, 1, 1},
     {&__pyx_n_s_Optional, __pyx_k_Optional, sizeof(__pyx_k_Optional), 0, 0, 1, 1},
     {&__pyx_kp_s_Optional_Board, __pyx_k_Optional_Board, sizeof(__pyx_k_Optional_Board), 0, 0, 1, 0},
+    {&__pyx_kp_s_Optional_float64, __pyx_k_Optional_float64, sizeof(__pyx_k_Optional_float64), 0, 0, 1, 0},
     {&__pyx_kp_s_Optional_int, __pyx_k_Optional_int, sizeof(__pyx_k_Optional_int), 0, 0, 1, 0},
     {&__pyx_n_s_Pick, __pyx_k_Pick, sizeof(__pyx_k_Pick), 0, 0, 1, 1},
     {&__pyx_n_s_ProcessPoolExecutor, __pyx_k_ProcessPoolExecutor, sizeof(__pyx_k_ProcessPoolExecutor), 0, 0, 1, 1},
@@ -5661,9 +6769,9 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_u_Unexpected_Operational_Error_str, __pyx_k_Unexpected_Operational_Error_str, sizeof(__pyx_k_Unexpected_Operational_Error_str), 0, 1, 0, 0},
     {&__pyx_n_s_Union, __pyx_k_Union, sizeof(__pyx_k_Union), 0, 0, 1, 1},
     {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
-    {&__pyx_n_s__17, __pyx_k__17, sizeof(__pyx_k__17), 0, 0, 1, 1},
+    {&__pyx_n_s__10, __pyx_k__10, sizeof(__pyx_k__10), 0, 0, 1, 1},
+    {&__pyx_n_s__19, __pyx_k__19, sizeof(__pyx_k__19), 0, 0, 1, 1},
     {&__pyx_kp_u__2, __pyx_k__2, sizeof(__pyx_k__2), 0, 1, 0, 0},
-    {&__pyx_n_s__8, __pyx_k__8, sizeof(__pyx_k__8), 0, 0, 1, 1},
     {&__pyx_n_s_annotations, __pyx_k_annotations, sizeof(__pyx_k_annotations), 0, 0, 1, 1},
     {&__pyx_n_s_as_completed, __pyx_k_as_completed, sizeof(__pyx_k_as_completed), 0, 0, 1, 1},
     {&__pyx_n_s_asyncio_coroutines, __pyx_k_asyncio_coroutines, sizeof(__pyx_k_asyncio_coroutines), 0, 0, 1, 1},
@@ -5678,6 +6786,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_chmengine_engines_cmhmey2, __pyx_k_chmengine_engines_cmhmey2, sizeof(__pyx_k_chmengine_engines_cmhmey2), 0, 0, 1, 1},
     {&__pyx_kp_s_chmengine_engines_cmhmey2_pool_e, __pyx_k_chmengine_engines_cmhmey2_pool_e, sizeof(__pyx_k_chmengine_engines_cmhmey2_pool_e), 0, 0, 1, 0},
     {&__pyx_n_s_chmengine_engines_cmhmey2_pool_e_2, __pyx_k_chmengine_engines_cmhmey2_pool_e_2, sizeof(__pyx_k_chmengine_engines_cmhmey2_pool_e_2), 0, 0, 1, 1},
+    {&__pyx_n_s_chmengine_engines_cmhmey3, __pyx_k_chmengine_engines_cmhmey3, sizeof(__pyx_k_chmengine_engines_cmhmey3), 0, 0, 1, 1},
     {&__pyx_n_s_chmengine_utils_pick, __pyx_k_chmengine_utils_pick, sizeof(__pyx_k_chmengine_utils_pick), 0, 0, 1, 1},
     {&__pyx_n_s_class_getitem, __pyx_k_class_getitem, sizeof(__pyx_k_class_getitem), 0, 0, 1, 1},
     {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
@@ -5694,6 +6803,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_engine, __pyx_k_engine, sizeof(__pyx_k_engine), 0, 0, 1, 1},
     {&__pyx_n_s_error_o, __pyx_k_error_o, sizeof(__pyx_k_error_o), 0, 0, 1, 1},
     {&__pyx_n_s_evaluate_move, __pyx_k_evaluate_move, sizeof(__pyx_k_evaluate_move), 0, 0, 1, 1},
+    {&__pyx_n_s_evaluate_move_until, __pyx_k_evaluate_move_until, sizeof(__pyx_k_evaluate_move_until), 0, 0, 1, 1},
     {&__pyx_n_s_executor, __pyx_k_executor, sizeof(__pyx_k_executor), 0, 0, 1, 1},
     {&__pyx_n_u_executor, __pyx_k_executor, sizeof(__pyx_k_executor), 0, 1, 0, 1},
     {&__pyx_n_s_fen, __pyx_k_fen, sizeof(__pyx_k_fen), 0, 0, 1, 1},
@@ -5714,6 +6824,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_move_2, __pyx_k_move_2, sizeof(__pyx_k_move_2), 0, 0, 1, 1},
     {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
     {&__pyx_n_s_numpy, __pyx_k_numpy, sizeof(__pyx_k_numpy), 0, 0, 1, 1},
+    {&__pyx_n_s_overhead, __pyx_k_overhead, sizeof(__pyx_k_overhead), 0, 0, 1, 1},
     {&__pyx_n_s_pick, __pyx_k_pick, sizeof(__pyx_k_pick), 0, 0, 1, 1},
     {&__pyx_n_s_pick_move, __pyx_k_pick_move, sizeof(__pyx_k_pick_move), 0, 0, 1, 1},
     {&__pyx_n_s_prepare, __pyx_k_prepare, sizeof(__pyx_k_prepare), 0, 0, 1, 1},
@@ -5732,6 +6843,8 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_submit, __pyx_k_submit, sizeof(__pyx_k_submit), 0, 0, 1, 1},
     {&__pyx_n_s_super, __pyx_k_super, sizeof(__pyx_k_super), 0, 0, 1, 1},
     {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
+    {&__pyx_n_s_time_limit, __pyx_k_time_limit, sizeof(__pyx_k_time_limit), 0, 0, 1, 1},
+    {&__pyx_n_u_time_limit, __pyx_k_time_limit, sizeof(__pyx_k_time_limit), 0, 1, 0, 1},
     {&__pyx_n_s_typing, __pyx_k_typing, sizeof(__pyx_k_typing), 0, 0, 1, 1},
     {0, 0, 0, 0, 0, 0, 0}
   };
@@ -5739,8 +6852,8 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
 }
 /* #### Code section: cached_builtins ### */
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 155, __pyx_L1_error)
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 105, __pyx_L1_error)
+  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 223, __pyx_L1_error)
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 159, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -5751,88 +6864,100 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":13
+  /* "chmengine/engines/cmhmey2_pool_executor.py":14
  * from chmengine.utils.pick import Pick
  * 
  * NAN64 = float64(None)             # <<<<<<<<<<<<<<
  * 
  * BoardCacheEntry = Dict[str, Union[Board, float64, Pick]]
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, Py_None); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(1, Py_None); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":20
+  /* "chmengine/engines/cmhmey2_pool_executor.py":21
  * 
  * # TODO: Move this helper to `chmengine.utils.__init__.py` (if we can, might have circular import errors?)
  * def evaluate_move(board: Board, depth: int = 1, debug: bool = False, cache_dir: str = CMHMEngine2.cache_dir) -> Pick:             # <<<<<<<<<<<<<<
  *     """Offloads eval calculations to another CMHMEngine2 instance.
  * 
  */
-  __pyx_tuple__4 = PyTuple_Pack(5, __pyx_n_s_board, __pyx_n_s_depth, __pyx_n_s_debug, __pyx_n_s_cache_dir, __pyx_n_s_error_o); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(5, __pyx_n_s_board, __pyx_n_s_depth, __pyx_n_s_debug, __pyx_n_s_cache_dir, __pyx_n_s_error_o); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
-  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_pool_e, __pyx_n_s_evaluate_move, 20, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_pool_e, __pyx_n_s_evaluate_move, 21, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 21, __pyx_L1_error)
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":63
- *     executor: ProcessPoolExecutor
+  /* "chmengine/engines/cmhmey2_pool_executor.py":57
  * 
- *     def __init__(self, board: Optional[Board] = None, depth: int = 1, max_workers: Optional[int] = None) -> None:             # <<<<<<<<<<<<<<
- *         """Initialize the CMHMEngine2PoolExecutor.
  * 
+ * def evaluate_move_until(             # <<<<<<<<<<<<<<
+ *         time_limit: float64,
+ *         board: Board,
  */
-  __pyx_tuple__6 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_board, __pyx_n_s_depth, __pyx_n_s_max_workers); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(6, __pyx_n_s_time_limit, __pyx_n_s_board, __pyx_n_s_depth, __pyx_n_s_debug, __pyx_n_s_cache_dir, __pyx_n_s_error_o); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
-  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_pool_e, __pyx_n_s_init, 63, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(5, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_pool_e, __pyx_n_s_evaluate_move_until, 57, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 57, __pyx_L1_error)
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":79
+  /* "chmengine/engines/cmhmey2_pool_executor.py":107
+ *     executor: ProcessPoolExecutor
+ * 
+ *     def __init__(             # <<<<<<<<<<<<<<
+ *             self,
+ *             board: Optional[Board] = None,
+ */
+  __pyx_tuple__8 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_board, __pyx_n_s_depth, __pyx_n_s_max_workers, __pyx_n_s_time_limit); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__8);
+  __Pyx_GIVEREF(__pyx_tuple__8);
+  __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(5, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_pool_e, __pyx_n_s_init, 107, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) __PYX_ERR(0, 107, __pyx_L1_error)
+
+  /* "chmengine/engines/cmhmey2_pool_executor.py":133
  *         self.executor = ProcessPoolExecutor(max_workers=max_workers)
  * 
  *     def pick_move(self, debug: bool = False) -> Pick:             # <<<<<<<<<<<<<<
  *         """
  *         Select the best move using conditional multithreaded evaluations.
  */
-  __pyx_tuple__9 = PyTuple_Pack(12, __pyx_n_s_self, __pyx_n_s_debug, __pyx_n_s_move_2, __pyx_n_s_board_cache, __pyx_n_s_root_error, __pyx_n_s_future_to_move, __pyx_n_s_future, __pyx_n_s_cache, __pyx_n_s__8, __pyx_n_s_e, __pyx_n_s_move_2, __pyx_n_s_move_2); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 79, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__9);
-  __Pyx_GIVEREF(__pyx_tuple__9);
-  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 12, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_pool_e, __pyx_n_s_pick_move, 79, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 79, __pyx_L1_error)
-  __pyx_tuple__11 = PyTuple_Pack(1, ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 79, __pyx_L1_error)
+  __pyx_tuple__11 = PyTuple_Pack(13, __pyx_n_s_self, __pyx_n_s_debug, __pyx_n_s_move_2, __pyx_n_s_board_cache, __pyx_n_s_root_error, __pyx_n_s_future_to_move, __pyx_n_s_future, __pyx_n_s_cache, __pyx_n_s__10, __pyx_n_s_e, __pyx_n_s_move_2, __pyx_n_s_move_2, __pyx_n_s_move_2); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 133, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
+  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 13, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_pool_e, __pyx_n_s_pick_move, 133, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 133, __pyx_L1_error)
+  __pyx_tuple__13 = PyTuple_Pack(1, ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 133, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__13);
+  __Pyx_GIVEREF(__pyx_tuple__13);
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":134
- *         return self.engine.pick_move(debug=debug)
+  /* "chmengine/engines/cmhmey2_pool_executor.py":202
+ *         ) if hasattr(self.engine, 'time_limit') else self.engine.pick_move(debug=debug)
  * 
  *     def push(self, move: Move) -> None:             # <<<<<<<<<<<<<<
  *         """Helper method to update the internal board state with a pushed move.
  * 
  */
-  __pyx_tuple__12 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_move); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 134, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__12);
-  __Pyx_GIVEREF(__pyx_tuple__12);
-  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_pool_e, __pyx_n_s_push, 134, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __pyx_tuple__14 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_move); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 202, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__14);
+  __Pyx_GIVEREF(__pyx_tuple__14);
+  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_pool_e, __pyx_n_s_push, 202, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 202, __pyx_L1_error)
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":143
+  /* "chmengine/engines/cmhmey2_pool_executor.py":211
  *         self.engine.board.push(move=move)
  * 
  *     def shutdown(self) -> None:             # <<<<<<<<<<<<<<
  *         """Shut down the ProcessPoolExecutor."""
  *         if hasattr(self, 'executor') and self.executor:
  */
-  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 143, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__14);
-  __Pyx_GIVEREF(__pyx_tuple__14);
-  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_pool_e, __pyx_n_s_shutdown, 143, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 143, __pyx_L1_error)
+  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 211, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__16);
+  __Pyx_GIVEREF(__pyx_tuple__16);
+  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_pool_e, __pyx_n_s_shutdown, 211, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 211, __pyx_L1_error)
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":148
+  /* "chmengine/engines/cmhmey2_pool_executor.py":216
  *             self.executor.shutdown()
  * 
  *     def __del__(self):             # <<<<<<<<<<<<<<
  *         """Ensure the ProcessPoolExecutor is shut down when the instance is deleted."""
  *         self.shutdown()
  */
-  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_pool_e, __pyx_n_s_del, 148, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 148, __pyx_L1_error)
+  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_chmengine_engines_cmhmey2_pool_e, __pyx_n_s_del, 216, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(0, 216, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -6347,8 +7472,8 @@ if (!__Pyx_RefNanny) {
  * from numpy import float64
  * 
  * from chmengine.engines.cmhmey2 import CMHMEngine2             # <<<<<<<<<<<<<<
+ * from chmengine.engines.cmhmey3 import CMHMEngine3
  * from chmengine.utils.pick import Pick
- * 
  */
   __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -6367,497 +7492,580 @@ if (!__Pyx_RefNanny) {
   /* "chmengine/engines/cmhmey2_pool_executor.py":11
  * 
  * from chmengine.engines.cmhmey2 import CMHMEngine2
+ * from chmengine.engines.cmhmey3 import CMHMEngine3             # <<<<<<<<<<<<<<
+ * from chmengine.utils.pick import Pick
+ * 
+ */
+  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_INCREF(__pyx_n_s_CMHMEngine3);
+  __Pyx_GIVEREF(__pyx_n_s_CMHMEngine3);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_CMHMEngine3)) __PYX_ERR(0, 11, __pyx_L1_error);
+  __pyx_t_3 = __Pyx_Import(__pyx_n_s_chmengine_engines_cmhmey3, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_CMHMEngine3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_CMHMEngine3, __pyx_t_2) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "chmengine/engines/cmhmey2_pool_executor.py":12
+ * from chmengine.engines.cmhmey2 import CMHMEngine2
+ * from chmengine.engines.cmhmey3 import CMHMEngine3
  * from chmengine.utils.pick import Pick             # <<<<<<<<<<<<<<
  * 
  * NAN64 = float64(None)
  */
-  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(__pyx_n_s_Pick);
   __Pyx_GIVEREF(__pyx_n_s_Pick);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_Pick)) __PYX_ERR(0, 11, __pyx_L1_error);
-  __pyx_t_3 = __Pyx_Import(__pyx_n_s_chmengine_utils_pick, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 11, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_Pick); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 0, __pyx_n_s_Pick)) __PYX_ERR(0, 12, __pyx_L1_error);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_chmengine_utils_pick, __pyx_t_3, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Pick, __pyx_t_2) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_Pick); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Pick, __pyx_t_3) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":13
+  /* "chmengine/engines/cmhmey2_pool_executor.py":14
  * from chmengine.utils.pick import Pick
  * 
  * NAN64 = float64(None)             # <<<<<<<<<<<<<<
  * 
  * BoardCacheEntry = Dict[str, Union[Board, float64, Pick]]
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_float64); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 13, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_NAN64, __pyx_t_2) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_NAN64, __pyx_t_3) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":15
+  /* "chmengine/engines/cmhmey2_pool_executor.py":16
  * NAN64 = float64(None)
  * 
  * BoardCacheEntry = Dict[str, Union[Board, float64, Pick]]             # <<<<<<<<<<<<<<
  * BoardCache = Dict[Move, BoardCacheEntry]
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Dict); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 15, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Union); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Dict); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Board); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Union); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 16, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Board); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_float64); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_float64); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Pick); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Pick); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyTuple_New(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __pyx_t_7 = PyTuple_New(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_GIVEREF(__pyx_t_4);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_4)) __PYX_ERR(0, 15, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_4)) __PYX_ERR(0, 16, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_5);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_5)) __PYX_ERR(0, 15, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_5)) __PYX_ERR(0, 16, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_6);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 2, __pyx_t_6)) __PYX_ERR(0, 15, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 2, __pyx_t_6)) __PYX_ERR(0, 16, __pyx_L1_error);
   __pyx_t_4 = 0;
   __pyx_t_5 = 0;
   __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_GetItem(__pyx_t_3, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 15, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyTuple_New(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 15, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_INCREF((PyObject *)(&PyUnicode_Type));
-  __Pyx_GIVEREF((PyObject *)(&PyUnicode_Type));
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 0, ((PyObject *)(&PyUnicode_Type)))) __PYX_ERR(0, 15, __pyx_L1_error);
-  __Pyx_GIVEREF(__pyx_t_6);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_6)) __PYX_ERR(0, 15, __pyx_L1_error);
-  __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_GetItem(__pyx_t_2, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetItem(__pyx_t_2, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_BoardCacheEntry, __pyx_t_6) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
+  __pyx_t_7 = PyTuple_New(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 16, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_INCREF((PyObject *)(&PyUnicode_Type));
+  __Pyx_GIVEREF((PyObject *)(&PyUnicode_Type));
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 0, ((PyObject *)(&PyUnicode_Type)))) __PYX_ERR(0, 16, __pyx_L1_error);
+  __Pyx_GIVEREF(__pyx_t_6);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_6)) __PYX_ERR(0, 16, __pyx_L1_error);
+  __pyx_t_6 = 0;
+  __pyx_t_6 = __Pyx_PyObject_GetItem(__pyx_t_3, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 16, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_BoardCacheEntry, __pyx_t_6) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":16
+  /* "chmengine/engines/cmhmey2_pool_executor.py":17
  * 
  * BoardCacheEntry = Dict[str, Union[Board, float64, Pick]]
  * BoardCache = Dict[Move, BoardCacheEntry]             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Dict); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 16, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Dict); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 17, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_Move); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 16, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_Move); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 17, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_BoardCacheEntry); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 16, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 16, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_BoardCacheEntry); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 17, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GIVEREF(__pyx_t_7);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_7)) __PYX_ERR(0, 16, __pyx_L1_error);
-  __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2)) __PYX_ERR(0, 16, __pyx_L1_error);
-  __pyx_t_7 = 0;
-  __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_t_6, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 16, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_7);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_7)) __PYX_ERR(0, 17, __pyx_L1_error);
+  __Pyx_GIVEREF(__pyx_t_3);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3)) __PYX_ERR(0, 17, __pyx_L1_error);
+  __pyx_t_7 = 0;
+  __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_t_6, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_BoardCache, __pyx_t_2) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_BoardCache, __pyx_t_3) < 0) __PYX_ERR(0, 17, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":20
+  /* "chmengine/engines/cmhmey2_pool_executor.py":21
  * 
  * # TODO: Move this helper to `chmengine.utils.__init__.py` (if we can, might have circular import errors?)
  * def evaluate_move(board: Board, depth: int = 1, debug: bool = False, cache_dir: str = CMHMEngine2.cache_dir) -> Pick:             # <<<<<<<<<<<<<<
  *     """Offloads eval calculations to another CMHMEngine2 instance.
  * 
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 20, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_depth, __pyx_n_s_int) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_debug, __pyx_n_s_bool) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_cache_dir, __pyx_n_s_str) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_n_s_Pick) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_21cmhmey2_pool_executor_1evaluate_move, 0, __pyx_n_s_evaluate_move, NULL, __pyx_n_s_chmengine_engines_cmhmey2_pool_e_2, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (!__Pyx_CyFunction_InitDefaults(__pyx_t_3, sizeof(__pyx_defaults), 2)) __PYX_ERR(0, 20, __pyx_L1_error)
-  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_int_1)) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_int_1))) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_depth, __pyx_n_s_int) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_debug, __pyx_n_s_bool) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_cache_dir, __pyx_n_s_str) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_return, __pyx_n_s_Pick) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_21cmhmey2_pool_executor_1evaluate_move, 0, __pyx_n_s_evaluate_move, NULL, __pyx_n_s_chmengine_engines_cmhmey2_pool_e_2, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (!__Pyx_CyFunction_InitDefaults(__pyx_t_2, sizeof(__pyx_defaults), 2)) __PYX_ERR(0, 21, __pyx_L1_error)
+  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_int_1)) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_int_1))) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_INCREF(__pyx_int_1);
-  __Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_t_3)->__pyx_arg_depth = ((PyObject*)__pyx_int_1);
+  __Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_t_2)->__pyx_arg_depth = ((PyObject*)__pyx_int_1);
   __Pyx_GIVEREF(__pyx_int_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_CMHMEngine2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_CMHMEngine2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_cache_dir); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_cache_dir); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (!(likely(PyUnicode_CheckExact(__pyx_t_7))||((__pyx_t_7) == Py_None) || __Pyx_RaiseUnexpectedTypeError("unicode", __pyx_t_7))) __PYX_ERR(0, 20, __pyx_L1_error)
-  __Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_t_3)->__pyx_arg_cache_dir = ((PyObject*)__pyx_t_7);
+  if (!(likely(PyUnicode_CheckExact(__pyx_t_7))||((__pyx_t_7) == Py_None) || __Pyx_RaiseUnexpectedTypeError("unicode", __pyx_t_7))) __PYX_ERR(0, 21, __pyx_L1_error)
+  __Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_t_2)->__pyx_arg_cache_dir = ((PyObject*)__pyx_t_7);
   __Pyx_GIVEREF(__pyx_t_7);
   __pyx_t_7 = 0;
-  __Pyx_CyFunction_SetDefaultsGetter(__pyx_t_3, __pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_2__defaults__);
+  __Pyx_CyFunction_SetDefaultsGetter(__pyx_t_2, __pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_4__defaults__);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_3);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_evaluate_move, __pyx_t_2) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "chmengine/engines/cmhmey2_pool_executor.py":57
+ * 
+ * 
+ * def evaluate_move_until(             # <<<<<<<<<<<<<<
+ *         time_limit: float64,
+ *         board: Board,
+ */
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_time_limit, __pyx_n_s_float64) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_board, __pyx_n_s_Board) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_depth, __pyx_n_s_int) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_debug, __pyx_n_s_bool) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_cache_dir, __pyx_n_s_str) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_n_s_Pick) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_21cmhmey2_pool_executor_3evaluate_move_until, 0, __pyx_n_s_evaluate_move_until, NULL, __pyx_n_s_chmengine_engines_cmhmey2_pool_e_2, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (!__Pyx_CyFunction_InitDefaults(__pyx_t_3, sizeof(__pyx_defaults1), 2)) __PYX_ERR(0, 57, __pyx_L1_error)
+
+  /* "chmengine/engines/cmhmey2_pool_executor.py":60
+ *         time_limit: float64,
+ *         board: Board,
+ *         depth: int = 1,             # <<<<<<<<<<<<<<
+ *         debug: bool = False,
+ *         cache_dir: str = CMHMEngine3.cache_dir) -> Pick:
+ */
+  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_int_1)) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_int_1))) __PYX_ERR(0, 60, __pyx_L1_error)
+  __Pyx_INCREF(__pyx_int_1);
+  __Pyx_CyFunction_Defaults(__pyx_defaults1, __pyx_t_3)->__pyx_arg_depth = ((PyObject*)__pyx_int_1);
+  __Pyx_GIVEREF(__pyx_int_1);
+
+  /* "chmengine/engines/cmhmey2_pool_executor.py":62
+ *         depth: int = 1,
+ *         debug: bool = False,
+ *         cache_dir: str = CMHMEngine3.cache_dir) -> Pick:             # <<<<<<<<<<<<<<
+ *     """Offloads eval calculations to another CMHMEngine3 instance.
+ * 
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_CMHMEngine3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_cache_dir); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  if (!(likely(PyUnicode_CheckExact(__pyx_t_6))||((__pyx_t_6) == Py_None) || __Pyx_RaiseUnexpectedTypeError("unicode", __pyx_t_6))) __PYX_ERR(0, 62, __pyx_L1_error)
+  __Pyx_CyFunction_Defaults(__pyx_defaults1, __pyx_t_3)->__pyx_arg_cache_dir = ((PyObject*)__pyx_t_6);
+  __Pyx_GIVEREF(__pyx_t_6);
+  __pyx_t_6 = 0;
+  __Pyx_CyFunction_SetDefaultsGetter(__pyx_t_3, __pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_6__defaults__);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_evaluate_move, __pyx_t_3) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_evaluate_move_until, __pyx_t_3) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":56
+  /* "chmengine/engines/cmhmey2_pool_executor.py":100
  * 
  * 
  * class CMHMEngine2PoolExecutor:             # <<<<<<<<<<<<<<
  *     """CMHMEngine2PoolExecutor"""
  *     cache_dir: str = CMHMEngine2.cache_dir
  */
-  __pyx_t_3 = __Pyx_Py3MetaclassPrepare((PyObject *) NULL, __pyx_empty_tuple, __pyx_n_s_CMHMEngine2PoolExecutor, __pyx_n_s_CMHMEngine2PoolExecutor, (PyObject *) NULL, __pyx_n_s_chmengine_engines_cmhmey2_pool_e_2, __pyx_n_s_CMHMEngine2PoolExecutor); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_Py3MetaclassPrepare((PyObject *) NULL, __pyx_empty_tuple, __pyx_n_s_CMHMEngine2PoolExecutor, __pyx_n_s_CMHMEngine2PoolExecutor, (PyObject *) NULL, __pyx_n_s_chmengine_engines_cmhmey2_pool_e_2, __pyx_n_s_CMHMEngine2PoolExecutor); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_cache_dir, __pyx_n_s_str) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_engine, __pyx_n_s_CMHMEngine2) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_executor, __pyx_n_s_ProcessPoolExecutor) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_annotations, __pyx_t_2) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_cache_dir, __pyx_n_s_str) < 0) __PYX_ERR(0, 100, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_engine, __pyx_n_s_CMHMEngine2) < 0) __PYX_ERR(0, 100, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_executor, __pyx_n_s_ProcessPoolExecutor) < 0) __PYX_ERR(0, 100, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_annotations, __pyx_t_2) < 0) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":58
+  /* "chmengine/engines/cmhmey2_pool_executor.py":102
  * class CMHMEngine2PoolExecutor:
  *     """CMHMEngine2PoolExecutor"""
  *     cache_dir: str = CMHMEngine2.cache_dir             # <<<<<<<<<<<<<<
  *     engine: CMHMEngine2
  *     # TODO: Refactor `max_workers` into a dict of options to be passed to `concurrent.futures` things as needed.
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_CMHMEngine2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_CMHMEngine2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 102, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_cache_dir); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 58, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_cache_dir); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_cache_dir, __pyx_t_7) < 0) __PYX_ERR(0, 58, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_cache_dir, __pyx_t_6) < 0) __PYX_ERR(0, 102, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":63
+  /* "chmengine/engines/cmhmey2_pool_executor.py":107
  *     executor: ProcessPoolExecutor
  * 
- *     def __init__(self, board: Optional[Board] = None, depth: int = 1, max_workers: Optional[int] = None) -> None:             # <<<<<<<<<<<<<<
- *         """Initialize the CMHMEngine2PoolExecutor.
- * 
+ *     def __init__(             # <<<<<<<<<<<<<<
+ *             self,
+ *             board: Optional[Board] = None,
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(4); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 63, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 63, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_depth, __pyx_n_s_int) < 0) __PYX_ERR(0, 63, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_max_workers, __pyx_kp_s_Optional_int) < 0) __PYX_ERR(0, 63, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 63, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngine2PoolExecutor_1__init__, 0, __pyx_n_s_CMHMEngine2PoolExecutor___init, NULL, __pyx_n_s_chmengine_engines_cmhmey2_pool_e_2, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_board, __pyx_kp_s_Optional_Board) < 0) __PYX_ERR(0, 107, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_depth, __pyx_n_s_int) < 0) __PYX_ERR(0, 107, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_max_workers, __pyx_kp_s_Optional_int) < 0) __PYX_ERR(0, 107, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_time_limit, __pyx_kp_s_Optional_float64) < 0) __PYX_ERR(0, 107, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngine2PoolExecutor_1__init__, 0, __pyx_n_s_CMHMEngine2PoolExecutor___init, NULL, __pyx_n_s_chmengine_engines_cmhmey2_pool_e_2, __pyx_d, ((PyObject *)__pyx_codeobj__9)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 107, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (!__Pyx_CyFunction_InitDefaults(__pyx_t_2, sizeof(__pyx_defaults1), 1)) __PYX_ERR(0, 63, __pyx_L1_error)
-  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_int_1)) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_int_1))) __PYX_ERR(0, 63, __pyx_L1_error)
+  if (!__Pyx_CyFunction_InitDefaults(__pyx_t_2, sizeof(__pyx_defaults2), 1)) __PYX_ERR(0, 107, __pyx_L1_error)
+
+  /* "chmengine/engines/cmhmey2_pool_executor.py":110
+ *             self,
+ *             board: Optional[Board] = None,
+ *             depth: int = 1,             # <<<<<<<<<<<<<<
+ *             max_workers: Optional[int] = None,
+ *             time_limit: Optional[float64] = None,
+ */
+  if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_int_1)) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_int_1))) __PYX_ERR(0, 110, __pyx_L1_error)
   __Pyx_INCREF(__pyx_int_1);
-  __Pyx_CyFunction_Defaults(__pyx_defaults1, __pyx_t_2)->__pyx_arg_depth = ((PyObject*)__pyx_int_1);
+  __Pyx_CyFunction_Defaults(__pyx_defaults2, __pyx_t_2)->__pyx_arg_depth = ((PyObject*)__pyx_int_1);
   __Pyx_GIVEREF(__pyx_int_1);
-  __Pyx_CyFunction_SetDefaultsGetter(__pyx_t_2, __pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_4__defaults__);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_7);
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_init, __pyx_t_2) < 0) __PYX_ERR(0, 63, __pyx_L1_error)
+  __Pyx_CyFunction_SetDefaultsGetter(__pyx_t_2, __pyx_pf_9chmengine_7engines_21cmhmey2_pool_executor_8__defaults__);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_6);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_init, __pyx_t_2) < 0) __PYX_ERR(0, 107, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":79
+  /* "chmengine/engines/cmhmey2_pool_executor.py":133
  *         self.executor = ProcessPoolExecutor(max_workers=max_workers)
  * 
  *     def pick_move(self, debug: bool = False) -> Pick:             # <<<<<<<<<<<<<<
  *         """
  *         Select the best move using conditional multithreaded evaluations.
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 79, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 133, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_debug, __pyx_n_s_bool) < 0) __PYX_ERR(0, 79, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_n_s_Pick) < 0) __PYX_ERR(0, 79, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngine2PoolExecutor_3pick_move, 0, __pyx_n_s_CMHMEngine2PoolExecutor_pick_mov, NULL, __pyx_n_s_chmengine_engines_cmhmey2_pool_e_2, __pyx_d, ((PyObject *)__pyx_codeobj__10)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 79, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_7, __pyx_tuple__11);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_2);
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_debug, __pyx_n_s_bool) < 0) __PYX_ERR(0, 133, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_n_s_Pick) < 0) __PYX_ERR(0, 133, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngine2PoolExecutor_3pick_move, 0, __pyx_n_s_CMHMEngine2PoolExecutor_pick_mov, NULL, __pyx_n_s_chmengine_engines_cmhmey2_pool_e_2, __pyx_d, ((PyObject *)__pyx_codeobj__12)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 133, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_6, __pyx_tuple__13);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_pick_move, __pyx_t_7) < 0) __PYX_ERR(0, 79, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_pick_move, __pyx_t_6) < 0) __PYX_ERR(0, 133, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":134
- *         return self.engine.pick_move(debug=debug)
+  /* "chmengine/engines/cmhmey2_pool_executor.py":202
+ *         ) if hasattr(self.engine, 'time_limit') else self.engine.pick_move(debug=debug)
  * 
  *     def push(self, move: Move) -> None:             # <<<<<<<<<<<<<<
  *         """Helper method to update the internal board state with a pushed move.
  * 
  */
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 134, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_move, __pyx_n_s_Move) < 0) __PYX_ERR(0, 134, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 134, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngine2PoolExecutor_5push, 0, __pyx_n_s_CMHMEngine2PoolExecutor_push, NULL, __pyx_n_s_chmengine_engines_cmhmey2_pool_e_2, __pyx_d, ((PyObject *)__pyx_codeobj__13)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 202, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_move, __pyx_n_s_Move) < 0) __PYX_ERR(0, 202, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 202, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngine2PoolExecutor_5push, 0, __pyx_n_s_CMHMEngine2PoolExecutor_push, NULL, __pyx_n_s_chmengine_engines_cmhmey2_pool_e_2, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 202, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_7);
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_push, __pyx_t_2) < 0) __PYX_ERR(0, 134, __pyx_L1_error)
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_6);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_push, __pyx_t_2) < 0) __PYX_ERR(0, 202, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":143
+  /* "chmengine/engines/cmhmey2_pool_executor.py":211
  *         self.engine.board.push(move=move)
  * 
  *     def shutdown(self) -> None:             # <<<<<<<<<<<<<<
  *         """Shut down the ProcessPoolExecutor."""
  *         if hasattr(self, 'executor') and self.executor:
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 143, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 211, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 143, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngine2PoolExecutor_7shutdown, 0, __pyx_n_s_CMHMEngine2PoolExecutor_shutdown, NULL, __pyx_n_s_chmengine_engines_cmhmey2_pool_e_2, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 143, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_7, __pyx_t_2);
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_n_s_None) < 0) __PYX_ERR(0, 211, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngine2PoolExecutor_7shutdown, 0, __pyx_n_s_CMHMEngine2PoolExecutor_shutdown, NULL, __pyx_n_s_chmengine_engines_cmhmey2_pool_e_2, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 211, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_6, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_shutdown, __pyx_t_7) < 0) __PYX_ERR(0, 143, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_shutdown, __pyx_t_6) < 0) __PYX_ERR(0, 211, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":148
+  /* "chmengine/engines/cmhmey2_pool_executor.py":216
  *             self.executor.shutdown()
  * 
  *     def __del__(self):             # <<<<<<<<<<<<<<
  *         """Ensure the ProcessPoolExecutor is shut down when the instance is deleted."""
  *         self.shutdown()
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngine2PoolExecutor_9__del__, 0, __pyx_n_s_CMHMEngine2PoolExecutor___del, NULL, __pyx_n_s_chmengine_engines_cmhmey2_pool_e_2, __pyx_d, ((PyObject *)__pyx_codeobj__16)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 148, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_del, __pyx_t_7) < 0) __PYX_ERR(0, 148, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_9chmengine_7engines_21cmhmey2_pool_executor_23CMHMEngine2PoolExecutor_9__del__, 0, __pyx_n_s_CMHMEngine2PoolExecutor___del, NULL, __pyx_n_s_chmengine_engines_cmhmey2_pool_e_2, __pyx_d, ((PyObject *)__pyx_codeobj__18)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_del, __pyx_t_6) < 0) __PYX_ERR(0, 216, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":56
+  /* "chmengine/engines/cmhmey2_pool_executor.py":100
  * 
  * 
  * class CMHMEngine2PoolExecutor:             # <<<<<<<<<<<<<<
  *     """CMHMEngine2PoolExecutor"""
  *     cache_dir: str = CMHMEngine2.cache_dir
  */
-  __pyx_t_7 = __Pyx_Py3ClassCreate(((PyObject*)&PyType_Type), __pyx_n_s_CMHMEngine2PoolExecutor, __pyx_empty_tuple, __pyx_t_3, NULL, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 56, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_CMHMEngine2PoolExecutor, __pyx_t_7) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_6 = __Pyx_Py3ClassCreate(((PyObject*)&PyType_Type), __pyx_n_s_CMHMEngine2PoolExecutor, __pyx_empty_tuple, __pyx_t_3, NULL, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_CMHMEngine2PoolExecutor, __pyx_t_6) < 0) __PYX_ERR(0, 100, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "chmengine/engines/cmhmey2_pool_executor.py":153
+  /* "chmengine/engines/cmhmey2_pool_executor.py":221
  * 
  * 
  * if __name__ == '__main__':             # <<<<<<<<<<<<<<
  *     cmhmey2_executor: CMHMEngine2PoolExecutor = CMHMEngine2PoolExecutor()
  *     print(cmhmey2_executor.engine.board)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 153, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 221, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_8 = (__Pyx_PyUnicode_Equals(__pyx_t_3, __pyx_n_u_main, Py_EQ)); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 153, __pyx_L1_error)
+  __pyx_t_8 = (__Pyx_PyUnicode_Equals(__pyx_t_3, __pyx_n_u_main, Py_EQ)); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 221, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (__pyx_t_8) {
 
-    /* "chmengine/engines/cmhmey2_pool_executor.py":154
+    /* "chmengine/engines/cmhmey2_pool_executor.py":222
  * 
  * if __name__ == '__main__':
  *     cmhmey2_executor: CMHMEngine2PoolExecutor = CMHMEngine2PoolExecutor()             # <<<<<<<<<<<<<<
  *     print(cmhmey2_executor.engine.board)
  *     # On first visit both `pick_move` calls below will take a while...
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_CMHMEngine2PoolExecutor); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 154, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_CMHMEngine2PoolExecutor); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 222, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_7 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 154, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_7);
+    __pyx_t_6 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 222, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (PyDict_SetItem(__pyx_d, __pyx_n_s_cmhmey2_executor, __pyx_t_7) < 0) __PYX_ERR(0, 154, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    if (PyDict_SetItem(__pyx_d, __pyx_n_s_cmhmey2_executor, __pyx_t_6) < 0) __PYX_ERR(0, 222, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "chmengine/engines/cmhmey2_pool_executor.py":155
+    /* "chmengine/engines/cmhmey2_pool_executor.py":223
  * if __name__ == '__main__':
  *     cmhmey2_executor: CMHMEngine2PoolExecutor = CMHMEngine2PoolExecutor()
  *     print(cmhmey2_executor.engine.board)             # <<<<<<<<<<<<<<
  *     # On first visit both `pick_move` calls below will take a while...
  *     pick: Pick = cmhmey2_executor.pick_move(debug=True)
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_cmhmey2_executor); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 155, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_engine); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 155, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_cmhmey2_executor); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 223, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_engine); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 223, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_board); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 155, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_7);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_board); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 223, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 155, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 223, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "chmengine/engines/cmhmey2_pool_executor.py":157
+    /* "chmengine/engines/cmhmey2_pool_executor.py":225
  *     print(cmhmey2_executor.engine.board)
  *     # On first visit both `pick_move` calls below will take a while...
  *     pick: Pick = cmhmey2_executor.pick_move(debug=True)             # <<<<<<<<<<<<<<
  *     print(f'{pick:+.2f}')
  *     cmhmey2_executor.push(pick.move)
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmhmey2_executor); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 157, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmhmey2_executor); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 225, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_pick_move); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 157, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_7);
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_pick_move); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 225, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 157, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 225, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_debug, Py_True) < 0) __PYX_ERR(0, 157, __pyx_L1_error)
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_debug, Py_True) < 0) __PYX_ERR(0, 225, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 225, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (PyDict_SetItem(__pyx_d, __pyx_n_s_pick, __pyx_t_2) < 0) __PYX_ERR(0, 157, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_d, __pyx_n_s_pick, __pyx_t_2) < 0) __PYX_ERR(0, 225, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "chmengine/engines/cmhmey2_pool_executor.py":158
+    /* "chmengine/engines/cmhmey2_pool_executor.py":226
  *     # On first visit both `pick_move` calls below will take a while...
  *     pick: Pick = cmhmey2_executor.pick_move(debug=True)
  *     print(f'{pick:+.2f}')             # <<<<<<<<<<<<<<
  *     cmhmey2_executor.push(pick.move)
  *     print(cmhmey2_executor.engine.board)
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_pick); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_pick); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 226, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyObject_Format(__pyx_t_2, __pyx_kp_u_2f); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Format(__pyx_t_2, __pyx_kp_u_2f); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 226, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 226, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "chmengine/engines/cmhmey2_pool_executor.py":159
+    /* "chmengine/engines/cmhmey2_pool_executor.py":227
  *     pick: Pick = cmhmey2_executor.pick_move(debug=True)
  *     print(f'{pick:+.2f}')
  *     cmhmey2_executor.push(pick.move)             # <<<<<<<<<<<<<<
  *     print(cmhmey2_executor.engine.board)
  *     #  On revisits, only the second `pick_move` call can take a while
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_cmhmey2_executor); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 159, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_cmhmey2_executor); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 227, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_push); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 159, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_push); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 227, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_pick); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 159, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_pick); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 227, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_move); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 159, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_7);
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_move); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 227, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 159, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 227, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "chmengine/engines/cmhmey2_pool_executor.py":160
+    /* "chmengine/engines/cmhmey2_pool_executor.py":228
  *     print(f'{pick:+.2f}')
  *     cmhmey2_executor.push(pick.move)
  *     print(cmhmey2_executor.engine.board)             # <<<<<<<<<<<<<<
  *     #  On revisits, only the second `pick_move` call can take a while
  *     #  should the back population change the outcome of the first call to lead to an unseen position.
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_cmhmey2_executor); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 160, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_cmhmey2_executor); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 228, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_engine); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 160, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_7);
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_engine); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 228, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_board); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 160, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_board); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 228, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 160, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_7);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 228, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "chmengine/engines/cmhmey2_pool_executor.py":163
+    /* "chmengine/engines/cmhmey2_pool_executor.py":231
  *     #  On revisits, only the second `pick_move` call can take a while
  *     #  should the back population change the outcome of the first call to lead to an unseen position.
  *     pick = cmhmey2_executor.pick_move(debug=True)             # <<<<<<<<<<<<<<
  *     print(f'{pick:+.2f}')
  *     cmhmey2_executor.push(pick.move)
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_cmhmey2_executor); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 163, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_pick_move); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_cmhmey2_executor); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 231, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_pick_move); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 231, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 163, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_7);
-    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_debug, Py_True) < 0) __PYX_ERR(0, 163, __pyx_L1_error)
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 231, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_debug, Py_True) < 0) __PYX_ERR(0, 231, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 231, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (PyDict_SetItem(__pyx_d, __pyx_n_s_pick, __pyx_t_3) < 0) __PYX_ERR(0, 163, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (PyDict_SetItem(__pyx_d, __pyx_n_s_pick, __pyx_t_3) < 0) __PYX_ERR(0, 231, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "chmengine/engines/cmhmey2_pool_executor.py":164
+    /* "chmengine/engines/cmhmey2_pool_executor.py":232
  *     #  should the back population change the outcome of the first call to lead to an unseen position.
  *     pick = cmhmey2_executor.pick_move(debug=True)
  *     print(f'{pick:+.2f}')             # <<<<<<<<<<<<<<
  *     cmhmey2_executor.push(pick.move)
  *     print(cmhmey2_executor.engine.board)
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_pick); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 164, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_pick); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 232, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_7 = __Pyx_PyObject_Format(__pyx_t_3, __pyx_kp_u_2f); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 164, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_7);
+    __pyx_t_6 = __Pyx_PyObject_Format(__pyx_t_3, __pyx_kp_u_2f); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 232, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 164, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 232, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "chmengine/engines/cmhmey2_pool_executor.py":165
+    /* "chmengine/engines/cmhmey2_pool_executor.py":233
  *     pick = cmhmey2_executor.pick_move(debug=True)
  *     print(f'{pick:+.2f}')
  *     cmhmey2_executor.push(pick.move)             # <<<<<<<<<<<<<<
  *     print(cmhmey2_executor.engine.board)
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmhmey2_executor); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmhmey2_executor); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 233, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_push); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 165, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_7);
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_push); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 233, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_pick); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_pick); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 233, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_move); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 165, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_move); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 233, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 233, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "chmengine/engines/cmhmey2_pool_executor.py":166
+    /* "chmengine/engines/cmhmey2_pool_executor.py":234
  *     print(f'{pick:+.2f}')
  *     cmhmey2_executor.push(pick.move)
  *     print(cmhmey2_executor.engine.board)             # <<<<<<<<<<<<<<
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmhmey2_executor); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 166, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmhmey2_executor); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 234, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_engine); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 166, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_engine); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 234, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_board); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 166, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_board); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 234, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 166, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 234, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "chmengine/engines/cmhmey2_pool_executor.py":153
+    /* "chmengine/engines/cmhmey2_pool_executor.py":221
  * 
  * 
  * if __name__ == '__main__':             # <<<<<<<<<<<<<<
@@ -11033,7 +12241,7 @@ __Pyx_PyType_GetName(PyTypeObject* tp)
     if (unlikely(name == NULL) || unlikely(!PyUnicode_Check(name))) {
         PyErr_Clear();
         Py_XDECREF(name);
-        name = __Pyx_NewRef(__pyx_n_s__17);
+        name = __Pyx_NewRef(__pyx_n_s__19);
     }
     return name;
 }

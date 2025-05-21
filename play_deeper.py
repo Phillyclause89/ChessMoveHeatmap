@@ -37,8 +37,10 @@ class EnginePoolContainer:
             self,
             engine_type: Callable = CMHMEngine2PoolExecutor,
             depth: int = 1,
+            time_limit: Optional[float64] = None,
             engine_type_2: Optional[Callable] = None,
-            depth_2: Optional[int] = None
+            depth_2: Optional[int] = None,
+            time_limit_2: Optional[float64] = None,
     ) -> None:
         """Initialize the EnginePoolContainer
 
@@ -49,10 +51,10 @@ class EnginePoolContainer:
         engine_type_2 : Optional[Callable]
         depth_2 : Optional[int]
         """
-        self._white = engine_type(depth=depth)
+        self._white = engine_type(depth=depth, time_limit=time_limit)
         # Allows for same Engine instance or different based on engine_type_2 being passed
         self._black = self._white if engine_type_2 is None else engine_type_2(
-            depth=depth if depth_2 is None else depth_2
+            depth=depth if depth_2 is None else depth_2, time_limit=time_limit if time_limit_2 is None else time_limit_2
         )
         # CMHMEngine.board.setter sets a copy thus we need to bypass the method to set the same object instance
         self._black.engine._board = self._white.engine.board
@@ -317,11 +319,13 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
             self,
             engine_type: Callable = EnginePoolContainer,
             depth: int = depth,
+            time_limit: Optional[float64] = None,
             player_name: str = player.name,
             player_color_is_black: bool = False,
             site: Optional[str] = None,
             engine_type_2: Optional[Callable] = None,
             depth_2: Optional[int] = None,
+            time_limit_2: Optional[float64] = None,
 
     ) -> None:
         """Initialize the PlayChessApp GUI and configure engines.
@@ -332,6 +336,8 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
             Class or factory for the primary engine (default: CMHMEngine).
         depth : int, optional
             Initial search depth for the primary engine (default: class‐level `depth`).
+        time_limit : float64
+            Passed to Cmhmey III
         player_name : str, optional
             Human player’s name (default: "Unknown").
         player_color_is_black : bool, optional
@@ -344,6 +350,8 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
             single engine instance to play against itself in training mode.
         depth_2 : int, optional
             Search depth for the secondary engine (default: same as `depth` if not provided).
+        time_limit : float64
+            Passed to Cmhmey III
         """
         self.updating = True
         self.training = False
@@ -360,7 +368,7 @@ class PlayDeeperChessApp(Tk, BaseChessTkApp):
         if player_color_is_black:
             self.player.index = 1
         self.onboard_player()
-        self.engine_pools = EnginePoolContainer(engine_type, depth, engine_type_2, depth_2)
+        self.engine_pools = EnginePoolContainer(engine_type, depth, time_limit, engine_type_2, depth_2, time_limit_2)
         self.depth = self.engine_pools.depth
         self.set_title()
         self.create_menu()
