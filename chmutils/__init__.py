@@ -5,7 +5,7 @@ from sqlite3 import Connection, Cursor, connect
 from typing import Dict, List, Optional, Tuple, Union
 
 from chess import Board, Move, Piece
-from numpy import float64, float_
+from numpy import float64
 
 from chmutils import base_chess_tk_app, concurrent, game_builder
 from chmutils.base_chess_tk_app import (
@@ -562,7 +562,7 @@ class HeatmapCache:
         # We'll assume the schema matches the flattened dict keys exactly.
         columns: List[str] = ["cache_key"] + list(flat.keys())
         placeholders: str = ", ".join(["?"] * len(columns))
-        values: List[str, float_] = [key] + list(flat.values())
+        values: List[str, float64] = [key] + list(flat.values())
 
         conn: Connection
         with connect(self.db_path) as conn:

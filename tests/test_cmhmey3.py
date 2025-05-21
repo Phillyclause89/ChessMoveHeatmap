@@ -5,7 +5,7 @@ from typing import List, Optional, Tuple
 from unittest import TestCase
 
 from chess import Board, Move
-from numpy import float64, mean, percentile, Inf
+from numpy import Inf, float64, mean, percentile
 from numpy.typing import NDArray
 
 from chmengine import CMHMEngine2, Pick, Quartney
