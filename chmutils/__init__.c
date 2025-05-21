@@ -2766,7 +2766,6 @@ static const char __pyx_k_chess[] = "chess";
 static const char __pyx_k_close[] = "close";
 static const char __pyx_k_depth[] = "depth";
 static const char __pyx_k_enter[] = "__enter__";
-static const char __pyx_k_float[] = "float_";
 static const char __pyx_k_isdir[] = "isdir";
 static const char __pyx_k_moves[] = "moves";
 static const char __pyx_k_numpy[] = "numpy";
@@ -3284,7 +3283,6 @@ typedef struct {
   PyObject *__pyx_n_s_flat;
   PyObject *__pyx_n_s_flatten_heatmap;
   PyObject *__pyx_n_u_flatten_heatmap;
-  PyObject *__pyx_n_s_float;
   PyObject *__pyx_n_s_float64;
   PyObject *__pyx_n_s_from_square;
   PyObject *__pyx_n_s_game_builder;
@@ -3780,7 +3778,6 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_flat);
   Py_CLEAR(clear_module_state->__pyx_n_s_flatten_heatmap);
   Py_CLEAR(clear_module_state->__pyx_n_u_flatten_heatmap);
-  Py_CLEAR(clear_module_state->__pyx_n_s_float);
   Py_CLEAR(clear_module_state->__pyx_n_s_float64);
   Py_CLEAR(clear_module_state->__pyx_n_s_from_square);
   Py_CLEAR(clear_module_state->__pyx_n_s_game_builder);
@@ -4254,7 +4251,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_flat);
   Py_VISIT(traverse_module_state->__pyx_n_s_flatten_heatmap);
   Py_VISIT(traverse_module_state->__pyx_n_u_flatten_heatmap);
-  Py_VISIT(traverse_module_state->__pyx_n_s_float);
   Py_VISIT(traverse_module_state->__pyx_n_s_float64);
   Py_VISIT(traverse_module_state->__pyx_n_s_from_square);
   Py_VISIT(traverse_module_state->__pyx_n_s_game_builder);
@@ -4738,7 +4734,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_flat __pyx_mstate_global->__pyx_n_s_flat
 #define __pyx_n_s_flatten_heatmap __pyx_mstate_global->__pyx_n_s_flatten_heatmap
 #define __pyx_n_u_flatten_heatmap __pyx_mstate_global->__pyx_n_u_flatten_heatmap
-#define __pyx_n_s_float __pyx_mstate_global->__pyx_n_s_float
 #define __pyx_n_s_float64 __pyx_mstate_global->__pyx_n_s_float64
 #define __pyx_n_s_from_square __pyx_mstate_global->__pyx_n_s_from_square
 #define __pyx_n_s_game_builder __pyx_mstate_global->__pyx_n_s_game_builder
@@ -10871,7 +10866,7 @@ static PyObject *__pyx_pf_8chmutils_12HeatmapCache_8store_heatmap(CYTHON_UNUSED 
  *         # We'll assume the schema matches the flattened dict keys exactly.
  *         columns: List[str] = ["cache_key"] + list(flat.keys())             # <<<<<<<<<<<<<<
  *         placeholders: str = ", ".join(["?"] * len(columns))
- *         values: List[str, float_] = [key] + list(flat.values())
+ *         values: List[str, float64] = [key] + list(flat.values())
  */
   __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 563, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -10898,7 +10893,7 @@ static PyObject *__pyx_pf_8chmutils_12HeatmapCache_8store_heatmap(CYTHON_UNUSED 
  *         # We'll assume the schema matches the flattened dict keys exactly.
  *         columns: List[str] = ["cache_key"] + list(flat.keys())
  *         placeholders: str = ", ".join(["?"] * len(columns))             # <<<<<<<<<<<<<<
- *         values: List[str, float_] = [key] + list(flat.values())
+ *         values: List[str, float64] = [key] + list(flat.values())
  * 
  */
   __pyx_t_5 = __Pyx_PyList_GET_SIZE(__pyx_v_columns); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 564, __pyx_L1_error)
@@ -10920,7 +10915,7 @@ static PyObject *__pyx_pf_8chmutils_12HeatmapCache_8store_heatmap(CYTHON_UNUSED 
   /* "chmutils/__init__.py":565
  *         columns: List[str] = ["cache_key"] + list(flat.keys())
  *         placeholders: str = ", ".join(["?"] * len(columns))
- *         values: List[str, float_] = [key] + list(flat.values())             # <<<<<<<<<<<<<<
+ *         values: List[str, float64] = [key] + list(flat.values())             # <<<<<<<<<<<<<<
  * 
  *         conn: Connection
  */
@@ -13318,7 +13313,6 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_flat, __pyx_k_flat, sizeof(__pyx_k_flat), 0, 0, 1, 1},
     {&__pyx_n_s_flatten_heatmap, __pyx_k_flatten_heatmap, sizeof(__pyx_k_flatten_heatmap), 0, 0, 1, 1},
     {&__pyx_n_u_flatten_heatmap, __pyx_k_flatten_heatmap, sizeof(__pyx_k_flatten_heatmap), 0, 1, 0, 1},
-    {&__pyx_n_s_float, __pyx_k_float, sizeof(__pyx_k_float), 0, 0, 1, 1},
     {&__pyx_n_s_float64, __pyx_k_float64, sizeof(__pyx_k_float64), 0, 0, 1, 1},
     {&__pyx_n_s_from_square, __pyx_k_from_square, sizeof(__pyx_k_from_square), 0, 0, 1, 1},
     {&__pyx_n_s_game_builder, __pyx_k_game_builder, sizeof(__pyx_k_game_builder), 0, 0, 1, 1},
@@ -14290,7 +14284,7 @@ if (!__Pyx_RefNanny) {
  * from typing import Dict, List, Optional, Tuple, Union
  * 
  * from chess import Board, Move, Piece             # <<<<<<<<<<<<<<
- * from numpy import float64, float_
+ * from numpy import float64
  * 
  */
   __pyx_t_2 = PyList_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 7, __pyx_L1_error)
@@ -14324,18 +14318,15 @@ if (!__Pyx_RefNanny) {
   /* "chmutils/__init__.py":8
  * 
  * from chess import Board, Move, Piece
- * from numpy import float64, float_             # <<<<<<<<<<<<<<
+ * from numpy import float64             # <<<<<<<<<<<<<<
  * 
  * from chmutils import base_chess_tk_app, concurrent, game_builder
  */
-  __pyx_t_3 = PyList_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(__pyx_n_s_float64);
   __Pyx_GIVEREF(__pyx_n_s_float64);
   if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 0, __pyx_n_s_float64)) __PYX_ERR(0, 8, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_s_float);
-  __Pyx_GIVEREF(__pyx_n_s_float);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 1, __pyx_n_s_float)) __PYX_ERR(0, 8, __pyx_L1_error);
   __pyx_t_2 = __Pyx_Import(__pyx_n_s_numpy, __pyx_t_3, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -14343,14 +14334,10 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_3);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_float64, __pyx_t_3) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_float); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 8, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_float, __pyx_t_3) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "chmutils/__init__.py":10
- * from numpy import float64, float_
+ * from numpy import float64
  * 
  * from chmutils import base_chess_tk_app, concurrent, game_builder             # <<<<<<<<<<<<<<
  * from chmutils.base_chess_tk_app import (
