@@ -11,6 +11,7 @@ class TestCMHEngineImports(TestCase):
     _engine1 = ['CMHMEngine']
     _engine2 = ['CMHMEngine2']
     _engine3 = ['Quartney']
+    _engine4 = ['CMHMEngine3']
     _poole = ['CMHMEngine2PoolExecutor']
     _engine_manager = ['PlayCMHMEngine']
     _pick = ['Pick']
@@ -34,8 +35,8 @@ class TestCMHEngineImports(TestCase):
         'get_static_value',
         'max_moves_map',
     ]
-    _engine_mods = ['cmhmey1', 'cmhmey2', 'quartney', 'cmhmey2_pool_executor']
-    _engines = _engine1 + _engine2 + _engine3 + _poole
+    _engine_mods = ['cmhmey1', 'cmhmey2', 'cmhmey3', 'quartney', 'cmhmey2_pool_executor']
+    _engines = _engine1 + _engine2 + _engine3 + _poole + _engine4
     _all = _engines + _engine_manager + _pick + _functions + _modules
 
     def setUp(self) -> None:

@@ -1,6 +1,6 @@
 """A silly chess engine that picks moves using heatmaps"""
 from chmengine import engines, play, utils
-from chmengine.engines import CMHMEngine, CMHMEngine2, Quartney, CMHMEngine2PoolExecutor
+from chmengine.engines import CMHMEngine, CMHMEngine2, Quartney, CMHMEngine2PoolExecutor, CMHMEngine3
 from chmengine.play import PlayCMHMEngine
 from chmengine.utils import (Pick, better_checkmate_score, calculate_better_white_minus_black_score,
                              calculate_white_minus_black_score, checkmate_score, format_moves, format_picks,
@@ -20,6 +20,7 @@ __all__ = [
     'PlayCMHMEngine',
     'Pick',
     'CMHMEngine2PoolExecutor',
+    'CMHMEngine3',
     # functions
     'format_moves',
     'format_picks',
