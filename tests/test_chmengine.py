@@ -58,7 +58,9 @@ class TestCMHEngineImports(TestCase):
     def test_from_imports(self) -> None:
         """test from chmengine imports"""
         # pylint: disable=import-outside-toplevel
-        from chmengine import CMHMEngine, CMHMEngine2, PlayCMHMEngine, Pick, Quartney, CMHMEngine2PoolExecutor
+        from chmengine import (
+            CMHMEngine, CMHMEngine2, PlayCMHMEngine, Pick, Quartney, CMHMEngine2PoolExecutor, CMHMEngine3
+        )
         _dir_1 = dir()
         self.assertEqual(sorted(_dir_1), sorted(self._engines + self._pick + self._engine_manager + self._dir))
         self.assertIsInstance(CMHMEngine, Callable)
@@ -67,6 +69,7 @@ class TestCMHEngineImports(TestCase):
         self.assertIsInstance(Pick, Callable)
         self.assertIsInstance(Quartney, Callable)
         self.assertIsInstance(CMHMEngine2PoolExecutor, Callable)
+        self.assertIsInstance(CMHMEngine3, Callable)
 
     def test_star_imports(self) -> None:
         """test from chmengine import *"""
