@@ -1369,6 +1369,844 @@ the candidate list if the new sum is lower than the current best.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chmengine.engines.</span></span><span class="sig-name descname"><span class="pre">CMHMEngine3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float64</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overhead</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float64</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.59</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chmengine.engines.CMHMEngine3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="chmengine.engines.cmhmey2.html#chmengine.engines.cmhmey2.CMHMEngine2" title="chmengine.engines.cmhmey2.CMHMEngine2"><code class="xref py py-class docutils literal notranslate"><span class="pre">CMHMEngine2</span></code></a></p>
+<p>A time-limited, single-process chess engine that extends CMHMEngine2 with
+per-move caching and iterative deepening on the current best move.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>The default <cite>time_limit</cite> is positive infinity—by default the engine will search</dt><dd><p>until you manually stop it.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Even if you interrupt the process (for example via KeyboardInterrupt) before</dt><dd><p><cite>pick_move</cite> returns, all the Q-table updates performed up to that point remain
+committed. That ongoing learning can improve future lookups.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>To avoid unbounded CPU use, supply an explicit finite <cite>time_limit</cite> either when</dt><dd><p>constructing the engine or in each <cite>pick_move</cite> call.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Builds a snapshot for each legal root move and attaches a Pick(move, score)</dt><dd><p>seeded from the Q-table or static eval.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Iteratively deepens along the current best move’s branch until the time_limit</dt><dd><p>expires, restarting from root whenever a different move becomes best.</p>
+</dd>
+</dl>
+</li>
+<li><p>Backs up improved scores into the Q-table after each deeper evaluation.</p></li>
+</ul>
+<dl class="py property">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.board">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">board</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Board</span></em><a class="headerlink" href="#chmengine.engines.CMHMEngine3.board" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current chess board.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>chess.Board</dt><dd><p>The current board state.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine</span> <span class="kn">import</span> <span class="n">CMHMEngine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span><span class="o">.</span><span class="n">board</span>
+<span class="go">Board(&#39;rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.board_copy_pushed">
+<span class="sig-name descname"><span class="pre">board_copy_pushed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">move</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Move</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Board</span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.board_copy_pushed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a copy of the board with the given move applied.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>move</strong><span class="classifier">chess.Move</span></dt><dd><p>The move to push onto the board.</p>
+</dd>
+<dt><strong>board</strong><span class="classifier">Optional[chess.Board], optional</span></dt><dd><p>The board to copy; if None, uses the engine’s current board.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>chess.Board</dt><dd><p>A new board instance with the move applied.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine</span> <span class="kn">import</span> <span class="n">CMHMEngine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chess</span> <span class="kn">import</span> <span class="n">Move</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_board</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">board_copy_pushed</span><span class="p">(</span><span class="n">Move</span><span class="o">.</span><span class="n">from_uci</span><span class="p">(</span><span class="s1">&#39;e2e4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_board</span>
+<span class="go">Board(&#39;rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.cache_dir">
+<span class="sig-name descname"><span class="pre">cache_dir</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'.\\SQLite3Caches\\QTables'</span></em><a class="headerlink" href="#chmengine.engines.CMHMEngine3.cache_dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.current_moves_list">
+<span class="sig-name descname"><span class="pre">current_moves_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Move</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.current_moves_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the list of legal moves for the current board position.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">Optional[chess.Board], default: None</span></dt><dd><p>The board for which to get legal moves. If None, the engine’s current board is used.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>List[chess.Move]</dt><dd><p>A list of legal moves available on the board.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine</span> <span class="kn">import</span> <span class="n">CMHMEngine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">moves</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">current_moves_list</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">moves</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span>
+<span class="go">Move.from_uci(&#39;e2e4&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.current_picks_list">
+<span class="sig-name descname"><span class="pre">current_picks_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.current_picks_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the list of legal null-scored picks for the current board position.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">Optional[chess.Board], default: None</span></dt><dd><p>The board for which to get legal moves. If None, the engine’s current board is used.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>List[Pick]</dt><dd><p>A list of null-scored picks available on the board.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.current_player_heatmap_index">
+<span class="sig-name descname"><span class="pre">current_player_heatmap_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.current_player_heatmap_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the heatmap index corresponding to the active (current) player.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">Optional[chess.Board]</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>The index for the current player. Typically, if the current turn is White (index 0),
+this returns 0, and vice versa.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine</span> <span class="kn">import</span> <span class="n">CMHMEngine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span><span class="o">.</span><span class="n">current_player_heatmap_index</span><span class="p">()</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.depth">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">depth</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#chmengine.engines.CMHMEngine3.depth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current recursion depth setting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>int</dt><dd><p>The current recursion depth used for heatmap calculations.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine</span> <span class="kn">import</span> <span class="n">CMHMEngine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span><span class="o">.</span><span class="n">depth</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.fen">
+<span class="sig-name descname"><span class="pre">fen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.fen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain the FEN string for a given board state.
+If no board is provided, the engine’s current board is used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">Optional[Board]</span></dt><dd><p>The board for which to retrieve the FEN string.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>str</dt><dd><p>The FEN string representing the board state.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine</span> <span class="kn">import</span> <span class="n">CMHMEngine2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine2</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span><span class="o">.</span><span class="n">fen</span><span class="p">()</span>
+<span class="go">&#39;rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.get_king_boxes">
+<span class="sig-name descname"><span class="pre">get_king_boxes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.get_king_boxes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the bounding boxes for the kings on the board.</p>
+<p>For both the current and opponent kings, this method calculates a “box” (a list of square
+indices) representing the king’s immediate surroundings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">Optional[chess.Board], default: None</span></dt><dd><p>The board to use; if None, the engine’s current board is used.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Tuple[List[int], List[int]]</dt><dd><p>A tuple containing two lists: the first is the box for the current king, and the second is
+the box for the opponent king.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.get_or_calc_move_maps">
+<span class="sig-name descname"><span class="pre">get_or_calc_move_maps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Move</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="heatmaps.html#heatmaps.GradientHeatmap" title="heatmaps.GradientHeatmap"><span class="pre">GradientHeatmap</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.get_or_calc_move_maps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute or retrieve precomputed heatmaps for all legal moves from the current board.</p>
+<p>For each legal move from the current board, this method generates a corresponding heatmap by
+applying the move and evaluating the resulting position with a given recursion depth.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>depth</strong><span class="classifier">Optional[int], default: None</span></dt><dd><p>The recursion depth for the heatmap calculation. If None, the engine’s current depth is used.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Dict[Move, GradientHeatmap]</dt><dd><p>A dictionary mapping each legal move to its corresponding heatmap.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ValueError</dt><dd><p>If the current board has no legal moves.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine</span> <span class="kn">import</span> <span class="n">CMHMEngine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">move_maps</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">get_or_calc_move_maps</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">some_move</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">move_maps</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">move_maps</span><span class="p">[</span><span class="n">some_move</span><span class="p">])</span>
+<span class="go">&lt;class &#39;heatmaps.ChessMoveHeatmap&#39;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.get_or_calc_move_maps_list">
+<span class="sig-name descname"><span class="pre">get_or_calc_move_maps_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Move</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="heatmaps.html#heatmaps.GradientHeatmap" title="heatmaps.GradientHeatmap"><span class="pre">GradientHeatmap</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.get_or_calc_move_maps_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a list of move-to-heatmap mappings.</p>
+<p>This method converts the dictionary returned by <cite>get_or_calc_move_maps()</cite> into a list of
+tuples for easier iteration, where each tuple contains a move and its corresponding heatmap.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>List[Tuple[Move, GradientHeatmap]]</dt><dd><p>A list of (move, heatmap) tuples.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine</span> <span class="kn">import</span> <span class="n">CMHMEngine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_move</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">get_or_calc_move_maps_list</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_move</span>
+<span class="go">Move.from_uci(&#39;g1h3&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.get_or_calc_score">
+<span class="sig-name descname"><span class="pre">get_or_calc_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float64</span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.get_or_calc_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a Q-table score for <cite>board</cite>, or compute &amp; cache a static eval if missing.</p>
+<p>This ensures every position’s score is seeded in the Q-table before any search
+deeper into it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">Board</span></dt><dd><p>The position for which to fetch or compute a score.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>float64</dt><dd><p>The stored or newly calculated evaluation (positive = White-good).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.get_q_value">
+<span class="sig-name descname"><span class="pre">get_q_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pieces_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.get_q_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a cached Q‑value for a position, or None if uncached.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>fen</strong><span class="classifier">str, optional</span></dt><dd><p>FEN of the position (deprecated; use <cite>board</cite>).</p>
+</dd>
+<dt><strong>board</strong><span class="classifier">chess.Board, optional</span></dt><dd><p>Board object for filename lookup.</p>
+</dd>
+<dt><strong>pieces_count</strong><span class="classifier">int, optional</span></dt><dd><p>Override piece count for selecting DB file.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>float64 or None</dt><dd><p>Stored Q‑value, or <cite>None</cite> if no entry exists.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine</span> <span class="kn">import</span> <span class="n">CMHMEngine2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine2</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">get_q_value</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.heatmap_data_is_zeros">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">heatmap_data_is_zeros</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">heatmap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="heatmaps.html#heatmaps.GradientHeatmap" title="heatmaps.GradientHeatmap"><span class="pre">GradientHeatmap</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.heatmap_data_is_zeros" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the heatmap data is entirely zero.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>heatmap</strong><span class="classifier">heatmaps.GradientHeatmap</span></dt><dd><p>The heatmap object to check.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>True if all values in the heatmap data are zero; otherwise, False.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine</span> <span class="kn">import</span> <span class="n">CMHMEngine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">heatmaps</span> <span class="kn">import</span> <span class="n">GradientHeatmap</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hmap</span> <span class="o">=</span> <span class="n">GradientHeatmap</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CMHMEngine</span><span class="o">.</span><span class="n">heatmap_data_is_zeros</span><span class="p">(</span><span class="n">hmap</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hmap</span><span class="p">[</span><span class="mi">32</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CMHMEngine</span><span class="o">.</span><span class="n">heatmap_data_is_zeros</span><span class="p">(</span><span class="n">hmap</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.other_player_heatmap_index">
+<span class="sig-name descname"><span class="pre">other_player_heatmap_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.other_player_heatmap_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the heatmap index corresponding to the inactive (other) player.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>int</dt><dd><p>The index for the other player. Typically, if the current turn is White (index 0),
+this returns 1, and vice versa.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine</span> <span class="kn">import</span> <span class="n">CMHMEngine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span><span class="o">.</span><span class="n">other_player_heatmap_index</span><span class="p">()</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.overhead">
+<span class="sig-name descname"><span class="pre">overhead</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float64</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.59</span></em><a class="headerlink" href="#chmengine.engines.CMHMEngine3.overhead" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.pick_board_generator">
+<span class="sig-name descname"><span class="pre">pick_board_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.pick_board_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lazily generate (Pick, Board) pairs for each legal move from <cite>board</cite>.</p>
+<p>For each legal move:
+1) Snapshot the board after the move.
+2) Create Pick(move, score) where score is pulled from the Q-table</p>
+<blockquote>
+<div><p>or computed on demand via get_or_calc_score.</p>
+</div></blockquote>
+<p>This generator is the entry point for building the per-move cache in pick_move.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">Union[Board, None]</span></dt><dd><p>The position to branch from; defaults to this engine’s internal board.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Iterator[Tuple[Pick, Board]]</dt><dd><p>An iterator over each legal move’s Pick and the resulting Board.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.pick_move">
+<span class="sig-name descname"><span class="pre">pick_move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.pick_move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Choose the best move using iterative deepening on the current best branch.</p>
+<p>If no finite <cite>time_limit</cite> is provided (and the class’s time_limit remains infinite),
+this will search until manually interrupted.</p>
+<p>Otherwise, it:
+1) Takes a snapshot board (defaulting to <cite>self.board</cite> or the provided <cite>board</cite>).
+2) Generates all legal moves and creates a list of (Pick, Board) pairs,</p>
+<blockquote>
+<div><p>with <cite>Pick.score</cite> seeded from the Q-table or a static heatmap eval.</p>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p>Sorts that list to find the best and second-best scores.</p></li>
+<li><dl class="simple">
+<dt>While time remains (&lt; deadline), calls _search_current_best_ on the top entry.</dt><dd><p>If the second-best score ever exceeds the updated best, it re-roots
+by resorting to the full move list.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>At timeout (or if only one move), returns the Pick with the best score</dt><dd><p>and writes that score back into the Q-table for the root position.</p>
+</dd>
+</dl>
+</li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>*args, **kwargs</strong><span class="classifier">passed through to super().pick_move for fallback</span></dt><dd></dd>
+<dt><strong>board</strong><span class="classifier">Optional[Board]</span></dt><dd><p>Position to analyze; defaults to this engine’s internal board.</p>
+</dd>
+<dt><strong>time_limit</strong><span class="classifier">Optional[float]</span></dt><dd><p>If set, overrides the engine’s time_limit for this call.</p>
+</dd>
+<dt><strong>debug</strong><span class="classifier">bool</span></dt><dd><p>If True, enables verbose timing and score-change logs.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Pick</dt><dd><p>The chosen move and its evaluation score, from the root’s perspective.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul class="simple">
+<li><p>Without a finite time_limit, <cite>pick_move</cite> will continue indefinitely.</p></li>
+<li><dl class="simple">
+<dt>You can safely cancel an infinite search at any moment; any Q-table writes</dt><dd><p>already performed will persist and benefit later searches.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.pieces_count">
+<span class="sig-name descname"><span class="pre">pieces_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.pieces_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of pieces on the board in O(1) time.</p>
+<p>This uses <cite>Board.occupied.bit_count()</cite> when given a <cite>board</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">chess.Board, optional</span></dt><dd><p>Board whose pieces to count. Preferred parameter.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>Total number of pieces on the board.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine.engines.cmhmey2</span> <span class="kn">import</span> <span class="n">CMHMEngine2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine2</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span><span class="o">.</span><span class="n">pieces_count</span><span class="p">()</span>
+<span class="go">32</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.qdb_path">
+<span class="sig-name descname"><span class="pre">qdb_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pieces_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.qdb_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the full path to the Q‑table database file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">chess.Board, optional</span></dt><dd><p>Board object for file naming.</p>
+</dd>
+<dt><strong>pieces_count</strong><span class="classifier">int or str, optional</span></dt><dd><p>Explicit piece count override.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>str</dt><dd><p>Relative path: <cite>&lt;cache_dir&gt;/&lt;qtable_filename(…)&gt;</cite></p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine.engines.cmhmey2</span> <span class="kn">import</span> <span class="n">CMHMEngine2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine2</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span><span class="o">.</span><span class="n">qdb_path</span><span class="p">()</span> <span class="o">==</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">engine</span><span class="o">.</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">engine</span><span class="o">.</span><span class="n">qtable_filename</span><span class="p">())</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.qtable_filename">
+<span class="sig-name descname"><span class="pre">qtable_filename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pieces_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.qtable_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the Q‑table filename based on depth and piece count.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">chess.Board, optional</span></dt><dd><p>Board object to derive FEN (and piece count) if <cite>fen</cite> is not given.</p>
+</dd>
+<dt><strong>pieces_count</strong><span class="classifier">int or str, optional</span></dt><dd><p>Explicit piece count to use. If provided, skips recomputing from board/FEN.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>str</dt><dd><p>File name of the form
+<cite>“qtable_depth_{depth}_piece_count_{pieces_count}.db”</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine.engines.cmhmey2</span> <span class="kn">import</span> <span class="n">CMHMEngine2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine2</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span><span class="o">.</span><span class="n">qtable_filename</span><span class="p">()</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">engine</span><span class="o">.</span><span class="n">cache_dir</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.set_q_value">
+<span class="sig-name descname"><span class="pre">set_q_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pieces_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.set_q_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert or update the Q‑value for a given position in the DB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>value</strong><span class="classifier">float</span></dt><dd><p>Q‑value to store.</p>
+</dd>
+<dt><strong>fen</strong><span class="classifier">str, optional</span></dt><dd><p>Position FEN (deprecated; prefer <cite>board</cite>).</p>
+</dd>
+<dt><strong>board</strong><span class="classifier">chess.Board, optional</span></dt><dd><p>Board object for filename lookup.</p>
+</dd>
+<dt><strong>pieces_count</strong><span class="classifier">int, optional</span></dt><dd><p>Override piece count for selecting DB file.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine</span> <span class="kn">import</span> <span class="n">CMHMEngine2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine2</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span><span class="o">.</span><span class="n">set_q_value</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;1k6/8/8/8/8/3K4/8/8 w - - 0 1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.time_limit">
+<span class="sig-name descname"><span class="pre">time_limit</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float64</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">inf</span></em><a class="headerlink" href="#chmengine.engines.CMHMEngine3.time_limit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.update_q_values">
+<span class="sig-name descname"><span class="pre">update_q_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.update_q_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Back-propagate game outcome through the Q-table.</p>
+<p>Pops all moves from the current board history and adjusts each
+stored Q-value in the database based on the final result
+(win/lose/draw).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>debug</strong><span class="classifier">bool, default=False</span></dt><dd><p>If True, print diagnostics for each back-step.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Updates the SQLite Q-table entries for every move in the game.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chess</span> <span class="kn">import</span> <span class="n">pgn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chmengine</span> <span class="kn">import</span> <span class="n">CMHMEngine2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pgn_buffer</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">(</span>
+<span class="gp">... </span><span class="w">   </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="gp">... </span><span class="sd">   1. f3 e5 2. g4 Qh4# 0-1</span>
+<span class="gp">...</span>
+<span class="gp">...</span>
+<span class="gp">... </span><span class="sd">   &#39;&#39;&#39;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">game</span> <span class="o">=</span> <span class="n">pgn</span><span class="o">.</span><span class="n">read_game</span><span class="p">(</span><span class="n">pgn_buffer</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">board</span> <span class="o">=</span> <span class="n">game</span><span class="o">.</span><span class="n">board</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">game</span><span class="o">.</span><span class="n">mainline_moves</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">board</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">move</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span> <span class="o">=</span> <span class="n">CMHMEngine2</span><span class="p">(</span><span class="n">board</span><span class="o">=</span><span class="n">board</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span><span class="o">.</span><span class="n">fen</span><span class="p">()</span>
+<span class="go">&#39;rnb1kbnr/pppp1ppp/8/4p3/6Pq/5P2/PPPPP2P/RNBQKBNR w KQkq - 1 3&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span><span class="o">.</span><span class="n">update_q_values</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">engine</span><span class="o">.</span><span class="n">fen</span><span class="p">()</span>
+<span class="go">&#39;rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.update_target_moves_by_delta">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_target_moves_by_delta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_moves_by_delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_player_sum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_player_sum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">move</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Move</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.update_target_moves_by_delta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the candidate moves based on the delta between current and other player’s sums.</p>
+<p>The delta is computed as the difference between the current player’s sum and the other player’s sum.
+If the calculated delta is greater than the current best, the candidate list is replaced; if equal,
+the move is appended.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>target_moves_by_delta</strong><span class="classifier">List[Union[Tuple[None, None], Pick]]</span></dt><dd><p>The current list of candidate moves and their delta scores.</p>
+</dd>
+<dt><strong>current_player_sum</strong><span class="classifier">numpy.float64</span></dt><dd><p>The sum of move intensities for the current player.</p>
+</dd>
+<dt><strong>other_player_sum</strong><span class="classifier">numpy.float64</span></dt><dd><p>The sum of move intensities for the other player.</p>
+</dd>
+<dt><strong>move</strong><span class="classifier">chess.Move</span></dt><dd><p>The move being evaluated.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>List[Pick]</dt><dd><p>The updated list of candidate moves with their delta scores.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.update_target_moves_by_king_delta">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_target_moves_by_king_delta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_moves_by_king_delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">move</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Move</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_king_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_king_sum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float64</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.update_target_moves_by_king_delta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update candidate moves based on the king’s delta value.</p>
+<p>Calculates the delta between the opponent’s king intensity and the current king’s minimum intensity,
+updating the candidate list if this delta is greater than the current best.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>target_moves_by_king_delta</strong><span class="classifier">List[Union[Tuple[None, None], Pick]]</span></dt><dd><p>The current candidate moves for the king delta criterion.</p>
+</dd>
+<dt><strong>move</strong><span class="classifier">chess.Move</span></dt><dd><p>The move being evaluated.</p>
+</dd>
+<dt><strong>current_king_min</strong><span class="classifier">numpy.float64</span></dt><dd><p>The minimum intensity value for the current king.</p>
+</dd>
+<dt><strong>other_king_sum</strong><span class="classifier">numpy.float64</span></dt><dd><p>The total intensity value for the opponent’s king.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>List[Pick]</dt><dd><p>The updated list of candidate moves based on king delta.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.update_target_moves_by_max_current">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_target_moves_by_max_current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_moves_by_max_current</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transposed_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">move</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Move</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.update_target_moves_by_max_current" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the candidate moves for maximizing the current player’s intensity.</p>
+<p>Computes the current player’s total intensity from the transposed heatmap and updates the candidate
+list if the new sum is greater than the current best.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>target_moves_by_max_current</strong><span class="classifier">List[Union[Tuple[None, None], Pick]]</span></dt><dd><p>The current candidate moves for maximizing the current player’s intensity.</p>
+</dd>
+<dt><strong>transposed_map</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>The transposed heatmap data array.</p>
+</dd>
+<dt><strong>move</strong><span class="classifier">chess.Move</span></dt><dd><p>The move being evaluated.</p>
+</dd>
+<dt><strong>color_index</strong><span class="classifier">int</span></dt><dd><p>The index corresponding to the current player.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Tuple[float64, List[Pick]]</dt><dd><p>A tuple containing the current player’s sum and the updated candidate list.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.update_target_moves_by_max_other_king">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_target_moves_by_max_other_king</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_moves_by_max_other_king</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heatmap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="heatmaps.html#heatmaps.GradientHeatmap" title="heatmaps.GradientHeatmap"><span class="pre">GradientHeatmap</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">move</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Move</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_king_box</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.update_target_moves_by_max_other_king" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update candidate moves for maximizing the opponent king’s intensity.</p>
+<p>Calculates the opponent king’s total intensity from the heatmap over the specified area and
+updates the candidate list if a higher intensity sum is found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>target_moves_by_max_other_king</strong><span class="classifier">List[Union[Tuple[None, None], Pick]]</span></dt><dd><p>The candidate moves list for maximizing opponent king’s intensity.</p>
+</dd>
+<dt><strong>heatmap</strong><span class="classifier">heatmaps.GradientHeatmap</span></dt><dd><p>The heatmap object containing move intensities.</p>
+</dd>
+<dt><strong>move</strong><span class="classifier">chess.Move</span></dt><dd><p>The move being evaluated.</p>
+</dd>
+<dt><strong>color_index</strong><span class="classifier">int</span></dt><dd><p>The index corresponding to the opponent.</p>
+</dd>
+<dt><strong>other_king_box</strong><span class="classifier">List[int]</span></dt><dd><p>A list of board squares representing the area around the opponent’s king.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Tuple[float64, List[Pick]]</dt><dd><p>A tuple containing the opponent king’s sum and the updated candidate list.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.update_target_moves_by_min_current_king">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_target_moves_by_min_current_king</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_moves_by_min_current_king</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heatmap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="heatmaps.html#heatmaps.GradientHeatmap" title="heatmaps.GradientHeatmap"><span class="pre">GradientHeatmap</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">move</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Move</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_king_box</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.update_target_moves_by_min_current_king" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update candidate moves for minimizing the current king’s intensity.</p>
+<p>Extracts the intensity values for the current king from the heatmap and updates the candidate
+list if a lower intensity sum is found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>target_moves_by_min_current_king</strong><span class="classifier">List[Union[Tuple[None, None], Pick]]</span></dt><dd><p>The candidate moves list for minimizing current king’s intensity.</p>
+</dd>
+<dt><strong>heatmap</strong><span class="classifier">heatmaps.GradientHeatmap</span></dt><dd><p>The heatmap object containing move intensities.</p>
+</dd>
+<dt><strong>move</strong><span class="classifier">chess.Move</span></dt><dd><p>The move being evaluated.</p>
+</dd>
+<dt><strong>other_index</strong><span class="classifier">int</span></dt><dd><p>The index corresponding to the opponent.</p>
+</dd>
+<dt><strong>current_king_box</strong><span class="classifier">List[int]</span></dt><dd><p>A list of board squares representing the area around the current king.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Tuple[float64, List[Pick]]</dt><dd><p>A tuple containing the current king’s sum and the updated candidate list.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chmengine.engines.CMHMEngine3.update_target_moves_by_min_other">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_target_moves_by_min_other</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_moves_by_min_other</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transposed_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">move</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Move</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chmengine.engines.CMHMEngine3.update_target_moves_by_min_other" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the candidate moves for minimizing the opponent’s sum.</p>
+<p>Calculates the opponent’s total move intensity from the transposed heatmap, and updates
+the candidate list if the new sum is lower than the current best.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>target_moves_by_min_other</strong><span class="classifier">List[Union[Tuple[None, None], Pick]]</span></dt><dd><p>The current candidate moves for minimizing the opponent’s intensity.</p>
+</dd>
+<dt><strong>transposed_map</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>The transposed heatmap data array.</p>
+</dd>
+<dt><strong>move</strong><span class="classifier">chess.Move</span></dt><dd><p>The move being evaluated.</p>
+</dd>
+<dt><strong>other_index</strong><span class="classifier">int</span></dt><dd><p>The index corresponding to the opponent.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Tuple[float64, List[Pick]]</dt><dd><p>A tuple containing the opponent’s sum and the updated candidate list.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="chmengine.engines.Quartney">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chmengine.engines.</span></span><span class="sig-name descname"><span class="pre">Quartney</span></span><a class="headerlink" href="#chmengine.engines.Quartney" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -1665,7 +2503,10 @@ stored Q-value in the database based on the final result
 <tr class="row-odd"><td><p><a class="reference internal" href="chmengine.engines.cmhmey2_pool_executor.html#module-chmengine.engines.cmhmey2_pool_executor" title="chmengine.engines.cmhmey2_pool_executor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chmengine.engines.cmhmey2_pool_executor</span></code></a></p></td>
 <td><p>Cmhmey Jr.'s Mad Scientist Uncle Who Likes to make clones of Cmhmey Jr.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="chmengine.engines.quartney.html#module-chmengine.engines.quartney" title="chmengine.engines.quartney"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chmengine.engines.quartney</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="chmengine.engines.cmhmey3.html#module-chmengine.engines.cmhmey3" title="chmengine.engines.cmhmey3"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chmengine.engines.cmhmey3</span></code></a></p></td>
+<td><p>Cmhmey the 3rd!! Son of Cmhmey Jr.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="chmengine.engines.quartney.html#module-chmengine.engines.quartney" title="chmengine.engines.quartney"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chmengine.engines.quartney</span></code></a></p></td>
 <td><p>Cmhmey Jr's Mom, Quartney</p></td>
 </tr>
 </tbody>
