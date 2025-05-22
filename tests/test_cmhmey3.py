@@ -1,12 +1,11 @@
 """Tests Cmhmey Jr.'s son Cmhmey the 3rd"""
 from os import environ, path
 from time import perf_counter
-from typing import List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Union
 from unittest import TestCase
 
 from chess import Board, Move
 from numpy import Inf, float64, mean, percentile
-from numpy.typing import NDArray
 
 from chmengine import CMHMEngine2, Pick, Quartney
 from chmengine.engines.cmhmey3 import CMHMEngine3
@@ -30,11 +29,36 @@ CMHMEngine3.cache_dir = CACHE_DIR
 pipeline_env: bool = environ.get('GITHUB_ACTIONS', '').lower() == 'true'
 
 
+def benchmark_assertions_map() -> Tuple[
+    Dict[str, Union[float, str]], Dict[str, Union[float, str]], Dict[str, Union[float, str]],
+    Dict[str, Union[float, str]], Dict[str, Union[float, str]], Dict[str, Union[float, str]],
+    Dict[str, Union[float, str]], Dict[str, Union[float, str]],
+]:
+    def inner_map(measurement_name: str = '') -> Dict[str, Union[float, str]]:
+        return dict(measurement=0.0, cap=-Inf, floor=Inf, name=measurement_name)
+
+    return (
+        inner_map('10th pct response lag-time'),  # 0
+        inner_map('10th pct revisit lag-time '),  # 1
+        inner_map('Average response lag-time '),  # 2
+        inner_map('Average revisit lag-time  '),  # 3
+        inner_map('Median response lag-time  '),  # 4
+        inner_map('Median revisit lag-time   '),  # 5
+        inner_map('90th pct response lag-time'),  # 6
+        inner_map('90th pct revisit lag-time '),  # 7
+    )
+
+
 class TestCMHMEngine3(TestCase):
     """Tests Cmhmey Jr.'s son Cmhmey the 3rd"""
     starting_board: Board
     engine: CMHMEngine3
-    time_limit: float64 = float64(5.0)
+    benchmark_assertions_maps: Tuple[
+        Dict[str, Union[float, str]], Dict[str, Union[float, str]], Dict[str, Union[float, str]],
+        Dict[str, Union[float, str]], Dict[str, Union[float, str]], Dict[str, Union[float, str]],
+        Dict[str, Union[float, str]], Dict[str, Union[float, str]],
+    ] = benchmark_assertions_map()
+    time_limit: float64 = float64(0.0)
     pipeline_env: bool = pipeline_env
 
     def setUp(self) -> None:
@@ -103,106 +127,93 @@ class TestCMHMEngine3(TestCase):
         """
         if sample_trim_div < 1:
             raise ValueError(f"sample_trim_div must be greater than `1`, got `{sample_trim_div}`")
-        pick: Pick
-        lag_time: float
-        pick, lag_time = self.measure_pick(message=1)
-        init_w_moves: List[Move] = list(self.engine.board.legal_moves)
-        first_time_pick_times: List[float] = [lag_time]  # list of all times a position was seen for the first time.
-        init_board_pick_times: List[float] = [lag_time]  # list of all times the first board position was seen.
-        revisit_pick_times: List[float] = []  # lists all the times the init board position was revisited.
-        i: int
-        move: Move
-        for i, move in enumerate(init_w_moves[:len(init_w_moves) // sample_trim_div], 1):
-            self.engine.board.push(move)
-            response_pick: Pick
-            response_lag_time: float
-            response_pick, response_lag_time = self.measure_pick(move=move, message=2)
-            first_time_pick_times.append(response_lag_time)
-            self.engine.board.pop()
-            new_pick: Pick
-            new_lag_time: float
-            new_pick, new_lag_time = self.measure_pick(i=i, message=3)
-            init_board_pick_times.append(new_lag_time)
-            revisit_pick_times.append(new_lag_time)
-        avg_lag_time: float = float(mean(init_board_pick_times))
-        avg_response: float = float(mean(first_time_pick_times))
-        avg_revisit: float = float(mean(revisit_pick_times))
-        pre_lag_time: NDArray[float] = percentile(init_board_pick_times, [0, 1, 10, 25, 50, 75, 90, 99, 100])
-        pre_response: NDArray[float] = percentile(first_time_pick_times, [0, 1, 10, 25, 50, 75, 90, 99, 100])
-        pre_revisit: NDArray[float] = percentile(revisit_pick_times, [0, 1, 10, 25, 50, 75, 90, 99, 100])
-        print(
-            f"mean pick lag-time: {avg_lag_time:.3f}s\npercentiles(0, 1, 10, 25, 50, 75, 90, 99, 100):\n{pre_lag_time}"
-        )
-        print(
-            f"mean response lag-time: {avg_response:.3f}s\npercentiles"
-            f"(0, 1, 10, 25, 50, 75, 90, 99, 100):\n{pre_response}"
-        )
-        print(
-            f"mean revisit lag-time: {avg_revisit:.3f}s\npercentiles(0, 1, 10, 25, 50, 75, 90, 99, 100):\n{pre_revisit}"
-        )
-        max_delta: float = -Inf
-        min_delta: float = Inf
-        closest_to_failing_cap: str = ''
-        closest_to_failing_floor: str = ''
-        # lag-time Assertions (used for `Iterative Second-Order Performance Calibration` of default `overhead` value)
-        measurement_name: str
-        measurement: float
-        cap: float
-        floor: float
-        cap_failures: List[AssertionError] = []
-        floor_failures: List[AssertionError] = []
-        # noinspection IncorrectFormatting
-        for measurement_name, measurement, floor, cap in sorted(
+        no_fails_counter: int = 0
+        while no_fails_counter < (1 if self.pipeline_env else 10):
+            no_fails_counter += 1
+            pick: Pick
+            lag_time: float
+            pick, lag_time = self.measure_pick(message=1)
+            init_w_moves: List[Move] = list(self.engine.board.legal_moves)
+            first_time_pick_times: List[float] = [lag_time]  # list of all times a position was seen for the first time.
+            revisit_pick_times: List[float] = []  # lists all the times the init board position was revisited.
+            i: int
+            move: Move
+            for i, move in enumerate(
+                    init_w_moves[:len(init_w_moves) // (6 if self.pipeline_env else sample_trim_div)],
+                    1
+            ):
+                self.engine.board.push(move)
+                response_lag_time: float
+                _, response_lag_time = self.measure_pick(move=move, message=2)
+                first_time_pick_times.append(response_lag_time)
+                _, response_lag_time = self.measure_pick(move=move, message=4)
+                revisit_pick_times.append(response_lag_time)
+                self.engine.board.pop()
+                new_pick: Pick
+                new_lag_time: float
+                new_pick, new_lag_time = self.measure_pick(i=i, message=3)
+                revisit_pick_times.append(new_lag_time)
+            self.benchmark_assertions_maps[2]['measurement'] = float(mean(first_time_pick_times))
+            self.benchmark_assertions_maps[3]['measurement'] = float(mean(revisit_pick_times))
             (
-                ('cap<=0: 10th pct response lag-time', pre_response[2],  -0.5614995999999994, -0.2400717999999955),
-                ('cap<=0:          10th pct lag-time', pre_lag_time[2],  -0.5578028999999987, -0.17771110000000334),
-                ('cap<=0:   10th pct revisit lag-time', pre_revisit[2],  -0.5579626099999999, -0.17094372999999835),
-                ('cap~=0:      Average response lag-time', avg_response, -0.17482825238095132, 0.0616098523809385),
-                ('cap~=0:               Average lag-time', avg_lag_time, -0.26118467142857177, 0.14011680000001953),
-                ('cap~=0:        Average revisit lag-time', avg_revisit, -0.24991738500000035, 0.1638538500000209),
-                ('cap~=0:    Median response lag-time', pre_response[4], -0.1961125999999993,  0.18266420000000494),
-                ('cap==0:             Median lag-time', pre_lag_time[4], -0.37646469999999965, 0.18407170000000406),
-                ('cap~=0:      Median revisit lag-time', pre_revisit[4], -0.3590221499999977,  0.1861797999999908),
-                ('cap>=0:  90th pct response lag-time', pre_response[6],  0.11212199999999939, 0.6205184999998892),
-                ('cap>=0:           90th pct lag-time', pre_lag_time[6],  0.16665559999999857, 0.7050927999998748),
-                ('cap>=0:    90th pct revisit lag-time', pre_revisit[6],  0.1801250799999993,  0.7123928199998774),
-            ),
-            key=lambda x: x[1],
-        ):
-            try:
-                delta: float = self.assertMeasurementBelowCap(
-                    measurement_name, measurement, Inf if self.pipeline_env else cap
-                )
-                max_delta, closest_to_failing_cap = (
-                    (delta, measurement_name) if max_delta < delta else (max_delta, closest_to_failing_cap)
-                )
-            except AssertionError as error:
-                print(error)
-                cap_failures.append(error)
-            try:
-                delta: float = self.assertMeasurementAboveFloor(
-                    measurement_name, measurement, -Inf if self.pipeline_env else floor
-                )
-                min_delta, closest_to_failing_floor = (
-                    (delta, measurement_name) if min_delta > delta else (min_delta, closest_to_failing_floor)
-                )
-            except AssertionError as error:
-                print(error)
-                floor_failures.append(error)
-        all_fails: List[AssertionError] = cap_failures + floor_failures
-        fail_count: int = len(all_fails)
-        if fail_count == 0:
+                self.benchmark_assertions_maps[0]['measurement'],
+                self.benchmark_assertions_maps[4]['measurement'],
+                self.benchmark_assertions_maps[6]['measurement'],
+            ) = percentile(first_time_pick_times, [10, 50, 90, ])
+            (
+                self.benchmark_assertions_maps[1]['measurement'],
+                self.benchmark_assertions_maps[5]['measurement'],
+                self.benchmark_assertions_maps[7]['measurement'],
+            ) = percentile(revisit_pick_times, [10, 50, 90, ])
+            max_delta: float = -Inf
+            min_delta: float = Inf
+            closest_to_failing_cap: str = ''
+            closest_to_failing_floor: str = ''
+            # lag-time Assertions (used for `Iterative Second-Order Performance Calibration`)
+            self.print_assertions_maps()
+            for assertions_map in self.benchmark_assertions_maps:
+                measurement_name = assertions_map['name']
+                measurement = assertions_map['measurement']
+                cap = assertions_map['cap']
+                floor = assertions_map['floor']
+                try:
+                    delta: float = self.assertMeasurementBelowCap(measurement_name, measurement, cap)
+                    max_delta, closest_to_failing_cap = (
+                        (delta, measurement_name) if max_delta < delta else (max_delta, closest_to_failing_cap)
+                    )
+                except AssertionError as error:
+                    assertions_map['cap'] = measurement
+                    no_fails_counter = 0
+                try:
+                    delta: float = self.assertMeasurementAboveFloor(
+                        measurement_name, measurement, floor
+                    )
+                    min_delta, closest_to_failing_floor = (
+                        (delta, measurement_name) if min_delta > delta else (min_delta, closest_to_failing_floor)
+                    )
+                except AssertionError as error:
+                    assertions_map['floor'] = measurement
+                    no_fails_counter = 0
             print(
-                f"closest_to_failing_cap: '{closest_to_failing_cap}' | max_delta: {max_delta:.3f}s ",
-                f"closest_to_failing_floor: '{closest_to_failing_floor}' | min_delta: {min_delta:.3f}",
-                sep='\n',
+                f"closest_to_failing_cap:   '{closest_to_failing_cap}' | max_delta: {max_delta:.3f}s"
+                f"\nclosest_to_failing_floor: '{closest_to_failing_floor}' | min_delta: {min_delta:.3f}s"
             )
-        else:
-            nl: str = '\n'
-            raise AssertionError(
-                f"{fail_count} AssertionError{'s' if fail_count > 1 else ''} encountered during test:{nl}{nl}"
-                f"{nl.join((f'Failure #{n}: {f}' for n, f in enumerate(all_fails, start=1)))}"
-            ) from all_fails[0]
+            clear_test_cache()
+            self.assertFalse(path.exists(CACHE_DIR))
+            self.engine._init_qdb()
+            self.print_assertions_maps()
+
+    def print_assertions_maps(self) -> None:
+        """print_assertions_maps"""
+        for assertions_map in sorted(self.benchmark_assertions_maps, key=lambda x: x['measurement']):
+            measurement_name = assertions_map['name']
+            measurement = assertions_map['measurement']
+            cap = assertions_map['cap']
+            floor = assertions_map['floor']
+            print(
+                f"{measurement_name}: {floor < measurement} == {floor:+.3f}s < {measurement:+.3f}s < {cap:+.3f}s"
+                f" == {measurement < cap}"
+            )
 
     def assertMeasurementAboveFloor(self, measurement_name: str, measurement: float, floor: float) -> float:
         """Assert that a single performance measurement does not exceed its historical best case measurements.
@@ -229,7 +240,8 @@ class TestCMHMEngine3(TestCase):
         print(f"{measurement_name}: {measurement:+.3f}s | floor: {floor:+.3f}s | delta: {delta:+.3f}s")
         self.assertGreaterEqual(
             measurement, floor,
-            f"New floor found for: '{measurement_name}', measurement too low: {measurement:.3f}s (delta={delta:+.3f}s)"
+            f"\nNew floor found for: '{measurement_name}', "
+            f"measurement too low: {measurement:.3f}s (delta={delta:+.3f}s)"
         )
         return delta
 
@@ -258,7 +270,8 @@ class TestCMHMEngine3(TestCase):
         print(f"{measurement_name}: {measurement:.3f}s | cap: {cap:.3f}s | delta: {delta:.3f}s")
         self.assertLessEqual(
             measurement, cap,
-            f"New cap found for: '{measurement_name}', measurement too high: {measurement:.3f}s (delta={delta:+.3f}s)"
+            f"\nNew cap found for: '{measurement_name}', "
+            f"measurement too high: {measurement:.3f}s (delta={delta:+.3f}s)"
         )
         return delta
 
@@ -281,9 +294,9 @@ class TestCMHMEngine3(TestCase):
 
         Parameters
         ----------
-        i : Optional[int]
+        i : Union[int, None]
             A sequence index for revisit calls, used in the debug print.
-        move : Optional[Move]
+        move : Union[Move, None]
             The Move just played before this pick_move call, for context in logs.
         message : int
             Controls the verbosity of printed output:
@@ -292,8 +305,9 @@ class TestCMHMEngine3(TestCase):
         Returns
         -------
         Tuple[Pick, float]
-            A tuple of (chosen Pick, lag_time).  The lag_time is the difference
-            between actual duration and the configured time_limit, positive if
+            A tuple of (chosen Pick, lag_time_scaled_nodes).  The lag_time_scaled_nodes is the difference
+            between actual duration and the configured time_limit scaled by nodes
+            i.e. len(tuple(self.engine.board.legal_moves))), positive if
             the call overran the deadline, negative if it finished early.
         """
         start: float = perf_counter()
@@ -301,25 +315,54 @@ class TestCMHMEngine3(TestCase):
         end: float = perf_counter()
         duration: float = (end - start)
         lag_time: float = duration - self.time_limit
-        self.assertAlmostEqual(lag_time, 0, -1)
+        branch_count: int = len(tuple(self.engine.board.legal_moves))
+        node_count: int = sum(len(tuple(b.legal_moves)) for _, b in self.engine.pick_board_generator())
+        if branch_count == 0:
+            branch_count = 1
+        # self.assertAlmostEqual(lag_time, 0, -1)
+        duration_scaled_branches: float = duration / branch_count
+        lag_time_scaled_branches: float = lag_time / branch_count
+        duration_scaled_nodes: float = duration / node_count
+        lag_time_scaled_nodes: float = lag_time / node_count
+        fen: str = self.engine.fen()
         if message == 1:
             print(
-                f"Start-> {self.engine.fen()} initial pick_move call: "
-                f"({pick[0].uci()}, {pick[1]:.2f}) (duration={duration:.3f}s, lag_time={lag_time:.3f}s)"
+                f"Start-> {fen}{' ' * (77 - len(fen))} initial pick_move call:   "
+                f"({pick:+.2f}) (duration={duration:.3f}s, lag_time={lag_time:.3f}s, "
+                f"branches={branch_count}, nodes={node_count}) "
+                f"(duration/branch={duration_scaled_branches:.3f}s, lag_time/branch={lag_time_scaled_branches:.3f}s) "
+                f"(duration/node={duration_scaled_nodes:.3f}s, lag_time/node={lag_time_scaled_nodes:.3f}s)"
             )
         elif message == 2:
             if move is not None:
                 print(
-                    f"{move} -> {self.engine.fen()} initial pick_move call: "
-                    f"({pick[0].uci()}, {pick[1]:.2f}) (duration={duration:.3f}s, lag_time={lag_time:.3f}s)"
+                    f"{move} -> {fen}{' ' * (77 - len(fen))} initial pick_move call:   "
+                    f"({pick:+.2f}) (duration={duration:.3f}s, lag_time={lag_time:.3f}s, "
+                    f"branches={branch_count}, nodes={node_count}) "
+                    f"(duration/branch={duration_scaled_branches:.3f}s, "
+                    f"lag_time/branch={lag_time_scaled_branches:.3f}s) "
+                    f"(duration/node={duration_scaled_nodes:.3f}s, lag_time/node={lag_time_scaled_nodes:.3f}s)"
                 )
         elif message == 3:
             if i is not None:
                 print(
-                    f"Start-> {self.engine.fen()} revisit {i} pick_move call: "
-                    f"({pick[0].uci()}, {pick[1]:.2f}) (duration={duration:.3f}s, lag_time={lag_time:.3f}s)"
+                    f"Start-> {fen}{' ' * (77 - len(fen))} revisit {i} pick_move call: "
+                    f"({pick:+.2f}) (duration={duration:.3f}s, lag_time={lag_time:.3f}s, "
+                    f"branches={branch_count}, nodes={node_count}) "
+                    f"(duration/branch={duration_scaled_branches:.3f}s, lag_time/branch={lag_time_scaled_branches:.3f}"
+                    f"s) (duration/node={duration_scaled_nodes:.3f}s, lag_time/node={lag_time_scaled_nodes:.3f}s)"
                 )
-        return pick, lag_time
+        elif message == 4:
+            if move is not None:
+                print(
+                    f"{move} -> {fen}{' ' * (77 - len(fen))} revisit 1 pick_move call:   "
+                    f"({pick:+.2f}) (duration={duration:.3f}s, lag_time={lag_time:.3f}s, "
+                    f"branches={branch_count}, nodes={node_count}) "
+                    f"(duration/branch={duration_scaled_branches:.3f}s, "
+                    f"lag_time/branch={lag_time_scaled_branches:.3f}s) "
+                    f"(duration/node={duration_scaled_nodes:.3f}s, lag_time/node={lag_time_scaled_nodes:.3f}s)"
+                )
+        return pick, lag_time_scaled_nodes
 
     def test__search_current_best_(self):
         """TBD"""

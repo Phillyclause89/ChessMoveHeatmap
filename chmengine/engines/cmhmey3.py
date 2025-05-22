@@ -33,7 +33,7 @@ class CMHMEngine3(CMHMEngine2):
         constructing the engine or in each `pick_move` call.
     """
     time_limit: float64 = inf
-    overhead: float64 = float64(0.59)
+    overhead: float64 = float64(0)
 
     def __init__(
             self,
@@ -192,29 +192,6 @@ class CMHMEngine3(CMHMEngine2):
         self.set_q_value(value=best_response_pick.score, board=root_board)
         return root_pick, best_response_board
 
-    def get_or_calc_score(self, board: Board) -> float64:
-        """Retrieve a Q-table score for `board`, or compute & cache a static eval if missing.
-
-        This ensures every position’s score is seeded in the Q-table before any search
-        deeper into it.
-
-        Parameters
-        ----------
-        board : Board
-            The position for which to fetch or compute a score.
-
-        Returns
-        -------
-        float64
-            The stored or newly calculated evaluation (positive = White-good).
-        """
-        score: Optional[float64] = self.get_q_value(board=board)
-        if score is None:
-            score: float64 = calculate_better_white_minus_black_score(board=board, depth=self.depth)
-            # First q-value set.
-            self.set_q_value(value=score, board=board)
-        return score
-
     def pick_board_generator(self, board: Optional[Board] = None) -> Iterator[Tuple[Pick, Board]]:
         """Lazily generate (Pick, Board) pairs for each legal move from `board`.
 
@@ -238,5 +215,50 @@ class CMHMEngine3(CMHMEngine2):
         board = self.board if board is None else board
         move: Move
         result_board: Board
-        return ((Pick(move=move, score=self.get_or_calc_score(result_board)), result_board) for move, result_board in
+        return ((Pick(move=move, score=self.get_or_calc_deeper_score(result_board)), result_board) for
+                move, result_board in
                 ((move, self.board_copy_pushed(move=move, board=board)) for move in board.legal_moves))
+
+    def get_or_calc_deeper_score(self, board: Board) -> float64:
+        """
+
+        Parameters
+        ----------
+        board : Board
+
+        Returns
+        -------
+        float64
+        """
+        score: float64 = sorted(
+            (
+                self.get_or_calc_score(result_board) for result_board in
+                (self.board_copy_pushed(move=move, board=board) for move in board.legal_moves)
+            ),
+            reverse=True
+        )[0 if board.turn else -1]
+        self.set_q_value(value=score, board=board)
+        return score
+
+    def get_or_calc_score(self, board: Board) -> float64:
+        """Retrieve a Q-table score for `board`, or compute & cache a static eval if missing.
+
+        This ensures every position’s score is seeded in the Q-table before any search
+        deeper into it.
+
+        Parameters
+        ----------
+        board : Board
+            The position for which to fetch or compute a score.
+
+        Returns
+        -------
+        float64
+            The stored or newly calculated evaluation (positive = White-good).
+        """
+        score: Optional[float64] = self.get_q_value(board=board)
+        if score is None:
+            score: float64 = calculate_better_white_minus_black_score(board=board, depth=self.depth)
+            # First q-value set.
+            self.set_q_value(value=score, board=board)
+        return score
