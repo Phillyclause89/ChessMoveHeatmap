@@ -1,4 +1,4 @@
-chmengine.engines.cmhmey2\_pool\_executor
+﻿chmengine.engines.cmhmey2\_pool\_executor
 =========================================
 
 .. automodule:: chmengine.engines.cmhmey2_pool_executor
@@ -14,6 +14,7 @@ chmengine.engines.cmhmey2\_pool\_executor
    .. autosummary::
    
       evaluate_move
+      evaluate_move_until
    
    
 

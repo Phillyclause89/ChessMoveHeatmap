@@ -44,6 +44,9 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#chmengine.engines.cmhmey2_pool_executor.evaluate_move" title="chmengine.engines.cmhmey2_pool_executor.evaluate_move"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate_move</span></code></a>(board[, depth, debug, cache_dir])</p></td>
 <td><p>Offloads eval calculations to another CMHMEngine2 instance.</p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#chmengine.engines.cmhmey2_pool_executor.evaluate_move_until" title="chmengine.engines.cmhmey2_pool_executor.evaluate_move_until"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate_move_until</span></code></a>(time_limit, board[, ...])</p></td>
+<td><p>Offloads eval calculations to another CMHMEngine3 instance.</p></td>
+</tr>
 </tbody>
 </table>
 <p class="rubric">Classes</p>
@@ -56,7 +59,7 @@
 </table>
 <dl class="py class">
 <dt class="sig sig-object py" id="chmengine.engines.cmhmey2_pool_executor.CMHMEngine2PoolExecutor">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chmengine.engines.cmhmey2_pool_executor.</span></span><span class="sig-name descname"><span class="pre">CMHMEngine2PoolExecutor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_workers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chmengine.engines.cmhmey2_pool_executor.CMHMEngine2PoolExecutor" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chmengine.engines.cmhmey2_pool_executor.</span></span><span class="sig-name descname"><span class="pre">CMHMEngine2PoolExecutor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Board</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_workers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chmengine.engines.cmhmey2_pool_executor.CMHMEngine2PoolExecutor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="chmengine.engines.cmhmey2_pool_executor.CMHMEngine2PoolExecutor.cache_dir">
@@ -121,6 +124,40 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
+<dt><strong>board</strong><span class="classifier">Board</span></dt><dd><p>The chess board state to evaluate.</p>
+</dd>
+<dt><strong>depth</strong><span class="classifier">int</span></dt><dd><p>The search depth for the evaluation.</p>
+</dd>
+<dt><strong>debug</strong><span class="classifier">bool</span></dt><dd><p>Whether to enable debug output.</p>
+</dd>
+<dt><strong>cache_dir</strong><span class="classifier">str</span></dt><dd><p>The cache directory for the engine.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Pick</dt><dd><p>The best move and its associated evaluation score.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>OperationalError</dt><dd><p>If the database remains locked after exhausting retries or for unexpected operational errors.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chmengine.engines.cmhmey2_pool_executor.evaluate_move_until">
+<span class="sig-prename descclassname"><span class="pre">chmengine.engines.cmhmey2_pool_executor.</span></span><span class="sig-name descname"><span class="pre">evaluate_move_until</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">board</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Board</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'.\\SQLite3Caches\\QTables'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="chmengine.utils.pick.html#chmengine.utils.pick.Pick" title="chmengine.utils.pick.Pick"><span class="pre">Pick</span></a></span></span><a class="headerlink" href="#chmengine.engines.cmhmey2_pool_executor.evaluate_move_until" title="Permalink to this definition">¶</a></dt>
+<dd><p>Offloads eval calculations to another CMHMEngine3 instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>time_limit</strong><span class="classifier">float</span></dt><dd><p>Time to spend on the evaluation.</p>
+</dd>
 <dt><strong>board</strong><span class="classifier">Board</span></dt><dd><p>The chess board state to evaluate.</p>
 </dd>
 <dt><strong>depth</strong><span class="classifier">int</span></dt><dd><p>The search depth for the evaluation.</p>
